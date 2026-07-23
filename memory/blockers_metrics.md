@@ -3,16 +3,25 @@
 > Ini **satu sumber kebenaran** untuk angka kunci. File lain merujuk ke sini.
 
 ## Status progres (per 23 Jul 2026)
-- **Progres pilot Cilacap: 42%** vs baseline resmi **19%** → **+23 poin** (di depan jadwal, sisi engineering).
-- Deviasi jadwal: +23 pt. Action items: **24** (5 berjalan, 15 terbuka, 0 selesai). Isu & risiko: **9** (4 tinggi).
+- **Progres pilot Cilacap: 39%** vs baseline resmi **19%** → **+20 poin** (murni sisi engineering lab, BUKAN kesiapan lapangan; jangan over-claim).
+- Action items: **25** (5 berjalan, 15 terbuka, 1 selesai). Isu & risiko: **8** (3 tinggi).
+- **Koreksi penting:** inferensi AI kini di **PC + emulator ESP32**, belum on-device. **Dataset konsisten & siap pakai** (isu konsistensi resolved). **Jangkauan LoRa disiasati mesh** (bukan blocker keras).
 
-## Blocker kritis aktif
+## Blocker kritis aktif (3)
 | ID | Blocker | Metrik | Dampak |
 |---|---|---|---|
 | blk:power | Autonomi baterai GLD < target 30 hari | draw ON **5,75 W**; 7P(28Ah)=**1,76 hari**; 30 hari butuh ~120 sel | GLD tak mandiri 30 hari → perlu perpanjang OFF ~63 mnt / solar |
-| blk:tpl | TPL5010 belum optimal | board ~**0,4 V** & cuplik data saat "off" | Daya tak benar-benar terputus saat idle |
+| blk:tpl | TPL5010 belum memutus daya | board ~**0,4 V** & cuplik data saat "off" | Duty-cycle belum efektif hemat daya |
 | blk:conv | DC converter perlu diganti/dimodifikasi | arahan 20 Jul | Menahan finalisasi catu daya |
-| blk:lora | Jangkauan LoRa di bawah spec | **~100 m** (obstruksi) vs **1–2 km** LOS | Menaikkan jumlah CH & biaya deployment |
+| blk:ai-edge | Deploy inferensi AI ke ESP32 on-device | kini di PC + emulator | Belum jalan di perangkat lapangan |
+
+## Diminimalkan / resolved
+- ~~blk:lora~~ → jangkauan LoRa ~100 m/hop **disiasati mesh multi-hop** (uji 8-CH se-kampus, Layer 3). Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH). Risiko, bukan blocker.
+- ~~isu konsistensi data~~ → **dataset konsisten & siap dipakai**.
+- CH catu daya → **teratasi 2 panel** (surplus 1,5–4,4 Wh/hari).
+
+## Mesh LoRa (uji 8-CH, 16 Jul)
+Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ← Layer 3 (CH2). Route depth 1–3, status installed. Downlink (GW→CH→GLD 0xF020) tembus lewat mesh + fix firmware.
 
 ## Gate
 | ID | Gate | Status |

@@ -16,10 +16,10 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 ## 2. Status singkat (per 23 Jul 2026)
 
-- **Progres pilot Cilacap ≈ 42%** vs baseline resmi 19% → **+23 poin di depan jadwal** (murni sisi engineering).
-- ✅ **Uji fungsional GLD-CH-GW-Server hingga inferensi AI SELESAI (16 Jul).**
-- ✅ TCN LPG 8-sensor ≥92%; failover CH; dataset 14.477 sampel; CH power teratasi dgn 2 panel.
-- ⚠️ **Blocker/gate:** autonomi baterai GLD (7P=1,76 hari vs target 30 hari) + TPL5010 belum optimal; DC converter; jangkauan LoRa ~100 m vs 1–2 km; **gate TRA/JSA** untuk site survey.
+- **Progres pilot Cilacap ≈ 39%** vs baseline resmi 19% → **+20 poin** (murni sisi engineering lab, **bukan** kesiapan lapangan).
+- ✅ Rantai **GLD-CH-GW-Server end-to-end**; **inferensi AI kini di PC + emulator ESP32** (belum on-device — langkah berikutnya).
+- ✅ TCN LPG 8-sensor ≥92%; **dataset konsisten & siap pakai**; failover CH; **mesh 8-CH multi-hop se-kampus** (menyiasati jangkauan LoRa); CH power teratasi dgn 2 panel.
+- ⚠️ **Blocker/gate:** autonomi baterai GLD (7P=1,76 hari vs 30 hari); TPL5010 belum memutus daya (~0,4 V); DC converter; deploy AI on-device ESP32; **gate TRA/JSA** untuk site survey. Jangkauan LoRa per-hop **disiasati mesh** (bukan blocker keras).
 
 ## 3. Peta memory (`memory/`)
 
@@ -52,6 +52,10 @@ URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).
 - **Baseline Kurva-S:** dikalibrasi ke **Project Timeline 9 bulan (Deck Kick-Off)**.
 - **Transparansi:** klien = partner → selalu tampilkan **progres + outstanding** secara jujur; jangan over-claim (analisis ≠ resolusi blocker).
 - **OGI (YOLO/thermal) DIHAPUS** — belum disetujui. Jangan dimasukkan lagi tanpa arahan.
+- **Inferensi AI**: saat ini di PC/laptop + **emulator ESP32**, BELUM on-device. Jangan klaim "AI di edge/on-device".
+- **Jangkauan LoRa**: keterbatasan per-hop **disiasati mesh multi-hop** (sudah terbukti 8-CH). Bukan blocker keras.
+- **Deviasi jadwal**: jangan over-claim. Selisih vs baseline = **sisi lab saja**; framing harus jujur & bersyarat.
+- **Tema HTML (baru)**: biru **#2B5FCB** + charcoal **#262321** (logo Korporasi Kinarya ITB), bukan navy lagi.
 - **Cilacap = RU IV** (bukan VI). Scope aktif hanya 1 RU.
 - **Git:** kerja di branch `claude/project-management-tracking-5l8ypx`; PR aktif = **PR #1**. Push = update PR.
 

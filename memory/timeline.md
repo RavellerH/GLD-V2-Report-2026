@@ -24,7 +24,7 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 - **13 Jul** ⚠️ Profil beban daya; catatan awal mode baterai (kelak diklarifikasi 16 Jul). Frontend: MapLibre + default RU IV.
 - **14 Jul** Solar stabil ±4,17 V; discharge >14:00.
 - **15 Jul** 🔵 Dataset 14.477 sampel; **TCN per-sensor 8 model ≥92%** (MQ4V 93,9%).
-- **16 Jul** 🔵 **Uji fungsional GLD-CH-GW-Server hingga inferensi AI SELESAI.** Juga: **analisis daya lengkap** (GLD 7P=1,76 hari; CH 2 panel surplus; TPL5010 belum optimal), **uji mesh CH**, **uji downlink GLD** + fix firmware. Temuan O₂ vs CO₂; threshold per-MQ; aplikasi UI GLD.
+- **16 Jul** 🔵 **Uji fungsional GLD-CH-GW-Server end-to-end** — **inferensi AI di PC + emulator ESP32** (belum on-device). Juga: **analisis daya** (GLD 7P=1,76 hari; CH 2 panel surplus; TPL5010 belum optimal), **uji mesh 8-CH se-kampus** (multi-hop L3), **uji downlink GLD** lewat mesh + fix firmware. Temuan O₂ vs CO₂; threshold per-MQ; dataset konsisten; aplikasi UI GLD.
 - **17 Jul** Urutan kerja: LGU undang Pertamina ke lab → uji lab → RU.
 - **20 Jul** Simulasi siklus ON 60/OFF 100/WAKE 160; arahan ganti DC converter; modifikasi baterai ditahan.
 - **23 Jul** Repo server (PertaminaGLD) aktif: firmware + Operator Hub + TPL5010 + nulling. **Status per hari ini.**

@@ -2,39 +2,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root{
-  --bg:#F3F5F8;--surface:#FFFFFF;--surface-2:#EDF1F6;--surface-3:#E1E7EF;
-  --ink:#15202F;--ink-2:#38465A;--ink-soft:#64748B;--line:#DBE2EC;--line-2:#C4CEDB;
-  --accent:#1D3B63;--accent-2:#132A49;--accent-soft:#DBE5F1;
+  --bg:#F4F6FA;--surface:#FFFFFF;--surface-2:#EDF1F8;--surface-3:#E1E8F3;
+  --ink:#20242B;--ink-2:#454B57;--ink-soft:#6B7480;--line:#DCE3EE;--line-2:#C6CFDD;
+  --accent:#2B5FCB;--accent-2:#1D3F8F;--accent-soft:#DCE6F8;
   --good:#2E7D57;--good-soft:#DBEDE3;--warn:#B0771B;--warn-soft:#F4EAD3;
-  --crit:#BC3B32;--crit-soft:#F5DEDB;--info:#2C6E9B;--info-soft:#DBE7F1;
+  --crit:#BC3B32;--crit-soft:#F5DEDB;--info:#3B78C4;--info-soft:#DCE8F6;
   --ml:#6B54A6;--ml-soft:#E5E1F2;
   --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
   --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
   --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#0C121B;--surface:#121A26;--surface-2:#18222F;--surface-3:#212D3C;
-  --ink:#E7ECF3;--ink-2:#B2BECD;--ink-soft:#7C8B9E;--line:#232F3D;--line-2:#31404F;
-  --accent:#5E8FC4;--accent-2:#84AAD8;--accent-soft:#15283E;
+  --bg:#16181C;--surface:#1E2127;--surface-2:#252A32;--surface-3:#2F343E;
+  --ink:#EDEFF3;--ink-2:#B9C0CC;--ink-soft:#828B99;--line:#2C313A;--line-2:#3A404B;
+  --accent:#5A8AE0;--accent-2:#83A9EC;--accent-soft:#182740;
   --good:#4FAE7C;--good-soft:#12291F;--warn:#D6A24A;--warn-soft:#332811;
-  --crit:#DE6A5E;--crit-soft:#331B18;--info:#5AA0CE;--info-soft:#112536;
+  --crit:#DE6A5E;--crit-soft:#331B18;--info:#5EA0DA;--info-soft:#112536;
   --ml:#A490DC;--ml-soft:#221B33;
   --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
 }}
 :root[data-theme="light"]{
-  --bg:#F3F5F8;--surface:#FFFFFF;--surface-2:#EDF1F6;--surface-3:#E1E7EF;
-  --ink:#15202F;--ink-2:#38465A;--ink-soft:#64748B;--line:#DBE2EC;--line-2:#C4CEDB;
-  --accent:#1D3B63;--accent-2:#132A49;--accent-soft:#DBE5F1;
+  --bg:#F4F6FA;--surface:#FFFFFF;--surface-2:#EDF1F8;--surface-3:#E1E8F3;
+  --ink:#20242B;--ink-2:#454B57;--ink-soft:#6B7480;--line:#DCE3EE;--line-2:#C6CFDD;
+  --accent:#2B5FCB;--accent-2:#1D3F8F;--accent-soft:#DCE6F8;
   --good:#2E7D57;--good-soft:#DBEDE3;--warn:#B0771B;--warn-soft:#F4EAD3;
-  --crit:#BC3B32;--crit-soft:#F5DEDB;--info:#2C6E9B;--info-soft:#DBE7F1;--ml:#6B54A6;--ml-soft:#E5E1F2;
+  --crit:#BC3B32;--crit-soft:#F5DEDB;--info:#3B78C4;--info-soft:#DCE8F6;--ml:#6B54A6;--ml-soft:#E5E1F2;
   --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
 }
 :root[data-theme="dark"]{
-  --bg:#0C121B;--surface:#121A26;--surface-2:#18222F;--surface-3:#212D3C;
-  --ink:#E7ECF3;--ink-2:#B2BECD;--ink-soft:#7C8B9E;--line:#232F3D;--line-2:#31404F;
-  --accent:#5E8FC4;--accent-2:#84AAD8;--accent-soft:#15283E;
+  --bg:#16181C;--surface:#1E2127;--surface-2:#252A32;--surface-3:#2F343E;
+  --ink:#EDEFF3;--ink-2:#B9C0CC;--ink-soft:#828B99;--line:#2C313A;--line-2:#3A404B;
+  --accent:#5A8AE0;--accent-2:#83A9EC;--accent-soft:#182740;
   --good:#4FAE7C;--good-soft:#12291F;--warn:#D6A24A;--warn-soft:#332811;
-  --crit:#DE6A5E;--crit-soft:#331B18;--info:#5AA0CE;--info-soft:#112536;--ml:#A490DC;--ml-soft:#221B33;
+  --crit:#DE6A5E;--crit-soft:#331B18;--info:#5EA0DA;--info-soft:#112536;--ml:#A490DC;--ml-soft:#221B33;
   --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
 }
 *{box-sizing:border-box}
@@ -148,11 +148,11 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
 
   <section class="exec">
     <div class="el">Ringkasan Eksekutif</div>
-    <p>Uji fungsional <b>GLD-CH-GW-Server hingga inferensi AI telah tuntas (16 Jul)</b> — engineering di depan jadwal (progres pilot <b>42%</b> vs rencana 19%). Keunggulan ini di sisi laboratorium; menuju lapangan, <b>3 blocker teknis</b> (catu daya, DC converter, jangkauan LoRa) &amp; <b>gate TRA/JSA</b> untuk site survey masih menjadi penahan. Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
+    <p>Rantai <b>GLD-CH-GW-Server berjalan end-to-end</b>; <b>inferensi AI kini di komputer/laptop + emulator ESP32</b> (deploy on-device = langkah berikutnya). Mesh <b>8-CH se-kampus terbukti multi-hop</b>, menyiasati keterbatasan jangkauan LoRa. Progres pilot <b>39%</b> vs rencana 19% — selisih ini murni sisi lab/engineering. Menuju lapangan, blocker daya (autonomi baterai, TPL5010, DC converter) &amp; <b>gate TRA/JSA</b> masih menjadi penahan. Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
   </section>
 
   <section class="summary">
-    <div class="scell good"><div class="v">42%</div><div class="l">Progres pilot · rencana <b>19%</b></div></div>
+    <div class="scell good"><div class="v">39%</div><div class="l">Progres pilot · rencana <b>19%</b></div></div>
     <div class="scell crit"><div class="v">3</div><div class="l">Blocker kritis</div></div>
     <div class="scell"><div class="v">24</div><div class="l">Action items</div></div>
     <div class="scell"><div class="v">14.477</div><div class="l">Sampel dataset</div></div>
@@ -241,10 +241,10 @@ const P2=[
    body:'Pukul 11–15 stabil <b>±4,17 V</b> (baterai penuh). Setelah 14:00 arus/daya negatif (mulai discharge) → ±4,12 V.'},
   {d:'15 Jul',title:'Akuisisi data & model TCN per-sensor',stat:['milestone','Milestone'],tags:[['ml','AI/ML']],
    body:'Dataset GLD-F001: Clean Air, LPG, O₂, CO₂ — <b>14.477 sampel</b> (8 kanal MQ, ~2,7 j). <b>Model TCN per-sensor selesai:</b> 8 model, semua <b>≥92% akurasi</b> prediksi LPG 5 dtk ke depan; terbaik <b>MQ4V 93,9%</b> (F1 0,923). Ekspor TFLite int8 ~72 KB.'},
-  {d:'16 Jul',title:'Uji fungsional GLD-CH-GW-Server hingga inferensi AI — SELESAI',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['ml','AI/ML'],['sw','Software']],
-   body:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end <b>termasuk inferensi AI di edge</b>. Uji fungsional sistem terintegrasi tuntas — jauh sebelum jadwal integrasi resmi (Sep).'},
-  {d:'16 Jul',title:'Analisis daya sistem · uji mesh · uji downlink',stat:['milestone','Milestone'],tags:[['power','Daya'],['net','Jaringan']],
-   body:'<b>Budget daya terkuantifikasi:</b> GLD 7P (28Ah) runtime <b>1,76 hari</b>; 30 hari batt-only butuh ~120 sel → opsi realistis <b>perpanjang OFF ~63 mnt</b>/solar. Draw ON terverifikasi <b>5,75 W</b> (mengklarifikasi "2,43 W"). <b>CH 2 panel surya surplus 1,5–4,4 Wh/hari</b> (1 panel defisit). Uji <b>mesh CH</b> &amp; <b>downlink GLD</b> + perbaikan firmware. Catatan: TPL5010 belum optimal (~0,4 V saat off).'},
+  {d:'16 Jul',title:'Uji fungsional GLD-CH-GW-Server + inferensi AI',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['ml','AI/ML'],['sw','Software']],
+   body:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end. <b>Inferensi AI jalan di komputer/laptop dengan emulator ESP32</b> — deploy on-device ESP32 = langkah berikutnya.'},
+  {d:'16 Jul',title:'Analisis daya · uji mesh 8-CH · uji downlink',stat:['milestone','Milestone'],tags:[['power','Daya'],['net','Jaringan']],
+   body:'<b>Budget daya terkuantifikasi:</b> GLD 7P (28Ah) runtime <b>1,76 hari</b>; 30 hari batt-only butuh ~120 sel → opsi realistis <b>perpanjang OFF ~63 mnt</b>/solar. Draw ON terverifikasi <b>5,75 W</b> (mengklarifikasi "2,43 W"). <b>CH 2 panel surya surplus 1,5–4,4 Wh/hari</b> (1 panel defisit). <b>Mesh 8-CH se-kampus ITB</b> multi-hop hingga Layer 3 &amp; <b>downlink GLD</b> lewat mesh + fix firmware → jangkauan LoRa disiasati. Catatan: TPL5010 belum optimal (~0,4 V saat off).'},
   {d:'16 Jul',title:'Temuan sensor & aplikasi UI',stat:['temuan','Temuan'],tags:[['ml','AI/ML'],['sw','Software'],['net','Jaringan']],
    body:'Respons berkorelasi positif pada <b>CO₂</b>, tidak pada <b>O₂</b>. Baseline berbeda per sensor → <b>threshold per-MQ</b> (panduan QC). Aplikasi UI GLD dibuat (dataset/capture/save/download). Uji LoRa acak: Gerbang Utara 242 m PDR 100%; LFT 177 m PDR 100%; STEI 200 m PDR 87%.'},
   {d:'17 Jul',title:'Urutan kerja koordinasi',stat:['berjalan','Berjalan'],tags:[['coord','Koordinasi']],

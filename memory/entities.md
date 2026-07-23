@@ -29,7 +29,7 @@
 | sub:net | Jaringan LoRa & Cluster Head | 65% — failover ok, jangkauan blocker |
 | sub:ai | AI & Sensor MQ (TCN LPG) | 52% — TCN ≥92%, konsistensi data terbuka |
 | sub:power | Catu Daya & Manajemen Energi | 50% — CH ok (2 panel), autonomi GLD blocker |
-| sub:chamber | Gas Chamber, Hardware & QC | 35% — assembly berjalan |
+| sub:chamber | Gas Chamber, Hardware & QC | 35% — fitur chamber: solenoid valve, pompa duty-cycle, BME280 ganda (eksternal/internal), TGS2610 via ADS1115. Next: PCB layout, pompa senyap, mounting dinding |
 | sub:sw | Perangkat Lunak, Server & Dashboard | 58% — MapLibre, Operator Hub, CRUD |
 | sub:integ | Integrasi Sistem (GLD-CH-GW-Server) | 92% — uji fungsional + AI selesai |
 | sub:ruprep | Persiapan & Survei RU / HSE | 40% — plan siap, gate TRA/JSA |
@@ -45,6 +45,13 @@
 | dev:bq25185 | BQ25185 | Charger + power path solar/baterai |
 | dev:tps63020 | TPS63020 | Buck-boost 3,3 V |
 | dev:ina219 | INA219 | Sensor arus untuk validasi energi panel |
+| dev:solenoid | Solenoid Valve | Pengendalian aliran gas chamber |
+| dev:pump | Pompa Chamber | Hisap duty-cycle untuk dinamika udara chamber |
+| dev:bme280 | BME280 (×2) | Suhu/tekanan/kelembapan eksternal & internal chamber (I2C addr 0x76/0x77) |
+| dev:tgs2610 | TGS2610 | Sensor gas spesifik di dalam chamber (output analog via ADS1115) |
+| dev:ads1115 | ADS1115 | ADC eksternal 16-bit untuk TGS2610 (atasi noise ADC internal ESP32) |
+| dev:lm2596 | LM2596 | Step-down regulator 5V untuk ESP32/BME280/TGS2610/relay/BTS7960 |
+| dev:bts7960 | BTS7960 | Driver motor pompa chamber |
 
 ## Repositori (`repo:`)
 | ID | Repo | Lapisan | Update terakhir |

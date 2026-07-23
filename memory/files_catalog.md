@@ -25,6 +25,7 @@
 | `Test Sinyal LoRa.xlsx` | Data uji RF LoRa (RSSI/SNR/PDR, orientasi antena, koordinat). |
 | `GLD_serial_20260708T060449.log` | Log serial perangkat (8 Jul). |
 | `Urutan ADS,.jpeg`, `Urutan Channel MCP.jpeg` | Diagram urutan channel ADC (ADS/MCP). |
+| `LAPORAN PROGRESS CHAMBER 230726.pdf` | Progress chamber gas: solenoid valve, BME280 ganda, pompa (duty cycle), TGS2610 via ADS1115, LM2596, BTS7960, voltage divider 5V→3,3V. Next: PCB layout, pompa lebih senyap, mounting dinding. |
 
 ## C. Dataset sensor (`Dataset/`) — perangkat GLD-F001, 15 Jul 2026
 9 file CSV, **14.477 baris total**, 8 kanal tegangan (MQ8, MQ135, MQ3, MQ5, MQ4, MQ7, MQ6, MQ2). Sesi: Clean Air, LPG (×2), Oksigen, Carbon Dioxide, + baseline. Format: `timestamp_ms, wall_time, voltage_MQ*`.

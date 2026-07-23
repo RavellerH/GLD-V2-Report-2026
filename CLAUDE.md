@@ -14,11 +14,12 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - **Scope aktif sekarang:** **pilot RU IV Cilacap** (5 RU lain = roadmap).
 - **Field test kolaborasi:** RU-VII Kasim/Sorong. **Target implementasi:** Des 2026.
 
-## 2. Status singkat (per 23 Jul 2026)
+## 2. Status singkat (per 26 Jul 2026)
 
 - **Progres pilot Cilacap ≈ 39%** vs baseline resmi 19% → **+20 poin** (murni sisi engineering lab, **bukan** kesiapan lapangan).
 - ✅ Rantai **GLD-CH-GW-Server end-to-end**; **inferensi AI kini di PC + emulator ESP32** (belum on-device — langkah berikutnya).
 - ✅ TCN LPG 8-sensor ≥92%; **dataset konsisten & siap pakai**; failover CH; **mesh 8-CH multi-hop se-kampus** (menyiasati jangkauan LoRa); CH power teratasi dgn 2 panel.
+- ✅ **Progress chamber gas**: solenoid valve, BME280 ganda (I2C 0x76/0x77), TGS2610 via ADS1115, LM2596 step-down, BTS7960 driver pompa. Next: PCB layout, pompa senyap, mounting dinding.
 - ⚠️ **Blocker/gate:** autonomi baterai GLD (7P=1,76 hari vs 30 hari); TPL5010 belum memutus daya (~0,4 V); DC converter; deploy AI on-device ESP32; **gate TRA/JSA** untuk site survey. Jangkauan LoRa per-hop **disiasati mesh** (bukan blocker keras).
 
 ## 3. Peta memory (`memory/`)

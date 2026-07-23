@@ -108,6 +108,11 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 - Jalur 5 V & 24 V normal (±6 W).
 - 🔴 **Mode baterai hanya 2,43 W** vs kebutuhan ±6 W — mode baterai belum mampu menyuplai 8 heater MQ penuh.
 
+### 13 Juli — Update Repo Frontend (gasleakdetectionV2-April) — *Update*
+- Peta dashboard pindah ke **MapLibre** (menghapus Mapbox, local tiles — hilangkan flicker).
+- **Default deployment diubah ke RU IV Cilacap.**
+- Ditambahkan **device CRUD** penuh + **gas trend heatmap overlay** + RU map zoom.
+
 ### 14 Juli — Solar–Baterai
 - Pukul 11:00–15:00 tegangan stabil **±4,17 V** (baterai penuh). Setelah 14:00 arus/daya negatif (mulai discharge) → turun ke ±4,12 V.
 
@@ -131,6 +136,13 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 - Program simulasi diunggah ke board GLD: **ON 60 s / OFF 100 s / interval WAKE 160 s** (warm-up → akuisisi → inferensi → transmit LoRa).
 - Strategi manajemen daya: inferensi tidak kontinu; saat inferensi suplai MQ diputus, **ESP tetap menyala**.
 - 🔴 Arahan: **circuit DC converter harus diganti/dimodifikasi**; modifikasi baterai ditahan sementara, fokus dialihkan.
+
+---
+
+### 23 Juli — Update Repo Server/Firmware (PertaminaGLD) — *Update*
+- Commit aktif (22–23 Jul): firmware **GLD/CH/GW** + **Operator Hub workflows**, peningkatan reliability & test coverage.
+- Manajemen daya **TPL5010** (timer nanopower untuk duty-cycle) & algoritma **nulling**, dataset handling.
+- *Catatan: repo ML edge (gas-leak-ml-chamber-system) commit terakhir 24 Jun — belum ada update baru.*
 
 ---
 

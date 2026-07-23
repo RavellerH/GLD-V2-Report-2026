@@ -2,40 +2,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root{
-  --bg:#F4F6F5;--surface:#FFFFFF;--surface-2:#EDF0EF;--surface-3:#E4E9E7;
-  --ink:#16201E;--ink-2:#3C4B47;--ink-soft:#657570;--line:#DCE3E0;--line-2:#CBD4D0;
-  --accent:#0E7C7B;--accent-2:#0A5E5D;--accent-soft:#D4E8E7;
-  --good:#2F855A;--good-soft:#DCEEE4;--warn:#B7791F;--warn-soft:#F5EAD2;
-  --crit:#C0392B;--crit-soft:#F6DED9;--info:#2C6E9B;--info-soft:#DBE7F1;
-  --ml:#7A4FB8;--ml-soft:#E7DEF5;
-  --shadow:0 1px 2px rgba(20,32,30,.06),0 4px 16px rgba(20,32,30,.05);
+  --bg:#F3F5F8;--surface:#FFFFFF;--surface-2:#EDF1F6;--surface-3:#E1E7EF;
+  --ink:#15202F;--ink-2:#38465A;--ink-soft:#64748B;--line:#DBE2EC;--line-2:#C4CEDB;
+  --accent:#1D3B63;--accent-2:#132A49;--accent-soft:#DBE5F1;
+  --good:#2E7D57;--good-soft:#DBEDE3;--warn:#B0771B;--warn-soft:#F4EAD3;
+  --crit:#BC3B32;--crit-soft:#F5DEDB;--info:#2C6E9B;--info-soft:#DBE7F1;
+  --ml:#6B54A6;--ml-soft:#E5E1F2;
+  --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
   --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
   --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#0E1416;--surface:#151D1F;--surface-2:#1B2528;--surface-3:#223033;
-  --ink:#E8EDEB;--ink-2:#B7C4C0;--ink-soft:#7E9089;--line:#26332F;--line-2:#31413C;
-  --accent:#35B7B3;--accent-2:#5AD0CC;--accent-soft:#123433;
-  --good:#4FB07A;--good-soft:#123227;--warn:#D9A84A;--warn-soft:#332813;
-  --crit:#E06B5C;--crit-soft:#331C18;--info:#5AA0CE;--info-soft:#122735;
-  --ml:#A98AE0;--ml-soft:#241834;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.28);
+  --bg:#0C121B;--surface:#121A26;--surface-2:#18222F;--surface-3:#212D3C;
+  --ink:#E7ECF3;--ink-2:#B2BECD;--ink-soft:#7C8B9E;--line:#232F3D;--line-2:#31404F;
+  --accent:#5E8FC4;--accent-2:#84AAD8;--accent-soft:#15283E;
+  --good:#4FAE7C;--good-soft:#12291F;--warn:#D6A24A;--warn-soft:#332811;
+  --crit:#DE6A5E;--crit-soft:#331B18;--info:#5AA0CE;--info-soft:#112536;
+  --ml:#A490DC;--ml-soft:#221B33;
+  --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
 }}
 :root[data-theme="light"]{
-  --bg:#F4F6F5;--surface:#FFFFFF;--surface-2:#EDF0EF;--surface-3:#E4E9E7;
-  --ink:#16201E;--ink-2:#3C4B47;--ink-soft:#657570;--line:#DCE3E0;--line-2:#CBD4D0;
-  --accent:#0E7C7B;--accent-2:#0A5E5D;--accent-soft:#D4E8E7;
-  --good:#2F855A;--good-soft:#DCEEE4;--warn:#B7791F;--warn-soft:#F5EAD2;
-  --crit:#C0392B;--crit-soft:#F6DED9;--info:#2C6E9B;--info-soft:#DBE7F1;--ml:#7A4FB8;--ml-soft:#E7DEF5;
-  --shadow:0 1px 2px rgba(20,32,30,.06),0 4px 16px rgba(20,32,30,.05);
+  --bg:#F3F5F8;--surface:#FFFFFF;--surface-2:#EDF1F6;--surface-3:#E1E7EF;
+  --ink:#15202F;--ink-2:#38465A;--ink-soft:#64748B;--line:#DBE2EC;--line-2:#C4CEDB;
+  --accent:#1D3B63;--accent-2:#132A49;--accent-soft:#DBE5F1;
+  --good:#2E7D57;--good-soft:#DBEDE3;--warn:#B0771B;--warn-soft:#F4EAD3;
+  --crit:#BC3B32;--crit-soft:#F5DEDB;--info:#2C6E9B;--info-soft:#DBE7F1;--ml:#6B54A6;--ml-soft:#E5E1F2;
+  --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
 }
 :root[data-theme="dark"]{
-  --bg:#0E1416;--surface:#151D1F;--surface-2:#1B2528;--surface-3:#223033;
-  --ink:#E8EDEB;--ink-2:#B7C4C0;--ink-soft:#7E9089;--line:#26332F;--line-2:#31413C;
-  --accent:#35B7B3;--accent-2:#5AD0CC;--accent-soft:#123433;
-  --good:#4FB07A;--good-soft:#123227;--warn:#D9A84A;--warn-soft:#332813;
-  --crit:#E06B5C;--crit-soft:#331C18;--info:#5AA0CE;--info-soft:#122735;--ml:#A98AE0;--ml-soft:#241834;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.28);
+  --bg:#0C121B;--surface:#121A26;--surface-2:#18222F;--surface-3:#212D3C;
+  --ink:#E7ECF3;--ink-2:#B2BECD;--ink-soft:#7C8B9E;--line:#232F3D;--line-2:#31404F;
+  --accent:#5E8FC4;--accent-2:#84AAD8;--accent-soft:#15283E;
+  --good:#4FAE7C;--good-soft:#12291F;--warn:#D6A24A;--warn-soft:#332811;
+  --crit:#DE6A5E;--crit-soft:#331B18;--info:#5AA0CE;--info-soft:#112536;--ml:#A490DC;--ml-soft:#221B33;
+  --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -55,6 +55,13 @@ h1{font-size:25px;margin-bottom:8px}
 .asof b{color:var(--ink)}
 .themebtn{margin-top:4px;font-family:var(--mono);font-size:11px;cursor:pointer;background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);padding:5px 11px;border-radius:8px}
 .themebtn:hover{border-color:var(--accent);color:var(--accent)}
+.topbar{height:4px;background:linear-gradient(90deg,var(--accent) 0%,var(--info) 55%,var(--accent-2) 100%)}
+.identity{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:14px;font-weight:600}
+.identity .sq{width:9px;height:9px;background:var(--accent);border-radius:2px;flex:none}
+.exec{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);color:#fff;border-radius:14px;padding:20px 22px;margin:18px 0 6px;box-shadow:var(--shadow)}
+.exec .el{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.78;font-weight:600;margin-bottom:9px}
+.exec p{font-size:13px;color:rgba(255,255,255,.92);max-width:80ch;line-height:1.6;margin:0}
+.exec p b{color:#fff}
 .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 6px}
 .scell{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .scell::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
@@ -118,7 +125,9 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
 @media(max-width:560px){.ev{grid-template-columns:64px 1fr;gap:10px}.ev-date{font-size:10.5px}}
 </style>
 
+<div class="topbar"></div>
 <div class="wrap">
+  <div class="identity"><span class="sq"></span>LAPI Ganesha Utama &nbsp;·&nbsp; Lab IoT &amp; Lab Fisika ITB &nbsp;·&nbsp; PT Pertamina Patra Niaga</div>
   <header class="masthead">
     <div>
       <div class="tagrow">
@@ -136,6 +145,11 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
       <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
     </div>
   </header>
+
+  <section class="exec">
+    <div class="el">Ringkasan Eksekutif</div>
+    <p>Uji fungsional <b>GLD-CH-GW-Server hingga inferensi AI telah tuntas (16 Jul)</b> — engineering di depan jadwal (progres pilot <b>42%</b> vs rencana 19%). Keunggulan ini di sisi laboratorium; menuju lapangan, <b>3 blocker teknis</b> (catu daya, DC converter, jangkauan LoRa) &amp; <b>gate TRA/JSA</b> untuk site survey masih menjadi penahan. Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
+  </section>
 
   <section class="summary">
     <div class="scell good"><div class="v">42%</div><div class="l">Progres pilot · rencana <b>19%</b></div></div>
@@ -219,6 +233,8 @@ const P2=[
    body:'Vp 7,25 V; Ip 0,05 A. Pengisian belum optimal — lokasi hanya optimal 10:00–13:00 → <b>rekomendasi pindah ke rooftop</b>.'},
   {d:'13 Jul',title:'Profil beban daya GLD',stat:['blocker','Blocker'],tags:[['power','Daya']],
    body:'Jalur 5 V &amp; 24 V normal (±6 W). 🔴 <b>Mode baterai hanya 2,43 W</b> vs kebutuhan ±6 W — belum mampu menyuplai 8 heater MQ penuh.'},
+  {d:'13 Jul',title:'Repo frontend — MapLibre & default RU IV Cilacap',stat:['berjalan','Update'],tags:[['sw','Repo Dev']],
+   body:'Dashboard pindah peta ke <b>MapLibre</b> (hapus Mapbox, local tiles), <b>default deployment RU IV Cilacap</b>, device CRUD penuh + gas trend heatmap overlay.'},
   {d:'14 Jul',title:'Solar–baterai',stat:['temuan','Temuan'],tags:[['power','Daya']],
    body:'Pukul 11–15 stabil <b>±4,17 V</b> (baterai penuh). Setelah 14:00 arus/daya negatif (mulai discharge) → ±4,12 V.'},
   {d:'15 Jul',title:'Akuisisi data & model TCN per-sensor',stat:['milestone','Milestone'],tags:[['ml','AI/ML']],
@@ -230,7 +246,9 @@ const P2=[
   {d:'17 Jul',title:'Urutan kerja koordinasi',stat:['berjalan','Berjalan'],tags:[['coord','Koordinasi']],
    body:'Disepakati: <b>LGU undang Pertamina ke lab → uji lab → kunjungan RU</b>. Dokumen JSA/TRA perlu dikonfirmasi kesiapannya.'},
   {d:'20 Jul',title:'Simulasi siklus operasi & arahan daya',stat:['berjalan','Berjalan'],tags:[['power','Daya'],['sw','Software']],
-   body:'Simulasi diunggah ke board: <b>ON 60 s / OFF 100 s / WAKE 160 s</b> (warm-up → akuisisi → inferensi → transmit). Saat inferensi suplai MQ diputus, <b>ESP tetap menyala</b>. 🔴 Arahan: <b>ganti/modifikasi DC converter</b>; modifikasi baterai ditahan.'}
+   body:'Simulasi diunggah ke board: <b>ON 60 s / OFF 100 s / WAKE 160 s</b> (warm-up → akuisisi → inferensi → transmit). Saat inferensi suplai MQ diputus, <b>ESP tetap menyala</b>. 🔴 Arahan: <b>ganti/modifikasi DC converter</b>; modifikasi baterai ditahan.'},
+  {d:'23 Jul',title:'Repo server/firmware aktif (PertaminaGLD)',stat:['berjalan','Update'],tags:[['net','Jaringan'],['sw','Repo Dev']],
+   body:'Commit terbaru: firmware GLD/CH/GW + <b>Operator Hub workflows</b>, reliability &amp; test coverage; manajemen daya <b>TPL5010</b> &amp; algoritma nulling.'}
 ];
 function render(data,elId){
   const c=document.getElementById(elId);let cur=null;

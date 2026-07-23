@@ -2,15 +2,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root{
-  --bg:#F3F5F8; --surface:#FFFFFF; --surface-2:#EDF1F6; --surface-3:#E1E7EF;
-  --ink:#15202F; --ink-2:#38465A; --ink-soft:#64748B; --line:#DBE2EC; --line-2:#C4CEDB;
-  --accent:#1D3B63; --accent-2:#132A49; --accent-soft:#DBE5F1;
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface-2:#EDF1F8; --surface-3:#E1E8F3;
+  --ink:#20242B; --ink-2:#454B57; --ink-soft:#6B7480; --line:#DCE3EE; --line-2:#C6CFDD;
+  --accent:#2B5FCB; --accent-2:#1D3F8F; --accent-soft:#DCE6F8;
   --good:#2E7D57; --good-soft:#DBEDE3;
   --warn:#B0771B; --warn-soft:#F4EAD3;
-  --crit:#BC3B32; --crit-soft:#F5DEDB;
-  --info:#2C6E9B; --info-soft:#DBE7F1;
-  --repo-app:#1D3B63; --repo-net:#3E6EA5; --repo-ml:#6B54A6;
-  --repo-app-soft:#DBE5F1; --repo-net-soft:#E0E9F4; --repo-ml-soft:#E5E1F2;
+  --crit:#C0392B; --crit-soft:#F6DEDB;
+  --info:#3B78C4; --info-soft:#DCE8F6;
+  --charcoal:#262321; --charcoal-2:#3A3531;
+  --repo-app:#2B5FCB; --repo-net:#3B78C4; --repo-ml:#6B54A6;
+  --repo-app-soft:#DCE6F8; --repo-net-soft:#DCE8F6; --repo-ml-soft:#E5E1F2;
   --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
   --radius:12px;
   --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
@@ -18,34 +19,37 @@
 }
 @media (prefers-color-scheme:dark){
   :root{
-    --bg:#0C121B; --surface:#121A26; --surface-2:#18222F; --surface-3:#212D3C;
-    --ink:#E7ECF3; --ink-2:#B2BECD; --ink-soft:#7C8B9E; --line:#232F3D; --line-2:#31404F;
-    --accent:#5E8FC4; --accent-2:#84AAD8; --accent-soft:#15283E;
+    --bg:#16181C; --surface:#1E2127; --surface-2:#252A32; --surface-3:#2F343E;
+    --ink:#EDEFF3; --ink-2:#B9C0CC; --ink-soft:#828B99; --line:#2C313A; --line-2:#3A404B;
+    --accent:#5A8AE0; --accent-2:#83A9EC; --accent-soft:#182740;
     --good:#4FAE7C; --good-soft:#12291F; --warn:#D6A24A; --warn-soft:#332811;
-    --crit:#DE6A5E; --crit-soft:#331B18; --info:#5AA0CE; --info-soft:#112536;
-    --repo-app:#5E8FC4; --repo-net:#7FB0DE; --repo-ml:#A490DC;
-    --repo-app-soft:#15283E; --repo-net-soft:#122536; --repo-ml-soft:#221B33;
+    --crit:#DE6A5E; --crit-soft:#331B18; --info:#5EA0DA; --info-soft:#122536;
+    --charcoal:#0F1013; --charcoal-2:#1E2127;
+    --repo-app:#5A8AE0; --repo-net:#5EA0DA; --repo-ml:#A490DC;
+    --repo-app-soft:#182740; --repo-net-soft:#122536; --repo-ml-soft:#221B33;
     --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
   }
 }
 :root[data-theme="light"]{
-  --bg:#F3F5F8; --surface:#FFFFFF; --surface-2:#EDF1F6; --surface-3:#E1E7EF;
-  --ink:#15202F; --ink-2:#38465A; --ink-soft:#64748B; --line:#DBE2EC; --line-2:#C4CEDB;
-  --accent:#1D3B63; --accent-2:#132A49; --accent-soft:#DBE5F1;
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface-2:#EDF1F8; --surface-3:#E1E8F3;
+  --ink:#20242B; --ink-2:#454B57; --ink-soft:#6B7480; --line:#DCE3EE; --line-2:#C6CFDD;
+  --accent:#2B5FCB; --accent-2:#1D3F8F; --accent-soft:#DCE6F8;
   --good:#2E7D57; --good-soft:#DBEDE3; --warn:#B0771B; --warn-soft:#F4EAD3;
-  --crit:#BC3B32; --crit-soft:#F5DEDB; --info:#2C6E9B; --info-soft:#DBE7F1;
-  --repo-app:#1D3B63; --repo-net:#3E6EA5; --repo-ml:#6B54A6;
-  --repo-app-soft:#DBE5F1; --repo-net-soft:#E0E9F4; --repo-ml-soft:#E5E1F2;
+  --crit:#C0392B; --crit-soft:#F6DEDB; --info:#3B78C4; --info-soft:#DCE8F6;
+  --charcoal:#262321; --charcoal-2:#3A3531;
+  --repo-app:#2B5FCB; --repo-net:#3B78C4; --repo-ml:#6B54A6;
+  --repo-app-soft:#DCE6F8; --repo-net-soft:#DCE8F6; --repo-ml-soft:#E5E1F2;
   --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
 }
 :root[data-theme="dark"]{
-  --bg:#0C121B; --surface:#121A26; --surface-2:#18222F; --surface-3:#212D3C;
-  --ink:#E7ECF3; --ink-2:#B2BECD; --ink-soft:#7C8B9E; --line:#232F3D; --line-2:#31404F;
-  --accent:#5E8FC4; --accent-2:#84AAD8; --accent-soft:#15283E;
+  --bg:#16181C; --surface:#1E2127; --surface-2:#252A32; --surface-3:#2F343E;
+  --ink:#EDEFF3; --ink-2:#B9C0CC; --ink-soft:#828B99; --line:#2C313A; --line-2:#3A404B;
+  --accent:#5A8AE0; --accent-2:#83A9EC; --accent-soft:#182740;
   --good:#4FAE7C; --good-soft:#12291F; --warn:#D6A24A; --warn-soft:#332811;
-  --crit:#DE6A5E; --crit-soft:#331B18; --info:#5AA0CE; --info-soft:#112536;
-  --repo-app:#5E8FC4; --repo-net:#7FB0DE; --repo-ml:#A490DC;
-  --repo-app-soft:#15283E; --repo-net-soft:#122536; --repo-ml-soft:#221B33;
+  --crit:#DE6A5E; --crit-soft:#331B18; --info:#5EA0DA; --info-soft:#122536;
+  --charcoal:#0F1013; --charcoal-2:#1E2127;
+  --repo-app:#5A8AE0; --repo-net:#5EA0DA; --repo-ml:#A490DC;
+  --repo-app-soft:#182740; --repo-net-soft:#122536; --repo-ml-soft:#221B33;
   --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
 }
 *{box-sizing:border-box}
@@ -90,7 +94,7 @@ h1{font-size:26px}
   border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px}
 .baseline-note b{color:var(--ink)}
 /* corporate polish */
-.topbar{height:4px;background:linear-gradient(90deg,var(--accent) 0%,var(--info) 55%,var(--accent-2) 100%)}
+.topbar{height:5px;background:linear-gradient(90deg,var(--charcoal) 0%,var(--accent) 42%,var(--accent-2) 100%)}
 .identity{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:14px;font-weight:600}
 .identity .sq{width:9px;height:9px;background:var(--accent);border-radius:2px;flex:none}
 .docmeta-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:18px 0 4px;background:var(--surface)}
@@ -118,6 +122,31 @@ h1{font-size:26px}
 .poitem .ic{font-size:12px;line-height:1.5}
 .potag{font-family:var(--mono);font-size:8.5px;text-transform:uppercase;letter-spacing:.03em;padding:1px 6px;border-radius:5px;margin-left:5px;white-space:nowrap;font-weight:700;vertical-align:middle}
 .potag.blk{background:var(--crit-soft);color:var(--crit)} .potag.gate{background:var(--warn-soft);color:var(--warn)} .potag.risk{background:var(--info-soft);color:var(--info)}
+/* sticky nav */
+html{scroll-behavior:smooth}
+.topnav{position:sticky;top:0;z-index:60;display:flex;gap:4px;overflow-x:auto;background:var(--charcoal);
+  padding:8px 10px;border-radius:11px;margin:16px 0 8px;box-shadow:var(--shadow);scrollbar-width:thin}
+.topnav::-webkit-scrollbar{height:5px}
+.topnav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px}
+.topnav a{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.02em;white-space:nowrap;
+  color:#C7CBD4;text-decoration:none;padding:6px 12px;border-radius:7px;transition:background .15s,color .15s}
+.topnav a:hover{background:rgba(255,255,255,.12);color:#fff}
+.topnav a.active{background:var(--accent);color:#fff}
+.section-label{scroll-margin-top:70px}
+#ringkasan{scroll-margin-top:70px}
+.evo{display:flex;flex-direction:column;gap:0;margin-top:6px;counter-reset:evo}
+.evostep{display:grid;grid-template-columns:26px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.evostep:last-child{border-bottom:0}
+.evostep .en{counter-increment:evo;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--ink-soft);
+  width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.evostep.cur .en{background:var(--accent)}
+.evostep.old .en{background:var(--line-2);color:var(--ink-2)}
+.evostep .eh{font-size:13px;font-weight:650;color:var(--ink);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.evostep .ed{font-family:var(--mono);font-size:10px;color:var(--ink-soft)}
+.evostep .eb{font-size:12.3px;color:var(--ink-2);line-height:1.5;margin-top:3px}
+.evostep .etag{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.04em;padding:1px 6px;border-radius:5px;font-weight:700}
+.evostep .etag.now{background:var(--accent-soft);color:var(--accent)}
+.evostep .etag.done{background:var(--good-soft);color:var(--good)}
 
 .grid{display:grid;gap:18px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
@@ -302,6 +331,8 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
     </div>
   </header>
 
+  <nav class="topnav" id="topnav" aria-label="Navigasi bagian"></nav>
+
   <div class="docmeta-row">
     <div><span class="k">Proyek</span><span class="v">GLD Point Sensor Network</span></div>
     <div><span class="k">Klien / Partner</span><span class="v">Pertamina Patra Niaga</span></div>
@@ -310,29 +341,29 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
     <div><span class="k">Status per</span><span class="v">23 Juli 2026</span></div>
   </div>
 
-  <section class="exec" aria-label="Ringkasan eksekutif">
+  <section class="exec" id="ringkasan" aria-label="Ringkasan eksekutif">
     <div class="el">Ringkasan Eksekutif</div>
-    <h2>Engineering di depan jadwal; kesiapan lapangan tertahan gate perizinan &amp; 3 blocker teknis.</h2>
-    <p>Uji fungsional sistem <b style="color:#fff">GLD-CH-GW-Server hingga inferensi AI telah tuntas (16 Jul)</b>, jauh sebelum jadwal integrasi resmi (September) — sehingga progres pilot Cilacap <b style="color:#fff">42% vs rencana 19% (+23 poin)</b>. Namun keunggulan ini murni di sisi laboratorium/engineering. Menuju lapangan, <b style="color:#fff">eksekusi site survey masih menunggu gate TRA/JSA</b> dan <b style="color:#fff">3 blocker teknis</b> (catu daya mode baterai, DC converter, jangkauan LoRa) belum tuntas. Transparansi progres &amp; outstanding di bawah ini disajikan sebagai basis kolaborasi partner.</p>
+    <h2>Engineering matang lebih awal; kesiapan lapangan masih bergantung pada gate perizinan &amp; penyelesaian blocker daya.</h2>
+    <p>Rantai <b style="color:#fff">GLD-CH-GW-Server berjalan end-to-end</b> dan <b style="color:#fff">inferensi AI sudah jalan — saat ini di komputer/laptop dengan emulator ESP32</b> (deploy on-device ESP32 = langkah berikutnya). Mesh LoRa <b style="color:#fff">8-CH se-kampus terbukti multi-hop</b>, sehingga keterbatasan jangkauan per-hop dapat disiasati. Progres pilot Cilacap <b style="color:#fff">39% vs rencana 19%</b> — selisih ini <b style="color:#fff">murni sisi lab/engineering</b>, bukan kesiapan lapangan. Menuju lapangan masih ada <b style="color:#fff">gate TRA/JSA</b> dan blocker daya (autonomi baterai GLD, TPL5010, DC converter). Progres &amp; outstanding disajikan terbuka sebagai basis kolaborasi partner.</p>
     <div class="statuschips">
-      <span class="sc g">✓ Uji fungsional + AI selesai</span>
-      <span class="sc g">✓ Failover CH terbukti</span>
-      <span class="sc g">✓ TCN LPG ≥92%</span>
-      <span class="sc w">⚠ Autonomi baterai GLD</span>
-      <span class="sc w">⚠ Gate TRA/JSA</span>
+      <span class="sc g">✓ Rantai GLD→server + inferensi AI (PC/emulator)</span>
+      <span class="sc g">✓ Mesh 8-CH multi-hop terbukti</span>
+      <span class="sc g">✓ TCN LPG ≥92% · dataset konsisten</span>
+      <span class="sc w">⚠ Deploy AI on-device ESP32</span>
+      <span class="sc w">⚠ Autonomi baterai · Gate TRA/JSA</span>
     </div>
   </section>
 
   <section class="kpis" aria-label="Ringkasan indikator">
-    <div class="kpi good">
+    <div class="kpi info">
       <div class="lab">Progres Pilot Cilacap</div>
-      <div class="val">42%</div>
-      <div class="sub">Rencana <b>19%</b> · <span class="delta pos">+23 poin</span></div>
+      <div class="val">39%</div>
+      <div class="sub">Rencana <b>19%</b> · <span class="delta pos">+20 poin (lab)</span></div>
     </div>
-    <div class="kpi good">
-      <div class="lab">Deviasi Jadwal</div>
-      <div class="val">+23<span style="font-size:16px">pt</span></div>
-      <div class="sub">Di depan baseline resmi</div>
+    <div class="kpi info">
+      <div class="lab">Selisih vs Baseline</div>
+      <div class="val">+20<span style="font-size:16px">pt</span></div>
+      <div class="sub">Hanya sisi engineering lab</div>
     </div>
     <div class="kpi info">
       <div class="lab">RU Aktif / Program</div>
@@ -342,17 +373,17 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
     <div class="kpi crit">
       <div class="lab">Blocker Kritis Aktif</div>
       <div class="val">3</div>
-      <div class="sub">Catu daya · konverter · jangkauan LoRa</div>
+      <div class="sub">Autonomi baterai · TPL5010 · konverter</div>
     </div>
     <div class="kpi">
       <div class="lab">Action Items</div>
-      <div class="val">24</div>
-      <div class="sub"><b>5</b> berjalan · <b>15</b> terbuka · <b>0</b> selesai</div>
+      <div class="val">25</div>
+      <div class="sub"><b>5</b> berjalan · <b>15</b> terbuka · <b>1</b> selesai</div>
     </div>
     <div class="kpi warn">
       <div class="lab">Isu &amp; Risiko</div>
-      <div class="val">9</div>
-      <div class="sub"><b>4</b> prioritas tinggi</div>
+      <div class="val">8</div>
+      <div class="sub"><b>3</b> prioritas tinggi</div>
     </div>
   </section>
 
@@ -369,7 +400,7 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
     </div>
   </div>
 
-  <p class="baseline-note">📐 <b>Baseline resmi:</b> Kurva-S &amp; timeline dikalibrasi ke <b>Project Timeline 9 bulan</b> pada Deck Kick-Off (12 Jun 2026 → Feb 2027, 12 aktivitas). Scope aktif saat ini <b>fokus 1 RU — pilot RU IV Cilacap</b> (5 RU lainnya = roadmap). Proyek <b>di depan jadwal</b> karena engineering front-loaded — termasuk <b>uji fungsional GLD-CH-GW-Server yang sudah tembus inferensi AI (16 Jul)</b>, jauh sebelum jadwal integrasi resmi (Sep). Namun eksekusi <b>site survey menunggu gate TRA/JSA</b> dan 3 blocker teknis masih aktif.</p>
+  <p class="baseline-note">📐 <b>Baseline resmi:</b> Kurva-S &amp; timeline dikalibrasi ke <b>Project Timeline 9 bulan</b> pada Deck Kick-Off (12 Jun 2026 → Feb 2027, 12 aktivitas). Scope aktif saat ini <b>fokus 1 RU — pilot RU IV Cilacap</b> (5 RU lainnya = roadmap). Selisih <b>+20 poin</b> ini <b>murni sisi engineering lab</b> (prototype, dataset, model AI, uji fungsional berjalan sejak April) — <b>bukan</b> kesiapan lapangan. Catatan penting: inferensi AI kini berjalan di <b>komputer/laptop + emulator ESP32</b>, belum on-device. Eksekusi <b>site survey menunggu gate TRA/JSA</b>; blocker daya masih aktif. Jangkauan LoRa per-hop terbatas namun sudah <b>disiasati mesh multi-hop 8-CH</b>.</p>
 
   <div class="section-label"><span class="eyebrow">Kurva-S · Progres Kumulatif</span></div>
   <div class="card">
@@ -413,7 +444,7 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
       <div class="node">
         <div class="layer">Edge · Sensor Node</div>
         <div class="nh">Gas Point Sensor Unit</div>
-        <div class="nspec">ESP32-S3 · 8× MQ (MQ2/3/4/5/6/7/8/135) · ADS1256 24-bit · TFLite Micro · multi-task NN + TCN per-sensor · manajemen daya duty-cycle (TPL5010)</div>
+        <div class="nspec">ESP32-S3 · 8× MQ (MQ2/3/4/5/6/7/8/135) · ADS1256 24-bit · TCN per-sensor + multi-task NN · <b>inferensi AI kini di PC + emulator ESP32</b> (target: TFLite Micro on-device) · duty-cycle (TPL5010)</div>
         <span class="repobadge ml">gas-leak-ml-chamber-system</span>
         <span class="repobadge net">PertaminaGLD · firmware GLD</span>
       </div>
@@ -475,16 +506,16 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
       <div class="feed" id="feed"></div>
     </div>
     <div class="card">
-      <div class="card-head"><h2>Telemetri Akuisisi Data</h2></div>
-      <p class="hint">Rekap dataset sensor GLD-F001 (15 Jul 2026).</p>
+      <div class="card-head"><h2>Evolusi Data &amp; Metode Model</h2></div>
+      <p class="hint">Rekap dataset GLD-F001 (15 Jul) dan perkembangan metode AI — dari Tahap 1 hingga metode saat ini.</p>
       <div class="telem">
         <div class="tcell"><div class="v">14.477</div><div class="l">Total sampel</div></div>
-        <div class="tcell"><div class="v">9</div><div class="l">Sesi akuisisi</div></div>
+        <div class="tcell"><div class="v">4</div><div class="l">Jenis gas</div></div>
         <div class="tcell"><div class="v">8</div><div class="l">Kanal MQ</div></div>
-        <div class="tcell"><div class="v">~2,7<span style="font-size:13px">j</span></div><div class="l">Durasi logging</div></div>
+        <div class="tcell"><div class="v">≥92%</div><div class="l">Akurasi TCN</div></div>
       </div>
       <div class="gaslist" id="gaslist"></div>
-      <p class="hint" style="margin:14px 0 0">Model TCN per-sensor (Board12): 8 model, semua <b style="color:var(--ink)">≥92% akurasi</b> prediksi LPG 5 s ke depan, terbaik MQ4V 93,9% (F1 0,923). Ekspor TFLite int8 ~72 KB untuk edge.</p>
+      <div class="evo" id="evo" style="margin-top:16px"></div>
     </div>
   </div>
 
@@ -551,11 +582,11 @@ const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt'
   // actual to today
   const act=[
     [new Date(2026,5,1),0],[new Date(2026,5,12),6],[new Date(2026,5,30),16],
-    [new Date(2026,6,7),24],[new Date(2026,6,15),31],[new Date(2026,6,23),42]
+    [new Date(2026,6,7),23],[new Date(2026,6,15),30],[new Date(2026,6,23),39]
   ].map(a=>({d:a[0],v:a[1]}));
   // forecast from today
   const fc=[
-    [new Date(2026,6,23),42],[new Date(2026,7,31),53],[new Date(2026,8,30),64],[new Date(2026,9,31),72],
+    [new Date(2026,6,23),39],[new Date(2026,7,31),50],[new Date(2026,8,30),62],[new Date(2026,9,31),71],
     [new Date(2026,10,30),82],[new Date(2026,11,31),91],[new Date(2027,0,31),97],[new Date(2027,1,28),100]
   ].map(a=>({d:a[0],v:a[1]}));
   for(let v=0;v<=100;v+=20){
@@ -582,7 +613,7 @@ const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt'
   const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini';svg.appendChild(tl);
   const last=act[act.length-1];
   svg.appendChild(el('circle',{cx:x(last.d),cy:y(last.v),r:5,fill:'var(--accent)',stroke:'var(--surface)','stroke-width':2}));
-  const lt=el('text',{x:x(last.d),y:y(last.v)-12,'text-anchor':'middle',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='42%';svg.appendChild(lt);
+  const lt=el('text',{x:x(last.d),y:y(last.v)-12,'text-anchor':'middle',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='39%';svg.appendChild(lt);
   svg.appendChild(el('circle',{cx:x(TODAY),cy:y(19),r:3.5,fill:'var(--ink-soft)'}));
   const pl=el('text',{x:x(TODAY),y:y(19)+18,'text-anchor':'middle',fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});pl.textContent='19%';svg.appendChild(pl);
   const dec=new Date(2026,11,1);
@@ -595,10 +626,10 @@ const ACT=[
   {id:1,name:'Kick-off & requirement confirmation',s:[2026,5,8],e:[2026,5,15],act:100,plan:100,st:'good'},
   {id:2,name:'Site survey & data collection plan',s:[2026,5,15],e:[2026,6,7],act:55,plan:100,st:'warn'},
   {id:3,name:'Detailed design',s:[2026,6,1],e:[2026,6,21],act:85,plan:90,st:'good'},
-  {id:4,name:'Prototype build',s:[2026,6,15],e:[2026,7,21],act:60,plan:5,st:'good'},
-  {id:5,name:'Lab test',s:[2026,7,15],e:[2026,8,21],act:35,plan:0,st:'accent'},
-  {id:6,name:'AI model training / validation',s:[2026,7,15],e:[2026,8,21],act:50,plan:0,st:'accent'},
-  {id:7,name:'Integration test (GLD-CH-GW-Server)',s:[2026,6,1],e:[2026,9,7],act:90,plan:0,st:'good'},
+  {id:4,name:'Prototype build',s:[2026,6,15],e:[2026,7,21],act:58,plan:5,st:'accent'},
+  {id:5,name:'Lab test',s:[2026,7,15],e:[2026,8,21],act:38,plan:0,st:'accent'},
+  {id:6,name:'AI model training / validation',s:[2026,7,15],e:[2026,8,21],act:52,plan:0,st:'accent'},
+  {id:7,name:'Integration test (fungsional; AI on-device pending)',s:[2026,6,1],e:[2026,9,7],act:58,plan:0,st:'accent'},
   {id:8,name:'HSE review & permit preparation',s:[2026,10,1],e:[2026,10,14],act:5,plan:0,st:'warn'},
   {id:9,name:'Field installation',s:[2026,10,15],e:[2026,11,7],act:0,plan:0,st:'neutral'},
   {id:10,name:'Field trial',s:[2026,11,8],e:[2027,0,7],act:0,plan:0,st:'neutral'},
@@ -671,11 +702,11 @@ const RU=[
 /* ---------- SUBSYSTEM READINESS ---------- */
 const WSW=[
   {n:'Jaringan LoRa & Cluster Head',w:20,act:65,plan:85,st:'warn'},
-  {n:'AI & Sensor MQ (TCN LPG)',w:22,act:52,plan:70,st:'warn'},
+  {n:'AI & Sensor MQ (TCN LPG · dataset konsisten)',w:22,act:55,plan:70,st:'warn'},
   {n:'Catu Daya & Manajemen Energi',w:15,act:50,plan:72,st:'crit'},
   {n:'Gas Chamber, Hardware & QC',w:12,act:35,plan:62,st:'warn'},
   {n:'Perangkat Lunak, Server & Dashboard',w:13,act:58,plan:60,st:'good'},
-  {n:'Integrasi Sistem (GLD-CH-GW-Server)',w:10,act:92,plan:45,st:'good'},
+  {n:'Integrasi Sistem (fungsional; AI on-device pending)',w:10,act:68,plan:45,st:'accent'},
   {n:'Persiapan & Survei RU / HSE',w:8,act:40,plan:60,st:'warn'},
   {n:'Inisiasi & Desain Sistem',w:10,act:95,plan:100,st:'good'}
 ];
@@ -718,8 +749,8 @@ const RES=[
 const FEED=[
   {d:'23 Jul',t:'Repo PertaminaGLD — firmware & Operator Hub (aktif)',b:'Commit terbaru: firmware GLD/CH/GW + <b>Operator Hub workflows</b>, reliability &amp; test coverage; manajemen daya <b>TPL5010</b> &amp; algoritma nulling.',tag:'Repo'},
   {d:'20 Jul',t:'Simulasi siklus operasi diunggah ke board GLD',b:'Warm-up → akuisisi → inferensi → transmit LoRa. <b>ON 60 s / OFF 100 s / WAKE 160 s</b>. Arahan: <b>ganti/modifikasi DC converter</b>; modifikasi baterai ditahan.',tag:'Fahmi'},
-  {d:'16 Jul',t:'Uji fungsional GLD-CH-GW-Server hingga inferensi AI — SELESAI',b:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end <b>termasuk inferensi AI di edge</b>. Uji fungsional sistem terintegrasi tuntas — jauh sebelum jadwal integrasi resmi (Sep).',tag:'Milestone',m:true},
-  {d:'16 Jul',t:'Analisis daya sistem · uji mesh · uji downlink',b:'<b>Budget daya terkuantifikasi:</b> GLD 7P (28Ah) runtime 1,76 hari; 30 hari batt-only butuh ~120 sel → opsi realistis perpanjang OFF ~63 mnt / solar. <b>CH dgn 2 panel surya surplus 1,5–4,4 Wh/hari</b> (1 panel defisit). Uji <b>mesh CH</b> &amp; <b>downlink GLD</b> (server→node) + perbaikan firmware. Catatan: TPL5010 belum optimal.',tag:'Milestone',m:true},
+  {d:'16 Jul',t:'Uji fungsional GLD-CH-GW-Server + inferensi AI',b:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end. <b>Inferensi AI jalan di komputer/laptop dengan emulator ESP32</b> — deploy on-device ESP32 = langkah berikutnya. Fungsional terintegrasi tercapai jauh sebelum jadwal resmi (Sep).',tag:'Milestone',m:true},
+  {d:'16 Jul',t:'Analisis daya · uji mesh 8-CH · uji downlink',b:'<b>Mesh 8-CH se-kampus ITB terbukti</b> — multi-hop hingga Layer 3 (route depth 1–3); <b>downlink GLD</b> tembus lewat mesh + fix firmware → keterbatasan jangkauan LoRa disiasati. <b>Budget daya:</b> GLD 7P runtime 1,76 hari; <b>CH 2 panel surplus 1,5–4,4 Wh/hari</b>. Catatan: TPL5010 belum optimal.',tag:'Milestone',m:true},
   {d:'16 Jul',t:'Temuan sensor & aplikasi UI',b:'Respons sensor berkorelasi positif pada <b>CO₂</b>, tidak pada <b>O₂</b>. Baseline berbeda per sensor → <b>threshold per-MQ</b>. Aplikasi UI GLD dibuat (capture/save/download).',tag:'Milestone',m:true},
   {d:'15 Jul',t:'Model TCN per-sensor selesai (Board12)',b:'8 model TCN independen (1/sensor), semua <b>≥92% akurasi</b> prediksi LPG 5 s ke depan. Terbaik <b>MQ4V 93,9%</b> (F1 0,923). Ekspor TFLite int8 ~72 KB untuk edge.',tag:'ML',ml:true},
   {d:'15 Jul',t:'Akuisisi dataset sensor',b:'Sesi Clean Air, LPG, O₂, CO₂ pada GLD-F001 — total <b>14.477 sampel</b> di 8 kanal MQ.',tag:''},
@@ -756,10 +787,11 @@ const GASES=[['Carbon Dioxide',6507],['LPG',5655],['Clean Air',616],['Oksigen',2
 
 /* ---------- BLOCKERS ---------- */
 const BLK=[
-  {t:'Catu Daya',h:'Autonomi baterai GLD jauh di bawah target 30 hari',d:'Draw ON terverifikasi <b>5,75 W</b> (5V×1,15A). Dengan baterai 7P (28Ah) &amp; duty 29%, runtime hanya <b>1,76 hari</b>; 30 hari batt-only butuh ~120 sel (tak realistis). TPL5010 belum optimal — board masih ~0,4 V &amp; mencuplik data saat "off". CH sendiri teratasi dgn 2 panel (surplus).',m:'7P = 1,76 hari / 30 hari'},
-  {t:'Elektronik',h:'DC converter perlu diganti/dimodifikasi',d:'Menahan finalisasi desain catu daya. Modifikasi baterai ditahan sementara; fokus dialihkan.',m:'Arahan 20 Jul'},
-  {t:'Jaringan',h:'Jangkauan LoRa jauh di bawah target spec',d:'Aktual ±100 m (obstruksi) – ±340 m (LOS) vs spec deck 1–2 km LOS. Berpotensi menaikkan jumlah CH signifikan (mis. RU VII butuh 11 CH).',m:'~100 m / 1–2 km'}
+  {t:'Catu Daya',h:'Autonomi baterai GLD jauh di bawah target 30 hari',d:'Draw ON terverifikasi <b>5,75 W</b>. Baterai 7P (28Ah) &amp; duty 29% → runtime <b>1,76 hari</b>; 30 hari batt-only butuh ~120 sel. Opsi realistis: perpanjang OFF ~63 mnt / berbasis solar. (CH sendiri teratasi 2 panel.)',m:'7P = 1,76 hari / 30 hari'},
+  {t:'Elektronik',h:'TPL5010 belum benar-benar memutus daya',d:'Saat sistem non-aktif, board masih <b>~0,4 V</b> &amp; tetap mencuplik data — duty-cycle belum efektif untuk hemat daya.',m:'~0,4 V saat off'},
+  {t:'Elektronik',h:'DC converter perlu diganti/dimodifikasi',d:'Menahan finalisasi desain catu daya. Modifikasi baterai ditahan; fokus dialihkan.',m:'Arahan 20 Jul'}
 ];
+/* LoRa reframed: mitigated by mesh multi-hop (lihat Isu & Risiko). */
 (function(){
   const c=document.getElementById('blockers');
   BLK.forEach(b=>{const d=document.createElement('div');d.className='blk';
@@ -780,7 +812,8 @@ const AI=[
   ['Pemetaan MQ dominan per jenis gas (datasheet)','Tim GLD & AI','t','berjalan','Berjalan'],
   ['Replot grafik per jenis gas (8 parameter)','Tim GLD & AI','s','terbuka','Terbuka'],
   ['Pengembangan & validasi model TCN/TCNN','Pak Fahdzi','t','berjalan','Berjalan'],
-  ['Investigasi akar ketidakkonsistenan akuisisi data','Tim GLD & AI','t','terbuka','Terbuka'],
+  ['Investigasi konsistensi akuisisi data — dataset konsisten & siap pakai','Tim GLD & AI','t','selesai','Selesai'],
+  ['Deploy inferensi AI ke ESP32 on-device (kini di PC + emulator)','Tim GLD & AI','t','terbuka','Terbuka'],
   ['Penetapan threshold per MQ berbasis baseline','Tim GLD & AI','s','terbuka','Terbuka'],
   ['Penyelesaian gas test chamber (pompa, valve, mounting)','Mahasiswa PJ Chamber','t','berjalan','Berjalan'],
   ['Uji metode aliran gas: disedot vs didorong','Tim Chamber','s','terbuka','Terbuka'],
@@ -816,13 +849,12 @@ const PRIO={t:['t','Tinggi'],s:['s','Sedang'],r:['r','Rendah']};
 
 /* ---------- ISSUES ---------- */
 const ISS=[
-  ['Mode baterai belum terbukti menyuplai 8 heater MQ (2,43 W vs 6 W)','GLD tidak dapat beroperasi mandiri di lapangan','t','Tinggi'],
-  ['Circuit DC converter perlu diganti/dimodifikasi','Menahan finalisasi desain catu daya','t','Tinggi'],
-  ['Jangkauan LoRa aktual ±100 m vs spec 1–2 km LOS','Menaikkan jumlah CH & biaya deployment 6 RU','t','Tinggi'],
-  ['Ketidakkonsistenan akuisisi data belum diketahui akar penyebabnya','Kualitas dataset pelatihan AI','t','Tinggi'],
+  ['Autonomi baterai GLD di bawah target 30 hari (7P = 1,76 hari)','GLD tak dapat mandiri 30 hari — perlu perpanjang OFF / solar','t','Tinggi'],
+  ['TPL5010 belum benar-benar memutus daya (~0,4 V saat off)','Duty-cycle belum efektif untuk hemat daya','t','Tinggi'],
+  ['Deploy inferensi AI ke ESP32 on-device','Kini berjalan di PC + emulator ESP32; belum on-device','t','Tinggi'],
+  ['Circuit DC converter perlu diganti/dimodifikasi','Menahan finalisasi desain catu daya','s','Sedang'],
   ['Eksekusi site survey Cilacap menunggu gate TRA/JSA','Rencana & workflow survei siap; TRA/JSA menahan survei fisik','s','Sedang'],
-  ['Dokumen JSA/TRA belum dikonfirmasi','Menahan jadwal site visit & kunjungan RU','s','Sedang'],
-  ['Data solar-baterai baru 10 hari dari minimum 1 bulan','Belum cukup untuk validasi energy budget','s','Sedang'],
+  ['Jangkauan LoRa ~100 m/hop — disiasati mesh multi-hop','Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH)','s','Sedang'],
   ['Keputusan solder vs soket & konsolidasi 3 repo belum tuntas','Berdampak pada maintenance & tata kelola kode','s','Sedang'],
   ['Anomali pencatatan data tegangan baterai (tertulis 309 V)','Integritas dokumentasi pengukuran','r','Rendah']
 ];
@@ -850,27 +882,27 @@ const RECS=[
 
 /* ---------- PROGRES vs OUTSTANDING ---------- */
 const DONE=[
-  ['Uji fungsional <b>GLD-CH-GW-Server hingga inferensi AI</b> tuntas (16 Jul)'],
+  ['Rantai <b>GLD-CH-GW-Server</b> + <b>inferensi AI</b> jalan (di PC + emulator ESP32)'],
   ['Rantai komunikasi <b>Node→CH→GW→server</b> (MQTT) tersambung (9 Jul)'],
   ['<b>Failover CH otomatis</b> (star-mesh) terbukti — 0 data loss'],
   ['Model <b>TCN LPG</b> 8-sensor: semua ≥92% akurasi (MQ4V 93,9%)'],
-  ['Dataset sensor <b>14.477 sampel</b> (4 jenis gas, 8 kanal MQ)'],
+  ['Dataset <b>14.477 sampel</b> (4 gas, 8 kanal) — <b>konsisten &amp; siap dipakai</b>'],
   ['<b>PCB GLD v1 &amp; v2</b> terverifikasi; board & ADC OK'],
   ['<b>Dashboard</b> (Next.js/MapLibre) default <b>RU IV Cilacap</b> + device CRUD'],
   ['Karakterisasi RF LoRa &amp; profil beban daya terukur'],
   ['Simulasi <b>duty-cycle</b> di board (ON 60 / OFF 100 / WAKE 160 s)'],
   ['<b>CH:</b> catu daya teratasi dgn <b>2 panel surya</b> (surplus 1,5–4,4 Wh/hari)'],
-  ['<b>Uji downlink GLD</b> (server→node) &amp; <b>uji mesh CH</b> + perbaikan firmware'],
+  ['<b>Mesh 8-CH se-kampus</b> (multi-hop Layer 3) &amp; <b>downlink GLD</b> terbukti + fix firmware'],
   ['Budget daya GLD <b>terkuantifikasi</b> (runtime per konfigurasi baterai)']
 ];
 const OUT=[
+  ['Deploy <b>inferensi AI ke ESP32 on-device</b> (kini di PC + emulator)','blk','Blocker'],
   ['<b>Autonomi baterai GLD</b> 30 hari — 7P hanya 1,76 hari; perlu perpanjang OFF ~63 mnt / solar','blk','Blocker'],
   ['<b>TPL5010</b> belum optimal — board ~0,4 V &amp; cuplik data saat "off"','blk','Blocker'],
   ['<b>DC converter</b> perlu diganti/dimodifikasi','blk','Blocker'],
-  ['Jangkauan LoRa <b>~100 m</b> vs spec 1–2 km LOS','blk','Blocker'],
   ['Penyusunan <b>TRA/JSA</b> — gate eksekusi site survey','gate','Gate'],
   ['Eksekusi <b>site survey fisik</b> RU IV Cilacap','gate','Gate'],
-  ['Investigasi <b>konsistensi akuisisi data</b>','risk','Risiko'],
+  ['Jangkauan LoRa ~100 m/hop — <b>disiasati mesh</b> (konsekuensi: lebih banyak CH)','risk','Risiko'],
   ['Konsolidasi <b>3 repositori</b> jadi satu repo utama','risk','Risiko'],
   ['Keputusan <b>solder vs soket</b> sensor','risk','Risiko']
 ];
@@ -882,6 +914,38 @@ const OUT=[
     e.innerHTML=`<span class="ic" style="color:var(--warn)">◇</span><span>${o[0]}<span class="potag ${o[1]}">${o[2]}</span></span>`;ol.appendChild(e);});
   document.getElementById('donecnt').textContent=DONE.length+' item';
   document.getElementById('outcnt').textContent=OUT.length+' item';
+})();
+
+/* ---------- EVOLUSI DATA & METODE MODEL ---------- */
+const EVO=[
+ {n:'Tahap 1 (baseline)',d:'sebelumnya',cls:'old',tag:'Lama',tagcls:'',b:'Data Excel Tahap 1 · analisis per-MQ individual · output biner gas/no-gas (respons tangga).'},
+ {n:'Pergeseran paradigma',d:'18 Jun',cls:'',tag:'Selesai',tagcls:'done',b:'Fingerprint 8-sensor · grafik per jenis gas · fokus pola/amplitudo relatif · fase transien/stasioner/saturasi.'},
+ {n:'Model TCNN',d:'26 Jun',cls:'',tag:'Selesai',tagcls:'done',b:'Prediksi 5 dtk ke depan dari 5 dtk sebelumnya (data tegangan MQx).'},
+ {n:'Akuisisi dataset',d:'15 Jul',cls:'',tag:'Selesai',tagcls:'done',b:'14.477 sampel · 4 gas (Clean Air/LPG/O₂/CO₂) · 8 kanal MQ · <b>dataset konsisten &amp; siap dipakai</b>.'},
+ {n:'TCN per-sensor (Board12)',d:'15 Jul',cls:'',tag:'Selesai',tagcls:'done',b:'8 model univariat, semua ≥92% (MQ4V 93,9%, F1 0,923) · ekspor TFLite float32 + int8 (~72 KB).'},
+ {n:'Metode saat ini',d:'kini',cls:'cur',tag:'Sekarang',tagcls:'now',b:'Inferensi berjalan di <b>komputer/laptop dengan emulator ESP32</b> · threshold per-MQ. Target berikutnya: <b>deploy on-device ESP32</b>.'}
+];
+(function(){const c=document.getElementById('evo');
+  EVO.forEach((e,i)=>{const d=document.createElement('div');d.className='evostep '+e.cls;
+    d.innerHTML='<div class="en">'+(i+1)+'</div><div><div class="eh">'+e.n+' <span class="ed">'+e.d+'</span> <span class="etag '+e.tagcls+'">'+e.tag+'</span></div><div class="eb">'+e.b+'</div></div>';
+    c.appendChild(d);});
+})();
+
+/* ---------- NAV + SCROLLSPY ---------- */
+(function(){
+  const labels=['Kurva-S','Timeline','6 RU','Arsitektur','Sub-sistem','Resource','Aktivitas','Blocker','Action Items','Risiko','Rekomendasi'];
+  const secs=[...document.querySelectorAll('.section-label')];
+  const nav=document.getElementById('topnav');
+  const targets=[{id:'ringkasan',el:document.getElementById('ringkasan'),lab:'Ringkasan'}];
+  secs.forEach((s,i)=>{const id='sec-'+i; s.id=id; targets.push({id:id,el:s,lab:labels[i]||('§'+(i+1))});});
+  targets.forEach(t=>{const a=document.createElement('a'); a.href='#'+t.id; a.textContent=t.lab; a.dataset.id=t.id; nav.appendChild(a);});
+  const links=[...nav.querySelectorAll('a')]; let lastCur=null;
+  function spy(){const y=window.scrollY+80; let cur=targets[0].id;
+    targets.forEach(t=>{if(t.el&&t.el.offsetTop<=y)cur=t.id;});
+    if(cur!==lastCur){lastCur=cur; links.forEach(a=>a.classList.toggle('active',a.dataset.id===cur));
+      const act=nav.querySelector('a.active'); if(act)act.scrollIntoView({block:'nearest',inline:'center'});}
+  }
+  window.addEventListener('scroll',spy,{passive:true}); window.addEventListener('resize',spy); setTimeout(spy,120);
 })();
 
 /* ---------- THEME TOGGLE ---------- */

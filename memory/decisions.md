@@ -14,6 +14,9 @@ Keputusan yang membentuk deliverable & arah kerja. Format: ID · tanggal · kepu
 | dec:08 | 23 Jul | Desain HTML = **korporat navy/steel**; tambah **Executive Summary + panel Progres vs Outstanding** | Client-facing; klien = partner → transparansi |
 | dec:09 | 23 Jul | Blocker daya **di-reframe**: bukan "baterai tak bisa suplai" (2,43 W) tapi **"autonomi baterai GLD < target 30 hari"** (draw ON 5,75 W terverifikasi; 7P=1,76 hari) | Data update Juli mengklarifikasi anomali |
 | dec:10 | 23 Jul | Buat **memory system** (CLAUDE.md + memory/ + graph) | Pemahaman folder lintas sesi & pencatatan terstruktur |
+| dec:11 | 23 Jul | **Tema HTML → biru #2B5FCB + charcoal #262321** (logo Korporasi Kinarya ITB); tambah **navigasi sticky** di dashboard | Arahan user; tampilan klien lebih mudah dibaca |
+| dec:12 | 23 Jul | **Koreksi klaim:** inferensi AI di PC+emulator (bukan on-device); **deviasi diturunkan 42→39% / +20** (jangan over-claim); **LoRa disiasati mesh**; **dataset konsisten** (isu resolved) | Klarifikasi user + pendalaman PDF Juli (uji mesh 8-CH) |
+| dec:13 | 23 Jul | **Telemetri → "Evolusi Data & Metode Model"** (Tahap 1 → metode saat ini) | Arahan user: tampilkan perubahan demi perubahan |
 
 ## Prinsip yang mengikat
 - Klien = partner → selalu tampilkan progres **dan** outstanding; jangan over-claim (analisis ≠ resolusi blocker).

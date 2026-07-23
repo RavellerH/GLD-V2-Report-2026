@@ -11,7 +11,7 @@
 
 | Indikator | Nilai |
 |---|---|
-| Progres pilot Cilacap (vs baseline resmi 9 bulan) | **42%** (rencana 19% · **+23 poin**) |
+| Progres pilot Cilacap (vs baseline resmi 9 bulan) | **39%** (rencana 19% · **+20 poin**, murni sisi lab) |
 | Blocker kritis aktif | 3 (catu daya · DC converter · jangkauan LoRa) |
 | Action items | 24 (5 berjalan · 15 terbuka) |
 | Isu & risiko | 9 (4 prioritas tinggi) |
@@ -124,8 +124,8 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 - Akuisisi dataset GLD-F001: sesi **Clean Air, LPG, O₂, CO₂** — total **14.477 sampel** di 8 kanal MQ (~2,7 jam logging).
 - **Model TCN per-sensor (Board12) selesai:** 8 model independen (1/sensor), semua **≥92% akurasi** prediksi LPG 5 dtk ke depan. Terbaik **MQ4V 93,9%** (F1 0,923). Ekspor TFLite int8 ~72 KB untuk edge.
 
-### 16 Juli — Uji Fungsional Sistem hingga Inferensi AI — *Milestone ✅*
-- Rantai penuh **sensor → CH → GW → server** berjalan end-to-end **termasuk inferensi AI di edge**. **Uji fungsional sistem terintegrasi (GLD-CH-GW-Server) tuntas** — jauh sebelum jadwal integrasi resmi (September).
+### 16 Juli — Uji Fungsional Sistem + Inferensi AI — *Milestone ✅*
+- Rantai penuh **sensor → CH → GW → server** berjalan end-to-end. **Inferensi AI berjalan di komputer/laptop dengan emulator ESP32** — belum on-device; **deploy ke ESP32 fisik = langkah berikutnya**. Fungsional terintegrasi (GLD-CH-GW-Server) tercapai jauh sebelum jadwal resmi (September).
 
 ### 16 Juli — Analisis Daya Sistem GLD & CH, Uji Mesh & Downlink — *Milestone ✅*
 **Budget daya GLD node (baterai 7P = 7×4000 mAh = 28 Ah, ~70,4 Wh usable):**
@@ -140,7 +140,7 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 - 1 panel surya: defisit **−0,66 Wh/hari**. **2 panel surya: surplus 1,5–4,4 Wh/hari** (Isc 1,29 A, Pmax ~6,51 W) — kebutuhan energi CH teratasi.
 - Power path: Panel → charger **BQ25185** → baterai 18650 → **TPS63020** 3,3 V → beban CH.
 
-**Jaringan:** Uji **mesh Cluster Head** & **uji downlink GLD** (server→node) dilakukan + perbaikan firmware downlink.
+**Jaringan:** **Uji mesh 8-CH se-kampus ITB** (CH1–CH8, multi-hop hingga Layer 3, route depth 1–3) & **uji downlink GLD** (server→node lewat mesh) + perbaikan firmware downlink → **keterbatasan jangkauan LoRa per-hop disiasati mesh multi-hop**.
 
 ### 16 Juli — Temuan Sensor & Aplikasi UI
 - Respons sensor berkorelasi positif pada **CO₂**, tidak pada **O₂** (O₂ menggantikan gas terdeteksi).

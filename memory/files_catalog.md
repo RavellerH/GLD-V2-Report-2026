@@ -6,6 +6,7 @@
 | `Dashboard_GLD_ProjectManagement.html` | Dashboard manajemen proyek interaktif (navy korporat): exec summary, progres vs outstanding, KPI, Kurva-S, Gantt 12 aktivitas, cakupan 6 RU, arsitektur 3 repo, sub-sistem, resource readiness, activity feed, blocker, action items, isu, rekomendasi. |
 | `Laporan_Progres_ByDate_GLD.html` / `.md` | Laporan progres kronologis (timeline Apr–Jul 2026). |
 | `JSA_HSE_RU-IV_Cilacap_GLD.html` / `.md` | **DRAFT** JSA/TRA & HSE plan RU IV Cilacap (4 lembar JSA, ERP, tanda tangan). Belum disahkan. |
+| `Knowledge_Graph_GLD.html` | Knowledge graph **interaktif** (force-directed Canvas, zoom/pan/klik/filter) dari `memory/graph.json`. |
 | `CLAUDE.md`, `memory/*` | Sistem memory ini. |
 
 ## B. Dokumen sumber (dari tim/klien)

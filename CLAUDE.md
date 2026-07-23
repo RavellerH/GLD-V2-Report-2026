@@ -41,6 +41,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - `Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (navy korporat).
 - `Laporan_Progres_ByDate_GLD.{html,md}` — laporan progres kronologis.
 - `JSA_HSE_RU-IV_Cilacap_GLD.{html,md}` — draft JSA/HSE Cilacap (belum disahkan).
+- `Knowledge_Graph_GLD.html` — knowledge graph interaktif (force-directed) dari `memory/graph.json`.
 
 URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).
 

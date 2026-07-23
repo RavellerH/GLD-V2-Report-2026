@@ -5,6 +5,7 @@
 | Dashboard manajemen proyek | `Dashboard_GLD_ProjectManagement.html` | https://claude.ai/code/artifact/507ba345-6cc4-48c1-b096-bfe7652696cd | 🛢️ |
 | Laporan progres per tanggal | `Laporan_Progres_ByDate_GLD.html` (+`.md`) | https://claude.ai/code/artifact/6bf8efb7-c4a1-495d-b964-7ac4014e5a22 | 📅 |
 | Draft JSA/HSE Cilacap | `JSA_HSE_RU-IV_Cilacap_GLD.html` (+`.md`) | https://claude.ai/code/artifact/2601ab9e-d32d-4e63-a06c-279278c96fb3 | 🦺 |
+| Knowledge graph interaktif | `Knowledge_Graph_GLD.html` | https://claude.ai/code/artifact/cae0f3a3-65e5-4355-808a-d467dc6f9e16 | 🕸️ |
 
 > Untuk update artifact: republish **file path yang sama** (URL tetap). Jangan mint URL baru.
 

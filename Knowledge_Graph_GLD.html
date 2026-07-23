@@ -1,0 +1,292 @@
+<title>Knowledge Graph GLD V2 — Interaktif</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#F3F5F8;--surface:#FFFFFF;--surface-2:#EDF1F6;--ink:#15202F;--ink-2:#38465A;--ink-soft:#64748B;
+  --line:#DBE2EC;--line-2:#C4CEDB;--accent:#1D3B63;--accent-2:#132A49;
+  --shadow:0 1px 2px rgba(21,32,47,.07),0 8px 30px rgba(21,32,47,.10);
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --canvas:#EEF2F7;--edge:#AEBBCB;--edge-hi:#1D3B63;--nodetext:#15202F;--pill:rgba(255,255,255,.82);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0C121B;--surface:#121A26;--surface-2:#18222F;--ink:#E7ECF3;--ink-2:#B2BECD;--ink-soft:#7C8B9E;
+  --line:#232F3D;--line-2:#31404F;--accent:#5E8FC4;--accent-2:#84AAD8;
+  --shadow:0 1px 2px rgba(0,0,0,.32),0 10px 34px rgba(0,0,0,.4);
+  --canvas:#0A1019;--edge:#2C3A4B;--edge-hi:#7FB0DE;--nodetext:#E7ECF3;--pill:rgba(18,26,38,.82);
+}}
+:root[data-theme="light"]{--bg:#F3F5F8;--surface:#FFFFFF;--surface-2:#EDF1F6;--ink:#15202F;--ink-2:#38465A;--ink-soft:#64748B;--line:#DBE2EC;--line-2:#C4CEDB;--accent:#1D3B63;--accent-2:#132A49;--canvas:#EEF2F7;--edge:#AEBBCB;--edge-hi:#1D3B63;--nodetext:#15202F;--pill:rgba(255,255,255,.82);--shadow:0 1px 2px rgba(21,32,47,.07),0 8px 30px rgba(21,32,47,.10);}
+:root[data-theme="dark"]{--bg:#0C121B;--surface:#121A26;--surface-2:#18222F;--ink:#E7ECF3;--ink-2:#B2BECD;--ink-soft:#7C8B9E;--line:#232F3D;--line-2:#31404F;--accent:#5E8FC4;--accent-2:#84AAD8;--canvas:#0A1019;--edge:#2C3A4B;--edge-hi:#7FB0DE;--nodetext:#E7ECF3;--pill:rgba(18,26,38,.82);--shadow:0 1px 2px rgba(0,0,0,.32),0 10px 34px rgba(0,0,0,.4);}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;overflow:hidden}
+.topbar{height:4px;background:linear-gradient(90deg,var(--accent),#2C6E9B,var(--accent-2))}
+.app{display:flex;flex-direction:column;height:calc(100vh - 4px)}
+header{padding:12px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--surface)}
+header .id{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:8px}
+header .id .sq{width:9px;height:9px;background:var(--accent);border-radius:2px}
+h1{font-size:16px;margin:0;font-weight:650;letter-spacing:-.01em}
+header .sub{font-size:11.5px;color:var(--ink-soft)}
+.spacer{flex:1}
+.btns{display:flex;gap:6px}
+.btn{font-family:var(--mono);font-size:12px;cursor:pointer;background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);width:32px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.btn.wide{width:auto;padding:0 11px}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.legend{display:flex;gap:6px;flex-wrap:wrap;padding:9px 18px;border-bottom:1px solid var(--line);background:var(--surface);align-items:center}
+.legend .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-right:2px}
+.chip{font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 9px 3px 7px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink-2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;user-select:none}
+.chip .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.chip[aria-pressed="false"]{opacity:.38}
+.stage{position:relative;flex:1;min-height:0}
+canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:none}
+canvas:active{cursor:grabbing}
+.hint{position:absolute;left:14px;bottom:12px;font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);background:var(--pill);padding:5px 9px;border-radius:7px;border:1px solid var(--line);pointer-events:none}
+.panel{position:absolute;top:14px;right:14px;width:300px;max-width:calc(100% - 28px);background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:0;transform:translateX(120%);transition:transform .28s cubic-bezier(.22,1,.36,1);max-height:calc(100% - 28px);overflow:auto}
+.panel.open{transform:none}
+.panel .ph{padding:15px 16px 12px;border-bottom:1px solid var(--line)}
+.panel .ptype{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:6px;margin-bottom:8px}
+.panel .ptype .dot{width:9px;height:9px;border-radius:50%}
+.panel h2{font-size:16px;margin:0;line-height:1.25}
+.panel .pid{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);margin-top:5px}
+.panel .pmeta{font-size:12.5px;color:var(--ink-2);padding:12px 16px;line-height:1.5;border-bottom:1px solid var(--line)}
+.panel .pconn{padding:12px 16px}
+.panel .pconn h3{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 9px}
+.conn{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12.5px;cursor:pointer;border-bottom:1px solid var(--line)}
+.conn:last-child{border-bottom:0}
+.conn:hover{color:var(--accent)}
+.conn .rel{font-family:var(--mono);font-size:9.5px;color:var(--ink-soft);background:var(--surface-2);padding:1px 6px;border-radius:5px;white-space:nowrap}
+.conn .arw{color:var(--ink-soft);font-family:var(--mono)}
+.pclose{position:absolute;top:12px;right:12px;cursor:pointer;background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);width:26px;height:26px;border-radius:7px;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center}
+.pclose:hover{border-color:var(--accent);color:var(--accent)}
+</style>
+
+<div class="topbar"></div>
+<div class="app">
+  <header>
+    <div>
+      <div class="id"><span class="sq"></span>GLD Tahap 2 · Knowledge Graph</div>
+      <h1>Peta Pengetahuan Proyek Gas Leak Detection</h1>
+    </div>
+    <div class="spacer"></div>
+    <span class="sub" id="stat"></span>
+    <div class="btns">
+      <button class="btn" id="zin" title="Perbesar">+</button>
+      <button class="btn" id="zout" title="Perkecil">−</button>
+      <button class="btn wide" id="fit" title="Muat ke layar">Fit</button>
+      <button class="btn" id="theme" title="Ganti tema">◐</button>
+    </div>
+  </header>
+  <div class="legend" id="legend"><span class="lbl">Filter tipe:</span></div>
+  <div class="stage">
+    <canvas id="cv"></canvas>
+    <div class="hint">Scroll = zoom · seret latar = geser · seret node = pindah · klik node = detail</div>
+    <div class="panel" id="panel">
+      <span class="pclose" id="pclose">×</span>
+      <div class="ph"><div class="ptype" id="ptype"></div><h2 id="pname"></h2><div class="pid" id="pid"></div></div>
+      <div class="pmeta" id="pmeta"></div>
+      <div class="pconn"><h3>Relasi</h3><div id="pconn"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TYPES={
+  project:{c:'#14304F',l:'Proyek'}, org:{c:'#3E6EA5',l:'Organisasi'}, subsystem:{c:'#2C8F9B',l:'Sub-sistem'},
+  device:{c:'#4F86C6',l:'Perangkat'}, hardware:{c:'#6B7A8F',l:'Hardware'}, repo:{c:'#6B54A6',l:'Repositori'},
+  model:{c:'#9B6BB0',l:'Model AI'}, ru:{c:'#2E7D57',l:'Refinery Unit'}, milestone:{c:'#C2701C',l:'Milestone'},
+  blocker:{c:'#BC3B32',l:'Blocker'}, gate:{c:'#B0771B',l:'Gate'}, deliverable:{c:'#0E7C7B',l:'Deliverable'}
+};
+const NODES=[
+  {id:'proj:GLD',type:'project',label:'GLD Tahap 2',meta:'Sistem deteksi kebocoran gas IoT untuk Pertamina. TRL-7. Program 9 bulan (Jun 2026–Feb 2027), 6 RU.'},
+  {id:'org:LGU',type:'org',label:'LAPI Ganesha Utama',meta:'Penyedia & pelaksana sistem (unit, CH, GW, solar, instalasi).'},
+  {id:'org:ITB-IoT',type:'org',label:'Lab IoT ITB',meta:'Engineering, firmware, AI/ML, dataset.'},
+  {id:'org:ITB-Fisika',type:'org',label:'Lab Fisika ITB',meta:'Dukungan solar/energi.'},
+  {id:'org:Pertamina',type:'org',label:'Pertamina Patra Niaga',meta:'Klien & partner. Menentukan titik pasang, izin, HSE per RU.'},
+  {id:'sub:net',type:'subsystem',label:'Jaringan LoRa & CH',meta:'Progres 65%. Failover terbukti; jangkauan LoRa jadi blocker.'},
+  {id:'sub:ai',type:'subsystem',label:'AI & Sensor MQ',meta:'Progres 52%. TCN LPG ≥92%; konsistensi data terbuka.'},
+  {id:'sub:power',type:'subsystem',label:'Catu Daya & Energi',meta:'Progres 50%. CH teratasi (2 panel); autonomi baterai GLD blocker.'},
+  {id:'sub:chamber',type:'subsystem',label:'Chamber/HW/QC',meta:'Progres 35%. Assembly chamber berjalan.'},
+  {id:'sub:sw',type:'subsystem',label:'Software/Server/Dashboard',meta:'Progres 58%. MapLibre, Operator Hub, device CRUD.'},
+  {id:'sub:integ',type:'subsystem',label:'Integrasi Sistem',meta:'Progres 92%. Uji fungsional GLD-CH-GW-Server + inferensi AI SELESAI (16 Jul).'},
+  {id:'sub:ruprep',type:'subsystem',label:'Survei RU / HSE',meta:'Progres 40%. Rencana siap; gate TRA/JSA.'},
+  {id:'dev:node',type:'device',label:'GLD Node',meta:'ESP32-S3 · 8× MQ · ADS1256/MCP3208 · TFLite Micro · TPL5010 duty-cycle.'},
+  {id:'dev:ch',type:'device',label:'Cluster Head',meta:'LoRa dual-channel (E22) · solar + 18650 · failover RSSI · IP66/67 · tiang 6 m.'},
+  {id:'dev:gw',type:'device',label:'Gateway',meta:'Aggregator mesh · uplink WiFi/4G · MQTT.'},
+  {id:'dev:server',type:'device',label:'PC Server',meta:'Node-RED · Operator Hub · backend GraphQL · dataset/ML pipeline.'},
+  {id:'dev:dashboard',type:'device',label:'Dashboard',meta:'Next.js 15 · MapLibre (default RU IV) · Recharts · device CRUD · RBAC.'},
+  {id:'dev:tpl5010',type:'hardware',label:'TPL5010',meta:'Timer nanopower duty-cycle. Belum optimal (~0,4 V saat off).'},
+  {id:'dev:bq25185',type:'hardware',label:'BQ25185',meta:'Charger + power path solar/baterai.'},
+  {id:'dev:tps63020',type:'hardware',label:'TPS63020',meta:'Buck-boost 3,3 V.'},
+  {id:'repo:fe',type:'repo',label:'gasleakdetectionV2-April',meta:'Frontend + backend dashboard (Next.js/MapLibre/NestJS-GraphQL). Update 13 Jul 2026.'},
+  {id:'repo:srv',type:'repo',label:'PertaminaGLD',meta:'Firmware GLD/CH/GW + server Node-RED + Operator Hub. Update 23 Jul 2026.'},
+  {id:'repo:ml',type:'repo',label:'gas-leak-ml-chamber-system',meta:'ML/AI edge (TFLite Micro, chamber training). Update 24 Jun 2026.'},
+  {id:'model:tcn',type:'model',label:'TCN LPG 8-model',meta:'8 model univariat ≥92% (MQ4V 93,9%, F1 0,923). TFLite int8 ~72 KB.'},
+  {id:'ru:2',type:'ru',label:'RU II Dumai',meta:'Roadmap. 10 sensor · 3 CH · 1 GW.'},
+  {id:'ru:3',type:'ru',label:'RU III Plaju',meta:'Roadmap. 4 sensor · 3 CH · 1 GW.'},
+  {id:'ru:4',type:'ru',label:'RU IV Cilacap ★',meta:'PILOT AKTIF. 3 sensor · 2 CH · 1 GW.'},
+  {id:'ru:5',type:'ru',label:'RU V Balikpapan',meta:'Roadmap. 2 sensor · 1 CH · 1 GW.'},
+  {id:'ru:6',type:'ru',label:'RU VI Balongan',meta:'Roadmap. 4 sensor · 2 CH · 2 GW.'},
+  {id:'ru:7',type:'ru',label:'RU VII Kasim',meta:'Roadmap (field test). 5 sensor · 11 CH · 1 GW.'},
+  {id:'ms:kickoff',type:'milestone',label:'Kick-off Pertamina',meta:'12 Jun 2026 ✓. Baseline 9 bulan, scope 6 RU.',done:true},
+  {id:'ms:2ch',type:'milestone',label:'Uji 2 CH',meta:'6 Jul 2026 ✓.',done:true},
+  {id:'ms:comms',type:'milestone',label:'Rantai komunikasi',meta:'9 Jul 2026 ✓. Node→CH→GW→server (MQTT).',done:true},
+  {id:'ms:tcn',type:'milestone',label:'TCN LPG ≥92%',meta:'15 Jul 2026 ✓.',done:true},
+  {id:'ms:funcai',type:'milestone',label:'Uji fungsional + AI',meta:'16 Jul 2026 ✓. Hingga inferensi AI end-to-end.',done:true},
+  {id:'ms:power',type:'milestone',label:'Analisis daya+mesh+downlink',meta:'16 Jul 2026 ✓.',done:true},
+  {id:'ms:install',type:'milestone',label:'Field installation',meta:'Target Des 2026. Belum tercapai.',done:false},
+  {id:'blk:power',type:'blocker',label:'Autonomi baterai GLD',meta:'Draw ON 5,75 W; 7P=1,76 hari vs target 30 hari. Perlu perpanjang OFF/solar.'},
+  {id:'blk:tpl',type:'blocker',label:'TPL5010 belum optimal',meta:'Board ~0,4 V & cuplik data saat "off".'},
+  {id:'blk:conv',type:'blocker',label:'DC converter',meta:'Perlu diganti/dimodifikasi (arahan 20 Jul).'},
+  {id:'blk:lora',type:'blocker',label:'Jangkauan LoRa',meta:'~100 m (obstruksi) vs spec 1–2 km LOS.'},
+  {id:'gate:jsa',type:'gate',label:'Gate TRA/JSA',meta:'Belum disusun → menahan eksekusi site survey fisik RU IV Cilacap.'},
+  {id:'deliv:dashboard',type:'deliverable',label:'Dashboard proyek',meta:'Dashboard_GLD_ProjectManagement.html'},
+  {id:'deliv:progres',type:'deliverable',label:'Laporan progres',meta:'Laporan_Progres_ByDate_GLD (HTML+MD)'},
+  {id:'deliv:jsa',type:'deliverable',label:'Draft JSA/HSE',meta:'JSA_HSE_RU-IV_Cilacap_GLD (HTML+MD)'}
+];
+const EDGES=[
+  ['org:LGU','proj:GLD','pelaksana'],['org:ITB-IoT','proj:GLD','engineering/AI'],['org:ITB-Fisika','proj:GLD','solar/energi'],['org:Pertamina','proj:GLD','klien-partner'],
+  ['proj:GLD','sub:net','punya'],['proj:GLD','sub:ai','punya'],['proj:GLD','sub:power','punya'],['proj:GLD','sub:chamber','punya'],['proj:GLD','sub:sw','punya'],['proj:GLD','sub:integ','punya'],['proj:GLD','sub:ruprep','punya'],
+  ['dev:node','dev:ch','LoRa STAR'],['dev:ch','dev:gw','LoRa MESH'],['dev:gw','dev:server','MQTT'],['dev:server','dev:dashboard','GraphQL'],['dev:server','dev:node','downlink'],
+  ['repo:ml','dev:node','edge-ML'],['repo:srv','dev:node','firmware'],['repo:srv','dev:ch','firmware'],['repo:srv','dev:gw','firmware'],['repo:srv','dev:server','node-red'],['repo:fe','dev:dashboard','frontend'],['repo:fe','dev:server','backend'],
+  ['dev:node','model:tcn','menjalankan'],['sub:power','dev:tpl5010','pakai'],['sub:power','dev:bq25185','pakai'],['sub:power','dev:tps63020','pakai'],
+  ['sub:net','dev:ch','mencakup'],['sub:net','dev:gw','mencakup'],['sub:ai','dev:node','mencakup'],['sub:sw','dev:server','mencakup'],['sub:sw','dev:dashboard','mencakup'],
+  ['ru:4','proj:GLD','pilot-aktif'],['ru:2','proj:GLD','roadmap'],['ru:3','proj:GLD','roadmap'],['ru:5','proj:GLD','roadmap'],['ru:6','proj:GLD','roadmap'],['ru:7','proj:GLD','roadmap'],
+  ['blk:power','ms:install','menahan'],['blk:tpl','ms:install','menahan'],['blk:conv','ms:install','menahan'],['blk:lora','ms:install','menahan'],['gate:jsa','sub:ruprep','menahan'],
+  ['blk:power','sub:power','bagian'],['blk:tpl','sub:power','bagian'],['blk:lora','sub:net','bagian'],
+  ['ms:funcai','sub:integ','menyelesaikan'],['ms:comms','sub:integ','menyelesaikan'],['model:tcn','sub:ai','bagian'],
+  ['ms:kickoff','proj:GLD','menandai'],['ms:install','ru:4','di'],
+  ['deliv:dashboard','proj:GLD','melaporkan'],['deliv:progres','proj:GLD','melaporkan'],['deliv:jsa','ru:4','untuk']
+];
+
+const NById={}; NODES.forEach(n=>NById[n.id]=n);
+const cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+let W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2);
+const cam={scale:1,x:0,y:0};
+const hidden={};
+let hover=null, selected=null, drag=null, panning=false, last={x:0,y:0}, moved=false;
+
+// init positions in a circle-ish spread
+NODES.forEach((n,i)=>{const a=i/NODES.length*Math.PI*2, r=180+((i*53)%140);
+  n.x=Math.cos(a)*r; n.y=Math.sin(a)*r; n.vx=0; n.vy=0;
+  n.rad=n.type==='project'?18:n.type==='subsystem'?12:n.type==='org'?12:10;});
+
+function resize(){const r=cv.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*DPR; cv.height=H*DPR;}
+window.addEventListener('resize',resize); resize();
+
+// physics
+let alpha=1;
+function step(){
+  const vis=NODES.filter(n=>!hidden[n.type]);
+  for(let i=0;i<vis.length;i++)for(let j=i+1;j<vis.length;j++){
+    const a=vis[i],b=vis[j]; let dx=a.x-b.x,dy=a.y-b.y; let d2=dx*dx+dy*dy||0.01; let d=Math.sqrt(d2);
+    const f=2600/d2; const fx=dx/d*f, fy=dy/d*f; a.vx+=fx;a.vy+=fy;b.vx-=fx;b.vy-=fy;
+  }
+  EDGES.forEach(e=>{const a=NById[e[0]],b=NById[e[1]]; if(hidden[a.type]||hidden[b.type])return;
+    let dx=b.x-a.x,dy=b.y-a.y; let d=Math.sqrt(dx*dx+dy*dy)||0.01; const L=118; const f=(d-L)*0.032;
+    const fx=dx/d*f, fy=dy/d*f; a.vx+=fx;a.vy+=fy;b.vx-=fx;b.vy-=fy;});
+  vis.forEach(n=>{n.vx-=n.x*0.004; n.vy-=n.y*0.004;
+    if(n===drag){n.x=n.fx;n.y=n.fy;n.vx=0;n.vy=0;return;}
+    n.vx*=0.86; n.vy*=0.86; n.x+=n.vx*alpha; n.y+=n.vy*alpha;});
+  if(alpha>0.05)alpha*=0.994;
+}
+
+function W2Sx(x){return x*cam.scale+cam.x} function W2Sy(y){return y*cam.scale+cam.y}
+function S2Wx(x){return (x-cam.x)/cam.scale} function S2Wy(y){return (y-cam.y)/cam.scale}
+
+function neighborsOf(id){const s=new Set(); EDGES.forEach(e=>{if(e[0]===id)s.add(e[1]); if(e[1]===id)s.add(e[0]);}); return s;}
+
+function draw(){
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.clearRect(0,0,W,H);
+  const css=getComputedStyle(document.documentElement);
+  const cCanvas=css.getPropertyValue('--canvas'), cEdge=css.getPropertyValue('--edge').trim(), cEdgeHi=css.getPropertyValue('--edge-hi').trim(), cText=css.getPropertyValue('--nodetext').trim(), cPill=css.getPropertyValue('--pill').trim();
+  ctx.fillStyle=cCanvas; ctx.fillRect(0,0,W,H);
+  const hi = selected||hover; const hiSet = hi?neighborsOf(hi.id):null;
+  // edges
+  EDGES.forEach(e=>{const a=NById[e[0]],b=NById[e[1]]; if(hidden[a.type]||hidden[b.type])return;
+    const on = hi && (e[0]===hi.id||e[1]===hi.id);
+    ctx.beginPath(); ctx.moveTo(W2Sx(a.x),W2Sy(a.y)); ctx.lineTo(W2Sx(b.x),W2Sy(b.y));
+    ctx.strokeStyle=on?cEdgeHi:cEdge; ctx.lineWidth=on?2:1; ctx.globalAlpha=hi?(on?1:0.25):0.7; ctx.stroke();
+    if(on && cam.scale>0.75){ // relation label
+      const mx=(W2Sx(a.x)+W2Sx(b.x))/2, my=(W2Sy(a.y)+W2Sy(b.y))/2;
+      ctx.globalAlpha=1; ctx.font='9px '+css.getPropertyValue('--mono'); const t=e[2]; const tw=ctx.measureText(t).width;
+      ctx.fillStyle=cPill; ctx.fillRect(mx-tw/2-4,my-7,tw+8,14); ctx.fillStyle=cEdgeHi; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(t,mx,my);
+    }
+  });
+  ctx.globalAlpha=1;
+  // nodes
+  NODES.forEach(n=>{if(hidden[n.type])return;
+    const sx=W2Sx(n.x),sy=W2Sy(n.y); const r=n.rad*Math.max(cam.scale,.6);
+    const dim = hi && n!==hi && hiSet && !hiSet.has(n.id);
+    let col=TYPES[n.type].c; if(n.type==='milestone') col=n.done?'#2E7D57':'#8A97A6';
+    ctx.globalAlpha=dim?0.28:1;
+    ctx.beginPath(); ctx.arc(sx,sy,r,0,Math.PI*2); ctx.fillStyle=col; ctx.fill();
+    if(n===selected){ctx.lineWidth=3;ctx.strokeStyle=cEdgeHi;ctx.stroke();}
+    else if(n.id==='ru:4'||n.type==='project'){ctx.lineWidth=2;ctx.strokeStyle='#fff';ctx.globalAlpha=dim?0.28:0.9;ctx.stroke();}
+    // label
+    if(cam.scale>0.55||n.type==='project'||n.type==='subsystem'||n===hi){
+      ctx.globalAlpha=dim?0.35:1; ctx.font='600 '+(11)+'px '+css.getPropertyValue('--sans');
+      const t=n.label, tw=ctx.measureText(t).width; const ly=sy+r+11;
+      ctx.fillStyle=cPill; ctx.fillRect(sx-tw/2-4,ly-8,tw+8,15);
+      ctx.fillStyle=cText; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(t,sx,ly);
+    }
+  });
+  ctx.globalAlpha=1;
+}
+function loop(){step();draw();requestAnimationFrame(loop);}
+loop();
+
+function hitTest(sx,sy){let best=null,bd=1e9; NODES.forEach(n=>{if(hidden[n.type])return; const dx=sx-W2Sx(n.x),dy=sy-W2Sy(n.y); const r=n.rad*Math.max(cam.scale,.6)+4; const d=dx*dx+dy*dy; if(d<r*r&&d<bd){bd=d;best=n;}}); return best;}
+
+function fit(){const vis=NODES.filter(n=>!hidden[n.type]); if(!vis.length)return;
+  let minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9; vis.forEach(n=>{minx=Math.min(minx,n.x);miny=Math.min(miny,n.y);maxx=Math.max(maxx,n.x);maxy=Math.max(maxy,n.y);});
+  const pad=70; const sw=(maxx-minx)||1, sh=(maxy-miny)||1; const s=Math.min((W-pad*2)/sw,(H-pad*2)/sh,1.6);
+  cam.scale=s; cam.x=W/2-(minx+maxx)/2*s; cam.y=H/2-(miny+maxy)/2*s;}
+setTimeout(()=>{alpha=1;let k=0;const warm=setInterval(()=>{step();if(++k>120){clearInterval(warm);fit();}},4);},60);
+
+// interactions (pointer = mouse+touch)
+cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId); const n=hitTest(e.offsetX,e.offsetY); moved=false; last={x:e.offsetX,y:e.offsetY};
+  if(n){drag=n; n.fx=S2Wx(e.offsetX); n.fy=S2Wy(e.offsetY);} else {panning=true;}});
+cv.addEventListener('pointermove',e=>{const dx=e.offsetX-last.x, dy=e.offsetY-last.y; if(Math.abs(dx)+Math.abs(dy)>3)moved=true;
+  if(drag){drag.fx=S2Wx(e.offsetX); drag.fy=S2Wy(e.offsetY); alpha=Math.max(alpha,0.4);}
+  else if(panning){cam.x+=dx; cam.y+=dy;}
+  else {hover=hitTest(e.offsetX,e.offsetY); cv.style.cursor=hover?'pointer':'grab';}
+  last={x:e.offsetX,y:e.offsetY};});
+cv.addEventListener('pointerup',e=>{ if(drag&&!moved){select(drag);} else if(!drag&&!moved){ const n=hitTest(e.offsetX,e.offsetY); if(n)select(n); else deselect(); }
+  if(drag){drag.fx=drag.fy=undefined;} drag=null; panning=false;});
+cv.addEventListener('wheel',e=>{e.preventDefault(); const f=e.deltaY<0?1.12:1/1.12; zoomAt(e.offsetX,e.offsetY,f);},{passive:false});
+function zoomAt(sx,sy,f){const wx=S2Wx(sx),wy=S2Wy(sy); cam.scale=Math.max(0.25,Math.min(3.5,cam.scale*f)); cam.x=sx-wx*cam.scale; cam.y=sy-wy*cam.scale;}
+document.getElementById('zin').onclick=()=>zoomAt(W/2,H/2,1.2);
+document.getElementById('zout').onclick=()=>zoomAt(W/2,H/2,1/1.2);
+document.getElementById('fit').onclick=fit;
+
+// selection & panel
+const panel=document.getElementById('panel');
+function select(n){selected=n; alpha=Math.max(alpha,0.2);
+  document.getElementById('pname').textContent=n.label;
+  document.getElementById('pid').textContent=n.id;
+  const tp=document.getElementById('ptype'); let col=TYPES[n.type].c; if(n.type==='milestone')col=n.done?'#2E7D57':'#8A97A6';
+  tp.innerHTML='<span class="dot" style="background:'+col+'"></span>'+TYPES[n.type].l; tp.style.color=col;
+  document.getElementById('pmeta').textContent=n.meta||'';
+  const cc=document.getElementById('pconn'); cc.innerHTML='';
+  EDGES.forEach(e=>{let other,dir; if(e[0]===n.id){other=e[1];dir='→';} else if(e[1]===n.id){other=e[0];dir='←';} else return;
+    const o=NById[other]; const row=document.createElement('div'); row.className='conn';
+    row.innerHTML='<span class="arw">'+dir+'</span><span class="rel">'+e[2]+'</span><span>'+o.label+'</span>';
+    row.onclick=()=>{select(o); centerOn(o);}; cc.appendChild(row);});
+  panel.classList.add('open');}
+function deselect(){selected=null; panel.classList.remove('open');}
+function centerOn(n){cam.x=W/2-n.x*cam.scale; cam.y=H/2-n.y*cam.scale;}
+document.getElementById('pclose').onclick=deselect;
+
+// legend / filter
+const lg=document.getElementById('legend');
+Object.keys(TYPES).forEach(t=>{const c=document.createElement('span'); c.className='chip'; c.setAttribute('aria-pressed','true');
+  c.innerHTML='<span class="dot" style="background:'+TYPES[t].c+'"></span>'+TYPES[t].l;
+  c.onclick=()=>{hidden[t]=!hidden[t]; c.setAttribute('aria-pressed',hidden[t]?'false':'true'); alpha=Math.max(alpha,0.5); updStat();};
+  lg.appendChild(c);});
+function updStat(){const nv=NODES.filter(n=>!hidden[n.type]).length; const ev=EDGES.filter(e=>!hidden[NById[e[0]].type]&&!hidden[NById[e[1]].type]).length;
+  document.getElementById('stat').textContent=nv+' node · '+ev+' relasi';}
+updStat();
+
+document.getElementById('theme').onclick=()=>{const cur=document.documentElement.getAttribute('data-theme'); const sd=window.matchMedia('(prefers-color-scheme:dark)').matches; const now=cur?cur:(sd?'dark':'light'); document.documentElement.setAttribute('data-theme',now==='dark'?'light':'dark');};
+</script>

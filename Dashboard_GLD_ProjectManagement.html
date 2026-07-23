@@ -1,0 +1,785 @@
+<title>Dashboard Proyek GLD V2 — Pemantauan &amp; Manajemen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#F4F6F5; --surface:#FFFFFF; --surface-2:#EDF0EF; --surface-3:#E4E9E7;
+  --ink:#16201E; --ink-2:#3C4B47; --ink-soft:#657570; --line:#DCE3E0; --line-2:#CBD4D0;
+  --accent:#0E7C7B; --accent-2:#0A5E5D; --accent-soft:#D4E8E7;
+  --good:#2F855A; --good-soft:#DCEEE4;
+  --warn:#B7791F; --warn-soft:#F5EAD2;
+  --crit:#C0392B; --crit-soft:#F6DED9;
+  --info:#2C6E9B; --info-soft:#DBE7F1;
+  --repo-app:#0E7C7B; --repo-net:#2C6E9B; --repo-ml:#7A4FB8;
+  --repo-app-soft:#D4E8E7; --repo-net-soft:#DBE7F1; --repo-ml-soft:#E7DEF5;
+  --shadow:0 1px 2px rgba(20,32,30,.06),0 4px 16px rgba(20,32,30,.05);
+  --radius:12px;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0E1416; --surface:#151D1F; --surface-2:#1B2528; --surface-3:#223033;
+    --ink:#E8EDEB; --ink-2:#B7C4C0; --ink-soft:#7E9089; --line:#26332F; --line-2:#31413C;
+    --accent:#35B7B3; --accent-2:#5AD0CC; --accent-soft:#123433;
+    --good:#4FB07A; --good-soft:#123227; --warn:#D9A84A; --warn-soft:#332813;
+    --crit:#E06B5C; --crit-soft:#331C18; --info:#5AA0CE; --info-soft:#122735;
+    --repo-app:#35B7B3; --repo-net:#5AA0CE; --repo-ml:#A98AE0;
+    --repo-app-soft:#123433; --repo-net-soft:#122735; --repo-ml-soft:#241834;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.28);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#F4F6F5; --surface:#FFFFFF; --surface-2:#EDF0EF; --surface-3:#E4E9E7;
+  --ink:#16201E; --ink-2:#3C4B47; --ink-soft:#657570; --line:#DCE3E0; --line-2:#CBD4D0;
+  --accent:#0E7C7B; --accent-2:#0A5E5D; --accent-soft:#D4E8E7;
+  --good:#2F855A; --good-soft:#DCEEE4; --warn:#B7791F; --warn-soft:#F5EAD2;
+  --crit:#C0392B; --crit-soft:#F6DED9; --info:#2C6E9B; --info-soft:#DBE7F1;
+  --repo-app:#0E7C7B; --repo-net:#2C6E9B; --repo-ml:#7A4FB8;
+  --repo-app-soft:#D4E8E7; --repo-net-soft:#DBE7F1; --repo-ml-soft:#E7DEF5;
+  --shadow:0 1px 2px rgba(20,32,30,.06),0 4px 16px rgba(20,32,30,.05);
+}
+:root[data-theme="dark"]{
+  --bg:#0E1416; --surface:#151D1F; --surface-2:#1B2528; --surface-3:#223033;
+  --ink:#E8EDEB; --ink-2:#B7C4C0; --ink-soft:#7E9089; --line:#26332F; --line-2:#31413C;
+  --accent:#35B7B3; --accent-2:#5AD0CC; --accent-soft:#123433;
+  --good:#4FB07A; --good-soft:#123227; --warn:#D9A84A; --warn-soft:#332813;
+  --crit:#E06B5C; --crit-soft:#331C18; --info:#5AA0CE; --info-soft:#122735;
+  --repo-app:#35B7B3; --repo-net:#5AA0CE; --repo-ml:#A98AE0;
+  --repo-app-soft:#123433; --repo-net-soft:#122735; --repo-ml-soft:#241834;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 22px 80px;}
+h1,h2,h3{margin:0;font-weight:650;letter-spacing:-.01em;line-height:1.2;text-wrap:balance;}
+a{color:var(--accent)}
+.mono{font-family:var(--mono)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:600;}
+
+.masthead{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between;
+  border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:24px;}
+.mast-left{display:flex;flex-direction:column;gap:9px;min-width:280px;}
+.tagrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--surface);}
+.chip.accent{background:var(--accent-soft);color:var(--accent-2);border-color:transparent}
+h1{font-size:26px}
+.subtitle{color:var(--ink-soft);font-size:14px;max-width:64ch}
+.mast-right{display:flex;flex-direction:column;gap:6px;align-items:flex-end;text-align:right}
+.asof{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.asof b{color:var(--ink)}
+.themebtn{margin-top:4px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;cursor:pointer;
+  background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);padding:5px 11px;border-radius:8px}
+.themebtn:hover{border-color:var(--accent);color:var(--accent)}
+.parties{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:12px;margin-bottom:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:7px;position:relative;overflow:hidden}
+.kpi .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.kpi .val{font-family:var(--mono);font-size:29px;font-weight:600;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:12px;color:var(--ink-soft)}
+.kpi .sub b{font-variant-numeric:tabular-nums;color:var(--ink)}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.kpi.warn::before{background:var(--warn)} .kpi.crit::before{background:var(--crit)} .kpi.good::before{background:var(--good)} .kpi.info::before{background:var(--info)}
+.delta{font-family:var(--mono);font-size:12px;font-weight:600;padding:1px 7px;border-radius:6px;display:inline-block}
+.delta.neg{background:var(--crit-soft);color:var(--crit)} .delta.pos{background:var(--good-soft);color:var(--good)}
+.baseline-note{font-size:12px;color:var(--ink-soft);margin:0 0 26px;padding:10px 13px;background:var(--surface-2);
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px}
+.baseline-note b{color:var(--ink)}
+
+.grid{display:grid;gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 20px 22px}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap}
+.card h2{font-size:16.5px}
+.card .hint{font-size:12px;color:var(--ink-soft);max-width:70ch;margin:6px 0 16px}
+.two{grid-template-columns:1fr;}
+@media(min-width:900px){.two{grid-template-columns:1.35fr 1fr}}
+.section-label{display:flex;align-items:center;gap:10px;margin:34px 0 14px}
+.section-label .eyebrow{white-space:nowrap}
+.section-label::after{content:"";height:1px;background:var(--line);flex:1}
+
+.chart-scroll{overflow-x:auto}
+svg{display:block;max-width:100%}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px}
+.lg-swatch{width:16px;height:3px;border-radius:2px;display:inline-block}
+.lg-dash{width:16px;height:0;border-top:2px dashed currentColor;display:inline-block}
+
+.ws{display:flex;flex-direction:column;gap:15px;margin-top:6px}
+.ws-row{display:grid;grid-template-columns:1fr;gap:6px}
+.ws-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ws-name{font-size:13.5px;font-weight:600}
+.ws-name small{font-family:var(--mono);color:var(--ink-soft);font-weight:500;font-size:11px;margin-left:6px}
+.ws-nums{font-family:var(--mono);font-size:12px;color:var(--ink-soft);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ws-nums b{color:var(--ink)}
+.track{position:relative;height:12px;background:var(--surface-3);border-radius:7px;overflow:visible}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:7px;background:var(--accent)}
+.fill.warn{background:var(--warn)} .fill.crit{background:var(--crit)} .fill.good{background:var(--good)}
+.plan-mark{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);border-radius:2px;opacity:.55}
+
+/* architecture */
+.arch{display:grid;grid-template-columns:1fr;gap:0;margin-top:8px}
+@media(min-width:820px){.arch{grid-template-columns:repeat(5,1fr);gap:0;align-items:stretch}}
+.node{background:var(--surface-2);border:1px solid var(--line-2);border-radius:11px;padding:13px 13px 14px;position:relative;display:flex;flex-direction:column;gap:8px}
+.node + .node{margin-top:26px}
+@media(min-width:820px){.node + .node{margin-top:0}}
+.node .nh{font-size:13.5px;font-weight:650;color:var(--ink);line-height:1.25}
+.node .nspec{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);line-height:1.5}
+.node .layer{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.repobadge{font-family:var(--mono);font-size:10px;font-weight:600;padding:2px 7px;border-radius:6px;display:inline-block;margin-top:2px;line-height:1.4}
+.repobadge.app{background:var(--repo-app-soft);color:var(--repo-app)}
+.repobadge.net{background:var(--repo-net-soft);color:var(--repo-net)}
+.repobadge.ml{background:var(--repo-ml-soft);color:var(--repo-ml)}
+.conn{display:flex;align-items:center;justify-content:center;padding:8px 0;color:var(--ink-soft)}
+@media(min-width:820px){.conn{padding:0 2px}}
+.conn .lab{font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--ink-soft);text-align:center;white-space:nowrap}
+.archflow{display:flex;flex-direction:column;gap:0}
+@media(min-width:820px){.archflow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr 40px 1fr 40px 1fr;align-items:center}}
+.arrow{font-size:18px;color:var(--accent);text-align:center}
+.arrow .lab2{display:block;font-family:var(--mono);font-size:8.5px;color:var(--ink-soft);letter-spacing:.02em;margin-top:2px}
+.repolegend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:12px}
+.repolegend span{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+.rl-dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+/* RU deployment table */
+.ru-scroll{overflow-x:auto}
+.rutbl{border-collapse:collapse;width:100%;font-size:13px}
+.rutbl th{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);
+  text-align:right;padding:9px 10px;border-bottom:1px solid var(--line-2);font-weight:600}
+.rutbl th:first-child,.rutbl th:nth-child(2){text-align:left}
+.rutbl td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--ink-2);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.rutbl td:first-child{font-weight:600;color:var(--ink);text-align:left;font-family:var(--sans)}
+.rutbl td:nth-child(2){text-align:left;color:var(--ink-soft);font-family:var(--sans)}
+.rutbl tr.total td{border-top:2px solid var(--line-2);border-bottom:0;font-weight:700;color:var(--ink)}
+.rutbl tr.pilot td:first-child::after{content:" ●";color:var(--accent)}
+
+/* resource readiness */
+.rr{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:4px}
+.rrcell{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;display:flex;flex-direction:column;gap:5px}
+.rrcell .rn2{font-size:13px;font-weight:600;color:var(--ink)}
+.rrcell .rd{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft)}
+
+.feed{display:flex;flex-direction:column;gap:0;margin-top:4px;max-height:560px;overflow-y:auto;padding-right:4px}
+.ev{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.ev:last-child{border-bottom:0}
+.ev-date{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);font-weight:600;padding-top:1px;text-align:right}
+.ev-body{font-size:13px;color:var(--ink-2);line-height:1.5}
+.ev-body b{color:var(--ink);font-weight:600}
+.ev-tag{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;padding:1px 6px;border-radius:5px;
+  background:var(--surface-2);color:var(--ink-soft);margin-left:6px;white-space:nowrap;border:1px solid var(--line)}
+.ev-tag.m{background:var(--accent-soft);color:var(--accent-2);border-color:transparent}
+.ev-tag.ml{background:var(--repo-ml-soft);color:var(--repo-ml);border-color:transparent}
+
+.telem{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:4px}
+.tcell{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.tcell .v{font-family:var(--mono);font-size:22px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.tcell .l{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+.gaslist{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+.gasrow{display:grid;grid-template-columns:96px 1fr 52px;align-items:center;gap:10px;font-size:12px}
+.gasrow .gn{font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.gasrow .gt{height:8px;background:var(--surface-3);border-radius:5px;overflow:hidden}
+.gasrow .gt i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.gasrow .gv{font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-align:right;font-variant-numeric:tabular-nums}
+
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 14px}
+.fbtn{font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;cursor:pointer;padding:5px 11px;border-radius:7px;
+  border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2)}
+.fbtn[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:transparent}
+@media (prefers-color-scheme:dark){.fbtn[aria-pressed="true"]{color:#0E1416}}
+:root[data-theme="dark"] .fbtn[aria-pressed="true"]{color:#0E1416}
+:root[data-theme="light"] .fbtn[aria-pressed="true"]{color:#fff}
+.fbtn:hover{border-color:var(--accent)}
+.tbl-scroll{overflow-x:auto}
+table.ai{border-collapse:collapse;width:100%;font-size:13px}
+table.ai th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+  text-align:left;padding:8px 10px;border-bottom:1px solid var(--line-2);font-weight:600}
+table.ai td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+td.num{font-family:var(--mono);color:var(--ink-soft);width:34px;text-align:right;font-variant-numeric:tabular-nums}
+td.act{color:var(--ink)}
+table.ai tr:last-child td{border-bottom:0}
+.pic{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);white-space:nowrap}
+.pill{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.02em;padding:2px 8px;border-radius:999px;white-space:nowrap;display:inline-block}
+.pill.terbuka{background:var(--surface-3);color:var(--ink-2)}
+.pill.berjalan{background:var(--accent-soft);color:var(--accent-2)}
+.pill.terencana{background:var(--warn-soft);color:var(--warn)}
+.pill.menunggu{background:var(--warn-soft);color:var(--warn)}
+.pill.selesai{background:var(--good-soft);color:var(--good)}
+.pill.ready{background:var(--good-soft);color:var(--good)}
+.pill.confirm{background:var(--warn-soft);color:var(--warn)}
+.pill.prep{background:var(--info-soft);color:var(--info)}
+.prio{font-family:var(--mono);font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dot.t{background:var(--crit)} .dot.s{background:var(--warn)} .dot.r{background:var(--ink-soft)}
+
+.issue{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:start;padding:13px 0;border-bottom:1px solid var(--line)}
+.issue:last-child{border-bottom:0}
+.sev{width:4px;align-self:stretch;border-radius:3px;background:var(--warn);min-height:34px}
+.sev.t{background:var(--crit)} .sev.s{background:var(--warn)} .sev.r{background:var(--ink-soft)}
+.issue-txt{font-size:13px;color:var(--ink);font-weight:550}
+.issue-imp{font-size:12px;color:var(--ink-soft);margin-top:3px}
+.issue-p{align-self:center}
+.blockers{display:grid;grid-template-columns:1fr;gap:12px;margin-top:4px}
+@media(min-width:760px){.blockers{grid-template-columns:repeat(3,1fr)}}
+.blk{border:1px solid var(--crit);border-radius:11px;padding:14px 15px;background:var(--crit-soft);position:relative}
+.blk .bt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--crit);font-weight:700}
+.blk .bh{font-size:14px;font-weight:650;margin:7px 0 6px;color:var(--ink)}
+.blk .bd{font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.blk .bm{font-family:var(--mono);font-size:12px;color:var(--crit);font-weight:600;margin-top:8px}
+
+.recs{display:flex;flex-direction:column;gap:2px;counter-reset:r}
+.rec{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.rec:last-child{border-bottom:0}
+.rec .rn{counter-increment:r;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent)}
+.rec .rn::before{content:counter(r,decimal-leading-zero)}
+.rec .rt{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.rec .rt b{color:var(--ink)}
+
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--ink-soft);font-family:var(--mono);line-height:1.7}
+@media (prefers-reduced-motion:no-preference){
+  .draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.4s ease forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .fill,.gt i{transition:width .9s cubic-bezier(.22,1,.36,1)}
+}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="mast-left">
+      <div class="tagrow">
+        <span class="chip accent">GLD · TAHAP 2</span>
+        <span class="chip">TRL-7</span>
+        <span class="chip">Program 6 RU</span>
+        <span class="chip">Jun 2026 – Feb 2027</span>
+      </div>
+      <h1>Sistem Gas Leak Detection — Dashboard Proyek</h1>
+      <p class="subtitle">Pemantauan progres, aktivitas, arsitektur sistem, dan risiko pengembangan GLD Point Sensor Network multi-modality (MQ + thermal) berbasis LoRa star-mesh, AI edge, dan catu daya solar–baterai — dari fase laboratorium menuju rollout 6 Refinery Unit &amp; field test RU-VII Kasim.</p>
+      <p class="parties">LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional</p>
+    </div>
+    <div class="mast-right">
+      <div class="asof">Per <b>23 Juli 2026</b> · Bulan ke-2</div>
+      <div class="asof">Target implementasi · <b>Des 2026</b></div>
+      <div class="asof">Field test · <b>RU-VII Kasim</b></div>
+      <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
+    </div>
+  </header>
+
+  <section class="kpis" aria-label="Ringkasan indikator">
+    <div class="kpi good">
+      <div class="lab">Progres Keseluruhan</div>
+      <div class="val">34%</div>
+      <div class="sub">Rencana <b>19%</b> · <span class="delta pos">+15 poin</span></div>
+    </div>
+    <div class="kpi good">
+      <div class="lab">Deviasi Jadwal</div>
+      <div class="val">+15<span style="font-size:16px">pt</span></div>
+      <div class="sub">Di depan baseline resmi</div>
+    </div>
+    <div class="kpi info">
+      <div class="lab">Cakupan Deployment</div>
+      <div class="val">6 RU</div>
+      <div class="sub"><b>28</b> sensor · <b>22</b> CH · <b>7</b> GW</div>
+    </div>
+    <div class="kpi crit">
+      <div class="lab">Blocker Kritis Aktif</div>
+      <div class="val">3</div>
+      <div class="sub">Catu daya · konverter · jangkauan LoRa</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">Action Items</div>
+      <div class="val">24</div>
+      <div class="sub"><b>5</b> berjalan · <b>15</b> terbuka · <b>0</b> selesai</div>
+    </div>
+    <div class="kpi warn">
+      <div class="lab">Isu &amp; Risiko</div>
+      <div class="val">9</div>
+      <div class="sub"><b>4</b> prioritas tinggi</div>
+    </div>
+  </section>
+  <p class="baseline-note">📐 <b>Baseline resmi:</b> Kurva-S &amp; timeline dikalibrasi ke <b>Project Timeline 9 bulan</b> pada Deck Kick-Off (12 Jun 2026 → Feb 2027, 12 aktivitas). Secara keseluruhan proyek <b>di depan jadwal</b> karena engineering (prototype board, model AI, uji lab) telah berjalan sejak April sebelum kickoff formal — namun milestone yang bergantung pihak RU (<b>site survey, HSE/permit</b>) tertinggal dan 3 blocker teknis masih aktif.</p>
+
+  <div class="section-label"><span class="eyebrow">Kurva-S · Progres Kumulatif</span></div>
+  <div class="card">
+    <div class="card-head"><h2>Kurva-S: Rencana vs Aktual vs Proyeksi</h2></div>
+    <p class="hint">Baseline = Project Timeline 9 bulan (Deck Kick-Off). Aktual menanjak lebih cepat dari rencana karena engineering front-loaded (prototype &amp; AI sudah berjalan sejak April). Area terarsir = kelebihan aktual terhadap baseline (+15 poin per 23 Jul). Garis merah = target implementasi Desember (field installation).</p>
+    <div class="chart-scroll"><svg id="scurve" viewBox="0 0 960 420" role="img" aria-label="Kurva-S progres proyek"></svg></div>
+    <div class="legend">
+      <span style="color:var(--accent)"><i class="lg-swatch" style="background:var(--accent)"></i>Aktual</span>
+      <span style="color:var(--ink-soft)"><i class="lg-dash"></i>Rencana / Baseline resmi</span>
+      <span style="color:var(--info)"><i class="lg-dash"></i>Proyeksi</span>
+      <span style="color:var(--good)"><i class="lg-swatch" style="background:var(--good);opacity:.35"></i>Kelebihan (ahead)</span>
+    </div>
+  </div>
+
+  <div class="section-label"><span class="eyebrow">Timeline · Gantt 12 Aktivitas</span></div>
+  <div class="card">
+    <div class="card-head"><h2>Timeline Resmi 9 Bulan &amp; Milestone</h2></div>
+    <p class="hint">12 aktivitas dari Deck Kick-Off (Jun 2026 – Feb 2027). Rentang = rencana; pengisian = progres aktual per 23 Jul; penanda ▮ = target progres sampai hari ini. Warna bilah = status (hijau: on/ahead, merah: tertinggal, teal: berjalan, kuning: menyusul, abu: belum mulai). Wajik = milestone; terisi = tercapai.</p>
+    <div class="chart-scroll"><svg id="gantt" viewBox="0 0 960 560" role="img" aria-label="Timeline Gantt 12 aktivitas"></svg></div>
+  </div>
+
+  <div class="section-label"><span class="eyebrow">Cakupan Deployment 6 Refinery Unit</span></div>
+  <div class="card">
+    <div class="card-head"><h2>Kebutuhan Perangkat per RU (scope LGU)</h2>
+      <span class="mono" style="font-size:12px;color:var(--ink-soft)">RU II–VII · v1.0 Mei 2026</span>
+    </div>
+    <p class="hint">Titik pilot survei: RU IV Cilacap (●). Field test kolaborasi: RU-VII Kasim/Sorong. Volume kabel &amp; conduit dihitung per RU setelah site survey.</p>
+    <div class="ru-scroll">
+      <table class="rutbl" id="rutbl">
+        <thead><tr><th>RU</th><th>Lokasi</th><th>Gas Sensor</th><th>Cluster Head</th><th>Gateway</th><th>Solar CH</th><th>Solar GW</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-label"><span class="eyebrow">Arsitektur Sistem &amp; Repositori</span></div>
+  <div class="card">
+    <div class="card-head"><h2>Alur Data End-to-End &amp; Pemetaan 3 Repositori</h2></div>
+    <p class="hint">Sensor node mendeteksi &amp; melakukan inferensi AI di edge, mengirim via LoRa ke Cluster Head (star) lalu antar-CH ke Gateway (mesh), diteruskan ke PC Server, dan divisualisasikan di dashboard. Tiga repositori kode memetakan ke lapisan berikut.</p>
+    <div class="archflow">
+      <div class="node">
+        <div class="layer">Edge · Sensor Node</div>
+        <div class="nh">Gas Point Sensor Unit</div>
+        <div class="nspec">ESP32-S3 · 8× MQ (MQ2/3/4/5/6/7/8/135) · ADS1256 24-bit · TFLite Micro · multi-task NN (jenis gas / leak / severity / PPM) + TCN per-sensor</div>
+        <span class="repobadge ml">gas-leak-ml-chamber-system</span>
+        <span class="repobadge net">PertaminaGLD · firmware GLD</span>
+      </div>
+      <div class="arrow">→<span class="lab2">LoRa 915MHz<br>STAR</span></div>
+      <div class="node">
+        <div class="layer">Level 1 · Routing</div>
+        <div class="nh">Cluster Head</div>
+        <div class="nspec">Aggregator · LoRa dual-channel · solar + baterai 18650 · failover otomatis (RSSI parent) · IP66/67 · tiang 6 m</div>
+        <span class="repobadge net">PertaminaGLD · firmware CH</span>
+      </div>
+      <div class="arrow">→<span class="lab2">LoRa<br>MESH</span></div>
+      <div class="node">
+        <div class="layer">Level 2 · Aggregator</div>
+        <div class="nh">Gateway</div>
+        <div class="nspec">Pengumpul data mesh · solar/power · uplink WiFi / 4G LTE · MQTT ke server</div>
+        <span class="repobadge net">PertaminaGLD · firmware GW</span>
+      </div>
+      <div class="arrow">→<span class="lab2">WiFi/4G<br>MQTT</span></div>
+      <div class="node">
+        <div class="layer">Server</div>
+        <div class="nh">PC Server / Backend</div>
+        <div class="nspec">Node-RED flows · NestJS + GraphQL API (port 4000) · SQLite/Prisma · device registry · dataset &amp; ML pipeline</div>
+        <span class="repobadge net">PertaminaGLD · Node-RED</span>
+        <span class="repobadge app">gasleakdetectionV2-April · backend</span>
+      </div>
+      <div class="arrow">→<span class="lab2">GraphQL</span></div>
+      <div class="node">
+        <div class="layer">Presentasi</div>
+        <div class="nh">Dashboard</div>
+        <div class="nspec">Next.js 15 · peta Mapbox GL (posisi sensor per RU) · Recharts (trend/risk) · event timeline · topologi jaringan · RBAC</div>
+        <span class="repobadge app">gasleakdetectionV2-April · frontend</span>
+      </div>
+    </div>
+    <div class="repolegend">
+      <span><i class="rl-dot" style="background:var(--repo-ml)"></i>gas-leak-ml-chamber-system — ML/AI edge (TFLite Micro, chamber training)</span>
+      <span><i class="rl-dot" style="background:var(--repo-net)"></i>PertaminaGLD — firmware GLD/CH/GW + server Node-RED</span>
+      <span><i class="rl-dot" style="background:var(--repo-app)"></i>gasleakdetectionV2-April — backend GraphQL + dashboard Next.js</span>
+    </div>
+  </div>
+
+  <div class="section-label"><span class="eyebrow">Kesiapan Teknis per Sub-sistem</span></div>
+  <div class="card">
+    <div class="card-head"><h2>Progres &amp; Kesehatan Sub-sistem</h2></div>
+    <p class="hint">Lensa teknis (kesiapan sub-sistem) sebagai pelengkap timeline aktivitas. Penanda ▮ = target sampai kini; warna bilah = status kesehatan.</p>
+    <div class="ws" id="ws"></div>
+  </div>
+
+  <div class="section-label"><span class="eyebrow">Kesiapan Sumber Daya (Resource Readiness)</span></div>
+  <div class="card">
+    <p class="hint" style="margin-top:0">Matriks kesiapan sumber daya dari Deck Kick-Off — dikonfirmasi saat kickoff &amp; dimonitor via milestone review.</p>
+    <div class="rr" id="rr"></div>
+  </div>
+
+  <div class="section-label"><span class="eyebrow">Pemantauan Aktivitas</span></div>
+  <div class="grid two">
+    <div class="card">
+      <div class="card-head"><h2>Log Aktivitas Terbaru</h2></div>
+      <p class="hint">Kronologi kegiatan, temuan, &amp; capaian model dari catatan koordinasi.</p>
+      <div class="feed" id="feed"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>Telemetri Akuisisi Data</h2></div>
+      <p class="hint">Rekap dataset sensor GLD-F001 (15 Jul 2026).</p>
+      <div class="telem">
+        <div class="tcell"><div class="v">14.477</div><div class="l">Total sampel</div></div>
+        <div class="tcell"><div class="v">9</div><div class="l">Sesi akuisisi</div></div>
+        <div class="tcell"><div class="v">8</div><div class="l">Kanal MQ</div></div>
+        <div class="tcell"><div class="v">~2,7<span style="font-size:13px">j</span></div><div class="l">Durasi logging</div></div>
+      </div>
+      <div class="gaslist" id="gaslist"></div>
+      <p class="hint" style="margin:14px 0 0">Model TCN per-sensor (Board12): 8 model, semua <b style="color:var(--ink)">≥92% akurasi</b>, terbaik MQ4V 93,9%. OGI thermal (YOLOv8s-seg): Precision 1,00 · Recall 0,79 · F1 0,88.</p>
+    </div>
+  </div>
+
+  <div class="section-label"><span class="eyebrow">Blocker Kritis</span></div>
+  <div class="blockers" id="blockers"></div>
+
+  <div class="section-label"><span class="eyebrow">Registrasi Tindak Lanjut</span></div>
+  <div class="card">
+    <div class="card-head"><h2>Action Item Register</h2>
+      <span class="mono" style="font-size:12px;color:var(--ink-soft)" id="aicount"></span>
+    </div>
+    <div class="filters" id="filters">
+      <button class="fbtn" data-f="all" aria-pressed="true" type="button">Semua</button>
+      <button class="fbtn" data-f="berjalan" aria-pressed="false" type="button">Berjalan</button>
+      <button class="fbtn" data-f="terbuka" aria-pressed="false" type="button">Terbuka</button>
+      <button class="fbtn" data-f="tinggi" aria-pressed="false" type="button">Prioritas Tinggi</button>
+    </div>
+    <div class="tbl-scroll">
+      <table class="ai">
+        <thead><tr><th>#</th><th>Tindakan</th><th>Penanggung Jawab</th><th>Prioritas</th><th>Status</th></tr></thead>
+        <tbody id="aibody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-label"><span class="eyebrow">Isu Terbuka &amp; Risiko</span></div>
+  <div class="card">
+    <div class="card-head"><h2>Daftar Isu &amp; Risiko</h2></div>
+    <div id="issues"></div>
+  </div>
+
+  <div class="section-label"><span class="eyebrow">Rekomendasi</span></div>
+  <div class="card">
+    <div class="recs" id="recs"></div>
+  </div>
+
+  <footer>
+    Sumber: Deck Kick-Off GLD (12 Jun 2026, timeline 9 bulan &amp; resource plan) · Dokumen Kebutuhan Peralatan GLD per RU v1.0 · Laporan Progres 18 Jun–20 Jul · Notulensi Kick-Off · MoM RU IV Cilacap · Board12 TCN per-Sensor · LangGas Top-6000 (OGI) · repo gasleakdetectionV2-April, PertaminaGLD, gas-leak-ml-chamber-system · dataset GLD-F001.<br>
+    Baseline Kurva-S dikalibrasi ke Project Timeline 9 bulan (Deck Kick-Off); persentase progres bersifat estimasi turunan dari status aktivitas &amp; dapat dikalibrasi lebih lanjut dengan laporan milestone resmi. Disusun per 23 Juli 2026.
+  </footer>
+</div>
+
+<script>
+const START=new Date(2026,5,1), END=new Date(2027,1,28);
+const TODAY=new Date(2026,6,23);
+const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt',2026,9],['Nov',2026,10],['Des',2026,11],['Jan',2027,0],['Feb',2027,1]];
+
+/* ---------- S-CURVE ---------- */
+(function(){
+  const svg=document.getElementById('scurve');
+  const W=960,H=420,m={l:46,r:20,t:22,b:46};
+  const pw=W-m.l-m.r, ph=H-m.t-m.b;
+  const x=d=>m.l+((d-START)/(END-START))*pw;
+  const y=v=>m.t+(1-v/100)*ph;
+  const NS='http://www.w3.org/2000/svg';
+  function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  function path(pts){return pts.map((p,i)=>(i?'L':'M')+x(p.d).toFixed(1)+' '+y(p.v).toFixed(1)).join(' ');}
+  // planned cumulative (monthly)
+  const plan=[
+    [new Date(2026,5,1),0],[new Date(2026,5,30),8],[new Date(2026,6,30),21],[new Date(2026,7,31),40],
+    [new Date(2026,8,30),62],[new Date(2026,9,31),71],[new Date(2026,10,30),84],[new Date(2026,11,31),93],
+    [new Date(2027,0,31),98],[new Date(2027,1,28),100]
+  ].map(a=>({d:a[0],v:a[1]}));
+  // actual to today
+  const act=[
+    [new Date(2026,5,1),0],[new Date(2026,5,12),6],[new Date(2026,5,30),16],
+    [new Date(2026,6,7),22],[new Date(2026,6,15),27],[new Date(2026,6,23),34]
+  ].map(a=>({d:a[0],v:a[1]}));
+  // forecast from today
+  const fc=[
+    [new Date(2026,6,23),34],[new Date(2026,7,31),47],[new Date(2026,8,30),61],[new Date(2026,9,31),70],
+    [new Date(2026,10,30),82],[new Date(2026,11,31),91],[new Date(2027,0,31),97],[new Date(2027,1,28),100]
+  ].map(a=>({d:a[0],v:a[1]}));
+  for(let v=0;v<=100;v+=20){
+    svg.appendChild(el('line',{x1:m.l,y1:y(v),x2:W-m.r,y2:y(v),stroke:'var(--line)','stroke-width':1}));
+    const t=el('text',{x:m.l-10,y:y(v)+4,'text-anchor':'end',fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});t.textContent=v+'%';svg.appendChild(t);
+  }
+  MONTHS.forEach(([lab,yr,mo])=>{const d=new Date(yr,mo,1);if(d<START||d>END)return;
+    svg.appendChild(el('line',{x1:x(d),y1:m.t,x2:x(d),y2:m.t+ph,stroke:'var(--line)','stroke-width':1,'stroke-dasharray':'2 4',opacity:.55}));
+    const t=el('text',{x:x(d),y:H-m.b+20,'text-anchor':'middle',fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});t.textContent=lab;svg.appendChild(t);
+  });
+  // ahead area between actual and plan up to today
+  const planToday=plan.filter(p=>p.d<=TODAY).concat([{d:TODAY,v:19}]);
+  const aheadPts=act.map(p=>x(p.d)+','+y(p.v)).concat(planToday.slice().reverse().map(p=>x(p.d)+','+y(p.v)));
+  svg.appendChild(el('polygon',{points:aheadPts.join(' '),fill:'var(--good)',opacity:.15}));
+  const aArea=act.map(p=>x(p.d)+','+y(p.v));
+  aArea.push(x(act[act.length-1].d)+','+y(0)); aArea.unshift(x(act[0].d)+','+y(0));
+  svg.appendChild(el('polygon',{points:aArea.join(' '),fill:'var(--accent)',opacity:.08}));
+  svg.appendChild(el('path',{d:path(plan),fill:'none',stroke:'var(--ink-soft)','stroke-width':2,'stroke-dasharray':'6 5',opacity:.85}));
+  svg.appendChild(el('path',{d:path(fc),fill:'none',stroke:'var(--info)','stroke-width':2,'stroke-dasharray':'2 5'}));
+  const ap=el('path',{d:path(act),fill:'none',stroke:'var(--accent)','stroke-width':3,'stroke-linejoin':'round','stroke-linecap':'round'});
+  ap.classList.add('draw');svg.appendChild(ap);
+  requestAnimationFrame(()=>{const L=ap.getTotalLength();ap.style.setProperty('--len',L);});
+  svg.appendChild(el('line',{x1:x(TODAY),y1:m.t-2,x2:x(TODAY),y2:m.t+ph,stroke:'var(--ink)','stroke-width':1.5,'stroke-dasharray':'3 3',opacity:.5}));
+  const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini';svg.appendChild(tl);
+  const last=act[act.length-1];
+  svg.appendChild(el('circle',{cx:x(last.d),cy:y(last.v),r:5,fill:'var(--accent)',stroke:'var(--surface)','stroke-width':2}));
+  const lt=el('text',{x:x(last.d),y:y(last.v)-12,'text-anchor':'middle',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='34%';svg.appendChild(lt);
+  svg.appendChild(el('circle',{cx:x(TODAY),cy:y(19),r:3.5,fill:'var(--ink-soft)'}));
+  const pl=el('text',{x:x(TODAY),y:y(19)+18,'text-anchor':'middle',fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});pl.textContent='19%';svg.appendChild(pl);
+  const dec=new Date(2026,11,1);
+  svg.appendChild(el('line',{x1:x(dec),y1:m.t,x2:x(dec),y2:m.t+ph,stroke:'var(--crit)','stroke-width':1.5,opacity:.5}));
+  const dt=el('text',{x:x(dec)-5,y:m.t+11,'text-anchor':'end',fill:'var(--crit)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});dt.textContent='Target Des';svg.appendChild(dt);
+})();
+
+/* ---------- GANTT (12 activities) ---------- */
+const ACT=[
+  {id:1,name:'Kick-off & requirement confirmation',s:[2026,5,8],e:[2026,5,15],act:100,plan:100,st:'good'},
+  {id:2,name:'Site survey & data collection plan',s:[2026,5,15],e:[2026,6,7],act:30,plan:100,st:'crit'},
+  {id:3,name:'Detailed design',s:[2026,6,1],e:[2026,6,21],act:85,plan:90,st:'good'},
+  {id:4,name:'Prototype build',s:[2026,6,15],e:[2026,7,21],act:60,plan:5,st:'good'},
+  {id:5,name:'Lab test',s:[2026,7,15],e:[2026,8,21],act:35,plan:0,st:'accent'},
+  {id:6,name:'AI model training / validation',s:[2026,7,15],e:[2026,8,21],act:50,plan:0,st:'accent'},
+  {id:7,name:'Integration test',s:[2026,8,15],e:[2026,9,7],act:20,plan:0,st:'accent'},
+  {id:8,name:'HSE review & permit preparation',s:[2026,10,1],e:[2026,10,14],act:5,plan:0,st:'warn'},
+  {id:9,name:'Field installation',s:[2026,10,15],e:[2026,11,7],act:0,plan:0,st:'neutral'},
+  {id:10,name:'Field trial',s:[2026,11,8],e:[2027,0,7],act:0,plan:0,st:'neutral'},
+  {id:11,name:'Evaluation & final report',s:[2027,0,1],e:[2027,0,21],act:0,plan:0,st:'neutral'},
+  {id:12,name:'Industrialization roadmap',s:[2027,1,8],e:[2027,1,21],act:5,plan:0,st:'neutral'}
+];
+const GMILES=[
+  {d:[2026,5,12],lab:'Kick-off',done:true},
+  {d:[2026,7,10],lab:'Site visit lab',done:false},
+  {d:[2026,8,20],lab:'Integration',done:false},
+  {d:[2026,10,10],lab:'HSE permit',done:false},
+  {d:[2026,11,1],lab:'Field install (target)',done:false},
+  {d:[2027,0,15],lab:'Field trial',done:false},
+  {d:[2027,1,15],lab:'Final report',done:false}
+];
+(function(){
+  const svg=document.getElementById('gantt');
+  const W=960,H=560,m={l:250,r:44,t:52,b:30};
+  const x=d=>m.l+((d-START)/(END-START))*(W-m.l-m.r);
+  const NS='http://www.w3.org/2000/svg';
+  function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  function D(a){return new Date(a[0],a[1],a[2]);}
+  MONTHS.forEach(([lab,yr,mo])=>{const d=new Date(yr,mo,1);if(d<START||d>END)return;
+    svg.appendChild(el('line',{x1:x(d),y1:m.t-6,x2:x(d),y2:H-m.b,stroke:'var(--line)','stroke-width':1,opacity:.7}));
+    const t=el('text',{x:x(d)+4,y:m.t-12,fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});t.textContent=lab;svg.appendChild(t);
+  });
+  const rowH=(H-m.t-m.b)/(ACT.length+1);
+  ACT.forEach((p,i)=>{
+    const cy=m.t+rowH*i+rowH/2;
+    const nm=el('text',{x:m.l-14,y:cy+2,'text-anchor':'end',fill:'var(--ink)','font-size':12,'font-weight':600});
+    nm.textContent=p.name;svg.appendChild(nm);
+    const idl=el('text',{x:14,y:cy+2,fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});idl.textContent=('0'+p.id).slice(-2);svg.appendChild(idl);
+    const xs=x(D(p.s)), xe=x(D(p.e)); const bw=Math.max(xe-xs,3), bh=15;
+    svg.appendChild(el('rect',{x:xs,y:cy-bh/2,width:bw,height:bh,rx:7,fill:'var(--surface-3)'}));
+    const col=p.st==='neutral'?'var(--line-2)':'var(--'+p.st+')';
+    svg.appendChild(el('rect',{x:xs,y:cy-bh/2,width:Math.max(bw*p.act/100,p.act>0?3:0),height:bh,rx:7,fill:col}));
+    if(p.plan>0){const px=xs+bw*p.plan/100;
+      svg.appendChild(el('rect',{x:px-1.2,y:cy-bh/2-4,width:2.4,height:bh+8,fill:'var(--ink)',opacity:.55,rx:1}));}
+    const pct=el('text',{x:xe+7,y:cy+3.5,fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});
+    pct.textContent=p.act+'%';svg.appendChild(pct);
+  });
+  svg.appendChild(el('line',{x1:x(TODAY),y1:m.t-6,x2:x(TODAY),y2:H-m.b,stroke:'var(--accent)','stroke-width':1.5,'stroke-dasharray':'3 3'}));
+  const my=H-m.b+2;
+  GMILES.forEach(ms=>{const d=D(ms.d);const cx=x(d);const s=6;
+    svg.appendChild(el('path',{d:`M${cx} ${my-s} L${cx+s} ${my} L${cx} ${my+s} L${cx-s} ${my} Z`,
+      fill:ms.done?'var(--accent)':'var(--surface)',stroke:ms.done?'var(--accent)':'var(--ink-soft)','stroke-width':1.6}));
+  });
+})();
+
+/* ---------- RU TABLE ---------- */
+const RU=[
+  ['RU II','Dumai',10,3,1,3,1,false],
+  ['RU III','Plaju',4,3,1,3,1,false],
+  ['RU IV','Cilacap',3,2,1,2,1,true],
+  ['RU V','Balikpapan',2,1,1,1,1,false],
+  ['RU VI','Balongan',4,2,2,2,2,false],
+  ['RU VII','Kasim/Sorong',5,11,1,11,1,false]
+];
+(function(){
+  const b=document.querySelector('#rutbl tbody');
+  RU.forEach(r=>{const tr=document.createElement('tr');if(r[7])tr.className='pilot';
+    tr.innerHTML=`<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td>`;b.appendChild(tr);});
+  const t=document.createElement('tr');t.className='total';
+  t.innerHTML=`<td>TOTAL</td><td>6 RU</td><td>28</td><td>22</td><td>7</td><td>22</td><td>7</td>`;b.appendChild(t);
+})();
+
+/* ---------- SUBSYSTEM READINESS ---------- */
+const WSW=[
+  {n:'Jaringan LoRa & Cluster Head',w:20,act:65,plan:85,st:'warn'},
+  {n:'AI & Sensor MQ (multi-modality)',w:22,act:52,plan:70,st:'warn'},
+  {n:'Catu Daya & Manajemen Energi',w:15,act:40,plan:72,st:'crit'},
+  {n:'Gas Chamber, Hardware & QC',w:12,act:35,plan:62,st:'warn'},
+  {n:'Perangkat Lunak, Server & Dashboard',w:13,act:50,plan:60,st:'accent'},
+  {n:'Integrasi Sistem (GLD-CH-GW-Server)',w:10,act:25,plan:45,st:'warn'},
+  {n:'Persiapan & Survei RU / HSE',w:8,act:10,plan:40,st:'crit'},
+  {n:'Inisiasi & Desain Sistem',w:10,act:95,plan:100,st:'good'}
+];
+(function(){
+  const c=document.getElementById('ws');
+  WSW.forEach(r=>{
+    const row=document.createElement('div');row.className='ws-row';
+    const fc=r.st==='good'?'good':r.st==='crit'?'crit':r.st==='warn'?'warn':'';
+    row.innerHTML=`<div class="ws-top">
+        <div class="ws-name">${r.n}<small>bobot ${r.w}%</small></div>
+        <div class="ws-nums">aktual <b>${r.act}%</b> / rencana ${r.plan}%</div></div>
+      <div class="track"><div class="fill ${fc}" style="width:0%" data-w="${r.act}"></div>
+        <div class="plan-mark" style="left:${r.plan}%"></div></div>`;
+    c.appendChild(row);
+  });
+  requestAnimationFrame(()=>document.querySelectorAll('#ws .fill').forEach(f=>f.style.width=f.dataset.w+'%'));
+})();
+
+/* ---------- RESOURCE READINESS ---------- */
+const RES=[
+  ['Engineering','Test Equipment, Vendor','ready','Ready'],
+  ['AI / ML','Dataset, Server Environment','confirm','Need Confirmation'],
+  ['Field','Access to Field Location, HSE','ready','Ready'],
+  ['HSE','RU Site, Field Team','ready','Ready'],
+  ['RU Site','Permit, Access','confirm','Need Confirmation'],
+  ['Procurement / Vendor','Budget, Delivery Lead Time','confirm','Need Confirmation'],
+  ['Test Equipment','Procurement / Vendor','prep','To Be Prepared'],
+  ['Gas Test Setup','Gas Supply, Calibration','prep','To Be Prepared'],
+  ['Server / Dashboard','Network, Cyber Security, Cloud','prep','To Be Prepared']
+];
+(function(){
+  const c=document.getElementById('rr');
+  RES.forEach(r=>{const d=document.createElement('div');d.className='rrcell';
+    d.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <span class="rn2">${r[0]}</span><span class="pill ${r[2]}">${r[3]}</span></div>
+      <div class="rd">Dep: ${r[1]}</div>`;c.appendChild(d);});
+})();
+
+/* ---------- ACTIVITY FEED ---------- */
+const FEED=[
+  {d:'20 Jul',t:'Simulasi siklus operasi diunggah ke board GLD',b:'Warm-up → akuisisi → inferensi → transmit LoRa. <b>ON 60 s / OFF 100 s / WAKE 160 s</b>. Arahan: <b>ganti/modifikasi DC converter</b>; modifikasi baterai ditahan.',tag:'Fahmi'},
+  {d:'16 Jul',t:'Temuan sensor & aplikasi UI',b:'Respons sensor berkorelasi positif pada <b>CO₂</b>, tidak pada <b>O₂</b>. Baseline berbeda per sensor → <b>threshold per-MQ</b>. Aplikasi UI GLD dibuat (capture/save/download).',tag:'Milestone',m:true},
+  {d:'15 Jul',t:'Model TCN per-sensor selesai (Board12)',b:'8 model TCN independen (1/sensor), semua <b>≥92% akurasi</b> prediksi LPG 5 s ke depan. Terbaik <b>MQ4V 93,9%</b> (F1 0,923). Ekspor TFLite int8 ~72 KB untuk edge.',tag:'ML',ml:true},
+  {d:'15 Jul',t:'Akuisisi dataset sensor',b:'Sesi Clean Air, LPG, O₂, CO₂ pada GLD-F001 — total <b>14.477 sampel</b> di 8 kanal MQ.',tag:''},
+  {d:'14 Jul',t:'',b:'Solar panel stabil <b>±4,17 V</b> pukul 11–15; baterai penuh. Setelah 14:00 arus/daya negatif (mulai discharge).',tag:''},
+  {d:'13 Jul',t:'Profil beban daya GLD terukur',b:'Jalur 5 V &amp; 24 V normal (±6 W). <b>Mode baterai hanya 2,43 W</b> vs kebutuhan ±6 W — teridentifikasi sebagai blocker.',tag:'Blocker',m:true},
+  {d:'Jul',t:'OGI thermal — YOLOv8s-seg (LangGas Top-6000)',b:'Segmentasi gas pada citra IR: <b>Precision 1,00 · Recall 0,79 · F1 0,88</b> (1.201 frame val, 0 false alarm). Melengkapi deteksi kimia MQ menjadi <b>multi-modality</b>.',tag:'ML',ml:true},
+  {d:'9 Jul',t:'',b:'Pengisian belum optimal (Vp 7,25 V). Lokasi hanya optimal 10:00–13:00 → rekomendasi pindah ke rooftop.',tag:''},
+  {d:'6 Jul',t:'Uji komunikasi 2 Cluster Head',b:'Charging 08:00–16:00 menaikkan baterai 3,0→3,4 V. Failover CH otomatis terbukti (parent pindah saat CH mati). PJ chamber didapatkan.',tag:'Milestone',m:true},
+  {d:'26 Jun',t:'',b:'Temuan: <b>antena LoRa 6 m maks ±100 m</b> di kondisi obstruksi (spec target 1–2 km LOS). Model TCNN mulai (prediksi 5 s dari 5 s).',tag:''},
+  {d:'18 Jun',t:'Prinsip pemodelan AI ditetapkan',b:'Pergeseran ke <b>fingerprint 8-sensor</b> &amp; pola relatif (transien/stasioner/saturasi). Proyek ditegaskan setara TRL-7.',tag:''},
+  {d:'12 Jun',t:'Kick-Off Meeting Pertamina',b:'Baseline timeline <b>9 bulan</b> disepakati; scope 6 RU (RU II–VII); target implementasi Des; field test RU-VII Kasim; instalasi via pihak ke-3 + koordinasi HSE.',tag:'Milestone',m:true}
+];
+(function(){
+  const c=document.getElementById('feed');
+  FEED.forEach(e=>{
+    const cls=e.ml?'ml':(e.m?'m':'');
+    const div=document.createElement('div');div.className='ev';
+    div.innerHTML=`<div class="ev-date">${e.d}</div>
+      <div class="ev-body">${e.t?`<b>${e.t}</b>${e.tag?`<span class="ev-tag ${cls}">${e.tag}</span>`:''}<br>`:(e.tag?`<span class="ev-tag ${cls}">${e.tag}</span> `:'')}${e.b}</div>`;
+    c.appendChild(div);
+  });
+})();
+
+/* ---------- GAS SESSIONS ---------- */
+const GASES=[['Carbon Dioxide',6507],['LPG',5655],['Clean Air',616],['Oksigen',205],['Baseline/uji',1494]];
+(function(){
+  const c=document.getElementById('gaslist');const max=6507;
+  GASES.forEach(([n,v])=>{const r=document.createElement('div');r.className='gasrow';
+    r.innerHTML=`<div class="gn">${n}</div><div class="gt"><i style="width:0" data-w="${(v/max*100).toFixed(0)}"></i></div><div class="gv">${v.toLocaleString('id-ID')}</div>`;c.appendChild(r);});
+  requestAnimationFrame(()=>document.querySelectorAll('#gaslist .gt i').forEach(f=>f.style.width=f.dataset.w+'%'));
+})();
+
+/* ---------- BLOCKERS ---------- */
+const BLK=[
+  {t:'Catu Daya',h:'Mode baterai belum menyuplai 8 heater MQ',d:'Terukur ±2,43 W vs kebutuhan ±6 W. Tanpa kepastian ini, skema duty-cycling &amp; autonomi lapangan tak dapat divalidasi.',m:'2,43 W / 6 W'},
+  {t:'Elektronik',h:'DC converter perlu diganti/dimodifikasi',d:'Menahan finalisasi desain catu daya. Modifikasi baterai ditahan sementara; fokus dialihkan.',m:'Arahan 20 Jul'},
+  {t:'Jaringan',h:'Jangkauan LoRa jauh di bawah target spec',d:'Aktual ±100 m (obstruksi) – ±340 m (LOS) vs spec deck 1–2 km LOS. Berpotensi menaikkan jumlah CH signifikan (mis. RU VII butuh 11 CH).',m:'~100 m / 1–2 km'}
+];
+(function(){
+  const c=document.getElementById('blockers');
+  BLK.forEach(b=>{const d=document.createElement('div');d.className='blk';
+    d.innerHTML=`<div class="bt">⚠ ${b.t}</div><div class="bh">${b.h}</div><div class="bd">${b.d}</div><div class="bm">${b.m}</div>`;c.appendChild(d);});
+})();
+
+/* ---------- ACTION ITEMS ---------- */
+const AI=[
+  ['Mengganti/memodifikasi circuit DC converter','Tim Elektronik (Fahmi)','t','terbuka','Terbuka'],
+  ['Menahan modifikasi baterai, alihkan ke pekerjaan lain','Tim Elektronik','s','berjalan','Diarahkan'],
+  ['Pengukuran ulang beban mode baterai + data tegangan','Fahmi','t','terbuka','Terbuka'],
+  ['Melanjutkan pengumpulan data solar ≥1 bulan','Lab IoT (Ryan)','s','berjalan','Berjalan (10/30)'],
+  ['Memindahkan titik pengecasan ke rooftop','Ilmania / Lab Fisika','s','berjalan','Diusulkan'],
+  ['Bukti empirik stabilitas CH posisi tinggi → CH1 Labtek XV','Tim Jaringan','t','terbuka','Terbuka'],
+  ['Eksperimen penentuan jumlah CH minimum','Tim Jaringan','t','terbuka','Terbuka'],
+  ['Mengajukan izin pemasangan CH Labtek XV lt.8','—','s','terbuka','Terbuka'],
+  ['Menyusun daftar titik tinggi survei untuk Pertamina','Tim Survei','s','terbuka','Terbuka'],
+  ['Pemetaan MQ dominan per jenis gas (datasheet)','Tim GLD & AI','t','berjalan','Berjalan'],
+  ['Replot grafik per jenis gas (8 parameter)','Tim GLD & AI','s','terbuka','Terbuka'],
+  ['Pengembangan & validasi model TCN/TCNN','Pak Fahdzi','t','berjalan','Berjalan'],
+  ['Investigasi akar ketidakkonsistenan akuisisi data','Tim GLD & AI','t','terbuka','Terbuka'],
+  ['Penetapan threshold per MQ berbasis baseline','Tim GLD & AI','s','terbuka','Terbuka'],
+  ['Penyelesaian gas test chamber (pompa, valve, mounting)','Mahasiswa PJ Chamber','t','berjalan','Berjalan'],
+  ['Uji metode aliran gas: disedot vs didorong','Tim Chamber','s','terbuka','Terbuka'],
+  ['Konsolidasi 3 repositori menjadi satu repo utama','Farhan Budiman','s','terencana','Terencana'],
+  ['Menambahkan collaborator GitHub dari Pertamina','Farhan Budiman','r','menunggu','Menunggu'],
+  ['Penyiapan dokumen JSA/TRA','Pak Tresnandi / LGU','t','terbuka','Terbuka'],
+  ['Penjadwalan site visit Pertamina ke lab LGU','LGU','t','terbuka','Terbuka'],
+  ['Pencatatan jenis gas Cilacap & cek tabung gas','Tim Pengujian','s','terbuka','Terbuka'],
+  ['Penyusunan SOP keselamatan (larangan cabut saat on)','Tim Lab','s','terbuka','Terbuka'],
+  ['Evaluasi keputusan solder vs soket sensor','Tim Elektronik','s','terbuka','Terbuka'],
+  ['Penataan ulang lab','Pak Maman','r','berjalan','Berjalan']
+];
+const PRIO={t:['t','Tinggi'],s:['s','Sedang'],r:['r','Rendah']};
+(function(){
+  const body=document.getElementById('aibody');const cnt=document.getElementById('aicount');let filter='all';
+  function render(){
+    body.innerHTML='';let shown=0;
+    AI.forEach((a,i)=>{const [txt,pic,pr,stKey,stLab]=a;
+      const match=filter==='all'||(filter==='tinggi'&&pr==='t')||(filter===stKey);
+      if(!match)return;shown++;
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td class="num">${i+1}</td><td class="act">${txt}</td>
+        <td><span class="pic">${pic}</span></td>
+        <td><span class="prio"><span class="dot ${pr}"></span>${PRIO[pr][1]}</span></td>
+        <td><span class="pill ${stKey}">${stLab}</span></td>`;
+      body.appendChild(tr);});
+    cnt.textContent=shown+' / '+AI.length+' item';
+  }
+  document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('.fbtn');if(!b)return;
+    filter=b.dataset.f;document.querySelectorAll('#filters .fbtn').forEach(x=>x.setAttribute('aria-pressed',x===b));render();});
+  render();
+})();
+
+/* ---------- ISSUES ---------- */
+const ISS=[
+  ['Mode baterai belum terbukti menyuplai 8 heater MQ (2,43 W vs 6 W)','GLD tidak dapat beroperasi mandiri di lapangan','t','Tinggi'],
+  ['Circuit DC converter perlu diganti/dimodifikasi','Menahan finalisasi desain catu daya','t','Tinggi'],
+  ['Jangkauan LoRa aktual ±100 m vs spec 1–2 km LOS','Menaikkan jumlah CH & biaya deployment 6 RU','t','Tinggi'],
+  ['Ketidakkonsistenan akuisisi data belum diketahui akar penyebabnya','Kualitas dataset pelatihan AI','t','Tinggi'],
+  ['Site survey RU & data collection plan tertinggal dari baseline','Menahan penentuan titik GLD/CH & DED','s','Sedang'],
+  ['Dokumen JSA/TRA belum dikonfirmasi','Menahan jadwal site visit & kunjungan RU','s','Sedang'],
+  ['Data solar-baterai baru 10 hari dari minimum 1 bulan','Belum cukup untuk validasi energy budget','s','Sedang'],
+  ['Keputusan solder vs soket & konsolidasi 3 repo belum tuntas','Berdampak pada maintenance & tata kelola kode','s','Sedang'],
+  ['Anomali pencatatan data tegangan baterai (tertulis 309 V)','Integritas dokumentasi pengukuran','r','Rendah']
+];
+(function(){
+  const c=document.getElementById('issues');
+  ISS.forEach((x,i)=>{const [txt,imp,sv,lab]=x;const d=document.createElement('div');d.className='issue';
+    d.innerHTML=`<div class="sev ${sv}"></div>
+      <div><div class="issue-txt">${i+1}. ${txt}</div><div class="issue-imp">${imp}</div></div>
+      <div class="issue-p"><span class="prio"><span class="dot ${sv}"></span>${lab}</span></div>`;c.appendChild(d);});
+})();
+
+/* ---------- RECOMMENDATIONS ---------- */
+const RECS=[
+  'Manfaatkan posisi <b>di depan jadwal engineering</b> untuk menuntaskan 3 blocker teknis (catu daya, DC converter, LoRa) sebelum masuk fase field. Keunggulan jadwal akan tergerus bila blocker terbawa ke instalasi.',
+  'Percepat <b>site survey RU &amp; dokumen JSA/TRA</b> — dua item ini adalah jalur kritis yang bergantung pihak RU dan saat ini paling tertinggal dari baseline; keduanya menahan penentuan titik GLD/CH dan DED.',
+  'Segera <b>kuantifikasi ulang jangkauan LoRa</b> (±100 m vs target 1–2 km) menjadi estimasi jumlah CH per RU. RU VII sudah butuh 11 CH; validasi antena/tinggi mounting sebelum survei agar biaya deployment realistis.',
+  'Formalkan <b>SOP pengujian &amp; QC per unit</b> serta <b>konsolidasi 3 repositori</b> (frontend, server, ML) menjadi satu repo utama untuk tata kelola menuju rollout 6 RU.',
+  'Konfirmasikan kesiapan sumber daya berstatus <b>Need Confirmation</b> (AI/ML, RU Site, Procurement) dan siapkan yang <b>To Be Prepared</b> (test equipment, gas setup, server/dashboard) menjelang milestone integrasi.'
+];
+(function(){
+  const c=document.getElementById('recs');
+  RECS.forEach(t=>{const d=document.createElement('div');d.className='rec';
+    d.innerHTML=`<div class="rn"></div><div class="rt">${t}</div>`;c.appendChild(d);});
+})();
+
+/* ---------- THEME TOGGLE ---------- */
+(function(){
+  const btn=document.getElementById('themebtn');
+  btn.addEventListener('click',()=>{
+    const cur=document.documentElement.getAttribute('data-theme');
+    const sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+    const now=cur?cur:(sysDark?'dark':'light');
+    document.documentElement.setAttribute('data-theme',now==='dark'?'light':'dark');
+  });
+})();
+</script>

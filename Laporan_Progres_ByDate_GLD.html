@@ -138,7 +138,7 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
   </header>
 
   <section class="summary">
-    <div class="scell good"><div class="v">36%</div><div class="l">Progres pilot · rencana <b>19%</b></div></div>
+    <div class="scell good"><div class="v">42%</div><div class="l">Progres pilot · rencana <b>19%</b></div></div>
     <div class="scell crit"><div class="v">3</div><div class="l">Blocker kritis</div></div>
     <div class="scell"><div class="v">24</div><div class="l">Action items</div></div>
     <div class="scell"><div class="v">14.477</div><div class="l">Sampel dataset</div></div>
@@ -213,6 +213,8 @@ const P2=[
    body:'Source code tersebar (GLD &amp; AI · jaringan · server) → <b>rencana konsolidasi</b> satu repo utama.'},
   {d:'6 Jul',title:'Uji komunikasi 2 Cluster Head',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['power','Daya']],
    body:'Charging 08:00–16:00 menaikkan baterai <b>3,0 → 3,4 V</b> (±20%). Mahasiswa PJ chamber didapatkan.'},
+  {d:'9 Jul',title:'Rantai komunikasi GLD-CH-GW-Server tersambung',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['sw','Software']],
+   body:'Data mengalir penuh <b>Node → CH → GW → server</b> (MQTT) — rantai komunikasi end-to-end terbukti, dasar uji fungsional terintegrasi.'},
   {d:'9 Jul',title:'Kinerja solar',stat:['temuan','Temuan'],tags:[['power','Daya']],
    body:'Vp 7,25 V; Ip 0,05 A. Pengisian belum optimal — lokasi hanya optimal 10:00–13:00 → <b>rekomendasi pindah ke rooftop</b>.'},
   {d:'13 Jul',title:'Profil beban daya GLD',stat:['blocker','Blocker'],tags:[['power','Daya']],
@@ -221,6 +223,8 @@ const P2=[
    body:'Pukul 11–15 stabil <b>±4,17 V</b> (baterai penuh). Setelah 14:00 arus/daya negatif (mulai discharge) → ±4,12 V.'},
   {d:'15 Jul',title:'Akuisisi data & model TCN per-sensor',stat:['milestone','Milestone'],tags:[['ml','AI/ML']],
    body:'Dataset GLD-F001: Clean Air, LPG, O₂, CO₂ — <b>14.477 sampel</b> (8 kanal MQ, ~2,7 j). <b>Model TCN per-sensor selesai:</b> 8 model, semua <b>≥92% akurasi</b> prediksi LPG 5 dtk ke depan; terbaik <b>MQ4V 93,9%</b> (F1 0,923). Ekspor TFLite int8 ~72 KB.'},
+  {d:'16 Jul',title:'Uji fungsional GLD-CH-GW-Server hingga inferensi AI — SELESAI',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['ml','AI/ML'],['sw','Software']],
+   body:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end <b>termasuk inferensi AI di edge</b>. Uji fungsional sistem terintegrasi tuntas — jauh sebelum jadwal integrasi resmi (Sep).'},
   {d:'16 Jul',title:'Temuan sensor & aplikasi UI',stat:['temuan','Temuan'],tags:[['ml','AI/ML'],['sw','Software'],['net','Jaringan']],
    body:'Respons berkorelasi positif pada <b>CO₂</b>, tidak pada <b>O₂</b>. Baseline berbeda per sensor → <b>threshold per-MQ</b> (panduan QC). Aplikasi UI GLD dibuat (dataset/capture/save/download). Uji LoRa acak: Gerbang Utara 242 m PDR 100%; LFT 177 m PDR 100%; STEI 200 m PDR 87%.'},
   {d:'17 Jul',title:'Urutan kerja koordinasi',stat:['berjalan','Berjalan'],tags:[['coord','Koordinasi']],

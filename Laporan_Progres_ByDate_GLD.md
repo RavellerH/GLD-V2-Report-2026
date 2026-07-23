@@ -11,7 +11,7 @@
 
 | Indikator | Nilai |
 |---|---|
-| Progres pilot Cilacap (vs baseline resmi 9 bulan) | **36%** (rencana 19% · **+17 poin**) |
+| Progres pilot Cilacap (vs baseline resmi 9 bulan) | **42%** (rencana 19% · **+23 poin**) |
 | Blocker kritis aktif | 3 (catu daya · DC converter · jangkauan LoRa) |
 | Action items | 24 (5 berjalan · 15 terbuka) |
 | Isu & risiko | 9 (4 prioritas tinggi) |
@@ -98,6 +98,9 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 - Charging 08:00–16:00 menaikkan baterai **3,0 → 3,4 V** (±20%).
 - Mahasiswa PJ penyelesaian chamber didapatkan.
 
+### 9 Juli — Rantai Komunikasi GLD–CH–GW–Server Tersambung — *Milestone ✅*
+- Data mengalir penuh **Node → CH → GW → server** (MQTT) — rantai komunikasi end-to-end terbukti, menjadi dasar uji fungsional terintegrasi.
+
 ### 9 Juli — Kinerja Solar
 - Vp = 7,25 V; Ip = 0,05 A (matahari mulai redup). **Pengisian belum optimal** — lokasi hanya optimal 10:00–13:00 → **rekomendasi pindah ke rooftop**.
 
@@ -111,6 +114,9 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 ### 15 Juli — Akuisisi Data & Model TCN — *Milestone ✅ / ML*
 - Akuisisi dataset GLD-F001: sesi **Clean Air, LPG, O₂, CO₂** — total **14.477 sampel** di 8 kanal MQ (~2,7 jam logging).
 - **Model TCN per-sensor (Board12) selesai:** 8 model independen (1/sensor), semua **≥92% akurasi** prediksi LPG 5 dtk ke depan. Terbaik **MQ4V 93,9%** (F1 0,923). Ekspor TFLite int8 ~72 KB untuk edge.
+
+### 16 Juli — Uji Fungsional Sistem hingga Inferensi AI — *Milestone ✅*
+- Rantai penuh **sensor → CH → GW → server** berjalan end-to-end **termasuk inferensi AI di edge**. **Uji fungsional sistem terintegrasi (GLD-CH-GW-Server) tuntas** — jauh sebelum jadwal integrasi resmi (September).
 
 ### 16 Juli — Temuan Sensor & Aplikasi UI
 - Respons sensor berkorelasi positif pada **CO₂**, tidak pada **O₂** (O₂ menggantikan gas terdeteksi).

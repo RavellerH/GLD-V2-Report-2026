@@ -273,12 +273,12 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
   <section class="kpis" aria-label="Ringkasan indikator">
     <div class="kpi good">
       <div class="lab">Progres Pilot Cilacap</div>
-      <div class="val">36%</div>
-      <div class="sub">Rencana <b>19%</b> · <span class="delta pos">+17 poin</span></div>
+      <div class="val">42%</div>
+      <div class="sub">Rencana <b>19%</b> · <span class="delta pos">+23 poin</span></div>
     </div>
     <div class="kpi good">
       <div class="lab">Deviasi Jadwal</div>
-      <div class="val">+17<span style="font-size:16px">pt</span></div>
+      <div class="val">+23<span style="font-size:16px">pt</span></div>
       <div class="sub">Di depan baseline resmi</div>
     </div>
     <div class="kpi info">
@@ -302,12 +302,12 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
       <div class="sub"><b>4</b> prioritas tinggi</div>
     </div>
   </section>
-  <p class="baseline-note">📐 <b>Baseline resmi:</b> Kurva-S &amp; timeline dikalibrasi ke <b>Project Timeline 9 bulan</b> pada Deck Kick-Off (12 Jun 2026 → Feb 2027, 12 aktivitas). Scope aktif saat ini <b>fokus 1 RU — pilot RU IV Cilacap</b> (5 RU lainnya = roadmap). Proyek <b>di depan jadwal</b> karena engineering (prototype board, model AI, uji lab) berjalan sejak April sebelum kickoff — namun eksekusi <b>site survey menunggu gate TRA/JSA</b> dan 3 blocker teknis masih aktif.</p>
+  <p class="baseline-note">📐 <b>Baseline resmi:</b> Kurva-S &amp; timeline dikalibrasi ke <b>Project Timeline 9 bulan</b> pada Deck Kick-Off (12 Jun 2026 → Feb 2027, 12 aktivitas). Scope aktif saat ini <b>fokus 1 RU — pilot RU IV Cilacap</b> (5 RU lainnya = roadmap). Proyek <b>di depan jadwal</b> karena engineering front-loaded — termasuk <b>uji fungsional GLD-CH-GW-Server yang sudah tembus inferensi AI (16 Jul)</b>, jauh sebelum jadwal integrasi resmi (Sep). Namun eksekusi <b>site survey menunggu gate TRA/JSA</b> dan 3 blocker teknis masih aktif.</p>
 
   <div class="section-label"><span class="eyebrow">Kurva-S · Progres Kumulatif</span></div>
   <div class="card">
     <div class="card-head"><h2>Kurva-S: Rencana vs Aktual vs Proyeksi</h2></div>
-    <p class="hint">Baseline = Project Timeline 9 bulan (Deck Kick-Off), mewakili perjalanan pilot RU IV Cilacap. Aktual menanjak lebih cepat dari rencana karena engineering front-loaded (prototype &amp; AI sudah berjalan sejak April). Area terarsir = kelebihan aktual terhadap baseline (+17 poin per 23 Jul). Garis merah = target implementasi Desember (field installation).</p>
+    <p class="hint">Baseline = Project Timeline 9 bulan (Deck Kick-Off), mewakili perjalanan pilot RU IV Cilacap. Aktual menanjak lebih cepat dari rencana karena engineering front-loaded (prototype &amp; AI sudah berjalan sejak April). Area terarsir = kelebihan aktual terhadap baseline (+23 poin per 23 Jul). Garis merah = target implementasi Desember (field installation).</p>
     <div class="chart-scroll"><svg id="scurve" viewBox="0 0 960 420" role="img" aria-label="Kurva-S progres proyek"></svg></div>
     <div class="legend">
       <span style="color:var(--accent)"><i class="lg-swatch" style="background:var(--accent)"></i>Aktual</span>
@@ -484,11 +484,11 @@ const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt'
   // actual to today
   const act=[
     [new Date(2026,5,1),0],[new Date(2026,5,12),6],[new Date(2026,5,30),16],
-    [new Date(2026,6,7),23],[new Date(2026,6,15),29],[new Date(2026,6,23),36]
+    [new Date(2026,6,7),24],[new Date(2026,6,15),31],[new Date(2026,6,23),42]
   ].map(a=>({d:a[0],v:a[1]}));
   // forecast from today
   const fc=[
-    [new Date(2026,6,23),36],[new Date(2026,7,31),48],[new Date(2026,8,30),61],[new Date(2026,9,31),70],
+    [new Date(2026,6,23),42],[new Date(2026,7,31),53],[new Date(2026,8,30),64],[new Date(2026,9,31),72],
     [new Date(2026,10,30),82],[new Date(2026,11,31),91],[new Date(2027,0,31),97],[new Date(2027,1,28),100]
   ].map(a=>({d:a[0],v:a[1]}));
   for(let v=0;v<=100;v+=20){
@@ -515,7 +515,7 @@ const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt'
   const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini';svg.appendChild(tl);
   const last=act[act.length-1];
   svg.appendChild(el('circle',{cx:x(last.d),cy:y(last.v),r:5,fill:'var(--accent)',stroke:'var(--surface)','stroke-width':2}));
-  const lt=el('text',{x:x(last.d),y:y(last.v)-12,'text-anchor':'middle',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='36%';svg.appendChild(lt);
+  const lt=el('text',{x:x(last.d),y:y(last.v)-12,'text-anchor':'middle',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='42%';svg.appendChild(lt);
   svg.appendChild(el('circle',{cx:x(TODAY),cy:y(19),r:3.5,fill:'var(--ink-soft)'}));
   const pl=el('text',{x:x(TODAY),y:y(19)+18,'text-anchor':'middle',fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});pl.textContent='19%';svg.appendChild(pl);
   const dec=new Date(2026,11,1);
@@ -531,7 +531,7 @@ const ACT=[
   {id:4,name:'Prototype build',s:[2026,6,15],e:[2026,7,21],act:60,plan:5,st:'good'},
   {id:5,name:'Lab test',s:[2026,7,15],e:[2026,8,21],act:35,plan:0,st:'accent'},
   {id:6,name:'AI model training / validation',s:[2026,7,15],e:[2026,8,21],act:50,plan:0,st:'accent'},
-  {id:7,name:'Integration test',s:[2026,8,15],e:[2026,9,7],act:20,plan:0,st:'accent'},
+  {id:7,name:'Integration test (GLD-CH-GW-Server)',s:[2026,6,1],e:[2026,9,7],act:90,plan:0,st:'good'},
   {id:8,name:'HSE review & permit preparation',s:[2026,10,1],e:[2026,10,14],act:5,plan:0,st:'warn'},
   {id:9,name:'Field installation',s:[2026,10,15],e:[2026,11,7],act:0,plan:0,st:'neutral'},
   {id:10,name:'Field trial',s:[2026,11,8],e:[2027,0,7],act:0,plan:0,st:'neutral'},
@@ -540,6 +540,7 @@ const ACT=[
 ];
 const GMILES=[
   {d:[2026,5,12],lab:'Kick-off',done:true},
+  {d:[2026,6,16],lab:'Uji fungsional + AI ✓',done:true},
   {d:[2026,7,1],lab:'TRA/JSA gate',done:false},
   {d:[2026,7,10],lab:'Site visit lab',done:false},
   {d:[2026,8,20],lab:'Integration',done:false},
@@ -607,7 +608,7 @@ const WSW=[
   {n:'Catu Daya & Manajemen Energi',w:15,act:40,plan:72,st:'crit'},
   {n:'Gas Chamber, Hardware & QC',w:12,act:35,plan:62,st:'warn'},
   {n:'Perangkat Lunak, Server & Dashboard',w:13,act:50,plan:60,st:'accent'},
-  {n:'Integrasi Sistem (GLD-CH-GW-Server)',w:10,act:25,plan:45,st:'warn'},
+  {n:'Integrasi Sistem (GLD-CH-GW-Server)',w:10,act:92,plan:45,st:'good'},
   {n:'Persiapan & Survei RU / HSE',w:8,act:40,plan:60,st:'warn'},
   {n:'Inisiasi & Desain Sistem',w:10,act:95,plan:100,st:'good'}
 ];
@@ -649,11 +650,13 @@ const RES=[
 /* ---------- ACTIVITY FEED ---------- */
 const FEED=[
   {d:'20 Jul',t:'Simulasi siklus operasi diunggah ke board GLD',b:'Warm-up → akuisisi → inferensi → transmit LoRa. <b>ON 60 s / OFF 100 s / WAKE 160 s</b>. Arahan: <b>ganti/modifikasi DC converter</b>; modifikasi baterai ditahan.',tag:'Fahmi'},
+  {d:'16 Jul',t:'Uji fungsional GLD-CH-GW-Server hingga inferensi AI — SELESAI',b:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end <b>termasuk inferensi AI di edge</b>. Uji fungsional sistem terintegrasi tuntas — jauh sebelum jadwal integrasi resmi (Sep).',tag:'Milestone',m:true},
   {d:'16 Jul',t:'Temuan sensor & aplikasi UI',b:'Respons sensor berkorelasi positif pada <b>CO₂</b>, tidak pada <b>O₂</b>. Baseline berbeda per sensor → <b>threshold per-MQ</b>. Aplikasi UI GLD dibuat (capture/save/download).',tag:'Milestone',m:true},
   {d:'15 Jul',t:'Model TCN per-sensor selesai (Board12)',b:'8 model TCN independen (1/sensor), semua <b>≥92% akurasi</b> prediksi LPG 5 s ke depan. Terbaik <b>MQ4V 93,9%</b> (F1 0,923). Ekspor TFLite int8 ~72 KB untuk edge.',tag:'ML',ml:true},
   {d:'15 Jul',t:'Akuisisi dataset sensor',b:'Sesi Clean Air, LPG, O₂, CO₂ pada GLD-F001 — total <b>14.477 sampel</b> di 8 kanal MQ.',tag:''},
   {d:'14 Jul',t:'',b:'Solar panel stabil <b>±4,17 V</b> pukul 11–15; baterai penuh. Setelah 14:00 arus/daya negatif (mulai discharge).',tag:''},
   {d:'13 Jul',t:'Profil beban daya GLD terukur',b:'Jalur 5 V &amp; 24 V normal (±6 W). <b>Mode baterai hanya 2,43 W</b> vs kebutuhan ±6 W — teridentifikasi sebagai blocker.',tag:'Blocker',m:true},
+  {d:'9 Jul',t:'Rantai komunikasi GLD-CH-GW-Server tersambung',b:'Data mengalir penuh <b>Node → CH → GW → server</b> (MQTT) — rantai komunikasi end-to-end terbukti, dasar untuk uji fungsional terintegrasi.',tag:'Milestone',m:true},
   {d:'9 Jul',t:'',b:'Pengisian belum optimal (Vp 7,25 V). Lokasi hanya optimal 10:00–13:00 → rekomendasi pindah ke rooftop.',tag:''},
   {d:'6 Jul',t:'Uji komunikasi 2 Cluster Head',b:'Charging 08:00–16:00 menaikkan baterai 3,0→3,4 V. Failover CH otomatis terbukti (parent pindah saat CH mati). PJ chamber didapatkan.',tag:'Milestone',m:true},
   {d:'26 Jun',t:'',b:'Temuan: <b>antena LoRa 6 m maks ±100 m</b> di kondisi obstruksi (spec target 1–2 km LOS). Model TCNN mulai (prediksi 5 s dari 5 s).',tag:''},

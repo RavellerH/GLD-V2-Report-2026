@@ -1,0 +1,256 @@
+<title>DRAFT JSA/HSE — GLD RU IV Cilacap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#F4F6F5;--surface:#FFFFFF;--surface-2:#EDF0EF;--surface-3:#E4E9E7;
+  --ink:#16201E;--ink-2:#3C4B47;--ink-soft:#657570;--line:#DCE3E0;--line-2:#CBD4D0;
+  --accent:#0E7C7B;--accent-2:#0A5E5D;--accent-soft:#D4E8E7;
+  --low:#2F855A;--low-s:#DCEEE4;--med:#B7791F;--med-s:#F5EAD2;
+  --high:#C2701C;--high-s:#F6E2CC;--ext:#C0392B;--ext-s:#F6DED9;
+  --shadow:0 1px 2px rgba(20,32,30,.06),0 4px 16px rgba(20,32,30,.05);
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0E1416;--surface:#151D1F;--surface-2:#1B2528;--surface-3:#223033;
+  --ink:#E8EDEB;--ink-2:#B7C4C0;--ink-soft:#7E9089;--line:#26332F;--line-2:#31413C;
+  --accent:#35B7B3;--accent-2:#5AD0CC;--accent-soft:#123433;
+  --low:#4FB07A;--low-s:#123227;--med:#D9A84A;--med-s:#332813;
+  --high:#E08A3C;--high-s:#33230F;--ext:#E06B5C;--ext-s:#331C18;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.28);
+}}
+:root[data-theme="light"]{
+  --bg:#F4F6F5;--surface:#FFFFFF;--surface-2:#EDF0EF;--surface-3:#E4E9E7;
+  --ink:#16201E;--ink-2:#3C4B47;--ink-soft:#657570;--line:#DCE3E0;--line-2:#CBD4D0;
+  --accent:#0E7C7B;--accent-2:#0A5E5D;--accent-soft:#D4E8E7;
+  --low:#2F855A;--low-s:#DCEEE4;--med:#B7791F;--med-s:#F5EAD2;--high:#C2701C;--high-s:#F6E2CC;--ext:#C0392B;--ext-s:#F6DED9;
+  --shadow:0 1px 2px rgba(20,32,30,.06),0 4px 16px rgba(20,32,30,.05);
+}
+:root[data-theme="dark"]{
+  --bg:#0E1416;--surface:#151D1F;--surface-2:#1B2528;--surface-3:#223033;
+  --ink:#E8EDEB;--ink-2:#B7C4C0;--ink-soft:#7E9089;--line:#26332F;--line-2:#31413C;
+  --accent:#35B7B3;--accent-2:#5AD0CC;--accent-soft:#123433;
+  --low:#4FB07A;--low-s:#123227;--med:#D9A84A;--med-s:#332813;--high:#E08A3C;--high-s:#33230F;--ext:#E06B5C;--ext-s:#331C18;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 20px 80px}
+h1,h2,h3{margin:0;font-weight:650;letter-spacing:-.01em;line-height:1.2}
+.mono{font-family:var(--mono)}
+.draftbar{background:repeating-linear-gradient(45deg,var(--med-s),var(--med-s) 12px,transparent 12px,transparent 24px);
+  border:1px solid var(--med);color:var(--ink);border-radius:10px;padding:11px 15px;font-size:12.5px;margin-bottom:20px}
+.draftbar b{color:var(--med)}
+.masthead{border-bottom:2px solid var(--accent);padding-bottom:16px;margin-bottom:18px}
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px;align-items:center}
+.chip{font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--surface)}
+.chip.accent{background:var(--accent-soft);color:var(--accent-2);border-color:transparent}
+.chip.draft{background:var(--ext-s);color:var(--ext);border-color:transparent}
+h1{font-size:23px;margin-bottom:6px}
+.sub{color:var(--ink-soft);font-size:13px;max-width:70ch}
+.themebtn{float:right;font-family:var(--mono);font-size:11px;cursor:pointer;background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);padding:5px 11px;border-radius:8px}
+.themebtn:hover{border-color:var(--accent);color:var(--accent)}
+.docmeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:16px 0 6px}
+.docmeta div{padding:9px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12.5px}
+.docmeta .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:2px}
+.docmeta .v{color:var(--ink);font-weight:600}
+h2.sec{font-size:16px;margin:34px 0 6px;padding-top:8px;display:flex;align-items:center;gap:10px}
+h2.sec .n{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:700}
+.sec-line{height:1px;background:var(--line);margin:6px 0 14px}
+.lead{font-size:13px;color:var(--ink-2);margin:0 0 14px;max-width:78ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:16px 17px;box-shadow:var(--shadow);margin-bottom:14px}
+ul.req{margin:0;padding-left:20px}
+ul.req li{margin:5px 0;font-size:13px;color:var(--ink-2)}
+ul.req li b{color:var(--ink)}
+.matrix{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+.mband{font-family:var(--mono);font-size:11px;font-weight:600;padding:4px 10px;border-radius:7px}
+.mband.low{background:var(--low-s);color:var(--low)} .mband.med{background:var(--med-s);color:var(--med)}
+.mband.high{background:var(--high-s);color:var(--high)} .mband.ext{background:var(--ext-s);color:var(--ext)}
+.jsa-title{font-size:14.5px;font-weight:650;margin:2px 0 3px}
+.jsa-meta{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-bottom:10px}
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table.jsa{border-collapse:collapse;width:100%;font-size:12px;min-width:820px}
+table.jsa th{background:var(--surface-2);font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);
+  text-align:left;padding:9px 10px;border-bottom:1px solid var(--line-2);font-weight:700;vertical-align:bottom}
+table.jsa td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2);line-height:1.5}
+table.jsa td.no{font-family:var(--mono);color:var(--ink-soft);text-align:center;width:26px}
+table.jsa td.step{color:var(--ink);font-weight:600;width:15%}
+table.jsa tr:last-child td{border-bottom:0}
+.risk{font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;white-space:nowrap;display:inline-block}
+.risk.low{background:var(--low-s);color:var(--low)} .risk.med{background:var(--med-s);color:var(--med)}
+.risk.high{background:var(--high-s);color:var(--high)} .risk.ext{background:var(--ext-s);color:var(--ext)}
+.apd{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft)}
+.pj{font-size:11.5px;color:var(--ink-soft)}
+.emg{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:760px){.emg{grid-template-columns:1fr 1fr}}
+.emgcard{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:var(--surface)}
+.emgcard h3{font-size:13px;margin-bottom:7px;color:var(--ink)}
+.emgcard.alarm{border-left:3px solid var(--ext)} .emgcard.fire{border-left:3px solid var(--high)}
+.emgcard.injury{border-left:3px solid var(--med)} .emgcard.contact{border-left:3px solid var(--accent)}
+.emgcard ul{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink-2)}
+.emgcard li{margin:3px 0}
+.sign{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--line-2);border-radius:10px;overflow:hidden;margin-top:8px}
+@media(min-width:680px){.sign{grid-template-columns:repeat(4,1fr)}}
+.sigcell{padding:13px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sigcell .role{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+.sigcell .who{font-size:12px;color:var(--ink-2);margin-top:4px}
+.sigline{height:38px;border-bottom:1.5px dotted var(--line-2);margin-top:14px}
+.sigcap{font-family:var(--mono);font-size:9.5px;color:var(--ink-soft);margin-top:5px}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-soft);font-family:var(--mono);line-height:1.7}
+@media print{.themebtn{display:none}body{background:#fff}}
+</style>
+
+<div class="wrap">
+  <button class="themebtn" id="themebtn" type="button">◐ Tema</button>
+
+  <div class="draftbar">📝 <b>DOKUMEN DRAFT</b> — Kerangka awal untuk mempercepat penyusunan TRA/JSA. <b>Belum disahkan.</b> Wajib direview, dilengkapi (klasifikasi area, nomor izin, kontak darurat), dan ditandatangani oleh <b>Tim HSE RU IV Cilacap</b> serta mengikuti sistem Permit-to-Work Pertamina sebelum digunakan di lapangan. Bukan pengganti prosedur HSE resmi RU.</div>
+
+  <header class="masthead">
+    <div class="tagrow">
+      <span class="chip draft">DRAFT · Rev 0</span>
+      <span class="chip accent">GLD · TAHAP 2</span>
+      <span class="chip">RU IV Cilacap</span>
+      <span class="chip">JSA / TRA · HSE</span>
+    </div>
+    <h1>Job Safety Analysis (JSA) &amp; HSE Plan — Instalasi Gas Leak Detection</h1>
+    <p class="sub">Pekerjaan survei, pemasangan, dan pengujian sistem GLD (sensor node, Cluster Head pada tiang 6 m, gateway, panel surya) di area PT Kilang Pertamina Internasional — RU IV Cilacap.</p>
+  </header>
+
+  <div class="docmeta">
+    <div><span class="k">Lokasi</span><span class="v">RU IV Cilacap</span></div>
+    <div><span class="k">Scope kerja</span><span class="v">Survei · Instalasi · Uji GLD</span></div>
+    <div><span class="k">Pelaksana</span><span class="v">LGU / pihak ke-3 + ITB</span></div>
+    <div><span class="k">Klasifikasi area</span><span class="v">⚠ Dikonfirmasi RU (Zona 0/1/2)</span></div>
+    <div><span class="k">Izin kerja (PTW)</span><span class="v">Cold · Hot · Height (No: ____)</span></div>
+    <div><span class="k">Volume pilot</span><span class="v">3 sensor · 2 CH · 1 GW</span></div>
+    <div><span class="k">Disusun</span><span class="v">23 Jul 2026</span></div>
+    <div><span class="k">Revalidasi</span><span class="v">Bila task/lokasi/cuaca/crew berubah</span></div>
+  </div>
+
+  <h2 class="sec"><span class="n">A</span> Prasyarat &amp; Persyaratan HSE Umum</h2>
+  <div class="sec-line"></div>
+  <p class="lead">Berlaku untuk seluruh aktivitas di bawah. Tidak boleh ada pekerjaan dimulai sebelum seluruh prasyarat terpenuhi dan izin kerja disahkan pihak RU.</p>
+  <div class="card">
+    <ul class="req">
+      <li><b>Permit-to-Work (PTW)</b> disahkan RU untuk tiap jenis kerja: cold work (survei), work-at-height (tiang/rooftop), hot work (pengeboran/energized di area terklasifikasi).</li>
+      <li><b>Konfirmasi klasifikasi area</b> tiap titik pasang ke HSE RU sebelum kerja. Di zona terklasifikasi gunakan alat/perangkat <b>Ex/Intrinsically-Safe</b>; energize &amp; commissioning di area aman atau di bawah izin energized-work — selaras SPK sertifikasi hazardous area.</li>
+      <li><b>Gas test</b> sebelum &amp; selama kerja; monitoring kontinu dengan <b>personal 4-gas detector</b> (LEL / O₂ / H₂S / CO). Hentikan kerja bila LEL melewati ambang izin.</li>
+      <li><b>Kompetensi:</b> personel bersertifikat untuk kerja di ketinggian, kelistrikan, dan penanganan gas. <b>Toolbox talk</b> + sign-on JSA tiap shift.</li>
+      <li><b>Escort &amp; komunikasi RU;</b> radio/HP check-in; <b>dilarang lone working</b> di ketinggian &amp; zona terklasifikasi.</li>
+      <li><b>SIMOPS:</b> koordinasi dengan control room sebelum &amp; selama kerja yang dapat memicu alarm/operasi.</li>
+      <li><b>APD dasar:</b> coverall katun anti-statik, safety helmet, safety shoes, safety glasses; ditambah per tugas (harness, sarung tangan, ear/dust protection, H₂S escape set).</li>
+      <li><b>Cuaca &amp; heat stress:</b> batas kecepatan angin untuk kerja di ketinggian; hidrasi &amp; rotasi kerja (iklim tropis Cilacap).</li>
+      <li><b>Housekeeping &amp; limbah:</b> area bersih, no barang tertinggal di ketinggian, penutupan izin setelah selesai.</li>
+    </ul>
+    <div class="matrix">
+      <span class="mono" style="font-size:11px;color:var(--ink-soft);align-self:center">Matriks risiko (L×S):</span>
+      <span class="mband low">Rendah 1–4</span><span class="mband med">Sedang 5–9</span>
+      <span class="mband high">Tinggi 10–15</span><span class="mband ext">Ekstrem 16–25</span>
+    </div>
+  </div>
+
+  <h2 class="sec"><span class="n">B</span> Lembar JSA per Aktivitas</h2>
+  <div class="sec-line"></div>
+  <div id="jsas"></div>
+
+  <h2 class="sec"><span class="n">C</span> Rencana Tanggap Darurat (ERP)</h2>
+  <div class="sec-line"></div>
+  <div class="emg">
+    <div class="emgcard alarm"><h3>🟥 Alarm Gas / Kebocoran</h3><ul>
+      <li>Hentikan pekerjaan, matikan/isolasi sumber nyala.</li>
+      <li>Evakuasi <b>ke arah upwind</b> menuju muster point.</li>
+      <li>Lapor control room RU &amp; HSE; jangan kembali sebelum area dinyatakan aman.</li></ul></div>
+    <div class="emgcard fire"><h3>🟧 Kebakaran</h3><ul>
+      <li>Bunyikan alarm, evakuasi via jalur aman.</li>
+      <li>APAR sesuai kelas — <b>baterai lithium: media Class D/khusus</b>.</li>
+      <li>Serahkan ke tim ERT RU bila di luar kendali.</li></ul></div>
+    <div class="emgcard injury"><h3>🟨 Cedera / Jatuh dari Ketinggian</h3><ul>
+      <li>Aktifkan <b>rescue plan</b> kerja di ketinggian (rescue &lt; batas waktu suspensi).</li>
+      <li>P3K, jangan pindahkan korban cedera tulang tanpa tenaga medis.</li>
+      <li>Hubungi medical RU &amp; muster.</li></ul></div>
+    <div class="emgcard contact"><h3>📞 Kontak Darurat (isi per RU)</h3><ul>
+      <li>Control Room RU IV: __________</li>
+      <li>HSE / ERT RU IV: __________</li>
+      <li>Medical / Klinik: __________</li>
+      <li>Project Lead LGU: __________</li>
+      <li>Muster point terdekat: __________</li></ul></div>
+  </div>
+
+  <h2 class="sec"><span class="n">D</span> Persetujuan &amp; Tanda Tangan</h2>
+  <div class="sec-line"></div>
+  <p class="lead">JSA berlaku setelah ditinjau &amp; disahkan seluruh pihak berikut. Personel pelaksana wajib sign-on pada toolbox talk sebelum bekerja.</p>
+  <div class="sign">
+    <div class="sigcell"><div class="role">Disusun</div><div class="who">Tim LGU / ITB</div><div class="sigline"></div><div class="sigcap">Nama · Tanda tangan · Tgl</div></div>
+    <div class="sigcell"><div class="role">Ditinjau</div><div class="who">Field / Engineering Lead</div><div class="sigline"></div><div class="sigcap">Nama · Tanda tangan · Tgl</div></div>
+    <div class="sigcell"><div class="role">Disahkan HSE</div><div class="who">HSE RU IV Cilacap</div><div class="sigline"></div><div class="sigcap">Nama · Tanda tangan · Tgl</div></div>
+    <div class="sigcell"><div class="role">Permit Issuer</div><div class="who">Area Authority RU IV</div><div class="sigline"></div><div class="sigcap">Nama · Tanda tangan · Tgl</div></div>
+  </div>
+
+  <footer>
+    Kerangka JSA/TRA disusun sebagai input percepatan berdasarkan dokumen proyek GLD (Deck Kick-Off — HSE Philosophy, Permit To Work Plan, Task Risk Assessment; Dokumen Kebutuhan Peralatan per RU; MoM RU IV Cilacap). Nilai risiko bersifat indikatif &amp; wajib divalidasi tim HSE RU. DRAFT Rev 0 · 23 Juli 2026 · bukan dokumen keselamatan yang telah disahkan.
+  </footer>
+</div>
+
+<script>
+function band(v){return v<=4?'low':v<=9?'med':v<=15?'high':'ext';}
+const JSA=[
+ {code:'JSA-01',title:'Survei Lapangan & Walkdown RF',meta:'Cold work permit · gas monitoring kontinu · escort RU',
+  rows:[
+   ['Mobilisasi & masuk area RU','Akses tanpa izin; disorientasi area asing; lalu-lintas plant',2,3,'Safety induction RU; visitor/ID; escort RU; PTW cold work; ikuti jalur pejalan & rambu','Coverall, helm, sepatu, kacamata','LGU + Escort RU',1,2],
+   ['Walkdown area proses (zona gas)','Atmosfer mudah terbakar/toksik (H₂, LPG, H₂S); paparan',4,5,'Gas test kontinu (4-gas); stop bila LEL > ambang izin; hindari sumber nyala; jaga jalur aman; upwind','+ 4-gas detector, H₂S escape set','HSE RU + Field',2,4],
+   ['Uji RF LoRa (perangkat elektronik portabel)','Perangkat non-Ex sebagai sumber nyala di area terklasifikasi',4,5,'Konfirmasi zona ke HSE; gunakan perangkat Ex/IS atau uji di area aman; izin energized bila di zona','+ per klasifikasi','HSE RU + Jaringan',2,4],
+   ['Penandaan titik & ukur ketinggian','Kejatuhan benda; kerja dekat struktur tinggi',2,3,'Barikade; dilarang kerja di bawah beban tergantung; spotter','Helm, sarung tangan','Field',1,2],
+   ['Dokumentasi foto','Kamera non-Ex sebagai sumber nyala',3,5,'Izin foto RU; kamera Ex atau foto dari area aman','—','HSE RU',1,3],
+   ['Demobilisasi','Barang tertinggal; izin tidak ditutup',1,2,'Housekeeping; lapor selesai; tutup PTW','—','LGU',1,1]
+  ]},
+ {code:'JSA-02',title:'Instalasi Cluster Head & Tiang 6 m (Kerja di Ketinggian)',meta:'Work-at-height + hot work permit · rescue plan · batas angin',
+  rows:[
+   ['Inspeksi alat angkat, tangga, harness','Alat rusak → kegagalan saat kerja',3,4,'Inspeksi pre-use bertag; alat tersertifikasi; singkirkan alat cacat','Sarung tangan','Field Lead',1,3],
+   ['Manual handling tiang & panel surya','Cedera punggung; terjepit',3,3,'Team-lift; teknik angkat benar; batas beban; sarung tangan','Helm, sarung tangan, sepatu','Field',2,2],
+   ['Base plate & anchor (pengeboran)','Spark/hot work di area terklasifikasi; debu; bising',4,5,'Hot work permit + gas test; exclusion zone; masker debu; pelindung telinga; fire watch','+ dust mask, ear protection','HSE RU + Field',2,4],
+   ['Mendirikan tiang 6 m','Jatuh dari ketinggian; tiang roboh; kontak overhead line',4,5,'Work-at-height permit; tag line; exclusion zone; cek jarak overhead; stop bila angin > batas','Full-body harness twin lanyard','HSE RU + Field',2,4],
+   ['Pasang CH & bracket solar di atas','Jatuh personel; jatuh alat/material',4,5,'100% tie-off ke anchor sah; tool lanyard; MEWP/scaffold bila perlu; rescue plan siap','Harness, tool lanyard, helm bertali','Field (competent)',2,4],
+   ['Wiring solar & charge controller','Listrik DC/arc; baterai 18650 (short/thermal)','3','4','LOTO; insulated tools; tutup panel PV saat wiring; cegah short; penanganan baterai benar','Sarung tangan insulasi','Elektrikal',1,3],
+   ['Grounding & sealing IP66/67','Grounding buruk; ingress air',2,3,'Verifikasi kontinuitas grounding; cable gland IP68 terpasang','—','Elektrikal',1,2]
+  ]},
+ {code:'JSA-03',title:'Pemasangan Sensor Node & Elektrikal/Kabel',meta:'Cold/energized-work permit · gas test · Ex compliance',
+  rows:[
+   ['Pasang enclosure sensor di titik kritis (valve/flange)','Dekat sumber kebocoran; atmosfer eksplosif',4,5,'Gas test; PTW; kepatuhan Ex; jangan ganggu sumber potensi bocor; koordinasi operasi','Coverall AS, helm, 4-gas','HSE RU + Field',2,4],
+   ['Penarikan kabel & conduit','Trip hazard; manual handling; kerja dekat piping',2,3,'Routing rapi & di-clamp; gland IP68; barikade; housekeeping','Sarung tangan','Field',1,2],
+   ['Koneksi PSU 24/5 VDC','Sengatan listrik; arc',3,4,'LOTO; verifikasi dead sebelum sentuh; insulated tools','Sarung tangan insulasi','Elektrikal',1,3],
+   ['Energize & commissioning','Spark saat energize di zona terklasifikasi',4,5,'Energize di area aman atau izin energized-work; pastikan no-gas via gas test','+ per klasifikasi','HSE RU + Elektrikal',2,4],
+   ['Uji fungsional & alarm','False trigger mengganggu operasi',2,3,'Koordinasi control room; jadwalkan; kelola SIMOPS','—','Field + Control Room',1,2]
+  ]},
+ {code:'JSA-04',title:'Pengujian Gas & Kalibrasi',meta:'Ventilasi · no ignition · handling tabung bertekanan',
+  rows:[
+   ['Handling tabung gas uji (LPG/test gas)','Tekanan tinggi; kebocoran; mudah terbakar',4,5,'Tabung tegak & terikat; regulator sesuai; leak check air sabun; no ignition; area berventilasi','Sarung tangan, kacamata','HSE + Tim Uji',2,4],
+   ['Aliran gas ke chamber/sensor','Pelepasan gas mudah terbakar; penumpukan',4,5,'Ventilasi/exhaust; gas monitor; volume minimum; dilarang merokok/hot work','+ 4-gas detector','Tim Uji',2,4],
+   ['Purging & pembuangan','Sisa gas terperangkap',3,4,'Purge udara/inert; buang ke area aman berventilasi','—','Tim Uji',1,3],
+   ['Penyimpanan tabung','Jatuh; paparan panas; dekat oxidizer',2,4,'Tempat berventilasi; tegak terikat; jauh dari oxidizer & sumber panas','—','Tim Uji',1,2]
+  ]}
+];
+(function(){
+  const c=document.getElementById('jsas');
+  JSA.forEach(j=>{
+    const card=document.createElement('div');card.className='card';
+    let rows='';
+    j.rows.forEach((r,i)=>{
+      const ri=(+r[2])*(+r[3]), rr=(+r[6])*(+r[7]);
+      rows+=`<tr><td class="no">${i+1}</td><td class="step">${r[0]}</td><td>${r[1]}</td>
+        <td><span class="risk ${band(ri)}">${ri}</span></td>
+        <td>${r[4]}</td><td class="apd">${r[5]}</td><td class="pj">${r[6]}</td>
+        <td><span class="risk ${band(rr)}">${rr}</span></td></tr>`;
+    });
+    card.innerHTML=`<div class="jsa-title">${j.code} · ${j.title}</div>
+      <div class="jsa-meta">${j.meta}</div>
+      <div class="tbl-scroll"><table class="jsa">
+        <thead><tr><th>#</th><th>Langkah Kerja</th><th>Potensi Bahaya</th><th>Risiko Awal</th><th>Pengendalian</th><th>APD Khusus</th><th>PJ</th><th>Risiko Sisa</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>`;
+    c.appendChild(card);
+  });
+})();
+(function(){const b=document.getElementById('themebtn');b.addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const sd=window.matchMedia('(prefers-color-scheme:dark)').matches;const now=cur?cur:(sd?'dark':'light');
+  document.documentElement.setAttribute('data-theme',now==='dark'?'light':'dark');});})();
+</script>

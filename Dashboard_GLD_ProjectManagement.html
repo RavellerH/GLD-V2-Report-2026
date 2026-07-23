@@ -318,7 +318,7 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
       <span class="sc g">✓ Uji fungsional + AI selesai</span>
       <span class="sc g">✓ Failover CH terbukti</span>
       <span class="sc g">✓ TCN LPG ≥92%</span>
-      <span class="sc w">⚠ 3 blocker teknis</span>
+      <span class="sc w">⚠ Autonomi baterai GLD</span>
       <span class="sc w">⚠ Gate TRA/JSA</span>
     </div>
   </section>
@@ -672,7 +672,7 @@ const RU=[
 const WSW=[
   {n:'Jaringan LoRa & Cluster Head',w:20,act:65,plan:85,st:'warn'},
   {n:'AI & Sensor MQ (TCN LPG)',w:22,act:52,plan:70,st:'warn'},
-  {n:'Catu Daya & Manajemen Energi',w:15,act:40,plan:72,st:'crit'},
+  {n:'Catu Daya & Manajemen Energi',w:15,act:50,plan:72,st:'crit'},
   {n:'Gas Chamber, Hardware & QC',w:12,act:35,plan:62,st:'warn'},
   {n:'Perangkat Lunak, Server & Dashboard',w:13,act:58,plan:60,st:'good'},
   {n:'Integrasi Sistem (GLD-CH-GW-Server)',w:10,act:92,plan:45,st:'good'},
@@ -719,6 +719,7 @@ const FEED=[
   {d:'23 Jul',t:'Repo PertaminaGLD — firmware & Operator Hub (aktif)',b:'Commit terbaru: firmware GLD/CH/GW + <b>Operator Hub workflows</b>, reliability &amp; test coverage; manajemen daya <b>TPL5010</b> &amp; algoritma nulling.',tag:'Repo'},
   {d:'20 Jul',t:'Simulasi siklus operasi diunggah ke board GLD',b:'Warm-up → akuisisi → inferensi → transmit LoRa. <b>ON 60 s / OFF 100 s / WAKE 160 s</b>. Arahan: <b>ganti/modifikasi DC converter</b>; modifikasi baterai ditahan.',tag:'Fahmi'},
   {d:'16 Jul',t:'Uji fungsional GLD-CH-GW-Server hingga inferensi AI — SELESAI',b:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end <b>termasuk inferensi AI di edge</b>. Uji fungsional sistem terintegrasi tuntas — jauh sebelum jadwal integrasi resmi (Sep).',tag:'Milestone',m:true},
+  {d:'16 Jul',t:'Analisis daya sistem · uji mesh · uji downlink',b:'<b>Budget daya terkuantifikasi:</b> GLD 7P (28Ah) runtime 1,76 hari; 30 hari batt-only butuh ~120 sel → opsi realistis perpanjang OFF ~63 mnt / solar. <b>CH dgn 2 panel surya surplus 1,5–4,4 Wh/hari</b> (1 panel defisit). Uji <b>mesh CH</b> &amp; <b>downlink GLD</b> (server→node) + perbaikan firmware. Catatan: TPL5010 belum optimal.',tag:'Milestone',m:true},
   {d:'16 Jul',t:'Temuan sensor & aplikasi UI',b:'Respons sensor berkorelasi positif pada <b>CO₂</b>, tidak pada <b>O₂</b>. Baseline berbeda per sensor → <b>threshold per-MQ</b>. Aplikasi UI GLD dibuat (capture/save/download).',tag:'Milestone',m:true},
   {d:'15 Jul',t:'Model TCN per-sensor selesai (Board12)',b:'8 model TCN independen (1/sensor), semua <b>≥92% akurasi</b> prediksi LPG 5 s ke depan. Terbaik <b>MQ4V 93,9%</b> (F1 0,923). Ekspor TFLite int8 ~72 KB untuk edge.',tag:'ML',ml:true},
   {d:'15 Jul',t:'Akuisisi dataset sensor',b:'Sesi Clean Air, LPG, O₂, CO₂ pada GLD-F001 — total <b>14.477 sampel</b> di 8 kanal MQ.',tag:''},
@@ -728,6 +729,7 @@ const FEED=[
   {d:'9 Jul',t:'Rantai komunikasi GLD-CH-GW-Server tersambung',b:'Data mengalir penuh <b>Node → CH → GW → server</b> (MQTT) — rantai komunikasi end-to-end terbukti, dasar untuk uji fungsional terintegrasi.',tag:'Milestone',m:true},
   {d:'9 Jul',t:'',b:'Pengisian belum optimal (Vp 7,25 V). Lokasi hanya optimal 10:00–13:00 → rekomendasi pindah ke rooftop.',tag:''},
   {d:'6 Jul',t:'Uji komunikasi 2 Cluster Head',b:'Charging 08:00–16:00 menaikkan baterai 3,0→3,4 V. Failover CH otomatis terbukti (parent pindah saat CH mati). PJ chamber didapatkan.',tag:'Milestone',m:true},
+  {d:'6–8 Jul',t:'Uji ketahanan baterai CH (LitoKala)',b:'1 baterai LitoKala supply board CH <b>~40 jam</b> (transmit 10 s); 3 baterai ~33 jam. Lapangan (dgn solar): CH3 hidup 8 hari (baterai awal 4,0 V), CH5 5 hari — defisit energi kecil pada 1 panel.',tag:'Daya'},
   {d:'26 Jun',t:'',b:'Temuan: <b>antena LoRa 6 m maks ±100 m</b> di kondisi obstruksi (spec target 1–2 km LOS). Model TCNN mulai (prediksi 5 s dari 5 s).',tag:''},
   {d:'18 Jun',t:'Prinsip pemodelan AI ditetapkan',b:'Pergeseran ke <b>fingerprint 8-sensor</b> &amp; pola relatif (transien/stasioner/saturasi). Proyek ditegaskan setara TRL-7.',tag:''},
   {d:'12 Jun',t:'Kick-Off Meeting Pertamina',b:'Baseline timeline <b>9 bulan</b> disepakati; scope 6 RU (RU II–VII); target implementasi Des; field test RU-VII Kasim; instalasi via pihak ke-3 + koordinasi HSE.',tag:'Milestone',m:true}
@@ -754,7 +756,7 @@ const GASES=[['Carbon Dioxide',6507],['LPG',5655],['Clean Air',616],['Oksigen',2
 
 /* ---------- BLOCKERS ---------- */
 const BLK=[
-  {t:'Catu Daya',h:'Mode baterai belum menyuplai 8 heater MQ',d:'Terukur ±2,43 W vs kebutuhan ±6 W. Tanpa kepastian ini, skema duty-cycling &amp; autonomi lapangan tak dapat divalidasi.',m:'2,43 W / 6 W'},
+  {t:'Catu Daya',h:'Autonomi baterai GLD jauh di bawah target 30 hari',d:'Draw ON terverifikasi <b>5,75 W</b> (5V×1,15A). Dengan baterai 7P (28Ah) &amp; duty 29%, runtime hanya <b>1,76 hari</b>; 30 hari batt-only butuh ~120 sel (tak realistis). TPL5010 belum optimal — board masih ~0,4 V &amp; mencuplik data saat "off". CH sendiri teratasi dgn 2 panel (surplus).',m:'7P = 1,76 hari / 30 hari'},
   {t:'Elektronik',h:'DC converter perlu diganti/dimodifikasi',d:'Menahan finalisasi desain catu daya. Modifikasi baterai ditahan sementara; fokus dialihkan.',m:'Arahan 20 Jul'},
   {t:'Jaringan',h:'Jangkauan LoRa jauh di bawah target spec',d:'Aktual ±100 m (obstruksi) – ±340 m (LOS) vs spec deck 1–2 km LOS. Berpotensi menaikkan jumlah CH signifikan (mis. RU VII butuh 11 CH).',m:'~100 m / 1–2 km'}
 ];
@@ -856,15 +858,18 @@ const DONE=[
   ['<b>PCB GLD v1 &amp; v2</b> terverifikasi; board & ADC OK'],
   ['<b>Dashboard</b> (Next.js/MapLibre) default <b>RU IV Cilacap</b> + device CRUD'],
   ['Karakterisasi RF LoRa &amp; profil beban daya terukur'],
-  ['Simulasi <b>duty-cycle</b> di board (ON 60 / OFF 100 / WAKE 160 s)']
+  ['Simulasi <b>duty-cycle</b> di board (ON 60 / OFF 100 / WAKE 160 s)'],
+  ['<b>CH:</b> catu daya teratasi dgn <b>2 panel surya</b> (surplus 1,5–4,4 Wh/hari)'],
+  ['<b>Uji downlink GLD</b> (server→node) &amp; <b>uji mesh CH</b> + perbaikan firmware'],
+  ['Budget daya GLD <b>terkuantifikasi</b> (runtime per konfigurasi baterai)']
 ];
 const OUT=[
-  ['Mode baterai <b>2,43 W</b> vs kebutuhan 6 W — belum menyuplai 8 heater MQ','blk','Blocker'],
+  ['<b>Autonomi baterai GLD</b> 30 hari — 7P hanya 1,76 hari; perlu perpanjang OFF ~63 mnt / solar','blk','Blocker'],
+  ['<b>TPL5010</b> belum optimal — board ~0,4 V &amp; cuplik data saat "off"','blk','Blocker'],
   ['<b>DC converter</b> perlu diganti/dimodifikasi','blk','Blocker'],
   ['Jangkauan LoRa <b>~100 m</b> vs spec 1–2 km LOS','blk','Blocker'],
   ['Penyusunan <b>TRA/JSA</b> — gate eksekusi site survey','gate','Gate'],
   ['Eksekusi <b>site survey fisik</b> RU IV Cilacap','gate','Gate'],
-  ['Data solar-baterai <b>10/30 hari</b> — validasi energy budget','risk','Risiko'],
   ['Investigasi <b>konsistensi akuisisi data</b>','risk','Risiko'],
   ['Konsolidasi <b>3 repositori</b> jadi satu repo utama','risk','Risiko'],
   ['Keputusan <b>solder vs soket</b> sensor','risk','Risiko']

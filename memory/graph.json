@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "project": "Gas Leak Detection (GLD) Tahap 2",
+    "as_of": "2026-07-23",
+    "scope_active": "Pilot RU IV Cilacap",
+    "note": "Machine-readable knowledge graph. Update bersama memory/graph.md."
+  },
+  "nodes": [
+    { "id": "org:LGU", "type": "org", "label": "LAPI Ganesha Utama" },
+    { "id": "org:ITB-IoT", "type": "org", "label": "Lab IoT ITB" },
+    { "id": "org:ITB-Fisika", "type": "org", "label": "Lab Fisika ITB" },
+    { "id": "org:Pertamina", "type": "org", "label": "Pertamina Patra Niaga" },
+    { "id": "proj:GLD", "type": "project", "label": "GLD Tahap 2" },
+
+    { "id": "sub:net", "type": "subsystem", "label": "Jaringan LoRa & CH", "progress": 65 },
+    { "id": "sub:ai", "type": "subsystem", "label": "AI & Sensor MQ", "progress": 52 },
+    { "id": "sub:power", "type": "subsystem", "label": "Catu Daya & Energi", "progress": 50 },
+    { "id": "sub:chamber", "type": "subsystem", "label": "Chamber/HW/QC", "progress": 35 },
+    { "id": "sub:sw", "type": "subsystem", "label": "Software/Server/Dashboard", "progress": 58 },
+    { "id": "sub:integ", "type": "subsystem", "label": "Integrasi Sistem", "progress": 92 },
+    { "id": "sub:ruprep", "type": "subsystem", "label": "Survei RU / HSE", "progress": 40 },
+
+    { "id": "dev:node", "type": "device", "label": "GLD Node (ESP32-S3, 8x MQ, TFLite)" },
+    { "id": "dev:ch", "type": "device", "label": "Cluster Head" },
+    { "id": "dev:gw", "type": "device", "label": "Gateway" },
+    { "id": "dev:server", "type": "device", "label": "PC Server (Node-RED + Operator Hub)" },
+    { "id": "dev:dashboard", "type": "device", "label": "Dashboard (Next.js/MapLibre)" },
+    { "id": "dev:tpl5010", "type": "hardware", "label": "TPL5010 timer" },
+    { "id": "dev:bq25185", "type": "hardware", "label": "BQ25185 charger" },
+    { "id": "dev:tps63020", "type": "hardware", "label": "TPS63020 buck-boost" },
+
+    { "id": "repo:fe", "type": "repo", "label": "gasleakdetectionV2-April", "updated": "2026-07-13" },
+    { "id": "repo:srv", "type": "repo", "label": "PertaminaGLD", "updated": "2026-07-23" },
+    { "id": "repo:ml", "type": "repo", "label": "gas-leak-ml-chamber-system", "updated": "2026-06-24" },
+
+    { "id": "model:tcn", "type": "model", "label": "TCN LPG 8-model (>=92%)" },
+
+    { "id": "ru:2", "type": "ru", "label": "RU II Dumai", "status": "roadmap", "sensor": 10, "ch": 3, "gw": 1 },
+    { "id": "ru:3", "type": "ru", "label": "RU III Plaju", "status": "roadmap", "sensor": 4, "ch": 3, "gw": 1 },
+    { "id": "ru:4", "type": "ru", "label": "RU IV Cilacap", "status": "active-pilot", "sensor": 3, "ch": 2, "gw": 1 },
+    { "id": "ru:5", "type": "ru", "label": "RU V Balikpapan", "status": "roadmap", "sensor": 2, "ch": 1, "gw": 1 },
+    { "id": "ru:6", "type": "ru", "label": "RU VI Balongan", "status": "roadmap", "sensor": 4, "ch": 2, "gw": 2 },
+    { "id": "ru:7", "type": "ru", "label": "RU VII Kasim/Sorong", "status": "roadmap-fieldtest", "sensor": 5, "ch": 11, "gw": 1 },
+
+    { "id": "ms:kickoff", "type": "milestone", "label": "Kick-off Pertamina", "date": "2026-06-12", "done": true },
+    { "id": "ms:2ch", "type": "milestone", "label": "Uji 2 CH", "date": "2026-07-06", "done": true },
+    { "id": "ms:comms", "type": "milestone", "label": "Rantai komunikasi GLD-CH-GW-Server", "date": "2026-07-09", "done": true },
+    { "id": "ms:tcn", "type": "milestone", "label": "TCN LPG >=92%", "date": "2026-07-15", "done": true },
+    { "id": "ms:funcai", "type": "milestone", "label": "Uji fungsional + inferensi AI SELESAI", "date": "2026-07-16", "done": true },
+    { "id": "ms:power", "type": "milestone", "label": "Analisis daya + mesh + downlink", "date": "2026-07-16", "done": true },
+    { "id": "ms:install", "type": "milestone", "label": "Field installation (target)", "date": "2026-12-01", "done": false },
+
+    { "id": "blk:power", "type": "blocker", "label": "Autonomi baterai GLD < 30 hari (7P=1,76 hari)" },
+    { "id": "blk:tpl", "type": "blocker", "label": "TPL5010 belum optimal (~0,4V saat off)" },
+    { "id": "blk:conv", "type": "blocker", "label": "DC converter perlu diganti" },
+    { "id": "blk:lora", "type": "blocker", "label": "LoRa ~100m vs 1-2km" },
+    { "id": "gate:jsa", "type": "gate", "label": "TRA/JSA belum disusun" },
+
+    { "id": "deliv:dashboard", "type": "deliverable", "label": "Dashboard proyek (HTML)" },
+    { "id": "deliv:progres", "type": "deliverable", "label": "Laporan progres per tanggal" },
+    { "id": "deliv:jsa", "type": "deliverable", "label": "Draft JSA/HSE Cilacap" }
+  ],
+  "edges": [
+    { "s": "org:LGU", "t": "proj:GLD", "r": "pelaksana" },
+    { "s": "org:ITB-IoT", "t": "proj:GLD", "r": "engineering/AI" },
+    { "s": "org:ITB-Fisika", "t": "proj:GLD", "r": "solar/energi" },
+    { "s": "org:Pertamina", "t": "proj:GLD", "r": "klien-partner" },
+
+    { "s": "proj:GLD", "t": "sub:net", "r": "punya" },
+    { "s": "proj:GLD", "t": "sub:ai", "r": "punya" },
+    { "s": "proj:GLD", "t": "sub:power", "r": "punya" },
+    { "s": "proj:GLD", "t": "sub:chamber", "r": "punya" },
+    { "s": "proj:GLD", "t": "sub:sw", "r": "punya" },
+    { "s": "proj:GLD", "t": "sub:integ", "r": "punya" },
+    { "s": "proj:GLD", "t": "sub:ruprep", "r": "punya" },
+
+    { "s": "dev:node", "t": "dev:ch", "r": "LoRa-STAR-915MHz" },
+    { "s": "dev:ch", "t": "dev:gw", "r": "LoRa-MESH" },
+    { "s": "dev:gw", "t": "dev:server", "r": "WiFi/4G-MQTT" },
+    { "s": "dev:server", "t": "dev:dashboard", "r": "GraphQL" },
+    { "s": "dev:server", "t": "dev:node", "r": "downlink" },
+
+    { "s": "repo:ml", "t": "dev:node", "r": "edge-ML" },
+    { "s": "repo:srv", "t": "dev:node", "r": "firmware" },
+    { "s": "repo:srv", "t": "dev:ch", "r": "firmware" },
+    { "s": "repo:srv", "t": "dev:gw", "r": "firmware" },
+    { "s": "repo:srv", "t": "dev:server", "r": "node-red/operator-hub" },
+    { "s": "repo:fe", "t": "dev:dashboard", "r": "frontend" },
+    { "s": "repo:fe", "t": "dev:server", "r": "backend-graphql" },
+
+    { "s": "dev:node", "t": "model:tcn", "r": "menjalankan" },
+    { "s": "sub:power", "t": "dev:tpl5010", "r": "pakai" },
+    { "s": "sub:power", "t": "dev:bq25185", "r": "pakai" },
+    { "s": "sub:power", "t": "dev:tps63020", "r": "pakai" },
+
+    { "s": "ru:4", "t": "proj:GLD", "r": "pilot-aktif" },
+
+    { "s": "blk:power", "t": "ms:install", "r": "menahan" },
+    { "s": "blk:tpl", "t": "ms:install", "r": "menahan" },
+    { "s": "blk:conv", "t": "ms:install", "r": "menahan" },
+    { "s": "blk:lora", "t": "ms:install", "r": "menahan" },
+    { "s": "gate:jsa", "t": "sub:ruprep", "r": "menahan-site-survey" },
+
+    { "s": "blk:power", "t": "sub:power", "r": "bagian-dari" },
+    { "s": "blk:tpl", "t": "sub:power", "r": "bagian-dari" },
+    { "s": "blk:lora", "t": "sub:net", "r": "bagian-dari" },
+
+    { "s": "ms:funcai", "t": "sub:integ", "r": "menyelesaikan" },
+    { "s": "model:tcn", "t": "sub:ai", "r": "bagian-dari" }
+  ]
+}

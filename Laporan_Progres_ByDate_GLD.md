@@ -98,6 +98,10 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 - Charging 08:00–16:00 menaikkan baterai **3,0 → 3,4 V** (±20%).
 - Mahasiswa PJ penyelesaian chamber didapatkan.
 
+### 6–8 Juli — Uji Ketahanan Baterai CH (LitoKala) — *Daya*
+- 1 baterai LitoKala mampu supply board CH **~40 jam** (periode transmit 10 dtk); 3 baterai ~33 jam.
+- Lapangan (dengan solar): **CH3 hidup 8 hari** (baterai awal 4,0 V), CH5 5 hari — teridentifikasi defisit energi kecil pada 1 panel.
+
 ### 9 Juli — Rantai Komunikasi GLD–CH–GW–Server Tersambung — *Milestone ✅*
 - Data mengalir penuh **Node → CH → GW → server** (MQTT) — rantai komunikasi end-to-end terbukti, menjadi dasar uji fungsional terintegrasi.
 
@@ -122,6 +126,21 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 
 ### 16 Juli — Uji Fungsional Sistem hingga Inferensi AI — *Milestone ✅*
 - Rantai penuh **sensor → CH → GW → server** berjalan end-to-end **termasuk inferensi AI di edge**. **Uji fungsional sistem terintegrasi (GLD-CH-GW-Server) tuntas** — jauh sebelum jadwal integrasi resmi (September).
+
+### 16 Juli — Analisis Daya Sistem GLD & CH, Uji Mesh & Downlink — *Milestone ✅*
+**Budget daya GLD node (baterai 7P = 7×4000 mAh = 28 Ah, ~70,4 Wh usable):**
+- Draw ON terverifikasi **5,75 W** (5 V × 1,15 A) — mengklarifikasi anomali "2,43 W" sebelumnya (pengukuran tak lengkap).
+- Duty 29% (T_ON 65 s / T_OFF 159 s) → runtime **1,76 hari**. Variasi T_ON: 10 s → 8,63 hari; 30 s → 3,22 hari; 60 s → 1,86 hari.
+- Variasi jumlah baterai: 7P 1,76 hari · 30P 7,54 hari · **120P baru ~30,16 hari**.
+- **Target 30 hari batt-only butuh ~120 sel (tidak realistis).** Opsi paling masuk akal: **perpanjang OFF ~63 menit** (ON tetap 65 s) atau berbasis solar.
+- ⚠️ Catatan: baterai LitoKala banyak yang hanya 2500 mAh; **TPL5010 belum optimal** — saat non-aktif board masih ~0,4 V & tetap mencuplik data.
+
+**Cluster Head:**
+- Konsumsi CH **84 mA** (ESP32-S3 58 mA + LoRa 2×6,8 mA + dll) ≈ 7,56 Wh/hari.
+- 1 panel surya: defisit **−0,66 Wh/hari**. **2 panel surya: surplus 1,5–4,4 Wh/hari** (Isc 1,29 A, Pmax ~6,51 W) — kebutuhan energi CH teratasi.
+- Power path: Panel → charger **BQ25185** → baterai 18650 → **TPS63020** 3,3 V → beban CH.
+
+**Jaringan:** Uji **mesh Cluster Head** & **uji downlink GLD** (server→node) dilakukan + perbaikan firmware downlink.
 
 ### 16 Juli — Temuan Sensor & Aplikasi UI
 - Respons sensor berkorelasi positif pada **CO₂**, tidak pada **O₂** (O₂ menggantikan gas terdeteksi).
@@ -150,7 +169,7 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 
 | # | Blocker | Metrik | Dampak |
 |---|---|---|---|
-| 1 | Mode baterai belum menyuplai 8 heater MQ | 2,43 W / 6 W | GLD tak dapat operasi mandiri di lapangan |
+| 1 | Autonomi baterai GLD di bawah target 30 hari (draw ON 5,75 W terverifikasi; 7P = 1,76 hari; TPL5010 belum optimal) | 7P = 1,76 hari / 30 hari | GLD tak dapat mandiri 30 hari — perlu perpanjang OFF / solar |
 | 2 | DC converter perlu diganti/dimodifikasi | Arahan 20 Jul | Menahan finalisasi desain catu daya |
 | 3 | Jangkauan LoRa jauh di bawah spec | ~100 m / 1–2 km | Menaikkan jumlah CH & biaya deployment |
 

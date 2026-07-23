@@ -174,7 +174,7 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
   <div class="callout">
     <h3>⚠ Blocker Kritis Aktif (per 20 Juli)</h3>
     <table>
-      <tr><td>Mode baterai belum menyuplai 8 heater MQ</td><td class="m">2,43 W / 6 W</td></tr>
+      <tr><td>Autonomi baterai GLD di bawah target 30 hari (TPL5010 belum optimal)</td><td class="m">7P = 1,76 hari</td></tr>
       <tr><td>DC converter perlu diganti/dimodifikasi</td><td class="m">Arahan 20 Jul</td></tr>
       <tr><td>Jangkauan LoRa di bawah spec</td><td class="m">~100 m / 1–2 km</td></tr>
     </table>
@@ -227,6 +227,8 @@ const P2=[
    body:'Source code tersebar (GLD &amp; AI · jaringan · server) → <b>rencana konsolidasi</b> satu repo utama.'},
   {d:'6 Jul',title:'Uji komunikasi 2 Cluster Head',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['power','Daya']],
    body:'Charging 08:00–16:00 menaikkan baterai <b>3,0 → 3,4 V</b> (±20%). Mahasiswa PJ chamber didapatkan.'},
+  {d:'6–8 Jul',title:'Uji ketahanan baterai CH (LitoKala)',stat:['temuan','Temuan'],tags:[['power','Daya']],
+   body:'1 baterai LitoKala supply board CH <b>~40 jam</b> (transmit 10 s); 3 baterai ~33 jam. Lapangan (dgn solar): CH3 8 hari (awal 4,0 V), CH5 5 hari — defisit energi kecil pada 1 panel.'},
   {d:'9 Jul',title:'Rantai komunikasi GLD-CH-GW-Server tersambung',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['sw','Software']],
    body:'Data mengalir penuh <b>Node → CH → GW → server</b> (MQTT) — rantai komunikasi end-to-end terbukti, dasar uji fungsional terintegrasi.'},
   {d:'9 Jul',title:'Kinerja solar',stat:['temuan','Temuan'],tags:[['power','Daya']],
@@ -241,6 +243,8 @@ const P2=[
    body:'Dataset GLD-F001: Clean Air, LPG, O₂, CO₂ — <b>14.477 sampel</b> (8 kanal MQ, ~2,7 j). <b>Model TCN per-sensor selesai:</b> 8 model, semua <b>≥92% akurasi</b> prediksi LPG 5 dtk ke depan; terbaik <b>MQ4V 93,9%</b> (F1 0,923). Ekspor TFLite int8 ~72 KB.'},
   {d:'16 Jul',title:'Uji fungsional GLD-CH-GW-Server hingga inferensi AI — SELESAI',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['ml','AI/ML'],['sw','Software']],
    body:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end <b>termasuk inferensi AI di edge</b>. Uji fungsional sistem terintegrasi tuntas — jauh sebelum jadwal integrasi resmi (Sep).'},
+  {d:'16 Jul',title:'Analisis daya sistem · uji mesh · uji downlink',stat:['milestone','Milestone'],tags:[['power','Daya'],['net','Jaringan']],
+   body:'<b>Budget daya terkuantifikasi:</b> GLD 7P (28Ah) runtime <b>1,76 hari</b>; 30 hari batt-only butuh ~120 sel → opsi realistis <b>perpanjang OFF ~63 mnt</b>/solar. Draw ON terverifikasi <b>5,75 W</b> (mengklarifikasi "2,43 W"). <b>CH 2 panel surya surplus 1,5–4,4 Wh/hari</b> (1 panel defisit). Uji <b>mesh CH</b> &amp; <b>downlink GLD</b> + perbaikan firmware. Catatan: TPL5010 belum optimal (~0,4 V saat off).'},
   {d:'16 Jul',title:'Temuan sensor & aplikasi UI',stat:['temuan','Temuan'],tags:[['ml','AI/ML'],['sw','Software'],['net','Jaringan']],
    body:'Respons berkorelasi positif pada <b>CO₂</b>, tidak pada <b>O₂</b>. Baseline berbeda per sensor → <b>threshold per-MQ</b> (panduan QC). Aplikasi UI GLD dibuat (dataset/capture/save/download). Uji LoRa acak: Gerbang Utara 242 m PDR 100%; LFT 177 m PDR 100%; STEI 200 m PDR 87%.'},
   {d:'17 Jul',title:'Urutan kerja koordinasi',stat:['berjalan','Berjalan'],tags:[['coord','Koordinasi']],

@@ -163,6 +163,15 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 - Manajemen daya **TPL5010** (timer nanopower untuk duty-cycle) & algoritma **nulling**, dataset handling.
 - *Catatan: repo ML edge (gas-leak-ml-chamber-system) commit terakhir 24 Jun — belum ada update baru.*
 
+### 23 Juli — Progress Gas Test Chamber — *Milestone ✅*
+Sistem kendali chamber berfungsi (kendali dua-arah real-time via ESP32):
+- **Solenoid valve** — pengendalian aliran gas presisi.
+- **Pompa penghisap** dengan pengaturan **duty cycle** — kontrol dinamika udara chamber.
+- **2× BME280** (I²C 0x76 & 0x77, modif solder pad) — komparasi suhu/tekanan/kelembapan internal vs eksternal.
+- **TGS2610** (sensor gas referensi) via **ADS1115** eksternal + **voltage divider** (5V→3,3V).
+- Daya: **LM2596** step-down → 5V → ESP32/BME280/TGS2610/relay/**driver motor BTS7960**.
+- **Rencana lanjut:** rapikan wiring → **buat PCB layout**; ganti pompa lebih senyap; pasang rangkaian di dinding belakang chamber.
+
 ---
 
 ## Blocker Kritis Aktif (per 20 Juli)

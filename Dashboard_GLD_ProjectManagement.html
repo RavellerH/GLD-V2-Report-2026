@@ -704,7 +704,7 @@ const WSW=[
   {n:'Jaringan LoRa & Cluster Head',w:20,act:65,plan:85,st:'warn'},
   {n:'AI & Sensor MQ (TCN LPG · dataset konsisten)',w:22,act:55,plan:70,st:'warn'},
   {n:'Catu Daya & Manajemen Energi',w:15,act:50,plan:72,st:'crit'},
-  {n:'Gas Chamber, Hardware & QC',w:12,act:35,plan:62,st:'warn'},
+  {n:'Gas Chamber, Hardware & QC',w:12,act:55,plan:62,st:'accent'},
   {n:'Perangkat Lunak, Server & Dashboard',w:13,act:58,plan:60,st:'good'},
   {n:'Integrasi Sistem (fungsional; AI on-device pending)',w:10,act:68,plan:45,st:'accent'},
   {n:'Persiapan & Survei RU / HSE',w:8,act:40,plan:60,st:'warn'},
@@ -747,6 +747,7 @@ const RES=[
 
 /* ---------- ACTIVITY FEED ---------- */
 const FEED=[
+  {d:'23 Jul',t:'Progress Gas Test Chamber — sistem kendali berfungsi',b:'Kendali dua-arah real-time via ESP32: <b>solenoid valve</b> (aliran gas presisi), <b>pompa penghisap duty-cycle</b>, <b>2× BME280</b> (komparasi internal/eksternal, I²C 0x76/0x77), <b>TGS2610</b> via ADS1115 + voltage divider. Daya LM2596 + driver BTS7960. Lanjut: PCB layout, pompa senyap.',tag:'Milestone',m:true},
   {d:'23 Jul',t:'Repo PertaminaGLD — firmware & Operator Hub (aktif)',b:'Commit terbaru: firmware GLD/CH/GW + <b>Operator Hub workflows</b>, reliability &amp; test coverage; manajemen daya <b>TPL5010</b> &amp; algoritma nulling.',tag:'Repo'},
   {d:'20 Jul',t:'Simulasi siklus operasi diunggah ke board GLD',b:'Warm-up → akuisisi → inferensi → transmit LoRa. <b>ON 60 s / OFF 100 s / WAKE 160 s</b>. Arahan: <b>ganti/modifikasi DC converter</b>; modifikasi baterai ditahan.',tag:'Fahmi'},
   {d:'16 Jul',t:'Uji fungsional GLD-CH-GW-Server + inferensi AI',b:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end. <b>Inferensi AI jalan di komputer/laptop dengan emulator ESP32</b> — deploy on-device ESP32 = langkah berikutnya. Fungsional terintegrasi tercapai jauh sebelum jadwal resmi (Sep).',tag:'Milestone',m:true},
@@ -893,7 +894,8 @@ const DONE=[
   ['Simulasi <b>duty-cycle</b> di board (ON 60 / OFF 100 / WAKE 160 s)'],
   ['<b>CH:</b> catu daya teratasi dgn <b>2 panel surya</b> (surplus 1,5–4,4 Wh/hari)'],
   ['<b>Mesh 8-CH se-kampus</b> (multi-hop Layer 3) &amp; <b>downlink GLD</b> terbukti + fix firmware'],
-  ['Budget daya GLD <b>terkuantifikasi</b> (runtime per konfigurasi baterai)']
+  ['Budget daya GLD <b>terkuantifikasi</b> (runtime per konfigurasi baterai)'],
+  ['<b>Gas Test Chamber</b> — sistem kendali (valve, pompa, 2×BME280, TGS2610, ESP32) berfungsi real-time']
 ];
 const OUT=[
   ['Deploy <b>inferensi AI ke ESP32 on-device</b> (kini di PC + emulator)','blk','Blocker'],

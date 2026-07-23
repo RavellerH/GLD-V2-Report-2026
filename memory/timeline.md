@@ -27,7 +27,8 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 - **16 Jul** 🔵 **Uji fungsional GLD-CH-GW-Server end-to-end** — **inferensi AI di PC + emulator ESP32** (belum on-device). Juga: **analisis daya** (GLD 7P=1,76 hari; CH 2 panel surplus; TPL5010 belum optimal), **uji mesh 8-CH se-kampus** (multi-hop L3), **uji downlink GLD** lewat mesh + fix firmware. Temuan O₂ vs CO₂; threshold per-MQ; dataset konsisten; aplikasi UI GLD.
 - **17 Jul** Urutan kerja: LGU undang Pertamina ke lab → uji lab → RU.
 - **20 Jul** Simulasi siklus ON 60/OFF 100/WAKE 160; arahan ganti DC converter; modifikasi baterai ditahan.
-- **23 Jul** Repo server (PertaminaGLD) aktif: firmware + Operator Hub + TPL5010 + nulling. **Status per hari ini.**
+- **23 Jul** Repo server (PertaminaGLD) aktif: firmware + Operator Hub + TPL5010 + nulling.
+- **26 Jul** 🔧 Progress chamber gas: solenoid valve, BME280 ganda (I2C 0x76/0x77), TGS2610 via ADS1115, LM2596, BTS7960, voltage divider. Next: PCB layout, pompa senyap, mounting dinding. **Status per hari ini.**
 
 ## Rencana ke depan (baseline resmi)
 Integration test (Sep) · HSE/permit (Nov) · **Field installation = target implementasi (Des)** · Field trial (Des–Jan) · Evaluation (Jan) · Industrialization roadmap (Feb 2027).

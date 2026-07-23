@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "Gas Leak Detection (GLD) Tahap 2",
-    "as_of": "2026-07-23",
+    "as_of": "2026-07-26",
     "scope_active": "Pilot RU IV Cilacap",
     "note": "Machine-readable knowledge graph. Update bersama memory/graph.md."
   },
@@ -28,6 +28,13 @@
     { "id": "dev:tpl5010", "type": "hardware", "label": "TPL5010 timer" },
     { "id": "dev:bq25185", "type": "hardware", "label": "BQ25185 charger" },
     { "id": "dev:tps63020", "type": "hardware", "label": "TPS63020 buck-boost" },
+    { "id": "dev:solenoid", "type": "hardware", "label": "Solenoid valve chamber" },
+    { "id": "dev:pump", "type": "hardware", "label": "Pompa chamber (duty-cycle)" },
+    { "id": "dev:bme280", "type": "hardware", "label": "BME280 ganda (I2C 0x76/0x77)" },
+    { "id": "dev:tgs2610", "type": "hardware", "label": "TGS2610 sensor gas chamber" },
+    { "id": "dev:ads1115", "type": "hardware", "label": "ADS1115 ADC eksternal chamber" },
+    { "id": "dev:lm2596", "type": "hardware", "label": "LM2596 step-down 5V chamber" },
+    { "id": "dev:bts7960", "type": "hardware", "label": "BTS7960 driver motor pompa" },
 
     { "id": "repo:fe", "type": "repo", "label": "gasleakdetectionV2-April", "updated": "2026-07-13" },
     { "id": "repo:srv", "type": "repo", "label": "PertaminaGLD", "updated": "2026-07-23" },
@@ -58,7 +65,8 @@
 
     { "id": "deliv:dashboard", "type": "deliverable", "label": "Dashboard proyek (HTML)" },
     { "id": "deliv:progres", "type": "deliverable", "label": "Laporan progres per tanggal" },
-    { "id": "deliv:jsa", "type": "deliverable", "label": "Draft JSA/HSE Cilacap" }
+    { "id": "deliv:jsa", "type": "deliverable", "label": "Draft JSA/HSE Cilacap" },
+    { "id": "deliv:chamber", "type": "deliverable", "label": "Laporan progress chamber gas (Jul 2026)" }
   ],
   "edges": [
     { "s": "org:LGU", "t": "proj:GLD", "r": "pelaksana" },
@@ -106,6 +114,16 @@
     { "s": "blk:lora", "t": "sub:net", "r": "bagian-dari" },
 
     { "s": "ms:funcai", "t": "sub:integ", "r": "menyelesaikan" },
-    { "s": "model:tcn", "t": "sub:ai", "r": "bagian-dari" }
+    { "s": "model:tcn", "t": "sub:ai", "r": "bagian-dari" },
+
+    { "s": "sub:chamber", "t": "dev:solenoid", "r": "pakai" },
+    { "s": "sub:chamber", "t": "dev:pump", "r": "pakai" },
+    { "s": "sub:chamber", "t": "dev:bme280", "r": "pakai" },
+    { "s": "sub:chamber", "t": "dev:tgs2610", "r": "pakai" },
+    { "s": "sub:chamber", "t": "dev:ads1115", "r": "pakai" },
+    { "s": "sub:chamber", "t": "dev:lm2596", "r": "pakai" },
+    { "s": "sub:chamber", "t": "dev:bts7960", "r": "pakai" },
+
+    { "s": "deliv:chamber", "t": "sub:chamber", "r": "melaporkan" }
   ]
 }

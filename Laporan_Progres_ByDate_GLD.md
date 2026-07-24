@@ -1,7 +1,7 @@
 # LAPORAN PROGRES PER TANGGAL — PROYEK GAS LEAK DETECTION (GLD) TAHAP 2
 
-**Periode:** 20 April – 20 Juli 2026
-**Disusun per:** 23 Juli 2026
+**Periode:** 20 April – 23 Juli 2026
+**Disusun per:** 24 Juli 2026
 **Scope aktif:** Pilot RU IV Cilacap (roadmap: 6 Refinery Unit)
 **Pihak terlibat:** LAPI Ganesha Utama (LGU) · Lab IoT & Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional
 
@@ -68,7 +68,7 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 
 ---
 
-## FASE 2 — Kick-Off & Progres Menuju Field (12 Juni – 20 Juli 2026)
+## FASE 2 — Kick-Off & Progres Menuju Field (12 Juni – 23 Juli 2026)
 
 ### 12 Juni — Kick-Off Meeting Pertamina — *Milestone ✅*
 - Baseline **timeline 9 bulan** disepakati; scope **6 RU** (RU II–VII).

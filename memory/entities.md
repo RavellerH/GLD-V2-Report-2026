@@ -24,14 +24,14 @@
 | p:totong | Pak Totong | Diskusi peletakan tiang/rooftop |
 
 ## Sub-sistem (`sub:`)
-| ID | Nama | Status ringkas (23 Jul) |
+| ID | Nama | Status ringkas (24 Jul) |
 |---|---|---|
 | sub:net | Jaringan LoRa & Cluster Head | 65% — failover ok, jangkauan blocker |
-| sub:ai | AI & Sensor MQ (TCN LPG) | 52% — TCN ≥92%, konsistensi data terbuka |
+| sub:ai | AI & Sensor MQ (TCN LPG) | 55% — TCN ≥92%, dataset konsisten |
 | sub:power | Catu Daya & Manajemen Energi | 50% — CH ok (2 panel), autonomi GLD blocker |
 | sub:chamber | Gas Chamber, Hardware & QC | 35% — fitur chamber: solenoid valve, pompa duty-cycle, BME280 ganda (eksternal/internal), TGS2610 via ADS1115. Next: PCB layout, pompa senyap, mounting dinding |
 | sub:sw | Perangkat Lunak, Server & Dashboard | 58% — MapLibre, Operator Hub, CRUD |
-| sub:integ | Integrasi Sistem (GLD-CH-GW-Server) | 92% — uji fungsional + AI selesai |
+| sub:integ | Integrasi Sistem (GLD-CH-GW-Server) | 68% — fungsional ok; AI on-device pending |
 | sub:ruprep | Persiapan & Survei RU / HSE | 40% — plan siap, gate TRA/JSA |
 
 ## Perangkat & hardware (`dev:`)

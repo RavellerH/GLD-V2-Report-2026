@@ -14,7 +14,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - **Scope aktif sekarang:** **pilot RU IV Cilacap** (5 RU lain = roadmap).
 - **Field test kolaborasi:** RU-VII Kasim/Sorong. **Target implementasi:** Des 2026.
 
-## 2. Status singkat (per 26 Jul 2026)
+## 2. Status singkat (per 24 Jul 2026)
 
 - **Progres pilot Cilacap ≈ 39%** vs baseline resmi 19% → **+20 poin** (murni sisi engineering lab, **bukan** kesiapan lapangan).
 - ✅ Rantai **GLD-CH-GW-Server end-to-end**; **inferensi AI kini di PC + emulator ESP32** (belum on-device — langkah berikutnya).
@@ -49,7 +49,7 @@ URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).
 ## 5. Aturan kerja penting (jangan dilupakan)
 
 - **Bahasa:** Bahasa Indonesia untuk semua deliverable.
-- **Desain HTML:** palet korporat **navy/steel** (client-facing), light+dark, self-contained.
+- **Desain HTML:** palet **biru #2B5FCB + charcoal #262321** (client-facing), light+dark, self-contained.
 - **Baseline Kurva-S:** dikalibrasi ke **Project Timeline 9 bulan (Deck Kick-Off)**.
 - **Transparansi:** klien = partner → selalu tampilkan **progres + outstanding** secara jujur; jangan over-claim (analisis ≠ resolusi blocker).
 - **OGI (YOLO/thermal) DIHAPUS** — belum disetujui. Jangan dimasukkan lagi tanpa arahan.

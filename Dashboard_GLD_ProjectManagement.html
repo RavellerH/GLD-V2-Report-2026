@@ -324,7 +324,7 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
       <p class="parties">LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional</p>
     </div>
     <div class="mast-right">
-      <div class="asof">Per <b>23 Juli 2026</b> · Bulan ke-2</div>
+      <div class="asof">Per <b>24 Juli 2026</b> · Bulan ke-2</div>
       <div class="asof">Target implementasi · <b>Des 2026</b></div>
       <div class="asof">Pilot aktif · <b>RU IV Cilacap</b></div>
       <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
@@ -338,7 +338,7 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
     <div><span class="k">Klien / Partner</span><span class="v">Pertamina Patra Niaga</span></div>
     <div><span class="k">Scope aktif</span><span class="v">Pilot RU IV Cilacap</span></div>
     <div><span class="k">Periode program</span><span class="v">Jun 2026 – Feb 2027</span></div>
-    <div><span class="k">Status per</span><span class="v">23 Juli 2026</span></div>
+    <div><span class="k">Status per</span><span class="v">24 Juli 2026</span></div>
   </div>
 
   <section class="exec" id="ringkasan" aria-label="Ringkasan eksekutif">
@@ -390,7 +390,7 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
   <div class="po">
     <div class="pocol done">
       <h3><span class="pohead-done">✓ Progres — Tercapai</span><span class="cnt" id="donecnt"></span></h3>
-      <p class="hint2">Capaian yang telah diverifikasi hingga 23 Jul 2026.</p>
+      <p class="hint2">Capaian yang telah diverifikasi hingga 24 Jul 2026.</p>
       <div id="donelist"></div>
     </div>
     <div class="pocol out">
@@ -405,7 +405,7 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
   <div class="section-label"><span class="eyebrow">Kurva-S · Progres Kumulatif</span></div>
   <div class="card">
     <div class="card-head"><h2>Kurva-S: Rencana vs Aktual vs Proyeksi</h2></div>
-    <p class="hint">Baseline = Project Timeline 9 bulan (Deck Kick-Off), mewakili perjalanan pilot RU IV Cilacap. Aktual menanjak lebih cepat dari rencana karena engineering front-loaded (prototype &amp; AI sudah berjalan sejak April). Area terarsir = kelebihan aktual terhadap baseline (+23 poin per 23 Jul). Garis merah = target implementasi Desember (field installation).</p>
+    <p class="hint">Baseline = Project Timeline 9 bulan (Deck Kick-Off), mewakili perjalanan pilot RU IV Cilacap. Aktual menanjak lebih cepat dari rencana karena engineering front-loaded (prototype &amp; AI sudah berjalan sejak April). Area terarsir = kelebihan aktual terhadap baseline (+23 poin per 24 Jul). Garis merah = target implementasi Desember (field installation).</p>
     <div class="chart-scroll"><svg id="scurve" viewBox="0 0 960 420" role="img" aria-label="Kurva-S progres proyek"></svg></div>
     <div class="legend">
       <span style="color:var(--accent)"><i class="lg-swatch" style="background:var(--accent)"></i>Aktual</span>
@@ -554,13 +554,13 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
 
   <footer>
     Sumber: Deck Kick-Off GLD (12 Jun 2026, timeline 9 bulan &amp; resource plan) · Dokumen Kebutuhan Peralatan GLD per RU v1.0 · Laporan Progres 18 Jun–20 Jul · Notulensi Kick-Off · MoM RU IV Cilacap · Board12 TCN per-Sensor (LPG) · repo gasleakdetectionV2-April, PertaminaGLD, gas-leak-ml-chamber-system · dataset GLD-F001.<br>
-    Baseline Kurva-S dikalibrasi ke Project Timeline 9 bulan (Deck Kick-Off); persentase progres bersifat estimasi turunan dari status aktivitas &amp; dapat dikalibrasi lebih lanjut dengan laporan milestone resmi. Disusun per 23 Juli 2026.
+    Baseline Kurva-S dikalibrasi ke Project Timeline 9 bulan (Deck Kick-Off); persentase progres bersifat estimasi turunan dari status aktivitas &amp; dapat dikalibrasi lebih lanjut dengan laporan milestone resmi. Disusun per 24 Juli 2026.
   </footer>
 </div>
 
 <script>
 const START=new Date(2026,5,1), END=new Date(2027,1,28);
-const TODAY=new Date(2026,6,23);
+const TODAY=new Date(2026,6,24);
 const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt',2026,9],['Nov',2026,10],['Des',2026,11],['Jan',2027,0],['Feb',2027,1]];
 
 /* ---------- S-CURVE ---------- */
@@ -582,11 +582,11 @@ const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt'
   // actual to today
   const act=[
     [new Date(2026,5,1),0],[new Date(2026,5,12),6],[new Date(2026,5,30),16],
-    [new Date(2026,6,7),23],[new Date(2026,6,15),30],[new Date(2026,6,23),39]
+    [new Date(2026,6,7),23],[new Date(2026,6,15),30],[new Date(2026,6,24),39]
   ].map(a=>({d:a[0],v:a[1]}));
   // forecast from today
   const fc=[
-    [new Date(2026,6,23),39],[new Date(2026,7,31),50],[new Date(2026,8,30),62],[new Date(2026,9,31),71],
+    [new Date(2026,6,24),39],[new Date(2026,7,31),50],[new Date(2026,8,30),62],[new Date(2026,9,31),71],
     [new Date(2026,10,30),82],[new Date(2026,11,31),91],[new Date(2027,0,31),97],[new Date(2027,1,28),100]
   ].map(a=>({d:a[0],v:a[1]}));
   for(let v=0;v<=100;v+=20){

@@ -2,7 +2,7 @@
 
 > Ini **satu sumber kebenaran** untuk angka kunci. File lain merujuk ke sini.
 
-## Status progres (per 26 Jul 2026)
+## Status progres (per 24 Jul 2026)
 - **Progres pilot Cilacap: 39%** vs baseline resmi **19%** → **+20 poin** (murni sisi engineering lab, BUKAN kesiapan lapangan; jangan over-claim).
 - Action items: **25** (5 berjalan, 15 terbuka, 1 selesai). Isu & risiko: **8** (3 tinggi).
 - **Koreksi penting:** inferensi AI kini di **PC + emulator ESP32**, belum on-device. **Dataset konsisten & siap pakai** (isu konsistensi resolved). **Jangkauan LoRa disiasati mesh** (bukan blocker keras).

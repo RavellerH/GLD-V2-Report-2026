@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "Gas Leak Detection (GLD) Tahap 2",
-    "as_of": "2026-07-26",
+    "as_of": "2026-07-24",
     "scope_active": "Pilot RU IV Cilacap",
     "note": "Machine-readable knowledge graph. Update bersama memory/graph.md."
   },
@@ -13,11 +13,11 @@
     { "id": "proj:GLD", "type": "project", "label": "GLD Tahap 2" },
 
     { "id": "sub:net", "type": "subsystem", "label": "Jaringan LoRa & CH", "progress": 65 },
-    { "id": "sub:ai", "type": "subsystem", "label": "AI & Sensor MQ", "progress": 52 },
+    { "id": "sub:ai", "type": "subsystem", "label": "AI & Sensor MQ", "progress": 55 },
     { "id": "sub:power", "type": "subsystem", "label": "Catu Daya & Energi", "progress": 50 },
-    { "id": "sub:chamber", "type": "subsystem", "label": "Chamber/HW/QC", "progress": 35 },
+    { "id": "sub:chamber", "type": "subsystem", "label": "Chamber/HW/QC", "progress": 55 },
     { "id": "sub:sw", "type": "subsystem", "label": "Software/Server/Dashboard", "progress": 58 },
-    { "id": "sub:integ", "type": "subsystem", "label": "Integrasi Sistem", "progress": 92 },
+    { "id": "sub:integ", "type": "subsystem", "label": "Integrasi Sistem", "progress": 68 },
     { "id": "sub:ruprep", "type": "subsystem", "label": "Survei RU / HSE", "progress": 40 },
 
     { "id": "dev:node", "type": "device", "label": "GLD Node (ESP32-S3, 8x MQ, TFLite)" },
@@ -60,7 +60,7 @@
     { "id": "blk:power", "type": "blocker", "label": "Autonomi baterai GLD < 30 hari (7P=1,76 hari)" },
     { "id": "blk:tpl", "type": "blocker", "label": "TPL5010 belum optimal (~0,4V saat off)" },
     { "id": "blk:conv", "type": "blocker", "label": "DC converter perlu diganti" },
-    { "id": "blk:lora", "type": "blocker", "label": "LoRa ~100m vs 1-2km" },
+    { "id": "blk:lora", "type": "blocker", "label": "LoRa per-hop ~100m (disiasati mesh)" },
     { "id": "gate:jsa", "type": "gate", "label": "TRA/JSA belum disusun" },
 
     { "id": "deliv:dashboard", "type": "deliverable", "label": "Dashboard proyek (HTML)" },

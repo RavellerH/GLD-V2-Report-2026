@@ -1,7 +1,7 @@
 # LAPORAN PROGRES PER TANGGAL — PROYEK GAS LEAK DETECTION (GLD) TAHAP 2
 
-**Periode:** 20 April – 20 Juli 2026
-**Disusun per:** 23 Juli 2026
+**Periode:** 20 April – 23 Juli 2026
+**Disusun per:** 24 Juli 2026
 **Scope aktif:** Pilot RU IV Cilacap (roadmap: 6 Refinery Unit)
 **Pihak terlibat:** LAPI Ganesha Utama (LGU) · Lab IoT & Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional
 
@@ -68,7 +68,7 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 
 ---
 
-## FASE 2 — Kick-Off & Progres Menuju Field (12 Juni – 20 Juli 2026)
+## FASE 2 — Kick-Off & Progres Menuju Field (12 Juni – 23 Juli 2026)
 
 ### 12 Juni — Kick-Off Meeting Pertamina — *Milestone ✅*
 - Baseline **timeline 9 bulan** disepakati; scope **6 RU** (RU II–VII).
@@ -162,6 +162,15 @@ Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 �
 - Commit aktif (22–23 Jul): firmware **GLD/CH/GW** + **Operator Hub workflows**, peningkatan reliability & test coverage.
 - Manajemen daya **TPL5010** (timer nanopower untuk duty-cycle) & algoritma **nulling**, dataset handling.
 - *Catatan: repo ML edge (gas-leak-ml-chamber-system) commit terakhir 24 Jun — belum ada update baru.*
+
+### 23 Juli — Progress Gas Test Chamber — *Milestone ✅*
+Sistem kendali chamber berfungsi (kendali dua-arah real-time via ESP32):
+- **Solenoid valve** — pengendalian aliran gas presisi.
+- **Pompa penghisap** dengan pengaturan **duty cycle** — kontrol dinamika udara chamber.
+- **2× BME280** (I²C 0x76 & 0x77, modif solder pad) — komparasi suhu/tekanan/kelembapan internal vs eksternal.
+- **TGS2610** (sensor gas referensi) via **ADS1115** eksternal + **voltage divider** (5V→3,3V).
+- Daya: **LM2596** step-down → 5V → ESP32/BME280/TGS2610/relay/**driver motor BTS7960**.
+- **Rencana lanjut:** rapikan wiring → **buat PCB layout**; ganti pompa lebih senyap; pasang rangkaian di dinding belakang chamber.
 
 ---
 

@@ -9,7 +9,7 @@
 | **Pelaksana** | LGU / pihak ke-3 + ITB |
 | **Klasifikasi area** | ⚠ Dikonfirmasi RU (Zona 0/1/2) |
 | **Izin kerja (PTW)** | Cold · Hot · Work-at-Height (No: ____) |
-| **Disusun / Revalidasi** | 23 Jul 2026 / bila task, lokasi, cuaca, atau crew berubah |
+| **Disusun / Revalidasi** | 24 Jul 2026 / bila task, lokasi, cuaca, atau crew berubah |
 
 **Matriks risiko (L×S):** Rendah 1–4 · Sedang 5–9 · Tinggi 10–15 · Ekstrem 16–25.
 
@@ -103,4 +103,4 @@ Kolom: Langkah · Bahaya · Risiko Awal (L×S) · Pengendalian · APD/PJ · Risi
 
 ---
 
-*Kerangka disusun sebagai input percepatan berdasarkan dokumen proyek GLD (Deck Kick-Off — HSE Philosophy, PTW Plan, Task Risk Assessment; Dokumen Kebutuhan Peralatan per RU; MoM RU IV Cilacap). Nilai risiko indikatif & wajib divalidasi tim HSE RU. DRAFT Rev 0 · 23 Juli 2026.*
+*Kerangka disusun sebagai input percepatan berdasarkan dokumen proyek GLD (Deck Kick-Off — HSE Philosophy, PTW Plan, Task Risk Assessment; Dokumen Kebutuhan Peralatan per RU; MoM RU IV Cilacap). Nilai risiko indikatif & wajib divalidasi tim HSE RU. DRAFT Rev 0 · 24 Juli 2026.*

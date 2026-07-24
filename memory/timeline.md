@@ -28,7 +28,8 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 - **17 Jul** Urutan kerja: LGU undang Pertamina ke lab → uji lab → RU.
 - **20 Jul** Simulasi siklus ON 60/OFF 100/WAKE 160; arahan ganti DC converter; modifikasi baterai ditahan.
 - **23 Jul** Repo server (PertaminaGLD) aktif: firmware + Operator Hub + TPL5010 + nulling.
-- **26 Jul** 🔧 Progress chamber gas: solenoid valve, BME280 ganda (I2C 0x76/0x77), TGS2610 via ADS1115, LM2596, BTS7960, voltage divider. Next: PCB layout, pompa senyap, mounting dinding. **Status per hari ini.**
+- **23 Jul** 🔵 Progress chamber gas: sistem kendali ESP32 real-time — solenoid valve, pompa duty-cycle, BME280 ganda (I2C 0x76/0x77), TGS2610 via ADS1115 + voltage divider, LM2596, BTS7960. Next: PCB layout, pompa senyap, mounting dinding.
+- **24 Jul** Status per hari ini (as-of).
 
 ## Rencana ke depan (baseline resmi)
 Integration test (Sep) · HSE/permit (Nov) · **Field installation = target implementasi (Des)** · Field trial (Des–Jan) · Evaluation (Jan) · Industrialization roadmap (Feb 2027).

@@ -140,7 +140,7 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
       <p class="parties">LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga</p>
     </div>
     <div class="mast-right">
-      <div class="asof">Periode <b>20 Apr – 23 Jul 2026</b></div>
+      <div class="asof">Periode <b>20 Apr – 24 Jul 2026</b></div>
       <div class="asof">Disusun <b>24 Jul 2026</b></div>
       <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
     </div>
@@ -148,15 +148,15 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
 
   <section class="exec">
     <div class="el">Ringkasan Eksekutif</div>
-    <p>Rantai <b>GLD-CH-GW-Server berjalan end-to-end</b>; <b>inferensi AI kini di komputer/laptop + emulator ESP32</b> (deploy on-device = langkah berikutnya). Mesh <b>8-CH se-kampus terbukti multi-hop</b>, menyiasati keterbatasan jangkauan LoRa. Progres pilot <b>39%</b> vs rencana 19% — selisih ini murni sisi lab/engineering. Menuju lapangan, blocker daya (autonomi baterai, TPL5010, DC converter) &amp; <b>gate TRA/JSA</b> masih menjadi penahan. Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
+    <p>Rantai <b>GLD-CH-GW-Server berjalan end-to-end</b>; <b>inferensi AI kini di komputer/laptop + emulator ESP32</b> (deploy on-device = langkah berikutnya). Mesh <b>8-CH se-kampus terbukti multi-hop</b> (diuji 3 hop-list), menyiasati keterbatasan jangkauan LoRa. Meeting 24 Jul: <b>versi 24V selesai &amp; siap sertifikasi</b> (Shanghai); <b>model AI terbaru CNN 1D mencapai 97,6%</b> namun baru 5 dari 6 kelas gas yang disyaratkan. Progres pilot <b>39%</b> vs rencana 19% — selisih ini murni sisi lab/engineering. Tim menyepakati target internal <b>survei akhir Jul → instalasi Sep 2026</b> dengan strategi <b>dual deployment</b> (server lokal + cloud). Menuju lapangan, blocker daya (autonomi baterai, TPL5010, DC converter versi baterai) &amp; <b>gate TRA/JSA</b> serta perizinan HSE RU Cilacap masih menjadi penahan. Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
   </section>
 
   <section class="summary">
     <div class="scell good"><div class="v">39%</div><div class="l">Progres pilot · rencana <b>19%</b></div></div>
-    <div class="scell crit"><div class="v">3</div><div class="l">Blocker kritis</div></div>
-    <div class="scell"><div class="v">24</div><div class="l">Action items</div></div>
+    <div class="scell crit"><div class="v">5</div><div class="l">Blocker kritis</div></div>
+    <div class="scell"><div class="v">42</div><div class="l">Action items</div></div>
     <div class="scell"><div class="v">14.477</div><div class="l">Sampel dataset</div></div>
-    <div class="scell"><div class="v">≥92%</div><div class="l">Akurasi TCN <b>(8 model)</b></div></div>
+    <div class="scell"><div class="v">97,6%</div><div class="l">Akurasi <b>CNN 1D</b></div></div>
   </section>
 
   <div class="phase">
@@ -254,7 +254,9 @@ const P2=[
   {d:'23 Jul',title:'Repo server/firmware aktif (PertaminaGLD)',stat:['berjalan','Update'],tags:[['net','Jaringan'],['sw','Repo Dev']],
    body:'Commit terbaru: firmware GLD/CH/GW + <b>Operator Hub workflows</b>, reliability &amp; test coverage; manajemen daya <b>TPL5010</b> &amp; algoritma nulling.'},
   {d:'23 Jul',title:'Progress Gas Test Chamber — sistem kendali berfungsi',stat:['milestone','Milestone'],tags:[['hw','Hardware'],['ml','Sensor']],
-   body:'Kendali dua-arah real-time via ESP32: <b>solenoid valve</b> (aliran gas presisi), <b>pompa penghisap duty-cycle</b>, <b>2× BME280</b> (I²C 0x76/0x77), <b>TGS2610</b> via ADS1115 + voltage divider. Daya LM2596 → 5V + driver BTS7960. Lanjut: PCB layout · pompa senyap · pasang di dinding chamber.'}
+   body:'Kendali dua-arah real-time via ESP32: <b>solenoid valve</b> (aliran gas presisi), <b>pompa penghisap duty-cycle</b>, <b>2× BME280</b> (I²C 0x76/0x77), <b>TGS2610</b> via ADS1115 + voltage divider. Daya LM2596 → 5V + driver BTS7960. Lanjut: PCB layout · pompa senyap · pasang di dinding chamber.'},
+  {d:'24 Jul',title:'Meeting: Gas Leak Detector Development (Real Testing & Certification)',stat:['milestone','Milestone'],tags:[['power','Daya'],['ml','AI/ML'],['coord','Koordinasi']],
+   body:'Rapat LGU × Pertamina (RU Cilacap). <b>Versi 24V selesai, siap sertifikasi</b> (Shanghai). <b>Model AI terbaru CNN 1D (fusi 8-sensor): 97,6%</b> — 5 gas (H₂/LPG/Metana/CO₂/Clean Air), verifikasi min. 6 kelas berjalan. Mesh diuji <b>3 hop-list</b>, CH stabil 20 hari solar. Keputusan: <b>dual deployment</b> (lokal+cloud); survei+instalasi 1 kunjungan, target internal <b>survei akhir Jul → instalasi Sep 2026</b>. Baterai: target &lt;100mA/≥30 hari, potensi 6–8 bulan — berjalan paralel, tak menghambat 24V. Next: RAP Meeting 15 Agu.'}
 ];
 function render(data,elId){
   const c=document.getElementById(elId);let cur=null;

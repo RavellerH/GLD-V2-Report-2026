@@ -18,16 +18,22 @@
 | p:ryan | Ryan (Lab IoT) | Pengumpulan data solar |
 | p:ilmania | Ilmania (Lab Fisika) | Titik pengecasan; notulis |
 | p:tresnandi | Pak Tresnandi | Dokumen JSA/TRA |
-| p:senna | Pak Senna | Pertamina — lokasi, mode, gateway |
+| p:senna | Pak Senna / Pak Sena | Pertamina — lokasi, mode, gateway, koordinasi jadwal survey |
 | p:nina | Bu Nina | Hazardous / standar pemasangan |
-| p:beny | Kak Beny | Overall system architecture, AI |
+| p:beny | Kak Beny / Beni | Overall system architecture, AI; testing multi-sensor LoRa Mesh; retry/recovery alarm |
 | p:totong | Pak Totong | Diskusi peletakan tiang/rooftop |
+| p:muhammad | Pak Muhammad (LGU) | PIC utama meeting 24 Jul — optimasi baterai, VPS, dokumen HSE, perjalanan sertifikasi |
+| p:adit | Pak Adit (Pertamina) | Peserta meeting 24 Jul, RU Cilacap |
+| p:roni | Mas Roni (Pertamina) | Peserta meeting 24 Jul, RU Cilacap |
+| p:indra | Mas Indra (Pertamina, RU Cilacap) | Peserta meeting 24 Jul |
+
+*Catatan: "Ilma" (notulen 24 Jul) = Ilmania; "Beni" = Beny; "Pak Sena" = Pak Senna — variasi ejaan pada sumber berbeda.*
 
 ## Sub-sistem (`sub:`)
 | ID | Nama | Status ringkas (24 Jul) |
 |---|---|---|
 | sub:net | Jaringan LoRa & Cluster Head | 65% — failover ok, jangkauan blocker |
-| sub:ai | AI & Sensor MQ (TCN LPG) | 55% — TCN ≥92%, dataset konsisten |
+| sub:ai | AI & Sensor MQ (CNN 1D 97,6%) | 62% — model CNN 1D 97,6%, dataset konsisten, verifikasi 6 kelas gas berjalan |
 | sub:power | Catu Daya & Manajemen Energi | 50% — CH ok (2 panel), autonomi GLD blocker |
 | sub:chamber | Gas Chamber, Hardware & QC | 35% — fitur chamber: solenoid valve, pompa duty-cycle, BME280 ganda (eksternal/internal), TGS2610 via ADS1115. Next: PCB layout, pompa senyap, mounting dinding |
 | sub:sw | Perangkat Lunak, Server & Dashboard | 58% — MapLibre, Operator Hub, CRUD |
@@ -64,7 +70,9 @@
 RU II Dumai · RU III Plaju · **RU IV Cilacap (pilot aktif)** · RU V Balikpapan · RU VI Balongan · RU VII Kasim/Sorong (field test). Detail jumlah → `overview.md`.
 
 ## Model AI
-- **TCN per-sensor (LPG):** 8 model univariat, semua ≥92% (MQ4V 93,9%, F1 0,923), TFLite int8 ~72 KB.
+- **CNN 1D (fusi 8-sensor MQ) — TERBARU (24 Jul):** akurasi **97,6%**. Gas: H₂, LPG, Metana, CO₂, Clean Air (5 kelas; minimum 6 kelas disyaratkan, verifikasi berjalan). Tiap unit GLD di-training khusus untuk gas target.
+- **TCN per-sensor (LPG, Board12, 15 Jul):** 8 model univariat, semua ≥92% (MQ4V 93,9%, F1 0,923), TFLite int8 ~72 KB — fondasi awal sebelum CNN 1D.
 - **Multi-task NN:** jenis gas / leak / severity / PPM (repo ML).
 - **TCNN:** prediksi 5 dtk dari 5 dtk (Pak Fahdzi).
 - ~~OGI YOLOv8-seg (thermal)~~ — **dihapus, belum disetujui.**
+- ~~Flame Detection (kamera/Jetson Nano, infrared, 79%)~~ — **ditahan** (disebut di meeting 24 Jul, mirip konsep OGI; belum dimasukkan ke deliverable, menunggu arahan).

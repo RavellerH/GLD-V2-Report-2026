@@ -29,7 +29,8 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 - **20 Jul** Simulasi siklus ON 60/OFF 100/WAKE 160; arahan ganti DC converter; modifikasi baterai ditahan.
 - **23 Jul** Repo server (PertaminaGLD) aktif: firmware + Operator Hub + TPL5010 + nulling.
 - **23 Jul** 🔵 Progress chamber gas: sistem kendali ESP32 real-time — solenoid valve, pompa duty-cycle, BME280 ganda (I2C 0x76/0x77), TGS2610 via ADS1115 + voltage divider, LM2596, BTS7960. Next: PCB layout, pompa senyap, mounting dinding.
-- **24 Jul** Status per hari ini (as-of).
+- **24 Jul** 🔵 **Meeting GLD — Real Testing & Certification** (LGU × Pertamina RU Cilacap): **versi 24V selesai, siap sertifikasi** (Shanghai). **Model AI terbaru CNN 1D (fusi 8-sensor): 97,6%** — 5 gas (H₂/LPG/Metana/CO₂/Clean Air), verifikasi min. 6 kelas berjalan. Mesh diuji 3 hop-list, latency <5s normal; CH stabil 20 hari solar. Keputusan: dual deployment (lokal+cloud); survei+instalasi 1 kunjungan, **target internal survei akhir Jul → instalasi Sep 2026** (vs baseline resmi Des). Baterai: target <100mA/≥30 hari, potensi 6–8 bulan, paralel tak menghambat 24V. Flame detection (kamera/Jetson Nano) **ditahan**. Next: RAP Meeting 15 Agu. **Status per hari ini.**
 
-## Rencana ke depan (baseline resmi)
-Integration test (Sep) · HSE/permit (Nov) · **Field installation = target implementasi (Des)** · Field trial (Des–Jan) · Evaluation (Jan) · Industrialization roadmap (Feb 2027).
+## Rencana ke depan (baseline resmi vs target internal)
+**Baseline resmi (Deck Kick-Off):** Integration test (Sep) · HSE/permit (Nov) · **Field installation = target implementasi (Des)** · Field trial (Des–Jan) · Evaluation (Jan) · Industrialization roadmap (Feb 2027).
+**Target internal (meeting 24 Jul, belum formal):** Survei RU Cilacap (akhir Jul) → **instalasi Sep 2026** → RAP Meeting persiapan (15 Agu, sebelum survei/instalasi tergantung konfirmasi jadwal).

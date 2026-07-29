@@ -4,21 +4,24 @@
 
 ## Status progres (per 24 Jul 2026)
 - **Progres pilot Cilacap: 39%** vs baseline resmi **19%** → **+20 poin** (murni sisi engineering lab, BUKAN kesiapan lapangan; jangan over-claim).
-- Action items: **25** (5 berjalan, 15 terbuka, 1 selesai). Isu & risiko: **8** (3 tinggi).
+- Action items: **42** (12 berjalan, 24 terbuka, 3 selesai). Isu & risiko: **12** (4 tinggi).
 - **Koreksi penting:** inferensi AI kini di **PC + emulator ESP32**, belum on-device. **Dataset konsisten & siap pakai** (isu konsistensi resolved). **Jangkauan LoRa disiasati mesh** (bukan blocker keras).
+- **Update meeting 24 Jul:** **versi 24V power supply selesai & siap sertifikasi** (Shanghai) — deployment dapat berjalan paralel tanpa menunggu versi baterai. **Model AI terbaru: CNN 1D (fusi 8-sensor) 97,6%**, menggantikan TCN sebagai model utama untuk pelaporan, namun baru mencakup 5 dari **minimum 6 kelas gas** yang disyaratkan (verifikasi berjalan). Target internal instalasi bergeser ke **September 2026** (vs baseline resmi Desember).
 
-## Blocker kritis aktif (3)
+## Blocker kritis aktif (5)
 | ID | Blocker | Metrik | Dampak |
 |---|---|---|---|
-| blk:power | Autonomi baterai GLD < target 30 hari | draw ON **5,75 W**; 7P(28Ah)=**1,76 hari**; 30 hari butuh ~120 sel | GLD tak mandiri 30 hari → perlu perpanjang OFF ~63 mnt / solar |
+| blk:gasclass | Verifikasi cakupan gas minimum 6 kelas belum tuntas | 5 kelas (H₂/LPG/Metana/CO₂/Clean Air) → butuh 6 | Syarat wajib sebelum deployment |
+| blk:power | Autonomi baterai GLD (mode baterai) < target 30 hari | draw ON **5,75 W** (~10W/1A total 8 sensor); 7P(28Ah)=**1,76 hari**; target baru **<100mA & ≥30 hari**, potensi 6–8 bulan | GLD (mode baterai) tak mandiri 30 hari; **tidak menghambat mode 24V** yang sudah siap |
 | blk:tpl | TPL5010 belum memutus daya | board ~**0,4 V** & cuplik data saat "off" | Duty-cycle belum efektif hemat daya |
-| blk:conv | DC converter perlu diganti/dimodifikasi | arahan 20 Jul | Menahan finalisasi catu daya |
+| blk:conv | DC converter (mode baterai) perlu diganti/dimodifikasi | arahan 20 Jul | Menahan finalisasi catu daya versi baterai |
 | blk:ai-edge | Deploy inferensi AI ke ESP32 on-device | kini di PC + emulator | Belum jalan di perangkat lapangan |
 
 ## Diminimalkan / resolved
-- ~~blk:lora~~ → jangkauan LoRa ~100 m/hop **disiasati mesh multi-hop** (uji 8-CH se-kampus, Layer 3). Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH). Risiko, bukan blocker.
+- ~~blk:24v~~ → **versi 24V power supply selesai, siap sertifikasi** (Shanghai) — resolved, tidak lagi blocker untuk deployment via mode 24V.
+- ~~blk:lora~~ → jangkauan LoRa ~100 m/hop **disiasati mesh multi-hop** (uji 8-CH se-kampus, Layer 3; meeting 24 Jul: diuji hingga 3 hop-list, latency <5s normal). Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH). Risiko, bukan blocker.
 - ~~isu konsistensi data~~ → **dataset konsisten & siap dipakai**.
-- CH catu daya → **teratasi 2 panel** (surplus 1,5–4,4 Wh/hari).
+- CH catu daya → **teratasi 2 panel** (surplus 1,5–4,4 Wh/hari); meeting 24 Jul konfirmasi **CH stabil 20 hari non-stop** dengan solar.
 
 ## Mesh LoRa (uji 8-CH, 16 Jul)
 Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ← Layer 3 (CH2). Route depth 1–3, status installed. Downlink (GW→CH→GLD 0xF020) tembus lewat mesh + fix firmware.
@@ -27,6 +30,7 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 | ID | Gate | Status |
 |---|---|---|
 | gate:jsa | TRA/JSA | Belum disusun → menahan eksekusi site survey fisik RU IV Cilacap |
+| gate:hse-doc | Perizinan & template dokumen HSE RU Cilacap | Belum diterima (izin kerja, surat masuk barang, APD non-merah) — PIC Pak Maman, deadline 31 Jul |
 
 ## Metrik daya (Update Timeline Juli, 16 Jul 2026)
 **GLD node (baterai 7P = 7×4000 mAh = 28 Ah, ~70,4 Wh usable):**
@@ -46,7 +50,17 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 
 ## Metrik AI & data
 - Dataset GLD-F001: **14.477 sampel**, 9 sesi, 8 kanal MQ, 4 jenis gas (~2,7 jam).
-- TCN LPG 8 model: semua **≥92%**, terbaik **MQ4V 93,9%** (F1 0,923), TFLite int8 ~72 KB.
+- TCN LPG 8 model (15 Jul, fondasi awal): semua **≥92%**, terbaik **MQ4V 93,9%** (F1 0,923), TFLite int8 ~72 KB.
+- **Model terbaru (24 Jul): CNN 1D, fusi 8-sensor MQ, akurasi 97,6%.** Target gas: H₂, LPG, Metana, CO₂, Clean Air (5 kelas; **minimum 6 disyaratkan**, verifikasi berjalan — PIC Pak Farhan/Ilma, deadline 10 Agu). Tiap unit GLD di-training khusus.
+
+## Mesh & jaringan (Update meeting 24 Jul)
+- Self-healing mesh, automatic failover; diuji hingga **3 hop-list**, latency **<5 dtk normal, 5–15 dtk kondisi ramai**.
+- **Cluster Head: konsumsi ~10W, stabil 20 hari non-stop** dengan solar panel (mengonfirmasi temuan 2-panel-surplus sebelumnya).
+
+## Target internal vs baseline resmi (meeting 24 Jul)
+- **Baseline resmi (Deck Kick-Off):** field installation target **Desember 2026**.
+- **Target internal (belum formal):** survei RU Cilacap **akhir Juli 2026** → instalasi **September 2026**, survei+instalasi digabung 1 kunjungan. RAP Meeting persiapan: **15 Agustus 2026**.
+- Strategi deployment: **dual system — server lokal RU + cloud** untuk perbandingan performa.
 
 ## Bobot sub-sistem (untuk % dashboard)
 net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (inisiasi 10 — bila dipakai). Baseline 12-aktivitas → lihat `overview.md`.

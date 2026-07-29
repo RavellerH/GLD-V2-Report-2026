@@ -13,7 +13,7 @@
     { "id": "proj:GLD", "type": "project", "label": "GLD Tahap 2" },
 
     { "id": "sub:net", "type": "subsystem", "label": "Jaringan LoRa & CH", "progress": 65 },
-    { "id": "sub:ai", "type": "subsystem", "label": "AI & Sensor MQ", "progress": 55 },
+    { "id": "sub:ai", "type": "subsystem", "label": "AI & Sensor MQ", "progress": 62 },
     { "id": "sub:power", "type": "subsystem", "label": "Catu Daya & Energi", "progress": 50 },
     { "id": "sub:chamber", "type": "subsystem", "label": "Chamber/HW/QC", "progress": 55 },
     { "id": "sub:sw", "type": "subsystem", "label": "Software/Server/Dashboard", "progress": 58 },
@@ -41,6 +41,7 @@
     { "id": "repo:ml", "type": "repo", "label": "gas-leak-ml-chamber-system", "updated": "2026-06-24" },
 
     { "id": "model:tcn", "type": "model", "label": "TCN LPG 8-model (>=92%)" },
+    { "id": "model:cnn1d", "type": "model", "label": "CNN 1D fusi 8-sensor (97.6%, terbaru 24 Jul)" },
 
     { "id": "ru:2", "type": "ru", "label": "RU II Dumai", "status": "roadmap", "sensor": 10, "ch": 3, "gw": 1 },
     { "id": "ru:3", "type": "ru", "label": "RU III Plaju", "status": "roadmap", "sensor": 4, "ch": 3, "gw": 1 },
@@ -61,12 +62,15 @@
     { "id": "blk:tpl", "type": "blocker", "label": "TPL5010 belum optimal (~0,4V saat off)" },
     { "id": "blk:conv", "type": "blocker", "label": "DC converter perlu diganti" },
     { "id": "blk:lora", "type": "blocker", "label": "LoRa per-hop ~100m (disiasati mesh)" },
+    { "id": "blk:gasclass", "type": "blocker", "label": "Verifikasi min. 6 kelas gas (baru 5)" },
     { "id": "gate:jsa", "type": "gate", "label": "TRA/JSA belum disusun" },
+    { "id": "gate:hsedoc", "type": "gate", "label": "Perizinan & template dokumen HSE RU Cilacap" },
 
     { "id": "deliv:dashboard", "type": "deliverable", "label": "Dashboard proyek (HTML)" },
     { "id": "deliv:progres", "type": "deliverable", "label": "Laporan progres per tanggal" },
     { "id": "deliv:jsa", "type": "deliverable", "label": "Draft JSA/HSE Cilacap" },
-    { "id": "deliv:chamber", "type": "deliverable", "label": "Laporan progress chamber gas (Jul 2026)" }
+    { "id": "deliv:chamber", "type": "deliverable", "label": "Laporan progress chamber gas (Jul 2026)" },
+    { "id": "deliv:meeting24jul", "type": "deliverable", "label": "Notulen Meeting GLD 24 Jul 2026" }
   ],
   "edges": [
     { "s": "org:LGU", "t": "proj:GLD", "r": "pelaksana" },
@@ -124,6 +128,13 @@
     { "s": "sub:chamber", "t": "dev:lm2596", "r": "pakai" },
     { "s": "sub:chamber", "t": "dev:bts7960", "r": "pakai" },
 
-    { "s": "deliv:chamber", "t": "sub:chamber", "r": "melaporkan" }
+    { "s": "deliv:chamber", "t": "sub:chamber", "r": "melaporkan" },
+
+    { "s": "dev:node", "t": "model:cnn1d", "r": "menjalankan" },
+    { "s": "model:cnn1d", "t": "sub:ai", "r": "bagian-dari" },
+    { "s": "blk:gasclass", "t": "sub:ai", "r": "bagian-dari" },
+    { "s": "blk:gasclass", "t": "ms:install", "r": "menahan" },
+    { "s": "gate:hsedoc", "t": "sub:ruprep", "r": "menahan-site-survey" },
+    { "s": "deliv:meeting24jul", "t": "proj:GLD", "r": "melaporkan" }
   ]
 }

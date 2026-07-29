@@ -18,9 +18,12 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - **Progres pilot Cilacap ≈ 39%** vs baseline resmi 19% → **+20 poin** (murni sisi engineering lab, **bukan** kesiapan lapangan).
 - ✅ Rantai **GLD-CH-GW-Server end-to-end**; **inferensi AI kini di PC + emulator ESP32** (belum on-device — langkah berikutnya).
-- ✅ TCN LPG 8-sensor ≥92%; **dataset konsisten & siap pakai**; failover CH; **mesh 8-CH multi-hop se-kampus** (menyiasati jangkauan LoRa); CH power teratasi dgn 2 panel.
+- ✅ **Model AI terbaru: CNN 1D (fusi 8-sensor) 97,6%** (24 Jul, menggantikan TCN ≥92% sbg headline) — 5 dari min. 6 kelas gas, verifikasi berjalan. **Dataset konsisten & siap pakai**; failover CH; **mesh 8-CH multi-hop se-kampus, diuji 3 hop-list** (menyiasati jangkauan LoRa); CH power teratasi dgn 2 panel, **stabil 20 hari solar**.
+- ✅ **Versi 24V (power supply) selesai, siap sertifikasi** (Shanghai) — deployment jalan paralel tanpa menunggu versi baterai.
 - ✅ **Progress chamber gas**: solenoid valve, BME280 ganda (I2C 0x76/0x77), TGS2610 via ADS1115, LM2596 step-down, BTS7960 driver pompa. Next: PCB layout, pompa senyap, mounting dinding.
-- ⚠️ **Blocker/gate:** autonomi baterai GLD (7P=1,76 hari vs 30 hari); TPL5010 belum memutus daya (~0,4 V); DC converter; deploy AI on-device ESP32; **gate TRA/JSA** untuk site survey. Jangkauan LoRa per-hop **disiasati mesh** (bukan blocker keras).
+- ⚠️ **Blocker/gate:** verifikasi min. 6 kelas gas; autonomi baterai GLD mode baterai (target &lt;100mA/≥30 hari, potensi 6–8 bln); TPL5010 belum memutus daya (~0,4 V); DC converter (mode baterai); deploy AI on-device ESP32; **gate TRA/JSA** + perizinan HSE RU Cilacap. Jangkauan LoRa per-hop **disiasati mesh** (bukan blocker keras).
+- 🗓️ **Target internal (meeting 24 Jul, belum baseline formal):** survei RU Cilacap akhir Jul → **instalasi Sep 2026** (vs baseline resmi Des); dual deployment (server lokal + cloud); RAP Meeting 15 Agu.
+- 🛑 **Flame detection (kamera/Jetson Nano) DITAHAN** dari deliverable — mirip OGI, belum disetujui.
 
 ## 3. Peta memory (`memory/`)
 
@@ -58,6 +61,10 @@ URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).
 - **Deviasi jadwal**: jangan over-claim. Selisih vs baseline = **sisi lab saja**; framing harus jujur & bersyarat.
 - **Tema HTML (baru)**: biru **#2B5FCB** + charcoal **#262321** (logo Korporasi Kinarya ITB), bukan navy lagi.
 - **Cilacap = RU IV** (bukan VI). Scope aktif hanya 1 RU.
+- **Flame detection (kamera/Jetson Nano) DITAHAN** — mirip OGI, belum disetujui. Jangan masukkan ke deliverable tanpa arahan eksplisit (beda dari dec:05 OGI, tapi perlakukan sama).
+- **Model AI headline = CNN 1D (97,6%)**, bukan TCN (≥92%) lagi — TCN tetap dicatat sbg fondasi historis 15 Jul. Cakupan gas baru 5 dari **minimum 6 kelas** yang disyaratkan — jangan klaim tuntas.
+- **Baseline resmi vs target internal**: Kurva-S/Gantt tetap ke Deck Kick-Off (Des 2026). Target rapat internal (mis. Sep 2026 dari meeting 24 Jul) dicatat terpisah sbg "target internal, belum formal" — jangan timpa baseline tanpa instruksi eksplisit.
+- **Blocker daya dipisah per mode:** mode 24V = resolved/siap sertifikasi; mode baterai = tetap blocker aktif.
 - **Git:** kerja di branch `claude/project-management-tracking-5l8ypx`; PR aktif = **PR #1**. Push = update PR.
 
 ## 6. Cara memelihara memory ini

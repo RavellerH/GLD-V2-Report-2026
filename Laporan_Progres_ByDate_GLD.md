@@ -1,6 +1,6 @@
 # LAPORAN PROGRES PER TANGGAL — PROYEK GAS LEAK DETECTION (GLD) TAHAP 2
 
-**Periode:** 20 April – 23 Juli 2026
+**Periode:** 20 April – 24 Juli 2026
 **Disusun per:** 24 Juli 2026
 **Scope aktif:** Pilot RU IV Cilacap (roadmap: 6 Refinery Unit)
 **Pihak terlibat:** LAPI Ganesha Utama (LGU) · Lab IoT & Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional
@@ -12,13 +12,14 @@
 | Indikator | Nilai |
 |---|---|
 | Progres pilot Cilacap (vs baseline resmi 9 bulan) | **39%** (rencana 19% · **+20 poin**, murni sisi lab) |
-| Blocker kritis aktif | 3 (catu daya · DC converter · jangkauan LoRa) |
-| Action items | 24 (5 berjalan · 15 terbuka) |
-| Isu & risiko | 9 (4 prioritas tinggi) |
+| Blocker kritis aktif | 5 (verifikasi 6 kelas gas · autonomi baterai · TPL5010 · DC converter · jangkauan LoRa) |
+| Action items | 42 (12 berjalan · 24 terbuka · 3 selesai) |
+| Isu & risiko | 12 (4 prioritas tinggi) |
 | Dataset sensor terkumpul | 14.477 sampel · 9 sesi · 8 kanal MQ |
-| Model AI | TCN per-sensor (LPG): 8 model, semua ≥92% akurasi (MQ4V 93,9%) |
+| Model AI | **CNN 1D (fusi 8-sensor): akurasi 97,6%** — 5 gas (H₂/LPG/Metana/CO₂/Clean Air), verifikasi min. 6 kelas berjalan. TCN per-sensor (LPG, 15 Jul): 8 model ≥92% (MQ4V 93,9%) sebagai fondasi awal. |
+| Status catu daya | Versi 24V: **selesai, siap sertifikasi**. Versi baterai: target &lt;100 mA, ≥30 hari (potensi 6–8 bulan) |
 
-Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 → Feb 2027). Engineering front-loaded sejak April sehingga progres di depan jadwal; namun eksekusi site survey menunggu **gate TRA/JSA** dan 3 blocker teknis belum tuntas.
+Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 → Feb 2027; target field installation Des 2026). Engineering front-loaded sejak April sehingga progres di depan jadwal; namun eksekusi site survey menunggu **gate TRA/JSA**, perizinan HSE RU Cilacap, dan 5 blocker teknis belum tuntas. ⚠️ Rapat 24 Jul menyebut **target internal survei akhir Jul → instalasi Sep 2026** (lebih cepat dari baseline resmi) — belum perubahan baseline formal.
 
 ---
 
@@ -172,20 +173,52 @@ Sistem kendali chamber berfungsi (kendali dua-arah real-time via ESP32):
 - Daya: **LM2596** step-down → 5V → ESP32/BME280/TGS2610/relay/**driver motor BTS7960**.
 - **Rencana lanjut:** rapikan wiring → **buat PCB layout**; ganti pompa lebih senyap; pasang rangkaian di dinding belakang chamber.
 
+### 24 Juli — Meeting: Gas Leak Detector Development (Real Testing & Certification) — *Milestone ✅*
+Rapat koordinasi LGU × Pertamina (RU Cilacap), 09:32–11:00 WIB. Poin kunci:
+
+**Status pengembangan & sertifikasi:**
+- ✅ **Versi 24V (power supply): selesai, siap sertifikasi** — proses administratif disiapkan, akan memakai biro sertifikasi di **Shanghai**.
+- 🔧 **Versi Battery:** masih dikembangkan. Tantangan: konsumsi sensor MQ ~10 W (1 A/8 sensor). Target reduksi ke **&lt;100 mA**; target lifetime minimum **30 hari**; desain baru berpotensi **6–8 bulan** dengan baterai rechargeable. *Pengembangan berjalan paralel, tidak menghambat deployment versi 24V.*
+
+**Model AI terbaru:**
+- **CNN 1D (fusi 8-sensor MQ): akurasi 97,6%.** Gas yang dapat dideteksi: H₂, LPG, Metana, CO₂, Clean Air. Setiap unit GLD di-training khusus untuk gas yang akan dideteksi.
+- ⚠️ Kapabilitas deteksi minimum **6 kelas** disyaratkan sebelum deployment — baru **5 kelas** yang disebutkan; **verifikasi & konfirmasi masih berjalan** (PIC: Pak Farhan, Ilma).
+
+**Jaringan (LoRa Mesh):**
+- Topologi GLD → CH → Gateway → Server, self-healing mesh dengan automatic failover.
+- Diuji hingga **3 hop-list**, latency &lt;5 dtk (normal), 5–15 dtk (kondisi ramai).
+- **Cluster Head konsumsi ~10 W, stabil 20 hari non-stop** dengan solar panel.
+
+**Aplikasi manajemen:** konfigurasi Gateway/CH/GLD, monitoring real-time (RSSI/SNR, heat map deteksi gas), remote re-calibration, alarm notification, data logging.
+
+**Keputusan rapat:**
+1. Deployment RU Cilacap memakai strategi **dual system: server lokal + cloud** untuk evaluasi performa.
+2. **Survey dan instalasi digabung 1 kunjungan** (jika memungkinkan) — target **survei akhir Juli 2026 → instalasi September 2026** (⚠️ lebih cepat dari baseline resmi Desember 2026 — ini target internal tim, belum perubahan baseline formal).
+3. Gas detection capability minimum 6 kelas harus dipastikan sebelum deployment.
+4. Pengembangan versi baterai berlanjut paralel, tidak menghambat deployment versi 24V.
+5. Koordinasi dengan tim HSE RU Cilacap wajib sejak awal.
+
+**Pengembangan tambahan (dicatat, belum masuk scope report):** flame detection berbasis kamera (Jetson Nano, akurasi 79%) dan sensor arah angin — **ditahan dulu**, konsisten dengan keputusan sebelumnya untuk tidak memasukkan fitur yang belum disetujui/divalidasi ke deliverable resmi.
+
+**Next meeting:** RAP Meeting persiapan deployment RU Cilacap — target **15 Agustus 2026**.
+
 ---
 
-## Blocker Kritis Aktif (per 20 Juli)
+## Blocker Kritis Aktif (per 24 Juli)
 
 | # | Blocker | Metrik | Dampak |
 |---|---|---|---|
-| 1 | Autonomi baterai GLD di bawah target 30 hari (draw ON 5,75 W terverifikasi; 7P = 1,76 hari; TPL5010 belum optimal) | 7P = 1,76 hari / 30 hari | GLD tak dapat mandiri 30 hari — perlu perpanjang OFF / solar |
-| 2 | DC converter perlu diganti/dimodifikasi | Arahan 20 Jul | Menahan finalisasi desain catu daya |
-| 3 | Jangkauan LoRa jauh di bawah spec | ~100 m / 1–2 km | Menaikkan jumlah CH & biaya deployment |
+| 1 | Verifikasi cakupan gas minimum 6 kelas belum tuntas | 5 → 6 kelas | Syarat wajib sebelum deployment |
+| 2 | Autonomi baterai GLD (mode baterai) di bawah target 30 hari | Target &lt;100 mA / ≥30 hari | Tidak menghambat mode 24V yang sudah siap sertifikasi |
+| 3 | TPL5010 belum benar-benar memutus daya | ~0,4 V saat off | Duty-cycle belum efektif |
+| 4 | DC converter (mode baterai) perlu diganti/dimodifikasi | Arahan 20 Jul | Menahan finalisasi catu daya versi baterai |
+| 5 | Jangkauan LoRa per-hop di bawah spec — disiasati mesh | ~100 m / 1–2 km | Menaikkan jumlah CH & biaya deployment |
 
 ## Gate Menuju Field (RU IV Cilacap)
 - ⛔ **TRA/JSA** — rencana & workflow survei Cilacap sudah siap; **penyusunan TRA/JSA menjadi gate** untuk eksekusi site survey fisik.
-- Site visit Pertamina ke lab LGU → uji lab → kunjungan RU.
+- ⛔ **Perizinan & template dokumen HSE RU Cilacap** belum diterima (izin kerja, surat masuk barang, APD non-merah).
+- Target internal: survei akhir Juli → instalasi September 2026 (vs baseline resmi Desember 2026).
 
 ---
 
-*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas.*
+*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Notulen Meeting GLD 24 Jul 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas.*

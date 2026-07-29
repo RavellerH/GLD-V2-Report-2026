@@ -26,6 +26,7 @@
 | `GLD_serial_20260708T060449.log` | Log serial perangkat (8 Jul). |
 | `Urutan ADS,.jpeg`, `Urutan Channel MCP.jpeg` | Diagram urutan channel ADC (ADS/MCP). |
 | `LAPORAN PROGRESS CHAMBER 230726.pdf` | Progress chamber gas: solenoid valve, BME280 ganda, pompa (duty cycle), TGS2610 via ADS1115, LM2596, BTS7960, voltage divider 5V→3,3V. Next: PCB layout, pompa lebih senyap, mounting dinding. |
+| `Notulen_Meeting_GLD_24Jul2026.md` | **Meeting GLD 24 Jul** (LGU × Pertamina RU Cilacap): versi 24V selesai/siap sertifikasi (Shanghai); versi baterai target <100mA/≥30 hari/potensi 6–8 bulan; **model CNN 1D 97,6%** (5→6 kelas gas, verifikasi berjalan); mesh diuji 3 hop-list, CH 20 hari solar; keputusan dual deployment & target internal survei akhir Jul→instalasi Sep 2026; 18 action items; flame detection (kamera/Jetson Nano) **ditahan** (mirip OGI, belum disetujui). |
 
 ## C. Dataset sensor (`Dataset/`) — perangkat GLD-F001, 15 Jul 2026
 9 file CSV, **14.477 baris total**, 8 kanal tegangan (MQ8, MQ135, MQ3, MQ5, MQ4, MQ7, MQ6, MQ2). Sesi: Clean Air, LPG (×2), Oksigen, Carbon Dioxide, + baseline. Format: `timestamp_ms, wall_time, voltage_MQ*`.

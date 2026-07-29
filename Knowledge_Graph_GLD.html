@@ -120,7 +120,8 @@ const NODES=[
   {id:'repo:fe',type:'repo',label:'gasleakdetectionV2-April',meta:'Frontend + backend dashboard (Next.js/MapLibre/NestJS-GraphQL). Update 13 Jul 2026.'},
   {id:'repo:srv',type:'repo',label:'PertaminaGLD',meta:'Firmware GLD/CH/GW + server Node-RED + Operator Hub. Update 23 Jul 2026.'},
   {id:'repo:ml',type:'repo',label:'gas-leak-ml-chamber-system',meta:'ML/AI edge (TFLite Micro, chamber training). Update 24 Jun 2026.'},
-  {id:'model:tcn',type:'model',label:'TCN LPG 8-model',meta:'8 model univariat ≥92% (MQ4V 93,9%, F1 0,923). TFLite int8 ~72 KB.'},
+  {id:'model:tcn',type:'model',label:'TCN LPG 8-model',meta:'8 model univariat ≥92% (MQ4V 93,9%, F1 0,923). TFLite int8 ~72 KB. Fondasi awal (15 Jul) sebelum CNN 1D.'},
+  {id:'model:cnn1d',type:'model',label:'CNN 1D fusi 8-sensor',meta:'Model AI terbaru (24 Jul): fusi 8 sensor MQ, akurasi 97,6%. Target 5 gas (H₂/LPG/Metana/CO₂/Clean Air) — minimum 6 kelas disyaratkan, verifikasi berjalan.'},
   {id:'ru:2',type:'ru',label:'RU II Dumai',meta:'Roadmap. 10 sensor · 3 CH · 1 GW.'},
   {id:'ru:3',type:'ru',label:'RU III Plaju',meta:'Roadmap. 4 sensor · 3 CH · 1 GW.'},
   {id:'ru:4',type:'ru',label:'RU IV Cilacap ★',meta:'PILOT AKTIF. 3 sensor · 2 CH · 1 GW.'},
@@ -137,25 +138,29 @@ const NODES=[
   {id:'blk:power',type:'blocker',label:'Autonomi baterai GLD',meta:'Draw ON 5,75 W; 7P=1,76 hari vs target 30 hari. Perlu perpanjang OFF/solar.'},
   {id:'blk:tpl',type:'blocker',label:'TPL5010 belum optimal',meta:'Board ~0,4 V & cuplik data saat "off".'},
   {id:'blk:conv',type:'blocker',label:'DC converter',meta:'Perlu diganti/dimodifikasi (arahan 20 Jul).'},
-  {id:'blk:lora',type:'blocker',label:'Jangkauan LoRa (disiasati mesh)',meta:'~100 m/hop vs spec 1–2 km. Disiasati mesh multi-hop 8-CH (risiko, bukan blocker keras).'},
+  {id:'blk:lora',type:'blocker',label:'Jangkauan LoRa (disiasati mesh)',meta:'~100 m/hop vs spec 1–2 km. Disiasati mesh multi-hop 8-CH (risiko, bukan blocker keras). Meeting 24 Jul: diuji hingga 3 hop-list, latency <5 dtk normal.'},
+  {id:'blk:gasclass',type:'blocker',label:'Verifikasi min. 6 kelas gas',meta:'Model CNN 1D (97,6%) baru mencakup 5 gas (H₂/LPG/Metana/CO₂/Clean Air). Minimum 6 kelas disyaratkan sebelum deployment — verifikasi berjalan (Pak Farhan, Ilma).'},
   {id:'gate:jsa',type:'gate',label:'Gate TRA/JSA',meta:'Belum disusun → menahan eksekusi site survey fisik RU IV Cilacap.'},
+  {id:'gate:hsedoc',type:'gate',label:'Perizinan & dokumen HSE RU Cilacap',meta:'Template izin kerja, surat masuk barang, APD non-merah belum diterima dari RU Cilacap (PIC Pak Maman, deadline 31 Jul).'},
   {id:'deliv:dashboard',type:'deliverable',label:'Dashboard proyek',meta:'Dashboard_GLD_ProjectManagement.html'},
   {id:'deliv:progres',type:'deliverable',label:'Laporan progres',meta:'Laporan_Progres_ByDate_GLD (HTML+MD)'},
-  {id:'deliv:jsa',type:'deliverable',label:'Draft JSA/HSE',meta:'JSA_HSE_RU-IV_Cilacap_GLD (HTML+MD)'}
+  {id:'deliv:jsa',type:'deliverable',label:'Draft JSA/HSE',meta:'JSA_HSE_RU-IV_Cilacap_GLD (HTML+MD)'},
+  {id:'deliv:chamber',type:'deliverable',label:'Laporan progress chamber gas',meta:'LAPORAN PROGRESS CHAMBER 230726.pdf (23 Jul 2026)'},
+  {id:'deliv:meeting24jul',type:'deliverable',label:'Notulen Meeting GLD 24 Jul',meta:'Notulen_Meeting_GLD_24Jul2026.md — sertifikasi, model CNN 1D, revisi jadwal Cilacap.'}
 ];
 const EDGES=[
   ['org:LGU','proj:GLD','pelaksana'],['org:ITB-IoT','proj:GLD','engineering/AI'],['org:ITB-Fisika','proj:GLD','solar/energi'],['org:Pertamina','proj:GLD','klien-partner'],
   ['proj:GLD','sub:net','punya'],['proj:GLD','sub:ai','punya'],['proj:GLD','sub:power','punya'],['proj:GLD','sub:chamber','punya'],['proj:GLD','sub:sw','punya'],['proj:GLD','sub:integ','punya'],['proj:GLD','sub:ruprep','punya'],
   ['dev:node','dev:ch','LoRa STAR'],['dev:ch','dev:gw','LoRa MESH'],['dev:gw','dev:server','MQTT'],['dev:server','dev:dashboard','GraphQL'],['dev:server','dev:node','downlink'],
   ['repo:ml','dev:node','edge-ML'],['repo:srv','dev:node','firmware'],['repo:srv','dev:ch','firmware'],['repo:srv','dev:gw','firmware'],['repo:srv','dev:server','node-red'],['repo:fe','dev:dashboard','frontend'],['repo:fe','dev:server','backend'],
-  ['dev:node','model:tcn','menjalankan'],['sub:power','dev:tpl5010','pakai'],['sub:power','dev:bq25185','pakai'],['sub:power','dev:tps63020','pakai'],
+  ['dev:node','model:tcn','menjalankan'],['dev:node','model:cnn1d','menjalankan'],['sub:power','dev:tpl5010','pakai'],['sub:power','dev:bq25185','pakai'],['sub:power','dev:tps63020','pakai'],
   ['sub:net','dev:ch','mencakup'],['sub:net','dev:gw','mencakup'],['sub:ai','dev:node','mencakup'],['sub:sw','dev:server','mencakup'],['sub:sw','dev:dashboard','mencakup'],
   ['ru:4','proj:GLD','pilot-aktif'],['ru:2','proj:GLD','roadmap'],['ru:3','proj:GLD','roadmap'],['ru:5','proj:GLD','roadmap'],['ru:6','proj:GLD','roadmap'],['ru:7','proj:GLD','roadmap'],
-  ['blk:power','ms:install','menahan'],['blk:tpl','ms:install','menahan'],['blk:conv','ms:install','menahan'],['blk:lora','ms:install','menahan'],['gate:jsa','sub:ruprep','menahan'],
-  ['blk:power','sub:power','bagian'],['blk:tpl','sub:power','bagian'],['blk:lora','sub:net','bagian'],
-  ['ms:funcai','sub:integ','menyelesaikan'],['ms:comms','sub:integ','menyelesaikan'],['model:tcn','sub:ai','bagian'],
+  ['blk:power','ms:install','menahan'],['blk:tpl','ms:install','menahan'],['blk:conv','ms:install','menahan'],['blk:lora','ms:install','menahan'],['blk:gasclass','ms:install','menahan'],['gate:jsa','sub:ruprep','menahan'],['gate:hsedoc','sub:ruprep','menahan'],
+  ['blk:power','sub:power','bagian'],['blk:tpl','sub:power','bagian'],['blk:lora','sub:net','bagian'],['blk:gasclass','sub:ai','bagian'],
+  ['ms:funcai','sub:integ','menyelesaikan'],['ms:comms','sub:integ','menyelesaikan'],['model:tcn','sub:ai','bagian'],['model:cnn1d','sub:ai','bagian'],
   ['ms:kickoff','proj:GLD','menandai'],['ms:install','ru:4','di'],
-  ['deliv:dashboard','proj:GLD','melaporkan'],['deliv:progres','proj:GLD','melaporkan'],['deliv:jsa','ru:4','untuk']
+  ['deliv:dashboard','proj:GLD','melaporkan'],['deliv:progres','proj:GLD','melaporkan'],['deliv:jsa','ru:4','untuk'],['deliv:chamber','sub:chamber','melaporkan'],['deliv:meeting24jul','proj:GLD','melaporkan']
 ];
 
 const NById={}; NODES.forEach(n=>NById[n.id]=n);

@@ -5,12 +5,14 @@
 ## A. Deliverable yang dibuat oleh Claude (`Deliverables/`)
 | File | Isi |
 |---|---|
-| `Dashboard_GLD_ProjectManagement.html` | Dashboard manajemen proyek interaktif (biru #2B5FCB + charcoal): exec summary, progres vs outstanding, KPI, Kurva-S, Gantt 12 aktivitas, cakupan 6 RU, arsitektur 3 repo, sub-sistem, resource readiness, activity feed, blocker, action items, isu, rekomendasi. |
-| `Laporan_Progres_ByDate_GLD.html` / `.md` | Laporan progres kronologis (timeline Apr–Jul 2026). |
+| `Dashboard_GLD_ProjectManagement.html` | Dashboard manajemen proyek interaktif (biru #2B5FCB + charcoal). **Redesign 30 Jul**: sidebar navigasi persisten + 5 zona bernomor (Ringkasan · Jadwal & Cakupan · Arsitektur & Kesiapan · Aktivitas & AI · Risiko & Tindak Lanjut), exec summary disederhanakan (bukan lagi gradient biru kontras tinggi — kartu netral + aksen kiri). Semua data (30 action items, 13 isu/risiko) dipertahankan, hanya direstruktur. Responsif diverifikasi (headless Chrome, tanpa overflow horizontal). |
+| `Laporan_Progres_ByDate_GLD.html` / `.md` | Laporan progres kronologis (timeline Apr–30 Jul 2026). HTML kini punya **heatmap navigasi tanggal** (gaya GitHub contribution graph) — klik kotak untuk lompat ke entri pada tanggal itu; warna = jenis hari (blocker/milestone/temuan/selesai), pekat = jumlah entri. Exec box juga disederhanakan kontrasnya (30 Jul). |
+| `Notulen_Meeting_GLD_24Jul2026.{docx,html}`, `Notulen_Meeting_GLD_30Jul2026.{md,docx,html}` | Notulen meeting terformat (docx/html dibuat via `build_notulen.py`, tool Codex terpisah yang juga dipakai user di repo ini). Versi `.md` 30 Jul disusun Claude dari catatan mentah weekly meeting. |
 | `JSA_HSE_RU-IV_Cilacap_GLD.html` / `.md` | **DRAFT** JSA/TRA & HSE plan RU IV Cilacap (4 lembar JSA, ERP, tanda tangan). Belum disahkan. |
 | `Knowledge_Graph_GLD.html` | Knowledge graph **interaktif** (force-directed Canvas, zoom/pan/klik/filter) dari `memory/graph.json`. |
 | `GLD_V2_Progress_Report_Jul2026.pptx` | Deck progress report Jul 2026 (dibuat Claude, 30 Jul). |
 | `REPORT_GLD_V2_2026.md` | Laporan lengkap versi awal (dibuat 23 Jul) — ringkasan proyek, struktur repo, analisis dataset, temuan, isu/risiko, rekomendasi. ⚠️ **Kemungkinan tumpang tindih** dengan `Laporan_Progres_ByDate_GLD.md` (dibuat hari sama) — belum dikonfirmasi apakah masih dipakai atau superseded. |
+| `Notulen_Meeting_GLD_30Jul2026.md` | Notulen weekly meeting tim 30 Jul, disusun Claude dari catatan mentah (bukan dokumen client asli seperti notulen 24 Jul). Poin utama: arsitektur app lokal+DB (cloud=gateway saja, request Pak Pindoan), kunjungan Cilacap 9–10 Agu (survey+instalasi digabung, gantikan rencana Sep), Wi-Fi=config lokal (LoRa tetap utama), 15 action items, risiko baru (kondensasi casing, LoRa collision, akurasi model dipertanyakan). |
 | `CLAUDE.md`, `memory/*` | Sistem memory ini (di root). |
 
 ## B. Dokumen sumber — dari tim/klien (`Sumber Dokumen/`)

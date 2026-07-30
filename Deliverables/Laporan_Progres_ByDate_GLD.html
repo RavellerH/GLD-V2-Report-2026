@@ -58,10 +58,10 @@ h1{font-size:25px;margin-bottom:8px}
 .topbar{height:4px;background:linear-gradient(90deg,var(--accent) 0%,var(--info) 55%,var(--accent-2) 100%)}
 .identity{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:14px;font-weight:600}
 .identity .sq{width:9px;height:9px;background:var(--accent);border-radius:2px;flex:none}
-.exec{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);color:#fff;border-radius:14px;padding:20px 22px;margin:18px 0 6px;box-shadow:var(--shadow)}
-.exec .el{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.78;font-weight:600;margin-bottom:9px}
-.exec p{font-size:13px;color:rgba(255,255,255,.92);max-width:80ch;line-height:1.6;margin:0}
-.exec p b{color:#fff}
+.exec{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:19px 22px;margin:18px 0 6px;box-shadow:var(--shadow)}
+.exec .el{color:var(--accent-2);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:9px}
+.exec p{font-size:13px;color:var(--ink-2);max-width:80ch;line-height:1.62;margin:0}
+.exec p b{color:var(--ink);font-weight:700}
 .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 6px}
 .scell{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .scell::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
@@ -123,6 +123,30 @@ h1{font-size:25px;margin-bottom:8px}
 .gatebox .gt{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--warn);font-weight:700;display:block;margin-bottom:6px}
 footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-soft);font-family:var(--mono);line-height:1.7}
 @media(max-width:560px){.ev{grid-template-columns:64px 1fr;gap:10px}.ev-date{font-size:10.5px}}
+
+/* card + heatmap */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:16px 18px;box-shadow:var(--shadow);margin:16px 0 22px}
+.card-head{margin-bottom:2px}
+.hint2{font-size:11.5px;color:var(--ink-soft);line-height:1.55}
+.heat-scroll{overflow-x:auto;padding-bottom:2px}
+#heatmap{display:inline-flex;flex-direction:column;gap:4px;min-width:max-content}
+.heat-months{display:flex;gap:3px;height:13px;margin-left:34px}
+.heat-months span{width:13px;font-family:var(--mono);font-size:9.5px;color:var(--ink-soft);white-space:nowrap;overflow:visible;display:inline-block}
+.heat-body{display:flex;gap:4px}
+.heat-daylabels{display:flex;flex-direction:column;gap:3px;width:30px;flex:none}
+.heat-daylabels span{height:13px;line-height:13px;font-family:var(--mono);font-size:9px;color:var(--ink-soft);text-align:right;padding-right:4px;display:block}
+.heat-weeks{display:flex;gap:3px}
+.heat-week{display:flex;flex-direction:column;gap:3px}
+.heat-day{width:13px;height:13px;border-radius:3px;background:var(--surface-3)}
+.heat-day.empty{visibility:hidden}
+.heat-day[data-has="1"]{cursor:pointer}
+.heat-day[data-has="1"]:hover{outline:1.5px solid var(--ink);outline-offset:1px}
+.heat-legend{display:flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--ink-soft);flex-wrap:wrap}
+.heat-legend .hc{width:11px;height:11px;border-radius:3px;display:inline-block;background:var(--surface-3);vertical-align:middle}
+.heat-legend .hc[data-lv="1"]{background:var(--accent);opacity:.55}
+.heat-legend .hc[data-lv="2"]{background:var(--accent);opacity:.78}
+.heat-legend .hc[data-lv="3"]{background:var(--accent);opacity:1}
+.heat-sep{width:1px;height:12px;background:var(--line-2);margin:0 4px;display:inline-block}
 </style>
 
 <div class="topbar"></div>
@@ -140,23 +164,40 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
       <p class="parties">LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga</p>
     </div>
     <div class="mast-right">
-      <div class="asof">Periode <b>20 Apr – 23 Jul 2026</b></div>
-      <div class="asof">Disusun <b>24 Jul 2026</b></div>
+      <div class="asof">Periode <b>20 Apr – 30 Jul 2026</b></div>
+      <div class="asof">Progres <b>24 Jul</b> · Update <b>30 Jul</b></div>
       <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
     </div>
   </header>
 
   <section class="exec">
     <div class="el">Ringkasan Eksekutif</div>
-    <p>Rantai <b>GLD-CH-GW-Server berjalan end-to-end</b>; <b>inferensi AI kini di komputer/laptop + emulator ESP32</b> (deploy on-device = langkah berikutnya). Mesh <b>8-CH se-kampus terbukti multi-hop</b>, menyiasati keterbatasan jangkauan LoRa. Progres pilot <b>39%</b> vs rencana 19% — selisih ini murni sisi lab/engineering. Menuju lapangan, blocker daya (autonomi baterai, TPL5010, DC converter) &amp; <b>gate TRA/JSA</b> masih menjadi penahan. Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
+    <p>Progres pilot Cilacap <b>39%</b> terhadap rencana <b>19%</b>, murni sisi lab/engineering. Rantai GLD-CH-GW-Server berjalan end-to-end dengan dua model AI berdampingan (TCN &amp; CNN 1D). Meeting 24 Jul mengonfirmasi <b>24V siap sertifikasi</b>; update 30 Jul memajukan &amp; menggabungkan kunjungan RU IV Cilacap — survey + instalasi pada <b>9–10 Agustus</b> — serta memperjelas arsitektur (app+DB lokal, cloud sebagai gateway ringan). Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
   </section>
+
+  <div class="card heatcard">
+    <div class="card-head"><h2 style="font-size:14.5px;margin:0">Navigasi Cepat — Peta Aktivitas per Tanggal</h2></div>
+    <p class="hint2" style="margin:4px 0 12px">Setiap kotak = satu hari. Warna menandai jenis hari terpenting (merah = blocker, biru tua = milestone, teal = temuan, hijau = selesai, abu = update rutin); pekat = lebih banyak entri. Klik kotak untuk lompat ke entri pada tanggal itu.</p>
+    <div class="heat-scroll"><div id="heatmap"></div></div>
+    <div class="heat-legend">
+      <span>Kurang</span>
+      <i class="hc" data-lv="0"></i><i class="hc" data-lv="1"></i><i class="hc" data-lv="2"></i><i class="hc" data-lv="3"></i>
+      <span>Lebih</span>
+      <span class="heat-sep"></span>
+      <span><i class="hc" style="background:var(--crit)"></i> Blocker</span>
+      <span><i class="hc" style="background:var(--accent)"></i> Milestone</span>
+      <span><i class="hc" style="background:var(--info)"></i> Temuan</span>
+      <span><i class="hc" style="background:var(--good)"></i> Selesai</span>
+    </div>
+  </div>
 
   <section class="summary">
     <div class="scell good"><div class="v">39%</div><div class="l">Progres pilot · rencana <b>19%</b></div></div>
     <div class="scell crit"><div class="v">3</div><div class="l">Blocker kritis</div></div>
     <div class="scell"><div class="v">24</div><div class="l">Action items</div></div>
     <div class="scell"><div class="v">14.477</div><div class="l">Sampel dataset</div></div>
-    <div class="scell"><div class="v">≥92%</div><div class="l">Akurasi TCN <b>(8 model)</b></div></div>
+    <div class="scell"><div class="v">≥92%</div><div class="l">Akurasi TCN <b>(8 model, prediksi leak)</b></div></div>
+    <div class="scell good"><div class="v">97,6%</div><div class="l">Akurasi CNN 1D <b>(klasifikasi gas)</b></div></div>
   </section>
 
   <div class="phase">
@@ -167,7 +208,7 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
 
   <div class="phase">
     <span class="pn">FASE 2</span>
-    <div><h2>Kick-Off &amp; Progres Menuju Field</h2><p class="phase-sub">12 Juni – 20 Juli 2026</p></div>
+    <div><h2>Kick-Off &amp; Progres Menuju Field</h2><p class="phase-sub">12 Juni – 30 Juli 2026</p></div>
   </div>
   <div class="phase-wrap"><div class="tl" id="tl2"></div></div>
 
@@ -182,79 +223,83 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
 
   <div class="gatebox">
     <span class="gt">⛔ Gate menuju field — RU IV Cilacap</span>
-    Rencana &amp; workflow site survey Cilacap sudah siap. <b>Penyusunan TRA/JSA menjadi gate</b> untuk eksekusi survei fisik &amp; instalasi. Alur: LGU undang Pertamina ke lab → uji lab → kunjungan RU.
+    Rencana &amp; workflow site survey Cilacap sudah siap. <b>Penyusunan TRA/JSA menjadi gate</b> untuk eksekusi survei fisik &amp; instalasi. Gate tambahan (meeting 24 Jul): <b>gas capability minimum 6 kelas</b> harus terverifikasi; <b>perizinan visitor/kerja/HSE RU Cilacap</b> harus lengkap sejak awal. Alur: LGU undang Pertamina ke lab → uji lab → kunjungan RU.
   </div>
 
   <footer>
-    Sumber: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres estimasi turunan dari status aktivitas · disusun 24 Juli 2026.
+    Sumber: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres estimasi turunan dari status aktivitas · progres terukur 24 Juli, diperbarui 30 Juli 2026.
   </footer>
 </div>
 
 <script>
 const P1=[
   {m:'April 2026'},
-  {d:'20–26 Apr',w:'M1',title:'Desain chamber, uji node lama & routing CH',stat:['selesai','Selesai'],tags:[['hw','Hardware'],['net','Jaringan']],
+  {d:'20–26 Apr',w:'M1',range:['2026-04-20','2026-04-26'],title:'Desain chamber, uji node lama & routing CH',stat:['selesai','Selesai'],tags:[['hw','Hardware'],['net','Jaringan']],
    body:'✅ Desain Gas Test Chamber selesai. ✅ Uji node GLD lama. ✅ Routing <b>CH_Hello</b> &amp; <b>CH_Config</b> terverifikasi. Uji board sensor: PSU 5V→board 5,05 V; VCC ESP32 3,305 V; VBUS 4,97 V.'},
   {m:'Mei 2026'},
-  {d:'27 Apr–3 Mei',w:'M2',title:'Uji Node GLD baru & konsumsi baterai CH',stat:['selesai','Selesai'],tags:[['hw','Hardware'],['power','Daya']],
+  {d:'27 Apr–3 Mei',w:'M2',range:['2026-04-27','2026-05-03'],title:'Uji Node GLD baru & konsumsi baterai CH',stat:['selesai','Selesai'],tags:[['hw','Hardware'],['power','Daya']],
    body:'✅ 2 unit board GLD baru (#0001 &amp; #0002) — semua parameter OK: TCA9548A I²C mux, ADS1115, MCP3208 (8/8 ch), LoRa, sensor. ✅ Uji baterai CH: 1 device → 3 CH + 1 Node online (CH ~4,03–4,08 V / 85–90%). 📄 Design.md &amp; desain EasyEDA chamber.'},
-  {d:'4–10 Mei',w:'M3',title:'Uji daya panel surya → CH & firmware guard',stat:['berjalan','Berjalan'],tags:[['power','Daya'],['net','Jaringan']],
+  {d:'4–10 Mei',w:'M3',range:['2026-05-04','2026-05-10'],title:'Uji daya panel surya → CH & firmware guard',stat:['berjalan','Berjalan'],tags:[['power','Daya'],['net','Jaringan']],
    body:'Uji fungsional sistem GLD–CH–GW–Server dimulai. Pembuatan chamber &amp; uji sensor. Uji daya solar → CH (percobaan 1 minggu). 🔧 Firmware CH: <b>power recovery guard + WDT</b>.'},
-  {d:'11–17 Mei',w:'M4',title:'Uji jarak/reliabilitas & konsumsi baterai Node',stat:['berjalan','Berjalan'],tags:[['net','Jaringan'],['power','Daya']],
+  {d:'11–17 Mei',w:'M4',range:['2026-05-11','2026-05-17'],title:'Uji jarak/reliabilitas & konsumsi baterai Node',stat:['berjalan','Berjalan'],tags:[['net','Jaringan'],['power','Daya']],
    body:'Uji jarak &amp; reliabilitas komunikasi. Konsumsi baterai Node GLD: aktif 2 mnt 37 dtk, sleep 3 mnt (3,267 V aktif / 200 mV nonaktif). Uji node mode 24 V.'},
-  {d:'18–31 Mei',w:'M5–M6',title:'Uji sistem lingkungan kampus & evaluasi',stat:['berjalan','Berjalan'],tags:[['net','Jaringan'],['coord','Survei']],
+  {d:'18–31 Mei',w:'M5–M6',range:['2026-05-18','2026-05-31'],title:'Uji sistem lingkungan kampus & evaluasi',stat:['berjalan','Berjalan'],tags:[['net','Jaringan'],['coord','Survei']],
    body:'Uji sistem di ITB (indoor, obstacle pohon/gedung, outdoor). 📋 Site Survey Technical Checklist disusun (pemetaan area, titik node, uji RF, power, server, gas/AI). Evaluasi.'},
-  {d:'Mei',w:'CH',title:'Uji Cluster Head — topologi star-mesh & failover',stat:['milestone','Milestone'],tags:[['net','Jaringan']],
+  {d:'Mei',w:'CH',date:'2026-05-20',title:'Uji Cluster Head — topologi star-mesh & failover',stat:['milestone','Milestone'],tags:[['net','Jaringan']],
    body:'Konfigurasi otomatis: CH pilih parent by <b>RSSI terbaik</b>. Topologi <b>Node → CH1 → CH2 → CH3/GW</b> dgn ACK tiap hop. <b>Failover terbukti:</b> CH2 mati (ACK timeout 3×) → CH1 pindah parent ke GW, data tetap sampai (0 loss).'},
-  {d:'Mei–Jun',w:'RF',title:'Karakterisasi RF LoRa (kampus)',stat:['temuan','Temuan'],tags:[['net','Jaringan']],
+  {d:'Mei–Jun',w:'RF',date:'2026-06-01',title:'Karakterisasi RF LoRa (kampus)',stat:['temuan','Temuan'],tags:[['net','Jaringan']],
    body:'Area terbuka 100 m @ −71 dBm PDR 100%. Bawah pohon 80 m PDR 100%. Antena RX 6 m memperbaiki link area gedung+pohon (−81 dBm PDR 100%). Batas jangkauan (Fisika): −112 dBm PDR 26%.'},
   {m:'Juni 2026'},
-  {d:'1–7 Jun',w:'M7',title:'Persiapan pemasangan sistem',stat:['berjalan','Berjalan'],tags:[['hw','Hardware']],
+  {d:'1–7 Jun',w:'M7',range:['2026-06-01','2026-06-07'],title:'Persiapan pemasangan sistem',stat:['berjalan','Berjalan'],tags:[['hw','Hardware']],
    body:'Persiapan pemasangan sistem menuju penutup fase lab.'}
 ];
 const P2=[
   {m:'Juni 2026'},
-  {d:'12 Jun',title:'Kick-Off Meeting Pertamina',stat:['milestone','Milestone'],tags:[['coord','Koordinasi']],
+  {d:'12 Jun',date:'2026-06-12',title:'Kick-Off Meeting Pertamina',stat:['milestone','Milestone'],tags:[['coord','Koordinasi']],
    body:'Baseline <b>timeline 9 bulan</b> disepakati; scope <b>6 RU</b> (RU II–VII). Target implementasi <b>Des 2026</b>; field test RU-VII Kasim. Sistem pelengkap (bukan pengganti); instalasi via pihak ke-3 + koordinasi HSE. Dua SPK: sertifikasi hazardous area &amp; implementasi 6 kilang.'},
-  {d:'18 Jun',title:'Prinsip pemodelan AI ditetapkan',stat:['berjalan','Berjalan'],tags:[['ml','AI/ML']],
+  {d:'18 Jun',date:'2026-06-18',title:'Prinsip pemodelan AI ditetapkan',stat:['berjalan','Berjalan'],tags:[['ml','AI/ML']],
    body:'Pergeseran ke <b>fingerprint 8-sensor</b> &amp; pola relatif (transien/stasioner/saturasi), bukan amplitudo absolut. Proyek ditegaskan setara <b>TRL-7</b>.'},
-  {d:'26 Jun',title:'Temuan jangkauan LoRa',stat:['temuan','Temuan'],tags:[['net','Jaringan'],['ml','AI/ML']],
+  {d:'26 Jun',date:'2026-06-26',title:'Temuan jangkauan LoRa',stat:['temuan','Temuan'],tags:[['net','Jaringan'],['ml','AI/ML']],
    body:'⚠️ Antena LoRa 6 m maks <b>±100 m</b> pada obstruksi (spec 1–2 km LOS). Model <b>TCNN</b> mulai (prediksi 5 dtk dari 5 dtk).'},
-  {d:'30 Jun',title:'Project Report June (Lab IoT ITB)',stat:['berjalan','Berjalan'],tags:[['hw','Hardware'],['ml','AI/ML']],
+  {d:'30 Jun',date:'2026-06-30',title:'Project Report June (Lab IoT ITB)',stat:['berjalan','Berjalan'],tags:[['hw','Hardware'],['ml','AI/ML']],
    body:'PCB GLD v1 &amp; v2 Done. Baterai GLD Progress; casing (sirine/buzzer menunggu kirim). Desain chamber Done; assembly Progress. Dataset Progress; model ML/AI (LPG) — perlu konfirmasi jenis gas. Validasi &amp; uji fungsional Progress.'},
   {m:'Juli 2026'},
-  {d:'2 Jul',title:'Repositori kode',stat:['berjalan','Berjalan'],tags:[['sw','Software']],
+  {d:'2 Jul',date:'2026-07-02',title:'Repositori kode',stat:['berjalan','Berjalan'],tags:[['sw','Software']],
    body:'Source code tersebar (GLD &amp; AI · jaringan · server) → <b>rencana konsolidasi</b> satu repo utama.'},
-  {d:'6 Jul',title:'Uji komunikasi 2 Cluster Head',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['power','Daya']],
+  {d:'6 Jul',date:'2026-07-06',title:'Uji komunikasi 2 Cluster Head',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['power','Daya']],
    body:'Charging 08:00–16:00 menaikkan baterai <b>3,0 → 3,4 V</b> (±20%). Mahasiswa PJ chamber didapatkan.'},
-  {d:'6–8 Jul',title:'Uji ketahanan baterai CH (LitoKala)',stat:['temuan','Temuan'],tags:[['power','Daya']],
+  {d:'6–8 Jul',range:['2026-07-06','2026-07-08'],title:'Uji ketahanan baterai CH (LitoKala)',stat:['temuan','Temuan'],tags:[['power','Daya']],
    body:'1 baterai LitoKala supply board CH <b>~40 jam</b> (transmit 10 s); 3 baterai ~33 jam. Lapangan (dgn solar): CH3 8 hari (awal 4,0 V), CH5 5 hari — defisit energi kecil pada 1 panel.'},
-  {d:'9 Jul',title:'Rantai komunikasi GLD-CH-GW-Server tersambung',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['sw','Software']],
+  {d:'9 Jul',date:'2026-07-09',title:'Rantai komunikasi GLD-CH-GW-Server tersambung',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['sw','Software']],
    body:'Data mengalir penuh <b>Node → CH → GW → server</b> (MQTT) — rantai komunikasi end-to-end terbukti, dasar uji fungsional terintegrasi.'},
-  {d:'9 Jul',title:'Kinerja solar',stat:['temuan','Temuan'],tags:[['power','Daya']],
+  {d:'9 Jul',date:'2026-07-09',title:'Kinerja solar',stat:['temuan','Temuan'],tags:[['power','Daya']],
    body:'Vp 7,25 V; Ip 0,05 A. Pengisian belum optimal — lokasi hanya optimal 10:00–13:00 → <b>rekomendasi pindah ke rooftop</b>.'},
-  {d:'13 Jul',title:'Profil beban daya GLD',stat:['blocker','Blocker'],tags:[['power','Daya']],
+  {d:'13 Jul',date:'2026-07-13',title:'Profil beban daya GLD',stat:['blocker','Blocker'],tags:[['power','Daya']],
    body:'Jalur 5 V &amp; 24 V normal (±6 W). 🔴 <b>Mode baterai hanya 2,43 W</b> vs kebutuhan ±6 W — belum mampu menyuplai 8 heater MQ penuh.'},
-  {d:'13 Jul',title:'Repo frontend — MapLibre & default RU IV Cilacap',stat:['berjalan','Update'],tags:[['sw','Repo Dev']],
+  {d:'13 Jul',date:'2026-07-13',title:'Repo frontend — MapLibre & default RU IV Cilacap',stat:['berjalan','Update'],tags:[['sw','Repo Dev']],
    body:'Dashboard pindah peta ke <b>MapLibre</b> (hapus Mapbox, local tiles), <b>default deployment RU IV Cilacap</b>, device CRUD penuh + gas trend heatmap overlay.'},
-  {d:'14 Jul',title:'Solar–baterai',stat:['temuan','Temuan'],tags:[['power','Daya']],
+  {d:'14 Jul',date:'2026-07-14',title:'Solar–baterai',stat:['temuan','Temuan'],tags:[['power','Daya']],
    body:'Pukul 11–15 stabil <b>±4,17 V</b> (baterai penuh). Setelah 14:00 arus/daya negatif (mulai discharge) → ±4,12 V.'},
-  {d:'15 Jul',title:'Akuisisi data & model TCN per-sensor',stat:['milestone','Milestone'],tags:[['ml','AI/ML']],
+  {d:'15 Jul',date:'2026-07-15',title:'Akuisisi data & model TCN per-sensor',stat:['milestone','Milestone'],tags:[['ml','AI/ML']],
    body:'Dataset GLD-F001: Clean Air, LPG, O₂, CO₂ — <b>14.477 sampel</b> (8 kanal MQ, ~2,7 j). <b>Model TCN per-sensor selesai:</b> 8 model, semua <b>≥92% akurasi</b> prediksi LPG 5 dtk ke depan; terbaik <b>MQ4V 93,9%</b> (F1 0,923). Ekspor TFLite int8 ~72 KB.'},
-  {d:'16 Jul',title:'Uji fungsional GLD-CH-GW-Server + inferensi AI',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['ml','AI/ML'],['sw','Software']],
+  {d:'16 Jul',date:'2026-07-16',title:'Uji fungsional GLD-CH-GW-Server + inferensi AI',stat:['milestone','Milestone'],tags:[['net','Jaringan'],['ml','AI/ML'],['sw','Software']],
    body:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end. <b>Inferensi AI jalan di komputer/laptop dengan emulator ESP32</b> — deploy on-device ESP32 = langkah berikutnya.'},
-  {d:'16 Jul',title:'Analisis daya · uji mesh 8-CH · uji downlink',stat:['milestone','Milestone'],tags:[['power','Daya'],['net','Jaringan']],
+  {d:'16 Jul',date:'2026-07-16',title:'Analisis daya · uji mesh 8-CH · uji downlink',stat:['milestone','Milestone'],tags:[['power','Daya'],['net','Jaringan']],
    body:'<b>Budget daya terkuantifikasi:</b> GLD 7P (28Ah) runtime <b>1,76 hari</b>; 30 hari batt-only butuh ~120 sel → opsi realistis <b>perpanjang OFF ~63 mnt</b>/solar. Draw ON terverifikasi <b>5,75 W</b> (mengklarifikasi "2,43 W"). <b>CH 2 panel surya surplus 1,5–4,4 Wh/hari</b> (1 panel defisit). <b>Mesh 8-CH se-kampus ITB</b> multi-hop hingga Layer 3 &amp; <b>downlink GLD</b> lewat mesh + fix firmware → jangkauan LoRa disiasati. Catatan: TPL5010 belum optimal (~0,4 V saat off).'},
-  {d:'16 Jul',title:'Temuan sensor & aplikasi UI',stat:['temuan','Temuan'],tags:[['ml','AI/ML'],['sw','Software'],['net','Jaringan']],
+  {d:'16 Jul',date:'2026-07-16',title:'Temuan sensor & aplikasi UI',stat:['temuan','Temuan'],tags:[['ml','AI/ML'],['sw','Software'],['net','Jaringan']],
    body:'Respons berkorelasi positif pada <b>CO₂</b>, tidak pada <b>O₂</b>. Baseline berbeda per sensor → <b>threshold per-MQ</b> (panduan QC). Aplikasi UI GLD dibuat (dataset/capture/save/download). Uji LoRa acak: Gerbang Utara 242 m PDR 100%; LFT 177 m PDR 100%; STEI 200 m PDR 87%.'},
-  {d:'17 Jul',title:'Urutan kerja koordinasi',stat:['berjalan','Berjalan'],tags:[['coord','Koordinasi']],
+  {d:'17 Jul',date:'2026-07-17',title:'Urutan kerja koordinasi',stat:['berjalan','Berjalan'],tags:[['coord','Koordinasi']],
    body:'Disepakati: <b>LGU undang Pertamina ke lab → uji lab → kunjungan RU</b>. Dokumen JSA/TRA perlu dikonfirmasi kesiapannya.'},
-  {d:'20 Jul',title:'Simulasi siklus operasi & arahan daya',stat:['berjalan','Berjalan'],tags:[['power','Daya'],['sw','Software']],
+  {d:'20 Jul',date:'2026-07-20',title:'Simulasi siklus operasi & arahan daya',stat:['berjalan','Berjalan'],tags:[['power','Daya'],['sw','Software']],
    body:'Simulasi diunggah ke board: <b>ON 60 s / OFF 100 s / WAKE 160 s</b> (warm-up → akuisisi → inferensi → transmit). Saat inferensi suplai MQ diputus, <b>ESP tetap menyala</b>. 🔴 Arahan: <b>ganti/modifikasi DC converter</b>; modifikasi baterai ditahan.'},
-  {d:'23 Jul',title:'Repo server/firmware aktif (PertaminaGLD)',stat:['berjalan','Update'],tags:[['net','Jaringan'],['sw','Repo Dev']],
+  {d:'23 Jul',date:'2026-07-23',title:'Repo server/firmware aktif (PertaminaGLD)',stat:['berjalan','Update'],tags:[['net','Jaringan'],['sw','Repo Dev']],
    body:'Commit terbaru: firmware GLD/CH/GW + <b>Operator Hub workflows</b>, reliability &amp; test coverage; manajemen daya <b>TPL5010</b> &amp; algoritma nulling.'},
-  {d:'23 Jul',title:'Progress Gas Test Chamber — sistem kendali berfungsi',stat:['milestone','Milestone'],tags:[['hw','Hardware'],['ml','Sensor']],
-   body:'Kendali dua-arah real-time via ESP32: <b>solenoid valve</b> (aliran gas presisi), <b>pompa penghisap duty-cycle</b>, <b>2× BME280</b> (I²C 0x76/0x77), <b>TGS2610</b> via ADS1115 + voltage divider. Daya LM2596 → 5V + driver BTS7960. Lanjut: PCB layout · pompa senyap · pasang di dinding chamber.'}
+  {d:'23 Jul',date:'2026-07-23',title:'Progress Gas Test Chamber — sistem kendali berfungsi',stat:['milestone','Milestone'],tags:[['hw','Hardware'],['ml','Sensor']],
+   body:'Kendali dua-arah real-time via ESP32: <b>solenoid valve</b> (aliran gas presisi), <b>pompa penghisap duty-cycle</b>, <b>2× BME280</b> (I²C 0x76/0x77), <b>TGS2610</b> via ADS1115 + voltage divider. Daya LM2596 → 5V + driver BTS7960. Lanjut: PCB layout · pompa senyap · pasang di dinding chamber.'},
+  {d:'24 Jul',date:'2026-07-24',title:'Meeting LGU–Pertamina — sertifikasi, gas capability, dual-system',stat:['milestone','Milestone'],tags:[['coord','Koordinasi'],['ml','AI/ML'],['power','Daya']],
+   body:'09:32–11:00 WIB, LGU (Pak Muhammad/Farhan/Ilma/Fahmi/Beni) &amp; Pertamina (Pak Sena/Maman/Adit/Roni/Indra). <b>24V siap sertifikasi</b> (biro Shanghai); battery version target <b>&lt;100 mA</b>/min 30 hari (desain baru 6–8 bulan) — paralel, tak menghambat 24V. Gate baru: <b>gas capability min 6 kelas</b> (H₂/LPG/Metana/CO₂/Clean Air). Model <b>CNN 1D</b> (klasifikasi gas, Lab IoT ITB) dikonfirmasi <b>97,6%</b> akurasi test (97,3% versi ESP32-S3 int8) — model berbeda dari TCN (prediksi leak), keduanya sah berdampingan. Deployment RU Cilacap: strategi <b>dual system</b> (server lokal+cloud); survey akhir Jul → instalasi <b>Sep 2026</b>. 18 action items dicatat; ⚠️ flame detection (Jetson Nano, 79%) &amp; sensor arah angin masih pengembangan tambahan, <b>belum masuk scope resmi</b>. Next: <b>RAP Meeting ~15 Agu 2026</b>.'},
+  {d:'30 Jul',date:'2026-07-30',title:'Weekly meeting — jadwal Cilacap maju, arsitektur diperjelas',stat:['milestone','Milestone'],tags:[['coord','Koordinasi'],['power','Daya']],
+   body:'<b>Kunjungan RU IV Cilacap dimajukan &amp; digabung</b>: survey + instalasi pada <b>9–10 Agustus</b> (berangkat 9 Agu, instalasi Senin 10 Agu) — menggantikan rencana 24 Jul (survey akhir Jul → instalasi Sep). Arsitektur diperjelas: <b>app+DB penuh lokal</b> (site + kantor Jakarta, request Pak Pindoan), <b>cloud hanya gateway/relay ringan</b>. Wi-Fi ESP32 dikonfirmasi hanya untuk config/serial lokal — LoRa tetap backbone telemetri. ⚠️ Risiko baru: kondensasi casing, data collision LoRa belum diuji, push alarm belum dicoba, protokol missed-report GLD portable, dan kekhawatiran akurasi model tinggi → direkomendasikan verifikasi ulang.'}
 ];
 function render(data,elId){
   const c=document.getElementById(elId);let cur=null;
@@ -264,7 +309,8 @@ function render(data,elId){
     const cls=e.stat[0]==='milestone'?'':(e.stat[0]==='blocker'?'crit':(e.stat[0]==='temuan'?'info':(e.stat[0]==='selesai'?'good':'')));
     const dotcls=e.stat[0]==='milestone'?'':(e.stat[0]==='blocker'?'crit':(e.stat[0]==='temuan'?'info':(e.stat[0]==='selesai'?'good':(e.tags[0][0]==='ml'?'ml':''))));
     const tags=e.tags.map(t=>`<span class="tag ${t[0]}">${t[1]}</span>`).join('');
-    row.innerHTML=`<div class="ev">
+    const dkey=e.date||(e.range?e.range[0]:'');
+    row.innerHTML=`<div class="ev" data-date="${dkey}">
       <div class="ev-rail"><div class="ev-date">${e.d}${e.w?`<small>${e.w}</small>`:''}</div></div>
       <div class="ev-card ${dotcls}">
         <div class="ev-head"><span class="ev-title">${e.title}</span><span class="stat ${e.stat[0]}">${e.stat[1]}</span></div>
@@ -275,6 +321,89 @@ function render(data,elId){
   });
 }
 render(P1,'tl1');render(P2,'tl2');
+
+/* ---------- HEATMAP NAVIGASI TANGGAL ---------- */
+(function(){
+  const HEAT_START=new Date(2026,3,20), HEAT_END=new Date(2026,6,30);
+  const MONTH_ID=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  const TYPE_COLOR={blocker:'var(--crit)',milestone:'var(--accent)',temuan:'var(--info)',selesai:'var(--good)',berjalan:'var(--ink-soft)'};
+  const TYPE_PRI=['blocker','milestone','temuan','selesai','berjalan'];
+  function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function addDays(d,n){const r=new Date(d);r.setDate(r.getDate()+n);return r;}
+  const heatData={};
+  function markDay(key,type){
+    if(!heatData[key])heatData[key]={count:0,types:{}};
+    heatData[key].count++;
+    heatData[key].types[type]=(heatData[key].types[type]||0)+1;
+  }
+  [...P1,...P2].forEach(e=>{
+    if(e.m)return;
+    const type=e.stat[0];
+    if(e.range){
+      let d=new Date(e.range[0]+'T00:00:00'); const end=new Date(e.range[1]+'T00:00:00');
+      while(d<=end){markDay(iso(d),type);d=addDays(d,1);}
+    } else if(e.date){
+      markDay(e.date,type);
+    }
+  });
+  function topType(types){for(const t of TYPE_PRI){if(types[t])return t;}return 'berjalan';}
+
+  const heatEl=document.getElementById('heatmap');
+  heatEl.innerHTML=`<div class="heat-months" id="heatMonths"></div>
+    <div class="heat-body">
+      <div class="heat-daylabels"><span></span><span>Sen</span><span></span><span>Rab</span><span></span><span>Jum</span><span></span></div>
+      <div class="heat-weeks" id="heatWeeks"></div>
+    </div>`;
+  const monthsEl=document.getElementById('heatMonths');
+  const weeksEl=document.getElementById('heatWeeks');
+
+  const gridStart=addDays(HEAT_START,-HEAT_START.getDay());
+  const gridEnd=addDays(HEAT_END,6-HEAT_END.getDay());
+  let cur=new Date(gridStart);
+  let lastMonth=HEAT_START.getMonth()-1;
+  let colIndex=0, lastLabelCol=-99;
+  while(cur<=gridEnd){
+    const weekCol=document.createElement('div');weekCol.className='heat-week';
+    let monthText='';
+    for(let i=0;i<7;i++){
+      const inRange=cur>=HEAT_START&&cur<=HEAT_END;
+      const key=iso(cur);
+      const data=heatData[key];
+      const cell=document.createElement('div');
+      cell.className='heat-day'+(inRange?'':' empty');
+      if(inRange){
+        if(cur.getDate()===1&&cur.getMonth()!==lastMonth){monthText=MONTH_ID[cur.getMonth()];lastMonth=cur.getMonth();}
+        const dlab=cur.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+        if(data){
+          const tt=topType(data.types);
+          const op=data.count>=3?1:(data.count===2?0.78:0.55);
+          cell.style.background=TYPE_COLOR[tt];
+          cell.style.opacity=op;
+          cell.dataset.has='1';
+          cell.dataset.date=key;
+          cell.title=dlab+' — '+data.count+' entri';
+        } else {
+          cell.title=dlab;
+        }
+      }
+      weekCol.appendChild(cell);
+      cur=addDays(cur,1);
+    }
+    if(colIndex===0&&!monthText)monthText=MONTH_ID[HEAT_START.getMonth()];
+    if(monthText&&(colIndex-lastLabelCol)<2)monthText='';
+    if(monthText)lastLabelCol=colIndex;
+    const monthLab=document.createElement('span');monthLab.textContent=monthText;
+    monthsEl.appendChild(monthLab);
+    weeksEl.appendChild(weekCol);
+    colIndex++;
+  }
+  weeksEl.addEventListener('click',e=>{
+    const cell=e.target.closest('.heat-day[data-has="1"]');
+    if(!cell)return;
+    const target=document.querySelector(`.ev[data-date="${cell.dataset.date}"]`);
+    if(target)target.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+})();
 (function(){const b=document.getElementById('themebtn');b.addEventListener('click',()=>{
   const cur=document.documentElement.getAttribute('data-theme');
   const sd=window.matchMedia('(prefers-color-scheme:dark)').matches;const now=cur?cur:(sd?'dark':'light');

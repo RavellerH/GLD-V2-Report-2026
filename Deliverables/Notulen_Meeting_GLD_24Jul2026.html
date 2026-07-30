@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notulen Meeting GLD — 24 Juli 2026</title>
+  <style>
+    :root { --navy:#17365d; --blue:#2e74b5; --ink:#20252b; --muted:#667085; --line:#d7dee8; --pale:#e8eef5; --paper:#fff; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#edf1f5; color:var(--ink); font:15px/1.52 Calibri, "Segoe UI", Arial, sans-serif; }
+    main { width:min(960px, calc(100% - 32px)); margin:28px auto; background:var(--paper); padding:54px 64px 62px; box-shadow:0 12px 36px rgba(23,54,93,.12); }
+    .kicker { color:var(--muted); font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    h1 { margin:7px 0 0; color:var(--navy); font-size:34px; line-height:1.05; letter-spacing:-.02em; }
+    .subtitle { margin:5px 0 22px; color:var(--muted); font-size:19px; font-weight:650; }
+    .meta { display:grid; grid-template-columns:150px 1fr; border:1px solid var(--line); margin-bottom:28px; }
+    .meta-label,.meta-value { padding:9px 12px; border-bottom:1px solid var(--line); }
+    .meta-label:nth-last-child(-n+2),.meta-value:nth-last-child(-n+2) { border-bottom:0; }
+    .meta-label { background:var(--pale); color:var(--navy); font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+    h2 { margin:30px 0 10px; padding-bottom:5px; color:var(--blue); font-size:22px; border-bottom:1px solid var(--line); }
+    h3 { margin:21px 0 7px; color:var(--navy); font-size:17px; }
+    h4 { margin:13px 0 4px; color:#1f4d78; font-size:15px; }
+    ul { margin:4px 0 12px; padding-left:23px; }
+    li { margin:4px 0; }
+    p { margin:5px 0; }
+    .note { color:var(--muted); font-size:13px; font-style:italic; }
+    .table-wrap { overflow-x:auto; margin:9px 0 22px; border:1px solid var(--line); }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th { padding:9px 8px; background:var(--navy); color:white; text-align:left; font-size:12px; letter-spacing:.02em; }
+    td { padding:8px; border-top:1px solid var(--line); vertical-align:top; }
+    tbody tr:nth-child(even) { background:#f8fafc; }
+    .actions th:first-child,.actions td:first-child { width:48px; text-align:center; }
+    .actions th:nth-child(4),.actions td:nth-child(4),.actions th:nth-child(5),.actions td:nth-child(5) { white-space:nowrap; }
+    footer { margin-top:34px; padding-top:10px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; font-style:italic; }
+    @media (max-width:700px) {
+      main { width:100%; margin:0; padding:30px 20px 42px; box-shadow:none; }
+      .meta { grid-template-columns:110px 1fr; }
+      h1 { font-size:29px; }
+    }
+    @media print {
+      @page { size:Letter; margin:16mm 17mm; }
+      body { background:white; font-size:10.5pt; }
+      main { width:auto; margin:0; padding:0; box-shadow:none; }
+      h2,h3,h4 { break-after:avoid; }
+      table { font-size:8.5pt; }
+      tr { break-inside:avoid; }
+      .table-wrap { overflow:visible; }
+      a { color:inherit; text-decoration:none; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="kicker">GLD Tahap 2 · Notulen Resmi</div>
+    <h1>NOTULEN MEETING</h1>
+    <div class="subtitle">Pengembangan Gas Leak Detector (GLD)</div>
+    <div class="meta"><div class="meta-label">Tanggal</div><div class="meta-value">24 Juli 2026</div><div class="meta-label">Waktu</div><div class="meta-value">09.32–11.00 WIB</div><div class="meta-label">Proyek</div><div class="meta-value">Gas Leak Detector (GLD) — Real Testing &amp; Certification</div><div class="meta-label">Peserta</div><div class="meta-value">PT LAPI Ganesha Utama (LGU): Pak Muhammad, Pak Farhan, Ilma, Fahmi, Beni<br>PT Pertamina: Pak Sena, Pak Maman, Pak Adit, Mas Roni, Mas Indra (RU IV Cilacap)</div></div>
+  </header>
+  <section><h2>Agenda</h2><ul><li>Pembaruan progres pengembangan Gas Leak Detector (GLD).</li><li>Status sertifikasi perangkat.</li><li>Persiapan pengujian lapangan di RU IV Cilacap.</li><li>Tinjauan teknis sensor, jaringan, dan aplikasi manajemen.</li><li>Koordinasi jadwal dan persyaratan instalasi.</li></ul></section>
+  <section><h2>Ringkasan Pembahasan</h2><h3>1. Status Pengembangan dan Sertifikasi</h3><h4>Versi 24 V (catu daya)</h4><ul><li>Pengembangan telah selesai dan perangkat siap memasuki proses sertifikasi.</li><li>Administrasi sertifikasi telah disiapkan.</li><li>Proses sertifikasi direncanakan menggunakan jasa biro sertifikasi di Shanghai.</li></ul><h4>Versi baterai</h4><ul><li>Masih dalam tahap pengembangan.</li><li>Tantangan utama adalah konsumsi daya sensor MQ sekitar 10 W atau total arus sekitar 1 A untuk delapan sensor.</li><li>Target optimasi adalah konsumsi arus di bawah 100 mA dengan masa operasi minimal 30 hari.</li><li>Desain baru dengan baterai isi ulang diproyeksikan berpotensi mencapai masa operasi 6–8 bulan.</li></ul><h3>2. Teknologi dan Fitur</h3><h4>Deteksi sensor</h4><ul><li>Sistem menggunakan fusi data dari delapan sensor MQ.</li><li>Gas yang disebutkan untuk dideteksi: H₂, LPG, metana, CO₂, dan clean air. Target minimum dinyatakan enam kelas; daftar sumber hanya menyebut lima kategori sehingga kelas keenam masih perlu dikonfirmasi.</li><li>Model CNN 1D dilaporkan memiliki akurasi 97,6%. Klaim ini perlu direkonsiliasi dengan hasil model lain dan diverifikasi sebelum dijadikan baseline resmi.</li><li>Setiap unit GLD perlu dilatih atau dikalibrasi untuk gas target yang akan dideteksi.</li></ul><h4>Jaringan LoRa mesh</h4><ul><li>Topologi komunikasi: GLD → Cluster Head (CH) → Gateway → Server.</li><li>Jaringan mesh mendukung self-healing dan automatic failover.</li><li>Pengujian telah mencapai tiga hop dengan latensi kurang dari 5 detik pada kondisi normal dan 5–15 detik pada kondisi ramai.</li><li>Cluster Head mengonsumsi sekitar 10 W dan dilaporkan stabil beroperasi selama 20 hari nonstop menggunakan panel surya.</li></ul><h4>Aplikasi manajemen</h4><ul><li>Tersedia perangkat bantu untuk konfigurasi Gateway, Cluster Head, dan sensor GLD.</li><li>Monitoring real-time meliputi status koneksi, kekuatan sinyal (RSSI/SNR), dan heat map deteksi gas.</li><li>Fitur yang dibahas mencakup rekalibrasi jarak jauh, notifikasi alarm, dan pencatatan data.</li></ul><h3>3. Persiapan Pengujian Lapangan — RU IV Cilacap</h3><h4>Rencana kunjungan</h4><ul><li>Rencana awal: survei pada akhir Juli 2026 dan instalasi pada September 2026.</li><li>Strategi dapat diubah menjadi satu kunjungan yang menggabungkan survei dan instalasi apabila kondisi memungkinkan.</li><li>Survei mencakup pemetaan area, penentuan posisi sensor/CH/Gateway, dan analisis coverage.</li></ul><h4>Persyaratan administratif</h4><ul><li>Survei awal menggunakan izin visitor dengan durasi maksimal tiga hari.</li><li>Instalasi memerlukan izin kerja dan surat masuk barang.</li><li>Dokumen HSE dan APD mengikuti template RU IV Cilacap; APD warna merah perlu dihindari.</li><li>Koordinasi dengan tim HSE RU IV Cilacap wajib dilakukan sejak awal.</li></ul><h4>Rencana deployment</h4><ul><li>Dibahas dua sistem paralel, yaitu server lokal RU dan cloud, untuk perbandingan performa.</li><li>Perangkat portable untuk pemetaan sinyal LoRa telah disiapkan.</li><li>Test chamber portable akan dibawa untuk kalibrasi di lokasi.</li></ul><h3>4. Pengembangan Tambahan</h3><h4>Deteksi api berbasis kamera</h4><ul><li>Model dilaporkan telah dikembangkan dengan akurasi 79% dan masih perlu ditingkatkan.</li><li>Perangkat yang digunakan adalah Jetson Nano, yang telah dibeli.</li><li>Dataset bersumber dari Google dan menggunakan kamera inframerah.</li><li>Kamera direncanakan dicari di China bersamaan dengan perjalanan sertifikasi.</li></ul><h4>Integrasi sensor arah angin</h4><ul><li>Sensor arah angin direncanakan sebagai bagian dari sistem peringatan dini.</li><li>Tujuannya adalah mendukung prediksi dispersi gas dan penyebaran api untuk respons darurat.</li></ul><h3>5. Masukan dan Diskusi Teknis</h3><ul><li>Pertamina meminta frekuensi pengiriman data disesuaikan dengan kebutuhan keselamatan.</li><li>Benchmark IoT monitoring yang dibahas adalah masa baterai lima tahun dengan transmisi dua kali per hari.</li><li>Sistem diharapkan plug-and-play dengan konfigurasi manual seminimal mungkin.</li><li>Konfigurasi default jaringan harus optimal; penyetelan manual hanya digunakan untuk kasus khusus.</li></ul></section>
+  <section>
+    <h2>Action Items / Daftar Tugas</h2>
+    <p class="note">Status, PIC, dan tenggat mengikuti catatan sumber. Entri “belum ditetapkan” menandai informasi yang perlu dilengkapi.</p>
+    <div class="table-wrap"><table class="actions"><thead><tr><th>No.</th><th>Tugas</th><th>PIC</th><th>Tenggat</th><th>Status</th></tr></thead><tbody><tr><td>1</td><td>Optimasi konsumsi daya versi baterai (&lt;100 mA) dan uji masa operasi minimal 30 hari.</td><td>Tim LGU (Pak Muhammad)</td><td>15 Agu 2026</td><td>Berjalan</td></tr><tr><td>2</td><td>Finalisasi desain baru versi baterai dengan target masa operasi 6–8 bulan.</td><td>Tim LGU</td><td>15 Agu 2026</td><td>Berjalan</td></tr><tr><td>3</td><td>Sewa ulang tabung gas hidrogen (H₂) untuk proses pelatihan model GLD.</td><td>Pak Farhan</td><td>5 Agu 2026</td><td>Tertunda</td></tr><tr><td>4</td><td>Verifikasi kemampuan deteksi H₂, LPG, metana, CO₂, clean air, dan konfirmasi kelas keenam.</td><td>Pak Farhan, Ilma</td><td>10 Agu 2026</td><td>Berjalan</td></tr><tr><td>5</td><td>Uji multi-sensor simultan pada jaringan LoRa mesh (stress test).</td><td>Beni, Fahmi</td><td>10 Agu 2026</td><td>Berjalan</td></tr><tr><td>6</td><td>Implementasikan retry/recovery untuk data alarm yang hilang saat transmisi.</td><td>Beni</td><td>15 Agu 2026</td><td>Belum mulai</td></tr><tr><td>7</td><td>Unggah progress report dan timeline ke platform cloud serta bagikan akses kepada Pertamina.</td><td>Pak Farhan</td><td>31 Jul 2026</td><td>Tertunda</td></tr><tr><td>8</td><td>Siapkan VPS kecil untuk deployment sistem monitoring berbasis cloud.</td><td>Pak Muhammad</td><td>20 Agu 2026</td><td>Belum mulai</td></tr><tr><td>9</td><td>Sempurnakan aplikasi manajemen dan konfigurasi default agar plug-and-play.</td><td>Fahmi</td><td>20 Agu 2026</td><td>Berjalan</td></tr><tr><td>10</td><td>Koordinasikan jadwal survei RU IV Cilacap dengan Pak Maman, Pak Adit, dan tim HSE.</td><td>Pak Sena (Pertamina)</td><td>31 Jul 2026</td><td>Tertunda</td></tr><tr><td>11</td><td>Bagikan template izin kerja, surat masuk barang, dan dokumen HSE dari RU IV Cilacap.</td><td>Pak Maman (Pertamina)</td><td>31 Jul 2026</td><td>Tertunda</td></tr><tr><td>12</td><td>Siapkan dokumen HSE dan perizinan masuk kilang, termasuk CS Negara.</td><td>Tim LGU (Pak Muhammad)</td><td>15 Agu 2026</td><td>Belum mulai</td></tr><tr><td>13</td><td>Adakan APD warna non-merah untuk tim LGU.</td><td>Pak Farhan</td><td>10 Agu 2026</td><td>Tertunda</td></tr><tr><td>14</td><td>Siapkan perangkat portable untuk pemetaan sinyal LoRa di lapangan.</td><td>Pak Farhan</td><td>20 Agu 2026</td><td>Siap</td></tr><tr><td>15</td><td>Siapkan test chamber portable dan tabung gas untuk pengujian di lokasi.</td><td>Tim LGU</td><td>20 Agu 2026</td><td>Berjalan</td></tr><tr><td>16</td><td>Aktif berkomunikasi di WhatsApp Group dengan tim Instrumen dan Merchant Insurance Pertamina.</td><td>Semua pihak</td><td>Berkelanjutan</td><td>Berjalan</td></tr><tr><td>17</td><td>Siapkan perjalanan ke China untuk sertifikasi di Shanghai dan pencarian kamera di Wuhan.</td><td>Pak Muhammad</td><td>TBD — setelah versi baterai siap</td><td>Ditahan</td></tr><tr><td>18</td><td>Laksanakan meeting persiapan pra-deployment bersama tim RU IV Cilacap (RAP meeting).</td><td>Pak Sena, Pak Maman, Tim LGU</td><td>15 Agu 2026</td><td>Belum mulai</td></tr></tbody></table></div>
+  </section>
+  <section><h2>Keputusan Meeting</h2><ul><li>Deployment RU IV Cilacap akan menggunakan strategi dual system: server lokal dan cloud untuk evaluasi performa.</li><li>Survei dan instalasi akan digabung dalam satu kunjungan apabila memungkinkan, dengan target saat itu September 2026.</li><li>Kemampuan deteksi minimum ditetapkan enam kelas. H₂, LPG, metana, CO₂, dan clean air telah disebutkan; kelas keenam perlu dikonfirmasi.</li><li>Pengembangan versi baterai dilanjutkan secara paralel dan tidak menghambat deployment versi 24 V.</li><li>Koordinasi dengan tim HSE RU IV Cilacap wajib dimulai sejak awal untuk mencegah penolakan perizinan.</li></ul></section>
+  <section><h2>Risiko dan Mitigasi</h2><div class="table-wrap"><table class=""><thead><tr><th>Risiko</th><th>Mitigasi</th></tr></thead><tbody><tr><td>Masa operasi baterai tidak mencapai target minimum 30 hari.</td><td>Lanjutkan deployment versi 24 V; versi baterai menjadi fase pengembangan berikutnya.</td></tr><tr><td>Perizinan masuk kilang terlambat atau ditolak.</td><td>Koordinasi awal dengan tim HSE/PIC RU IV Cilacap dan siapkan dokumen lengkap jauh hari.</td></tr><tr><td>Coverage LoRa mesh tidak optimal di lapangan.</td><td>Lakukan survei dengan perangkat pemetaan sinyal dan tambahkan Cluster Head bila diperlukan.</td></tr><tr><td>Data alarm hilang saat transmisi.</td><td>Implementasikan retry, local buffering, dan heartbeat untuk mendeteksi kehilangan koneksi.</td></tr></tbody></table></div></section>
+  <section><h2>Next Meeting / Kegiatan Berikutnya</h2><p><strong>Agenda:</strong> RAP meeting persiapan deployment RU IV Cilacap.</p><p><strong>Peserta:</strong> Tim LGU dan tim RU IV Cilacap, termasuk HSE, Instrumen, dan Operasi.</p><p><strong>Target:</strong> Sekitar 15 Agustus 2026.</p></section>
+  <section><h2>Catatan Penting</h2><ul><li>Komunikasi melalui WhatsApp Group perlu lebih aktif untuk mempercepat umpan balik teknis.</li><li>Progress report perlu dapat diakses secara real-time oleh Pertamina.</li><li>Setiap perubahan ruang lingkup atau timeline perlu segera dikomunikasikan.</li><li>Klaim akurasi CNN 1D 97,6% dan flame detection 79% dicatat sebagai laporan meeting dan perlu verifikasi teknis lebih lanjut.</li></ul></section>
+  <footer>Dokumen ini disusun dari catatan meeting yang tersedia tanpa menambahkan PIC, keputusan, atau tanggal yang tidak tercatat.</footer>
+</main>
+</body>
+</html>

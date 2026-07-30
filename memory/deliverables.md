@@ -6,6 +6,7 @@
 | Laporan progres per tanggal | `Deliverables/Laporan_Progres_ByDate_GLD.html` (+`.md`) | https://claude.ai/code/artifact/6bf8efb7-c4a1-495d-b964-7ac4014e5a22 | 📅 |
 | Draft JSA/HSE Cilacap | `Deliverables/JSA_HSE_RU-IV_Cilacap_GLD.html` (+`.md`) | https://claude.ai/code/artifact/2601ab9e-d32d-4e63-a06c-279278c96fb3 | 🦺 |
 | Knowledge graph interaktif | `Deliverables/Knowledge_Graph_GLD.html` | https://claude.ai/code/artifact/cae0f3a3-65e5-4355-808a-d467dc6f9e16 | 🕸️ |
+| Notulen meeting 30 Jul (disusun Claude) | `Deliverables/Notulen_Meeting_GLD_30Jul2026.md` | *(belum dipublikasi sbg artifact)* | — |
 
 > ⚠️ **File pindah folder 30 Jul** (root → `Deliverables/`). Redeploy **dalam sesi yang sama** yang mem-publish = pakai path baru (URL tetap otomatis). Redeploy dari **sesi/percakapan baru** (termasuk ini) **wajib** pass parameter `url` di atas ke tool Artifact — tanpa itu akan mint URL baru. Jangan andalkan path lama untuk mencocokkan artifact across sesi.
 

@@ -17,7 +17,7 @@
 | p:fahdzi | Pak Fahdzi | Model TCNN/TCN |
 | p:ryan | Ryan (Lab IoT) | Pengumpulan data solar |
 | p:ilmania | Ilmania (Lab Fisika) | Titik pengecasan; notulis |
-| p:tresnandi | Pak Tresnandi | Dokumen JSA/TRA |
+| p:tresnandi | Pak Tresnandi | Dokumen JSA/TRA; ditanya soal sisa anggaran proyek (sudah didistribusikan) — pertanyaan terbuka dari weekly meeting 30 Jul |
 | p:senna | Pak Senna | Pertamina — lokasi, mode, gateway |
 | p:nina | Bu Nina | Hazardous / standar pemasangan |
 | p:beny | Kak Beny | Overall system architecture, AI |
@@ -25,6 +25,7 @@
 | p:adit | Pak Adit | Pertamina — meeting 24 Jul |
 | p:roni | Mas Roni | Pertamina — meeting 24 Jul |
 | p:indra | Mas Indra | Pertamina, RU Cilacap — meeting 24 Jul |
+| p:pinduan | Pak Pindoan | Pertamina — meminta instalasi aplikasi monitoring di kantor pusat Jakarta (selain site), weekly meeting 30 Jul |
 
 > Catatan: "Pak Sena" (notulen 24 Jul) kemungkinan sama dengan `p:senna` (Pak Senna); "Pak Maman" konsisten dengan `p:maman`. "Pak Muhammad" (LGU, notulen 24 Jul) belum punya ID — kemungkinan overlap dengan `p:beny`/`p:maman`, perlu klarifikasi.
 

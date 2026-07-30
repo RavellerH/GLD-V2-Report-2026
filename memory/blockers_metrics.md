@@ -69,3 +69,45 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 | Model **"CNN 1D" akurasi 97,6%** | ✅ **DIREKONSILIASI** (30 Jul, ditemukan source pptx) | Bukan konflik dgn TCN ≥92% — **model berbeda**: CNN 1D = klasifikasi jenis gas 3-kelas (Clean Air/LPG/CO2), TCN = prediksi leak LPG time-series per-sensor. Sumber: `Sumber Dokumen/Deteksi_Gas_CNN_Presentasi.pptx` (Lab IoT ITB) — 97,6% akurasi test (374 holdout, F1-macro 97,55%), versi ESP32-S3 int8 97,3%. Detail lengkap → `entities.md` bagian Model AI. **Boleh dipakai di deliverable** sebagai model AI kedua (klasifikasi gas), terpisah dari TCN (prediksi leak). |
 | **Flame detection (camera-based)**: model develop 79%, hardware Jetson Nano (sudah dibeli), dataset dari Google + kamera infrared | ⚠️ **Masih belum dikonfirmasi** | Tidak ada file sumber pendukung ditemukan di repo (beda dgn OGI/`LangGas_Top6000_Progress.pptx` yang eksplisit dihapus). Teknologi berbeda dari OGI tapi domain mirip. **Status: pengembangan tambahan terpisah, BELUM masuk scope dashboard/report** (dec:18) — perlu arahan user. |
 | **Sensor arah angin** untuk early warning (prediksi dispersi gas/flame) | ⚠️ Rencana masa depan | Tidak ada di scope/sub-sistem manapun saat ini; belum ada timeline/PIC konkret di notulen. |
+
+## Meeting mingguan 30 Jul 2026 — update lapangan, arsitektur & risiko baru
+> Sumber: notulen mentah weekly meeting tim (belum ada file terpisah di `Sumber Dokumen/`).
+
+**Jadwal (menggantikan tanggal 24 Jul — lihat `decisions.md` dec:22):**
+- Kunjungan Cilacap **9–10 Agustus 2026** = survey + instalasi **digabung dalam satu kunjungan**. Berangkat Minggu 9 Agu, instalasi Senin 10 Agu. Jadwal tim wajib dikosongkan.
+
+**Arsitektur diperjelas (bukan konflik — detail dari dec:14, lihat `decisions.md` dec:23–24):**
+- **App + database penuh berjalan lokal** di site RU IV **dan** kantor pusat Jakarta (request Pak Pindoan, Pertamina, untuk monitoring terpusat). **Cloud hanya berperan sebagai gateway/relay ringan**, bukan sistem paralel penuh.
+- **Wi-Fi ESP32** dikonfirmasi **hanya untuk config/serial lokal** (perintah enable/disable WiFi diperlukan). **LoRa tetap backbone telemetri utama, selalu aktif** — tidak ada perubahan arsitektur komunikasi data.
+- ⚠️ **Hardware fix diperlukan:** antena Wi-Fi 2,4G masih di dalam casing — perlu dikeluarkan agar channel config berfungsi andal.
+- Biaya cloud "hanya untuk GW" disebut **~USD 5** — satuan (per bulan? per device?) **belum jelas**, perlu konfirmasi sebelum dipakai di deliverable biaya.
+
+**Risiko & gap baru:**
+| Item | Catatan |
+|---|---|
+| Kondensasi/genangan air dalam casing | Perlu mekanisme pencegahan — opsi: lubang kecil sirkulasi, kipas berkala, pemanas. Belum dipilih. |
+| Potensi data collision multi-sensor (LoRa) | Probabilitas kecil menurut tim, tapi **belum diuji** — perlu test eksplisit. |
+| Push alarm | **Belum dicoba sama sekali** — perlu masuk rencana pengujian. |
+| Protokol missed-report GLD portable | Kekhawatiran: GLD portable bisa melewatkan gas saat non-aktif (duty-cycle OFF). Perlu mekanisme/protokol: jika GLD tak lapor sesuai jadwal, cek kondisi (baterai, sensor, dll). **Perluasan** dari risiko "data alarm hilang" 24 Jul (retry/heartbeat, PIC Beni) — protokol spesifik ini belum didefinisikan. |
+| Portable GLD versi baterai | Butuh **magnet** untuk mounting — belum disourcing. |
+| Test chamber portable | Dimensi & berat **belum ditentukan** — target harus mudah dimobilisasi. Pertanyaan terbuka dari tim sendiri, belum ada jawaban. |
+| Gas capability gate (dec:17, min 6 kelas) | Status: baru **3 dari 6 kelas tervalidasi** (Clean Air, LPG, CO2 — sesuai scope `model:cnn1d`). LPG sudah diuji semprot langsung, hasil OK. H₂, Metana, dan validasi CO₂/Clean Air lebih lanjut masih diperlukan. |
+| ⚠️ **Akurasi model dipertanyakan ulang** (dibahas "hari Jumat") | Tim sendiri mengangkat kekhawatiran akurasi CNN 1D/TCN yang terlihat tinggi — **direkomendasikan cek ulang** (potensi data leakage/overfitting, terutama karena dataset lab relatif kecil). Perlu jadi action item verifikasi independen sebelum klaim akurasi dipakai lebih jauh ke client. |
+
+**Catatan teknis chamber/sensor (belum tentu actionable, tapi relevan utk R&D & ML):**
+- MQ perlu dipanaskan dulu (~30 menit) sampai stabil sebelum mulai siklus on-off duty-cycle.
+- Heater MQ berfungsi menstabilkan permukaan sensor; referensi suhu **~200°C disebut dari ChatGPT** — **belum diverifikasi ke datasheet MQ resmi**, jangan dikutip sebagai fakta terverifikasi.
+- Semprot O₂ langsung → tegangan sensor turun (negatif) — melengkapi temuan 16 Jul (O₂ vs CO₂ pada baseline).
+- Ide R&D: jika duty-cycle terbukti memengaruhi temperatur kerja sensor, ini bisa jadi **fitur tambahan untuk model ML** (bukan hanya gangguan). Pendekatan alternatif: panaskan cepat, atau jaga panas sensor agar tak meluruh cepat.
+- Sensor suhu tambahan **tidak bisa dipasang** — keterbatasan ruang dalam housing chamber.
+- Saat kunjungan lapangan (9–10 Agu), perlu **catat suhu lapangan manual** untuk melihat pengaruh variasi duty-cycle vs temperatur optimum kerja sensor.
+- Model ESP32-S3 dipangkas **~84%** menurut catatan verbal tim — **konsisten** dengan angka 83% di `Deteksi_Gas_CNN_Presentasi.pptx` (selisih kecil, wajar untuk catatan verbal vs angka presisi pptx).
+
+**Prinsip kerja tambahan (lihat `decisions.md` dec:25–26):**
+- Dokumentasi progres harus jadi **knowledge base tim internal**, bukan hanya untuk client.
+- Parameter konfigurasi akan disederhanakan, tapi operator tetap perlu memahami sejumlah konfigurasi inti.
+
+**Item administratif terbuka (bukan blocker teknis):**
+- Tanya **Pak Tresnandi** soal sisa anggaran proyek (sudah didistribusikan) — belum ada jawaban di notulen.
+- Kabel HDMI panjang tersedia di lab untuk sesi berikutnya (logistik minor).
+- Disebutkan rencana proyek berikutnya pasca-GLD, kemungkinan "susi-sensor proposal" — **nama tidak jelas/kemungkinan salah transkrip**, perlu klarifikasi bila relevan untuk dicatat lebih lanjut.

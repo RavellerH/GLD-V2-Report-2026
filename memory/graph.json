@@ -57,7 +57,9 @@
     { "id": "ms:funcai", "type": "milestone", "label": "Uji fungsional + inferensi AI SELESAI", "date": "2026-07-16", "done": true },
     { "id": "ms:power", "type": "milestone", "label": "Analisis daya + mesh + downlink", "date": "2026-07-16", "done": true },
     { "id": "ms:meeting0724", "type": "milestone", "label": "Meeting LGU-Pertamina: dual-system, gas 6-kelas, 24V ready", "date": "2026-07-24", "done": true },
-    { "id": "ms:install", "type": "milestone", "label": "Field installation (target)", "date": "2026-12-01", "done": false },
+    { "id": "ms:meeting0730", "type": "milestone", "label": "Weekly meeting: jadwal Cilacap 9-10 Agu, arsitektur lokal+cloud-gateway diperjelas", "date": "2026-07-30", "done": true },
+    { "id": "ms:cilacap-visit", "type": "milestone", "label": "Kunjungan Cilacap: survey+instalasi gabungan (menggantikan rencana Sep)", "date": "2026-08-10", "done": false },
+    { "id": "ms:install", "type": "milestone", "label": "Field installation (target, baseline resmi 9-bulan)", "date": "2026-12-01", "done": false },
 
     { "id": "blk:power", "type": "blocker", "label": "Autonomi baterai GLD < 30 hari (7P=1,76 hari)" },
     { "id": "blk:tpl", "type": "blocker", "label": "TPL5010 belum optimal (~0,4V saat off)" },
@@ -133,6 +135,9 @@
     { "s": "deliv:chamber", "t": "sub:chamber", "r": "melaporkan" },
 
     { "s": "ms:meeting0724", "t": "proj:GLD", "r": "update-status" },
+    { "s": "ms:meeting0730", "t": "proj:GLD", "r": "update-status" },
+    { "s": "ms:cilacap-visit", "t": "ru:4", "r": "survei-instalasi-pilot" },
+    { "s": "gate:jsa", "t": "ms:cilacap-visit", "r": "menahan" },
     { "s": "cand:jetson", "t": "proj:GLD", "r": "usulan-belum-dikonfirmasi" }
   ]
 }

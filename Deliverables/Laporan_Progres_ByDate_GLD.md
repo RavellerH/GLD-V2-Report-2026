@@ -1,7 +1,7 @@
 # LAPORAN PROGRES PER TANGGAL — PROYEK GAS LEAK DETECTION (GLD) TAHAP 2
 
-**Periode:** 20 April – 23 Juli 2026
-**Disusun per:** 24 Juli 2026
+**Periode:** 20 April – 30 Juli 2026
+**Disusun per:** 24 Juli 2026 (progres) · diperbarui 30 Juli 2026 (jadwal &amp; arsitektur)
 **Scope aktif:** Pilot RU IV Cilacap (roadmap: 6 Refinery Unit)
 **Pihak terlibat:** LAPI Ganesha Utama (LGU) · Lab IoT & Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional
 
@@ -16,7 +16,8 @@
 | Action items | 24 (5 berjalan · 15 terbuka) |
 | Isu & risiko | 9 (4 prioritas tinggi) |
 | Dataset sensor terkumpul | 14.477 sampel · 9 sesi · 8 kanal MQ |
-| Model AI | TCN per-sensor (LPG): 8 model, semua ≥92% akurasi (MQ4V 93,9%) |
+| Model AI — TCN | Per-sensor (prediksi leak LPG 5 dtk ke depan): 8 model, semua ≥92% akurasi (MQ4V 93,9%) |
+| Model AI — CNN 1D | Klasifikasi jenis gas 3-kelas (Clean Air/LPG/CO₂): **97,6%** akurasi test (PC), **97,3%** setelah kuantisasi int8 untuk ESP32-S3 (7,4 KB) |
 
 Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 → Feb 2027). Engineering front-loaded sejak April sehingga progres di depan jadwal; namun eksekusi site survey menunggu **gate TRA/JSA** dan 3 blocker teknis belum tuntas.
 
@@ -174,6 +175,67 @@ Sistem kendali chamber berfungsi (kendali dua-arah real-time via ESP32):
 
 ---
 
+### 24 Juli — Meeting LGU–Pertamina (09:32–11:00 WIB) — *Milestone 🔵*
+**Peserta:** LGU — Pak Muhammad, Pak Farhan, Ilma, Fahmi, Beni · Pertamina — Pak Sena, Pak Maman, Pak Adit, Mas Roni, Mas Indra (RU Cilacap).
+
+**Sertifikasi & Power**
+- Versi **24 V (power supply): siap sertifikasi** — proses administratif berjalan via biro sertifikasi di **Shanghai**. Jalur ini **tidak menunggu** pengembangan battery version.
+- Versi **Battery**: target diturunkan ke **<100 mA** (dari ~10 W/1 A saat ini untuk 8 sensor MQ), lifetime minimal **30 hari**; desain baru (rechargeable) berpotensi mencapai **6–8 bulan**. Pengembangan **berjalan paralel**, tidak menghambat deployment 24 V.
+
+**Gas Detection & AI**
+- Gate baru: kapasitas deteksi **minimum 6 kelas gas** (H₂, LPG, Metana, CO₂, Clean Air) harus terverifikasi sebelum deployment.
+- Model **CNN 1D** (klasifikasi jenis gas, Lab IoT ITB) dikonfirmasi: 97,6% akurasi test (374 data holdout, F1-macro 97,55%), versi ESP32-S3 (int8) 97,3% — model ini **berbeda** dari TCN (yang memprediksi leak LPG time-series), keduanya berjalan berdampingan.
+
+**Persiapan Field Test — RU IV Cilacap**
+- Rencana: **survei akhir Juli → instalasi September 2026** (berpotensi digabung 1 kunjungan bila memungkinkan).
+- Deployment akan memakai strategi **dual system**: server lokal RU + cloud, untuk perbandingan performa.
+- Persyaratan administratif baru: izin visitor (maks 3 hari) untuk survey, izin kerja + surat masuk barang untuk instalasi, dokumen HSE (APD non-merah, template dari RU Cilacap).
+- Tools portable mapping sinyal LoRa & test chamber portable disiapkan untuk kalibrasi on-site.
+
+**Pengembangan Tambahan (belum masuk scope resmi)**
+- ⚠️ **Flame detection (camera-based)** — model 79% akurasi, hardware Jetson Nano sudah dibeli, dataset dari Google + kamera infrared. Berbeda dari OGI/YOLO-thermal yang sudah dihapus dari scope, namun **status sama: belum dikonfirmasi masuk deliverable resmi**, menunggu arahan.
+- Rencana integrasi **sensor arah angin** untuk early warning (prediksi dispersi gas/flame spread) — belum ada timeline/PIC.
+
+**Keputusan & Tindak Lanjut**
+- 18 action items dicatat dengan PIC & deadline (mayoritas Agustus 2026); termasuk retry/recovery mechanism untuk data alarm yang hilang saat transmisi, dan koordinasi jadwal survey dengan tim HSE RU Cilacap.
+- **Next meeting: RAP Meeting persiapan deployment RU Cilacap, target ~15 Agustus 2026.**
+
+---
+
+### 30 Juli — Weekly Meeting Tim — *Milestone 🔵*
+**Peserta:** Tim LGU / Lab IoT ITB (weekly internal); disebutkan permintaan dari Pak Pindoan (Pertamina) dan pertanyaan anggaran untuk Pak Tresnandi.
+
+**Arsitektur & Jadwal — revisi penting**
+- Arsitektur diperjelas: **app + database penuh berjalan lokal** (site RU IV Cilacap **dan** kantor Jakarta, request Pak Pindoan untuk monitoring pusat); **cloud hanya berperan sebagai gateway/relay ringan** — melengkapi (bukan mengganti) keputusan "dual system" 24 Jul.
+- ⚠️ **Kunjungan RU IV Cilacap dimajukan & digabung**: survey + instalasi pada **9–10 Agustus 2026** (berangkat 9 Agu, instalasi Senin 10 Agu) — **menggantikan** rencana 24 Jul (survey akhir Jul → instalasi Sep).
+
+**Komunikasi: Wi-Fi vs LoRa**
+- Wi-Fi ESP32 dikonfirmasi **hanya untuk config/serial lokal** (perintah enable/disable diperlukan); **LoRa tetap backbone telemetri utama**, selalu aktif — bukan perubahan arsitektur.
+- Antena Wi-Fi 2,4G masih di dalam casing — perlu dikeluarkan agar channel config berfungsi andal.
+
+**Daya & GLD Portable**
+- Target konsumsi **<100 mA** dengan on-off cepat — butuh modifikasi hardware.
+- Push alarm belum dicoba. Perlu magnet untuk mounting versi baterai portable.
+- Protokol missed-report untuk GLD portable (cek baterai/sensor bila tak lapor rutin sesuai setting) belum didefinisikan — perluasan dari risiko "data alarm hilang" 24 Jul.
+
+**Chamber & Karakterisasi Sensor**
+- MQ perlu dipanaskan ±30 menit sebelum mulai siklus on-off duty-cycle; info suhu heater ~200°C (dari ChatGPT — **belum diverifikasi ke datasheet resmi**).
+- Semprot oksigen langsung → tegangan sensor turun (negatif). Perlu dicatat temperatur lapangan saat kunjungan Agustus untuk analisis pengaruh duty-cycle vs temperatur optimum kerja sensor.
+- Potensi genangan air dalam casing akibat kondensasi — mekanisme pencegahan (lubang sirkulasi/kipas/pemanas) belum dipilih.
+
+**Model AI**
+- Gas capability gate (min 6 kelas): baru **3/6 tervalidasi** (Clean Air, LPG, CO₂) — H₂ & Metana tersisa. LPG sudah diuji semprot langsung, OK.
+- Model ESP32-S3 dipangkas ~84% menurut catatan verbal — konsisten dengan 83% di presentasi CNN 1D.
+- ⚠️ **Kekhawatiran diangkat ulang** (dibahas "hari Jumat"): akurasi model (CNN 1D/TCN) dinilai tinggi/mencurigakan — **direkomendasikan verifikasi ulang** (cek potensi data leakage/overfitting) sebelum diklaim lebih jauh ke client.
+
+**Keputusan Tambahan**
+- Dokumentasi progres diarahkan juga menjadi **knowledge base internal tim**, bukan hanya untuk keperluan client.
+- Parameter konfigurasi akan **disederhanakan**, namun operator tetap perlu memahami sejumlah konfigurasi inti.
+
+Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & risiko baru → `memory/blockers_metrics.md` § Meeting mingguan 30 Jul.
+
+---
+
 ## Blocker Kritis Aktif (per 20 Juli)
 
 | # | Blocker | Metrik | Dampak |
@@ -184,8 +246,19 @@ Sistem kendali chamber berfungsi (kendali dua-arah real-time via ESP32):
 
 ## Gate Menuju Field (RU IV Cilacap)
 - ⛔ **TRA/JSA** — rencana & workflow survei Cilacap sudah siap; **penyusunan TRA/JSA menjadi gate** untuk eksekusi site survey fisik.
+- ⛔ **Gas capability minimum 6 kelas** (H₂/LPG/Metana/CO₂/Clean Air) harus terverifikasi sebelum deployment (keputusan meeting 24 Jul).
+- ⛔ **Perizinan administratif RU Cilacap**: izin visitor survey, izin kerja + surat masuk barang instalasi, dokumen HSE (APD non-merah) — dikoordinasikan dengan tim HSE RU sejak awal.
 - Site visit Pertamina ke lab LGU → uji lab → kunjungan RU.
+
+> ⚠️ Catatan transparansi: angka "action items" & "isu/risiko" pada tabel Ringkasan di atas belum mencakup rekonsiliasi penuh dengan 18 action item baru dari meeting 24 Jul (kemungkinan sebagian overlap) — lihat `memory/blockers_metrics.md` untuk detail & status rekonsiliasi.
+
+## Risiko Tambahan (dari weekly meeting 30 Juli)
+- Potensi kondensasi/genangan air dalam casing GLD — mekanisme pencegahan belum dipilih.
+- Potensi data collision multi-sensor pada LoRa — probabilitas kecil, belum diuji secara eksplisit.
+- Antena Wi-Fi 2,4G masih di dalam casing — perlu dikeluarkan.
+- Push alarm belum dicoba; protokol missed-report GLD portable belum didefinisikan.
+- ⚠️ Akurasi model (CNN 1D/TCN) dinilai tinggi/mencurigakan — perlu verifikasi independen (prioritas tinggi).
 
 ---
 
-*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas.*
+*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas · diperbarui 30 Juli 2026.*

@@ -25,6 +25,11 @@ Keputusan yang membentuk deliverable & arah kerja. Format: ID · tanggal · kepu
 | dec:19 | 30 Jul | **Reorganisasi folder root** menjadi `Deliverables/` (output Claude) + `Sumber Dokumen/` (dokumen tim/klien); `Dataset/` & `memory/` tetap di root | Root terlalu padat (30+ file bercampur); arahan user "kategorikan folder ini rapi" |
 | dec:20 | 30 Jul | Hapus duplikat persis `TCN_GasLPG_Presentation (2) (1).pptx` (md5 identik dgn `(2).pptx`); rename `mom_ruiv_cilacap_gld (1).pdf` → `mom_ruiv_cilacap_gld_ringkasan-AI.pdf` (bukan duplikat, isi beda) | Kebersihan repo saat reorganisasi; arahan user |
 | dec:21 | 30 Jul | Klaim **"CNN 1D 97,6%"** dari notulen 24 Jul **direkonsiliasi**: ditemukan `Deteksi_Gas_CNN_Presentasi.pptx` — model klasifikasi jenis gas (3 kelas), **berbeda** dari TCN (prediksi leak time-series). Kedua model sah & boleh dipakai di deliverable | Ditemukan saat kategorisasi file; bukan konflik data, hanya dua model dgn tugas berbeda |
+| dec:22 | 30 Jul | Kunjungan Cilacap **9–10 Agustus = survey + instalasi digabung**, **MENGGANTIKAN** rencana 24 Jul (survey akhir Jul → instalasi Sep 2026). Berangkat 9 Agu (Minggu), instalasi 10 Agu (Senin) | Weekly meeting 30 Jul; jadwal tim wajib dikosongkan tanggal tsb |
+| dec:23 | 30 Jul | **Wi-Fi ESP32 = HANYA untuk config/serial lokal** (enable/disable via command); **LoRa tetap backbone telemetri utama, selalu aktif** — bukan perubahan arsitektur komunikasi data | Klarifikasi user (weekly meeting 30 Jul), menjawab notulen mentah yang tampak kontradiktif ("gunakan LoRa selalu aktif" vs "komunikasi data lewat WiFi") |
+| dec:24 | 30 Jul | Arsitektur deployment RU Cilacap diperjelas: **app + database penuh berjalan lokal** (site RU IV **dan** kantor Jakarta — request **Pak Pindoan** untuk monitoring pusat); **cloud HANYA berperan sebagai gateway/relay ringan**, bukan sistem paralel penuh | Memperjelas (bukan mengganti) dec:14 "dual system" — ini detail konkretnya |
+| dec:25 | 30 Jul | Dokumentasi progres harus jadi **knowledge base internal tim**, bukan hanya untuk keperluan client | Prinsip kerja dari weekly meeting 30 Jul |
+| dec:26 | 30 Jul | Parameter konfigurasi akan **disederhanakan**, namun operator tetap perlu memahami sejumlah konfigurasi inti (bukan zero-config) | Weekly meeting 30 Jul: keluhan "terlalu banyak parameter" |
 
 ## Prinsip yang mengikat
 - Klien = partner → selalu tampilkan progres **dan** outstanding; jangan over-claim (analisis ≠ resolusi blocker).
@@ -34,3 +39,5 @@ Keputusan yang membentuk deliverable & arah kerja. Format: ID · tanggal · kepu
 - Flame detection (Jetson Nano, camera) **≠** OGI YOLO-thermal (sudah dihapus), tapi statusnya sama: **belum masuk scope resmi report** sampai ada arahan eksplisit user.
 - **CNN 1D (klasifikasi gas 3-kelas)** dan **TCN (prediksi leak time-series)** adalah **dua model berbeda, keduanya sah** — jangan disatukan atau dianggap konflik angka (dec:21).
 - File di `Sumber Dokumen/` adalah **arsip mentah dari tim/klien** — sebelum mengutip angka baru dari sana ke deliverable, cek dulu apakah sudah tercatat/direkonsiliasi di `memory/` (blockers_metrics.md, entities.md).
+- Tanggal Cilacap 9–10 Agustus (dec:22) **menggantikan sepenuhnya** tanggal survey/instalasi versi 24 Jul — jangan tampilkan dua tanggal berbeda di deliverable yang sama tanpa keterangan "revisi".
+- Wi-Fi ≠ jalur telemetri utama (dec:23) — jangan gambarkan arsitektur komunikasi data GLD berubah dari LoRa mesh ke WiFi di deliverable manapun.

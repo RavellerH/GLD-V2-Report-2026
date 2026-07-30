@@ -102,6 +102,8 @@ timeline
   15–16 Jul : TCN LPG >=92% : Uji fungsional + inferensi AI SELESAI : Analisis daya + mesh + downlink
   20–23 Jul : Simulasi duty-cycle : Repo Operator Hub/TPL5010
   24 Jul : Meeting LGU-Pertamina (dual-system, gas 6-kelas, 24V ready, 18 action items)
+  30 Jul : Weekly meeting (arsitektur lokal+cloud-gateway diperjelas, WiFi=config-only)
+  10 Agu : Kunjungan Cilacap survey+instalasi gabungan (menggantikan rencana Sep)
   Des 2026 : Target implementasi (field installation)
   Feb 2027 : Evaluasi & roadmap industrialisasi
 ```

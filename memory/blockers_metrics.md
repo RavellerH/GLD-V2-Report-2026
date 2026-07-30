@@ -50,3 +50,22 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 
 ## Bobot sub-sistem (untuk % dashboard)
 net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (inisiasi 10 — bila dipakai). Baseline 12-aktivitas → lihat `overview.md`.
+
+## Meeting 24 Jul 2026 — update & catatan rekonsiliasi
+> Sumber: `Notulen Meeting GLD 24 Juli 2026.docx` (LGU–Pertamina, 09:32–11:00 WIB).
+
+- **Target battery baru:** konsumsi sensor MQ ~10W (1A/8 sensor) → target diturunkan ke **<100mA**; lifetime min **30 hari**, desain baru berpotensi **6–8 bulan** (rechargeable). Ini **target/arah**, bukan pengganti angka terukur `blk:power` (draw ON 5,75 W, 7P=1,76 hari) — belum ada data pengujian baru yang mengonfirmasi <100mA tercapai.
+- **24V (power supply): siap sertifikasi**, proses administratif jalan via biro di Shanghai — jalur deployment ini **tidak menunggu** battery version (dec:16).
+- **Gas capability gate baru:** minimum 6 kelas (H₂, LPG, Metana, CO₂, Clean Air) harus terverifikasi sebelum deployment (dec:17) — status verifikasi: **action item terbuka** (PIC Pak Farhan/Ilma, deadline 10 Agu 2026).
+- **Gate administratif baru (RU Cilacap):** izin visitor (maks 3 hari) utk survey; izin kerja + surat masuk barang utk instalasi; dokumen HSE (APD non-merah, template dari RU). Melengkapi `gate:jsa` yang sudah ada.
+- **Risiko baru dari meeting** (belum ada di daftar 8 isu/risiko existing):
+  - Data alarm hilang saat transmisi → mitigasi: retry/recovery mechanism + local buffering + heartbeat monitoring (action item PIC Beni, deadline 15 Agu 2026).
+  - Perizinan masuk kilang terlambat/ditolak → mitigasi: koordinasi early dgn HSE & PIC RU Cilacap, dokumen lengkap jauh-jauh hari.
+- **Action items meeting:** 18 item dengan PIC & deadline (Agustus 2026, next meeting RAP ~15 Agu). ⚠️ **Belum direkonsiliasi** satu-per-satu dengan angka "25 action items (5 berjalan/15 terbuka/1 selesai)" di atas — kemungkinan overlap sebagian, perlu verifikasi sebelum dashboard diupdate.
+
+### Klaim dari notulen 24 Jul — status rekonsiliasi
+| Klaim di notulen 24 Jul | Status | Catatan |
+|---|---|---|
+| Model **"CNN 1D" akurasi 97,6%** | ✅ **DIREKONSILIASI** (30 Jul, ditemukan source pptx) | Bukan konflik dgn TCN ≥92% — **model berbeda**: CNN 1D = klasifikasi jenis gas 3-kelas (Clean Air/LPG/CO2), TCN = prediksi leak LPG time-series per-sensor. Sumber: `Sumber Dokumen/Deteksi_Gas_CNN_Presentasi.pptx` (Lab IoT ITB) — 97,6% akurasi test (374 holdout, F1-macro 97,55%), versi ESP32-S3 int8 97,3%. Detail lengkap → `entities.md` bagian Model AI. **Boleh dipakai di deliverable** sebagai model AI kedua (klasifikasi gas), terpisah dari TCN (prediksi leak). |
+| **Flame detection (camera-based)**: model develop 79%, hardware Jetson Nano (sudah dibeli), dataset dari Google + kamera infrared | ⚠️ **Masih belum dikonfirmasi** | Tidak ada file sumber pendukung ditemukan di repo (beda dgn OGI/`LangGas_Top6000_Progress.pptx` yang eksplisit dihapus). Teknologi berbeda dari OGI tapi domain mirip. **Status: pengembangan tambahan terpisah, BELUM masuk scope dashboard/report** (dec:18) — perlu arahan user. |
+| **Sensor arah angin** untuk early warning (prediksi dispersi gas/flame) | ⚠️ Rencana masa depan | Tidak ada di scope/sub-sistem manapun saat ini; belum ada timeline/PIC konkret di notulen. |

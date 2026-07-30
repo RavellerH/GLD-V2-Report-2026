@@ -21,6 +21,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - ✅ TCN LPG 8-sensor ≥92%; **dataset konsisten & siap pakai**; failover CH; **mesh 8-CH multi-hop se-kampus** (menyiasati jangkauan LoRa); CH power teratasi dgn 2 panel.
 - ✅ **Progress chamber gas**: solenoid valve, BME280 ganda (I2C 0x76/0x77), TGS2610 via ADS1115, LM2596 step-down, BTS7960 driver pompa. Next: PCB layout, pompa senyap, mounting dinding.
 - ⚠️ **Blocker/gate:** autonomi baterai GLD (7P=1,76 hari vs 30 hari); TPL5010 belum memutus daya (~0,4 V); DC converter; deploy AI on-device ESP32; **gate TRA/JSA** untuk site survey. Jangkauan LoRa per-hop **disiasati mesh** (bukan blocker keras).
+- 🔵 **Meeting LGU–Pertamina 24 Jul**: 24V **siap sertifikasi** (biro Shanghai); battery version target **<100mA**/min 30 hari (desain baru berpotensi 6–8 bulan) — **paralel, tidak menghambat** deployment 24V; gate baru **gas capability min 6 kelas** (H₂/LPG/Metana/CO₂/Clean Air); deployment RU Cilacap = **dual system** (server lokal+cloud); survey akhir Jul → instalasi **Sep 2026**; 18 action items; next **RAP Meeting ~15 Agu 2026**. ⚠️ **Belum dikonfirmasi masuk scope**: flame detection camera (Jetson Nano, 79%) — beda dari OGI yang sudah dihapus, tapi status sama (butuh arahan eksplisit). ✅ Klaim "CNN 1D 97,6%" **sudah direkonsiliasi** (30 Jul): model nyata klasifikasi jenis gas 3-kelas, terpisah & tidak konflik dgn TCN ≥92% (prediksi leak time-series) — lihat `memory/entities.md`. Detail → `memory/blockers_metrics.md`, `memory/decisions.md` dec:14–21.
+- 📁 **Struktur folder dirapikan (30 Jul):** root kini `Deliverables/` (output Claude) + `Sumber Dokumen/` (dokumen tim/klien) + `Dataset/` + `memory/`. Lihat bagian 4 & `memory/files_catalog.md`.
 
 ## 3. Peta memory (`memory/`)
 
@@ -37,13 +39,15 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 | [`memory/graph.md`](memory/graph.md) | **Knowledge graph (Mermaid)**: entitas, data-flow, dependensi |
 | [`memory/graph.json`](memory/graph.json) | Graph versi machine-readable (nodes + edges) |
 
-## 4. Deliverable utama (file HTML/MD di root)
+## 4. Deliverable utama (`Deliverables/`)
 
-- `Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (navy korporat).
-- `Laporan_Progres_ByDate_GLD.{html,md}` — laporan progres kronologis.
-- `JSA_HSE_RU-IV_Cilacap_GLD.{html,md}` — draft JSA/HSE Cilacap (belum disahkan).
-- `Knowledge_Graph_GLD.html` — knowledge graph interaktif (force-directed) dari `memory/graph.json`.
+- `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).
+- `Deliverables/Laporan_Progres_ByDate_GLD.{html,md}` — laporan progres kronologis.
+- `Deliverables/JSA_HSE_RU-IV_Cilacap_GLD.{html,md}` — draft JSA/HSE Cilacap (belum disahkan).
+- `Deliverables/Knowledge_Graph_GLD.html` — knowledge graph interaktif (force-directed) dari `memory/graph.json`.
+- `Deliverables/GLD_V2_Progress_Report_Jul2026.pptx`, `Deliverables/REPORT_GLD_V2_2026.md` — laporan pendukung lain.
 
+Dokumen sumber (dari tim/klien) ada di `Sumber Dokumen/` — katalog lengkap → [`memory/files_catalog.md`](memory/files_catalog.md).
 URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).
 
 ## 5. Aturan kerja penting (jangan dilupakan)

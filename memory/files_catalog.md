@@ -1,15 +1,19 @@
 # Files Catalog — isi setiap file di repo
 
-## A. Deliverable yang dibuat oleh Claude (root)
+> **Struktur folder (per 30 Jul 2026):** root berisi `CLAUDE.md` + `memory/` + `Dataset/` + dua folder kategori: `Deliverables/` (output Claude) dan `Sumber Dokumen/` (dokumen dari tim/klien). Lihat `decisions.md` dec:19.
+
+## A. Deliverable yang dibuat oleh Claude (`Deliverables/`)
 | File | Isi |
 |---|---|
-| `Dashboard_GLD_ProjectManagement.html` | Dashboard manajemen proyek interaktif (navy korporat): exec summary, progres vs outstanding, KPI, Kurva-S, Gantt 12 aktivitas, cakupan 6 RU, arsitektur 3 repo, sub-sistem, resource readiness, activity feed, blocker, action items, isu, rekomendasi. |
+| `Dashboard_GLD_ProjectManagement.html` | Dashboard manajemen proyek interaktif (biru #2B5FCB + charcoal): exec summary, progres vs outstanding, KPI, Kurva-S, Gantt 12 aktivitas, cakupan 6 RU, arsitektur 3 repo, sub-sistem, resource readiness, activity feed, blocker, action items, isu, rekomendasi. |
 | `Laporan_Progres_ByDate_GLD.html` / `.md` | Laporan progres kronologis (timeline Apr–Jul 2026). |
 | `JSA_HSE_RU-IV_Cilacap_GLD.html` / `.md` | **DRAFT** JSA/TRA & HSE plan RU IV Cilacap (4 lembar JSA, ERP, tanda tangan). Belum disahkan. |
 | `Knowledge_Graph_GLD.html` | Knowledge graph **interaktif** (force-directed Canvas, zoom/pan/klik/filter) dari `memory/graph.json`. |
-| `CLAUDE.md`, `memory/*` | Sistem memory ini. |
+| `GLD_V2_Progress_Report_Jul2026.pptx` | Deck progress report Jul 2026 (dibuat Claude, 30 Jul). |
+| `REPORT_GLD_V2_2026.md` | Laporan lengkap versi awal (dibuat 23 Jul) — ringkasan proyek, struktur repo, analisis dataset, temuan, isu/risiko, rekomendasi. ⚠️ **Kemungkinan tumpang tindih** dengan `Laporan_Progres_ByDate_GLD.md` (dibuat hari sama) — belum dikonfirmasi apakah masih dipakai atau superseded. |
+| `CLAUDE.md`, `memory/*` | Sistem memory ini (di root). |
 
-## B. Dokumen sumber (dari tim/klien)
+## B. Dokumen sumber — dari tim/klien (`Sumber Dokumen/`)
 | File | Isi ringkas |
 |---|---|
 | `Laporan_Progres_GLD_18Jun-20Jul.md` | Laporan progres periode 18 Jun–20 Jul (sumber teks utama). |
@@ -18,16 +22,23 @@
 | `Kebutuhan_Peralatan_GLD_per_RU_v2.pdf` | Spesifikasi & jumlah perangkat per RU (tabel 6 RU). |
 | `Timeline_Kerjaan_Mingguan_GLD.pptx` | Timeline mingguan awal (M1–M7, 20 Apr–7 Jun). |
 | `Timeline_Kerjaan_Mingguan_GLD_updated_Juli_2026.pdf` | **Update Juli (87 hlm):** analisis daya lengkap (baterai/solar/duty-cycle), uji mesh, uji downlink. |
-| `mom_ruiv_cilacap_gld.pdf` / `(1).pdf` | MoM RU IV Cilacap (survei, penempatan CH, AI, chamber). |
+| `mom_ruiv_cilacap_gld.pdf` | MoM RU IV Cilacap — dokumen utama (survei, penempatan CH, komunikasi LoRa, AI, chamber; keputusan sementara & tindak lanjut). |
+| `mom_ruiv_cilacap_gld_ringkasan-AI.pdf` | **Direname dari `(1).pdf`** — bukan duplikat (8,9 KB vs 153 KB). Berisi ringkasan MoM yang sama + bagian "Analisis" tambahan (anotasi `[web:]`/`[cite:]`, tampak diproses tool AI note-taking eksternal). Isi sejalan dengan dokumen utama. |
 | `POLE-BRACKET-GLD-CH-SOLAR.pdf.pdf` | Desain bracket tiang CH + solar. |
-| `TCN_GasLPG_Presentation (2).pptx` | Presentasi model TCN LPG. |
+| `TCN_GasLPG_Presentation (2).pptx` | Presentasi model TCN LPG (per-sensor, ≥92%). |
+| `Board12_TCN_PerSensor.pptx` | Presentasi teknis TCN per-sensor (8 model univariat, Board12, prediksi leak LPG 5 detik ke depan; dataset 3.234 baris; window 15s lookback). **Sumber pendukung angka TCN ≥92%** — konsisten, bukan konflik. |
+| `Deteksi_Gas_CNN_Presentasi.pptx` | Presentasi **CNN 1D — klasifikasi jenis gas** (Clean Air/LPG/CO2) dari 8 sensor MQ, Lab IoT ITB. **Ini sumber klaim "CNN 1D 97,6%" dari notulen 24 Jul — SUDAH DIREKONSILIASI**: model nyata & terdokumentasi, **berbeda** dari TCN (TCN = prediksi leak LPG time-series per-sensor; CNN 1D = klasifikasi jenis gas 3-kelas). Detail: arsitektur 5 layer (Conv1D 16 filter→MaxPool→Dense 16→Softmax 3 kelas), 1.155 parameter, model PC 43 KB/97,6% akurasi test (374 data holdout, F1-macro 97,55%), model ESP32-S3 (int8) 7,4 KB/97,3% akurasi (kompresi 83%, akurasi turun 0,27 poin). Validasi lapangan: 3.466 pembacaan device F001 (20 Jul), keyakinan rata-rata 98,6%. |
+| `LangGas_Top6000_Progress.pptx` | Progress tim ML **OGI/YOLO** (seleksi top-6000 dari 41.872 gambar IR, training YOLOv8s-seg 119 epoch). Ini materi sumber untuk pendekatan **OGI yang sudah DIHAPUS** dari scope report (dec:05) — disimpan sebagai arsip, **jangan dipakai lagi di deliverable** tanpa arahan baru. |
 | `Cadangan AI Kick of meeting.pptx` | Materi AI cadangan kick-off. |
 | `Test Sinyal LoRa.xlsx` | Data uji RF LoRa (RSSI/SNR/PDR, orientasi antena, koordinat). |
 | `GLD_serial_20260708T060449.log` | Log serial perangkat (8 Jul). |
 | `Urutan ADS,.jpeg`, `Urutan Channel MCP.jpeg` | Diagram urutan channel ADC (ADS/MCP). |
 | `LAPORAN PROGRESS CHAMBER 230726.pdf` | Progress chamber gas: solenoid valve, BME280 ganda, pompa (duty cycle), TGS2610 via ADS1115, LM2596, BTS7960, voltage divider 5V→3,3V. Next: PCB layout, pompa lebih senyap, mounting dinding. |
+| `Notulen Meeting GLD 24 Juli 2026.docx` | Notulen meeting LGU–Pertamina 24 Jul 2026 (09:32–11:00 WIB). Sertifikasi 24V (siap, biro Shanghai) & battery version (target <100mA, min 30 hari, desain baru 6–8 bulan); gas capability min 6 kelas (H₂/LPG/Metana/CO₂/Clean Air); rencana survey RU Cilacap akhir Jul→instalasi Sep 2026; strategi dual system (server lokal+cloud); 18 action items + risk/mitigation; next RAP Meeting ~15 Agu 2026. Klaim "CNN 1D 97,6%" **sudah direkonsiliasi** (lih. `Deteksi_Gas_CNN_Presentasi.pptx` di atas); **flame detection camera (Jetson Nano, 79%)** masih **belum dikonfirmasi masuk scope** (dec:18) — belum ada file sumber pendukung di repo ini. |
+| `[JUNE 2026] GAS LEAK DETECTION [PERTAMINA] [30-06-2026-1355]_compressed.pdf` | Belum dianalisis mendalam — kemungkinan materi presentasi/laporan Juni 2026. |
 
 ## C. Dataset sensor (`Dataset/`) — perangkat GLD-F001, 15 Jul 2026
 9 file CSV, **14.477 baris total**, 8 kanal tegangan (MQ8, MQ135, MQ3, MQ5, MQ4, MQ7, MQ6, MQ2). Sesi: Clean Air, LPG (×2), Oksigen, Carbon Dioxide, + baseline. Format: `timestamp_ms, wall_time, voltage_MQ*`.
 
-> Catatan: file `TCN_GasLPG` = model LPG yang **disetujui**. Berkas OGI/YOLO (thermal) **tidak dipakai** dalam report (belum disetujui).
+> Catatan: file `TCN_GasLPG` = model LPG yang **disetujui**. Berkas OGI/YOLO (thermal, `LangGas_Top6000_Progress.pptx`) **tidak dipakai** dalam report (belum disetujui).
+> Duplikat persis `TCN_GasLPG_Presentation (2) (1).pptx` (md5 identik dgn `(2).pptx`) **dihapus** 30 Jul saat reorganisasi folder.

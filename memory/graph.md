@@ -101,6 +101,16 @@ timeline
   6–9 Jul : Uji 2 CH : Rantai komunikasi GLD-CH-GW-Server
   15–16 Jul : TCN LPG >=92% : Uji fungsional + inferensi AI SELESAI : Analisis daya + mesh + downlink
   20–23 Jul : Simulasi duty-cycle : Repo Operator Hub/TPL5010
+  24 Jul : Meeting LGU-Pertamina (dual-system, gas 6-kelas, 24V ready, 18 action items)
   Des 2026 : Target implementasi (field installation)
   Feb 2027 : Evaluasi & roadmap industrialisasi
 ```
+
+## 5. Kandidat belum dikonfirmasi (dari notulen 24 Jul)
+
+Node `cand:*` di `graph.json` bertipe `candidate` — sengaja **tidak** dihubungkan ke sub-sistem manapun (bukan bagian arsitektur resmi) sampai ada arahan user:
+- **Flame detection (Jetson Nano, 79%)** — usulan pengembangan tambahan, domain mirip OGI yang sudah dihapus. Belum ada file sumber pendukung di repo.
+
+Detail & alasan → `decisions.md` dec:18.
+
+> Update 30 Jul: klaim **"CNN 1D 97,6%"** sudah **direkonsiliasi** — ditemukan `Sumber Dokumen/Deteksi_Gas_CNN_Presentasi.pptx`. Sekarang jadi node model resmi `model:cnn1d` (bukan `candidate` lagi), terhubung ke `sub:ai` di samping `model:tcn` — keduanya model berbeda tugas (klasifikasi gas vs prediksi leak). Lihat `decisions.md` dec:21.

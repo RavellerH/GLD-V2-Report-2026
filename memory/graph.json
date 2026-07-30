@@ -40,7 +40,8 @@
     { "id": "repo:srv", "type": "repo", "label": "PertaminaGLD", "updated": "2026-07-23" },
     { "id": "repo:ml", "type": "repo", "label": "gas-leak-ml-chamber-system", "updated": "2026-06-24" },
 
-    { "id": "model:tcn", "type": "model", "label": "TCN LPG 8-model (>=92%)" },
+    { "id": "model:tcn", "type": "model", "label": "TCN LPG 8-model (>=92%), prediksi leak time-series" },
+    { "id": "model:cnn1d", "type": "model", "label": "CNN 1D klasifikasi jenis gas (97,6% PC / 97,3% ESP32-S3 int8)" },
 
     { "id": "ru:2", "type": "ru", "label": "RU II Dumai", "status": "roadmap", "sensor": 10, "ch": 3, "gw": 1 },
     { "id": "ru:3", "type": "ru", "label": "RU III Plaju", "status": "roadmap", "sensor": 4, "ch": 3, "gw": 1 },
@@ -55,6 +56,7 @@
     { "id": "ms:tcn", "type": "milestone", "label": "TCN LPG >=92%", "date": "2026-07-15", "done": true },
     { "id": "ms:funcai", "type": "milestone", "label": "Uji fungsional + inferensi AI SELESAI", "date": "2026-07-16", "done": true },
     { "id": "ms:power", "type": "milestone", "label": "Analisis daya + mesh + downlink", "date": "2026-07-16", "done": true },
+    { "id": "ms:meeting0724", "type": "milestone", "label": "Meeting LGU-Pertamina: dual-system, gas 6-kelas, 24V ready", "date": "2026-07-24", "done": true },
     { "id": "ms:install", "type": "milestone", "label": "Field installation (target)", "date": "2026-12-01", "done": false },
 
     { "id": "blk:power", "type": "blocker", "label": "Autonomi baterai GLD < 30 hari (7P=1,76 hari)" },
@@ -62,6 +64,8 @@
     { "id": "blk:conv", "type": "blocker", "label": "DC converter perlu diganti" },
     { "id": "blk:lora", "type": "blocker", "label": "LoRa per-hop ~100m (disiasati mesh)" },
     { "id": "gate:jsa", "type": "gate", "label": "TRA/JSA belum disusun" },
+
+    { "id": "cand:jetson", "type": "candidate", "label": "Flame detection (Jetson Nano, 79%) — belum dikonfirmasi scope" },
 
     { "id": "deliv:dashboard", "type": "deliverable", "label": "Dashboard proyek (HTML)" },
     { "id": "deliv:progres", "type": "deliverable", "label": "Laporan progres per tanggal" },
@@ -97,6 +101,8 @@
     { "s": "repo:fe", "t": "dev:server", "r": "backend-graphql" },
 
     { "s": "dev:node", "t": "model:tcn", "r": "menjalankan" },
+    { "s": "dev:node", "t": "model:cnn1d", "r": "menjalankan" },
+    { "s": "model:cnn1d", "t": "sub:ai", "r": "bagian-dari" },
     { "s": "sub:power", "t": "dev:tpl5010", "r": "pakai" },
     { "s": "sub:power", "t": "dev:bq25185", "r": "pakai" },
     { "s": "sub:power", "t": "dev:tps63020", "r": "pakai" },
@@ -124,6 +130,9 @@
     { "s": "sub:chamber", "t": "dev:lm2596", "r": "pakai" },
     { "s": "sub:chamber", "t": "dev:bts7960", "r": "pakai" },
 
-    { "s": "deliv:chamber", "t": "sub:chamber", "r": "melaporkan" }
+    { "s": "deliv:chamber", "t": "sub:chamber", "r": "melaporkan" },
+
+    { "s": "ms:meeting0724", "t": "proj:GLD", "r": "update-status" },
+    { "s": "cand:jetson", "t": "proj:GLD", "r": "usulan-belum-dikonfirmasi" }
   ]
 }

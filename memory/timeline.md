@@ -30,6 +30,7 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 - **23 Jul** Repo server (PertaminaGLD) aktif: firmware + Operator Hub + TPL5010 + nulling.
 - **23 Jul** 🔵 Progress chamber gas: sistem kendali ESP32 real-time — solenoid valve, pompa duty-cycle, BME280 ganda (I2C 0x76/0x77), TGS2610 via ADS1115 + voltage divider, LM2596, BTS7960. Next: PCB layout, pompa senyap, mounting dinding.
 - **24 Jul** Status per hari ini (as-of).
+- **24 Jul** 🔵 **Meeting GLD LGU–Pertamina** (09:32–11:00 WIB; LGU: Pak Muhammad/Pak Farhan/Ilma/Fahmi/Beni — Pertamina: Pak Sena/Pak Maman/Pak Adit/Mas Roni/Mas Indra RU Cilacap). Poin: **24V siap sertifikasi** (biro Shanghai); battery version target **<100mA**, min 30 hari, desain baru 6–8 bulan; gas capability min **6 kelas** (H₂/LPG/Metana/CO₂/Clean Air); rencana **survey RU Cilacap akhir Jul → instalasi Sep 2026** (berpotensi 1 kunjungan); strategi **dual system** (server lokal + cloud); 18 action items + tabel risk/mitigation; next meeting **RAP ~15 Agu 2026**. ⚠️ Klaim baru **belum direkonsiliasi** dengan memory existing: model "**CNN 1D 97,6%**" (vs TCN per-sensor ≥92% terdokumentasi 15 Jul) dan **flame detection camera (Jetson Nano, akurasi 79%)** — status belum dikonfirmasi masuk scope resmi (lih. `decisions.md` dec:18, `blockers_metrics.md`).
 
 ## Rencana ke depan (baseline resmi)
 Integration test (Sep) · HSE/permit (Nov) · **Field installation = target implementasi (Des)** · Field trial (Des–Jan) · Evaluation (Jan) · Industrialization roadmap (Feb 2027).

@@ -17,9 +17,20 @@ Keputusan yang membentuk deliverable & arah kerja. Format: ID · tanggal · kepu
 | dec:11 | 23 Jul | **Tema HTML → biru #2B5FCB + charcoal #262321** (logo Korporasi Kinarya ITB); tambah **navigasi sticky** di dashboard | Arahan user; tampilan klien lebih mudah dibaca |
 | dec:12 | 23 Jul | **Koreksi klaim:** inferensi AI di PC+emulator (bukan on-device); **deviasi diturunkan 42→39% / +20** (jangan over-claim); **LoRa disiasati mesh**; **dataset konsisten** (isu resolved) | Klarifikasi user + pendalaman PDF Juli (uji mesh 8-CH) |
 | dec:13 | 23 Jul | **Telemetri → "Evolusi Data & Metode Model"** (Tahap 1 → metode saat ini) | Arahan user: tampilkan perubahan demi perubahan |
+| dec:14 | 24 Jul | Deployment RU Cilacap = **dual system** (server lokal RU + cloud) untuk perbandingan performa | Keputusan meeting LGU–Pertamina 24 Jul |
+| dec:15 | 24 Jul | Survey & instalasi RU Cilacap **digabung 1 kunjungan** bila memungkinkan (target instalasi **Sep 2026**) | Efisiensi kunjungan lapangan; keputusan meeting 24 Jul |
+| dec:16 | 24 Jul | Battery version development **lanjut paralel**, TIDAK menghambat deployment versi 24V | 24V sudah siap sertifikasi; battery masih R&D |
+| dec:17 | 24 Jul | Gas detection capability **minimum wajib dipastikan**: H₂, LPG, Metana, CO₂, Clean Air (6 kelas) sebelum deployment | Keputusan meeting 24 Jul |
+| dec:18 | 24 Jul | **Flame detection (camera, Jetson Nano)** & **sensor arah angin** = pengembangan tambahan terpisah; **BELUM dikonfirmasi masuk scope** dashboard/report resmi | Berpotensi tumpang tindih dengan OGI yang sudah dihapus (dec:05); perlu arahan eksplisit user sebelum dimasukkan ke deliverable manapun |
+| dec:19 | 30 Jul | **Reorganisasi folder root** menjadi `Deliverables/` (output Claude) + `Sumber Dokumen/` (dokumen tim/klien); `Dataset/` & `memory/` tetap di root | Root terlalu padat (30+ file bercampur); arahan user "kategorikan folder ini rapi" |
+| dec:20 | 30 Jul | Hapus duplikat persis `TCN_GasLPG_Presentation (2) (1).pptx` (md5 identik dgn `(2).pptx`); rename `mom_ruiv_cilacap_gld (1).pdf` → `mom_ruiv_cilacap_gld_ringkasan-AI.pdf` (bukan duplikat, isi beda) | Kebersihan repo saat reorganisasi; arahan user |
+| dec:21 | 30 Jul | Klaim **"CNN 1D 97,6%"** dari notulen 24 Jul **direkonsiliasi**: ditemukan `Deteksi_Gas_CNN_Presentasi.pptx` — model klasifikasi jenis gas (3 kelas), **berbeda** dari TCN (prediksi leak time-series). Kedua model sah & boleh dipakai di deliverable | Ditemukan saat kategorisasi file; bukan konflik data, hanya dua model dgn tugas berbeda |
 
 ## Prinsip yang mengikat
 - Klien = partner → selalu tampilkan progres **dan** outstanding; jangan over-claim (analisis ≠ resolusi blocker).
 - Headline progres ditahan konservatif (42%) meski engineering di depan; keunggulan murni sisi lab.
 - Cilacap = **RU IV** (bukan VI).
 - JSA/HSE = **draft**, wajib disahkan HSE RU sebelum dipakai.
+- Flame detection (Jetson Nano, camera) **≠** OGI YOLO-thermal (sudah dihapus), tapi statusnya sama: **belum masuk scope resmi report** sampai ada arahan eksplisit user.
+- **CNN 1D (klasifikasi gas 3-kelas)** dan **TCN (prediksi leak time-series)** adalah **dua model berbeda, keduanya sah** — jangan disatukan atau dianggap konflik angka (dec:21).
+- File di `Sumber Dokumen/` adalah **arsip mentah dari tim/klien** — sebelum mengutip angka baru dari sana ke deliverable, cek dulu apakah sudah tercatat/direkonsiliasi di `memory/` (blockers_metrics.md, entities.md).

@@ -22,6 +22,11 @@
 | p:nina | Bu Nina | Hazardous / standar pemasangan |
 | p:beny | Kak Beny | Overall system architecture, AI |
 | p:totong | Pak Totong | Diskusi peletakan tiang/rooftop |
+| p:adit | Pak Adit | Pertamina — meeting 24 Jul |
+| p:roni | Mas Roni | Pertamina — meeting 24 Jul |
+| p:indra | Mas Indra | Pertamina, RU Cilacap — meeting 24 Jul |
+
+> Catatan: "Pak Sena" (notulen 24 Jul) kemungkinan sama dengan `p:senna` (Pak Senna); "Pak Maman" konsisten dengan `p:maman`. "Pak Muhammad" (LGU, notulen 24 Jul) belum punya ID — kemungkinan overlap dengan `p:beny`/`p:maman`, perlu klarifikasi.
 
 ## Sub-sistem (`sub:`)
 | ID | Nama | Status ringkas (24 Jul) |
@@ -52,6 +57,8 @@
 | dev:ads1115 | ADS1115 | ADC eksternal 16-bit untuk TGS2610 (atasi noise ADC internal ESP32) |
 | dev:lm2596 | LM2596 | Step-down regulator 5V untuk ESP32/BME280/TGS2610/relay/BTS7960 |
 | dev:bts7960 | BTS7960 | Driver motor pompa chamber |
+| dev:jetson | Jetson Nano | **Tentatif/belum masuk scope resmi** — hardware flame detection camera-based (dibeli); model 79% akurasi, dataset dari Google + kamera infrared. Lih. `decisions.md` dec:18 |
+| dev:windsensor | Sensor Arah Angin | **Rencana**, belum ada timeline/PIC — untuk early warning (prediksi dispersi gas/flame spread) |
 
 ## Repositori (`repo:`)
 | ID | Repo | Lapisan | Update terakhir |
@@ -64,7 +71,8 @@
 RU II Dumai · RU III Plaju · **RU IV Cilacap (pilot aktif)** · RU V Balikpapan · RU VI Balongan · RU VII Kasim/Sorong (field test). Detail jumlah → `overview.md`.
 
 ## Model AI
-- **TCN per-sensor (LPG):** 8 model univariat, semua ≥92% (MQ4V 93,9%, F1 0,923), TFLite int8 ~72 KB.
+- **TCN per-sensor (LPG):** 8 model univariat, semua ≥92% (MQ4V 93,9%, F1 0,923), TFLite int8 ~72 KB. Prediksi **leak LPG 5 detik ke depan** dari 15 dtk lookback (Board12, 3.234 baris). Sumber: `Board12_TCN_PerSensor.pptx`.
+- **CNN 1D (klasifikasi jenis gas):** model **terpisah** dari TCN — tugasnya klasifikasi 3 kelas (Clean Air/LPG/CO2), bukan prediksi leak time-series. 5 layer (Conv1D 16 filter→MaxPool→Dense 16→Softmax), 1.155 parameter. **Model PC** (`cnn_gas_model.keras`, 43 KB): **97,6% akurasi test** (374 data holdout, F1-macro 97,55%; per-kelas F1 Clean Air 0,99/LPG 0,98/CO2 0,96). **Model ESP32-S3** (`cnn_gas_model_data.h`, int8, 7,4 KB): 97,3% akurasi (kompresi 83%, turun 0,27 poin). Validasi lapangan: 3.466 pembacaan device F001 (20 Jul 2026), keyakinan rata-rata 98,6%, 34 baris (1%) ditandai untuk tinjauan manual. Sumber: `Deteksi_Gas_CNN_Presentasi.pptx` (Lab IoT ITB). **Ini yang dimaksud "CNN 1D 97,6%" di notulen 24 Jul — sudah direkonsiliasi, bukan konflik dgn TCN.**
 - **Multi-task NN:** jenis gas / leak / severity / PPM (repo ML).
 - **TCNN:** prediksi 5 dtk dari 5 dtk (Pak Fahdzi).
-- ~~OGI YOLOv8-seg (thermal)~~ — **dihapus, belum disetujui.**
+- ~~OGI YOLOv8-seg (thermal)~~ — **dihapus, belum disetujui.** Materi sumber: `LangGas_Top6000_Progress.pptx` (arsip, jangan dipakai lagi tanpa arahan).

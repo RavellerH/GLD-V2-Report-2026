@@ -40,6 +40,8 @@ Keputusan yang membentuk deliverable & arah kerja. Format: ID · tanggal · kepu
 | dec:34 | 6–8 Agu | **Push alarm dinyatakan berhasil diuji**: GLD disemprot LPG di uji mesh kampus (GW+CH1+CH2+CH3) → status server berubah jadi alarm otomatis **tanpa pull request** | Demo persiapan sebelum kunjungan Cilacap; **menyelesaikan** risiko "push alarm belum dicoba" (`decisions.md` konteks dec:22, `blockers_metrics.md` § 30 Jul) |
 | dec:35 | 6 Agu | **8 action item resmi dgn PIC formal** ditetapkan (bukan lagi PIC generik "Tim Mekanik/Elektronik"): mounting/bracket→Tim Mekanik ITB; skenario instalasi+dimensi→Tim Mekanik & Vendor Mekanik; evaluasi kapasitas GW/CH→Tim Komunikasi ITB; fitur alarm threshold→Tim AI ITB; info Area+Equipment→Tim UI ITB; kajian pembuangan gas→Tim Instrumentasi ITB; studi banding Emerson/WirelessHART→Tim Komunikasi ITB; rencana sertifikasi→Tim ITB + Pertamina | Notulensi resmi 6 Agu menggantikan penamaan PIC generik yang sempat dipakai di action-item dashboard |
 
+| dec:36 | 9 Agu | Model **CNN Dual-Branch** dicatat sbg **penerus CNN 1D** (belum menggantikan resmi) — akurasi lebih tinggi (99,73%/99,20%) tapi **masih 3-kelas LPG/CO2/Udara Bersih**, TIDAK menutup requirement CO/H2S/Benzena (dec:30) | File ditemukan di `Sumber Dokumen/` (push langsung Farhan Budiman ke main, 9 Agu, di luar sesi Claude); perlu arahan eksplisit user sebelum dipromosikan jadi model resmi di deliverable client-facing |
+
 ## Prinsip yang mengikat
 - Klien = partner → selalu tampilkan progres **dan** outstanding; jangan over-claim (analisis ≠ resolusi blocker).
 - Headline progres ditahan konservatif (42%) meski engineering di depan; keunggulan murni sisi lab.
@@ -54,3 +56,5 @@ Keputusan yang membentuk deliverable & arah kerja. Format: ID · tanggal · kepu
 - Sebelum 6 Agu, "push alarm" berstatus **belum dicoba**; per dec:34 sudah **diuji & berhasil** (uji mesh kampus, bukan lapangan RU) — status di deliverable harus dibedakan dari "sudah tervalidasi di lapangan produksi".
 - Tanggal rapat mounting/topologi = **6 Agustus 2026 (Kamis)**, dikonfirmasi user — badan teks notulensi resmi (`Notulensi_Rapat_5Agustus2026_GLD.pdf`) salah tulis "5 Agustus", nama file & konfirmasi user jadi acuan yang benar.
 - Kapasitas jaringan GW/CH terhadap jumlah sensor **belum ada angka resmi** (action item terbuka, dec:28) — jangan kutip "<30 sensor" sbg spesifikasi established di deliverable manapun.
+- **CNN Dual-Branch (dec:36) ≠ solusi gate:gas-extra** — akurasinya lebih baik dari CNN 1D tapi kelasnya sama (LPG/CO2/Udara Bersih); jangan klaim "requirement CO/H2S/Benzena terpenuhi" di deliverable manapun berdasarkan model ini.
+- Slide "uji lapangan H2" di deck CNN Dual-Branch **belum diverifikasi** — jangan kutip angka 97,65%/kelas H2 sbg fakta final sebelum klarifikasi ke Lab IoT ITB.

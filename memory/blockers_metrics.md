@@ -139,6 +139,12 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 - Pemilihan teknologi komunikasi ke depan perlu pertimbangkan **chipset** yg dipakai shg implementasi tak perlu dibangun sepenuhnya dari awal.
 - **Menarik dibandingkan** dgn performa jaringan sistem corrosion monitoring komersial (mis. Emerson), termasuk kemungkinan pakai konsep **WirelessHART** — action item studi banding (PIC Tim Komunikasi ITB), **belum dilakukan**.
 
+**Catu Daya — Solar Panel (dibahas Pak Raihan, RU VII Kasim, dalam rapat 6 Agustus):**
+- **Pak Raihan** menanyakan kebutuhan **solar panel** bila GLD menggunakan kombinasi baterai + solar. Pertamina menyatakan **ukuran fisik besar tidak masalah** (dicontohkan setara panel lampu PJU atau lebih).
+- ⚠️ **Diminta juga cost-benefit analysis**: solar panel **vs** catu daya kabel (grid), termasuk **CAPEX kabel** (biaya pengadaan & instalasi kabel) sbg pembanding — bukan cuma hitungan Wp solar sendirian.
+- **Tindak lanjut** (lih. tabel di bawah, PIC Beny/ITB Fisika): perhitungan Wp & cost-benefit **belum dibuat** per follow-up WA 8 Agustus — dilanjutkan/dikonfirmasi via WhatsApp krn perlu waktu hitung. Diskusi sebelumnya (di luar rapat ini): solar panel dinilai **menyulitkan instalasi & sempat tidak diizinkan Pertamina**; akan dihitung bila ternyata tidak masalah.
+- ⚠️ Notulensi resmi (`Notulensi_Rapat_5Agustus2026_GLD.pdf`) **tidak mencatat poin ini secara tertulis** — direkonstruksi dari catatan informal + konfirmasi user (9 Agu) bahwa ini bagian dari pembahasan rapat 6 Agustus oleh Pak Raihan. Sudah ditambahkan ke `Deliverables/Notulen_Meeting_GLD_6Agustus2026.{docx,pdf}` sbg bagian 07.
+
 **Status produksi unit (per 6 Agu):**
 | Item | Jumlah |
 |---|---|
@@ -154,7 +160,7 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 5. Aplikasi perlu tampilkan info lokasi perangkat: kolom **Area DAN identitas Equipment** (dec:33) — ⚠️ bukan cuma "Area" seperti sempat dicatat.
 6. **Jalur pembuangan gas** pasca-sampling perlu dievaluasi agar tak timbulkan paparan ke pengguna/lingkungan — action item (PIC Tim Instrumentasi ITB), **belum dijawab**.
 
-**8 Tindak Lanjut resmi (dengan PIC) — menggantikan PIC generik yang sempat dipakai:**
+**9 Tindak Lanjut resmi (dengan PIC) — menggantikan PIC generik yang sempat dipakai:**
 | # | Tindak Lanjut | PIC |
 |---|---|---|
 | 1 | Menyusun desain mounting & bracket sesuai standar kilang | Tim Mekanik ITB |
@@ -165,12 +171,13 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 | 6 | Mengkaji sistem pembuangan gas pasca-sampling | Tim Instrumentasi ITB |
 | 7 | Studi perbandingan topologi dgn sistem Emerson/WirelessHART | Tim Komunikasi ITB |
 | 8 | Menyusun rencana sertifikasi perangkat utk kilang | Tim ITB bersama Pertamina |
+| 9 | Menghitung kebutuhan solar panel (Wp) & cost-benefit analysis vs catu daya kabel (+ CAPEX kabel) | Beny (ITB Fisika) |
 
-**Follow-up WhatsApp (6–8 Agustus 2026, setelah rapat 6 Agu):**
-- **6 Agu 12:00** (Farhan Budiman): contoh desain repeater & bracket Emerson utk memudahkan mounting pada struktur existing, cc **Raihan Fakhar (RU VII Kasim)** — ⚠️ nama ini dari WA, **tidak disebut** di notulensi resmi (peserta ditulis generik "Tim ITB, PT Pertamina, PT LAPI Ganesha Utama").
+**Follow-up WhatsApp (6–8 Agustus 2026) — kelanjutan pembahasan rapat 6 Agu:**
+- **6 Agu 12:00** (Farhan Budiman): contoh desain repeater & bracket Emerson utk memudahkan mounting pada struktur existing, cc **Raihan Fakhar (RU VII Kasim)** — orang yang sama dgn "Pak Raihan" yang mengangkat topik solar panel di rapat.
 - **6 Agu 12:12 & 12:17** (Farhan Budiman): contoh app **"Gateway Manager"** — jumlah device terdaftar/terhubung per GW, kapasitas GW, device tak terhubung, & visualisasi jaringan → **requirement fitur baru** utk dashboard/Operator Hub, belum ada di scope sw saat ini.
-- **8 Agu 09:16** (Farhan Budiman): pertanyaan Pertamina soal kebutuhan **solar panel** bila GLD pakai baterai+solar — ukuran besar tidak masalah bagi mereka (contoh: seukuran panel lampu PJU atau lebih). ⚠️ **Diminta juga cost-benefit analysis**: solar panel **vs** catu daya kabel (grid), termasuk **CAPEX kabel** (biaya pengadaan & instalasi kabel) sbg pembanding — bukan cuma hitungan Wp solar sendirian.
-- **8 Agu 12:49** (Beny Agustirandi, ITB Fisika): **belum ada perhitungan Wp** solar panel maupun cost-benefit analysis vs kabel. Diskusi sebelumnya: solar panel dinilai **menyulitkan instalasi & sempat tidak diizinkan Pertamina**; akan dihitung kebutuhan Wp bila ternyata tidak masalah.
+- **8 Agu 09:16** (Farhan Budiman): meneruskan pertanyaan solar panel dari rapat ke Beny utk dihitung.
+- **8 Agu 12:49** (Beny Agustirandi, ITB Fisika): **belum ada perhitungan Wp** solar panel maupun cost-benefit analysis vs kabel — akan dihitung.
 
 **Demo persiapan sebelum kunjungan Cilacap (6–8 Agu, mesh kampus):**
 - Tiang **GW, CH1, CH2, CH3** disiapkan; **semua CH sudah masuk/terhubung ke GW**.

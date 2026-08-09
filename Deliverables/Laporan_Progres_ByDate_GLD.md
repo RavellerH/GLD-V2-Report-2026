@@ -264,7 +264,12 @@ Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & ri
 7. **Hindari material PVC** — dinilai kurang sesuai untuk lingkungan kilang.
 8. Tim diminta menyusun **skenario instalasi lengkap** (dimensi, bracket, baut, mur, komponen pendukung) — **belum dibuat**.
 
-**8 Tindak Lanjut resmi (dengan PIC):**
+**Catu Daya — Solar Panel (dibahas Pak Raihan, RU VII Kasim, dalam rapat ini):**
+- **Pak Raihan** menanyakan kebutuhan **solar panel** bila GLD menggunakan kombinasi baterai + solar. Pertamina menyatakan **ukuran fisik besar tidak masalah** (contoh: setara panel lampu PJU atau lebih).
+- Diminta juga **cost-benefit analysis**: solar panel **vs** catu daya kabel, termasuk **CAPEX kabel** (biaya pengadaan & instalasi) sbg pembanding.
+- PIC: **Beny (ITB Fisika)** — perhitungan Wp & cost-benefit **belum dibuat** (dilanjutkan via WA 8 Agustus).
+
+**9 Tindak Lanjut resmi (dengan PIC):**
 
 | # | Tindak Lanjut | PIC |
 |---|---|---|
@@ -276,15 +281,16 @@ Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & ri
 | 6 | Kajian sistem pembuangan gas pasca-sampling | Tim Instrumentasi ITB |
 | 7 | Studi banding topologi dengan Emerson/WirelessHART | Tim Komunikasi ITB |
 | 8 | Rencana sertifikasi perangkat untuk kilang | Tim ITB bersama Pertamina |
+| 9 | Hitung solar panel (Wp) & cost-benefit vs kabel (+CAPEX kabel) | Beny (ITB Fisika) |
 
 ### 6–8 Agustus — Demo Mesh Siap-Uji & Push Alarm Berhasil — *Milestone ✅*
 - Tiang **GW, CH1, CH2, CH3** disiapkan; **semua CH sudah terhubung ke GW**.
 - Uji star GLD di **CH1 & CH2**: data masuk saat direquest (pull) — OK.
 - **Uji alarm real-time:** GLD disemprot LPG → status server berubah **alarm otomatis tanpa pull request** — **push alarm berhasil**, menyelesaikan risiko "push alarm belum dicoba" dari weekly meeting 30 Jul (uji di mesh kampus/lab, **belum** validasi lapangan RU produksi).
 - Urutan demo: **aktifkan server → pasang GW → pasang CH → pasang GLD 24V.**
-- Follow-up WhatsApp: contoh app **"Gateway Manager"** (device terdaftar/terhubung per GW, kapasitas, visualisasi jaringan) — requirement fitur baru untuk dashboard. Pertanyaan Pertamina soal kebutuhan **solar panel (Wp)** untuk GLD baterai+solar — ukuran besar tidak masalah bagi mereka; **diminta juga cost-benefit analysis solar panel vs catu daya kabel (termasuk CAPEX kabel)**, **perhitungan belum dibuat**; sebelumnya solar panel dinilai menyulitkan instalasi & sempat tidak diizinkan.
+- Follow-up WhatsApp: contoh app **"Gateway Manager"** (device terdaftar/terhubung per GW, kapasitas, visualisasi jaringan) — requirement fitur baru untuk dashboard; kelanjutan pertanyaan **solar panel** dari Pak Raihan (rapat 6 Agustus) diteruskan Farhan ke Beny — **perhitungan Wp & cost-benefit vs kabel belum dibuat**; sebelumnya solar panel dinilai menyulitkan instalasi & sempat tidak diizinkan.
 
-Detail lengkap → `memory/blockers_metrics.md` § Rapat resmi 6 Agustus 2026, `memory/decisions.md` dec:27–34.
+Detail lengkap → `memory/blockers_metrics.md` § Rapat resmi 6 Agustus 2026, `memory/decisions.md` dec:27–34, dec:37.
 
 ### 9 Agustus — Model AI CNN Dual-Branch Resmi Menggantikan CNN 1D — *Milestone ✅*
 - File presentasi ditemukan di `Sumber Dokumen/` (push langsung Farhan Budiman ke `main`, di luar sesi Claude; dibuat Lab IoT ITB, edit terakhir 6 Agu oleh **Ilmania Syakira**).

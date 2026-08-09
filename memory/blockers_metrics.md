@@ -169,8 +169,8 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 **Follow-up WhatsApp (6–8 Agustus 2026, setelah rapat 6 Agu):**
 - **6 Agu 12:00** (Farhan Budiman): contoh desain repeater & bracket Emerson utk memudahkan mounting pada struktur existing, cc **Raihan Fakhar (RU VII Kasim)** — ⚠️ nama ini dari WA, **tidak disebut** di notulensi resmi (peserta ditulis generik "Tim ITB, PT Pertamina, PT LAPI Ganesha Utama").
 - **6 Agu 12:12 & 12:17** (Farhan Budiman): contoh app **"Gateway Manager"** — jumlah device terdaftar/terhubung per GW, kapasitas GW, device tak terhubung, & visualisasi jaringan → **requirement fitur baru** utk dashboard/Operator Hub, belum ada di scope sw saat ini.
-- **8 Agu 09:16** (Farhan Budiman): pertanyaan Pertamina soal kebutuhan **solar panel** bila GLD pakai baterai+solar — ukuran besar tidak masalah bagi mereka (contoh: seukuran panel lampu PJU atau lebih).
-- **8 Agu 12:49** (Beny Agustirandi, ITB Fisika): **belum ada perhitungan Wp** solar panel. Diskusi sebelumnya: solar panel dinilai **menyulitkan instalasi & sempat tidak diizinkan Pertamina**; akan dihitung kebutuhan Wp bila ternyata tidak masalah.
+- **8 Agu 09:16** (Farhan Budiman): pertanyaan Pertamina soal kebutuhan **solar panel** bila GLD pakai baterai+solar — ukuran besar tidak masalah bagi mereka (contoh: seukuran panel lampu PJU atau lebih). ⚠️ **Diminta juga cost-benefit analysis**: solar panel **vs** catu daya kabel (grid), termasuk **CAPEX kabel** (biaya pengadaan & instalasi kabel) sbg pembanding — bukan cuma hitungan Wp solar sendirian.
+- **8 Agu 12:49** (Beny Agustirandi, ITB Fisika): **belum ada perhitungan Wp** solar panel maupun cost-benefit analysis vs kabel. Diskusi sebelumnya: solar panel dinilai **menyulitkan instalasi & sempat tidak diizinkan Pertamina**; akan dihitung kebutuhan Wp bila ternyata tidak masalah.
 
 **Demo persiapan sebelum kunjungan Cilacap (6–8 Agu, mesh kampus):**
 - Tiang **GW, CH1, CH2, CH3** disiapkan; **semua CH sudah masuk/terhubung ke GW**.

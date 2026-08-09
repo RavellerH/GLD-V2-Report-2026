@@ -282,7 +282,7 @@ Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & ri
 - Uji star GLD di **CH1 & CH2**: data masuk saat direquest (pull) — OK.
 - **Uji alarm real-time:** GLD disemprot LPG → status server berubah **alarm otomatis tanpa pull request** — **push alarm berhasil**, menyelesaikan risiko "push alarm belum dicoba" dari weekly meeting 30 Jul (uji di mesh kampus/lab, **belum** validasi lapangan RU produksi).
 - Urutan demo: **aktifkan server → pasang GW → pasang CH → pasang GLD 24V.**
-- Follow-up WhatsApp: contoh app **"Gateway Manager"** (device terdaftar/terhubung per GW, kapasitas, visualisasi jaringan) — requirement fitur baru untuk dashboard. Pertanyaan Pertamina soal kebutuhan **solar panel (Wp)** untuk GLD baterai+solar — **perhitungan belum dibuat** (ukuran besar tidak masalah bagi mereka); sebelumnya solar panel dinilai menyulitkan instalasi & sempat tidak diizinkan.
+- Follow-up WhatsApp: contoh app **"Gateway Manager"** (device terdaftar/terhubung per GW, kapasitas, visualisasi jaringan) — requirement fitur baru untuk dashboard. Pertanyaan Pertamina soal kebutuhan **solar panel (Wp)** untuk GLD baterai+solar — ukuran besar tidak masalah bagi mereka; **diminta juga cost-benefit analysis solar panel vs catu daya kabel (termasuk CAPEX kabel)**, **perhitungan belum dibuat**; sebelumnya solar panel dinilai menyulitkan instalasi & sempat tidak diizinkan.
 
 Detail lengkap → `memory/blockers_metrics.md` § Rapat resmi 6 Agustus 2026, `memory/decisions.md` dec:27–34.
 
@@ -326,7 +326,7 @@ Detail lengkap → `memory/entities.md` § Model AI, `memory/decisions.md` dec:3
 ## Risiko & Requirement Tambahan (dari diskusi 6 Agustus)
 - ⚠️ **Requirement gas Benzena/CO/H2S** belum direkonsiliasi dengan gate 6-kelas 24 Jul.
 - ⚠️ **Sertifikasi ketinggian pemasangan** belum ada — instalasi kilang baru diizinkan setinggi orang.
-- Kebutuhan solar panel (Wp) untuk GLD baterai+solar — **perhitungan belum dibuat**; sebelumnya solar dinilai menyulitkan instalasi & sempat tidak diizinkan Pertamina.
+- Cost-benefit analysis solar panel vs catu daya kabel (termasuk CAPEX kabel) untuk GLD — **perhitungan belum dibuat**; sebelumnya solar dinilai menyulitkan instalasi & sempat tidak diizinkan Pertamina.
 - Pertanyaan terbuka belum dijawab: arah buangan gas hasil sedotan pompa chamber; opsi gateway indoor + kabel.
 - App "Gateway Manager" & kolom "Area"+"Equipment" pada data equipment/sensor — requirement fitur baru, belum masuk scope dashboard saat ini.
 - Kapasitas Gateway/CH terhadap jumlah sensor **belum ada angka resmi** — action item evaluasi (Tim Komunikasi ITB).

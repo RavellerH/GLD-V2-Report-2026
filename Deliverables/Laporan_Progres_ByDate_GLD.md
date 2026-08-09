@@ -236,36 +236,46 @@ Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & ri
 
 ---
 
-### 6 Agustus — Mounting & Topologi vs Corrosion Monitoring Emerson — *Milestone 🔵*
-**Konteks:** diskusi teknis instalasi, arahan **Raihan Fakhar (RU VII Kasim)**, dibandingkan dengan sistem **Corrosion Monitoring Emerson** (protokol **WirelessHART**) yang sudah terpasang & teruji di kilang.
+### 6 Agustus — Rapat Resmi: Mounting & Topologi vs Corrosion Monitoring Emerson — *Milestone 🔵*
+**Konteks:** rapat resmi di Labtek XV ITB (Tim ITB, PT Pertamina, PT LAPI Ganesha Utama), dibandingkan dengan sistem **Corrosion Monitoring Emerson** (konsep **WirelessHART**) yang sudah terpasang di kilang. Sumber: `Sumber Dokumen/Notulensi_Rapat_5Agustus2026_GLD.pdf` (catatan: badan teks dokumen salah tulis tanggal "5 Agustus" — tanggal rapat yang benar 6 Agustus 2026).
 
 **Mounting**
-- Mengikuti pola existing: **bracket L + U-clamp** ke tiang/struktur yang sudah ada — **tanpa pole baru**, **hindari pengelasan & pengeboran**. Bracket umumnya sepaket dengan device.
-- CH = repeater; ukurannya besar karena butuh jangkauan LoRa luas, transfer data lebih banyak, dan kapasitas menampung perluasan lain. Versi Kasim sebelumnya single-channel, kini multi-channel.
-- Instalasi harus **aman dan terlihat aman**; sertifikasi penting mengingat area kritis kilang. Saat dicoba di kilang, instalasi baru **setinggi orang** — belum diizinkan lebih tinggi karena **belum tersertifikasi**.
-- Referensi lapangan: instalasi existing dengan hanya **3 CH/repeater** menembak ke server dengan jangkauan luas, jadi acuan penempatan. Di ITB, area seluas kampus cukup 2 CH.
+- Mengikuti standar mounting existing di kilang — **tidak perlu desain struktur baru**: **bracket tipe L / U-clamp** ke struktur yang sudah ada, **tanpa pengeboran maupun pengelasan**. Pemilihan bracket disesuaikan untuk Gateway, CH, **maupun** sensor GLD.
+- CH besar karena butuh jangkauan LoRa luas, kapasitas komunikasi lebih besar, dan mendukung pengembangan sistem masa depan. Sistem sekarang multi-channel (vs Kasim sebelumnya single-channel).
+- Instalasi harus **aman dan terlihat aman**; sertifikasi penting mengingat area kritis kilang. Saat dicoba di kilang, instalasi baru **setinggi manusia** — belum bersertifikasi untuk **instalasi permanen**.
+- Referensi lapangan: 3 repeater yang sudah terpasang di kilang jadi acuan penempatan (terbukti cakupan baik). Di ITB, 2 CH sudah cukup mencakup area pengujian — jumlah CH diupayakan seminimal mungkin.
+- Vendor mekanik dilibatkan **sejak awal** proses desain & instalasi.
 
 **Topologi jaringan**
-- Sistem corrosion monitoring bisa mencari jalur terbaik & **langsung ke GW tanpa lewat CH**; GW mengunci CH & sensor di bawahnya; metode discover node dengan **mesh-tree sudah diterapkan**. **GLD diminta mengikuti pola ini dan bisa berfungsi juga sebagai CH.**
-- Kapasitas referensi: **< 30 sensor** per gateway. Corrosion monitoring hanya kirim data **2×/hari** (jauh lebih sedikit dari kebutuhan GLD yang real-time/safety-critical) — kebutuhan berbeda: **safety (GLD)** vs **kehandalan alat (Emerson)**.
-- Cilacap dinilai jauh lebih besar & lebih ketat dibanding Kasim. Vendor mekanik akan dilibatkan untuk persiapan instalasi.
+- **Sistem GLD diharapkan dapat mengadopsi topologi tersebut sehingga CH juga dapat berfungsi sebagai repeater.**
+- ⚠️ **Kapasitas Gateway/CH terhadap jumlah sensor BELUM ditentukan** — ini action item evaluasi (PIC: Tim Komunikasi ITB), **bukan** angka pasti "<30 sensor" seperti sempat dicatat dari sumber informal awal.
+- Corrosion monitoring hanya kirim data **~2×/hari** (jauh lebih sedikit dari kebutuhan GLD yang real-time/safety-critical) — kebutuhan berbeda: **safety, komunikasi intensif (GLD)** vs **kehandalan alat (Emerson)**. Pemilihan teknologi komunikasi ke depan perlu pertimbangkan chipset yang dipakai.
+- Cilacap dinilai jauh lebih besar & lebih ketat dibanding Kasim.
 
-**Status produksi unit (per 6 Agu):** CH 9 besar + 7 kecil (16 unit) · GLD 4 unit diminta.
+**Status produksi unit (per 6 Agu):** CH 9 besar + 7 kecil (16 unit) · GLD 4 unit (sesuai permintaan saat ini).
 
-**Requirement tambahan dari Pertamina (sebagian besar masih terbuka):**
-1. Komunikasi antar-sensor (relay/"nitip" data ke sensor lain) — belum ada di desain saat ini.
-2. ⚠️ Deteksi gas tambahan **wajib**: **Benzena, CO, H2S** — di luar gate 6-kelas 24 Jul, **belum direkonsiliasi**.
-3. Chamber **tidak boleh dibawa masuk kilang** — sampel gas dibawa keluar oleh tim Pertamina.
-4. **Alarm dibedakan**: gas mudah terbakar berbasis threshold ppm; gas toksik (CO, H2S) alarm **langsung**.
-5. Pemilihan bracket disesuaikan untuk CH & GLD sekaligus.
-6. Skenario instalasi lengkap dengan ukuran-ukuran konkret — **belum dibuat**.
-7. Hindari pengelasan & pengeboran.
-8. ⚠️ Pertanyaan terbuka: buangan gas hasil sedotan pompa chamber ke mana (risiko paparan user)? — belum dijawab.
-9. Tambahkan kolom **"Area"** pada data equipment/sensor di aplikasi.
-10. Alarm diatur dari nilai-nilai threshold per jenis gas.
-11. **Hindari material PVC.**
-12. CH besar diberi dudukan L, disambungkan ke bracket.
-13. ⚠️ Pertanyaan terbuka: gateway bisa pakai kabel & dipasang indoor (hanya antena di luar)? — belum dijawab.
+**Requirement resmi pengembangan sistem GLD:**
+1. Deteksi gas **wajib**: **Benzena, CO, H2S** — di luar gate 6-kelas 24 Jul, **belum direkonsiliasi**.
+2. Sampel gas **tidak diambil langsung di kilang** — disiapkan & dibawa tim Pertamina ke lokasi pengujian.
+3. ⚠️ Sistem harus menampilkan **konsentrasi gas (ppm) secara real-time** (bukan hanya trigger alarm).
+4. **Alarm berbasis threshold**: gas mudah terbakar → aktif setelah lewat batas bahaya kebakaran; gas toksik (CO, H2S) → aktif **segera** begitu lewat ambang batas keselamatan.
+5. Aplikasi perlu tampilkan kolom **"Area"** **dan** **"Equipment"** (identitas peralatan) — bukan cuma "Area" saja.
+6. Jalur pembuangan gas pasca-sampling perlu dievaluasi agar tidak menimbulkan paparan ke pengguna/lingkungan.
+7. **Hindari material PVC** — dinilai kurang sesuai untuk lingkungan kilang.
+8. Tim diminta menyusun **skenario instalasi lengkap** (dimensi, bracket, baut, mur, komponen pendukung) — **belum dibuat**.
+
+**8 Tindak Lanjut resmi (dengan PIC):**
+
+| # | Tindak Lanjut | PIC |
+|---|---|---|
+| 1 | Desain mounting & bracket sesuai standar kilang | Tim Mekanik ITB |
+| 2 | Skenario instalasi lengkap + dimensi pemasangan | Tim Mekanik & Vendor Mekanik |
+| 3 | Evaluasi kapasitas Gateway & Cluster Head | Tim Komunikasi ITB |
+| 4 | Fitur alarm berbasis threshold gas | Tim AI ITB |
+| 5 | Info Area & Equipment pada dashboard | Tim UI ITB |
+| 6 | Kajian sistem pembuangan gas pasca-sampling | Tim Instrumentasi ITB |
+| 7 | Studi banding topologi dengan Emerson/WirelessHART | Tim Komunikasi ITB |
+| 8 | Rencana sertifikasi perangkat untuk kilang | Tim ITB bersama Pertamina |
 
 ### 6–8 Agustus — Demo Mesh Siap-Uji & Push Alarm Berhasil — *Milestone ✅*
 - Tiang **GW, CH1, CH2, CH3** disiapkan; **semua CH sudah terhubung ke GW**.
@@ -274,7 +284,7 @@ Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & ri
 - Urutan demo: **aktifkan server → pasang GW → pasang CH → pasang GLD 24V.**
 - Follow-up WhatsApp: contoh app **"Gateway Manager"** (device terdaftar/terhubung per GW, kapasitas, visualisasi jaringan) — requirement fitur baru untuk dashboard. Pertanyaan Pertamina soal kebutuhan **solar panel (Wp)** untuk GLD baterai+solar — **perhitungan belum dibuat** (ukuran besar tidak masalah bagi mereka); sebelumnya solar panel dinilai menyulitkan instalasi & sempat tidak diizinkan.
 
-Detail lengkap → `memory/blockers_metrics.md` § Meeting 6 Agustus 2026, `memory/decisions.md` dec:27–34.
+Detail lengkap → `memory/blockers_metrics.md` § Rapat resmi 6 Agustus 2026, `memory/decisions.md` dec:27–34.
 
 ---
 
@@ -308,8 +318,9 @@ Detail lengkap → `memory/blockers_metrics.md` § Meeting 6 Agustus 2026, `memo
 - ⚠️ **Sertifikasi ketinggian pemasangan** belum ada — instalasi kilang baru diizinkan setinggi orang.
 - Kebutuhan solar panel (Wp) untuk GLD baterai+solar — **perhitungan belum dibuat**; sebelumnya solar dinilai menyulitkan instalasi & sempat tidak diizinkan Pertamina.
 - Pertanyaan terbuka belum dijawab: arah buangan gas hasil sedotan pompa chamber; opsi gateway indoor + kabel.
-- App "Gateway Manager" & kolom "Area" pada data equipment/sensor — requirement fitur baru, belum masuk scope dashboard saat ini.
+- App "Gateway Manager" & kolom "Area"+"Equipment" pada data equipment/sensor — requirement fitur baru, belum masuk scope dashboard saat ini.
+- Kapasitas Gateway/CH terhadap jumlah sensor **belum ada angka resmi** — action item evaluasi (Tim Komunikasi ITB).
 
 ---
 
-*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · diskusi teknis & WhatsApp 6–8 Agustus 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas · diperbarui 8 Agustus 2026.*
+*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · Notulensi Rapat GLD 6 Agustus 2026 (Labtek XV ITB) · WhatsApp follow-up 6–8 Agustus 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas · diperbarui 9 Agustus 2026.*

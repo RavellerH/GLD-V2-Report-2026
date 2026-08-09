@@ -13,6 +13,7 @@
 | `GLD_V2_Progress_Report_Jul2026.pptx` | Deck progress report Jul 2026 (dibuat Claude, 30 Jul). |
 | `REPORT_GLD_V2_2026.md` | Laporan lengkap versi awal (dibuat 23 Jul) — ringkasan proyek, struktur repo, analisis dataset, temuan, isu/risiko, rekomendasi. ⚠️ **Kemungkinan tumpang tindih** dengan `Laporan_Progres_ByDate_GLD.md` (dibuat hari sama) — belum dikonfirmasi apakah masih dipakai atau superseded. |
 | `Notulen_Meeting_GLD_30Jul2026.md` | Notulen weekly meeting tim 30 Jul, disusun Claude dari catatan mentah (bukan dokumen client asli seperti notulen 24 Jul). Poin utama: arsitektur app lokal+DB (cloud=gateway saja, request Pak Pindoan), kunjungan Cilacap 9–10 Agu (survey+instalasi digabung, gantikan rencana Sep), Wi-Fi=config lokal (LoRa tetap utama), 15 action items, risiko baru (kondensasi casing, LoRa collision, akurasi model dipertanyakan). |
+| `Notulen_Meeting_GLD_6Agustus2026.{docx,pdf}` | Notulensi rapat resmi 6 Agu (mounting/topologi vs Corrosion Monitoring Emerson, requirement gas Benzena/CO/H2S, alarm, sertifikasi, 8 tindak lanjut ber-PIC) — **disusun ulang Claude 9 Agu** dari `Sumber Dokumen/Notulensi_Rapat_5Agustus2026_GLD.pdf` dengan **koreksi tanggal** (badan dokumen asli salah tulis "5 Agustus"; tanggal sebenarnya 6 Agustus, dikonfirmasi user). Isi lain identik dgn dokumen sumber. Dibuat dua format sesuai permintaan user (docx via docx-js, pdf via reportlab — LibreOffice docx→pdf gagal di environment sesi ini utk semua file termasuk file trivial, jadi PDF digenerate independen bukan hasil konversi). |
 | `CLAUDE.md`, `memory/*` | Sistem memory ini (di root). |
 
 ## B. Dokumen sumber — dari tim/klien (`Sumber Dokumen/`)
@@ -20,6 +21,7 @@
 |---|---|
 | `Laporan_Progres_GLD_18Jun-20Jul.md` | Laporan progres periode 18 Jun–20 Jul (sumber teks utama). |
 | `Notulensi_KickOffMeeting 12 Juni 2026.pdf` | Notulen kick-off Pertamina (scope, tanya-jawab, mode sistem). |
+| `Notulensi_Rapat_5Agustus2026_GLD.pdf` | Notulensi resmi rapat mounting/topologi/gas requirement (Labtek XV ITB, Tim ITB+Pertamina+LGU). Diunggah user 9 Agu. ⚠️ **Badan dokumen salah tulis tanggal** ("5 Agustus") — tanggal rapat sebenarnya **6 Agustus 2026**, dikonfirmasi user; nama file dipertahankan apa adanya (arsip), lihat versi terkoreksi di `Deliverables/Notulen_Meeting_GLD_6Agustus2026.{docx,pdf}`. |
 | `Deck Presentasi GLD KICKOFF MEETING - BPUDL Template.pptx_compressed (1).pdf` | Deck kick-off (66 hlm): **timeline 9 bulan, in/out scope, arsitektur, AI, HSE, org, resource plan, TKDN**. Sumber **baseline resmi**. |
 | `Kebutuhan_Peralatan_GLD_per_RU_v2.pdf` | Spesifikasi & jumlah perangkat per RU (tabel 6 RU). |
 | `Timeline_Kerjaan_Mingguan_GLD.pptx` | Timeline mingguan awal (M1–M7, 20 Apr–7 Jun). |

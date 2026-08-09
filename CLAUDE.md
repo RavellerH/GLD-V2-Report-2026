@@ -14,7 +14,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - **Scope aktif sekarang:** **pilot RU IV Cilacap** (5 RU lain = roadmap).
 - **Field test kolaborasi:** RU-VII Kasim/Sorong. **Target implementasi:** Des 2026.
 
-## 2. Status singkat (per 30 Jul 2026)
+## 2. Status singkat (per 8 Agu 2026)
 
 - **Progres pilot Cilacap ≈ 39%** vs baseline resmi 19% → **+20 poin** (murni sisi engineering lab, **bukan** kesiapan lapangan).
 - ✅ Rantai **GLD-CH-GW-Server end-to-end**; **inferensi AI kini di PC + emulator ESP32** (belum on-device — langkah berikutnya).
@@ -24,6 +24,9 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - 🔵 **Meeting LGU–Pertamina 24 Jul**: 24V **siap sertifikasi** (biro Shanghai); battery version target **<100mA**/min 30 hari (desain baru berpotensi 6–8 bulan) — **paralel, tidak menghambat** deployment 24V; gate baru **gas capability min 6 kelas** (H₂/LPG/Metana/CO₂/Clean Air, baru **3/6 tervalidasi**); 18 action items; next **RAP Meeting ~15 Agu 2026**. ⚠️ **Belum dikonfirmasi masuk scope**: flame detection camera (Jetson Nano, 79%). ✅ Klaim "CNN 1D 97,6%" **direkonsiliasi**: model nyata klasifikasi jenis gas 3-kelas, terpisah & tidak konflik dgn TCN ≥92% (prediksi leak time-series). Detail → `memory/blockers_metrics.md`, `memory/decisions.md` dec:14–21.
 - 🔴 **PENTING — jadwal berubah (weekly meeting 30 Jul):** kunjungan Cilacap **maju & digabung jadi 9–10 Agustus** (survey + instalasi sekaligus), **menggantikan** rencana 24 Jul (survey akhir Jul → instalasi Sep). Arsitektur diperjelas: **app+DB penuh lokal** (site + kantor Jakarta, request Pak Pindoan), **cloud hanya gateway/relay ringan**. **Wi-Fi ESP32 = config lokal saja**, LoRa tetap backbone (bukan perubahan arsitektur). Risiko baru: kondensasi casing, LoRa data-collision belum diuji, push alarm belum dicoba, protokol missed-report GLD portable, **akurasi model dipertanyakan ulang** (perlu verifikasi independen). Detail → `memory/blockers_metrics.md` § Meeting mingguan 30 Jul, `memory/decisions.md` dec:22–26.
 - 📁 **Struktur folder dirapikan (30 Jul):** root kini `Deliverables/` (output Claude) + `Sumber Dokumen/` (dokumen tim/klien) + `Dataset/` + `memory/`. Lihat bagian 4 & `memory/files_catalog.md`.
+- 🔵 **Diskusi mounting/topologi 6 Agu** (rujukan sistem **Corrosion Monitoring Emerson**, WirelessHART, sudah terpasang & teruji di kilang): mounting GLD/CH pakai **bracket L + U-clamp** ke struktur existing, **tanpa pole baru, tanpa las/bor**; GLD diminta bisa **berfungsi juga sebagai CH**; instalasi kilang baru dicoba **setinggi orang** (belum tersertifikasi lebih tinggi → `gate:cert-height`). **Requirement baru Pertamina:** wajib deteksi **Benzena, CO, H2S** (⚠️ belum direkonsiliasi dgn gate 6-kelas 24 Jul → `gate:gas-extra`); **alarm toksik (CO/H2S) langsung**, gas mudah-terbakar tetap berbasis threshold; **chamber tak boleh masuk kilang**; **hindari PVC**; kolom **"Area"** perlu ditambah di aplikasi. Status produksi: **CH 16 unit** (9 besar+7 kecil), **GLD 4 unit** diminta. Detail → `memory/blockers_metrics.md` § Meeting 6 Agustus, `memory/decisions.md` dec:27–33.
+- ✅ **Push alarm berhasil diuji (6–8 Agu):** demo mesh kampus (GW+CH1+CH2+CH3, semua CH terhubung ke GW) — GLD disemprot LPG → server alarm **otomatis tanpa pull request**. Menyelesaikan risiko "push alarm belum dicoba" dari 30 Jul (uji di lab/kampus, **belum** validasi lapangan RU). `memory/decisions.md` dec:34.
+- 🔴 **H-1 kunjungan Cilacap:** sesuai dec:22, tim berangkat **9 Agustus**, instalasi **10 Agustus** (survey+instalasi digabung). Urutan demo: aktifkan server → pasang GW → pasang CH → pasang GLD 24V.
 
 ## 3. Peta memory (`memory/`)
 

@@ -9,6 +9,8 @@
 | Notulen meeting 30 Jul (disusun Claude) | `Deliverables/Notulen_Meeting_GLD_30Jul2026.md` | *(belum dipublikasi sbg artifact)* | — |
 
 > ⚠️ **File pindah folder 30 Jul** (root → `Deliverables/`). Redeploy **dalam sesi yang sama** yang mem-publish = pakai path baru (URL tetap otomatis). Redeploy dari **sesi/percakapan baru** (termasuk ini) **wajib** pass parameter `url` di atas ke tool Artifact — tanpa itu akan mint URL baru. Jangan andalkan path lama untuk mencocokkan artifact across sesi.
+>
+> **8 Agu:** Konten `Dashboard_GLD_ProjectManagement.html` & `Laporan_Progres_ByDate_GLD.{html,md}` diupdate (mounting/topologi vs Emerson, requirement gas/alarm/material baru 6 Agu, push alarm berhasil diuji 6–8 Agu) — **file lokal sudah diupdate**, belum di-republish ke Artifact URL di atas pada sesi ini (sesi ini dikonfigurasi tanpa akses publish artifact/PR — lihat catatan Git di bawah).
 
 ## Isi dashboard (bagian)
 Identity band · doc-meta · **Executive Summary** · KPI · **Progres vs Outstanding** · baseline note · Kurva-S · Gantt 12 aktivitas · cakupan 6 RU · **arsitektur 3 repo** · sub-sistem · resource readiness · activity feed · telemetri · blocker · action items · isu/risiko · rekomendasi.

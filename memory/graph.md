@@ -103,7 +103,9 @@ timeline
   20–23 Jul : Simulasi duty-cycle : Repo Operator Hub/TPL5010
   24 Jul : Meeting LGU-Pertamina (dual-system, gas 6-kelas, 24V ready, 18 action items)
   30 Jul : Weekly meeting (arsitektur lokal+cloud-gateway diperjelas, WiFi=config-only)
-  10 Agu : Kunjungan Cilacap survey+instalasi gabungan (menggantikan rencana Sep)
+  6 Agu : Diskusi mounting/topologi vs Corrosion Monitoring Emerson : requirement gas Benzena/CO/H2S, alarm toksik, no-PVC, no-las/bor
+  8 Agu : Push alarm berhasil diuji (mesh kampus, semprot LPG tanpa pull request)
+  9-10 Agu : Kunjungan Cilacap survey+instalasi gabungan (menggantikan rencana Sep)
   Des 2026 : Target implementasi (field installation)
   Feb 2027 : Evaluasi & roadmap industrialisasi
 ```
@@ -116,3 +118,12 @@ Node `cand:*` di `graph.json` bertipe `candidate` — sengaja **tidak** dihubung
 Detail & alasan → `decisions.md` dec:18.
 
 > Update 30 Jul: klaim **"CNN 1D 97,6%"** sudah **direkonsiliasi** — ditemukan `Sumber Dokumen/Deteksi_Gas_CNN_Presentasi.pptx`. Sekarang jadi node model resmi `model:cnn1d` (bukan `candidate` lagi), terhubung ke `sub:ai` di samping `model:tcn` — keduanya model berbeda tugas (klasifikasi gas vs prediksi leak). Lihat `decisions.md` dec:21.
+
+## 6. Update 6 Agustus — referensi eksternal & gate baru
+
+- `org:emerson` ditambahkan sebagai node **referensi eksternal** (bukan bagian tim/proyek GLD) — sistem Corrosion Monitoring (WirelessHART) yang sudah terpasang & teruji di kilang, jadi acuan desain mounting/bracket & topologi jaringan GLD. Edge: `org:emerson --referensi-topologi-mounting--> sub:net`.
+- `p:raihan` (Raihan Fakhar, PIC RU VII Kasim) ditambahkan — sumber arahan mounting 6 Agu.
+- Dua gate baru: `gate:cert-height` (instalasi kilang baru dicoba setinggi orang, belum tersertifikasi lebih tinggi) dan `gate:gas-extra` (requirement Benzena/CO/H2S belum direkonsiliasi dgn gate 6-kelas `dec:17`) — keduanya **belum** dihubungkan sbg "selesai", menahan `ms:cilacap-visit` dan `sub:ai`.
+- `ms:pushalarm` (8 Agu) — push alarm berhasil diuji di mesh kampus, menyelesaikan risiko yg dicatat di weekly meeting 30 Jul. Terhubung ke `sub:integ`.
+
+Detail lengkap → `decisions.md` dec:27–34, `blockers_metrics.md` § Meeting 6 Agustus.

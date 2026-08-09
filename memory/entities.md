@@ -7,6 +7,7 @@
 | org:ITB-IoT | Lab IoT ITB | Engineering, firmware, AI/ML |
 | org:ITB-Fisika | Lab Fisika ITB | Dukungan solar/energi |
 | org:Pertamina | Pertamina Patra Niaga / Kilang Pertamina Internasional | Klien & partner |
+| org:emerson | Emerson | Vendor sistem **Corrosion Monitoring** (protokol **WirelessHART**) yang sudah terpasang & teruji di kilang — jadi rujukan desain mounting/bracket & topologi jaringan GLD (6 Agu). Bukan vendor/bagian dari proyek GLD. |
 
 ## Orang (`p:`) — dari notulen/laporan
 | ID | Nama | Peran/konteks |
@@ -26,13 +27,14 @@
 | p:roni | Mas Roni | Pertamina — meeting 24 Jul |
 | p:indra | Mas Indra | Pertamina, RU Cilacap — meeting 24 Jul |
 | p:pinduan | Pak Pindoan | Pertamina — meminta instalasi aplikasi monitoring di kantor pusat Jakarta (selain site), weekly meeting 30 Jul |
+| p:raihan | Raihan Fakhar | Pertamina, PIC **RU VII Kasim** — arahan mounting GLD/CH ikuti pola existing (6 Agu); dicc Farhan utk contoh desain bracket/repeater Emerson |
 
 > Catatan: "Pak Sena" (notulen 24 Jul) kemungkinan sama dengan `p:senna` (Pak Senna); "Pak Maman" konsisten dengan `p:maman`. "Pak Muhammad" (LGU, notulen 24 Jul) belum punya ID — kemungkinan overlap dengan `p:beny`/`p:maman`, perlu klarifikasi.
 
 ## Sub-sistem (`sub:`)
 | ID | Nama | Status ringkas (24 Jul) |
 |---|---|---|
-| sub:net | Jaringan LoRa & Cluster Head | 65% — failover ok, jangkauan blocker |
+| sub:net | Jaringan LoRa & Cluster Head | 65% — failover ok, jangkauan blocker. ⚠️ Requirement baru (6 Agu, belum dikerjakan): GLD mampu berfungsi sbg CH, topologi bypass-ke-GW ala mesh-tree, app "Gateway Manager" (lih. `decisions.md` dec:28, `blockers_metrics.md` § 6 Agu) |
 | sub:ai | AI & Sensor MQ (TCN LPG) | 55% — TCN ≥92%, dataset konsisten |
 | sub:power | Catu Daya & Manajemen Energi | 50% — CH ok (2 panel), autonomi GLD blocker |
 | sub:chamber | Gas Chamber, Hardware & QC | 35% — fitur chamber: solenoid valve, pompa duty-cycle, BME280 ganda (eksternal/internal), TGS2610 via ADS1115. Next: PCB layout, pompa senyap, mounting dinding |

@@ -1,7 +1,7 @@
 # LAPORAN PROGRES PER TANGGAL — PROYEK GAS LEAK DETECTION (GLD) TAHAP 2
 
-**Periode:** 20 April – 8 Agustus 2026
-**Disusun per:** 24 Juli 2026 (progres) · diperbarui 30 Juli 2026 (jadwal &amp; arsitektur) · diperbarui 8 Agustus 2026 (mounting/topologi vs Emerson, requirement gas/alarm/material, push alarm)
+**Periode:** 20 April – 9 Agustus 2026
+**Disusun per:** 24 Juli 2026 (progres) · diperbarui 30 Juli 2026 (jadwal &amp; arsitektur) · diperbarui 8 Agustus 2026 (mounting/topologi vs Emerson, requirement gas/alarm/material, push alarm) · diperbarui 9 Agustus 2026 (model AI CNN Dual-Branch menggantikan CNN 1D)
 **Scope aktif:** Pilot RU IV Cilacap (roadmap: 6 Refinery Unit)
 **Pihak terlibat:** LAPI Ganesha Utama (LGU) · Lab IoT & Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional
 
@@ -17,7 +17,7 @@
 | Isu & risiko | 9 (4 prioritas tinggi) |
 | Dataset sensor terkumpul | 14.477 sampel · 9 sesi · 8 kanal MQ |
 | Model AI — TCN | Per-sensor (prediksi leak LPG 5 dtk ke depan): 8 model, semua ≥92% akurasi (MQ4V 93,9%) |
-| Model AI — CNN 1D | Klasifikasi jenis gas 3-kelas (Clean Air/LPG/CO₂): **97,6%** akurasi test (PC), **97,3%** setelah kuantisasi int8 untuk ESP32-S3 (7,4 KB) |
+| Model AI — CNN Dual-Branch (menggantikan CNN 1D, 9 Agu) | Klasifikasi jenis gas 4-kelas (LPG/CO₂/Udara Bersih/H2): **99,20%** akurasi on-chip ESP32-S3 (int8, 9,14 KB) — angka resmi dipakai |
 
 Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 → Feb 2027). Engineering front-loaded sejak April sehingga progres di depan jadwal; namun eksekusi site survey menunggu **gate TRA/JSA** dan 3 blocker teknis belum tuntas.
 
@@ -286,6 +286,16 @@ Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & ri
 
 Detail lengkap → `memory/blockers_metrics.md` § Rapat resmi 6 Agustus 2026, `memory/decisions.md` dec:27–34.
 
+### 9 Agustus — Model AI CNN Dual-Branch Resmi Menggantikan CNN 1D — *Milestone ✅*
+- File presentasi ditemukan di `Sumber Dokumen/` (push langsung Farhan Budiman ke `main`, di luar sesi Claude; dibuat Lab IoT ITB, edit terakhir 6 Agu oleh **Ilmania Syakira**).
+- **CNN Dual-Branch = penerus CNN 1D** (dinyatakan eksplisit di deck sbg "model CNN satu-cabang sebelumnya"), dikonfirmasi user **menggantikan CNN 1D** di seluruh deliverable.
+- Arsitektur baru **2 cabang**: Conv1D dari 8 sensor MQ mentah + Dense dari 7 fitur sensitivitas datasheet MQ (tabel statis per gas) → digabung → Dense → Softmax. **1.347 parameter.**
+- Klasifikasi kini **4 kelas: LPG, CO2, Udara Bersih, H2** (H2 dikonfirmasi user termasuk, meski belum lengkap didokumentasikan di slide utama).
+- **Akurasi resmi dipakai: 99,20%** — angka on-chip ESP32-S3 (TFLite int8, 9,14 KB), dikonfirmasi user sbg angka yang benar-benar berjalan di perangkat (bukan 99,73% versi PC/pre-kuantisasi, penurunannya dinilai tidak signifikan).
+- ⚠️ **Masih TIDAK mencakup H2S maupun Benzena** — requirement wajib dari rapat 6 Agustus (lih. bagian sebelumnya) — jadi gate gas tambahan belum tertutup sepenuhnya meski H2 (bagian gate 6-kelas lama) kini sudah tercakup.
+
+Detail lengkap → `memory/entities.md` § Model AI, `memory/decisions.md` dec:36.
+
 ---
 
 ## Blocker Kritis Aktif (per 20 Juli)
@@ -311,7 +321,7 @@ Detail lengkap → `memory/blockers_metrics.md` § Rapat resmi 6 Agustus 2026, `
 - Potensi data collision multi-sensor pada LoRa — probabilitas kecil, belum diuji secara eksplisit.
 - Antena Wi-Fi 2,4G masih di dalam casing — perlu dikeluarkan.
 - ~~Push alarm belum dicoba~~ → ✅ **diuji & berhasil 6–8 Agu** (lih. di atas) — namun protokol missed-report GLD portable **masih** belum didefinisikan.
-- ⚠️ Akurasi model (CNN 1D/TCN) dinilai tinggi/mencurigakan — perlu verifikasi independen (prioritas tinggi).
+- ⚠️ Akurasi model (CNN Dual-Branch/TCN) dinilai tinggi/mencurigakan — perlu verifikasi independen (prioritas tinggi).
 
 ## Risiko & Requirement Tambahan (dari diskusi 6 Agustus)
 - ⚠️ **Requirement gas Benzena/CO/H2S** belum direkonsiliasi dengan gate 6-kelas 24 Jul.
@@ -323,4 +333,4 @@ Detail lengkap → `memory/blockers_metrics.md` § Rapat resmi 6 Agustus 2026, `
 
 ---
 
-*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · Notulensi Rapat GLD 6 Agustus 2026 (Labtek XV ITB) · WhatsApp follow-up 6–8 Agustus 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas · diperbarui 9 Agustus 2026.*
+*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Deteksi Kebocoran Gas CNN Dual-Branch (6 Agu) · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · Notulensi Rapat GLD 6 Agustus 2026 (Labtek XV ITB) · WhatsApp follow-up 6–8 Agustus 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas · diperbarui 9 Agustus 2026.*

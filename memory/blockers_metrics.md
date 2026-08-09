@@ -29,7 +29,7 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 |---|---|---|
 | gate:jsa | TRA/JSA | Belum disusun → menahan eksekusi site survey fisik RU IV Cilacap |
 | gate:cert-height | Sertifikasi ketinggian pemasangan | Percobaan di kilang baru setinggi orang; **belum tersertifikasi** utk instalasi permanen (rapat resmi 6 Agu) |
-| gate:gas-extra | Requirement gas tambahan (Benzena/CO/H2S) | Belum direkonsiliasi dgn gate 6-kelas (dec:17/dec:30) — status verifikasi belum ada. Model AI terbaru (**CNN Dual-Branch**, 9 Agu) masih 3-kelas LPG/CO2/Udara Bersih, **tidak menutup gate ini** |
+| gate:gas-extra | Requirement gas tambahan (Benzena/CO/H2S) | Belum direkonsiliasi dgn gate 6-kelas (dec:17/dec:30) — status verifikasi belum ada. Model AI resmi saat ini (**CNN Dual-Branch**, dec:36) sudah cakup H2 (gate lama) tapi **masih TIDAK cakup H2S/Benzena** — gate ini belum tertutup |
 | gate:capacity | Kapasitas GW/CH vs jumlah sensor | **Belum ada angka resmi** — action item terbuka (Tim Komunikasi ITB), lih. dec:28 |
 
 ## Metrik daya (Update Timeline Juli, 16 Jul 2026)
@@ -51,7 +51,7 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 ## Metrik AI & data
 - Dataset GLD-F001: **14.477 sampel**, 9 sesi, 8 kanal MQ, 4 jenis gas (~2,7 jam).
 - TCN LPG 8 model: semua **≥92%**, terbaik **MQ4V 93,9%** (F1 0,923), TFLite int8 ~72 KB.
-- **CNN Dual-Branch (9 Agu, penerus CNN 1D):** 1.870 pembacaan unik (1.496 train/374 test); akurasi **99,73% PC / 99,20% on-chip int8** (9,14 KB); 1.347 parameter; masih 3-kelas LPG/CO2/Udara Bersih (bukan CO/H2S). Detail lengkap → `entities.md` § Model AI.
+- **CNN Dual-Branch — model klasifikasi gas resmi saat ini** (menggantikan CNN 1D, dec:36): 1.870 pembacaan unik (1.496 train/374 test); **akurasi resmi 99,20%** (on-chip ESP32-S3 int8, 9,14 KB; versi PC 99,73% pre-kuantisasi); 1.347 parameter; kelas **LPG/CO2/Udara Bersih/H2** — masih TIDAK cakup H2S/Benzena. Detail lengkap → `entities.md` § Model AI.
 
 ## Bobot sub-sistem (untuk % dashboard)
 net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (inisiasi 10 — bila dipakai). Baseline 12-aktivitas → lihat `overview.md`.

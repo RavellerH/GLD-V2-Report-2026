@@ -257,7 +257,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="sm-row"><span class="k">STATUS</span><span class="v">Draft engineering</span></div>
       <div class="sm-row"><span class="k">SCOPE</span><span class="v">Pilot RU IV Cilacap</span></div>
       <div class="sm-row"><span class="k">TANGGAL</span><span class="v">19 Agu 2026</span></div>
-      <div class="sm-row"><span class="k">REV</span><span class="v">0.4</span></div>
+      <div class="sm-row"><span class="k">REV</span><span class="v">0.5</span></div>
     </div>
     <div class="zonenav">
       <a href="#z1"><span class="zi">01</span>Ringkasan</a>
@@ -402,7 +402,8 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="rcard"><span class="ic">📊</span><div><b>Dashboard <span class="status ok">Fungsional</span></b><span>Peta, topologi, event log, multi-tenant per RU</span></div></div>
       </div>
 
-      <div class="banner info"><span class="ic">🤖</span><span><b>AI sudah on-device.</b> Inferensi CNN Dual-Branch berjalan langsung di ESP32-S3 GLD (bukan lagi PC/emulator) — model terkuantisasi int8 (9,14 KB) dieksekusi on-chip tiap siklus transmit.</span></div>
+      <div class="banner info"><span class="ic">🤖</span><span><b>AI sudah on-device (dikonfirmasi user, 19 Agu).</b> Inferensi CNN Dual-Branch berjalan langsung di ESP32-S3 GLD (bukan lagi PC/emulator) — model terkuantisasi int8 (9,14 KB) dieksekusi on-chip tiap siklus transmit.</span></div>
+      <div class="banner warn"><span class="ic">⚠️</span><span><b>Catatan verifikasi:</b> klaim ini berasal dari konfirmasi langsung user, <b>belum dari dokumen tertulis</b>. Salinan source firmware terbaru yang tersedia untuk diperiksa (<span class="mono">docs/design/gld/final_design.md</span>, mirror per 29 Jun 2026) masih mendeskripsikan skema klasifikasi 6 kelas yang berbeda (clear/LPG/methane/propane/butane/anomaly) — bukan 4 kelas CNN Dual-Branch (LPG/CO2/Udara Bersih/H2). Kemungkinan besar mirror dokumen ini belum diperbarui sejak integrasi CNN Dual-Branch (~29 Jul–9 Agu), tapi ini <b>belum diverifikasi tertulis</b> — perlu konfirmasi commit firmware terbaru dari tim sebelum diklaim final ke klien.</span></div>
     </section>
 
     <!-- ===================== ZONE 4 ===================== -->
@@ -515,12 +516,13 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="zone-head"><span class="zn">06</span><h2>Area berbahaya &amp; sertifikasi ATEX</h2></div>
       <div class="banner crit"><span class="ic">🔥</span><span><b>Belum disertifikasi.</b> Target pengajuan ~3 minggu sejak notulen (menumpang rombongan sertifikasi ke China, lebih ekonomis). Sampai terbit, jangan dianggap siap pasang permanen di Tangki LPG / SRU.</span></div>
 
-      <div class="subhead"><h3>Desain Ex-Proof — 3 kompartemen terpisah</h3></div>
+      <div class="subhead"><h3>Desain Ex-Proof — 2 kompartemen terpisah, disambung seal/cable gland</h3></div>
       <div class="enclosure">
         <div class="ebox"><span class="ic">🔌</span><b>Modul elektronik</b><p>PCB &amp; power, enclosure Ex-Proof, tak boleh terekspos udara luar</p></div>
         <div class="eseal">SEAL / GLAND →</div>
         <div class="ebox"><span class="ic">🧪</span><b>Sensor cartridge</b><p>Elektronik sensor gas, kompartemen terpisah</p></div>
       </div>
+      <p style="font-size:11.8px;color:var(--ink-soft)">Notulen menyebut "3 komponen utama" secara verbal, tapi ringkasan tertulisnya hanya merinci 2 kompartemen fisik (elektronik &amp; sensor) yang dihubungkan via seal/cable gland — bukan 3 kompartemen terpisah. Diperbaiki di sini agar tidak overclaim dari transkrip yang ambigu.</p>
 
       <div class="subhead"><h3>Mounting &amp; instalasi</h3></div>
       <ul class="tight">
@@ -802,7 +804,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 
     <footer>
       GLD Tahap 2 — LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga (RU IV Cilacap)<br>
-      Disusun 19 Agustus 2026. Rev 0.4 — draft engineering, belum disahkan.
+      Disusun 19 Agustus 2026. Rev 0.5 — draft engineering, belum disahkan.
     </footer>
   </main>
 </div>

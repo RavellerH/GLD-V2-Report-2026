@@ -19,6 +19,7 @@
 - ~~blk:lora~~ → jangkauan LoRa ~100 m/hop **disiasati mesh multi-hop** (uji 8-CH se-kampus, Layer 3). Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH). Risiko, bukan blocker.
 - ~~isu konsistensi data~~ → **dataset konsisten & siap dipakai**.
 - CH catu daya → **teratasi 2 panel** (surplus 1,5–4,4 Wh/hari).
+- ~~risiko "push alarm belum dicoba"~~ (dari 30 Jul) → **diuji & berhasil** 6–8 Agu: GLD disemprot LPG di uji mesh kampus (GW+CH1+CH2+CH3), status server berubah alarm **otomatis tanpa pull request**. Catatan: ini uji di **mesh kampus/lab**, bukan validasi di lapangan produksi RU — lih. `decisions.md` dec:34.
 
 ## Mesh LoRa (uji 8-CH, 16 Jul)
 Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ← Layer 3 (CH2). Route depth 1–3, status installed. Downlink (GW→CH→GLD 0xF020) tembus lewat mesh + fix firmware.
@@ -27,6 +28,9 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 | ID | Gate | Status |
 |---|---|---|
 | gate:jsa | TRA/JSA | Belum disusun → menahan eksekusi site survey fisik RU IV Cilacap |
+| gate:cert-height | Sertifikasi ketinggian pemasangan | Percobaan di kilang baru setinggi orang; **belum tersertifikasi** utk instalasi permanen (rapat resmi 6 Agu) |
+| gate:gas-extra | Requirement gas tambahan (Benzena/CO/H2S) | Belum direkonsiliasi dgn gate 6-kelas (dec:17/dec:30) — status verifikasi belum ada. Model AI resmi saat ini (**CNN Dual-Branch**, dec:36) sudah cakup H2 (gate lama) tapi **masih TIDAK cakup H2S/Benzena** — gate ini belum tertutup |
+| gate:capacity | Kapasitas GW/CH vs jumlah sensor | **Belum ada angka resmi** — action item terbuka (Tim Komunikasi ITB), lih. dec:28 |
 
 ## Metrik daya (Update Timeline Juli, 16 Jul 2026)
 **GLD node (baterai 7P = 7×4000 mAh = 28 Ah, ~70,4 Wh usable):**
@@ -47,6 +51,7 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 ## Metrik AI & data
 - Dataset GLD-F001: **14.477 sampel**, 9 sesi, 8 kanal MQ, 4 jenis gas (~2,7 jam).
 - TCN LPG 8 model: semua **≥92%**, terbaik **MQ4V 93,9%** (F1 0,923), TFLite int8 ~72 KB.
+- **CNN Dual-Branch — model klasifikasi gas resmi saat ini** (menggantikan CNN 1D, dec:36): 1.870 pembacaan unik (1.496 train/374 test); **akurasi resmi 99,20%** (on-chip ESP32-S3 int8, 9,14 KB; versi PC 99,73% pre-kuantisasi); 1.347 parameter; kelas **LPG/CO2/Udara Bersih/H2** — masih TIDAK cakup H2S/Benzena. Detail lengkap → `entities.md` § Model AI.
 
 ## Bobot sub-sistem (untuk % dashboard)
 net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (inisiasi 10 — bila dipakai). Baseline 12-aktivitas → lihat `overview.md`.
@@ -111,3 +116,71 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 - Tanya **Pak Tresnandi** soal sisa anggaran proyek (sudah didistribusikan) — belum ada jawaban di notulen.
 - Kabel HDMI panjang tersedia di lab untuk sesi berikutnya (logistik minor).
 - Disebutkan rencana proyek berikutnya pasca-GLD, kemungkinan "susi-sensor proposal" — **nama tidak jelas/kemungkinan salah transkrip**, perlu klarifikasi bila relevan untuk dicatat lebih lanjut.
+
+## Rapat resmi 6 Agustus 2026 — instalasi, mounting & requirement tambahan
+> Sumber: `Sumber Dokumen/Notulensi_Rapat_5Agustus2026_GLD.pdf` (Labtek XV ITB; Tim ITB + PT Pertamina + PT LAPI Ganesha Utama), diverifikasi 9 Agu terhadap catatan informal sebelumnya.
+>
+> ⚠️ **Catatan tanggal:** badan teks notulensi resmi tertulis "Tanggal: 5 Agustus 2026" — namun ini **typo pada dokumen**; tanggal rapat yang benar dikonfirmasi **6 Agustus 2026 (Kamis)**, sesuai nama file sumber (`NOTULENSI_RAPAT_060826` = 06-08-26) dan konfirmasi user. Beberapa detail konten di bawah tetap direvisi (ditandai ⚠️) karena versi notulensi resmi lebih presisi/berbeda dari catatan informal awal — itu terlepas dari isu tanggal.
+
+**Mounting & instalasi (dibandingkan sistem Corrosion Monitoring Emerson, konsep WirelessHART, sudah terpasang di kilang):**
+- Mounting GLD/CH mengikuti standar mounting existing di kilang — **tidak memerlukan desain struktur baru**.
+- CH besar karena: jangkauan LoRa lebih luas, kapasitas komunikasi lebih besar, mendukung pengembangan sistem masa depan. Sistem sekarang **multi-channel** (vs implementasi Kasim sebelumnya yang single-channel).
+- **Bracket tipe L / U-clamp** dipasang pada struktur existing, **tanpa pengeboran maupun pengelasan**. Pemilihan bracket disesuaikan dgn kebutuhan Gateway, CH, **maupun** sensor GLD.
+- Vendor mekanik dilibatkan **sejak awal** proses desain & instalasi.
+- Tim diminta menyusun **skenario instalasi lengkap** (dimensi pemasangan, kebutuhan bracket, baut, mur, komponen pendukung) — **belum dibuat**.
+- **Material PVC dihindari** — dinilai kurang sesuai utk lingkungan kilang.
+- Jumlah CH diupayakan **seminimal mungkin** utk kurangi kompleksitas instalasi; pengujian di ITB: **2 CH** sudah cukup mencakup area pengujian.
+- **3 repeater** yang sudah terpasang di kilang jadi referensi penempatan (terbukti memberi cakupan baik).
+- Instalasi harus perhatikan keselamatan **teknis maupun visual** (cegah persepsi negatif operator/personel lapangan). Krn lokasi di area kilang, perangkat harus penuhi **persyaratan sertifikasi**. Tahap uji coba: pemasangan **dibatasi setinggi manusia** — perangkat belum bersertifikasi utk **instalasi permanen** (`gate:cert-height`).
+
+**Topologi jaringan & evaluasi teknologi:**
+- **Sistem GLD diharapkan dapat mengadopsi topologi tsb sehingga CH juga dapat berfungsi sebagai repeater** (lih. `decisions.md` dec:28). ⚠️ **Catatan revisi:** notulensi resmi TIDAK menyatakan sistem corrosion monitoring "sudah terbukti bypass-ke-GW" atau "mesh-tree sudah diterapkan" sbg fakta established seperti sempat dicatat dari sumber informal — itu simplifikasi berlebih. Yang resmi: **tim diminta mengevaluasi** kapasitas GW/CH thd jumlah sensor yg bisa dilayani & sediakan indikator bila perlu tambah perangkat (action item, PIC Tim Komunikasi ITB) — **BELUM ada angka pasti** (bukan "<30 sensor" seperti sempat dicatat).
+- Kebutuhan berbeda: **GLD berorientasi safety**, perlu komunikasi lebih intensif; **corrosion monitoring** menekankan keandalan alat, kirim data **~2×/hari** (jauh lebih jarang).
+- Pemilihan teknologi komunikasi ke depan perlu pertimbangkan **chipset** yg dipakai shg implementasi tak perlu dibangun sepenuhnya dari awal.
+- **Menarik dibandingkan** dgn performa jaringan sistem corrosion monitoring komersial (mis. Emerson), termasuk kemungkinan pakai konsep **WirelessHART** — action item studi banding (PIC Tim Komunikasi ITB), **belum dilakukan**.
+
+**Catu Daya — Solar Panel (dibahas Pak Raihan, RU VII Kasim, dalam rapat 6 Agustus):**
+- **Pak Raihan** menanyakan kebutuhan **solar panel** bila GLD menggunakan kombinasi baterai + solar. Pertamina menyatakan **ukuran fisik besar tidak masalah** (dicontohkan setara panel lampu PJU atau lebih).
+- ⚠️ **Diminta juga cost-benefit analysis**: solar panel **vs** catu daya kabel (grid), termasuk **CAPEX kabel** (biaya pengadaan & instalasi kabel) sbg pembanding — bukan cuma hitungan Wp solar sendirian.
+- **Tindak lanjut** (lih. tabel di bawah, PIC Beny/ITB Fisika): perhitungan Wp & cost-benefit **belum dibuat** per follow-up WA 8 Agustus — dilanjutkan/dikonfirmasi via WhatsApp krn perlu waktu hitung. Diskusi sebelumnya (di luar rapat ini): solar panel dinilai **menyulitkan instalasi & sempat tidak diizinkan Pertamina**; akan dihitung bila ternyata tidak masalah.
+- ⚠️ Notulensi resmi (`Notulensi_Rapat_5Agustus2026_GLD.pdf`) **tidak mencatat poin ini secara tertulis** — direkonstruksi dari catatan informal + konfirmasi user (9 Agu) bahwa ini bagian dari pembahasan rapat 6 Agustus oleh Pak Raihan. Sudah ditambahkan ke `Deliverables/Notulen_Meeting_GLD_6Agustus2026.{docx,pdf}` sbg bagian 07.
+
+**Status produksi unit (per 6 Agu):**
+| Item | Jumlah |
+|---|---|
+| CH besar | 9 |
+| CH kecil | 7 |
+| GLD (sesuai permintaan saat ini) | 4 |
+
+**Requirement resmi pengembangan sistem GLD (Bab 4 notulensi):**
+1. Sistem dirancang mampu deteksi **Benzene, Carbon Monoxide (CO), Hydrogen Sulfide (H2S)** — lih. dec:30, **belum direkonsiliasi** dgn `gate:gas-extra`/gate 6-kelas dec:17.
+2. Sampel gas **tidak diambil langsung di area kilang** — disiapkan & dibawa tim Pertamina ke lokasi pengujian (dec:32).
+3. ⚠️ **Sistem harus menampilkan nilai konsentrasi gas (ppm) secara real-time** — requirement eksplisit yang sempat terlewat dari catatan informal awal.
+4. **Alarm dikonfigurasi berdasarkan threshold**: gas mudah terbakar → alarm setelah lewat batas bahaya kebakaran; gas toksik (CO, H2S) → alarm **segera** begitu lewat ambang batas keselamatan (dec:29).
+5. Aplikasi perlu tampilkan info lokasi perangkat: kolom **Area DAN identitas Equipment** (dec:33) — ⚠️ bukan cuma "Area" seperti sempat dicatat.
+6. **Jalur pembuangan gas** pasca-sampling perlu dievaluasi agar tak timbulkan paparan ke pengguna/lingkungan — action item (PIC Tim Instrumentasi ITB), **belum dijawab**.
+
+**9 Tindak Lanjut resmi (dengan PIC) — menggantikan PIC generik yang sempat dipakai:**
+| # | Tindak Lanjut | PIC |
+|---|---|---|
+| 1 | Menyusun desain mounting & bracket sesuai standar kilang | Tim Mekanik ITB |
+| 2 | Menyusun skenario instalasi lengkap + dimensi pemasangan | Tim Mekanik & Vendor Mekanik |
+| 3 | Mengevaluasi kapasitas Gateway & Cluster Head | Tim Komunikasi ITB |
+| 4 | Mengembangkan fitur alarm berbasis threshold gas | Tim AI ITB |
+| 5 | Menambahkan info Area & Equipment pada dashboard | Tim UI ITB |
+| 6 | Mengkaji sistem pembuangan gas pasca-sampling | Tim Instrumentasi ITB |
+| 7 | Studi perbandingan topologi dgn sistem Emerson/WirelessHART | Tim Komunikasi ITB |
+| 8 | Menyusun rencana sertifikasi perangkat utk kilang | Tim ITB bersama Pertamina |
+| 9 | Menghitung kebutuhan solar panel (Wp) & cost-benefit analysis vs catu daya kabel (+ CAPEX kabel) | Beny (ITB Fisika) |
+
+**Follow-up WhatsApp (6–8 Agustus 2026) — kelanjutan pembahasan rapat 6 Agu:**
+- **6 Agu 12:00** (Farhan Budiman): contoh desain repeater & bracket Emerson utk memudahkan mounting pada struktur existing, cc **Raihan Fakhar (RU VII Kasim)** — orang yang sama dgn "Pak Raihan" yang mengangkat topik solar panel di rapat.
+- **6 Agu 12:12 & 12:17** (Farhan Budiman): contoh app **"Gateway Manager"** — jumlah device terdaftar/terhubung per GW, kapasitas GW, device tak terhubung, & visualisasi jaringan → **requirement fitur baru** utk dashboard/Operator Hub, belum ada di scope sw saat ini.
+- **8 Agu 09:16** (Farhan Budiman): meneruskan pertanyaan solar panel dari rapat ke Beny utk dihitung.
+- **8 Agu 12:49** (Beny Agustirandi, ITB Fisika): **belum ada perhitungan Wp** solar panel maupun cost-benefit analysis vs kabel — akan dihitung.
+
+**Demo persiapan sebelum kunjungan Cilacap (6–8 Agu, mesh kampus):**
+- Tiang **GW, CH1, CH2, CH3** disiapkan; **semua CH sudah masuk/terhubung ke GW**.
+- Uji star GLD di **CH1 & CH2**: data masuk saat direquest (pull) — OK.
+- Uji alarm real-time: GLD disemprot LPG → status server jadi **alarm otomatis tanpa pull request** — **push alarm berhasil** (lih. `decisions.md` dec:34, resolved di atas).
+- Urutan demo: **aktifkan server → pasang GW → pasang CH → pasang GLD 24V.**

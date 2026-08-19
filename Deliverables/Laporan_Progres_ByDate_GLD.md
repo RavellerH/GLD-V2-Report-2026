@@ -1,7 +1,7 @@
 # LAPORAN PROGRES PER TANGGAL — PROYEK GAS LEAK DETECTION (GLD) TAHAP 2
 
-**Periode:** 20 April – 30 Juli 2026
-**Disusun per:** 24 Juli 2026 (progres) · diperbarui 30 Juli 2026 (jadwal &amp; arsitektur)
+**Periode:** 20 April – 9 Agustus 2026
+**Disusun per:** 24 Juli 2026 (progres) · diperbarui 30 Juli 2026 (jadwal &amp; arsitektur) · diperbarui 8 Agustus 2026 (mounting/topologi vs Emerson, requirement gas/alarm/material, push alarm) · diperbarui 9 Agustus 2026 (model AI CNN Dual-Branch menggantikan CNN 1D)
 **Scope aktif:** Pilot RU IV Cilacap (roadmap: 6 Refinery Unit)
 **Pihak terlibat:** LAPI Ganesha Utama (LGU) · Lab IoT & Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional
 
@@ -17,7 +17,7 @@
 | Isu & risiko | 9 (4 prioritas tinggi) |
 | Dataset sensor terkumpul | 14.477 sampel · 9 sesi · 8 kanal MQ |
 | Model AI — TCN | Per-sensor (prediksi leak LPG 5 dtk ke depan): 8 model, semua ≥92% akurasi (MQ4V 93,9%) |
-| Model AI — CNN 1D | Klasifikasi jenis gas 3-kelas (Clean Air/LPG/CO₂): **97,6%** akurasi test (PC), **97,3%** setelah kuantisasi int8 untuk ESP32-S3 (7,4 KB) |
+| Model AI — CNN Dual-Branch (menggantikan CNN 1D, 9 Agu) | Klasifikasi jenis gas 4-kelas (LPG/CO₂/Udara Bersih/H2): **99,20%** akurasi on-chip ESP32-S3 (int8, 9,14 KB) — angka resmi dipakai |
 
 Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 → Feb 2027). Engineering front-loaded sejak April sehingga progres di depan jadwal; namun eksekusi site survey menunggu **gate TRA/JSA** dan 3 blocker teknis belum tuntas.
 
@@ -236,6 +236,74 @@ Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & ri
 
 ---
 
+### 6 Agustus — Rapat Resmi: Mounting & Topologi vs Corrosion Monitoring Emerson — *Milestone 🔵*
+**Konteks:** rapat resmi di Labtek XV ITB (Tim ITB, PT Pertamina, PT LAPI Ganesha Utama), dibandingkan dengan sistem **Corrosion Monitoring Emerson** (konsep **WirelessHART**) yang sudah terpasang di kilang. Sumber: `Sumber Dokumen/Notulensi_Rapat_5Agustus2026_GLD.pdf` (catatan: badan teks dokumen salah tulis tanggal "5 Agustus" — tanggal rapat yang benar 6 Agustus 2026).
+
+**Mounting**
+- Mengikuti standar mounting existing di kilang — **tidak perlu desain struktur baru**: **bracket tipe L / U-clamp** ke struktur yang sudah ada, **tanpa pengeboran maupun pengelasan**. Pemilihan bracket disesuaikan untuk Gateway, CH, **maupun** sensor GLD.
+- CH besar karena butuh jangkauan LoRa luas, kapasitas komunikasi lebih besar, dan mendukung pengembangan sistem masa depan. Sistem sekarang multi-channel (vs Kasim sebelumnya single-channel).
+- Instalasi harus **aman dan terlihat aman**; sertifikasi penting mengingat area kritis kilang. Saat dicoba di kilang, instalasi baru **setinggi manusia** — belum bersertifikasi untuk **instalasi permanen**.
+- Referensi lapangan: 3 repeater yang sudah terpasang di kilang jadi acuan penempatan (terbukti cakupan baik). Di ITB, 2 CH sudah cukup mencakup area pengujian — jumlah CH diupayakan seminimal mungkin.
+- Vendor mekanik dilibatkan **sejak awal** proses desain & instalasi.
+
+**Topologi jaringan**
+- **Sistem GLD diharapkan dapat mengadopsi topologi tersebut sehingga CH juga dapat berfungsi sebagai repeater.**
+- ⚠️ **Kapasitas Gateway/CH terhadap jumlah sensor BELUM ditentukan** — ini action item evaluasi (PIC: Tim Komunikasi ITB), **bukan** angka pasti "<30 sensor" seperti sempat dicatat dari sumber informal awal.
+- Corrosion monitoring hanya kirim data **~2×/hari** (jauh lebih sedikit dari kebutuhan GLD yang real-time/safety-critical) — kebutuhan berbeda: **safety, komunikasi intensif (GLD)** vs **kehandalan alat (Emerson)**. Pemilihan teknologi komunikasi ke depan perlu pertimbangkan chipset yang dipakai.
+- Cilacap dinilai jauh lebih besar & lebih ketat dibanding Kasim.
+
+**Status produksi unit (per 6 Agu):** CH 9 besar + 7 kecil (16 unit) · GLD 4 unit (sesuai permintaan saat ini).
+
+**Requirement resmi pengembangan sistem GLD:**
+1. Deteksi gas **wajib**: **Benzena, CO, H2S** — di luar gate 6-kelas 24 Jul, **belum direkonsiliasi**.
+2. Sampel gas **tidak diambil langsung di kilang** — disiapkan & dibawa tim Pertamina ke lokasi pengujian.
+3. ⚠️ Sistem harus menampilkan **konsentrasi gas (ppm) secara real-time** (bukan hanya trigger alarm).
+4. **Alarm berbasis threshold**: gas mudah terbakar → aktif setelah lewat batas bahaya kebakaran; gas toksik (CO, H2S) → aktif **segera** begitu lewat ambang batas keselamatan.
+5. Aplikasi perlu tampilkan kolom **"Area"** **dan** **"Equipment"** (identitas peralatan) — bukan cuma "Area" saja.
+6. Jalur pembuangan gas pasca-sampling perlu dievaluasi agar tidak menimbulkan paparan ke pengguna/lingkungan.
+7. **Hindari material PVC** — dinilai kurang sesuai untuk lingkungan kilang.
+8. Tim diminta menyusun **skenario instalasi lengkap** (dimensi, bracket, baut, mur, komponen pendukung) — **belum dibuat**.
+
+**Catu Daya — Solar Panel (dibahas Pak Raihan, RU VII Kasim, dalam rapat ini):**
+- **Pak Raihan** menanyakan kebutuhan **solar panel** bila GLD menggunakan kombinasi baterai + solar. Pertamina menyatakan **ukuran fisik besar tidak masalah** (contoh: setara panel lampu PJU atau lebih).
+- Diminta juga **cost-benefit analysis**: solar panel **vs** catu daya kabel, termasuk **CAPEX kabel** (biaya pengadaan & instalasi) sbg pembanding.
+- PIC: **Beny (ITB Fisika)** — perhitungan Wp & cost-benefit **belum dibuat** (dilanjutkan via WA 8 Agustus).
+
+**9 Tindak Lanjut resmi (dengan PIC):**
+
+| # | Tindak Lanjut | PIC |
+|---|---|---|
+| 1 | Desain mounting & bracket sesuai standar kilang | Tim Mekanik ITB |
+| 2 | Skenario instalasi lengkap + dimensi pemasangan | Tim Mekanik & Vendor Mekanik |
+| 3 | Evaluasi kapasitas Gateway & Cluster Head | Tim Komunikasi ITB |
+| 4 | Fitur alarm berbasis threshold gas | Tim AI ITB |
+| 5 | Info Area & Equipment pada dashboard | Tim UI ITB |
+| 6 | Kajian sistem pembuangan gas pasca-sampling | Tim Instrumentasi ITB |
+| 7 | Studi banding topologi dengan Emerson/WirelessHART | Tim Komunikasi ITB |
+| 8 | Rencana sertifikasi perangkat untuk kilang | Tim ITB bersama Pertamina |
+| 9 | Hitung solar panel (Wp) & cost-benefit vs kabel (+CAPEX kabel) | Beny (ITB Fisika) |
+
+### 6–8 Agustus — Demo Mesh Siap-Uji & Push Alarm Berhasil — *Milestone ✅*
+- Tiang **GW, CH1, CH2, CH3** disiapkan; **semua CH sudah terhubung ke GW**.
+- Uji star GLD di **CH1 & CH2**: data masuk saat direquest (pull) — OK.
+- **Uji alarm real-time:** GLD disemprot LPG → status server berubah **alarm otomatis tanpa pull request** — **push alarm berhasil**, menyelesaikan risiko "push alarm belum dicoba" dari weekly meeting 30 Jul (uji di mesh kampus/lab, **belum** validasi lapangan RU produksi).
+- Urutan demo: **aktifkan server → pasang GW → pasang CH → pasang GLD 24V.**
+- Follow-up WhatsApp: contoh app **"Gateway Manager"** (device terdaftar/terhubung per GW, kapasitas, visualisasi jaringan) — requirement fitur baru untuk dashboard; kelanjutan pertanyaan **solar panel** dari Pak Raihan (rapat 6 Agustus) diteruskan Farhan ke Beny — **perhitungan Wp & cost-benefit vs kabel belum dibuat**; sebelumnya solar panel dinilai menyulitkan instalasi & sempat tidak diizinkan.
+
+Detail lengkap → `memory/blockers_metrics.md` § Rapat resmi 6 Agustus 2026, `memory/decisions.md` dec:27–34, dec:37.
+
+### 9 Agustus — Model AI CNN Dual-Branch Resmi Menggantikan CNN 1D — *Milestone ✅*
+- File presentasi ditemukan di `Sumber Dokumen/` (push langsung Farhan Budiman ke `main`, di luar sesi Claude; dibuat Lab IoT ITB, edit terakhir 6 Agu oleh **Ilmania Syakira**).
+- **CNN Dual-Branch = penerus CNN 1D** (dinyatakan eksplisit di deck sbg "model CNN satu-cabang sebelumnya"), dikonfirmasi user **menggantikan CNN 1D** di seluruh deliverable.
+- Arsitektur baru **2 cabang**: Conv1D dari 8 sensor MQ mentah + Dense dari 7 fitur sensitivitas datasheet MQ (tabel statis per gas) → digabung → Dense → Softmax. **1.347 parameter.**
+- Klasifikasi kini **4 kelas: LPG, CO2, Udara Bersih, H2** (H2 dikonfirmasi user termasuk, meski belum lengkap didokumentasikan di slide utama).
+- **Akurasi resmi dipakai: 99,20%** — angka on-chip ESP32-S3 (TFLite int8, 9,14 KB), dikonfirmasi user sbg angka yang benar-benar berjalan di perangkat (bukan 99,73% versi PC/pre-kuantisasi, penurunannya dinilai tidak signifikan).
+- ⚠️ **Masih TIDAK mencakup H2S maupun Benzena** — requirement wajib dari rapat 6 Agustus (lih. bagian sebelumnya) — jadi gate gas tambahan belum tertutup sepenuhnya meski H2 (bagian gate 6-kelas lama) kini sudah tercakup.
+
+Detail lengkap → `memory/entities.md` § Model AI, `memory/decisions.md` dec:36.
+
+---
+
 ## Blocker Kritis Aktif (per 20 Juli)
 
 | # | Blocker | Metrik | Dampak |
@@ -248,6 +316,8 @@ Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & ri
 - ⛔ **TRA/JSA** — rencana & workflow survei Cilacap sudah siap; **penyusunan TRA/JSA menjadi gate** untuk eksekusi site survey fisik.
 - ⛔ **Gas capability minimum 6 kelas** (H₂/LPG/Metana/CO₂/Clean Air) harus terverifikasi sebelum deployment (keputusan meeting 24 Jul).
 - ⛔ **Perizinan administratif RU Cilacap**: izin visitor survey, izin kerja + surat masuk barang instalasi, dokumen HSE (APD non-merah) — dikoordinasikan dengan tim HSE RU sejak awal.
+- ⛔ **Sertifikasi ketinggian pemasangan** (baru, 6 Agu) — kilang baru mengizinkan instalasi setinggi orang, belum tersertifikasi untuk lebih tinggi.
+- ⛔ **Requirement gas Benzena/CO/H2S** (baru, 6 Agu) — belum direkonsiliasi dengan gate 6-kelas di atas.
 - Site visit Pertamina ke lab LGU → uji lab → kunjungan RU.
 
 > ⚠️ Catatan transparansi: angka "action items" & "isu/risiko" pada tabel Ringkasan di atas belum mencakup rekonsiliasi penuh dengan 18 action item baru dari meeting 24 Jul (kemungkinan sebagian overlap) — lihat `memory/blockers_metrics.md` untuk detail & status rekonsiliasi.
@@ -256,9 +326,17 @@ Detail lengkap notulen → `Notulen_Meeting_GLD_30Jul2026.md`. Rekonsiliasi & ri
 - Potensi kondensasi/genangan air dalam casing GLD — mekanisme pencegahan belum dipilih.
 - Potensi data collision multi-sensor pada LoRa — probabilitas kecil, belum diuji secara eksplisit.
 - Antena Wi-Fi 2,4G masih di dalam casing — perlu dikeluarkan.
-- Push alarm belum dicoba; protokol missed-report GLD portable belum didefinisikan.
-- ⚠️ Akurasi model (CNN 1D/TCN) dinilai tinggi/mencurigakan — perlu verifikasi independen (prioritas tinggi).
+- ~~Push alarm belum dicoba~~ → ✅ **diuji & berhasil 6–8 Agu** (lih. di atas) — namun protokol missed-report GLD portable **masih** belum didefinisikan.
+- ⚠️ Akurasi model (CNN Dual-Branch/TCN) dinilai tinggi/mencurigakan — perlu verifikasi independen (prioritas tinggi).
+
+## Risiko & Requirement Tambahan (dari diskusi 6 Agustus)
+- ⚠️ **Requirement gas Benzena/CO/H2S** belum direkonsiliasi dengan gate 6-kelas 24 Jul.
+- ⚠️ **Sertifikasi ketinggian pemasangan** belum ada — instalasi kilang baru diizinkan setinggi orang.
+- Cost-benefit analysis solar panel vs catu daya kabel (termasuk CAPEX kabel) untuk GLD — **perhitungan belum dibuat**; sebelumnya solar dinilai menyulitkan instalasi & sempat tidak diizinkan Pertamina.
+- Pertanyaan terbuka belum dijawab: arah buangan gas hasil sedotan pompa chamber; opsi gateway indoor + kabel.
+- App "Gateway Manager" & kolom "Area"+"Equipment" pada data equipment/sensor — requirement fitur baru, belum masuk scope dashboard saat ini.
+- Kapasitas Gateway/CH terhadap jumlah sensor **belum ada angka resmi** — action item evaluasi (Tim Komunikasi ITB).
 
 ---
 
-*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas · diperbarui 30 Juli 2026.*
+*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Deteksi Kebocoran Gas CNN Dual-Branch (6 Agu) · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · Notulensi Rapat GLD 6 Agustus 2026 (Labtek XV ITB) · WhatsApp follow-up 6–8 Agustus 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas · diperbarui 9 Agustus 2026.*

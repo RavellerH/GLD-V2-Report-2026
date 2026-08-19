@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "Gas Leak Detection (GLD) Tahap 2",
-    "as_of": "2026-07-24",
+    "as_of": "2026-08-08",
     "scope_active": "Pilot RU IV Cilacap",
     "note": "Machine-readable knowledge graph. Update bersama memory/graph.md."
   },
@@ -10,6 +10,7 @@
     { "id": "org:ITB-IoT", "type": "org", "label": "Lab IoT ITB" },
     { "id": "org:ITB-Fisika", "type": "org", "label": "Lab Fisika ITB" },
     { "id": "org:Pertamina", "type": "org", "label": "Pertamina Patra Niaga" },
+    { "id": "org:emerson", "type": "org", "label": "Emerson (vendor Corrosion Monitoring, WirelessHART) — referensi eksternal" },
     { "id": "proj:GLD", "type": "project", "label": "GLD Tahap 2" },
 
     { "id": "sub:net", "type": "subsystem", "label": "Jaringan LoRa & CH", "progress": 65 },
@@ -58,6 +59,8 @@
     { "id": "ms:power", "type": "milestone", "label": "Analisis daya + mesh + downlink", "date": "2026-07-16", "done": true },
     { "id": "ms:meeting0724", "type": "milestone", "label": "Meeting LGU-Pertamina: dual-system, gas 6-kelas, 24V ready", "date": "2026-07-24", "done": true },
     { "id": "ms:meeting0730", "type": "milestone", "label": "Weekly meeting: jadwal Cilacap 9-10 Agu, arsitektur lokal+cloud-gateway diperjelas", "date": "2026-07-30", "done": true },
+    { "id": "ms:meeting0806", "type": "milestone", "label": "Diskusi mounting/topologi vs Corrosion Monitoring Emerson + requirement gas/alarm/material baru", "date": "2026-08-06", "done": true },
+    { "id": "ms:pushalarm", "type": "milestone", "label": "Push alarm berhasil diuji (mesh kampus GW+CH1-3, semprot LPG, tanpa pull request)", "date": "2026-08-08", "done": true },
     { "id": "ms:cilacap-visit", "type": "milestone", "label": "Kunjungan Cilacap: survey+instalasi gabungan (menggantikan rencana Sep)", "date": "2026-08-10", "done": false },
     { "id": "ms:install", "type": "milestone", "label": "Field installation (target, baseline resmi 9-bulan)", "date": "2026-12-01", "done": false },
 
@@ -66,6 +69,8 @@
     { "id": "blk:conv", "type": "blocker", "label": "DC converter perlu diganti" },
     { "id": "blk:lora", "type": "blocker", "label": "LoRa per-hop ~100m (disiasati mesh)" },
     { "id": "gate:jsa", "type": "gate", "label": "TRA/JSA belum disusun" },
+    { "id": "gate:cert-height", "type": "gate", "label": "Sertifikasi ketinggian pemasangan belum ada" },
+    { "id": "gate:gas-extra", "type": "gate", "label": "Requirement gas Benzena/CO/H2S belum direkonsiliasi dgn gate 6-kelas" },
 
     { "id": "cand:jetson", "type": "candidate", "label": "Flame detection (Jetson Nano, 79%) — belum dikonfirmasi scope" },
 
@@ -136,8 +141,15 @@
 
     { "s": "ms:meeting0724", "t": "proj:GLD", "r": "update-status" },
     { "s": "ms:meeting0730", "t": "proj:GLD", "r": "update-status" },
+    { "s": "ms:meeting0806", "t": "proj:GLD", "r": "update-status" },
+    { "s": "ms:pushalarm", "t": "sub:integ", "r": "menyelesaikan-risiko" },
     { "s": "ms:cilacap-visit", "t": "ru:4", "r": "survei-instalasi-pilot" },
     { "s": "gate:jsa", "t": "ms:cilacap-visit", "r": "menahan" },
-    { "s": "cand:jetson", "t": "proj:GLD", "r": "usulan-belum-dikonfirmasi" }
+    { "s": "gate:cert-height", "t": "ms:cilacap-visit", "r": "menahan-ketinggian-pemasangan" },
+    { "s": "gate:gas-extra", "t": "sub:ai", "r": "menahan-scope-gas" },
+    { "s": "cand:jetson", "t": "proj:GLD", "r": "usulan-belum-dikonfirmasi" },
+    { "s": "org:emerson", "t": "sub:net", "r": "referensi-topologi-mounting" },
+    { "s": "p:raihan", "t": "org:Pertamina", "r": "PIC-RU-VII-Kasim" },
+    { "s": "p:raihan", "t": "ms:meeting0806", "r": "sumber-arahan-mounting" }
   ]
 }

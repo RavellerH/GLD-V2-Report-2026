@@ -5,21 +5,21 @@
 ## Status progres (per 24 Jul 2026)
 - **Progres pilot Cilacap: 39%** vs baseline resmi **19%** → **+20 poin** (murni sisi engineering lab, BUKAN kesiapan lapangan; jangan over-claim).
 - Action items: **25** (5 berjalan, 15 terbuka, 1 selesai). Isu & risiko: **8** (3 tinggi).
-- **Koreksi penting:** inferensi AI kini di **PC + emulator ESP32**, belum on-device. **Dataset konsisten & siap pakai** (isu konsistensi resolved). **Jangkauan LoRa disiasati mesh** (bukan blocker keras).
+- **Update 19 Agu:** inferensi AI (CNN Dual-Branch) **sudah on-device di ESP32-S3 GLD**, dikonfirmasi user — bukan lagi "PC + emulator" seperti tercatat di notulen 24/30 Jul. **Dataset konsisten & siap pakai** (isu konsistensi resolved). **Jangkauan LoRa disiasati mesh** (bukan blocker keras).
 
-## Blocker kritis aktif (3)
+## Blocker kritis aktif (2)
 | ID | Blocker | Metrik | Dampak |
 |---|---|---|---|
-| blk:power | Autonomi baterai GLD < target 30 hari | draw ON **5,75 W**; 7P(28Ah)=**1,76 hari**; 30 hari butuh ~120 sel | GLD tak mandiri 30 hari → perlu perpanjang OFF ~63 mnt / solar |
+| blk:power | Autonomi baterai GLD < target 30 hari | draw ON **5,75 W**; 7P(28Ah)=**1,76 hari**; 30 hari butuh ~120 sel | Jalur baterai **terpisah**, tidak menahan deployment — GLD sekarang pakai **24VDC ≥2A/unit (final, siap pasang, dec:39)**, kabel+PSU pengadaan RU/kilang |
 | blk:tpl | TPL5010 belum memutus daya | board ~**0,4 V** & cuplik data saat "off" | Duty-cycle belum efektif hemat daya |
 | blk:conv | DC converter perlu diganti/dimodifikasi | arahan 20 Jul | Menahan finalisasi catu daya |
-| blk:ai-edge | Deploy inferensi AI ke ESP32 on-device | kini di PC + emulator | Belum jalan di perangkat lapangan |
 
 ## Diminimalkan / resolved
 - ~~blk:lora~~ → jangkauan LoRa ~100 m/hop **disiasati mesh multi-hop** (uji 8-CH se-kampus, Layer 3). Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH). Risiko, bukan blocker.
 - ~~isu konsistensi data~~ → **dataset konsisten & siap dipakai**.
 - CH catu daya → **teratasi 2 panel** (surplus 1,5–4,4 Wh/hari).
 - ~~risiko "push alarm belum dicoba"~~ (dari 30 Jul) → **diuji & berhasil** 6–8 Agu: GLD disemprot LPG di uji mesh kampus (GW+CH1+CH2+CH3), status server berubah alarm **otomatis tanpa pull request**. Catatan: ini uji di **mesh kampus/lab**, bukan validasi di lapangan produksi RU — lih. `decisions.md` dec:34.
+- ~~blk:ai-edge~~ (deploy inferensi AI ke ESP32 on-device) → **DIKONFIRMASI SELESAI 19 Agu** (user langsung, di luar dokumen sumber tertulis): CNN Dual-Branch berjalan on-board ESP32-S3 GLD (int8, 9,14 KB), bukan lagi PC+emulator. Supersede status "PC + emulator" yang tercatat di notulen 24/30 Jul — sumber tertulis pendukung belum ditemukan di repo, tapi dianggap otoritatif karena konfirmasi langsung user.
 
 ## Mesh LoRa (uji 8-CH, 16 Jul)
 Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ← Layer 3 (CH2). Route depth 1–3, status installed. Downlink (GW→CH→GLD 0xF020) tembus lewat mesh + fix firmware.
@@ -31,6 +31,11 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 | gate:cert-height | Sertifikasi ketinggian pemasangan | Percobaan di kilang baru setinggi orang; **belum tersertifikasi** utk instalasi permanen (rapat resmi 6 Agu) |
 | gate:gas-extra | Requirement gas tambahan (Benzena/CO/H2S) | Belum direkonsiliasi dgn gate 6-kelas (dec:17/dec:30) — status verifikasi belum ada. Model AI resmi saat ini (**CNN Dual-Branch**, dec:36) sudah cakup H2 (gate lama) tapi **masih TIDAK cakup H2S/Benzena** — gate ini belum tertutup |
 | gate:capacity | Kapasitas GW/CH vs jumlah sensor | **Belum ada angka resmi** — action item terbuka (Tim Komunikasi ITB), lih. dec:28 |
+| gate:solar-cert | Sertifikasi solar panel (CH) utk hazardous area | **Belum disourcing** — PIC LGU (dec:41) |
+| gate:ch-batt-safety | Keamanan baterai Li-ion 18650 CH di kondisi kilang | **Belum didokumentasikan** — perlu verifikasi sertifikasi sel/BMS (mis. IEC 62133/UN38.3) — PIC LGU (dec:41) |
+| gate:bracket-tools | Ukuran kunci/mur-baut bracket GLD & CH | **Belum ditentukan** — PIC LGU/Tim Mekanik (dec:40) |
+| gate:net-registration | Step-by-step registrasi Gateway ke jaringan kilang + kebijakan security jaringan (selain SSID/password) | **Perlu jawaban Pertamina** — belum ada (dec:42) |
+| gate:server-spec | Spesifikasi server/VM aktual (CPU/RAM/storage/OS/DB) RU IV | LGU sudah usulkan rekomendasi minimum (dec:44) — **menunggu konfirmasi Pertamina** |
 
 ## Metrik daya (Update Timeline Juli, 16 Jul 2026)
 **GLD node (baterai 7P = 7×4000 mAh = 28 Ah, ~70,4 Wh usable):**

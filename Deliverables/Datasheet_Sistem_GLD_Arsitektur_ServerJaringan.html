@@ -1,0 +1,825 @@
+<title>Datasheet Sistem GLD — Arsitektur, Perangkat &amp; Kebutuhan Server/Jaringan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --paper:#F3F3F4; --surface:#FFFFFF; --surface-2:#F7F8F9; --surface-3:#ECEEF1;
+  --ink:#2B2B2B; --ink-2:#676A6C; --ink-soft:#9CA0A3; --line:#E7EAEC; --line-2:#D7DADE;
+  --accent:#1ABB9C; --accent-2:#149174; --accent-soft:#E6F8F4;
+  --good:#1ABB9C; --good-soft:#E6F8F4;
+  --warn:#E5934F; --warn-soft:#FDF1E6;
+  --crit:#E2495A; --crit-soft:#FBE7E9;
+  --info:#1C93C6; --info-soft:#E4F2FA;
+  --charcoal:#2F4050; --charcoal-2:#293846; --charcoal-3:#3A4C5E;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
+  --radius:6px;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"Segoe UI","Open Sans",Roboto,ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+    --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+    --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+    --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+    --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+    --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+    --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#F3F3F4; --surface:#FFFFFF; --surface-2:#F7F8F9; --surface-3:#ECEEF1;
+  --ink:#2B2B2B; --ink-2:#676A6C; --ink-soft:#9CA0A3; --line:#E7EAEC; --line-2:#D7DADE;
+  --accent:#1ABB9C; --accent-2:#149174; --accent-soft:#E6F8F4;
+  --good:#1ABB9C; --good-soft:#E6F8F4; --warn:#E5934F; --warn-soft:#FDF1E6;
+  --crit:#E2495A; --crit-soft:#FBE7E9; --info:#1C93C6; --info-soft:#E4F2FA;
+  --charcoal:#2F4050; --charcoal-2:#293846; --charcoal-3:#3A4C5E;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
+}
+:root[data-theme="dark"]{
+  --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+  --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+  --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+  --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+  --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+  --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.005em;line-height:1.3;text-wrap:balance;color:var(--ink)}
+a{color:var(--accent-2)}
+.mono{font-family:var(--mono)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.topbar{height:4px;background:var(--charcoal)}
+.shell{display:flex;align-items:stretch;min-height:100vh}
+.side{width:264px;flex:none;position:sticky;top:0;align-self:flex-start;height:100vh;overflow-y:auto;
+  background:var(--charcoal);color:#C9D1DB;display:flex;flex-direction:column;gap:18px;padding:20px 0 16px;
+  scrollbar-width:thin}
+.side-brand{display:flex;align-items:center;gap:10px;padding:0 20px}
+.brandmark{width:14px;height:14px;border-radius:3px;flex:none;background:var(--accent)}
+.brandtext b{display:block;font-size:13.5px;letter-spacing:0;color:#fff;font-weight:700}
+.brandtext small{display:block;font-size:10.5px;color:#8A97A6;margin-top:2px;font-weight:500}
+.side-meta{background:var(--charcoal-2);border:1px solid var(--charcoal-3);border-radius:var(--radius);padding:12px 14px;display:flex;flex-direction:column;gap:8px;margin:0 20px}
+.sm-row{display:flex;justify-content:space-between;gap:8px;font-size:12px}
+.sm-row .k{color:#8A97A6;font-weight:500}
+.sm-row .v{color:#fff;font-weight:600;text-align:right}
+.zonenav{display:flex;flex-direction:column;gap:1px;flex:1;padding:6px 0}
+.zonenav a{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;color:#B3BDC9;
+  text-decoration:none;padding:10px 20px;border-left:3px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.zonenav a .zi{font-size:11px;font-weight:700;color:#7C8896;width:16px;flex:none}
+.zonenav a:hover{background:rgba(255,255,255,.05);color:#fff}
+.zonenav a:hover .zi{color:var(--accent)}
+.side-foot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--charcoal-3);padding:14px 20px 0}
+.themebtn{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:0;cursor:pointer;
+  background:var(--charcoal-2);border:1px solid var(--charcoal-3);color:#C9D1DB;padding:8px 11px;border-radius:var(--radius);text-align:left}
+.themebtn:hover{border-color:var(--accent);color:#fff}
+.content{flex:1;min-width:0;max-width:1180px;padding:30px 40px 110px}
+.masthead{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px;display:flex;flex-direction:column;gap:10px}
+.tagrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:0;
+  padding:4px 10px;border-radius:4px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--surface)}
+.chip.accent{background:var(--accent-soft);color:var(--accent-2);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+h1{font-size:26px}
+.subtitle{color:var(--ink-2);font-size:14.5px;max-width:74ch;line-height:1.6}
+
+/* ---- zones ---- */
+.zone{scroll-margin-top:20px}
+.zone + .zone{margin-top:8px;padding-top:32px;border-top:1px solid var(--line)}
+.zone-head{display:flex;align-items:baseline;gap:11px;margin-bottom:15px}
+.zone-head .zn{font-size:12.5px;font-weight:700;color:var(--accent-2)}
+.zone-head h2{font-size:20px}
+.subhead{display:flex;align-items:center;gap:11px;margin:28px 0 13px}
+.subhead:first-of-type{margin-top:4px}
+.subhead h3{font-size:14.5px;color:var(--ink);letter-spacing:0;text-transform:none;font-weight:700}
+.subhead::after{content:"";height:1px;background:var(--line);flex:1}
+.lede{font-size:13.8px;color:var(--ink-2);max-width:82ch;margin:0 0 16px;line-height:1.6}
+
+/* ---- banners / callouts ---- */
+.banner{border-radius:var(--radius);padding:13px 16px;font-size:13.3px;line-height:1.6;margin:0 0 18px;
+  display:flex;gap:10px;align-items:flex-start;border:1px solid transparent;border-left-width:3px}
+.banner .ic{flex:none;font-size:16px;line-height:1.35}
+.banner b{color:var(--ink)}
+.banner.crit{background:var(--crit-soft);color:var(--ink-2);border-left-color:var(--crit)}
+.banner.warn{background:var(--warn-soft);color:var(--ink-2);border-left-color:var(--warn)}
+.banner.info{background:var(--info-soft);color:var(--ink-2);border-left-color:var(--info)}
+
+/* ---- audience cards ---- */
+.grid3{display:grid;grid-template-columns:1fr;gap:13px}
+@media(min-width:900px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.grid2{display:grid;grid-template-columns:1fr;gap:13px}
+@media(min-width:820px){.grid2{grid-template-columns:1fr 1fr}}
+.acard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;box-shadow:var(--shadow)}
+.acard .ic{font-size:19px;margin-bottom:7px;display:block}
+.acard h4{font-size:13.8px;margin-bottom:7px}
+.acard ul{margin:0;padding-left:17px}
+.acard li{font-size:13px;color:var(--ink-2);margin:4px 0;line-height:1.55}
+
+/* ============ PIPELINE DIAGRAM ============ */
+.pipeline{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:18px 0 9px}
+.pl-stage{display:flex;align-items:center}
+.pl-box{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--radius);padding:14px 16px;
+  min-width:138px;box-shadow:var(--shadow);position:relative}
+.pl-box .ic{font-size:19px;display:block;margin-bottom:6px}
+.pl-box .t{font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+.pl-box .s{font-size:11.5px;color:var(--ink-soft);margin-top:3px;line-height:1.35}
+.pl-box .dot{position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%}
+.pl-box.ok .dot{background:var(--good)}
+.pl-box.wip .dot{background:var(--warn)}
+.pl-box.gap .dot{background:var(--crit)}
+.pl-box.hub{background:var(--charcoal);border-color:var(--charcoal-3)}
+.pl-box.hub .t{color:#fff}.pl-box.hub .s{color:#B3BDC9}
+.pl-arrow{flex:none;width:30px;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:17px}
+@media(max-width:760px){.pipeline{flex-direction:column;align-items:stretch}.pl-stage{flex-direction:column}.pl-arrow{transform:rotate(90deg);width:100%;height:22px}}
+.legend-row{display:flex;gap:17px;flex-wrap:wrap;margin:7px 0 20px;font-size:12px;color:var(--ink-soft)}
+.legend-row span{display:inline-flex;align-items:center;gap:6px}
+.legend-row i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.legend-row i.ok{background:var(--good)} .legend-row i.wip{background:var(--warn)} .legend-row i.gap{background:var(--crit)}
+
+/* ============ STACK / LAYER DIAGRAM (site <-> HQ) ============ */
+.stackwrap{display:flex;flex-direction:column;gap:0;margin:16px 0 11px;max-width:660px}
+.slayer{display:flex;align-items:center;gap:12px;padding:11px 0}
+.slayer .sicon{width:40px;height:40px;border-radius:var(--radius);flex:none;display:flex;align-items:center;justify-content:center;font-size:18px;
+  background:var(--accent-soft);color:var(--accent-2)}
+.slayer.hq .sicon{background:var(--charcoal);color:#fff}
+.slayer .stext b{display:block;font-size:13.5px;color:var(--ink)}
+.slayer .stext span{font-size:12.5px;color:var(--ink-soft)}
+.sconnect{margin-left:19px;width:2px;height:21px;background:var(--line-2);position:relative}
+.sconnect::after{content:"⇅";position:absolute;left:-9px;top:-2px;font-size:12px;color:var(--ink-soft);background:var(--paper)}
+
+/* ============ SPEC / DEVICE CARDS ============ */
+.devcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:17px;overflow:hidden}
+.devcard-h{display:flex;align-items:center;gap:10px;padding:13px 16px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.devcard-h .ic{font-size:19px}
+.devcard-h b{font-size:14px}
+.devcard-h span{font-size:11.5px;color:var(--ink-soft)}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:1px;background:var(--line)}
+.stat{background:var(--surface);padding:11px 14px}
+.stat .k{font-size:11px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink-soft);display:block;margin-bottom:4px}
+.stat .v{font-size:13.3px;color:var(--ink);font-weight:600;line-height:1.4}
+
+/* ============ BAR LIST (RF range, battery runtime) ============ */
+.barlist{display:flex;flex-direction:column;gap:9px;margin:15px 0 8px}
+.brow{display:grid;grid-template-columns:126px 1fr 126px;align-items:center;gap:10px;font-size:12.5px}
+.brow .lab{color:var(--ink-2);font-weight:600}
+.btrack{height:15px;background:var(--surface-2);border:1px solid var(--line);border-radius:3px;overflow:hidden;position:relative}
+.bfill{height:100%;background:var(--accent)}
+.bfill.warn{background:var(--warn)}
+.bfill.crit{background:var(--crit)}
+.brow .val{font-size:12px;color:var(--ink-soft);text-align:right;font-weight:500}
+.bmarker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+
+/* ============ BADGE GRID (gas coverage) ============ */
+.badgegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:8px;margin:15px 0 6px}
+.gbadge{border-radius:var(--radius);padding:10px 12px;display:flex;align-items:center;gap:9px;border:1px solid transparent}
+.gbadge .gi{font-size:16px}
+.gbadge b{font-size:13px;display:block}
+.gbadge span{font-size:11px;font-weight:600;letter-spacing:0}
+.gbadge.ok{background:var(--good-soft)} .gbadge.ok b{color:var(--good)} .gbadge.ok span{color:var(--good)}
+.gbadge.wip{background:var(--warn-soft)} .gbadge.wip b{color:var(--warn)} .gbadge.wip span{color:var(--warn)}
+.gbadge.gap{background:var(--crit-soft)} .gbadge.gap b{color:var(--crit)} .gbadge.gap span{color:var(--crit)}
+
+/* ============ ENCLOSURE DIAGRAM (ATEX) ============ */
+.enclosure{display:flex;align-items:stretch;gap:0;margin:18px 0;border:2px dashed var(--line-2);border-radius:var(--radius);padding:16px;flex-wrap:wrap}
+.ebox{flex:1;min-width:176px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px;text-align:center;margin:4px}
+.ebox .ic{font-size:23px;display:block;margin-bottom:6px}
+.ebox b{font-size:13px;display:block;margin-bottom:5px}
+.ebox p{font-size:11.5px;color:var(--ink-soft);margin:0;line-height:1.45}
+.eseal{flex:none;width:110px;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:11px;font-weight:600;
+  text-align:center;line-height:1.35}
+
+/* ============ MESH TOPOLOGY DIAGRAM ============ */
+.mesh{display:flex;flex-direction:column;align-items:center;gap:22px;margin:18px 0;padding:19px 12px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.mesh-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;position:relative}
+.mnode{background:var(--surface-2);border:1px solid var(--line-2);border-radius:4px;padding:8px 13px;font-size:12px;font-weight:700;color:var(--ink);text-align:center;min-width:66px}
+.mnode.root{background:var(--charcoal);color:#fff;border-color:var(--charcoal-3)}
+.mnode small{display:block;font-weight:500;color:var(--ink-soft);font-size:9.5px;margin-top:2px}
+.mnode.root small{color:#B3BDC9}
+.mrow-label{font-size:11px;font-weight:600;color:var(--ink-soft);letter-spacing:0;text-align:center}
+
+/* ============ ROLE / CHECKLIST GRID ============ */
+.rolegrid{display:grid;grid-template-columns:1fr;gap:8px;margin:15px 0}
+@media(min-width:760px){.rolegrid{grid-template-columns:1fr 1fr}}
+.rcard{display:flex;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:11px 13px}
+.rcard .ic{font-size:15px;flex:none}
+.rcard b{font-size:13px;display:block;margin-bottom:3px}
+.rcard span{font-size:12.3px;color:var(--ink-soft);line-height:1.45}
+
+.checklist{display:flex;flex-direction:column;gap:1px;background:var(--line);border-radius:var(--radius);overflow:hidden;margin:15px 0;border:1px solid var(--line)}
+.citem{background:var(--surface);display:flex;gap:10px;align-items:flex-start;padding:10px 14px}
+.citem .ic{color:var(--good);font-size:14px;flex:none;margin-top:1px}
+.citem b{font-size:13px;display:block}
+.citem span{font-size:12.3px;color:var(--ink-soft)}
+
+/* ============ TOPIC FLOW (MQTT) ============ */
+.topicflow{display:flex;flex-direction:column;gap:7px;margin:15px 0}
+.trow{display:flex;align-items:center;gap:10px;font-size:12.5px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:9px 12px;flex-wrap:wrap}
+.trow .dir{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:3px;flex:none;width:122px;text-align:center}
+.trow .dir.out{background:var(--accent-soft);color:var(--accent-2)}
+.trow .dir.in{background:var(--warn-soft);color:var(--warn)}
+.trow .dir.int{background:var(--surface-3);color:var(--ink-soft)}
+.trow .topic{font-family:var(--mono);font-size:11.5px;color:var(--ink);flex:none;min-width:188px}
+.trow .desc{font-size:12px;color:var(--ink-soft)}
+
+/* ---- compact tables kept only where truly tabular ---- */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);margin:13px 0 19px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}
+table th{background:var(--surface-2);font-size:11px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink-soft);
+  text-align:left;padding:10px 13px;border-bottom:1px solid var(--line-2);font-weight:700;white-space:nowrap}
+table td{padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2);line-height:1.55}
+table td b{color:var(--ink)}
+table tr:last-child td{border-bottom:0}
+
+.status{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:0;padding:3px 8px;border-radius:3px;white-space:nowrap;display:inline-block}
+.status.ok{background:var(--good-soft);color:var(--good)}
+.status.wip{background:var(--warn-soft);color:var(--warn)}
+.status.gap{background:var(--crit-soft);color:var(--crit)}
+
+ul.tight{margin:0;padding-left:18px}
+ul.tight li{margin:6px 0;font-size:13.3px;color:var(--ink-2);line-height:1.6}
+ul.tight li b{color:var(--ink)}
+.kbd{font-family:var(--mono);font-size:11.5px;background:var(--surface-3);border:1px solid var(--line-2);border-radius:3px;padding:2px 6px;color:var(--ink-2)}
+footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft);line-height:1.85}
+@media print{.side,.themebtn{display:none}.content{max-width:100%}}
+</style>
+
+<div class="topbar"></div>
+<div class="shell">
+  <nav class="side">
+    <div class="side-brand">
+      <div class="brandmark"></div>
+      <div class="brandtext"><b>GLD Tahap 2 — Datasheet</b><small>LGU · Lab IoT/Fisika ITB · Pertamina</small></div>
+    </div>
+    <div class="side-meta">
+      <div class="sm-row"><span class="k">STATUS</span><span class="v">Draft engineering</span></div>
+      <div class="sm-row"><span class="k">SCOPE</span><span class="v">Pilot RU IV Cilacap</span></div>
+      <div class="sm-row"><span class="k">TANGGAL</span><span class="v">19 Agu 2026</span></div>
+      <div class="sm-row"><span class="k">REV</span><span class="v">0.4</span></div>
+    </div>
+    <div class="zonenav">
+      <a href="#z1"><span class="zi">01</span>Ringkasan</a>
+      <a href="#z2"><span class="zi">02</span>Kesiapan: Kilang vs LGU/ITB</a>
+      <a href="#z3"><span class="zi">03</span>Arsitektur sistem</a>
+      <a href="#z4"><span class="zi">04</span>Perangkat lapangan</a>
+      <a href="#z5"><span class="zi">05</span>Radio &amp; jaringan mesh</a>
+      <a href="#z6"><span class="zi">06</span>Area berbahaya &amp; ATEX</a>
+      <a href="#z7"><span class="zi">07</span>Deteksi gas &amp; AI</a>
+      <a href="#z8"><span class="zi">08</span>Server &amp; jaringan IT</a>
+      <a href="#z9"><span class="zi">09</span>Catu daya</a>
+      <a href="#z10"><span class="zi">10</span>Gate &amp; item terbuka</a>
+      <a href="#z11"><span class="zi">11</span>Sumber</a>
+    </div>
+    <div class="side-foot">
+      <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
+    </div>
+  </nav>
+
+  <main class="content">
+    <header class="masthead">
+      <div class="tagrow">
+        <span class="chip accent">GLD · TAHAP 2</span>
+        <span class="chip">RU IV Cilacap — Tangki LPG &amp; SRU</span>
+        <span class="chip warn">DRAFT — belum disahkan</span>
+      </div>
+      <h1>Datasheet Sistem GLD</h1>
+      <p class="subtitle">Arsitektur, perangkat, dan kebutuhan server/jaringan — untuk tim kilang, tim lapangan, dan tim IT Pertamina.</p>
+    </header>
+
+    <!-- ===================== ZONE 1 ===================== -->
+    <section class="zone" id="z1">
+      <div class="zone-head"><span class="zn">01</span><h2>Ringkasan</h2></div>
+
+      <div class="pipeline">
+        <div class="pl-stage"><div class="pl-box ok"><span class="ic">📡</span><span class="t">GLD Node</span><span class="s">sensor + AI</span><span class="dot"></span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box ok"><span class="ic">📶</span><span class="t">Cluster Head</span><span class="s">relay LoRa</span><span class="dot"></span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box ok"><span class="ic">🌐</span><span class="t">Gateway</span><span class="s">mesh↔MQTT</span><span class="dot"></span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box wip"><span class="ic">🖥️</span><span class="t">Server Site</span><span class="s">broker + Node-RED</span><span class="dot"></span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box ok"><span class="ic">📊</span><span class="t">Dashboard</span><span class="s">operator RU</span><span class="dot"></span></div></div>
+      </div>
+      <div class="legend-row"><span><i class="ok"></i>Fungsional</span><span><i class="wip"></i>Berjalan / perlu setup site</span><span><i class="gap"></i>Belum / gap</span></div>
+
+      <div class="grid3">
+        <div class="acard"><span class="ic">🏭</span><h4>Tim kilang / operasi</h4><ul><li>Bagian 02, 06, 07, 10</li><li>Arsitektur, status ATEX, cakupan gas, item terbuka</li></ul></div>
+        <div class="acard"><span class="ic">🔧</span><h4>Tim lapangan / instalasi</h4><ul><li>Bagian 04, 05, 06, 09</li><li>Spesifikasi perangkat, radio, mounting, catu daya</li></ul></div>
+        <div class="acard"><span class="ic">💻</span><h4>Tim IT Pertamina</h4><ul><li>Bagian 08</li><li>Jaringan, MQTT, keamanan, checklist go-live</li></ul></div>
+      </div>
+      <div class="banner warn"><span class="ic">⚠️</span><span><b>Belum siap pasang permanen di area berbahaya.</b> Item bertanda <span class="status wip">wip</span>/<span class="status gap">gap</span> di dokumen ini belum selesai atau belum diverifikasi lapangan.</span></div>
+    </section>
+
+    <!-- ===================== ZONE 2 ===================== -->
+    <section class="zone" id="z2">
+      <div class="zone-head"><span class="zn">02</span><h2>Kesiapan: Kilang vs LGU/ITB</h2></div>
+      <p class="lede">Ringkasan paling penting untuk tim kilang: apa yang <b>sudah disiapkan LGU/ITB</b>, dan apa yang <b>perlu disiapkan pihak Kilang/Pertamina</b> sebelum instalasi &amp; go-live. Detail teknis tiap item ada di bagian yang dirujuk.</p>
+
+      <div class="subhead"><h3>✅ Sudah disiapkan LGU/ITB</h3></div>
+      <div class="checklist">
+        <div class="citem"><span class="ic">✅</span><div><b>Firmware GLD/CH/Gateway berfungsi</b><span>Rantai komunikasi end-to-end teruji, termasuk mesh 8-CH &amp; push alarm otomatis (bagian 03, 05)</span></div></div>
+        <div class="citem"><span class="ic">✅</span><div><b>Model AI on-device</b><span>CNN Dual-Branch berjalan langsung di ESP32-S3 GLD, akurasi 99,20% (bagian 03, 07)</span></div></div>
+        <div class="citem"><span class="ic">✅</span><div><b>Catu daya GLD final</b><span>24VDC ≥2A per unit — desain selesai, siap pasang (bagian 04, 09)</span></div></div>
+        <div class="citem"><span class="ic">✅</span><div><b>Desain mounting</b><span>L-bracket referensi Emerson untuk GLD &amp; CH+solar panel (bagian 04, 06, 09)</span></div></div>
+        <div class="citem"><span class="ic">✅</span><div><b>Software server siap</b><span>Konfigurasi MQTT broker, backend, frontend — installer satu-paket disiapkan LGU/ITB (bagian 08)</span></div></div>
+        <div class="citem"><span class="ic">✅</span><div><b>Rekomendasi spesifikasi server/VM</b><span>CPU/RAM/storage/OS/database diusulkan, tinggal dikonfirmasi Pertamina (bagian 08)</span></div></div>
+        <div class="citem"><span class="ic">✅</span><div><b>Dokumen integrasi jaringan</b><span>Kontrak MQTT, keamanan, checklist go-live sudah didraft (bagian 08)</span></div></div>
+      </div>
+
+      <div class="subhead"><h3>☐ Perlu disiapkan pihak Kilang/Pertamina</h3></div>
+
+      <p style="font-size:12.8px;color:var(--ink-soft);margin:0 0 8px;font-weight:600">Jaringan &amp; server</p>
+      <div class="checklist">
+        <div class="citem"><span class="ic">☐</span><div><b>Sediakan server/VM di site RU IV</b><span>Sesuai rekomendasi spek LGU atau info kapasitas aktual yang tersedia (bagian 08)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Registrasi MAC Gateway</b><span>Ke sistem IT kilang agar IP tidak berubah (DHCP reservation/IP statis) (bagian 08)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Satukan jaringan Gateway + server</b><span>Satu subnet, plus jelaskan langkah-langkah konkretnya (bagian 08)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Kebijakan keamanan jaringan</b><span>Ada/tidak lapisan tambahan selain SSID+password (VLAN/802.1X/firewall) (bagian 08)</span></div></div>
+      </div>
+
+      <p style="font-size:12.8px;color:var(--ink-soft);margin:16px 0 8px;font-weight:600">Instalasi &amp; catu daya</p>
+      <div class="checklist">
+        <div class="citem"><span class="ic">☐</span><div><b>Kabel &amp; PSU 24VDC ≥2A</b><span>Pengadaan per titik pasang GLD (bagian 04, 09)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Konfirmasi struktur mounting</b><span>Bracket ke konstruksi existing, atau siapkan tiang baru bila perlu (bagian 06, 09)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Sertifikasi solar panel &amp; baterai CH</b><span>Solar wajib bersertifikasi hazardous area; keamanan baterai 18650 perlu didokumentasikan LGU, tapi butuh akses/persetujuan kilang (bagian 09, 10)</span></div></div>
+      </div>
+
+      <p style="font-size:12.8px;color:var(--ink-soft);margin:16px 0 8px;font-weight:600">Perizinan &amp; sertifikasi</p>
+      <div class="checklist">
+        <div class="citem"><span class="ic">☐</span><div><b>TRA/JSA site survey</b><span>Menahan eksekusi survei fisik RU IV Cilacap sampai disusun (bagian 10)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Sertifikasi ketinggian pemasangan</b><span>Bila instalasi permanen di atas tinggi manusia (bagian 06, 10)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Sampel gas ke lokasi pengujian</b><span>Disiapkan &amp; dibawa tim Pertamina, tidak diambil langsung di kilang (bagian 06)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Rekonsiliasi requirement gas tambahan</b><span>Benzena/CO/H2S — apakah menambah atau menggantikan sebagian gate 6-kelas (bagian 07, 10)</span></div></div>
+      </div>
+
+      <div class="banner info"><span class="ic">🤝</span><span>Kolom "perlu disiapkan Kilang" ini adalah <b>daftar kerja bersama</b> — bukan tuntutan sepihak. LGU/ITB siap membantu diskusi teknis untuk tiap item begitu PIC dari Pertamina ditentukan.</span></div>
+    </section>
+
+    <!-- ===================== ZONE 3 ===================== -->
+    <section class="zone" id="z3">
+      <div class="zone-head"><span class="zn">03</span><h2>Arsitektur sistem</h2></div>
+
+      <div class="subhead"><h3>Alur data lapangan → dashboard</h3></div>
+      <div class="pipeline">
+        <div class="pl-stage"><div class="pl-box ok"><span class="ic">📡</span><span class="t">GLD Node</span><span class="s">8× sensor MQ<br>+ AI on-chip</span><span class="dot"></span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box ok"><span class="ic">📶</span><span class="t">Cluster Head</span><span class="s">cache + relay</span><span class="dot"></span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box ok"><span class="ic">🌐</span><span class="t">Gateway</span><span class="s">bridge mesh↔MQTT</span><span class="dot"></span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box hub"><span class="ic">📨</span><span class="t">MQTT Broker</span><span class="s">site RU IV</span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box wip"><span class="ic">⚙️</span><span class="t">Node-RED</span><span class="s">decode, validasi, alarm</span><span class="dot"></span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box ok"><span class="ic">📊</span><span class="t">Dashboard</span><span class="s">operator RU</span><span class="dot"></span></div></div>
+      </div>
+      <ul class="tight">
+        <li><b>Push alarm sudah teruji</b> (6–8 Agu, mesh kampus): GLD disemprot LPG → alarm otomatis, bukan menunggu polling. Belum divalidasi di lapangan produksi RU.</li>
+      </ul>
+
+      <div class="subhead"><h3>Sinkronisasi site ↔ kantor pusat Jakarta</h3></div>
+      <div class="stackwrap">
+        <div class="slayer"><div class="sicon">🏭</div><div class="stext"><b>Backend RU IV (site)</b><span>GraphQL API + DB lokal penuh — sumber kebenaran data</span></div></div>
+        <div class="sconnect"></div>
+        <div class="slayer"><div class="sicon">☁️</div><div class="stext"><b>Agregator VPS</b><span>pull terjadwal (±30 dtk) via HTTPS + sync key · akses VPN-only, tidak publik</span></div></div>
+        <div class="sconnect"></div>
+        <div class="slayer hq"><div class="sicon">🏢</div><div class="stext"><b>Dashboard HQ Jakarta</b><span>read-only, via WireGuard VPN, hanya lokal di komputer HQ</span></div></div>
+      </div>
+      <ul class="tight">
+        <li>Cloud = <b>relay/cache ringan</b>, bukan sistem paralel penuh.</li>
+        <li>Wi-Fi ESP32 hanya untuk konfigurasi lokal — LoRa tetap backbone telemetri.</li>
+      </ul>
+
+      <div class="subhead"><h3>Peran tiap lapisan</h3></div>
+      <div class="rolegrid">
+        <div class="rcard"><span class="ic">📡</span><div><b>GLD Node <span class="status ok">Fungsional</span></b><span>Baca 8 sensor, inferensi AI, kirim data terenkripsi</span></div></div>
+        <div class="rcard"><span class="ic">📶</span><div><b>Cluster Head <span class="status ok">Fungsional</span></b><span>Cache, relay mesh, failover parent — teruji 8-CH</span></div></div>
+        <div class="rcard"><span class="ic">🌐</span><div><b>Gateway <span class="status ok">Fungsional</span></b><span>Jembatan mesh↔MQTT, publish uplink/status/topologi</span></div></div>
+        <div class="rcard"><span class="ic">📨</span><div><b>MQTT Broker <span class="status wip">Perlu setup</span></b><span>Parameter produksi RU IV belum ditetapkan</span></div></div>
+        <div class="rcard"><span class="ic">⚙️</span><div><b>Node-RED + Backend <span class="status wip">Perlu deploy</span></b><span>Fungsional di lab; deployment site pending</span></div></div>
+        <div class="rcard"><span class="ic">📊</span><div><b>Dashboard <span class="status ok">Fungsional</span></b><span>Peta, topologi, event log, multi-tenant per RU</span></div></div>
+      </div>
+
+      <div class="banner info"><span class="ic">🤖</span><span><b>AI sudah on-device.</b> Inferensi CNN Dual-Branch berjalan langsung di ESP32-S3 GLD (bukan lagi PC/emulator) — model terkuantisasi int8 (9,14 KB) dieksekusi on-chip tiap siklus transmit.</span></div>
+    </section>
+
+    <!-- ===================== ZONE 4 ===================== -->
+    <section class="zone" id="z4">
+      <div class="zone-head"><span class="zn">04</span><h2>Perangkat lapangan</h2></div>
+      <p class="lede">Spesifikasi dari firmware &amp; desain saat ini (repo <span class="mono">PertaminaGLD</span>). Detail pin/skema lengkap ada di source — tidak diduplikasi di sini.</p>
+
+      <div class="devcard">
+        <div class="devcard-h"><span class="ic">📡</span><b>GLD Node</b><span>Gas Point Sensor Unit · fw v0.8.14</span></div>
+        <div class="statgrid">
+          <div class="stat"><span class="k">MCU</span><span class="v">ESP32-S3-WROOM-1U-N16R8</span></div>
+          <div class="stat"><span class="k">Sensor</span><span class="v">8× MQ via ADS1256 24-bit</span></div>
+          <div class="stat"><span class="k">Scan sensor</span><span class="v">500 ms</span></div>
+          <div class="stat"><span class="k">Transmit LoRa</span><span class="v">tiap 10 detik</span></div>
+          <div class="stat"><span class="k">RX window</span><span class="v">2.000 ms</span></div>
+          <div class="stat"><span class="k">Model AI</span><span class="v">CNN Dual-Branch, 99,20%</span></div>
+          <div class="stat"><span class="k">Alarm trigger</span><span class="v">gasClass≠0 &amp; conf≥30%</span></div>
+          <div class="stat"><span class="k">Sumber daya</span><span class="v">24VDC ≥2A (final) · baterai jalur terpisah</span></div>
+          <div class="stat"><span class="k">Mounting</span><span class="v">L-bracket ref. Emerson, ke struktur existing</span></div>
+          <div class="stat"><span class="k">Enkripsi</span><span class="v">AES-128-GCM, frame 39 byte</span></div>
+        </div>
+      </div>
+
+      <div class="devcard">
+        <div class="devcard-h"><span class="ic">📶</span><b>Cluster Head (CH)</b><span>fw v0.7.1 · 9 unit besar + 7 unit kecil</span></div>
+        <div class="statgrid">
+          <div class="stat"><span class="k">Radio</span><span class="v">Dual SX1262 (STAR + MESH)</span></div>
+          <div class="stat"><span class="k">Cache node</span><span class="v">32 slot GLD</span></div>
+          <div class="stat"><span class="k">Data stale</span><span class="v">&gt;5 menit dikecualikan</span></div>
+          <div class="stat"><span class="k">Heartbeat</span><span class="v">CH_HELLO tiap 5 menit</span></div>
+          <div class="stat"><span class="k">Baterai start/kritis</span><span class="v">3.500 / 3.100 mV</span></div>
+          <div class="stat"><span class="k">Catu daya</span><span class="v">Solar (2 panel) + 18650</span></div>
+          <div class="stat"><span class="k">Failover parent</span><span class="v">Otomatis, skor RSSI</span></div>
+          <div class="stat"><span class="k">Mounting</span><span class="v">Bracket L/U-clamp, tanpa las/bor</span></div>
+        </div>
+      </div>
+
+      <div class="devcard">
+        <div class="devcard-h"><span class="ic">🌐</span><b>Gateway</b><span>fw v0.1.3 · bridge mesh ↔ MQTT</span></div>
+        <div class="statgrid">
+          <div class="stat"><span class="k">MCU</span><span class="v">ESP32-S3 (4D Gen4 R8N16)</span></div>
+          <div class="stat"><span class="k">Radio mesh</span><span class="v">921,0 MHz · SF9 · 17 dBm</span></div>
+          <div class="stat"><span class="k">Uplink server</span><span class="v">Wi-Fi/LAN → MQTT</span></div>
+          <div class="stat"><span class="k">Topic root</span><span class="v">gld/gateway</span></div>
+          <div class="stat"><span class="k">Buffer lokal</span><span class="v">8 item × 1.024 byte (RAM, volatil)</span></div>
+          <div class="stat"><span class="k">Status publish</span><span class="v">tiap 10 detik</span></div>
+          <div class="stat"><span class="k">Catu daya</span><span class="v">5V via adaptor</span></div>
+          <div class="stat"><span class="k">Penempatan unit</span><span class="v">Indoor, safe area</span></div>
+          <div class="stat"><span class="k">Penempatan antena</span><span class="v">Outdoor / rooftop</span></div>
+          <div class="stat"><span class="k">Jaringan</span><span class="v">MAC didaftarkan, satu subnet dgn server</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ZONE 5 ===================== -->
+    <section class="zone" id="z5">
+      <div class="zone-head"><span class="zn">05</span><h2>Radio &amp; jaringan mesh</h2></div>
+      <p class="lede">Dua domain LoRa terpisah agar tidak saling mengganggu.</p>
+
+      <div class="grid2">
+        <div class="acard"><span class="ic">📡➜📶</span><h4>STAR — GLD ↔ CH</h4>
+          <div class="statgrid" style="margin-top:8px">
+            <div class="stat"><span class="k">Frekuensi</span><span class="v">920,0 MHz</span></div>
+            <div class="stat"><span class="k">SF / CR</span><span class="v">SF7 / 4:5</span></div>
+            <div class="stat"><span class="k">TX power</span><span class="v">17 dBm</span></div>
+            <div class="stat"><span class="k">Sync word</span><span class="v">0x12</span></div>
+          </div>
+        </div>
+        <div class="acard"><span class="ic">📶➜🌐</span><h4>MESH — CH ↔ CH/Gateway</h4>
+          <div class="statgrid" style="margin-top:8px">
+            <div class="stat"><span class="k">Frekuensi</span><span class="v">921,0 MHz</span></div>
+            <div class="stat"><span class="k">SF / CR</span><span class="v">SF9 / 4:5</span></div>
+            <div class="stat"><span class="k">TX power</span><span class="v">17 dBm</span></div>
+            <div class="stat"><span class="k">Sync word</span><span class="v">0x34</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subhead"><h3>Topologi mesh (contoh teruji, 8-CH kampus)</h3></div>
+      <div class="mesh">
+        <div class="mrow-label">Gateway (root)</div>
+        <div class="mesh-row"><div class="mnode root">GW<small>root MESH</small></div></div>
+        <div class="mrow-label">Layer 1</div>
+        <div class="mesh-row">
+          <div class="mnode">CH3<small>depth 1</small></div><div class="mnode">CH5<small>depth 1</small></div><div class="mnode">CH8<small>depth 1</small></div>
+        </div>
+        <div class="mrow-label">Layer 2</div>
+        <div class="mesh-row"><div class="mnode">CH1<small>depth 2</small></div><div class="mnode">CH4<small>depth 2</small></div></div>
+        <div class="mrow-label">Layer 3</div>
+        <div class="mesh-row"><div class="mnode">CH2<small>depth 3</small></div></div>
+      </div>
+      <ul class="tight">
+        <li>Jangkauan per-hop terbatas → <b>disiasati multi-hop</b>, bukan blocker keras. Jumlah CH lapangan mengikuti kebutuhan cakupan (mis. RU VII Kasim ~11 CH).</li>
+        <li><span class="status gap">Belum diuji</span>: data collision saat banyak sensor kirim bersamaan pada mesh produksi.</li>
+      </ul>
+
+      <div class="subhead"><h3>Jangkauan &amp; keandalan (uji lapangan kampus)</h3></div>
+      <div class="barlist">
+        <div class="brow"><span class="lab">Area terbuka</span><div class="btrack"><div class="bfill" style="width:100%"></div></div><span class="val">100m · PDR 100%</span></div>
+        <div class="brow"><span class="lab">LFT (LOS)</span><div class="btrack"><div class="bfill" style="width:100%"></div></div><span class="val">177m · PDR 100%</span></div>
+        <div class="brow"><span class="lab">Gerbang Utara</span><div class="btrack"><div class="bfill" style="width:100%"></div></div><span class="val">242m · PDR 100%</span></div>
+        <div class="brow"><span class="lab">STEI (obstruksi)</span><div class="btrack"><div class="bfill warn" style="width:87%"></div></div><span class="val">200m · PDR 87%</span></div>
+        <div class="brow"><span class="lab">Batas link</span><div class="btrack"><div class="bfill crit" style="width:26%"></div></div><span class="val">−112dBm · PDR 26%</span></div>
+      </div>
+      <p style="font-size:11.8px;color:var(--ink-soft)">Antena RX 6 m memperbaiki link di area obstruksi gedung/pohon. Protokol lengkap: <span class="mono">PertaminaGLD/Pertamina_GLD_Protocol_Reference.md</span>.</p>
+    </section>
+
+    <!-- ===================== ZONE 6 ===================== -->
+    <section class="zone" id="z6">
+      <div class="zone-head"><span class="zn">06</span><h2>Area berbahaya &amp; sertifikasi ATEX</h2></div>
+      <div class="banner crit"><span class="ic">🔥</span><span><b>Belum disertifikasi.</b> Target pengajuan ~3 minggu sejak notulen (menumpang rombongan sertifikasi ke China, lebih ekonomis). Sampai terbit, jangan dianggap siap pasang permanen di Tangki LPG / SRU.</span></div>
+
+      <div class="subhead"><h3>Desain Ex-Proof — 3 kompartemen terpisah</h3></div>
+      <div class="enclosure">
+        <div class="ebox"><span class="ic">🔌</span><b>Modul elektronik</b><p>PCB &amp; power, enclosure Ex-Proof, tak boleh terekspos udara luar</p></div>
+        <div class="eseal">SEAL / GLAND →</div>
+        <div class="ebox"><span class="ic">🧪</span><b>Sensor cartridge</b><p>Elektronik sensor gas, kompartemen terpisah</p></div>
+      </div>
+
+      <div class="subhead"><h3>Mounting &amp; instalasi</h3></div>
+      <ul class="tight">
+        <li>Bracket L/U-clamp ke struktur existing — <b>tanpa las/bor</b> (rujukan: Corrosion Monitoring Emerson/WirelessHART).</li>
+        <li>Material <b>PVC dihindari</b>. Vendor mekanik dilibatkan sejak awal desain.</li>
+        <li>Uji coba pemasangan saat ini <b>setinggi manusia</b> — <span class="status gap">belum tersertifikasi</span> untuk ketinggian struktur permanen.</li>
+        <li>Skenario instalasi lengkap (dimensi, bracket, baut) — <span class="status gap">belum disusun</span>.</li>
+      </ul>
+
+      <div class="subhead"><h3>Catu daya di area hazardous</h3></div>
+      <ul class="tight">
+        <li>Gateway → <b>safe area</b>, LAN kabel (bukan wireless) bila memungkinkan.</li>
+        <li>Jangan tarik tegangan tinggi tanpa proteksi Class 1. Jangka panjang: <b>24V DC</b> untuk area LPG tank/SRU.</li>
+      </ul>
+
+      <div class="subhead"><h3>Tindak lanjut resmi</h3></div>
+      <div class="rolegrid">
+        <div class="rcard"><span class="ic">🔩</span><div><b>Isolasi elektronik ↔ sensor</b><span>PIC: Mas Adit / Mas Hanif</span></div></div>
+        <div class="rcard"><span class="ic">📄</span><div><b>Skematik final + BOM utk ATEX</b><span>PIC: Tim ITB + Pertamina</span></div></div>
+        <div class="rcard"><span class="ic">🧪</span><div><b>Dataset gas tambahan (LPG/H2S/CH4/CO/NH3)</b><span>PIC: Tim AI/chamber ITB</span></div></div>
+        <div class="rcard"><span class="ic">📍</span><div><b>Survei lanjutan RU IV Cilacap</b><span>PIC: Tim lapangan</span></div></div>
+        <div class="rcard"><span class="ic">🛠️</span><div><b>Desain mounting/bracket standar kilang</b><span>PIC: Tim Mekanik ITB</span></div></div>
+        <div class="rcard"><span class="ic">📐</span><div><b>Skenario instalasi + dimensi</b><span>PIC: Tim Mekanik + Vendor</span></div></div>
+      </div>
+    </section>
+
+    <!-- ===================== ZONE 7 ===================== -->
+    <section class="zone" id="z7">
+      <div class="zone-head"><span class="zn">07</span><h2>Deteksi gas &amp; AI</h2></div>
+      <div class="statgrid" style="border:1px solid var(--line);border-radius:11px;overflow:hidden">
+        <div class="stat"><span class="k">Model resmi</span><span class="v">CNN Dual-Branch</span></div>
+        <div class="stat"><span class="k">Akurasi resmi</span><span class="v">99,20% (on-chip int8)</span></div>
+        <div class="stat"><span class="k">Parameter</span><span class="v">1.347</span></div>
+        <div class="stat"><span class="k">Uji lapangan real-time</span><span class="v">97,65%</span></div>
+      </div>
+
+      <div class="banner crit"><span class="ic">🚨</span><span><b>Gap requirement gas.</b> Rapat 6 Agustus meminta cakupan <b>Benzena, CO, H2S</b> — model resmi saat ini tidak mencakup ketiganya.</span></div>
+
+      <div class="badgegrid">
+        <div class="gbadge ok"><span class="gi">✅</span><div><b>LPG</b><span>Tervalidasi</span></div></div>
+        <div class="gbadge wip"><span class="gi">🟡</span><div><b>CO2</b><span>Validasi lanjutan</span></div></div>
+        <div class="gbadge wip"><span class="gi">🟡</span><div><b>Udara Bersih</b><span>Validasi lanjutan</span></div></div>
+        <div class="gbadge wip"><span class="gi">🟡</span><div><b>H2</b><span>Belum lengkap didokumentasikan</span></div></div>
+        <div class="gbadge gap"><span class="gi">⛔</span><div><b>Metana</b><span>Belum tervalidasi</span></div></div>
+        <div class="gbadge gap"><span class="gi">⛔</span><div><b>Benzena</b><span>Tidak dicakup — requirement baru</span></div></div>
+        <div class="gbadge gap"><span class="gi">⛔</span><div><b>CO</b><span>Tidak dicakup — requirement baru</span></div></div>
+        <div class="gbadge gap"><span class="gi">⛔</span><div><b>H2S</b><span>Tidak dicakup — requirement baru</span></div></div>
+      </div>
+
+      <div class="subhead"><h3>Logika alarm</h3></div>
+      <ul class="tight">
+        <li><b>Gas mudah terbakar</b> (LPG dll.) → alarm berbasis threshold bahaya kebakaran.</li>
+        <li><b>Gas toksik</b> (CO, H2S) → alarm segera setelah lewat ambang keselamatan — begitu gap gas tertutup.</li>
+        <li>Dashboard wajib tampilkan ppm real-time + kolom Area <b>dan</b> Equipment.</li>
+      </ul>
+    </section>
+
+    <!-- ===================== ZONE 8 ===================== -->
+    <section class="zone" id="z8">
+      <div class="zone-head"><span class="zn">08</span><h2>Server &amp; jaringan — untuk tim IT Pertamina</h2></div>
+      <p class="lede">Rangkuman 2 dokumen integrasi dari repo server (13 Agustus 2026), dipertahankan sebagai <b>draft/requirement</b> — bukan konfigurasi live.</p>
+      <div class="banner crit"><span class="ic">📋</span><span><b>Belum ada bukti live.</b> Dokumen sumber menyatakan eksplisit: belum bukti broker/deployment/hardware live. Bukti dikumpulkan saat commissioning (checklist di bagian 8).</span></div>
+
+      <div class="pipeline">
+        <div class="pl-stage"><div class="pl-box"><span class="ic">🔧</span><span class="t">Perangkat</span><span class="s">lapangan</span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box"><span class="ic">🌐</span><span class="t">Gateway</span><span class="s">Wi-Fi/LAN site</span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box hub"><span class="ic">📨</span><span class="t">MQTT Broker</span><span class="s">port 1884*</span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box"><span class="ic">⚙️</span><span class="t">Node-RED</span><span class="s">decode + validasi</span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box"><span class="ic">📊</span><span class="t">Dashboard/alarm</span><span class="s">+ penyimpanan</span></div></div>
+      </div>
+      <p style="font-size:11.5px;color:var(--ink-soft)">*konfigurasi bench/default — <span class="status gap">TBD tim IT</span> untuk RU IV. Broker <b>bukan</b> 127.0.0.1 (itu alamat Gateway sendiri).</p>
+
+      <div class="subhead"><h3>Siapa mengerjakan apa</h3></div>
+      <div class="rolegrid">
+        <div class="rcard"><span class="ic">🧩</span><div><b>LGU / ITB</b><span>Install &amp; setup MQTT broker, backend, frontend di server/VM RU — pakai installer satu-paket</span></div></div>
+        <div class="rcard"><span class="ic">🏭</span><div><b>Pertamina / IT RU</b><span>Sediakan server/VM, satukan Gateway+server dalam satu jaringan, registrasi MAC Gateway</span></div></div>
+      </div>
+
+      <div class="subhead"><h3>Registrasi Gateway ke jaringan kilang</h3></div>
+      <div class="pipeline">
+        <div class="pl-stage"><div class="pl-box"><span class="ic">🌐</span><span class="t">Gateway</span><span class="s">MAC address didaftarkan</span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box"><span class="ic">📶</span><span class="t">Intranet kilang</span><span class="s">DHCP reservation / IP statis</span></div></div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-stage"><div class="pl-box hub"><span class="ic">🖥️</span><span class="t">Server/VM RU</span><span class="s">satu jaringan dgn GW</span></div></div>
+      </div>
+      <ul class="tight">
+        <li>Tujuan registrasi MAC: <b>IP Gateway tidak berubah-ubah</b> (DHCP reservation atau IP statis) — broker &amp; dashboard butuh alamat GW yang stabil.</li>
+        <li>Gateway &amp; server/VM <b>wajib satu jaringan/subnet</b> agar MQTT &amp; akses dashboard jalan tanpa hambatan firewall.</li>
+        <li>Server/VM RU jadi <b>web server internal</b> — dashboard diakses langsung dari browser oleh siapa pun yang terhubung ke intranet kilang, tanpa install aplikasi tambahan.</li>
+        <li><span class="status gap">Perlu dari Pertamina</span>: langkah-langkah konkret untuk menyatukan Gateway + server ke satu jaringan (proses registrasi, siapa PIC, berapa lama).</li>
+      </ul>
+
+      <div class="subhead"><h3>Catu daya &amp; pemasangan Gateway</h3></div>
+      <div class="statgrid" style="border:1px solid var(--line);border-radius:11px;overflow:hidden">
+        <div class="stat"><span class="k">Catu daya</span><span class="v">5V via adaptor</span></div>
+        <div class="stat"><span class="k">Penempatan unit</span><span class="v">Dalam ruangan (indoor)</span></div>
+        <div class="stat"><span class="k">Antena</span><span class="v">Luar ruangan / rooftop</span></div>
+        <div class="stat"><span class="k">Koneksi ke broker</span><span class="v">Wi-Fi → IP server (MQTT)</span></div>
+      </div>
+
+      <div class="subhead"><h3>Kapasitas payload &amp; periode kirim</h3></div>
+      <div class="statgrid" style="border:1px solid var(--line);border-radius:11px;overflow:hidden">
+        <div class="stat"><span class="k">Ukuran payload alarm</span><span class="v">&lt; 1 KB</span></div>
+        <div class="stat"><span class="k">Ukuran payload normal</span><span class="v">&lt; 1 KB</span></div>
+        <div class="stat"><span class="k">Periode — kondisi alarm</span><span class="v">Push, tercepat ~10 detik (siklus LoRa)</span></div>
+        <div class="stat"><span class="k">Periode — kondisi normal</span><span class="v">Pull/polling ~90 detik</span></div>
+      </div>
+      <p style="font-size:11.8px;color:var(--ink-soft)">Kondisi alarm dikirim <b>push</b> secepat siklus LoRa (~10 dtk); kondisi normal cukup <b>ditarik (pull) tiap ~90 dtk</b> untuk hemat trafik jaringan — sesuai mekanisme pull-request yang sudah ada di firmware (bagian 05).</p>
+
+      <div class="subhead"><h3>Keamanan Wi-Fi Gateway — saat ini</h3></div>
+      <div class="banner warn"><span class="ic">🔓</span><span><b>Konfigurasi saat ini hanya SSID + Password.</b> Belum ada lapisan keamanan tambahan (VLAN khusus OT, 802.1X, whitelist MAC, VPN). <span class="status gap">Perlu dari Pertamina</span>: apakah intranet kilang mewajibkan security tambahan di luar SSID/password? Jika ya, LGU/ITB akan menyesuaikan firmware Gateway.</span></div>
+
+      <div class="subhead"><h3>Spesifikasi server/VM RU — rekomendasi minimum LGU</h3></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Komponen</th><th>Rekomendasi minimum</th></tr>
+        <tr><td>CPU</td><td>4 vCore (8 vCore disarankan utk headroom)</td></tr>
+        <tr><td>RAM</td><td>8 GB (16 GB disarankan)</td></tr>
+        <tr><td>Storage</td><td>100 GB SSD (250 GB disarankan utk retensi log/data time-series)</td></tr>
+        <tr><td>Network</td><td>1× NIC Gigabit Ethernet, IP statis, satu subnet dgn Gateway</td></tr>
+        <tr><td>OS</td><td>Linux (Ubuntu Server 22.04 LTS disarankan) — Windows Server dapat menyesuaikan bila jadi standar kilang</td></tr>
+        <tr><td>Runtime</td><td>Docker / Docker Compose (mengikuti installer LGU)</td></tr>
+        <tr><td>Database</td><td>PostgreSQL 14+ (dipakai backend/Prisma; TimescaleDB opsional utk data time-series)</td></tr>
+      </table></div>
+      <div class="banner info"><span class="ic">📐</span><span>Ini <b>usulan LGU</b>, bukan angka final — <span class="status gap">perlu dari Pertamina</span>: spesifikasi komputer/VM aktual, OS, dan database yang akan disediakan, agar installer LGU disesuaikan.</span></div>
+
+      <div class="subhead"><h3>Kontrak topik MQTT — root <span class="kbd">gld/gateway</span></h3></div>
+      <div class="topicflow">
+        <div class="trow"><span class="dir out">GW → Server</span><span class="topic">.../uplink</span><span class="desc">Frame MESH dibungkus Gateway</span></div>
+        <div class="trow"><span class="dir out">GW → Server</span><span class="topic">.../status</span><span class="desc">Wi-Fi/MQTT, identitas, queue</span></div>
+        <div class="trow"><span class="dir out">GW → Server</span><span class="topic">.../topology</span><span class="desc">Telemetri topologi CH–Gateway</span></div>
+        <div class="trow"><span class="dir in">Server → GW</span><span class="topic">.../cmd/pull</span><span class="desc">Request data via CH (hopList)</span></div>
+        <div class="trow"><span class="dir in">Server → GW</span><span class="topic">.../cmd/node</span><span class="desc">Command node terotorisasi</span></div>
+        <div class="trow"><span class="dir int">Internal</span><span class="topic">gld/server/alarm</span><span class="desc">Alarm tervalidasi</span></div>
+        <div class="trow"><span class="dir int">Internal</span><span class="topic">gld/server/replay</span><span class="desc">Karantina gagal validasi / replay</span></div>
+      </div>
+
+      <div class="subhead"><h3>Keamanan — minimum</h3></div>
+      <div class="rolegrid">
+        <div class="rcard"><span class="ic">🔑</span><div><b>Kredensial unik</b><span>Per perangkat/lingkungan — jangan commit ke source</span></div></div>
+        <div class="rcard"><span class="ic">🔒</span><div><b>TLS non-loopback</b><span>Kecuali bench terisolasi disetujui eksplisit</span></div></div>
+        <div class="rcard"><span class="ic">🗝️</span><div><b>Secret di secret store</b><span>AES key + auth token (min 32 karakter)</span></div></div>
+        <div class="rcard"><span class="ic">🧱</span><div><b>Segmentasi jaringan</b><span>OT terpisah dari aplikasi, firewall minimum</span></div></div>
+        <div class="rcard"><span class="ic">📝</span><div><b>Audit log</b><span>Autentikasi, koneksi, command</span></div></div>
+        <div class="rcard"><span class="ic">🔁</span><div><b>Replay protection</b><span>Nonce reuse ditolak/dilaporkan</span></div></div>
+      </div>
+
+      <div class="subhead"><h3>Batas keandalan Gateway</h3></div>
+      <ul class="tight">
+        <li>Queue lokal <b>8 item RAM</b> — volatil, hilang saat reboot/penuh. Bukan pengganti HA broker.</li>
+        <li>Alarm hanya ACK setelah publish langsung berhasil (<span class="mono">GW_ALARM_ACK_WITHHELD</span> jika tertunda).</li>
+      </ul>
+
+      <div class="subhead"><h3>Pembagian tanggung jawab</h3></div>
+      <div class="rolegrid">
+        <div class="rcard"><span class="ic">🌐</span><div><b>IT Infrastruktur/Network</b><span>Segmen, IP/DNS, firewall, availability</span></div></div>
+        <div class="rcard"><span class="ic">🛡️</span><div><b>Cyber Security</b><span>TLS, secret handling, ACL, hardening</span></div></div>
+        <div class="rcard"><span class="ic">🖥️</span><div><b>Server/Aplikasi (proyek)</b><span>Deploy &amp; monitor broker + server</span></div></div>
+        <div class="rcard"><span class="ic">🔧</span><div><b>OT/Project (LGU/ITB)</b><span>Provisioning Gateway, uji lapangan</span></div></div>
+      </div>
+
+      <div class="subhead"><h3>Yang perlu dijawab/disiapkan Pertamina</h3></div>
+      <div class="checklist">
+        <div class="citem"><span class="ic">☐</span><div><b>Langkah registrasi Gateway</b><span>Step-by-step menyatukan Gateway + server/VM dalam satu jaringan (proses, PIC, estimasi waktu)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Server/VM aktual</b><span>Spesifikasi komputer, OS, dan database yang akan disediakan (bandingkan dgn rekomendasi minimum di atas)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Kebijakan keamanan jaringan</b><span>Ada/tidak lapisan security selain SSID+password (VLAN, 802.1X, whitelist MAC, firewall) — bila ada, LGU/ITB menyesuaikan</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Host &amp; port broker final</b><span>IP/DNS broker MQTT produksi RU IV (menggantikan placeholder saat ini)</span></div></div>
+      </div>
+
+      <div class="subhead"><h3>Checklist sebelum go-live</h3></div>
+      <div class="checklist">
+        <div class="citem"><span class="ic">☐</span><div><b>Network</b><span>Gateway menjangkau broker pada port disetujui</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>MQTT</b><span>CONNACK sukses — bukan sekadar TCP open</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Security</b><span>Secret di tempat benar, TLS/ACL sesuai kebijakan</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Aplikasi</b><span>Uplink diproses, alarm diuji end-to-end</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Command</b><span>Terotorisasi, dengan jejak audit</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Operasional</b><span>PIC monitoring, alert, retensi log ditetapkan</span></div></div>
+      </div>
+    </section>
+
+    <!-- ===================== ZONE 9 ===================== -->
+    <section class="zone" id="z9">
+      <div class="zone-head"><span class="zn">09</span><h2>Catu daya</h2></div>
+
+      <div class="subhead"><h3>GLD Node — catu daya <span class="status ok">24VDC final &amp; siap pasang</span></h3></div>
+      <div class="statgrid" style="border:1px solid var(--line);border-radius:11px;overflow:hidden">
+        <div class="stat"><span class="k">Sumber daya dipilih</span><span class="v">24VDC ≥2A per unit GLD</span></div>
+        <div class="stat"><span class="k">Status</span><span class="v">Selesai, siap pasang</span></div>
+        <div class="stat"><span class="k">Kabel &amp; PSU 24V</span><span class="v">Pengadaan oleh pihak RU/kilang</span></div>
+        <div class="stat"><span class="k">Jalur baterai</span><span class="v">Dikembangkan terpisah, tidak menahan deployment 24V</span></div>
+      </div>
+      <p style="font-size:11.8px;color:var(--ink-soft)">2A adalah kebutuhan <b>per titik GLD</b> — jadi acuan sizing kabel &amp; PSU per titik pasang oleh RU/kilang, bukan kapasitas gabungan yang di-share ke beberapa unit.</p>
+
+      <div class="subhead"><h3>GLD Node — jalur baterai (dikembangkan terpisah, bukan blocker deployment)</h3></div>
+      <div class="barlist">
+        <div class="brow"><span class="lab">Runtime aktual</span><div class="btrack"><div class="bfill crit" style="width:6%"></div></div><span class="val">1,76 hari</span></div>
+        <div class="brow"><span class="lab">Target</span><div class="btrack"><div class="bfill" style="width:100%;opacity:.35"></div></div><span class="val">30 hari</span></div>
+      </div>
+      <ul class="tight">
+        <li>Draw ON 5,75 W, duty 29% (baterai 7P/28Ah). Target baru: &lt;100 mA, desain rechargeable berpotensi 6–8 bulan.</li>
+        <li>Solar+baterai untuk GLD portable: ukuran fisik besar tidak masalah bagi Pertamina, tapi cost-benefit vs kabel (+CAPEX) <span class="status gap">belum dihitung</span> (PIC: Beny/ITB Fisika).</li>
+      </ul>
+
+      <div class="subhead"><h3>Bracket &amp; instalasi GLD</h3></div>
+      <ul class="tight">
+        <li>Bracket mengikuti desain <b>referensi Emerson</b>, tipe <b>L-bracket</b> — dipasang ke konstruksi existing untuk mempercepat instalasi.</li>
+        <li>Kilang siap membangun <b>tiang baru</b> bila diperlukan (opsi cadangan bila konstruksi existing tidak cocok).</li>
+      </ul>
+
+      <div class="subhead"><h3>Cluster Head — solar + baterai <span class="status ok">Teratasi (daya)</span></h3></div>
+      <ul class="tight">
+        <li>2 panel solar → surplus 1,5–4,4 Wh/hari (1 panel defisit −0,66 Wh/hari).</li>
+        <li>Path: Panel → BQ25185 → 18650 → TPS63020 3,3V → beban.</li>
+      </ul>
+
+      <div class="subhead"><h3>Bracket, tools &amp; sertifikasi CH + solar panel</h3></div>
+      <ul class="tight">
+        <li>CH &amp; solar panel juga pakai <b>L-bracket</b> sejenis GLD — dipasang ke konstruksi existing.</li>
+        <li>Ukuran kunci/mur-baut untuk instalasi — <span class="status gap">belum ditentukan</span> (PIC: LGU/Tim Mekanik, item baru).</li>
+        <li>Solar panel <b>wajib tersertifikasi</b> untuk area kilang/hazardous-flammable — <span class="status gap">belum disourcing</span> (PIC: LGU).</li>
+        <li>Keamanan baterai Li-ion 18650 CH di kondisi kilang — <span class="status gap">belum didokumentasikan</span> (PIC: LGU, verifikasi sertifikasi sel/BMS mis. IEC 62133/UN38.3, dan apakah boleh dipasang di area hazardous).</li>
+      </ul>
+
+      <div class="subhead"><h3>Lainnya — masih terbuka</h3></div>
+      <ul class="tight">
+        <li>Kondensasi casing, magnet mounting GLD portable, dimensi chamber portable — semua <span class="status gap">belum diputuskan</span>.</li>
+      </ul>
+    </section>
+
+    <!-- ===================== ZONE 10 ===================== -->
+    <section class="zone" id="z10">
+      <div class="zone-head"><span class="zn">10</span><h2>Gate &amp; item terbuka</h2></div>
+
+      <div class="rolegrid">
+        <div class="rcard"><span class="ic">🟡</span><div><b>Baterai GLD &lt; 30 hari</b><span>Jalur terpisah, tidak menahan deployment 24VDC</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>TPL5010 belum efektif</b><span>Masih cuplik data saat "off" (~0,4V)</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>DC converter</b><span>Perlu diganti/dimodifikasi</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>TRA/JSA belum disusun</b><span>Menahan eksekusi site survey fisik</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi ketinggian</b><span>Baru diuji setinggi manusia</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>Gas tambahan belum direkonsiliasi</b><span>Benzena/CO/H2S vs gate 6-kelas</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Kapasitas GW/CH</b><span>Belum ada angka resmi vs jumlah sensor</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>Sertifikasi ATEX</b><span>Belum terbit — target ~3 minggu sejak notulen</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi solar panel hazardous</b><span>Belum disourcing — PIC LGU</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Keamanan baterai CH di kilang</b><span>Sertifikasi sel/BMS belum didokumentasikan — PIC LGU</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Tools/fastener bracket</b><span>Ukuran kunci &amp; mur-baut belum ditentukan — PIC LGU</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>Registrasi jaringan GW↔server</b><span>Step-by-step &amp; kebijakan security — perlu dari Pertamina</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Spek server/VM aktual</b><span>Masih rekomendasi LGU — perlu dikonfirmasi Pertamina</span></div></div>
+      </div>
+
+      <div class="subhead"><h3>Sudah selesai (untuk konteks)</h3></div>
+      <ul class="tight">
+        <li>Jangkauan LoRa → disiasati mesh multi-hop (teruji 8-CH).</li>
+        <li>Konsistensi dataset → siap dipakai.</li>
+        <li>Catu daya CH → teratasi (2 panel solar).</li>
+        <li>Push alarm → berhasil diuji di mesh kampus (belum lapangan produksi).</li>
+        <li>Catu daya GLD → <b>24VDC ≥2A final, siap pasang</b> (jalur baterai berjalan terpisah).</li>
+      </ul>
+      <div class="banner info"><span class="ic">📈</span><span>Progres pilot Cilacap ≈ 39% (baseline 19%) — <b>sisi engineering lab saja</b>, bukan kesiapan lapangan/sertifikasi.</span></div>
+    </section>
+
+    <!-- ===================== ZONE 11 ===================== -->
+    <section class="zone" id="z11">
+      <div class="zone-head"><span class="zn">11</span><h2>Sumber</h2></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Sumber</th><th>Dipakai untuk</th></tr>
+        <tr><td>Notulen ATEX &amp; Persiapan Lapangan RU IV (<span class="mono">Summary recorder 081426.pdf</span>)</td><td>Bagian 06</td></tr>
+        <tr><td><span class="mono">PertaminaGLD/Pertamina_GLD_Protocol_Reference.md</span></td><td>Bagian 04–05</td></tr>
+        <tr><td><span class="mono">PertaminaGLD/docs/design/*/final_design.md</span> + <span class="mono">firmware/config/*.h</span></td><td>Bagian 04–05</td></tr>
+        <tr><td><span class="mono">PertaminaGLD/docs/manual/Gateway-to-Server-Site-{IT-Pertamina,Technical-Datasheet}.docx</span> (13 Agu)</td><td>Bagian 02, 08</td></tr>
+        <tr><td><span class="mono">gasleakdetectionV2-April/Documentation/*.md</span>, <span class="mono">docker-compose.vps.yml</span>, <span class="mono">deploy/hq/</span></td><td>Bagian 03, 08</td></tr>
+        <tr><td><span class="mono">memory/blockers_metrics.md</span>, <span class="mono">entities.md</span>, <span class="mono">decisions.md</span></td><td>Bagian 02, 07, 09, 10</td></tr>
+      </table></div>
+      <div class="banner warn"><span class="ic">📌</span><span>Dokumen ini <b>tidak membuktikan</b> broker aktif, server dideploy, atau ATEX tersertifikasi — status itu baru sah setelah commissioning &amp; sertifikasi menghasilkan bukti (checklist di bagian 8).</span></div>
+    </section>
+
+    <footer>
+      GLD Tahap 2 — LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga (RU IV Cilacap)<br>
+      Disusun 19 Agustus 2026. Rev 0.4 — draft engineering, belum disahkan.
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn = document.getElementById('themebtn');
+  var root = document.documentElement;
+  var saved = localStorage.getItem('gld-datasheet-theme');
+  if(saved){ root.setAttribute('data-theme', saved); }
+  function current(){
+    return root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  btn.addEventListener('click', function(){
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('gld-datasheet-theme', next);
+  });
+})();
+</script>

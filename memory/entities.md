@@ -45,8 +45,8 @@
 ## Perangkat & hardware (`dev:`)
 | ID | Nama | Detail |
 |---|---|---|
-| dev:node | GLD Gas Point Sensor Unit | ESP32-S3 · 8× MQ · ADS1256/ADS1115/MCP3208 · TFLite Micro · TPL5010 duty-cycle |
-| dev:ch | Cluster Head | LoRa dual-channel (E22) · solar + 18650 · failover RSSI · IP66/67 · tiang 6 m |
+| dev:node | GLD Gas Point Sensor Unit | ESP32-S3 · 8× MQ · ADS1256/ADS1115/MCP3208 · TFLite Micro · TPL5010 duty-cycle · **catu daya final: 24VDC ≥2A/unit (dec:39)**, kabel+PSU disediakan RU/kilang · mounting L-bracket ref. Emerson (dec:40) |
+| dev:ch | Cluster Head | LoRa dual-channel (E22) · solar + 18650 · failover RSSI · IP66/67 · tiang 6 m · mounting L-bracket ref. Emerson bareng solar panel (dec:40) · gate terbuka: sertifikasi solar hazardous (gate:solar-cert) & keamanan baterai 18650 di kilang (gate:ch-batt-safety) |
 | dev:gw | Gateway | Aggregator mesh · uplink WiFi/4G · MQTT |
 | dev:server | PC Server | Node-RED · Operator Hub · backend GraphQL |
 | dev:tpl5010 | TPL5010 | Timer nanopower duty-cycle (belum optimal) |
@@ -67,7 +67,7 @@
 | ID | Repo | Lapisan | Update terakhir |
 |---|---|---|---|
 | repo:fe | RavellerH/gasleakdetectionV2-April | Frontend + backend dashboard (Next.js/MapLibre/NestJS-GraphQL) | 13 Jul 2026 |
-| repo:srv | fadlurrahmanf/PertaminaGLD | Firmware GLD/CH/GW + server Node-RED + Operator Hub | 23 Jul 2026 |
+| repo:srv | fadlurrahmanf/PertaminaGLD | Firmware GLD/CH/GW + server Node-RED + Operator Hub | 23 Jul 2026 — berisi juga `Pertamina_GLD_Protocol_Reference.md` (spek frame protokol lengkap) dan 2 dokumen integrasi server/jaringan bertanggal **13 Agu 2026**: `docs/manual/Gateway-to-Server-Site-IT-Pertamina.docx` (kebutuhan jaringan utk tim IT Pertamina) & `Gateway-to-Server-Site-Technical-Datasheet.docx` (kontrak MQTT/topik/keamanan teknis); keduanya ditandai eksplisit "draft source-backed — belum bukti broker/deployment/hardware live". Dirangkum ke `Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html` bagian 07 (19 Agu). |
 | repo:ml | RavellerH/gas-leak-ml-chamber-system | ML/AI edge (TFLite Micro, chamber training) | 24 Jun 2026 |
 
 ## Refinery Unit (`ru:`)

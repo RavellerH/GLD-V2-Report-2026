@@ -20,7 +20,7 @@
 | p:ilmania | Ilmania Syakira (disebut "Ilma"/"Ilmania") | Titik pengecasan; notulis; PIC verifikasi gas capability (dec 24 Jul); penulis/editor terakhir presentasi model **CNN Dual-Branch** (6 Agu) — kemungkinan lintas Lab Fisika & Lab IoT, belum dikonfirmasi |
 | p:tresnandi | Pak Tresnandi | Dokumen JSA/TRA; ditanya soal sisa anggaran proyek (sudah didistribusikan) — pertanyaan terbuka dari weekly meeting 30 Jul |
 | p:senna | Pak Senna | Pertamina — lokasi, mode, gateway |
-| p:nina | Bu Nina | Hazardous / standar pemasangan |
+| p:nina | Bu Nina (Dr. Nina Siti Aminah, ITB Fisika) | Hazardous / standar pemasangan; penulis `Parameter spesifikasi EMC_lengkap.docx` (19 Agu) |
 | p:beny | Kak Beny | Overall system architecture, AI |
 | p:totong | Pak Totong | Diskusi peletakan tiang/rooftop |
 | p:adit | Pak Adit | Pertamina — meeting 24 Jul |
@@ -45,9 +45,9 @@
 ## Perangkat & hardware (`dev:`)
 | ID | Nama | Detail |
 |---|---|---|
-| dev:node | GLD Gas Point Sensor Unit | ESP32-S3 · 8× MQ · ADS1256/ADS1115/MCP3208 · TFLite Micro · TPL5010 duty-cycle · **catu daya final: 24VDC ≥2A/unit (dec:39)**, kabel+PSU disediakan RU/kilang · mounting L-bracket ref. Emerson (dec:40) |
-| dev:ch | Cluster Head | LoRa dual-channel (E22) · solar + 18650 · failover RSSI · IP66/67 · tiang 6 m · mounting L-bracket ref. Emerson bareng solar panel (dec:40) · gate terbuka: sertifikasi solar hazardous (gate:solar-cert) & keamanan baterai 18650 di kilang (gate:ch-batt-safety) |
-| dev:gw | Gateway | Aggregator mesh · uplink WiFi/4G · MQTT |
+| dev:node | GLD Gas Point Sensor Unit | ESP32-S3 · 8× MQ · ADS1256/ADS1115/MCP3208 · TFLite Micro · TPL5010 duty-cycle · **catu daya final: 24VDC ≥2A/unit (dec:39)**, kabel+PSU disediakan RU/kilang · mounting L-bracket ref. Emerson (dec:40) · **spek EMC (dec:45)**: modul radio E22-900MM22S (TX maks 22dBm, dikonfigurasi 17dBm), antena omni 3dBi, dimensi 20×9×29cm, enclosure metal Ex-Proof, konsumsi maks 7,995W (versi 24VDC kontinu, beda dari draw ON 5,75W versi baterai duty-cycled), port USB/sensor/power/fan/antena/buzzer |
+| dev:ch | Cluster Head | LoRa dual-channel (E22) · solar + 18650 · failover RSSI · IP66/67 · tiang 6 m · mounting L-bracket ref. Emerson bareng solar panel (dec:40) · gate terbuka: sertifikasi solar hazardous (gate:solar-cert) & keamanan baterai 18650 di kilang (gate:ch-batt-safety) · **spek EMC (dec:45)**: modul radio E22-900MM22S, antena fiber 3dBi(STAR)/8dBi(MESH), dimensi 8×8×21cm, enclosure metal, konsumsi maks 0,73W · ⚠️ spek EMC sebut input power **5VDC** — belum rekonsiliasi dgn solar+18650 lapangan, perlu klarifikasi |
+| dev:gw | Gateway | Aggregator mesh · uplink WiFi/4G · MQTT · **spek EMC (dec:45)**: antena fiber 8dBi, dimensi 8×8×21cm (housing sama dgn CH), enclosure metal, konsumsi maks 0,73W, **port Ethernet tersedia selain Wi-Fi** (belum jelas apakah firmware sudah dukung) |
 | dev:server | PC Server | Node-RED · Operator Hub · backend GraphQL |
 | dev:tpl5010 | TPL5010 | Timer nanopower duty-cycle (belum optimal) |
 | dev:bq25185 | BQ25185 | Charger + power path solar/baterai |

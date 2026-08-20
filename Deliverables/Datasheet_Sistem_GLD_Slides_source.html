@@ -7,14 +7,14 @@
 @page{ size: 13.333in 7.5in; margin:0; }
 *{box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
 html,body{margin:0;padding:0;background:#fff;font-family:"Segoe UI",Roboto,Arial,sans-serif;color:#262321}
-.slide{width:1280px;height:720px;position:relative;overflow:hidden;background:#FFFFFF;page-break-after:always;padding:64px 76px 56px}
+.slide{width:1280px;height:720px;position:relative;overflow:hidden;background:#FFFFFF;page-break-after:always;padding:56px 72px 54px}
 .slide:last-child{page-break-after:auto}
-.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2B5FCB;margin-bottom:10px}
+.eyebrow{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2B5FCB;margin-bottom:10px}
 h1{font-size:40px;font-weight:800;letter-spacing:-.01em;margin:0 0 12px;color:#1B1918;line-height:1.15}
-h2{font-size:30px;font-weight:800;letter-spacing:-.01em;margin:0 0 6px;color:#1B1918}
-.sub{font-size:16px;color:#57514A;max-width:900px;line-height:1.5;margin:0 0 22px}
+h2{font-size:34px;font-weight:800;letter-spacing:-.01em;margin:0 0 7px;color:#1B1918}
+.sub{font-size:17px;color:#57514A;max-width:940px;line-height:1.48;margin:0 0 20px}
 .footer{position:absolute;left:76px;right:76px;bottom:26px;display:flex;justify-content:space-between;align-items:center;
-  font-size:11.5px;color:#A9A296;border-top:1px solid #ECE7DC;padding-top:12px}
+  font-size:12px;color:#89827A;border-top:1px solid #ECE7DC;padding-top:11px}
 .pageno{font-weight:700;color:#89827A}
 .topline{position:absolute;top:0;left:0;right:0;height:8px;background:linear-gradient(90deg,#2B5FCB,#1D3F8F)}
 
@@ -126,7 +126,7 @@ td b{color:#1B1918}
     <span class="tag">RU IV Cilacap — Tangki LPG &amp; SRU</span>
     <span class="tag warn">Draft — belum disahkan</span>
   </div>
-  <div class="meta">Rev 0.4 · 19 Agustus 2026 · Ringkasan slide dari Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html</div>
+  <div class="meta">Rev 0.6 · 19 Agustus 2026 · Sinkron dengan audit sumber rev 0.5 + perbaikan keterbacaan dan status</div>
 </div>
 
 <!-- ============ SLIDE 2: RINGKASAN ============ -->
@@ -162,10 +162,10 @@ td b{color:#1B1918}
   <div class="sub">Siap dipakai sebagai dasar diskusi &amp; instalasi — detail lengkap ada di datasheet utama.</div>
   <div class="clist" style="margin-top:14px">
     <div class="citem"><span class="ic">✅</span><div><b>Firmware GLD/CH/Gateway berfungsi</b><span>Rantai komunikasi end-to-end teruji — mesh 8-CH &amp; push alarm otomatis</span></div></div>
-    <div class="citem"><span class="ic">✅</span><div><b>Model AI on-device</b><span>CNN Dual-Branch berjalan langsung di ESP32-S3 GLD, akurasi 99,20%</span></div></div>
+    <div class="citem"><span class="ic">✅</span><div><b>Model AI on-device (konfirmasi langsung)</b><span>CNN Dual-Branch di ESP32-S3 GLD, akurasi resmi 99,20%; bukti firmware tertulis terbaru belum tersedia</span></div></div>
     <div class="citem"><span class="ic">✅</span><div><b>Catu daya GLD final</b><span>24VDC ≥2A per unit — desain selesai, siap pasang</span></div></div>
     <div class="citem"><span class="ic">✅</span><div><b>Desain mounting</b><span>L-bracket referensi Emerson untuk GLD &amp; CH + solar panel</span></div></div>
-    <div class="citem"><span class="ic">✅</span><div><b>Software server siap</b><span>Konfigurasi MQTT broker, backend, frontend — installer satu-paket disiapkan</span></div></div>
+    <div class="citem"><span class="ic">✅</span><div><b>Paket deployment server sudah disiapkan</b><span>MQTT broker, backend, frontend, dan installer satu-paket; belum menjadi bukti commissioning di server RU</span></div></div>
     <div class="citem"><span class="ic">✅</span><div><b>Rekomendasi spesifikasi server/VM</b><span>CPU/RAM/storage/OS/database diusulkan, tinggal dikonfirmasi</span></div></div>
     <div class="citem"><span class="ic">✅</span><div><b>Dokumen integrasi jaringan</b><span>Kontrak MQTT, keamanan, checklist go-live sudah didraft</span></div></div>
   </div>
@@ -255,7 +255,7 @@ td b{color:#1B1918}
         <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Dual radio SX1262</b><span>STAR ke GLD + MESH ke CH/GW</span></div></div>
         <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Cache 32 slot GLD</b><span>Failover parent otomatis (skor RSSI)</span></div></div>
         <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Solar (2 panel) + 18650</b><span>Surplus 1,5–4,4 Wh/hari</span></div></div>
-        <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Mounting L-bracket ref. Emerson</b><span>Bareng solar panel</span></div></div>
+        <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Mounting L-bracket ref. Emerson</b><span>Bersama panel solar</span></div></div>
       </div>
     </div>
     <div class="panel"><h3>🌐 Gateway</h3>
@@ -304,8 +304,8 @@ td b{color:#1B1918}
     <div class="ebox"><span class="ic">🧪</span><b>Sensor cartridge</b><p>Elektronik sensor gas, kompartemen terpisah</p></div>
   </div>
   <div class="cols2" style="margin-top:20px">
-    <div class="panel"><h3>Mounting</h3><div style="font-size:13px;color:#57514A;line-height:1.6">L/U-bracket ke struktur existing, tanpa las/bor. Material PVC dihindari. Uji coba saat ini setinggi manusia — belum tersertifikasi utk permanen.</div></div>
-    <div class="panel"><h3>Catu daya area hazardous</h3><div style="font-size:13px;color:#57514A;line-height:1.6">Gateway di safe area, LAN kabel. Tidak tarik tegangan tinggi tanpa proteksi Class 1. Jangka panjang: 24V DC.</div></div>
+    <div class="panel"><h3>Mounting</h3><div style="font-size:13px;color:#57514A;line-height:1.6">L/U-bracket ke struktur existing, tanpa pengeboran atau pengelasan. Material PVC dihindari. Uji coba saat ini setinggi manusia — belum tersertifikasi untuk permanen.</div></div>
+    <div class="panel"><h3>Catu daya area hazardous</h3><div style="font-size:13px;color:#57514A;line-height:1.6">Gateway ditempatkan di safe area dengan LAN kabel. Jalur 24VDC wajib mengikuti proteksi dan persetujuan area hazardous.</div></div>
   </div>
   <div class="footer"><span>Datasheet Sistem GLD — RU IV Cilacap</span><span class="pageno">9</span></div>
 </div>
@@ -316,7 +316,7 @@ td b{color:#1B1918}
   <div class="eyebrow">07 · Deteksi gas &amp; AI</div>
   <h2>Model resmi: CNN Dual-Branch</h2>
   <div class="statgrid two">
-    <div class="stat"><span class="k">Akurasi resmi</span><span class="v">99,20% (on-chip int8)</span></div>
+    <div class="stat"><span class="k">Akurasi model int8</span><span class="v">99,20% (laporan resmi model)</span></div>
     <div class="stat"><span class="k">Uji lapangan real-time</span><span class="v">97,65%</span></div>
   </div>
   <div class="banner crit"><span class="ic">🚨</span><span><b>Gap requirement gas.</b> Rapat 6 Agustus meminta cakupan Benzena, CO, H2S — model resmi saat ini tidak mencakup ketiganya.</span></div>
@@ -343,14 +343,14 @@ td b{color:#1B1918}
     <div class="parrow">→</div>
     <div class="pstage"><div class="pbox"><span class="ic">📶</span><span class="t">Intranet kilang</span><span class="s">DHCP reservation/IP statis</span></div></div>
     <div class="parrow">→</div>
-    <div class="pstage"><div class="pbox hub"><span class="ic">🖥️</span><span class="t">Server/VM RU</span><span class="s">satu jaringan dgn GW</span></div></div>
+    <div class="pstage"><div class="pbox hub"><span class="ic">🖥️</span><span class="t">Server/VM RU</span><span class="s">satu jaringan dengan GW</span></div></div>
   </div>
   <div class="statgrid" style="margin-top:18px">
     <div class="stat"><span class="k">Payload alarm/normal</span><span class="v">&lt; 1 KB masing-masing</span></div>
     <div class="stat"><span class="k">Periode alarm</span><span class="v">Push, tercepat ~10 dtk</span></div>
     <div class="stat"><span class="k">Periode normal</span><span class="v">Pull/polling ~90 dtk</span></div>
   </div>
-  <div class="banner warn"><span class="ic">🔓</span><span><b>Keamanan Wi-Fi saat ini: SSID + Password saja.</b> Perlu dari Pertamina: apakah ada kebijakan tambahan (VLAN/802.1X/firewall)?</span></div>
+  <div class="banner warn"><span class="ic">🔓</span><span><b>Keamanan Wi-Fi saat ini: SSID + kata sandi.</b> Pertamina perlu menetapkan kebijakan tambahan bila diwajibkan (VLAN, 802.1X, atau firewall).</span></div>
   <div class="footer"><span>Datasheet Sistem GLD — RU IV Cilacap</span><span class="pageno">11</span></div>
 </div>
 
@@ -364,7 +364,7 @@ td b{color:#1B1918}
       <div class="clist">
         <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">24VDC ≥2A per unit — final, siap pasang</b></div></div>
         <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Kabel &amp; PSU: pengadaan RU/kilang</b></div></div>
-        <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Jalur baterai portable: terpisah, tidak menahan deployment</b></div></div>
+        <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Jalur baterai portabel: terpisah, tidak menahan instalasi 24VDC</b></div></div>
       </div>
     </div>
     <div class="panel"><h3>✅ Cluster Head</h3>
@@ -387,13 +387,13 @@ td b{color:#1B1918}
   <div class="eyebrow">10 · Gate &amp; item terbuka</div>
   <h2>Status ringkas per 19 Agustus 2026</h2>
   <div class="rolegrid">
-    <div class="rcard"><span class="ic">🔴</span><div><b>TRA/JSA belum disusun</b><span>Menahan eksekusi site survey fisik</span></div></div>
+    <div class="rcard"><span class="ic">🔴</span><div><b>TRA/JSA belum disahkan</b><span>Draft internal tersedia, tetapi persetujuan site masih menahan eksekusi fisik</span></div></div>
     <div class="rcard"><span class="ic">🔴</span><div><b>Sertifikasi ATEX</b><span>Belum terbit — target ~3 minggu sejak notulen</span></div></div>
     <div class="rcard"><span class="ic">🔴</span><div><b>Gas tambahan belum direkonsiliasi</b><span>Benzena/CO/H2S vs gate 6-kelas</span></div></div>
-    <div class="rcard"><span class="ic">🔴</span><div><b>Registrasi jaringan GW↔server</b><span>Step-by-step &amp; security — perlu dari Pertamina</span></div></div>
+    <div class="rcard"><span class="ic">🔴</span><div><b>Registrasi jaringan GW↔server</b><span>Langkah registrasi &amp; kebijakan keamanan — perlu dari Pertamina</span></div></div>
     <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi ketinggian pemasangan</b><span>Baru diuji setinggi manusia</span></div></div>
     <div class="rcard"><span class="ic">🟡</span><div><b>Kapasitas GW/CH</b><span>Belum ada angka resmi vs jumlah sensor</span></div></div>
-    <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi solar &amp; baterai CH</b><span>Belum disourcing/didokumentasikan — PIC LGU</span></div></div>
+    <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi solar &amp; baterai CH</b><span>Bukti sertifikasi belum ditelusuri/didokumentasikan — PIC LGU</span></div></div>
     <div class="rcard"><span class="ic">🟡</span><div><b>Spek server/VM aktual</b><span>Masih rekomendasi LGU — perlu konfirmasi Pertamina</span></div></div>
   </div>
   <div class="banner info"><span class="ic">📈</span><span>Progres pilot Cilacap ≈ 39% (baseline 19%) — <b>sisi engineering lab saja</b>, bukan kesiapan lapangan/sertifikasi.</span></div>

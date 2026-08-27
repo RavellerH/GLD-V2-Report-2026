@@ -47,7 +47,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 | [`memory/graph.md`](memory/graph.md) | **Knowledge graph (Mermaid)**: entitas, data-flow, dependensi |
 | [`memory/graph.json`](memory/graph.json) | Graph versi machine-readable (nodes + edges) |
 
-- 🆕 **27 Agu — Executive Presentation (pitch marketing/showcase)** dibuat: `Deliverables/GLD_Executive_Presentation.pptx`, 12 slide, tema navy+amber (beda dari palet biru dokumen client-facing lain). **Berbeda tujuan** dari Datasheet Sistem (teknis, non-persuasif, utk IT Pertamina) — deck ini untuk **calon klien baru** (RU lain/instansi lain), fokus diferensiator vs metode konvensional (multi-gas, AI trainable/edge, mesh self-healing privat sbg infrastruktur), bukti lapangan RU IV Cilacap + **RU VII Kasim/Sorong** (kolaborasi field test disebut eksplisit atas instruksi user), dan mitra manufaktur skala besar **PT Samindo (ekosistem Samsung Indonesia)** — entitas baru, generik tanpa detail kontrak. Detail → `memory/deliverables.md`, `memory/entities.md` (org:samindo).
+- 🆕 **27 Agu — Executive Presentation (pitch marketing/showcase)** dibuat: `Deliverables/GLD_Executive_Presentation.pptx`, fokus diferensiator vs metode konvensional (multi-gas, AI trainable/edge, mesh self-healing privat sbg infrastruktur), bukti lapangan RU IV Cilacap + **RU VII Kasim/Sorong** (kolaborasi field test disebut eksplisit atas instruksi user), dan mitra manufaktur skala besar **PT Samindo (ekosistem Samsung Indonesia)** — entitas baru, generik tanpa detail kontrak. **Berbeda tujuan** dari Datasheet Sistem (teknis, non-persuasif, utk IT Pertamina) — deck ini untuk **calon klien baru** (RU lain/instansi lain). Detail → `memory/deliverables.md`, `memory/entities.md` (org:samindo).
+- 🆕 **27 Agu (lanjutan, sesi sama) — Redesain total ke template ITB:** atas permintaan user, seluruh deck di-rebuild mengikuti `Sumber Dokumen/Deck Presentasi Template (1).pptx` (template brand resmi **Korporasi Kinarya ITB** — navy `133765`/`002B5F`, biru `2D64AC`, cyan `38C0EF`/`1CD8FF`, motif blok kuartal-lingkaran), menggantikan tema navy+amber lama. Kini **13 slide** (+1 slide baru "Arsitektur Jaringan" berisi diagram Network Architecture dari deck kickoff internal 66-halaman `Sumber Dokumen/Deck Presentasi GLD KICKOFF MEETING...pdf`), + 4 foto lapangan/hardware asli baru (unit GLD, instalasi Cluster Head+solar RU-VII, foto aerial situs RU-VII). Semua angka/klaim & catatan provenance dipertahankan verbatim. **Template ITB ini kini jadi referensi desain baku untuk deliverable client-facing PPTX ke depan** — pakai untuk deck serupa selanjutnya. Detail → `memory/deliverables.md`.
 
 ## 4. Deliverable utama (`Deliverables/`)
 
@@ -57,7 +58,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - `Deliverables/Knowledge_Graph_GLD.html` — knowledge graph interaktif (force-directed) dari `memory/graph.json`.
 - `Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html` — datasheet konsolidasi untuk kilang/lapangan/IT: arsitektur, hardware, radio, ATEX, gas/AI, **server & jaringan**, catu daya, gate.
 - `Deliverables/GLD_V2_Progress_Report_Jul2026.pptx`, `Deliverables/REPORT_GLD_V2_2026.md` — laporan pendukung lain.
-- `Deliverables/GLD_Executive_Presentation.pptx` — pitch marketing/showcase ke calon klien baru (12 slide, tema navy+amber, terpisah dari Datasheet Sistem teknis).
+- `Deliverables/GLD_Executive_Presentation.pptx` — pitch marketing/showcase ke calon klien baru (13 slide, tema resmi Korporasi Kinarya ITB, terpisah dari Datasheet Sistem teknis).
 
 Dokumen sumber (dari tim/klien) ada di `Sumber Dokumen/` — katalog lengkap → [`memory/files_catalog.md`](memory/files_catalog.md).
 URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).
@@ -73,6 +74,7 @@ URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).
 - **Jangkauan LoRa**: keterbatasan per-hop **disiasati mesh multi-hop** (sudah terbukti 8-CH). Bukan blocker keras.
 - **Deviasi jadwal**: jangan over-claim. Selisih vs baseline = **sisi lab saja**; framing harus jujur & bersyarat.
 - **Tema HTML (baru)**: biru **#2B5FCB** + charcoal **#262321** (logo Korporasi Kinarya ITB), bukan navy lagi.
+- **Template PPTX client-facing (baru, 27 Agu)**: pakai `Sumber Dokumen/Deck Presentasi Template (1).pptx` (brand resmi Korporasi Kinarya ITB — navy `133765`/`002B5F`, biru `2D64AC`, cyan `38C0EF`/`1CD8FF`, motif blok kuartal-lingkaran) sbg basis desain untuk deck PowerPoint client-facing baru, sejak Executive Presentation di-rebuild ke template ini.
 - **Cilacap = RU IV** (bukan VI). Scope aktif hanya 1 RU.
 - **Git:** kerja di branch `claude/project-management-tracking-5l8ypx`; PR aktif = **PR #1**. Push = update PR.
 

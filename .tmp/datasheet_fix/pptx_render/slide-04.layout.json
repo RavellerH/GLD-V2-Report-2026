@@ -1,0 +1,2032 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/r60y4i",
+    "id": "r60y4i",
+    "slide": 4,
+    "layoutId": "6d0d72f7-3a19-4a11-94bb-e58cfa72cddc",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "70d56673-09e7-4ba8-837e-43fd25690fb9",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "6d0d72f7-3a19-4a11-94bb-e58cfa72cddc",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "70d56673-09e7-4ba8-837e-43fd25690fb9",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "70d56673-09e7-4ba8-837e-43fd25690fb9",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dsb2p8z",
+      "id": "1",
+      "name": "topline-4",
+      "bbox": [
+        0,
+        0,
+        1280,
+        9
+      ],
+      "geometry": "rect",
+      "fillColor": "#2457C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t0jud47q",
+      "id": "2",
+      "name": "section-4",
+      "bbox": [
+        72,
+        36,
+        560,
+        26
+      ],
+      "geometry": "rect",
+      "text": "02 · INSTALLATION PREREQUISITES",
+      "textPreview": "02 · INSTALLATION PREREQUISITES",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#2457C5",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02 · INSTALLATION PREREQUISITES"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02 · INSTALLATION PREREQUISITES",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#2457C5",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "02 · INSTALLATION PREREQUISITES",
+              "fontSize": 16,
+              "color": "#2457C5",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8zat4zq5",
+      "id": "3",
+      "name": "title-4",
+      "bbox": [
+        72,
+        70,
+        1136,
+        66
+      ],
+      "geometry": "rect",
+      "text": "Tiga prerequisite wajib ditutup sebelum instalasi",
+      "textPreview": "Tiga prerequisite wajib ditutup sebelum instalasi",
+      "resolvedFontSize": 48,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 48,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Tiga prerequisite wajib ditutup sebelum instalasi"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Tiga prerequisite wajib ditutup sebelum instalasi",
+          "resolvedTextStyle": {
+            "fontSize": 48,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Tiga prerequisite wajib ditutup sebelum instalasi",
+              "fontSize": 48,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jahc7upo",
+      "id": "4",
+      "name": "subtitle-4",
+      "bbox": [
+        72,
+        136,
+        1080,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Setiap prerequisite memerlukan owner, technical approval, dan evidence of closure dari Kilang.",
+      "textPreview": "Setiap prerequisite memerlukan owner, technical approval, dan evidence of closure dari Kilang.",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#59616C",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Setiap prerequisite memerlukan owner, technical approval, dan evidence of closure dari Kilang."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Setiap prerequisite memerlukan owner, technical approval, dan evidence of closure dari Kilang.",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#59616C",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Setiap prerequisite memerlukan owner, technical approval, dan evidence of closure dari Kilang.",
+              "fontSize": 22,
+              "color": "#59616C",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y98byp83",
+      "id": "5",
+      "name": "footer-rule-4",
+      "bbox": [
+        72,
+        678,
+        1136,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#DCE2EC",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lcju9k7e",
+      "id": "6",
+      "name": "footer-4",
+      "bbox": [
+        72,
+        684,
+        500,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Datasheet Sistem GLD — RU IV Cilacap",
+      "textPreview": "Datasheet Sistem GLD — RU IV Cilacap",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#8A929D",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Datasheet Sistem GLD — RU IV Cilacap"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Datasheet Sistem GLD — RU IV Cilacap",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#8A929D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Datasheet Sistem GLD — RU IV Cilacap",
+              "fontSize": 14,
+              "color": "#8A929D",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kbat0zq9",
+      "id": "7",
+      "name": "page-4",
+      "bbox": [
+        1160,
+        684,
+        48,
+        24
+      ],
+      "geometry": "rect",
+      "text": "4",
+      "textPreview": "4",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#8A929D",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#8A929D",
+            "bold": true,
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "4",
+              "fontSize": 14,
+              "color": "#8A929D",
+              "bold": true,
+              "alignment": "right"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b6hs3apc",
+      "id": "8",
+      "name": "action-num-0",
+      "bbox": [
+        72,
+        218,
+        54,
+        54
+      ],
+      "geometry": "ellipse",
+      "text": "1",
+      "textPreview": "1",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1",
+              "fontSize": 27,
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#2457C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a58bu58r",
+      "id": "9",
+      "name": "action-title-0",
+      "bbox": [
+        142,
+        216,
+        280,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Server & jaringan",
+      "textPreview": "Server & jaringan",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Server & jaringan"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Server & jaringan",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Server & jaringan",
+              "fontSize": 28,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8ji547ux",
+      "id": "10",
+      "name": "action-rule-0",
+      "bbox": [
+        72,
+        286,
+        338,
+        2
+      ],
+      "geometry": "rect",
+      "fillColor": "#DCE2EC",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9kbmxsbi",
+      "id": "11",
+      "name": "dot-72-318",
+      "bbox": [
+        72,
+        318,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mh0n2xcr",
+      "id": "12",
+      "name": "action-0-0-title",
+      "bbox": [
+        96,
+        310,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Sediakan server/VM RU",
+      "textPreview": "Sediakan server/VM RU",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sediakan server/VM RU"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sediakan server/VM RU",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sediakan server/VM RU",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7i94v2tc",
+      "id": "13",
+      "name": "dot-72-384",
+      "bbox": [
+        72,
+        384,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kfi50nul",
+      "id": "14",
+      "name": "action-0-1-title",
+      "bbox": [
+        96,
+        376,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Registrasi MAC Gateway",
+      "textPreview": "Registrasi MAC Gateway",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Registrasi MAC Gateway"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Registrasi MAC Gateway",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Registrasi MAC Gateway",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lgrmtsb6",
+      "id": "15",
+      "name": "dot-72-450",
+      "bbox": [
+        72,
+        450,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0nydcv",
+      "id": "16",
+      "name": "action-0-2-title",
+      "bbox": [
+        96,
+        442,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Satukan subnet GW + server",
+      "textPreview": "Satukan subnet GW + server",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Satukan subnet GW + server"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Satukan subnet GW + server",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Satukan subnet GW + server",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ze94ritg",
+      "id": "17",
+      "name": "dot-72-516",
+      "bbox": [
+        72,
+        516,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#9A6414",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4b25cru5",
+      "id": "18",
+      "name": "action-0-3-title",
+      "bbox": [
+        96,
+        508,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Tetapkan VLAN/firewall/802.1X",
+      "textPreview": "Tetapkan VLAN/firewall/802.1X",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Tetapkan VLAN/firewall/802.1X"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Tetapkan VLAN/firewall/802.1X",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Tetapkan VLAN/firewall/802.1X",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5cv65cbq",
+      "id": "19",
+      "name": "action-num-1",
+      "bbox": [
+        454,
+        218,
+        54,
+        54
+      ],
+      "geometry": "ellipse",
+      "text": "2",
+      "textPreview": "2",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2",
+              "fontSize": 27,
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#2457C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsrmpc3u",
+      "id": "20",
+      "name": "action-title-1",
+      "bbox": [
+        524,
+        216,
+        280,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Instalasi & daya",
+      "textPreview": "Instalasi & daya",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Instalasi & daya"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Instalasi & daya",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Instalasi & daya",
+              "fontSize": 28,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sri5w7m9",
+      "id": "21",
+      "name": "action-rule-1",
+      "bbox": [
+        454,
+        286,
+        338,
+        2
+      ],
+      "geometry": "rect",
+      "fillColor": "#DCE2EC",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r6p4nmlo",
+      "id": "22",
+      "name": "dot-454-318",
+      "bbox": [
+        454,
+        318,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q5gnuh43",
+      "id": "23",
+      "name": "action-1-0-title",
+      "bbox": [
+        478,
+        310,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Sediakan kabel + PSU 24VDC",
+      "textPreview": "Sediakan kabel + PSU 24VDC",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sediakan kabel + PSU 24VDC"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sediakan kabel + PSU 24VDC",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sediakan kabel + PSU 24VDC",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/547mlc3i",
+      "id": "24",
+      "name": "dot-454-384",
+      "bbox": [
+        454,
+        384,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/43y5s7mx",
+      "id": "25",
+      "name": "action-1-1-title",
+      "bbox": [
+        478,
+        376,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Konfirmasi struktur mounting",
+      "textPreview": "Konfirmasi struktur mounting",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Konfirmasi struktur mounting"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Konfirmasi struktur mounting",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Konfirmasi struktur mounting",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/32p4j2ls",
+      "id": "26",
+      "name": "dot-454-450",
+      "bbox": [
+        454,
+        450,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i1g3qx47",
+      "id": "27",
+      "name": "action-1-2-title",
+      "bbox": [
+        478,
+        442,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Setujui bracket dan fastener",
+      "textPreview": "Setujui bracket dan fastener",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Setujui bracket dan fastener"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Setujui bracket dan fastener",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Setujui bracket dan fastener",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h07mhs3m",
+      "id": "28",
+      "name": "dot-454-516",
+      "bbox": [
+        454,
+        516,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#9A6414",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gzylonm1",
+      "id": "29",
+      "name": "action-1-3-title",
+      "bbox": [
+        478,
+        508,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Verifikasi solar + baterai CH",
+      "textPreview": "Verifikasi solar + baterai CH",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Verifikasi solar + baterai CH"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Verifikasi solar + baterai CH",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Verifikasi solar + baterai CH",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mtsb29gn",
+      "id": "30",
+      "name": "action-num-2",
+      "bbox": [
+        836,
+        218,
+        54,
+        54
+      ],
+      "geometry": "ellipse",
+      "text": "3",
+      "textPreview": "3",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "3",
+              "fontSize": 27,
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#2457C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nulsbex8",
+      "id": "31",
+      "name": "action-title-2",
+      "bbox": [
+        906,
+        216,
+        280,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Izin & sertifikasi",
+      "textPreview": "Izin & sertifikasi",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Izin & sertifikasi"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Izin & sertifikasi",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Izin & sertifikasi",
+              "fontSize": 28,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8vut4zyt",
+      "id": "32",
+      "name": "action-rule-2",
+      "bbox": [
+        836,
+        286,
+        338,
+        2
+      ],
+      "geometry": "rect",
+      "fillColor": "#DCE2EC",
+      "lineWidth": 0
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9w3ad4fe",
+      "id": "33",
+      "name": "dot-836-318",
+      "bbox": [
+        836,
+        318,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y5sbypgr",
+      "id": "34",
+      "name": "action-2-0-title",
+      "bbox": [
+        860,
+        310,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Sahkan TRA/JSA",
+      "textPreview": "Sahkan TRA/JSA",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sahkan TRA/JSA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sahkan TRA/JSA",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sahkan TRA/JSA",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zq1s7uxw",
+      "id": "35",
+      "name": "dot-836-384",
+      "bbox": [
+        836,
+        384,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 36,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0rat0zyh",
+      "id": "36",
+      "name": "action-2-1-title",
+      "bbox": [
+        860,
+        376,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Sertifikasi ATEX",
+      "textPreview": "Sertifikasi ATEX",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sertifikasi ATEX"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sertifikasi ATEX",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sertifikasi ATEX",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 37,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lsja94f2",
+      "id": "37",
+      "name": "dot-836-450",
+      "bbox": [
+        836,
+        450,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 38,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q18rupgf",
+      "id": "38",
+      "name": "action-2-2-title",
+      "bbox": [
+        860,
+        442,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Izin ketinggian permanen",
+      "textPreview": "Izin ketinggian permanen",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Izin ketinggian permanen"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Izin ketinggian permanen",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Izin ketinggian permanen",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 39,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b2hs3ux0",
+      "id": "39",
+      "name": "dot-836-516",
+      "bbox": [
+        836,
+        516,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#9A6414",
+      "lineWidth": 0
+    },
+    {
+      "order": 40,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3e1ozq1w",
+      "id": "40",
+      "name": "action-2-3-title",
+      "bbox": [
+        860,
+        508,
+        314,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Siapkan sampel gas uji",
+      "textPreview": "Siapkan sampel gas uji",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Siapkan sampel gas uji"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Siapkan sampel gas uji",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Siapkan sampel gas uji",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 41,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2ds76l0b",
+      "id": "41",
+      "name": "gas-decision-bg",
+      "bbox": [
+        72,
+        604,
+        1136,
+        70
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F8E4E1",
+      "lineWidth": 0
+    },
+    {
+      "order": 42,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pg3610jm",
+      "id": "42",
+      "name": "gas-decision-bar",
+      "bbox": [
+        72,
+        604,
+        7,
+        70
+      ],
+      "geometry": "rect",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 43,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4fap8vi1",
+      "id": "43",
+      "name": "gas-decision-label",
+      "bbox": [
+        96,
+        613,
+        280,
+        24
+      ],
+      "geometry": "rect",
+      "text": "GAS-DETECTION REQUIREMENT",
+      "textPreview": "GAS-DETECTION REQUIREMENT",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#AF3E35",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "GAS-DETECTION REQUIREMENT"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "GAS-DETECTION REQUIREMENT",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#AF3E35",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "GAS-DETECTION REQUIREMENT",
+              "fontSize": 18,
+              "color": "#AF3E35",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 44,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fq1ov61k",
+      "id": "44",
+      "name": "gas-decision-body",
+      "bbox": [
+        96,
+        636,
+        1084,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Tetapkan mapping Benzena, CO, dan H₂S terhadap output class model sebelum test protocol dibekukan.",
+      "textPreview": "Tetapkan mapping Benzena, CO, dan H₂S terhadap output class model sebelum test protocol dibekukan.",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Tetapkan mapping Benzena, CO, dan H₂S terhadap output class model sebelum test protocol dibekukan."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Tetapkan mapping Benzena, CO, dan H₂S terhadap output class model sebelum test protocol dibekukan.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#171A1F",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Tetapkan mapping Benzena, CO, dan H₂S terhadap output class model sebelum test protocol dibekukan.",
+              "fontSize": 18,
+              "color": "#171A1F",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

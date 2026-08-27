@@ -1,0 +1,1247 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/udsvah03",
+    "id": "udsvah03",
+    "slide": 9,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri Light",
+        "eastAsianTypeface": "Calibri Light",
+        "complexScriptTypeface": "Calibri Light"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri",
+        "eastAsianTypeface": "Calibri",
+        "complexScriptTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Calibri",
+      "Calibri Light"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wba1cjqp",
+      "id": "25",
+      "name": "topline-9",
+      "bbox": [
+        0,
+        0,
+        1280,
+        9
+      ],
+      "geometry": "rect",
+      "fillColor": "#2457C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cfmhgne",
+      "id": "2",
+      "name": "section-9",
+      "bbox": [
+        72,
+        36,
+        560,
+        26
+      ],
+      "geometry": "rect",
+      "text": "06 · AREA BERBAHAYA & ATEX",
+      "textPreview": "06 · AREA BERBAHAYA & ATEX",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06 · AREA BERBAHAYA & ATEX"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06 · AREA BERBAHAYA & ATEX",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#2457C5",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "06 · AREA BERBAHAYA & ATEX",
+              "fontSize": 16,
+              "color": "#2457C5",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0b65obm9",
+      "id": "3",
+      "name": "title-9",
+      "bbox": [
+        72,
+        70,
+        1136,
+        66
+      ],
+      "geometry": "rect",
+      "text": "Enclosure memiliki dua kompartemen yang dipisahkan seal",
+      "textPreview": "Enclosure memiliki dua kompartemen yang dipisahkan seal",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Enclosure memiliki dua kompartemen yang dipisahkan"
+          },
+          {
+            "index": 2,
+            "text": "seal"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Enclosure memiliki dua kompartemen yang dipisahkan seal",
+          "resolvedTextStyle": {
+            "fontSize": 48,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Enclosure memiliki dua kompartemen yang dipisahkan seal",
+              "fontSize": 48,
+              "color": "#171A1F",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nex4jq5k",
+      "id": "4",
+      "name": "subtitle-9",
+      "bbox": [
+        72,
+        136,
+        1080,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Desain belum tersertifikasi untuk pemasangan permanen di Tangki LPG/SRU.",
+      "textPreview": "Desain belum tersertifikasi untuk pemasangan permanen di Tangki LPG/SRU.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Desain belum tersertifikasi untuk pemasangan permanen di Tangki LPG/SRU."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Desain belum tersertifikasi untuk pemasangan permanen di Tangki LPG/SRU.",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#59616C",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Desain belum tersertifikasi untuk pemasangan permanen di Tangki LPG/SRU.",
+              "fontSize": 22,
+              "color": "#59616C"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mdonql4z",
+      "id": "5",
+      "name": "footer-rule-9",
+      "bbox": [
+        72,
+        678,
+        1136,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#DCE2EC",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9gzml0nq",
+      "id": "6",
+      "name": "footer-9",
+      "bbox": [
+        72,
+        684,
+        500,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Datasheet Sistem GLD — RU IV Cilacap",
+      "textPreview": "Datasheet Sistem GLD — RU IV Cilacap",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Datasheet Sistem GLD — RU IV Cilacap"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Datasheet Sistem GLD — RU IV Cilacap",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#8A929D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Datasheet Sistem GLD — RU IV Cilacap",
+              "fontSize": 14,
+              "color": "#8A929D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ofq5svm5",
+      "id": "7",
+      "name": "page-9",
+      "bbox": [
+        1160,
+        684,
+        48,
+        24
+      ],
+      "geometry": "rect",
+      "text": "9",
+      "textPreview": "9",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "9"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "9",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#8A929D",
+            "bold": true,
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "9",
+              "fontSize": 14,
+              "color": "#8A929D",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bih4na5w",
+      "id": "8",
+      "name": "atex-status-bg",
+      "bbox": [
+        72,
+        202,
+        1136,
+        70
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F8E4E1",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ah8nu54b",
+      "id": "9",
+      "name": "atex-status-bar",
+      "bbox": [
+        72,
+        202,
+        7,
+        70
+      ],
+      "geometry": "rect",
+      "fillColor": "#AF3E35",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oza1gfyh",
+      "id": "10",
+      "name": "atex-status-label",
+      "bbox": [
+        96,
+        211,
+        280,
+        24
+      ],
+      "geometry": "rect",
+      "text": "STATUS MERAH",
+      "textPreview": "STATUS MERAH",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "STATUS MERAH"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "STATUS MERAH",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#AF3E35",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "STATUS MERAH",
+              "fontSize": 18,
+              "color": "#AF3E35",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p0ji9kf2",
+      "id": "11",
+      "name": "atex-status-body",
+      "bbox": [
+        96,
+        234,
+        1084,
+        30
+      ],
+      "geometry": "rect",
+      "text": "ATEX belum terbit; instalasi permanen dan ketinggian di atas manusia belum disetujui.",
+      "textPreview": "ATEX belum terbit; instalasi permanen dan ketinggian di atas manusia belum disetujui.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ATEX belum terbit; instalasi permanen dan ketinggian di atas manusia belum disetujui."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ATEX belum terbit; instalasi permanen dan ketinggian di atas manusia belum disetujui.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#171A1F",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ATEX belum terbit; instalasi permanen dan ketinggian di atas manusia belum disetujui.",
+              "fontSize": 18,
+              "color": "#171A1F"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2xsjepgb",
+      "id": "12",
+      "name": "atex-elec",
+      "bbox": [
+        108,
+        316,
+        392,
+        152
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F6F8FB",
+      "lineColor": "#DCE2EC",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3y107axw",
+      "id": "13",
+      "name": "atex-elec-title",
+      "bbox": [
+        138,
+        342,
+        332,
+        38
+      ],
+      "geometry": "rect",
+      "text": "MODUL ELEKTRONIK",
+      "textPreview": "MODUL ELEKTRONIK",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "MODUL ELEKTRONIK"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "MODUL ELEKTRONIK",
+          "resolvedTextStyle": {
+            "fontSize": 26,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "MODUL ELEKTRONIK",
+              "fontSize": 26,
+              "color": "#171A1F",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cnu1kzyd",
+      "id": "14",
+      "name": "atex-elec-body",
+      "bbox": [
+        138,
+        390,
+        332,
+        42
+      ],
+      "geometry": "rect",
+      "text": "PCB + power di enclosure Ex-Proof",
+      "textPreview": "PCB + power di enclosure Ex-Proof",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PCB + power di enclosure Ex-Proof"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PCB + power di enclosure Ex-Proof",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#59616C",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PCB + power di enclosure Ex-Proof",
+              "fontSize": 20,
+              "color": "#59616C"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/do3id4fy",
+      "id": "15",
+      "name": "atex-arrow",
+      "bbox": [
+        510,
+        360,
+        260,
+        58
+      ],
+      "geometry": "rect",
+      "text": "SEAL / CABLE GLAND  →",
+      "textPreview": "SEAL / CABLE GLAND  →",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SEAL / CABLE GLAND  →"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SEAL / CABLE GLAND  →",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#2457C5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SEAL / CABLE GLAND  →",
+              "fontSize": 20,
+              "color": "#2457C5",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qlcjipgn",
+      "id": "16",
+      "name": "atex-sensor",
+      "bbox": [
+        780,
+        316,
+        392,
+        152
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F6F8FB",
+      "lineColor": "#DCE2EC",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bml0buxs",
+      "id": "17",
+      "name": "atex-sensor-title",
+      "bbox": [
+        810,
+        342,
+        332,
+        38
+      ],
+      "geometry": "rect",
+      "text": "SENSOR CARTRIDGE",
+      "textPreview": "SENSOR CARTRIDGE",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SENSOR CARTRIDGE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SENSOR CARTRIDGE",
+          "resolvedTextStyle": {
+            "fontSize": 26,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SENSOR CARTRIDGE",
+              "fontSize": 26,
+              "color": "#171A1F",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0ru1ozyp",
+      "id": "18",
+      "name": "atex-sensor-body",
+      "bbox": [
+        810,
+        390,
+        332,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Elektronik sensor di kompartemen terpisah",
+      "textPreview": "Elektronik sensor di kompartemen terpisah",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Elektronik sensor di kompartemen"
+          },
+          {
+            "index": 2,
+            "text": "terpisah"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Elektronik sensor di kompartemen terpisah",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#59616C",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Elektronik sensor di kompartemen terpisah",
+              "fontSize": 20,
+              "color": "#59616C"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lsn2h4fa",
+      "id": "19",
+      "name": "dot-108-528",
+      "bbox": [
+        108,
+        528,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#9A6414",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/98ji147e",
+      "id": "20",
+      "name": "atex-mount-title",
+      "bbox": [
+        132,
+        520,
+        476,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Mounting tanpa bor/las",
+      "textPreview": "Mounting tanpa bor/las",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Mounting tanpa bor/las"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Mounting tanpa bor/las",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Mounting tanpa bor/las",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87a18zqt",
+      "id": "21",
+      "name": "atex-mount-detail",
+      "bbox": [
+        132,
+        550,
+        476,
+        34
+      ],
+      "geometry": "rect",
+      "text": "L/U-bracket pada struktur existing; PVC dihindari",
+      "textPreview": "L/U-bracket pada struktur existing; PVC dihindari",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "L/U-bracket pada struktur existing; PVC dihindari"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "L/U-bracket pada struktur existing; PVC dihindari",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#59616C",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "L/U-bracket pada struktur existing; PVC dihindari",
+              "fontSize": 18,
+              "color": "#59616C"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/76h0zup8",
+      "id": "22",
+      "name": "dot-680-528",
+      "bbox": [
+        680,
+        528,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#9A6414",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ml8j6p8n",
+      "id": "23",
+      "name": "atex-power-title",
+      "bbox": [
+        704,
+        520,
+        476,
+        30
+      ],
+      "geometry": "rect",
+      "text": "24VDC perlu proteksi area hazardous",
+      "textPreview": "24VDC perlu proteksi area hazardous",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "24VDC perlu proteksi area hazardous"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "24VDC perlu proteksi area hazardous",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "24VDC perlu proteksi area hazardous",
+              "fontSize": 22,
+              "color": "#171A1F",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hcji5o7a",
+      "id": "24",
+      "name": "atex-power-detail",
+      "bbox": [
+        704,
+        550,
+        476,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Gateway tetap di safe area dengan koneksi LAN",
+      "textPreview": "Gateway tetap di safe area dengan koneksi LAN",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Gateway tetap di safe area dengan koneksi LAN"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Gateway tetap di safe area dengan koneksi LAN",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#59616C",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Gateway tetap di safe area dengan koneksi LAN",
+              "fontSize": 18,
+              "color": "#59616C"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,1174 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/enhkca",
+    "id": "enhkca",
+    "slide": 19,
+    "layoutId": "6d0d72f7-3a19-4a11-94bb-e58cfa72cddc",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "70d56673-09e7-4ba8-837e-43fd25690fb9",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "6d0d72f7-3a19-4a11-94bb-e58cfa72cddc",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "70d56673-09e7-4ba8-837e-43fd25690fb9",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "70d56673-09e7-4ba8-837e-43fd25690fb9",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4bmdc3u1",
+      "id": "1",
+      "name": "topline-19",
+      "bbox": [
+        0,
+        0,
+        1280,
+        9
+      ],
+      "geometry": "rect",
+      "fillColor": "#2457C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jadw3ydg",
+      "id": "2",
+      "name": "section-19",
+      "bbox": [
+        72,
+        36,
+        560,
+        26
+      ],
+      "geometry": "rect",
+      "text": "14 · ACCEPTANCE CRITERIA",
+      "textPreview": "14 · ACCEPTANCE CRITERIA",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#2457C5",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "14 · ACCEPTANCE CRITERIA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "14 · ACCEPTANCE CRITERIA",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#2457C5",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "14 · ACCEPTANCE CRITERIA",
+              "fontSize": 16,
+              "color": "#2457C5",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i94vatcv",
+      "id": "3",
+      "name": "title-19",
+      "bbox": [
+        72,
+        70,
+        1136,
+        66
+      ],
+      "geometry": "rect",
+      "text": "Minimum commissioning acceptance criteria",
+      "textPreview": "Minimum commissioning acceptance criteria",
+      "resolvedFontSize": 48,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 48,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Minimum commissioning acceptance criteria"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Minimum commissioning acceptance criteria",
+          "resolvedTextStyle": {
+            "fontSize": 48,
+            "color": "#171A1F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Minimum commissioning acceptance criteria",
+              "fontSize": 48,
+              "color": "#171A1F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h8vu1ova",
+      "id": "4",
+      "name": "subtitle-19",
+      "bbox": [
+        72,
+        136,
+        1080,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Sistem hanya dapat dinyatakan operational setelah seluruh evidence diverifikasi di RU.",
+      "textPreview": "Sistem hanya dapat dinyatakan operational setelah seluruh evidence diverifikasi di RU.",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#59616C",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sistem hanya dapat dinyatakan operational setelah seluruh evidence diverifikasi di RU."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sistem hanya dapat dinyatakan operational setelah seluruh evidence diverifikasi di RU.",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#59616C",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sistem hanya dapat dinyatakan operational setelah seluruh evidence diverifikasi di RU.",
+              "fontSize": 22,
+              "color": "#59616C",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7md83u5",
+      "id": "5",
+      "name": "footer-rule-19",
+      "bbox": [
+        72,
+        678,
+        1136,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#DCE2EC",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6tczydk",
+      "id": "6",
+      "name": "footer-19",
+      "bbox": [
+        72,
+        684,
+        500,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Datasheet Sistem GLD — RU IV Cilacap",
+      "textPreview": "Datasheet Sistem GLD — RU IV Cilacap",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#8A929D",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Datasheet Sistem GLD — RU IV Cilacap"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Datasheet Sistem GLD — RU IV Cilacap",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#8A929D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Datasheet Sistem GLD — RU IV Cilacap",
+              "fontSize": 14,
+              "color": "#8A929D",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u5kv6tcz",
+      "id": "7",
+      "name": "page-19",
+      "bbox": [
+        1160,
+        684,
+        48,
+        24
+      ],
+      "geometry": "rect",
+      "text": "19",
+      "textPreview": "19",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#8A929D",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "19"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "19",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#8A929D",
+            "bold": true,
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "19",
+              "fontSize": 14,
+              "color": "#8A929D",
+              "bold": true,
+              "alignment": "right"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/94buxove",
+      "id": "8",
+      "name": "close-n-0",
+      "bbox": [
+        92,
+        226,
+        58,
+        58
+      ],
+      "geometry": "ellipse",
+      "text": "1",
+      "textPreview": "1",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1",
+              "fontSize": 28,
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#2457C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8j2d4jut",
+      "id": "9",
+      "name": "close-h-0",
+      "bbox": [
+        178,
+        224,
+        330,
+        30
+      ],
+      "geometry": "rect",
+      "text": "SITE READINESS",
+      "textPreview": "SITE READINESS",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#2457C5",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SITE READINESS"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SITE READINESS",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#2457C5",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SITE READINESS",
+              "fontSize": 18,
+              "color": "#2457C5",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q1cn29w3",
+      "id": "10",
+      "name": "close-b-0",
+      "bbox": [
+        178,
+        254,
+        930,
+        50
+      ],
+      "geometry": "rect",
+      "text": "TRA/JSA approved; mounting structure released; protected 24 VDC circuit available.",
+      "textPreview": "TRA/JSA approved; mounting structure released; protected 24 VDC circuit available.",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TRA/JSA approved; mounting structure released; protected 24 VDC circuit available."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TRA/JSA approved; mounting structure released; protected 24 VDC circuit available.",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#171A1F",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TRA/JSA approved; mounting structure released; protected 24 VDC circuit available.",
+              "fontSize": 23,
+              "color": "#171A1F",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b2lovexo",
+      "id": "11",
+      "name": "close-n-1",
+      "bbox": [
+        92,
+        338,
+        58,
+        58
+      ],
+      "geometry": "ellipse",
+      "text": "2",
+      "textPreview": "2",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2",
+              "fontSize": 28,
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#2457C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c3e54je9",
+      "id": "12",
+      "name": "close-h-1",
+      "bbox": [
+        178,
+        336,
+        330,
+        30
+      ],
+      "geometry": "rect",
+      "text": "SYSTEM INTEGRATION",
+      "textPreview": "SYSTEM INTEGRATION",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#2457C5",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SYSTEM INTEGRATION"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SYSTEM INTEGRATION",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#2457C5",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SYSTEM INTEGRATION",
+              "fontSize": 18,
+              "color": "#2457C5",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4n6xofe",
+      "id": "13",
+      "name": "close-b-1",
+      "bbox": [
+        178,
+        366,
+        930,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Server/VM allocated; network path approved; MQTT adapter and RU database operational.",
+      "textPreview": "Server/VM allocated; network path approved; MQTT adapter and RU database operational.",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Server/VM allocated; network path approved; MQTT adapter and RU database operational."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Server/VM allocated; network path approved; MQTT adapter and RU database operational.",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#171A1F",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Server/VM allocated; network path approved; MQTT adapter and RU database operational.",
+              "fontSize": 23,
+              "color": "#171A1F",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2dcnypwr",
+      "id": "14",
+      "name": "close-n-2",
+      "bbox": [
+        92,
+        450,
+        58,
+        58
+      ],
+      "geometry": "ellipse",
+      "text": "3",
+      "textPreview": "3",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "3",
+              "fontSize": 28,
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#2457C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3eloruxc",
+      "id": "15",
+      "name": "close-h-2",
+      "bbox": [
+        178,
+        448,
+        330,
+        30
+      ],
+      "geometry": "rect",
+      "text": "SAFETY COMPLIANCE",
+      "textPreview": "SAFETY COMPLIANCE",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#2457C5",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SAFETY COMPLIANCE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SAFETY COMPLIANCE",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#2457C5",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SAFETY COMPLIANCE",
+              "fontSize": 18,
+              "color": "#2457C5",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ofu50zex",
+      "id": "16",
+      "name": "close-b-2",
+      "bbox": [
+        178,
+        478,
+        930,
+        50
+      ],
+      "geometry": "rect",
+      "text": "ATEX approval issued; required gas classes validated; permanent installation authorized.",
+      "textPreview": "ATEX approval issued; required gas classes validated; permanent installation authorized.",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ATEX approval issued; required gas classes validated; permanent installation authorized."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ATEX approval issued; required gas classes validated; permanent installation authorized.",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#171A1F",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ATEX approval issued; required gas classes validated; permanent installation authorized.",
+              "fontSize": 23,
+              "color": "#171A1F",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p036t4fi",
+      "id": "17",
+      "name": "close-proof-bg",
+      "bbox": [
+        72,
+        586,
+        1136,
+        70
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F7EBCF",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u9snupwv",
+      "id": "18",
+      "name": "close-proof-bar",
+      "bbox": [
+        72,
+        586,
+        7,
+        70
+      ],
+      "geometry": "rect",
+      "fillColor": "#9A6414",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fa14nuxg",
+      "id": "19",
+      "name": "close-proof-label",
+      "bbox": [
+        96,
+        595,
+        280,
+        24
+      ],
+      "geometry": "rect",
+      "text": "MANDATORY EVIDENCE",
+      "textPreview": "MANDATORY EVIDENCE",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#9A6414",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "MANDATORY EVIDENCE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "MANDATORY EVIDENCE",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#9A6414",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "MANDATORY EVIDENCE",
+              "fontSize": 18,
+              "color": "#9A6414",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jehkvqd8",
+      "id": "20",
+      "name": "close-proof-body",
+      "bbox": [
+        96,
+        618,
+        1084,
+        30
+      ],
+      "geometry": "rect",
+      "text": "MQTT broker online; ingestion tervalidasi; alarm tampil di dashboard; restore test lulus; hazardous-area approval diterbitkan.",
+      "textPreview": "MQTT broker online; ingestion tervalidasi; alarm tampil di dashboard; restore test lulus; hazardous-area approval diterbitkan.",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#171A1F",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "MQTT broker online; ingestion tervalidasi; alarm tampil di dashboard; restore test lulus; hazardous-area approval diterbitkan."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "MQTT broker online; ingestion tervalidasi; alarm tampil di dashboard; restore test lulus; hazardous-area approval diterbitkan.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#171A1F",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "MQTT broker online; ingestion tervalidasi; alarm tampil di dashboard; restore test lulus; hazardous-area approval diterbitkan.",
+              "fontSize": 18,
+              "color": "#171A1F",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

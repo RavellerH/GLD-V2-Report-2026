@@ -1,0 +1,672 @@
+{"kind":"deck","id":"pr/u7ota5","name":"Deck"}
+{"kind":"layout","layoutId":"70d56673-09e7-4ba8-837e-43fd25690fb9","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"6d0d72f7-3a19-4a11-94bb-e58cfa72cddc","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/1fuf8p","slide":1,"title":"LAPI GANESHA UTAMA  •  LAB IOT & FISIKA ITB  •  PERTAMINA","textShapes":5}
+{"kind":"shape","id":"sh/itwnqtcv","slide":1,"name":"cover-topline","bbox":[0,0,1280,12]}
+{"kind":"shape","id":"sh/5g761ov6","slide":1,"name":"cover-mark","bbox":[84,108,24,24]}
+{"kind":"textbox","id":"sh/4ve5s3u1","slide":1,"name":"cover-brand","text":"LAPI GANESHA UTAMA  •  LAB IOT & FISIKA ITB  •  PERTAMINA","textPreview":"LAPI GANESHA UTAMA  •  LAB IOT & FISIKA ITB  •  PERTAMINA","textChars":57,"textLines":1,"bbox":[124,101,980,38]}
+{"kind":"textbox","id":"sh/ripo3ydc","slide":1,"name":"cover-title","text":"Datasheet Sistem GLD","textPreview":"Datasheet Sistem GLD","textChars":20,"textLines":1,"bbox":[84,230,980,96]}
+{"kind":"textbox","id":"sh/6hgnutcr","slide":1,"name":"cover-subtitle","text":"Spesifikasi arsitektur, interface, data flow, aplikasi, dan infrastruktur Kilang","textPreview":"Spesifikasi arsitektur, interface, data flow, aplikasi, dan infrastruktur Kilang","textChars":80,"textLines":1,"bbox":[84,332,980,82]}
+{"kind":"textbox","id":"sh/tk7658vi","slide":1,"name":"cover-rev","text":"REV 0.8  •  19 AGUSTUS 2026  •  DRAFT TECHNICAL SPECIFICATION","textPreview":"REV 0.8  •  19 AGUSTUS 2026  •  DRAFT TECHNICAL SPECIFICATION","textChars":61,"textLines":1,"bbox":[84,528,860,40]}
+{"kind":"textbox","id":"sh/sjy5w3ux","slide":1,"name":"cover-scope","text":"Tangki LPG & SRU  |  GLD Tahap 2","textPreview":"Tangki LPG & SRU  |  GLD Tahap 2","textChars":32,"textLines":1,"bbox":[84,579,560,36]}
+{"kind":"notes","id":"nt/1fuf8p","slide":1,"text":"[Sources]\n- https://github.com/RavellerH/gasleakdetectionV2-April/tree/660febbfceaca42ca3147fbf47ca09417bd93490\n- https://github.com/fadlurrahmanf/PertaminaGLD/tree/69a493c32d2500134a21e029820cd4addea1794a\n- memory/deliverables.md (audit sumber, 19 Agustus 2026)"}
+{"kind":"slide","id":"sl/vehr9c","slide":2,"title":"01 · SYSTEM OVERVIEW","textShapes":25}
+{"kind":"shape","id":"sh/vidcbyx4","slide":2,"name":"topline-2","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/gjmtk3ep","slide":2,"name":"section-2","text":"01 · SYSTEM OVERVIEW","textPreview":"01 · SYSTEM OVERVIEW","textChars":20,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/hkvud8fa","slide":2,"name":"title-2","text":"Arsitektur operasional terdiri dari lima lapisan","textPreview":"Arsitektur operasional terdiri dari lima lapisan","textChars":48,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/mtkbetwn","slide":2,"name":"subtitle-2","text":"Inferensi dijalankan pada GLD Node; telemetri ditransmisikan melalui LoRa dan MQTT ke aplikasi RU.","textPreview":"Inferensi dijalankan pada GLD Node; telemetri ditransmisikan melalui LoRa dan MQTT ke aplikasi RU.","textChars":98,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/7uts7yx8","slide":2,"name":"footer-rule-2","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/8fmtg3et","slide":2,"name":"footer-2","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/tgvu98fy","slide":2,"name":"page-2","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/ypkba9wb","slide":2,"name":"flow-0","bbox":[72,228,184,126]}
+{"kind":"shape","id":"sh/zqts3exw","slide":2,"name":"dot-90-246","bbox":[90,246,12,12]}
+{"kind":"textbox","id":"sh/jqh0ja9w","slide":2,"name":"flow-title-0","text":"GLD Node","textPreview":"GLD Node","textChars":8,"textLines":1,"bbox":[90,272,148,34]}
+{"kind":"textbox","id":"sh/yp8zq58b","slide":2,"name":"flow-sub-0","text":"8 sensor MQ + AI","textPreview":"8 sensor MQ + AI","textChars":16,"textLines":1,"bbox":[90,311,148,28]}
+{"kind":"textbox","id":"sh/lsjil0r2","slide":2,"name":"arrow-0","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[259,266,38,50]}
+{"kind":"shape","id":"sh/krqhsfqh","slide":2,"name":"flow-1","bbox":[298,228,184,126]}
+{"kind":"shape","id":"sh/7e10na98","slide":2,"name":"dot-316-246","bbox":[316,246,12,12]}
+{"kind":"textbox","id":"sh/6tszu58n","slide":2,"name":"flow-title-1","text":"Cluster Head","textPreview":"Cluster Head","textChars":12,"textLines":1,"bbox":[316,272,148,34]}
+{"kind":"textbox","id":"sh/tgjipkry","slide":2,"name":"flow-sub-1","text":"relay & cache LoRa","textPreview":"relay & cache LoRa","textChars":18,"textLines":1,"bbox":[316,311,148,28]}
+{"kind":"textbox","id":"sh/8fa1wfqd","slide":2,"name":"arrow-1","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[485,266,38,50]}
+{"kind":"shape","id":"sh/nyx0bq9o","slide":2,"name":"flow-2","bbox":[524,228,184,126]}
+{"kind":"shape","id":"sh/mxozils3","slide":2,"name":"dot-542-246","bbox":[542,246,12,12]}
+{"kind":"textbox","id":"sh/qdw3qtsr","slide":2,"name":"flow-title-2","text":"Gateway","textPreview":"Gateway","textChars":7,"textLines":1,"bbox":[542,272,148,34]}
+{"kind":"textbox","id":"sh/re5kjytc","slide":2,"name":"flow-sub-2","text":"mesh ke MQTT","textPreview":"mesh ke MQTT","textChars":12,"textLines":1,"bbox":[542,311,148,28]}
+{"kind":"textbox","id":"sh/cfels3ax","slide":2,"name":"arrow-2","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[711,266,38,50]}
+{"kind":"shape","id":"sh/dgn2lobi","slide":2,"name":"flow-3","bbox":[750,228,184,126]}
+{"kind":"shape","id":"sh/i9c3m9sv","slide":2,"name":"dot-768-246","bbox":[768,246,12,12]}
+{"kind":"textbox","id":"sh/3alkfetg","slide":2,"name":"flow-title-3","text":"Server RU","textPreview":"Server RU","textChars":9,"textLines":1,"bbox":[768,272,148,34]}
+{"kind":"textbox","id":"sh/4belojal","slide":2,"name":"flow-sub-3","text":"broker + aplikasi","textPreview":"broker + aplikasi","textChars":17,"textLines":1,"bbox":[768,311,148,28]}
+{"kind":"textbox","id":"sh/pcn2hob6","slide":2,"name":"arrow-3","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[937,266,38,50]}
+{"kind":"shape","id":"sh/ulc3i9cj","slide":2,"name":"flow-4","bbox":[976,228,184,126]}
+{"kind":"shape","id":"sh/vmlkbet4","slide":2,"name":"dot-994-246","bbox":[994,246,12,12]}
+{"kind":"textbox","id":"sh/x0r6hcvm","slide":2,"name":"flow-title-4","text":"Dashboard","textPreview":"Dashboard","textChars":9,"textLines":1,"bbox":[994,272,148,34]}
+{"kind":"textbox","id":"sh/wzi5o7u1","slide":2,"name":"flow-sub-4","text":"monitoring operator","textPreview":"monitoring operator","textChars":19,"textLines":1,"bbox":[994,311,148,28]}
+{"kind":"textbox","id":"sh/by9of2dg","slide":2,"name":"aud-0","text":"KILANG","textPreview":"KILANG","textChars":6,"textLines":1,"bbox":[72,430,330,28]}
+{"kind":"textbox","id":"sh/ad0nmxcb","slide":2,"name":"aud-body-0","text":"Arsitektur, ATEX, cakupan gas","textPreview":"Arsitektur, ATEX, cakupan gas","textChars":29,"textLines":1,"bbox":[72,463,340,54]}
+{"kind":"textbox","id":"sh/9cr6dsvq","slide":2,"name":"aud-1","text":"LAPANGAN","textPreview":"LAPANGAN","textChars":8,"textLines":1,"bbox":[458,430,330,28]}
+{"kind":"textbox","id":"sh/obi5knu5","slide":2,"name":"aud-body-1","text":"Perangkat, mounting, catu daya","textPreview":"Perangkat, mounting, catu daya","textChars":30,"textLines":1,"bbox":[458,463,340,54]}
+{"kind":"textbox","id":"sh/na9ob2dk","slide":2,"name":"aud-2","text":"IT PERTAMINA","textPreview":"IT PERTAMINA","textChars":12,"textLines":1,"bbox":[844,430,330,28]}
+{"kind":"textbox","id":"sh/m9gnixcz","slide":2,"name":"aud-body-2","text":"Server, MQTT, keamanan jaringan","textPreview":"Server, MQTT, keamanan jaringan","textChars":31,"textLines":1,"bbox":[844,463,340,54]}
+{"kind":"notes","id":"nt/vehr9c","slide":2,"text":"[Sources]\n- Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html §01–03\n- memory/overview.md"}
+{"kind":"slide","id":"sl/9oepcg","slide":3,"title":"02 · IMPLEMENTATION STATUS","textShapes":19}
+{"kind":"shape","id":"sh/jqtgzeho","slide":3,"name":"topline-3","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/4r2x8jy9","slide":3,"name":"section-3","text":"02 · IMPLEMENTATION STATUS","textPreview":"02 · IMPLEMENTATION STATUS","textChars":26,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/5sby14ze","slide":3,"name":"title-3","text":"System status: RU NOT COMMISSIONED","textPreview":"System status: RU NOT COMMISSIONED","textChars":34,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/ul0f2p0r","slide":3,"name":"subtitle-3","text":"ENGINEERING TEST: PASS. Hasil uji laboratorium bukan bukti operational acceptance di RU.","textPreview":"ENGINEERING TEST: PASS. Hasil uji laboratorium bukan bukti operational acceptance di RU.","textChars":88,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/vmtwvuhc","slide":3,"name":"footer-rule-3","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/wn2x4zix","slide":3,"name":"footer-3","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/hobex4zi","slide":3,"name":"page-3","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/eh4fytgb","slide":3,"name":"dot-88-232","bbox":[88,232,12,12]}
+{"kind":"textbox","id":"sh/fidg7yhw","slide":3,"name":"prep-l-0-title","text":"Firmware integration test","textPreview":"Firmware integration test","textChars":25,"textLines":1,"bbox":[112,224,486,30]}
+{"kind":"textbox","id":"sh/b69obqxs","slide":3,"name":"prep-l-0-detail","text":"PASS — 8-CH mesh dan automatic alarm push diuji di kampus","textPreview":"PASS — 8-CH mesh dan automatic alarm push diuji di kampus","textChars":57,"textLines":1,"bbox":[112,254,486,34]}
+{"kind":"shape","id":"sh/q507ilw7","slide":3,"name":"dot-88-350","bbox":[88,350,12,12]}
+{"kind":"textbox","id":"sh/d8b6d0fy","slide":3,"name":"prep-l-1-title","text":"GLD power interface","textPreview":"GLD power interface","textChars":19,"textLines":1,"bbox":[112,342,486,30]}
+{"kind":"textbox","id":"sh/c72pkved","slide":3,"name":"prep-l-1-detail","text":"BASELINE — 24 VDC ≥2 A per unit; cable dan PSU oleh RU","textPreview":"BASELINE — 24 VDC ≥2 A per unit; cable dan PSU oleh RU","textChars":54,"textLines":1,"bbox":[112,372,486,34]}
+{"kind":"shape","id":"sh/zatofaxo","slide":3,"name":"dot-88-468","bbox":[88,468,12,12]}
+{"kind":"textbox","id":"sh/y9k7m5wj","slide":3,"name":"prep-l-2-title","text":"Mechanical mounting design","textPreview":"Mechanical mounting design","textChars":26,"textLines":1,"bbox":[112,460,486,30]}
+{"kind":"textbox","id":"sh/lcbqhkfu","slide":3,"name":"prep-l-2-detail","text":"REFERENCE — L-bracket/U-clamp; no drilling; no welding","textPreview":"REFERENCE — L-bracket/U-clamp; no drilling; no welding","textChars":54,"textLines":1,"bbox":[112,490,486,34]}
+{"kind":"shape","id":"sh/0b2pofe9","slide":3,"name":"dot-666-232","bbox":[666,232,12,12]}
+{"kind":"textbox","id":"sh/7ed8jax0","slide":3,"name":"prep-r-0-title","text":"AI execution status","textPreview":"AI execution status","textChars":19,"textLines":1,"bbox":[690,224,486,30]}
+{"kind":"textbox","id":"sh/mdk7q5wf","slide":3,"name":"prep-r-0-detail","text":"REPORTED ON-DEVICE — 99,20%; firmware evidence belum tersedia","textPreview":"REPORTED ON-DEVICE — 99,20%; firmware evidence belum tersedia","textChars":61,"textLines":1,"bbox":[690,254,486,34]}
+{"kind":"shape","id":"sh/itori9gn","slide":3,"name":"dot-666-350","bbox":[666,350,12,12]}
+{"kind":"textbox","id":"sh/juxsreh8","slide":3,"name":"prep-r-1-title","text":"RU deployment package","textPreview":"RU deployment package","textChars":21,"textLines":1,"bbox":[690,342,486,30]}
+{"kind":"textbox","id":"sh/4v69kjyt","slide":3,"name":"prep-r-1-detail","text":"AVAILABLE — broker, backend, frontend, installer; not commissioned","textPreview":"AVAILABLE — broker, backend, frontend, installer; not commissioned","textChars":66,"textLines":1,"bbox":[690,372,486,34]}
+{"kind":"shape","id":"sh/5wfatoze","slide":3,"name":"dot-666-468","bbox":[666,468,12,12]}
+{"kind":"textbox","id":"sh/u54re9gr","slide":3,"name":"prep-r-2-title","text":"Network integration package","textPreview":"Network integration package","textChars":27,"textLines":1,"bbox":[690,460,486,30]}
+{"kind":"textbox","id":"sh/v6xsnehw","slide":3,"name":"prep-r-2-detail","text":"AVAILABLE — MQTT contract, security baseline, go-live checklist","textPreview":"AVAILABLE — MQTT contract, security baseline, go-live checklist","textChars":63,"textLines":1,"bbox":[690,490,486,34]}
+{"kind":"shape","id":"sh/w769gjyh","slide":3,"name":"prep-caveat-bg","bbox":[72,590,1136,70]}
+{"kind":"shape","id":"sh/h8fapoz2","slide":3,"name":"prep-caveat-bar","bbox":[72,590,7,70]}
+{"kind":"textbox","id":"sh/e18bqtgv","slide":3,"name":"prep-caveat-label","text":"STATUS SISTEM","textPreview":"STATUS SISTEM","textChars":13,"textLines":1,"bbox":[96,599,280,24]}
+{"kind":"textbox","id":"sh/f2hszyhg","slide":3,"name":"prep-caveat-body","text":"NOT COMMISSIONED — operasi RU memerlukan server, network path, site permit, dan sertifikasi hazardous-area.","textPreview":"NOT COMMISSIONED — operasi RU memerlukan server, network path, site permit, dan sertifikasi hazardous-area.","textChars":107,"textLines":1,"bbox":[96,622,1084,30]}
+{"kind":"notes","id":"nt/9oepcg","slide":3,"text":"[Sources]\n- memory/blockers_metrics.md\n- Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html §02\n- Sumber Dokumen/Summary recorder 081426 .pdf"}
+{"kind":"slide","id":"sl/r60y4i","slide":4,"title":"02 · INSTALLATION PREREQUISITES","textShapes":25}
+{"kind":"shape","id":"sh/6dsb2p8z","slide":4,"name":"topline-4","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/t0jud47q","slide":4,"name":"section-4","text":"02 · INSTALLATION PREREQUISITES","textPreview":"02 · INSTALLATION PREREQUISITES","textChars":31,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/8zat4zq5","slide":4,"name":"title-4","text":"Tiga prerequisite wajib ditutup sebelum instalasi","textPreview":"Tiga prerequisite wajib ditutup sebelum instalasi","textChars":49,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/jahc7upo","slide":4,"name":"subtitle-4","text":"Setiap prerequisite memerlukan owner, technical approval, dan evidence of closure dari Kilang.","textPreview":"Setiap prerequisite memerlukan owner, technical approval, dan evidence of closure dari Kilang.","textChars":94,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/y98byp83","slide":4,"name":"footer-rule-4","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/lcju9k7e","slide":4,"name":"footer-4","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/kbat0zq9","slide":4,"name":"page-4","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"textbox","id":"sh/b6hs3apc","slide":4,"name":"action-num-0","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[72,218,54,54]}
+{"kind":"textbox","id":"sh/a58bu58r","slide":4,"name":"action-title-0","text":"Server & jaringan","textPreview":"Server & jaringan","textChars":17,"textLines":1,"bbox":[142,216,280,58]}
+{"kind":"shape","id":"sh/8ji547ux","slide":4,"name":"action-rule-0","bbox":[72,286,338,2]}
+{"kind":"shape","id":"sh/9kbmxsbi","slide":4,"name":"dot-72-318","bbox":[72,318,12,12]}
+{"kind":"textbox","id":"sh/mh0n2xcr","slide":4,"name":"action-0-0-title","text":"Sediakan server/VM RU","textPreview":"Sediakan server/VM RU","textChars":21,"textLines":1,"bbox":[96,310,314,30]}
+{"kind":"shape","id":"sh/7i94v2tc","slide":4,"name":"dot-72-384","bbox":[72,384,12,12]}
+{"kind":"textbox","id":"sh/kfi50nul","slide":4,"name":"action-0-1-title","text":"Registrasi MAC Gateway","textPreview":"Registrasi MAC Gateway","textChars":22,"textLines":1,"bbox":[96,376,314,30]}
+{"kind":"shape","id":"sh/lgrmtsb6","slide":4,"name":"dot-72-450","bbox":[72,450,12,12]}
+{"kind":"textbox","id":"sh/yd0nydcv","slide":4,"name":"action-0-2-title","text":"Satukan subnet GW + server","textPreview":"Satukan subnet GW + server","textChars":26,"textLines":1,"bbox":[96,442,314,30]}
+{"kind":"shape","id":"sh/ze94ritg","slide":4,"name":"dot-72-516","bbox":[72,516,12,12]}
+{"kind":"textbox","id":"sh/4b25cru5","slide":4,"name":"action-0-3-title","text":"Tetapkan VLAN/firewall/802.1X","textPreview":"Tetapkan VLAN/firewall/802.1X","textChars":29,"textLines":1,"bbox":[96,508,314,30]}
+{"kind":"textbox","id":"sh/5cv65cbq","slide":4,"name":"action-num-1","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[454,218,54,54]}
+{"kind":"textbox","id":"sh/dsrmpc3u","slide":4,"name":"action-title-1","text":"Instalasi & daya","textPreview":"Instalasi & daya","textChars":16,"textLines":1,"bbox":[524,216,280,58]}
+{"kind":"shape","id":"sh/sri5w7m9","slide":4,"name":"action-rule-1","bbox":[454,286,338,2]}
+{"kind":"shape","id":"sh/r6p4nmlo","slide":4,"name":"dot-454-318","bbox":[454,318,12,12]}
+{"kind":"textbox","id":"sh/q5gnuh43","slide":4,"name":"action-1-0-title","text":"Sediakan kabel + PSU 24VDC","textPreview":"Sediakan kabel + PSU 24VDC","textChars":26,"textLines":1,"bbox":[478,310,314,30]}
+{"kind":"shape","id":"sh/547mlc3i","slide":4,"name":"dot-454-384","bbox":[454,384,12,12]}
+{"kind":"textbox","id":"sh/43y5s7mx","slide":4,"name":"action-1-1-title","text":"Konfirmasi struktur mounting","textPreview":"Konfirmasi struktur mounting","textChars":28,"textLines":1,"bbox":[478,376,314,30]}
+{"kind":"shape","id":"sh/32p4j2ls","slide":4,"name":"dot-454-450","bbox":[454,450,12,12]}
+{"kind":"textbox","id":"sh/i1g3qx47","slide":4,"name":"action-1-2-title","text":"Setujui bracket dan fastener","textPreview":"Setujui bracket dan fastener","textChars":28,"textLines":1,"bbox":[478,442,314,30]}
+{"kind":"shape","id":"sh/h07mhs3m","slide":4,"name":"dot-454-516","bbox":[454,516,12,12]}
+{"kind":"textbox","id":"sh/gzylonm1","slide":4,"name":"action-1-3-title","text":"Verifikasi solar + baterai CH","textPreview":"Verifikasi solar + baterai CH","textChars":29,"textLines":1,"bbox":[478,508,314,30]}
+{"kind":"textbox","id":"sh/mtsb29gn","slide":4,"name":"action-num-2","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[836,218,54,54]}
+{"kind":"textbox","id":"sh/nulsbex8","slide":4,"name":"action-title-2","text":"Izin & sertifikasi","textPreview":"Izin & sertifikasi","textChars":18,"textLines":1,"bbox":[906,216,280,58]}
+{"kind":"shape","id":"sh/8vut4zyt","slide":4,"name":"action-rule-2","bbox":[836,286,338,2]}
+{"kind":"shape","id":"sh/9w3ad4fe","slide":4,"name":"dot-836-318","bbox":[836,318,12,12]}
+{"kind":"textbox","id":"sh/y5sbypgr","slide":4,"name":"action-2-0-title","text":"Sahkan TRA/JSA","textPreview":"Sahkan TRA/JSA","textChars":14,"textLines":1,"bbox":[860,310,314,30]}
+{"kind":"shape","id":"sh/zq1s7uxw","slide":4,"name":"dot-836-384","bbox":[836,384,12,12]}
+{"kind":"textbox","id":"sh/0rat0zyh","slide":4,"name":"action-2-1-title","text":"Sertifikasi ATEX","textPreview":"Sertifikasi ATEX","textChars":16,"textLines":1,"bbox":[860,376,314,30]}
+{"kind":"shape","id":"sh/lsja94f2","slide":4,"name":"dot-836-450","bbox":[836,450,12,12]}
+{"kind":"textbox","id":"sh/q18rupgf","slide":4,"name":"action-2-2-title","text":"Izin ketinggian permanen","textPreview":"Izin ketinggian permanen","textChars":24,"textLines":1,"bbox":[860,442,314,30]}
+{"kind":"shape","id":"sh/b2hs3ux0","slide":4,"name":"dot-836-516","bbox":[836,516,12,12]}
+{"kind":"textbox","id":"sh/3e1ozq1w","slide":4,"name":"action-2-3-title","text":"Siapkan sampel gas uji","textPreview":"Siapkan sampel gas uji","textChars":22,"textLines":1,"bbox":[860,508,314,30]}
+{"kind":"shape","id":"sh/2ds76l0b","slide":4,"name":"gas-decision-bg","bbox":[72,604,1136,70]}
+{"kind":"shape","id":"sh/pg3610jm","slide":4,"name":"gas-decision-bar","bbox":[72,604,7,70]}
+{"kind":"textbox","id":"sh/4fap8vi1","slide":4,"name":"gas-decision-label","text":"GAS-DETECTION REQUIREMENT","textPreview":"GAS-DETECTION REQUIREMENT","textChars":25,"textLines":1,"bbox":[96,613,280,24]}
+{"kind":"textbox","id":"sh/fq1ov61k","slide":4,"name":"gas-decision-body","text":"Tetapkan mapping Benzena, CO, dan H₂S terhadap output class model sebelum test protocol dibekukan.","textPreview":"Tetapkan mapping Benzena, CO, dan H₂S terhadap output class model sebelum test protocol dibekukan.","textChars":98,"textLines":1,"bbox":[96,636,1084,30]}
+{"kind":"notes","id":"nt/r60y4i","slide":4,"text":"[Sources]\n- memory/blockers_metrics.md §Gate\n- memory/decisions.md dec:30–44\n- Deliverables/JSA_HSE_RU-IV_Cilacap_GLD.md (draft, belum disahkan)"}
+{"kind":"slide","id":"sl/6ffsto","slide":5,"title":"03 · KILANG-SUPPLIED INFRASTRUCTURE","textShapes":25}
+{"kind":"shape","id":"sh/gv2t8zm9","slide":5,"name":"topline-5","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/futczu5o","slide":5,"name":"section-5","text":"03 · KILANG-SUPPLIED INFRASTRUCTURE","textPreview":"03 · KILANG-SUPPLIED INFRASTRUCTURE","textChars":35,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/utkb6p43","slide":5,"name":"title-5","text":"Kilang: server, network, dan operational controls","textPreview":"Kilang: server, network, dan operational controls","textChars":49,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/tsbux4ni","slide":5,"name":"subtitle-5","text":"Baseline sizing berlaku untuk pilot; final sizing mengikuti device count, data rate, retention, dan availability target.","textPreview":"Baseline sizing berlaku untuk pilot; final sizing mengikuti device count, data rate, retention, dan availability target.","textChars":120,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/8r2t4zmx","slide":5,"name":"footer-rule-5","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/7q9cvu5c","slide":5,"name":"footer-5","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/6p0b2p47","slide":5,"name":"page-5","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"textbox","id":"sh/dovu9onm","slide":5,"name":"srv-head","text":"SERVER / VM RU","textPreview":"SERVER / VM RU","textChars":14,"textLines":1,"bbox":[88,214,500,42]}
+{"kind":"textbox","id":"sh/cnmdgjmh","slide":5,"name":"net-head","text":"JARINGAN & OPERASI","textPreview":"JARINGAN & OPERASI","textChars":18,"textLines":1,"bbox":[682,214,500,42]}
+{"kind":"shape","id":"sh/ylwjulo7","slide":5,"name":"dot-88-282","bbox":[88,282,12,12]}
+{"kind":"textbox","id":"sh/z65k3q5s","slide":5,"name":"srv-0-title","text":"Minimum","textPreview":"Minimum","textChars":7,"textLines":1,"bbox":[112,274,476,30]}
+{"kind":"textbox","id":"sh/k7e1wb6d","slide":5,"name":"srv-0-detail","text":"4 vCPU • 8 GB RAM • 100 GB SSD","textPreview":"4 vCPU • 8 GB RAM • 100 GB SSD","textChars":30,"textLines":1,"bbox":[112,304,476,34]}
+{"kind":"shape","id":"sh/l8n25gny","slide":5,"name":"dot-88-356","bbox":[88,356,12,12]}
+{"kind":"textbox","id":"sh/qhcjq1ob","slide":5,"name":"srv-1-title","text":"Rekomendasi","textPreview":"Rekomendasi","textChars":11,"textLines":1,"bbox":[112,348,476,30]}
+{"kind":"textbox","id":"sh/bilkz65w","slide":5,"name":"srv-1-detail","text":"8 vCPU • 16 GB RAM • 250 GB SSD","textPreview":"8 vCPU • 16 GB RAM • 250 GB SSD","textChars":31,"textLines":1,"bbox":[112,378,476,34]}
+{"kind":"shape","id":"sh/cju1sb61","slide":5,"name":"dot-88-430","bbox":[88,430,12,12]}
+{"kind":"textbox","id":"sh/dkn21gnm","slide":5,"name":"srv-2-title","text":"Platform","textPreview":"Platform","textChars":8,"textLines":1,"bbox":[112,422,476,30]}
+{"kind":"textbox","id":"sh/udgj25of","slide":5,"name":"srv-2-detail","text":"Ubuntu Server 22.04 LTS • Docker Compose","textPreview":"Ubuntu Server 22.04 LTS • Docker Compose","textChars":40,"textLines":1,"bbox":[112,452,476,34]}
+{"kind":"shape","id":"sh/vepkba50","slide":5,"name":"dot-88-504","bbox":[88,504,12,12]}
+{"kind":"textbox","id":"sh/76x87yh0","slide":5,"name":"srv-3-title","text":"Antarmuka","textPreview":"Antarmuka","textChars":9,"textLines":1,"bbox":[112,496,476,30]}
+{"kind":"textbox","id":"sh/65o7et0v","slide":5,"name":"srv-3-detail","text":"1 GbE • IP stabil / reservasi DHCP • DNS/NTP","textPreview":"1 GbE • IP stabil / reservasi DHCP • DNS/NTP","textChars":44,"textLines":1,"bbox":[112,526,476,34]}
+{"kind":"shape","id":"sh/t8zq98z6","slide":5,"name":"dot-682-282","bbox":[682,282,12,12]}
+{"kind":"textbox","id":"sh/s76pg3il","slide":5,"name":"kilang-net-0-title","text":"Akses","textPreview":"Akses","textChars":5,"textLines":1,"bbox":[706,274,476,30]}
+{"kind":"textbox","id":"sh/fah8bihc","slide":5,"name":"kilang-net-0-detail","text":"Gateway dan server dapat saling menjangkau pada VLAN yang disetujui","textPreview":"Gateway dan server dapat saling menjangkau pada VLAN yang disetujui","textChars":67,"textLines":1,"bbox":[706,304,476,34]}
+{"kind":"shape","id":"sh/u987id0r","slide":5,"name":"dot-682-356","bbox":[682,356,12,12]}
+{"kind":"textbox","id":"sh/hczqd8zi","slide":5,"name":"kilang-net-1-title","text":"Keamanan","textPreview":"Keamanan","textChars":8,"textLines":1,"bbox":[706,348,476,30]}
+{"kind":"textbox","id":"sh/gbqpk3ix","slide":5,"name":"kilang-net-1-detail","text":"Registrasi MAC, firewall, ACL MQTT, TLS/VPN, akun servis","textPreview":"Registrasi MAC, firewall, ACL MQTT, TLS/VPN, akun servis","textChars":56,"textLines":1,"bbox":[706,378,476,34]}
+{"kind":"shape","id":"sh/3eh8fih8","slide":5,"name":"dot-682-430","bbox":[682,430,12,12]}
+{"kind":"textbox","id":"sh/2d87md0n","slide":5,"name":"kilang-net-2-title","text":"Operasi","textPreview":"Operasi","textChars":7,"textLines":1,"bbox":[706,422,476,30]}
+{"kind":"textbox","id":"sh/03apcne1","slide":5,"name":"kilang-net-2-detail","text":"PIC IT/OT, backup, retensi, monitoring, patching dan incident path","textPreview":"PIC IT/OT, backup, retensi, monitoring, patching dan incident path","textChars":66,"textLines":1,"bbox":[706,452,476,34]}
+{"kind":"shape","id":"sh/14j65sfm","slide":5,"name":"dot-682-504","bbox":[682,504,12,12]}
+{"kind":"textbox","id":"sh/ehs7adwv","slide":5,"name":"kilang-net-3-title","text":"Keputusan","textPreview":"Keputusan","textChars":9,"textLines":1,"bbox":[706,496,476,30]}
+{"kind":"textbox","id":"sh/zi1o3ixg","slide":5,"name":"kilang-net-3-detail","text":"Host/port MQTT produksi; endpoint operator; izin koneksi VPS/HQ","textPreview":"Host/port MQTT produksi; endpoint operator; izin koneksi VPS/HQ","textChars":63,"textLines":1,"bbox":[706,526,476,34]}
+{"kind":"shape","id":"sh/cfap8nyp","slide":5,"name":"kilang-boundary-bg","bbox":[72,590,1136,70]}
+{"kind":"shape","id":"sh/dgj618fa","slide":5,"name":"kilang-boundary-bar","bbox":[72,590,7,70]}
+{"kind":"textbox","id":"sh/qd876dgz","slide":5,"name":"kilang-boundary-label","text":"PRODUCTION PARAMETERS — OPEN","textPreview":"PRODUCTION PARAMETERS — OPEN","textChars":28,"textLines":1,"bbox":[96,599,280,24]}
+{"kind":"textbox","id":"sh/rehozixk","slide":5,"name":"kilang-boundary-body","text":"Port 1884 hanya untuk bench. IT/OT Kilang wajib menetapkan port, certificate chain, DNS/IP, backup, dan retention produksi.","textPreview":"Port 1884 hanya untuk bench. IT/OT Kilang wajib menetapkan port, certificate chain, DNS/IP, backup, dan retention produksi.","textChars":123,"textLines":1,"bbox":[96,622,1084,30]}
+{"kind":"notes","id":"nt/6ffsto","slide":5,"text":"[Sources]\n- https://github.com/fadlurrahmanf/PertaminaGLD/blob/69a493c32d2500134a21e029820cd4addea1794a/server/nodered/README.md\n- https://github.com/RavellerH/gasleakdetectionV2-April/blob/660febbfceaca42ca3147fbf47ca09417bd93490/memory/PRE_INSTALLATION_HANDOFF_2026-08-05.md\n- Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html §08"}
+{"kind":"slide","id":"sl/n8bl9o","slide":6,"title":"04 · DATA FLOW DIAGRAM","textShapes":38}
+{"kind":"shape","id":"sh/i5s3utor","slide":6,"name":"topline-6","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/58jm587i","slide":6,"name":"section-6","text":"04 · DATA FLOW DIAGRAM","textPreview":"04 · DATA FLOW DIAGRAM","textChars":22,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/k7a5w36x","slide":6,"name":"title-6","text":"DFD-01 — akuisisi sensor hingga dashboard RU","textPreview":"DFD-01 — akuisisi sensor hingga dashboard RU","textChars":44,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/v2h4zepg","slide":6,"name":"subtitle-6","text":"Processing dan visualization beroperasi lokal di RU; koneksi VPS tidak menjadi dependency operasi lokal.","textPreview":"Processing dan visualization beroperasi lokal di RU; koneksi VPS tidak menjadi dependency operasi lokal.","textChars":104,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/ah83q9ov","slide":6,"name":"footer-rule-6","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/x4zm1o76","slide":6,"name":"footer-6","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/w3qlsj6l","slide":6,"name":"page-6","text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/fyl4bipk","slide":6,"name":"dfd-0","bbox":[72,214,236,116]}
+{"kind":"textbox","id":"sh/udcn2doz","slide":6,"name":"dfd-n-0","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[88,226,42,24]}
+{"kind":"textbox","id":"sh/gfmdwnut","slide":6,"name":"dfd-t-0","text":"8× MQ","textPreview":"8× MQ","textChars":5,"textLines":1,"bbox":[88,253,204,32]}
+{"kind":"textbox","id":"sh/hgve5sve","slide":6,"name":"dfd-s-0","text":"sampling 1 s","textPreview":"sampling 1 s","textChars":12,"textLines":1,"bbox":[88,289,204,25]}
+{"kind":"textbox","id":"sh/ut4vudcn","slide":6,"name":"dfd-a-0","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[312,249,42,42]}
+{"kind":"shape","id":"sh/fedw3id8","slide":6,"name":"dfd-1","bbox":[358,214,236,116]}
+{"kind":"textbox","id":"sh/sr2dsnuh","slide":6,"name":"dfd-n-1","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[374,226,42,24]}
+{"kind":"textbox","id":"sh/tsve1sv2","slide":6,"name":"dfd-t-1","text":"ESP32-S3","textPreview":"ESP32-S3","textChars":8,"textLines":1,"bbox":[374,253,204,32]}
+{"kind":"textbox","id":"sh/6pkvqdcr","slide":6,"name":"dfd-s-1","text":"AI + confidence","textPreview":"AI + confidence","textChars":15,"textLines":1,"bbox":[374,289,204,25]}
+{"kind":"textbox","id":"sh/7qtwzidw","slide":6,"name":"dfd-a-1","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[598,249,42,42]}
+{"kind":"shape","id":"sh/kn2do3ul","slide":6,"name":"dfd-2","bbox":[644,214,236,116]}
+{"kind":"textbox","id":"sh/5obex8v6","slide":6,"name":"dfd-n-2","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[660,226,42,24]}
+{"kind":"textbox","id":"sh/l8j250ji","slide":6,"name":"dfd-t-2","text":"LoRa STAR","textPreview":"LoRa STAR","textChars":9,"textLines":1,"bbox":[660,253,204,32]}
+{"kind":"textbox","id":"sh/07alcvix","slide":6,"name":"dfd-s-2","text":"AES-GCM frame","textPreview":"AES-GCM frame","textChars":13,"textLines":1,"bbox":[660,289,204,25]}
+{"kind":"textbox","id":"sh/z61k3q1s","slide":6,"name":"dfd-a-2","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[884,249,42,42]}
+{"kind":"shape","id":"sh/y5s3a507","slide":6,"name":"dfd-3","bbox":[930,214,236,116]}
+{"kind":"textbox","id":"sh/d4j210jm","slide":6,"name":"dfd-n-3","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[946,226,42,24]}
+{"kind":"textbox","id":"sh/c3al8vi1","slide":6,"name":"dfd-t-3","text":"CH / MESH","textPreview":"CH / MESH","textChars":9,"textLines":1,"bbox":[946,253,204,32]}
+{"kind":"textbox","id":"sh/r2hkzq1g","slide":6,"name":"dfd-s-3","text":"cache + relay","textPreview":"cache + relay","textChars":13,"textLines":1,"bbox":[946,289,204,25]}
+{"kind":"shape","id":"sh/q1836l0v","slide":6,"name":"dfd-4","bbox":[930,378,236,116]}
+{"kind":"textbox","id":"sh/x03mdkjq","slide":6,"name":"dfd-n-4","text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[946,390,42,24]}
+{"kind":"textbox","id":"sh/wzulkfi5","slide":6,"name":"dfd-t-4","text":"Gateway","textPreview":"Gateway","textChars":7,"textLines":1,"bbox":[946,417,204,32]}
+{"kind":"textbox","id":"sh/ulozyhgn","slide":6,"name":"dfd-s-4","text":"LoRa → MQTT","textPreview":"LoRa → MQTT","textChars":11,"textLines":1,"bbox":[946,453,204,25]}
+{"kind":"textbox","id":"sh/f6x07mh8","slide":6,"name":"dfd-a-4","text":"←","textPreview":"←","textChars":1,"textLines":1,"bbox":[884,413,42,42]}
+{"kind":"shape","id":"sh/g76h0ryt","slide":6,"name":"dfd-5","bbox":[644,378,236,116]}
+{"kind":"textbox","id":"sh/h8fi9wze","slide":6,"name":"dfd-n-5","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[660,390,42,24]}
+{"kind":"textbox","id":"sh/6h4zahgr","slide":6,"name":"dfd-t-5","text":"Node-RED","textPreview":"Node-RED","textChars":8,"textLines":1,"bbox":[660,417,204,32]}
+{"kind":"textbox","id":"sh/7id03mhc","slide":6,"name":"dfd-s-5","text":"decode + validate","textPreview":"decode + validate","textChars":17,"textLines":1,"bbox":[660,453,204,25]}
+{"kind":"textbox","id":"sh/sjmhw7yx","slide":6,"name":"dfd-a-5","text":"←","textPreview":"←","textChars":1,"textLines":1,"bbox":[598,413,42,42]}
+{"kind":"shape","id":"sh/tkfi5cz2","slide":6,"name":"dfd-6","bbox":[358,378,236,116]}
+{"kind":"textbox","id":"sh/qd8j61gv","slide":6,"name":"dfd-n-6","text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[374,390,42,24]}
+{"kind":"textbox","id":"sh/reh0f6hg","slide":6,"name":"dfd-t-6","text":"RU Backend","textPreview":"RU Backend","textChars":10,"textLines":1,"bbox":[374,417,204,32]}
+{"kind":"textbox","id":"sh/b6xwbylw","slide":6,"name":"dfd-s-6","text":"GraphQL + DB","textPreview":"GraphQL + DB","textChars":12,"textLines":1,"bbox":[374,453,204,25]}
+{"kind":"textbox","id":"sh/a5ov2dkb","slide":6,"name":"dfd-a-6","text":"←","textPreview":"←","textChars":1,"textLines":1,"bbox":[312,413,42,42]}
+{"kind":"shape","id":"sh/x8fed832","slide":6,"name":"dfd-7","bbox":[72,378,236,116]}
+{"kind":"textbox","id":"sh/w76x432h","slide":6,"name":"dfd-n-7","text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[88,390,42,24]}
+{"kind":"textbox","id":"sh/n2dw7ylk","slide":6,"name":"dfd-t-7","text":"RU Frontend","textPreview":"RU Frontend","textChars":11,"textLines":1,"bbox":[88,417,204,32]}
+{"kind":"textbox","id":"sh/m14vytkf","slide":6,"name":"dfd-s-7","text":"operator browser","textPreview":"operator browser","textChars":16,"textLines":1,"bbox":[88,453,204,25]}
+{"kind":"textbox","id":"sh/94ve983q","slide":6,"name":"dfd-down","text":"↓","textPreview":"↓","textChars":1,"textLines":1,"bbox":[1110,328,42,45]}
+{"kind":"shape","id":"sh/o3md0325","slide":6,"name":"dfd-gap-bg","bbox":[72,552,1136,70]}
+{"kind":"shape","id":"sh/7yhwjil4","slide":6,"name":"dfd-gap-bar","bbox":[72,552,7,70]}
+{"kind":"textbox","id":"sh/6x8faxkj","slide":6,"name":"dfd-gap-label","text":"NOT IMPLEMENTED","textPreview":"NOT IMPLEMENTED","textChars":15,"textLines":1,"bbox":[96,561,280,24]}
+{"kind":"textbox","id":"sh/4jit4fi1","slide":6,"name":"dfd-gap-body","text":"Adapter MQTT → apps/backend tidak terdapat pada repo aplikasi. Implementasi dan integration test bersifat mandatory.","textPreview":"Adapter MQTT → apps/backend tidak terdapat pada repo aplikasi. Implementasi dan integration test bersifat mandatory.","textChars":116,"textLines":1,"bbox":[96,584,1084,30]}
+{"kind":"notes","id":"nt/n8bl9o","slide":6,"text":"[Sources]\n- https://github.com/fadlurrahmanf/PertaminaGLD/tree/69a493c32d2500134a21e029820cd4addea1794a\n- https://github.com/RavellerH/gasleakdetectionV2-April/blob/660febbfceaca42ca3147fbf47ca09417bd93490/memory/PRE_INSTALLATION_HANDOFF_2026-08-05.md"}
+{"kind":"slide","id":"sl/i74op2","slide":7,"title":"04 · INTERFACE SPECIFICATION","textShapes":22}
+{"kind":"shape","id":"sh/r2hkbmhg","slide":7,"name":"topline-7","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/cnq1kri1","slide":7,"name":"section-7","text":"04 · INTERFACE SPECIFICATION","textPreview":"04 · INTERFACE SPECIFICATION","textChars":28,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/doz2dcz6","slide":7,"name":"title-7","text":"Batas interface: MQTT/Node-RED → backend GraphQL","textPreview":"Batas interface: MQTT/Node-RED → backend GraphQL","textChars":48,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/ep83mh0r","slide":7,"name":"subtitle-7","text":"PertaminaGLD menghasilkan normalized MQTT topics; aplikasi menerima data melalui ingestion adapter.","textPreview":"PertaminaGLD menghasilkan normalized MQTT topics; aplikasi menerima data melalui ingestion adapter.","textChars":99,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/zqhkfmhc","slide":7,"name":"footer-rule-7","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/0rqloryx","slide":7,"name":"footer-7","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/1sz2hwzi","slide":7,"name":"page-7","text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/ut4jax0n","slide":7,"name":"bound-left","bbox":[72,214,520,316]}
+{"kind":"shape","id":"sh/fuxk32h8","slide":7,"name":"bound-right","bbox":[688,214,520,316]}
+{"kind":"textbox","id":"sh/v6dkv2lw","slide":7,"name":"bound-lh","text":"PertaminaGLD","textPreview":"PertaminaGLD","textChars":12,"textLines":1,"bbox":[98,235,460,38]}
+{"kind":"textbox","id":"sh/a543mhkb","slide":7,"name":"bound-rh","text":"gasleakdetectionV2-April","textPreview":"gasleakdetectionV2-April","textChars":24,"textLines":1,"bbox":[714,235,460,38]}
+{"kind":"shape","id":"sh/x8v2xcj2","slide":7,"name":"dot-100-300","bbox":[100,300,12,12]}
+{"kind":"textbox","id":"sh/w7mlo72h","slide":7,"name":"bound-l-0-title","text":"Input","textPreview":"Input","textChars":5,"textLines":1,"bbox":[124,292,426,30]}
+{"kind":"textbox","id":"sh/n2dkr2lk","slide":7,"name":"bound-l-0-detail","text":"gld/gateway/uplink • raw • pertamina/gld/uplink","textPreview":"gld/gateway/uplink • raw • pertamina/gld/uplink","textChars":47,"textLines":1,"bbox":[124,322,426,34]}
+{"kind":"shape","id":"sh/mh4jixkf","slide":7,"name":"dot-100-376","bbox":[100,376,12,12]}
+{"kind":"textbox","id":"sh/94v2tc3q","slide":7,"name":"bound-l-1-title","text":"Proses","textPreview":"Proses","textChars":6,"textLines":1,"bbox":[124,368,426,30]}
+{"kind":"textbox","id":"sh/83mlk725","slide":7,"name":"bound-l-1-detail","text":"decrypt • integrity • replay • topology","textPreview":"decrypt • integrity • replay • topology","textChars":39,"textLines":1,"bbox":[124,398,426,34]}
+{"kind":"shape","id":"sh/zetknilo","slide":7,"name":"dot-100-452","bbox":[100,452,12,12]}
+{"kind":"textbox","id":"sh/ydkjexk3","slide":7,"name":"bound-l-2-title","text":"Output","textPreview":"Output","textChars":6,"textLines":1,"bbox":[124,444,426,30]}
+{"kind":"textbox","id":"sh/29036d4v","slide":7,"name":"bound-l-2-detail","text":"decoded • alarm • status • events • integrity","textPreview":"decoded • alarm • status • events • integrity","textChars":45,"textLines":1,"bbox":[124,474,426,34]}
+{"kind":"shape","id":"sh/3at4zi5g","slide":7,"name":"dot-716-300","bbox":[716,300,12,12]}
+{"kind":"textbox","id":"sh/ob2l8nm1","slide":7,"name":"bound-r-0-title","text":"Input wajib","textPreview":"Input wajib","textChars":11,"textLines":1,"bbox":[740,292,426,30]}
+{"kind":"textbox","id":"sh/pcbm1snm","slide":7,"name":"bound-r-0-detail","text":"adapter mengubah MQTT normalized → addReading/device","textPreview":"adapter mengubah MQTT normalized → addReading/device","textChars":52,"textLines":1,"bbox":[740,322,426,34]}
+{"kind":"shape","id":"sh/qdk3ax47","slide":7,"name":"dot-716-376","bbox":[716,376,12,12]}
+{"kind":"textbox","id":"sh/bet4325s","slide":7,"name":"bound-r-1-title","text":"Layanan","textPreview":"Layanan","textChars":7,"textLines":1,"bbox":[740,368,426,30]}
+{"kind":"textbox","id":"sh/cf2lc7md","slide":7,"name":"bound-r-1-detail","text":"NestJS GraphQL • Prisma • database RU","textPreview":"NestJS GraphQL • Prisma • database RU","textChars":37,"textLines":1,"bbox":[740,398,426,34]}
+{"kind":"shape","id":"sh/d0bm5cni","slide":7,"name":"dot-716-452","bbox":[716,452,12,12]}
+{"kind":"textbox","id":"sh/y1k3ex43","slide":7,"name":"bound-r-2-title","text":"Konsumen","textPreview":"Konsumen","textChars":8,"textLines":1,"bbox":[740,444,426,30]}
+{"kind":"textbox","id":"sh/z2d4725o","slide":7,"name":"bound-r-2-detail","text":"Next.js dashboard • map • alerts • analytics","textPreview":"Next.js dashboard • map • alerts • analytics","textChars":44,"textLines":1,"bbox":[740,474,426,34]}
+{"kind":"textbox","id":"sh/9wf6xw7q","slide":7,"name":"bound-arrow","text":"MQTT NORMALIZED  →","textPreview":"MQTT NORMALIZED  →","textChars":18,"textLines":1,"bbox":[566,338,150,62]}
+{"kind":"shape","id":"sh/8v654b6l","slide":7,"name":"contract-bg","bbox":[72,566,1136,70]}
+{"kind":"shape","id":"sh/nuxov6p0","slide":7,"name":"contract-bar","bbox":[72,566,7,70]}
+{"kind":"textbox","id":"sh/m9on21of","slide":7,"name":"contract-label","text":"MANDATORY DATA CONTRACT","textPreview":"MANDATORY DATA CONTRACT","textChars":23,"textLines":1,"bbox":[96,575,280,24]}
+{"kind":"textbox","id":"sh/x0f61g72","slide":7,"name":"contract-body","text":"deviceId • timestamp • gasClass/aiClass • confidence • battery • network/health • messageId untuk deduplication.","textPreview":"deviceId • timestamp • gasClass/aiClass • confidence • battery • network/health • messageId untuk deduplication.","textChars":112,"textLines":1,"bbox":[96,598,1084,30]}
+{"kind":"notes","id":"nt/i74op2","slide":7,"text":"[Sources]\n- https://github.com/fadlurrahmanf/PertaminaGLD/blob/69a493c32d2500134a21e029820cd4addea1794a/server/nodered/README.md\n- https://github.com/RavellerH/gasleakdetectionV2-April/tree/660febbfceaca42ca3147fbf47ca09417bd93490/apps/backend"}
+{"kind":"slide","id":"sl/yuaaut","slide":8,"title":"05 · APPLICATION SPECIFICATION","textShapes":23}
+{"kind":"shape","id":"sh/dkzqh4zy","slide":8,"name":"topline-8","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/qh8rmpg7","slide":8,"name":"section-8","text":"05 · APPLICATION SPECIFICATION","textPreview":"05 · APPLICATION SPECIFICATION","textChars":30,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/rih8fuhs","slide":8,"name":"title-8","text":"Frontend — RU operator UI dan HQ read-only UI","textPreview":"Frontend — RU operator UI dan HQ read-only UI","textChars":45,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/4fqpkfy1","slide":8,"name":"subtitle-8","text":"IMPLEMENTED: Next.js client dengan GraphQL polling. GraphQL subscription tidak diimplementasikan.","textPreview":"IMPLEMENTED: Next.js client dengan GraphQL polling. GraphQL subscription tidak diimplementasikan.","textChars":97,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/pgzqdkzm","slide":8,"name":"footer-rule-8","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/2t87ipgb","slide":8,"name":"footer-8","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/3eh8buhw","slide":8,"name":"page-8","text":"8","textPreview":"8","textChars":1,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/gr6pgfy5","slide":8,"name":"fe-bg-0","bbox":[72,208,528,78]}
+{"kind":"textbox","id":"sh/hsfq9kzq","slide":8,"name":"fe-k-0","text":"FRAMEWORK","textPreview":"FRAMEWORK","textChars":9,"textLines":1,"bbox":[90,218,150,22]}
+{"kind":"textbox","id":"sh/h07mh4ra","slide":8,"name":"fe-v-0","text":"Next.js 15 • React 18 • TypeScript","textPreview":"Next.js 15 • React 18 • TypeScript","textChars":34,"textLines":1,"bbox":[90,243,492,31]}
+{"kind":"shape","id":"sh/wfy5ozqp","slide":8,"name":"fe-bg-1","bbox":[640,208,528,78]}
+{"kind":"textbox","id":"sh/vep4fu94","slide":8,"name":"fe-k-1","text":"VISUALISASI","textPreview":"VISUALISASI","textChars":11,"textLines":1,"bbox":[658,218,150,22]}
+{"kind":"textbox","id":"sh/udg3mp8j","slide":8,"name":"fe-v-1","text":"Mapbox GL • Recharts • Tailwind CSS","textPreview":"Mapbox GL • Recharts • Tailwind CSS","textChars":35,"textLines":1,"bbox":[658,243,492,31]}
+{"kind":"shape","id":"sh/9c7mdkre","slide":8,"name":"fe-bg-2","bbox":[72,304,528,78]}
+{"kind":"textbox","id":"sh/8belkfqt","slide":8,"name":"fe-k-2","text":"DATA ACCESS","textPreview":"DATA ACCESS","textChars":11,"textLines":1,"bbox":[90,314,150,22]}
+{"kind":"textbox","id":"sh/7a54ba98","slide":8,"name":"fe-v-2","text":"GraphQL Request → endpoint RU :4000/graphql","textPreview":"GraphQL Request → endpoint RU :4000/graphql","textChars":43,"textLines":1,"bbox":[90,339,492,31]}
+{"kind":"shape","id":"sh/m9w3ip8n","slide":8,"name":"fe-bg-3","bbox":[640,304,528,78]}
+{"kind":"textbox","id":"sh/l8nm9kr2","slide":8,"name":"fe-k-3","text":"REFRESH","textPreview":"REFRESH","textChars":7,"textLines":1,"bbox":[658,314,150,22]}
+{"kind":"textbox","id":"sh/k7elgfqh","slide":8,"name":"fe-v-3","text":"Polling berkala; default setting 10 detik","textPreview":"Polling berkala; default setting 10 detik","textChars":41,"textLines":1,"bbox":[658,339,492,31]}
+{"kind":"shape","id":"sh/cri5wfyd","slide":8,"name":"fe-bg-4","bbox":[72,400,528,78]}
+{"kind":"textbox","id":"sh/dsrmpkzy","slide":8,"name":"fe-k-4","text":"MODUL","textPreview":"MODUL","textChars":5,"textLines":1,"bbox":[90,410,150,22]}
+{"kind":"textbox","id":"sh/qp0nu5g7","slide":8,"name":"fe-v-4","text":"Overview • Devices • Map • Alerts • Events","textPreview":"Overview • Devices • Map • Alerts • Events","textChars":42,"textLines":1,"bbox":[90,435,492,31]}
+{"kind":"shape","id":"sh/bq94nahs","slide":8,"name":"fe-bg-5","bbox":[640,400,528,78]}
+{"kind":"textbox","id":"sh/onylsfyh","slide":8,"name":"fe-k-5","text":"ANALITIK","textPreview":"ANALITIK","textChars":8,"textLines":1,"bbox":[658,410,150,22]}
+{"kind":"textbox","id":"sh/po7ml0z2","slide":8,"name":"fe-v-5","text":"Timeline sensor • confidence • status perangkat","textPreview":"Timeline sensor • confidence • status perangkat","textChars":47,"textLines":1,"bbox":[658,435,492,31]}
+{"kind":"shape","id":"sh/2lg3q5gb","slide":8,"name":"fe-bg-6","bbox":[72,496,528,78]}
+{"kind":"textbox","id":"sh/3mp4jahw","slide":8,"name":"fe-k-6","text":"MODE RU","textPreview":"MODE RU","textChars":7,"textLines":1,"bbox":[90,506,150,22]}
+{"kind":"textbox","id":"sh/8j254zyl","slide":8,"name":"fe-v-6","text":"Operasional lokal termasuk menu admin/settings","textPreview":"Operasional lokal termasuk menu admin/settings","textChars":46,"textLines":1,"bbox":[90,531,492,31]}
+{"kind":"shape","id":"sh/9kbmx4z6","slide":8,"name":"fe-bg-7","bbox":[640,496,528,78]}
+{"kind":"textbox","id":"sh/jed83y18","slide":8,"name":"fe-k-7","text":"MODE HQ","textPreview":"MODE HQ","textChars":7,"textLines":1,"bbox":[658,506,150,22]}
+{"kind":"textbox","id":"sh/id47ut0n","slide":8,"name":"fe-v-7","text":"Read-only; mutation dan settings disembunyikan","textPreview":"Read-only; mutation dan settings disembunyikan","textChars":46,"textLines":1,"bbox":[658,531,492,31]}
+{"kind":"shape","id":"sh/5gfq58je","slide":8,"name":"fe-deploy-bg","bbox":[72,604,1136,70]}
+{"kind":"shape","id":"sh/kfmpw3it","slide":8,"name":"fe-deploy-bar","bbox":[72,604,7,70]}
+{"kind":"textbox","id":"sh/7ix87i1k","slide":8,"name":"fe-deploy-label","text":"KILANG-SUPPLIED ACCESS","textPreview":"KILANG-SUPPLIED ACCESS","textChars":22,"textLines":1,"bbox":[96,613,280,24]}
+{"kind":"textbox","id":"sh/6ho7yd0z","slide":8,"name":"fe-deploy-body","text":"Kilang menetapkan internal URL, DNS/IP, TLS certificate, identity/access policy, operator workstation, dan availability target.","textPreview":"Kilang menetapkan internal URL, DNS/IP, TLS certificate, identity/access policy, operator workstation, dan availability target.","textChars":127,"textLines":1,"bbox":[96,636,1084,30]}
+{"kind":"notes","id":"nt/yuaaut","slide":8,"text":"[Sources]\n- https://github.com/RavellerH/gasleakdetectionV2-April/tree/660febbfceaca42ca3147fbf47ca09417bd93490/apps/frontend\n- https://github.com/RavellerH/gasleakdetectionV2-April/tree/660febbfceaca42ca3147fbf47ca09417bd93490/apps/ru-frontend"}
+{"kind":"slide","id":"sl/vwuejs","slide":9,"title":"05 · APPLICATION SPECIFICATION","textShapes":23}
+{"kind":"shape","id":"sh/ovmp0rap","slide":9,"name":"topline-9","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/3udorm94","slide":9,"name":"section-9","text":"05 · APPLICATION SPECIFICATION","textPreview":"05 · APPLICATION SPECIFICATION","textChars":30,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/2t47yhsj","slide":9,"name":"title-9","text":"Backend: ingestion, storage, dan API GraphQL","textPreview":"Backend: ingestion, storage, dan API GraphQL","textChars":44,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/d0fqxwr6","slide":9,"name":"subtitle-9","text":"IMPLEMENTED RU: SQLite. PostgreSQL/TimescaleDB belum menjadi production baseline yang disetujui.","textPreview":"IMPLEMENTED RU: SQLite. PostgreSQL/TimescaleDB belum menjadi production baseline yang disetujui.","textChars":96,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/cz6p4bal","slide":9,"name":"footer-rule-9","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/byxov690","slide":9,"name":"footer-9","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/qxo721sf","slide":9,"name":"page-9","text":"9","textPreview":"9","textChars":1,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/t4v6lcb2","slide":9,"name":"be-bg-0","bbox":[72,208,528,78]}
+{"kind":"textbox","id":"sh/s32ps7ah","slide":9,"name":"be-k-0","text":"RUNTIME/API","textPreview":"RUNTIME/API","textChars":11,"textLines":1,"bbox":[90,218,150,22]}
+{"kind":"textbox","id":"sh/i5o7edc7","slide":9,"name":"be-v-0","text":"Node.js • NestJS • Apollo GraphQL • port 4000","textPreview":"Node.js • NestJS • Apollo GraphQL • port 4000","textChars":45,"textLines":1,"bbox":[90,242,492,34]}
+{"kind":"shape","id":"sh/36xo7its","slide":9,"name":"be-bg-1","bbox":[640,208,528,78]}
+{"kind":"textbox","id":"sh/476pgnud","slide":9,"name":"be-k-1","text":"DATA LAYER","textPreview":"DATA LAYER","textChars":10,"textLines":1,"bbox":[658,218,150,22]}
+{"kind":"textbox","id":"sh/58f698by","slide":9,"name":"be-v-1","text":"Prisma ORM • current RU schema: SQLite file-based","textPreview":"Prisma ORM • current RU schema: SQLite file-based","textChars":49,"textLines":1,"bbox":[658,242,492,34]}
+{"kind":"shape","id":"sh/q9o7idcj","slide":9,"name":"be-bg-2","bbox":[72,304,528,78]}
+{"kind":"textbox","id":"sh/rax8bit4","slide":9,"name":"be-k-2","text":"CORE ENTITIES","textPreview":"CORE ENTITIES","textChars":13,"textLines":1,"bbox":[90,314,150,22]}
+{"kind":"textbox","id":"sh/sb6pknu9","slide":9,"name":"be-v-2","text":"Device • GasReading • SystemSettings • EventLog • User","textPreview":"Device • GasReading • SystemSettings • EventLog • User","textChars":54,"textLines":1,"bbox":[90,338,492,34]}
+{"kind":"shape","id":"sh/dczqdsbu","slide":9,"name":"be-bg-3","bbox":[640,304,528,78]}
+{"kind":"textbox","id":"sh/ed87mxcf","slide":9,"name":"be-k-3","text":"INGESTION","textPreview":"INGESTION","textChars":9,"textLines":1,"bbox":[658,314,150,22]}
+{"kind":"textbox","id":"sh/feh8f2t0","slide":9,"name":"be-v-3","text":"addReading validates confidence 0–1 and derives LOW/MIDDLE/HIGH","textPreview":"addReading validates confidence 0–1 and derives LOW/MIDDLE/HIGH","textChars":63,"textLines":1,"bbox":[658,338,492,34]}
+{"kind":"shape","id":"sh/biho3298","slide":9,"name":"be-bg-4","bbox":[72,400,528,78]}
+{"kind":"textbox","id":"sh/ah8nax8n","slide":9,"name":"be-k-4","text":"ALERT LOGIC","textPreview":"ALERT LOGIC","textChars":11,"textLines":1,"bbox":[90,410,150,22]}
+{"kind":"textbox","id":"sh/x4j65cry","slide":9,"name":"be-v-4","text":"Threshold default warning 0.70 • critical 0.80 • dedup 15 menit","textPreview":"Threshold default warning 0.70 • critical 0.80 • dedup 15 menit","textChars":63,"textLines":1,"bbox":[90,434,492,34]}
+{"kind":"shape","id":"sh/c3apc7qt","slide":9,"name":"be-bg-5","bbox":[640,400,528,78]}
+{"kind":"textbox","id":"sh/nehozi9w","slide":9,"name":"be-k-5","text":"API","textPreview":"API","textChars":3,"textLines":1,"bbox":[658,410,150,22]}
+{"kind":"textbox","id":"sh/2d8n6d8b","slide":9,"name":"be-v-5","text":"dashboard • devices • timeline • events • analytics • gatewayPull","textPreview":"dashboard • devices • timeline • events • analytics • gatewayPull","textChars":65,"textLines":1,"bbox":[658,434,492,34]}
+{"kind":"shape","id":"sh/pgz61sr2","slide":9,"name":"be-bg-6","bbox":[72,496,528,78]}
+{"kind":"textbox","id":"sh/ofq58nqh","slide":9,"name":"be-k-6","text":"SECURITY STATE","textPreview":"SECURITY STATE","textChars":14,"textLines":1,"bbox":[90,506,150,22]}
+{"kind":"textbox","id":"sh/faxovi90","slide":9,"name":"be-v-6","text":"Production hides playground/introspection; CORS still broad","textPreview":"Production hides playground/introspection; CORS still broad","textChars":59,"textLines":1,"bbox":[90,530,492,34]}
+{"kind":"shape","id":"sh/e9on2dsf","slide":9,"name":"be-bg-7","bbox":[640,496,528,78]}
+{"kind":"textbox","id":"sh/4fmlwj6d","slide":9,"name":"be-k-7","text":"OPEN ITEM","textPreview":"OPEN ITEM","textChars":9,"textLines":1,"bbox":[658,506,150,22]}
+{"kind":"textbox","id":"sh/5gvm5o7y","slide":9,"name":"be-v-7","text":"MQTT adapter, backup/retention RU, auth/TLS and hardening","textPreview":"MQTT adapter, backup/retention RU, auth/TLS and hardening","textChars":57,"textLines":1,"bbox":[658,530,492,34]}
+{"kind":"shape","id":"sh/id43u9o7","slide":9,"name":"be-db-bg","bbox":[72,604,1136,70]}
+{"kind":"shape","id":"sh/3edk3eps","slide":9,"name":"be-db-bar","bbox":[72,604,7,70]}
+{"kind":"textbox","id":"sh/sjml0j69","slide":9,"name":"be-db-label","text":"DATABASE BASELINE — OPEN","textPreview":"DATABASE BASELINE — OPEN","textChars":24,"textLines":1,"bbox":[96,613,280,24]}
+{"kind":"textbox","id":"sh/dkfm9o7u","slide":9,"name":"be-db-body","text":"Tetapkan SQLite untuk pilot atau migrasi PostgreSQL. Keputusan wajib mencakup sizing, backup, retention, HA, dan recovery objective.","textPreview":"Tetapkan SQLite untuk pilot atau migrasi PostgreSQL. Keputusan wajib mencakup sizing, backup, retention, HA, dan recovery objective.","textChars":132,"textLines":1,"bbox":[96,636,1084,30]}
+{"kind":"notes","id":"nt/vwuejs","slide":9,"text":"[Sources]\n- https://github.com/RavellerH/gasleakdetectionV2-April/tree/660febbfceaca42ca3147fbf47ca09417bd93490/apps/backend\n- https://github.com/RavellerH/gasleakdetectionV2-April/blob/660febbfceaca42ca3147fbf47ca09417bd93490/apps/backend/prisma/schema.prisma"}
+{"kind":"slide","id":"sl/e8yubj","slide":10,"title":"06 · INTER-SITE INTEGRATION","textShapes":26}
+{"kind":"shape","id":"sh/n2pk3yxk","slide":10,"name":"topline-10","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/83y1c3y5","slide":10,"name":"section-10","text":"06 · INTER-SITE INTEGRATION","textPreview":"06 · INTER-SITE INTEGRATION","textChars":27,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/94725ofa","slide":10,"name":"title-10","text":"DFD-02: RU → VPS/HQ (NOT COMMISSIONED)","textPreview":"DFD-02: RU → VPS/HQ (NOT COMMISSIONED)","textChars":38,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/yxwj69gn","slide":10,"name":"subtitle-10","text":"RU beroperasi mandiri; VPS menarik data read-only melalui VPN. Remote actuation tidak termasuk scope fase ini.","textPreview":"RU beroperasi mandiri; VPS menarik data read-only melalui VPN. Remote actuation tidak termasuk scope fase ini.","textChars":110,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/zy50zex8","slide":10,"name":"footer-rule-10","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/0ze18jyt","slide":10,"name":"footer-10","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/l0ni1ofe","slide":10,"name":"page-10","text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/itgjidg7","slide":10,"name":"arch-0","bbox":[72,230,154,110]}
+{"kind":"textbox","id":"sh/ju9kbixs","slide":10,"name":"arch-t-0","text":"RU Backend","textPreview":"RU Backend","textChars":10,"textLines":1,"bbox":[86,247,126,32]}
+{"kind":"textbox","id":"sh/j2t8jap4","slide":10,"name":"arch-s-0","text":"SQLite lokal","textPreview":"SQLite lokal","textChars":12,"textLines":1,"bbox":[82,286,134,34]}
+{"kind":"textbox","id":"sh/i1k7q58j","slide":10,"name":"arch-a-0","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[226,258,36,46]}
+{"kind":"shape","id":"sh/54bqlk7a","slide":10,"name":"arch-1","bbox":[262,230,154,110]}
+{"kind":"textbox","id":"sh/432psfqp","slide":10,"name":"arch-t-1","text":"gatewayPull","textPreview":"gatewayPull","textChars":11,"textLines":1,"bbox":[276,247,126,32]}
+{"kind":"textbox","id":"sh/r6t8nap0","slide":10,"name":"arch-s-1","text":"GraphQL + auth","textPreview":"GraphQL + auth","textChars":14,"textLines":1,"bbox":[272,286,134,34]}
+{"kind":"textbox","id":"sh/65k7u58f","slide":10,"name":"arch-a-1","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[416,258,36,46]}
+{"kind":"shape","id":"sh/t8vqpk76","slide":10,"name":"arch-2","bbox":[452,230,154,110]}
+{"kind":"textbox","id":"sh/s72pwfql","slide":10,"name":"arch-t-2","text":"VPN","textPreview":"VPN","textChars":3,"textLines":1,"bbox":[466,247,126,32]}
+{"kind":"textbox","id":"sh/fad8rupc","slide":10,"name":"arch-s-2","text":"private route","textPreview":"private route","textChars":13,"textLines":1,"bbox":[462,286,134,34]}
+{"kind":"textbox","id":"sh/e94ryp8r","slide":10,"name":"arch-a-2","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[606,258,36,46]}
+{"kind":"shape","id":"sh/qpobqtsz","slide":10,"name":"arch-3","bbox":[642,230,154,110]}
+{"kind":"textbox","id":"sh/bqxsjy9k","slide":10,"name":"arch-t-3","text":"Gateway VPS","textPreview":"Gateway VPS","textChars":11,"textLines":1,"bbox":[656,247,126,32]}
+{"kind":"textbox","id":"sh/crqts3a5","slide":10,"name":"arch-s-3","text":"pull tiap 30 s","textPreview":"pull tiap 30 s","textChars":14,"textLines":1,"bbox":[652,286,134,34]}
+{"kind":"textbox","id":"sh/dszal8ra","slide":10,"name":"arch-a-3","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[796,258,36,46]}
+{"kind":"shape","id":"sh/21obm9sn","slide":10,"name":"arch-4","bbox":[832,230,154,110]}
+{"kind":"textbox","id":"sh/32xsfe98","slide":10,"name":"arch-t-4","text":"PostgreSQL","textPreview":"PostgreSQL","textChars":10,"textLines":1,"bbox":[846,247,126,32]}
+{"kind":"textbox","id":"sh/o36tojat","slide":10,"name":"arch-s-4","text":"7 / 90 hari","textPreview":"7 / 90 hari","textChars":11,"textLines":1,"bbox":[842,286,134,34]}
+{"kind":"textbox","id":"sh/p4fahore","slide":10,"name":"arch-a-4","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[986,258,36,46]}
+{"kind":"shape","id":"sh/mx8byds7","slide":10,"name":"arch-5","bbox":[1022,230,154,110]}
+{"kind":"textbox","id":"sh/nyhcri9s","slide":10,"name":"arch-t-5","text":"HQ Frontend","textPreview":"HQ Frontend","textChars":11,"textLines":1,"bbox":[1036,247,126,32]}
+{"kind":"textbox","id":"sh/hs3excbu","slide":10,"name":"arch-s-5","text":"read-only","textPreview":"read-only","textChars":9,"textLines":1,"bbox":[1032,286,134,34]}
+{"kind":"shape","id":"sh/wrudo7u9","slide":10,"name":"push-proof-bg","bbox":[72,392,1136,70]}
+{"kind":"shape","id":"sh/vqlwv2to","slide":10,"name":"push-proof-bar","bbox":[72,392,7,70]}
+{"kind":"textbox","id":"sh/upsvmxc3","slide":10,"name":"push-proof-label","text":"VPS RETENTION TARGET","textPreview":"VPS RETENTION TARGET","textChars":20,"textLines":1,"bbox":[96,401,280,24]}
+{"kind":"textbox","id":"sh/9ojetsbi","slide":10,"name":"push-proof-body","text":"Reading dan non-critical event: 7 hari. Critical event: 90 hari. Final retention policy memerlukan approval Kilang.","textPreview":"Reading dan non-critical event: 7 hari. Critical event: 90 hari. Final retention policy memerlukan approval Kilang.","textChars":115,"textLines":1,"bbox":[96,424,1084,30]}
+{"kind":"shape","id":"sh/8nadk7ud","slide":10,"name":"ai-proof-bg","bbox":[72,482,1136,70]}
+{"kind":"shape","id":"sh/nm1wr2ts","slide":10,"name":"ai-proof-bar","bbox":[72,482,7,70]}
+{"kind":"textbox","id":"sh/mlsvixc7","slide":10,"name":"ai-proof-label","text":"NOT COMMISSIONED","textPreview":"NOT COMMISSIONED","textChars":16,"textLines":1,"bbox":[96,491,280,24]}
+{"kind":"textbox","id":"sh/tkne5wb2","slide":10,"name":"ai-proof-body","text":"Gateway service tersedia di repo. Production deployment, VPN, credential, DNS, backup, dan monitoring belum diverifikasi.","textPreview":"Gateway service tersedia di repo. Production deployment, VPN, credential, DNS, backup, dan monitoring belum diverifikasi.","textChars":121,"textLines":1,"bbox":[96,514,1084,30]}
+{"kind":"notes","id":"nt/e8yubj","slide":10,"text":"[Sources]\n- https://github.com/RavellerH/gasleakdetectionV2-April/tree/660febbfceaca42ca3147fbf47ca09417bd93490/apps/gateway\n- https://github.com/RavellerH/gasleakdetectionV2-April/blob/660febbfceaca42ca3147fbf47ca09417bd93490/memory/PRE_INSTALLATION_HANDOFF_2026-08-05.md"}
+{"kind":"slide","id":"sl/1xpp5f","slide":11,"title":"07 · FIELD DEVICE SPECIFICATION","textShapes":24}
+{"kind":"shape","id":"sh/4n6hs3qp","slide":11,"name":"topline-11","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/jmxgzy94","slide":11,"name":"section-11","text":"07 · FIELD DEVICE SPECIFICATION","textPreview":"07 · FIELD DEVICE SPECIFICATION","textChars":31,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/ilozqt8j","slide":11,"name":"title-11","text":"GLD Node: hardware, firmware, dan telemetri","textPreview":"GLD Node: hardware, firmware, dan telemetri","textChars":43,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/dsfy5sr6","slide":11,"name":"subtitle-11","text":"Firmware v0.8.14 • 8-channel MQ acquisition • on-device inference • 24 VDC ≥2 A.","textPreview":"Firmware v0.8.14 • 8-channel MQ acquisition • on-device inference • 24 VDC ≥2 A.","textChars":80,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/sr6hwnq1","slide":11,"name":"footer-rule-11","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/rqxg3i9g","slide":11,"name":"footer-11","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/6pozud8v","slide":11,"name":"page-11","text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/9wvytor2","slide":11,"name":"gld-0-bg","bbox":[72,218,338,108]}
+{"kind":"textbox","id":"sh/8vmxkjqh","slide":11,"name":"gld-0-label","text":"MCU","textPreview":"MCU","textChars":3,"textLines":1,"bbox":[90,230,302,24]}
+{"kind":"textbox","id":"sh/e9cf6pk3","slide":11,"name":"gld-0-value","text":"ESP32-S3-WROOM-1U-N16R8","textPreview":"ESP32-S3-WROOM-1U-N16R8","textChars":23,"textLines":1,"bbox":[90,257,302,54]}
+{"kind":"shape","id":"sh/falgzu18","slide":11,"name":"gld-1-bg","bbox":[454,218,338,108]}
+{"kind":"textbox","id":"sh/0bex8z2t","slide":11,"name":"gld-1-label","text":"ADC","textPreview":"ADC","textChars":3,"textLines":1,"bbox":[472,230,302,24]}
+{"kind":"textbox","id":"sh/1cny14je","slide":11,"name":"gld-1-value","text":"ADS1256, 24-bit","textPreview":"ADS1256, 24-bit","textChars":15,"textLines":1,"bbox":[472,257,302,54]}
+{"kind":"shape","id":"sh/2xwfa9kz","slide":11,"name":"gld-2-bg","bbox":[836,218,338,108]}
+{"kind":"textbox","id":"sh/ny5g3e1k","slide":11,"name":"gld-2-label","text":"SENSOR","textPreview":"SENSOR","textChars":6,"textLines":1,"bbox":[854,230,302,24]}
+{"kind":"textbox","id":"sh/ozexcj25","slide":11,"name":"gld-2-value","text":"8 × MQ","textPreview":"8 × MQ","textChars":6,"textLines":1,"bbox":[854,257,302,54]}
+{"kind":"shape","id":"sh/p0ny54jq","slide":11,"name":"gld-3-bg","bbox":[72,342,338,108]}
+{"kind":"textbox","id":"sh/a1wze9kv","slide":11,"name":"gld-3-label","text":"TELEMETRI","textPreview":"TELEMETRI","textChars":9,"textLines":1,"bbox":[90,354,302,24]}
+{"kind":"textbox","id":"sh/b25g7e1g","slide":11,"name":"gld-3-value","text":"LoRa tiap 10 detik","textPreview":"LoRa tiap 10 detik","textChars":18,"textLines":1,"bbox":[90,381,302,54]}
+{"kind":"shape","id":"sh/76pwveho","slide":11,"name":"gld-4-bg","bbox":[454,342,338,108]}
+{"kind":"textbox","id":"sh/m5gfm9g3","slide":11,"name":"gld-4-label","text":"ALARM","textPreview":"ALARM","textChars":5,"textLines":1,"bbox":[472,354,302,24]}
+{"kind":"textbox","id":"sh/987exozu","slide":11,"name":"gld-4-value","text":"gasClass ≠ 0; confidence ≥30%","textPreview":"gasClass ≠ 0; confidence ≥30%","textChars":29,"textLines":1,"bbox":[472,381,302,54]}
+{"kind":"shape","id":"sh/87yxojy9","slide":11,"name":"gld-5-bg","bbox":[836,342,338,108]}
+{"kind":"textbox","id":"sh/z2pwrehs","slide":11,"name":"gld-5-label","text":"KEAMANAN FRAME","textPreview":"KEAMANAN FRAME","textChars":14,"textLines":1,"bbox":[854,354,302,24]}
+{"kind":"textbox","id":"sh/y1wfi907","slide":11,"name":"gld-5-value","text":"AES-128-GCM, 39 byte","textPreview":"AES-128-GCM, 39 byte","textChars":20,"textLines":1,"bbox":[854,381,302,54]}
+{"kind":"shape","id":"sh/l47etozi","slide":11,"name":"gld-6-bg","bbox":[72,466,338,108]}
+{"kind":"textbox","id":"sh/k3yxkjyx","slide":11,"name":"gld-6-label","text":"AI","textPreview":"AI","textChars":2,"textLines":1,"bbox":[90,478,302,24]}
+{"kind":"textbox","id":"sh/be5wnuhg","slide":11,"name":"gld-6-value","text":"CNN Dual-Branch, int8","textPreview":"CNN Dual-Branch, int8","textChars":21,"textLines":1,"bbox":[90,505,302,54]}
+{"kind":"shape","id":"sh/adwfep0v","slide":11,"name":"gld-7-bg","bbox":[454,466,338,108]}
+{"kind":"textbox","id":"sh/0jutovet","slide":11,"name":"gld-7-label","text":"CATU DAYA","textPreview":"CATU DAYA","textChars":9,"textLines":1,"bbox":[472,478,302,24]}
+{"kind":"textbox","id":"sh/1k3ux0fe","slide":11,"name":"gld-7-value","text":"24VDC ≥2A per unit","textPreview":"24VDC ≥2A per unit","textChars":18,"textLines":1,"bbox":[472,505,302,54]}
+{"kind":"shape","id":"sh/ehsbmlgn","slide":11,"name":"gld-8-bg","bbox":[836,466,338,108]}
+{"kind":"textbox","id":"sh/fi1cvqx8","slide":11,"name":"gld-8-label","text":"MOUNTING","textPreview":"MOUNTING","textChars":8,"textLines":1,"bbox":[854,478,302,24]}
+{"kind":"textbox","id":"sh/o7udsfep","slide":11,"name":"gld-8-value","text":"L-bracket referensi Emerson","textPreview":"L-bracket referensi Emerson","textChars":27,"textLines":1,"bbox":[854,505,302,54]}
+{"kind":"textbox","id":"sh/p83u1kfa","slide":11,"name":"gld-caveat","text":"* 99,20% berasal dari laporan model int8. On-device execution memerlukan traceability ke firmware commit dan binary release.","textPreview":"* 99,20% berasal dari laporan model int8. On-device execution memerlukan traceability ke firmware commit dan binary release.","textChars":124,"textLines":1,"bbox":[72,606,1136,42]}
+{"kind":"notes","id":"nt/1xpp5f","slide":11,"text":"[Sources]\n- Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html §04\n- memory/entities.md §Model AI\n- memory/decisions.md dec:39–43"}
+{"kind":"slide","id":"sl/jolze6","slide":12,"title":"07 · FIELD DEVICE SPECIFICATION","textShapes":25}
+{"kind":"shape","id":"sh/knm1kbet","slide":12,"name":"topline-12","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/jmtkr6d8","slide":12,"name":"section-12","text":"07 · FIELD DEVICE SPECIFICATION","textPreview":"07 · FIELD DEVICE SPECIFICATION","textChars":31,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/ylkji1wn","slide":12,"name":"title-12","text":"Cluster Head dan Gateway — functional specification","textPreview":"Cluster Head dan Gateway — functional specification","textChars":51,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/xkb2pgv2","slide":12,"name":"subtitle-12","text":"Cluster Head menyediakan cache/relay LoRa; Gateway menyediakan LoRa-to-MQTT bridge. Seluruh buffer bersifat volatile.","textPreview":"Cluster Head menyediakan cache/relay LoRa; Gateway menyediakan LoRa-to-MQTT bridge. Seluruh buffer bersifat volatile.","textChars":117,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/wj21wbeh","slide":12,"name":"footer-rule-12","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/bitkn6xw","slide":12,"name":"footer-12","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/axkju1wb","slide":12,"name":"page-12","text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/9wb2lwf6","slide":12,"name":"split","bbox":[640,214,2,388]}
+{"kind":"textbox","id":"sh/ovi1srel","slide":12,"name":"ch-head","text":"CLUSTER HEAD","textPreview":"CLUSTER HEAD","textChars":12,"textLines":1,"bbox":[88,214,500,42]}
+{"kind":"textbox","id":"sh/ilgjy1wn","slide":12,"name":"gw-head","text":"GATEWAY","textPreview":"GATEWAY","textChars":7,"textLines":1,"bbox":[682,214,500,42]}
+{"kind":"shape","id":"sh/jmp0r6d8","slide":12,"name":"dot-88-288","bbox":[88,288,12,12]}
+{"kind":"textbox","id":"sh/4ny10bed","slide":12,"name":"ch-0-title","text":"Dual SX1262","textPreview":"Dual SX1262","textChars":11,"textLines":1,"bbox":[112,280,476,30]}
+{"kind":"textbox","id":"sh/5oritgvy","slide":12,"name":"ch-0-detail","text":"STAR ke GLD + MESH ke CH/Gateway","textPreview":"STAR ke GLD + MESH ke CH/Gateway","textChars":32,"textLines":1,"bbox":[112,310,476,34]}
+{"kind":"shape","id":"sh/uhgju1wb","slide":12,"name":"dot-88-364","bbox":[88,364,12,12]}
+{"kind":"textbox","id":"sh/vip0n6dw","slide":12,"name":"ch-1-title","text":"Cache 32 node","textPreview":"Cache 32 node","textChars":13,"textLines":1,"bbox":[112,356,476,30]}
+{"kind":"textbox","id":"sh/wjy1wbeh","slide":12,"name":"ch-1-detail","text":"Failover parent otomatis berbasis RSSI","textPreview":"Failover parent otomatis berbasis RSSI","textChars":38,"textLines":1,"bbox":[112,386,476,34]}
+{"kind":"shape","id":"sh/hk7ipgv2","slide":12,"name":"dot-88-440","bbox":[88,440,12,12]}
+{"kind":"textbox","id":"sh/mtwzqhwf","slide":12,"name":"ch-2-title","text":"2 panel solar + 18650","textPreview":"2 panel solar + 18650","textChars":21,"textLines":1,"bbox":[112,432,476,30]}
+{"kind":"textbox","id":"sh/7e50jmd0","slide":12,"name":"ch-2-detail","text":"Surplus daya 1,5–4,4 Wh/hari","textPreview":"Surplus daya 1,5–4,4 Wh/hari","textChars":28,"textLines":1,"bbox":[112,462,476,34]}
+{"kind":"shape","id":"sh/bylgrits","slide":12,"name":"dot-88-516","bbox":[88,516,12,12]}
+{"kind":"textbox","id":"sh/axcfixc7","slide":12,"name":"ch-3-title","text":"16 unit tersedia","textPreview":"16 unit tersedia","textChars":16,"textLines":1,"bbox":[112,508,476,30]}
+{"kind":"textbox","id":"sh/xk3ytsbi","slide":12,"name":"ch-3-detail","text":"9 CH besar + 7 CH kecil","textPreview":"9 CH besar + 7 CH kecil","textChars":23,"textLines":1,"bbox":[112,538,476,34]}
+{"kind":"shape","id":"sh/czuxknux","slide":12,"name":"dot-682-288","bbox":[682,288,12,12]}
+{"kind":"textbox","id":"sh/zmlgv2to","slide":12,"name":"gw-0-title","text":"Radio mesh 921,0 MHz","textPreview":"Radio mesh 921,0 MHz","textChars":20,"textLines":1,"bbox":[706,280,476,30]}
+{"kind":"textbox","id":"sh/ylcfmxc3","slide":12,"name":"gw-0-detail","text":"SF9 • 17 dBm","textPreview":"SF9 • 17 dBm","textChars":12,"textLines":1,"bbox":[706,310,476,34]}
+{"kind":"shape","id":"sh/lonyxcbu","slide":12,"name":"dot-682-364","bbox":[682,364,12,12]}
+{"kind":"textbox","id":"sh/knuxo7u9","slide":12,"name":"gw-1-title","text":"Bridge Wi-Fi/LAN ke MQTT","textPreview":"Bridge Wi-Fi/LAN ke MQTT","textChars":24,"textLines":1,"bbox":[706,356,476,30]}
+{"kind":"textbox","id":"sh/fq1wjytk","slide":12,"name":"gw-1-detail","text":"MAC didaftarkan; satu subnet dengan server","textPreview":"MAC didaftarkan; satu subnet dengan server","textChars":42,"textLines":1,"bbox":[706,386,476,34]}
+{"kind":"shape","id":"sh/epsfadcz","slide":12,"name":"dot-682-440","bbox":[682,440,12,12]}
+{"kind":"textbox","id":"sh/4v6dkzax","slide":12,"name":"gw-2-title","text":"Buffer 8 item RAM","textPreview":"Buffer 8 item RAM","textChars":17,"textLines":1,"bbox":[706,432,476,30]}
+{"kind":"textbox","id":"sh/5wfut4r2","slide":12,"name":"gw-2-detail","text":"Volatil, bukan penyimpanan permanen","textPreview":"Volatil, bukan penyimpanan permanen","textChars":35,"textLines":1,"bbox":[706,462,476,34]}
+{"kind":"shape","id":"sh/i9ovi9sr","slide":12,"name":"dot-682-516","bbox":[682,516,12,12]}
+{"kind":"textbox","id":"sh/juxcru9c","slide":12,"name":"gw-3-title","text":"Unit indoor","textPreview":"Unit indoor","textChars":11,"textLines":1,"bbox":[706,508,476,30]}
+{"kind":"textbox","id":"sh/w76dgzal","slide":12,"name":"gw-3-detail","text":"Antena ditempatkan outdoor/rooftop","textPreview":"Antena ditempatkan outdoor/rooftop","textChars":34,"textLines":1,"bbox":[706,538,476,34]}
+{"kind":"shape","id":"sh/h8fup4r6","slide":12,"name":"capacity-bg","bbox":[72,604,1136,70]}
+{"kind":"shape","id":"sh/u54vepsf","slide":12,"name":"capacity-bar","bbox":[72,604,7,70]}
+{"kind":"textbox","id":"sh/v6xcnu90","slide":12,"name":"capacity-label","text":"CAPACITY LIMIT — OPEN","textPreview":"CAPACITY LIMIT — OPEN","textChars":21,"textLines":1,"bbox":[96,613,280,24]}
+{"kind":"textbox","id":"sh/03qdsjap","slide":12,"name":"capacity-body","text":"Maximum supported GLD Node per Cluster Head dan per Gateway belum ditetapkan melalui load test.","textPreview":"Maximum supported GLD Node per Cluster Head dan per Gateway belum ditetapkan melalui load test.","textChars":95,"textLines":1,"bbox":[96,636,1084,30]}
+{"kind":"notes","id":"nt/jolze6","slide":12,"text":"[Sources]\n- memory/blockers_metrics.md §Status produksi unit\n- memory/blockers_metrics.md §Gate capacity\n- Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html §04"}
+{"kind":"slide","id":"sl/ey8y5o","slide":13,"title":"08 · RF SPECIFICATION","textShapes":26}
+{"kind":"shape","id":"sh/tkji50fu","slide":13,"name":"topline-13","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/6hsza5g3","slide":13,"name":"section-13","text":"08 · RF SPECIFICATION","textPreview":"08 · RF SPECIFICATION","textChars":21,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/7i103qxo","slide":13,"name":"title-13","text":"STAR dan MESH menggunakan domain radio terpisah","textPreview":"STAR dan MESH menggunakan domain radio terpisah","textChars":47,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/g7a1gfy5","slide":13,"name":"subtitle-13","text":"Frekuensi, spreading factor, dan sync word dikonfigurasi berbeda untuk mengisolasi kedua link.","textPreview":"Frekuensi, spreading factor, dan sync word dikonfigurasi berbeda untuk mengisolasi kedua link.","textChars":94,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/h83i9kfq","slide":13,"name":"footer-rule-13","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/ulsze5gf","slide":13,"name":"footer-13","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/vm107ax0","slide":13,"name":"page-13","text":"13","textPreview":"13","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"textbox","id":"sh/4bu1kfyh","slide":13,"name":"radio-h1","text":"PARAMETER","textPreview":"PARAMETER","textChars":9,"textLines":1,"bbox":[72,213,300,38]}
+{"kind":"textbox","id":"sh/5c3idkf2","slide":13,"name":"radio-h2","text":"STAR — GLD ↔ CH","textPreview":"STAR — GLD ↔ CH","textChars":15,"textLines":1,"bbox":[410,213,310,38]}
+{"kind":"textbox","id":"sh/dgv2lcjq","slide":13,"name":"radio-h3","text":"MESH — CH ↔ GW","textPreview":"MESH — CH ↔ GW","textChars":14,"textLines":1,"bbox":[788,213,320,38]}
+{"kind":"shape","id":"sh/sfm1s7i5","slide":13,"name":"radio-line-0","bbox":[72,306,1036,1]}
+{"kind":"textbox","id":"sh/redkj210","slide":13,"name":"rp-0","text":"Frekuensi","textPreview":"Frekuensi","textChars":9,"textLines":1,"bbox":[72,258,300,44]}
+{"kind":"textbox","id":"sh/qd4jqx0f","slide":13,"name":"rs-0","text":"920,0 MHz","textPreview":"920,0 MHz","textChars":9,"textLines":1,"bbox":[410,258,310,44]}
+{"kind":"textbox","id":"sh/1kf2pcj2","slide":13,"name":"rm-0","text":"921,0 MHz","textPreview":"921,0 MHz","textChars":9,"textLines":1,"bbox":[788,258,320,44]}
+{"kind":"shape","id":"sh/0j61wrih","slide":13,"name":"radio-line-1","bbox":[72,364,1036,1]}
+{"kind":"textbox","id":"sh/fidknm1w","slide":13,"name":"rp-1","text":"Spreading Factor","textPreview":"Spreading Factor","textChars":16,"textLines":1,"bbox":[72,316,300,44]}
+{"kind":"textbox","id":"sh/eh4juh0b","slide":13,"name":"rs-1","text":"SF7","textPreview":"SF7","textChars":3,"textLines":1,"bbox":[410,316,310,44]}
+{"kind":"textbox","id":"sh/hobidsji","slide":13,"name":"rm-1","text":"SF9","textPreview":"SF9","textChars":3,"textLines":1,"bbox":[788,316,320,44]}
+{"kind":"shape","id":"sh/gn21knid","slide":13,"name":"radio-line-2","bbox":[72,422,1036,1]}
+{"kind":"textbox","id":"sh/87610nqt","slide":13,"name":"rp-2","text":"TX power","textPreview":"TX power","textChars":8,"textLines":1,"bbox":[72,374,300,44]}
+{"kind":"textbox","id":"sh/9sf2tsre","slide":13,"name":"rs-2","text":"17 dBm","textPreview":"17 dBm","textChars":6,"textLines":1,"bbox":[410,374,310,44]}
+{"kind":"textbox","id":"sh/m5ojyd83","slide":13,"name":"rm-2","text":"17 dBm","textPreview":"17 dBm","textChars":6,"textLines":1,"bbox":[788,374,320,44]}
+{"kind":"shape","id":"sh/76xkri9o","slide":13,"name":"radio-line-3","bbox":[72,480,1036,1]}
+{"kind":"textbox","id":"sh/wv6147q5","slide":13,"name":"rp-3","text":"Sync word","textPreview":"Sync word","textChars":9,"textLines":1,"bbox":[72,432,300,44]}
+{"kind":"textbox","id":"sh/hwz2xcrq","slide":13,"name":"rs-3","text":"0x12","textPreview":"0x12","textChars":4,"textLines":1,"bbox":[410,432,310,44]}
+{"kind":"textbox","id":"sh/utoj2x8z","slide":13,"name":"rm-3","text":"0x34","textPreview":"0x34","textChars":4,"textLines":1,"bbox":[788,432,320,44]}
+{"kind":"textbox","id":"sh/vuxkv29k","slide":13,"name":"range-l-0","text":"100 m terbuka","textPreview":"100 m terbuka","textChars":13,"textLines":1,"bbox":[72,514,260,32]}
+{"kind":"shape","id":"sh/4zql87q1","slide":13,"name":"range-bg-0","bbox":[350,523,610,14]}
+{"kind":"shape","id":"sh/50z21crm","slide":13,"name":"range-fill-0","bbox":[350,523,610,14]}
+{"kind":"textbox","id":"sh/z6lwnax0","slide":13,"name":"range-v-0","text":"PDR 100%","textPreview":"PDR 100%","textChars":8,"textLines":1,"bbox":[988,514,150,32]}
+{"kind":"textbox","id":"sh/e5cve5wf","slide":13,"name":"range-l-1","text":"242 m Gerbang Utara","textPreview":"242 m Gerbang Utara","textChars":19,"textLines":1,"bbox":[72,557,260,32]}
+{"kind":"shape","id":"sh/183epkf6","slide":13,"name":"range-bg-1","bbox":[350,566,610,14]}
+{"kind":"shape","id":"sh/07udgfel","slide":13,"name":"range-fill-1","bbox":[350,566,610,14]}
+{"kind":"textbox","id":"sh/r2lwjqx4","slide":13,"name":"range-v-1","text":"PDR 100%","textPreview":"PDR 100%","textChars":8,"textLines":1,"bbox":[988,557,150,32]}
+{"kind":"textbox","id":"sh/q1cvalgj","slide":13,"name":"range-l-2","text":"200 m terhalang gedung","textPreview":"200 m terhalang gedung","textChars":22,"textLines":1,"bbox":[72,600,260,32]}
+{"kind":"shape","id":"sh/d43el0fu","slide":13,"name":"range-bg-2","bbox":[350,609,610,14]}
+{"kind":"shape","id":"sh/c3udcvep","slide":13,"name":"range-fill-2","bbox":[350,609,530.7,14]}
+{"kind":"textbox","id":"sh/by5wvux8","slide":13,"name":"range-v-2","text":"PDR 87%","textPreview":"PDR 87%","textChars":7,"textLines":1,"bbox":[988,600,150,32]}
+{"kind":"notes","id":"nt/ey8y5o","slide":13,"text":"[Sources]\n- memory/blockers_metrics.md §Metrik RF LoRa\n- Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html §05"}
+{"kind":"slide","id":"sl/774aij","slide":14,"title":"09 · HAZARDOUS-AREA COMPLIANCE","textShapes":16}
+{"kind":"shape","id":"sh/k7ylkfi5","slide":14,"name":"topline-14","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/jmp4buhk","slide":14,"name":"section-14","text":"09 · HAZARDOUS-AREA COMPLIANCE","textPreview":"09 · HAZARDOUS-AREA COMPLIANCE","textChars":30,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/ylg3ip0z","slide":14,"name":"title-14","text":"Instalasi permanen dilarang sebelum sertifikasi","textPreview":"Instalasi permanen dilarang sebelum sertifikasi","textChars":47,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/xk7m9kze","slide":14,"name":"subtitle-14","text":"Enclosure menggunakan dua kompartemen dengan seal/cable gland; compliance ATEX belum diverifikasi.","textPreview":"Enclosure menggunakan dua kompartemen dengan seal/cable gland; compliance ATEX belum diverifikasi.","textChars":98,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/wjylgfit","slide":14,"name":"footer-rule-14","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/bi547aho","slide":14,"name":"footer-14","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/ahw3e503","slide":14,"name":"page-14","text":"14","textPreview":"14","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/9gnm50zi","slide":14,"name":"atex-status-bg","bbox":[72,202,1136,70]}
+{"kind":"shape","id":"sh/ofelcvix","slide":14,"name":"atex-status-bar","bbox":[72,202,7,70]}
+{"kind":"textbox","id":"sh/6dkjy54b","slide":14,"name":"atex-status-label","text":"INSTALLATION HOLD","textPreview":"INSTALLATION HOLD","textChars":17,"textLines":1,"bbox":[96,211,280,24]}
+{"kind":"textbox","id":"sh/7et07a5w","slide":14,"name":"atex-status-body","text":"ATEX certificate dan elevated-mounting approval belum tersedia. Permanent installation tidak diizinkan.","textPreview":"ATEX certificate dan elevated-mounting approval belum tersedia. Permanent installation tidak diizinkan.","textChars":103,"textLines":1,"bbox":[96,234,1084,30]}
+{"kind":"shape","id":"sh/8f210fmh","slide":14,"name":"atex-elec","bbox":[108,316,392,152]}
+{"kind":"textbox","id":"sh/tgbi9kn2","slide":14,"name":"atex-elec-title","text":"MODUL ELEKTRONIK","textPreview":"MODUL ELEKTRONIK","textChars":16,"textLines":1,"bbox":[138,342,332,38]}
+{"kind":"textbox","id":"sh/yp0jul4f","slide":14,"name":"atex-elec-body","text":"PCB + power di enclosure Ex-Proof","textPreview":"PCB + power di enclosure Ex-Proof","textChars":33,"textLines":1,"bbox":[138,390,332,42]}
+{"kind":"textbox","id":"sh/jq903q5k","slide":14,"name":"atex-arrow","text":"SEAL / CABLE GLAND  →","textPreview":"SEAL / CABLE GLAND  →","textChars":21,"textLines":1,"bbox":[510,360,260,58]}
+{"kind":"shape","id":"sh/kbi1wvm5","slide":14,"name":"atex-sensor","bbox":[780,316,392,152]}
+{"kind":"textbox","id":"sh/lcri50nq","slide":14,"name":"atex-sensor-title","text":"SENSOR CARTRIDGE","textPreview":"SENSOR CARTRIDGE","textChars":16,"textLines":1,"bbox":[810,342,332,38]}
+{"kind":"textbox","id":"sh/al0zql43","slide":14,"name":"atex-sensor-body","text":"Elektronik sensor di kompartemen terpisah","textPreview":"Elektronik sensor di kompartemen terpisah","textChars":41,"textLines":1,"bbox":[810,390,332,42]}
+{"kind":"shape","id":"sh/bm90zq5o","slide":14,"name":"dot-108-528","bbox":[108,528,12,12]}
+{"kind":"textbox","id":"sh/felobih4","slide":14,"name":"atex-mount-title","text":"Non-intrusive mounting","textPreview":"Non-intrusive mounting","textChars":22,"textLines":1,"bbox":[132,520,476,30]}
+{"kind":"textbox","id":"sh/edc7ixgj","slide":14,"name":"atex-mount-detail","text":"L/U-bracket pada existing structure; drilling dan welding dilarang","textPreview":"L/U-bracket pada existing structure; drilling dan welding dilarang","textChars":66,"textLines":1,"bbox":[132,550,476,34]}
+{"kind":"shape","id":"sh/1gn6dsza","slide":14,"name":"dot-680-528","bbox":[680,528,12,12]}
+{"kind":"textbox","id":"sh/0fupknyp","slide":14,"name":"atex-power-title","text":"Hazardous-area power protection","textPreview":"Hazardous-area power protection","textChars":31,"textLines":1,"bbox":[704,520,476,30]}
+{"kind":"textbox","id":"sh/ni5of2hg","slide":14,"name":"atex-power-detail","text":"24 VDC protection wajib sesuai zone; Gateway ditempatkan di safe area","textPreview":"24 VDC protection wajib sesuai zone; Gateway ditempatkan di safe area","textChars":69,"textLines":1,"bbox":[704,550,476,34]}
+{"kind":"notes","id":"nt/774aij","slide":14,"text":"[Sources]\n- Sumber Dokumen/Summary recorder 081426 .pdf\n- Sumber Dokumen/Notulensi_Rapat_5Agustus2026_GLD.pdf\n- memory/deliverables.md (koreksi audit: 2 kompartemen + seal/gland)"}
+{"kind":"slide","id":"sl/chn2xy","slide":15,"title":"10 · GAS DETECTION AND AI","textShapes":21}
+{"kind":"shape","id":"sh/mtwnid0v","slide":15,"name":"topline-15","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/9wn6d8j6","slide":15,"name":"section-15","text":"10 · GAS DETECTION AND AI","textPreview":"10 · GAS DETECTION AND AI","textChars":25,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/8ve5kni1","slide":15,"name":"title-15","text":"Model AI tidak mencakup tiga gas requirement RU","textPreview":"Model AI tidak mencakup tiga gas requirement RU","textChars":47,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/zql47y14","slide":15,"name":"subtitle-15","text":"Current model classes: LPG, CO₂, H₂, dan clean air. Benzena, CO, dan H₂S tidak tercakup.","textPreview":"Current model classes: LPG, CO₂, H₂, dan clean air. Benzena, CO, dan H₂S tidak tercakup.","textChars":88,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/ypcnet0j","slide":15,"name":"footer-rule-15","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/lsnm98ja","slide":15,"name":"footer-15","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/0re5g3ip","slide":15,"name":"page-15","text":"15","textPreview":"15","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/bml43y18","slide":15,"name":"ai-acc-bg","bbox":[72,214,332,108]}
+{"kind":"textbox","id":"sh/q1cnat0n","slide":15,"name":"ai-acc-label","text":"AKURASI MODEL INT8","textPreview":"AKURASI MODEL INT8","textChars":18,"textLines":1,"bbox":[90,226,296,24]}
+{"kind":"textbox","id":"sh/8vyp0v2l","slide":15,"name":"ai-acc-value","text":"99,20%","textPreview":"99,20%","textChars":6,"textLines":1,"bbox":[90,253,296,54]}
+{"kind":"shape","id":"sh/tw7qt0jq","slide":15,"name":"ai-field-bg","bbox":[430,214,332,108]}
+{"kind":"textbox","id":"sh/6tg7y5kf","slide":15,"name":"ai-field-label","text":"UJI REAL-TIME","textPreview":"UJI REAL-TIME","textChars":13,"textLines":1,"bbox":[448,226,296,24]}
+{"kind":"textbox","id":"sh/7up8ral0","slide":15,"name":"ai-field-value","text":"97,65%","textPreview":"97,65%","textChars":6,"textLines":1,"bbox":[448,253,296,54]}
+{"kind":"shape","id":"sh/krypwv29","slide":15,"name":"ai-size-bg","bbox":[788,214,332,108]}
+{"kind":"textbox","id":"sh/ls7qp03u","slide":15,"name":"ai-size-label","text":"UKURAN MODEL","textPreview":"UKURAN MODEL","textChars":12,"textLines":1,"bbox":[806,226,296,24]}
+{"kind":"textbox","id":"sh/ypw7ulk3","slide":15,"name":"ai-size-value","text":"9,14 KB","textPreview":"9,14 KB","textChars":7,"textLines":1,"bbox":[806,253,296,54]}
+{"kind":"textbox","id":"sh/jq58nqlo","slide":15,"name":"ai-covered-head","text":"KELAS MODEL SAAT INI","textPreview":"KELAS MODEL SAAT INI","textChars":20,"textLines":1,"bbox":[72,350,500,36]}
+{"kind":"textbox","id":"sh/4ni98f2d","slide":15,"name":"ai-ok-0","text":"LPG","textPreview":"LPG","textChars":3,"textLines":1,"bbox":[72,398,148,62]}
+{"kind":"textbox","id":"sh/5orq1kjy","slide":15,"name":"ai-ok-1","text":"CO₂","textPreview":"CO₂","textChars":3,"textLines":1,"bbox":[242,398,148,62]}
+{"kind":"textbox","id":"sh/d8ny5076","slide":15,"name":"ai-ok-2","text":"H₂","textPreview":"H₂","textChars":2,"textLines":1,"bbox":[412,398,148,62]}
+{"kind":"textbox","id":"sh/s7uhwvql","slide":15,"name":"ai-ok-3","text":"Udara Bersih","textPreview":"Udara Bersih","textChars":12,"textLines":1,"bbox":[582,398,148,62]}
+{"kind":"textbox","id":"sh/r6lg3qp0","slide":15,"name":"ai-gap-head","text":"REQUIREMENT BELUM DICAKUP","textPreview":"REQUIREMENT BELUM DICAKUP","textChars":25,"textLines":1,"bbox":[72,493,500,36]}
+{"kind":"textbox","id":"sh/q5czul8f","slide":15,"name":"ai-gap-0","text":"Benzena","textPreview":"Benzena","textChars":7,"textLines":1,"bbox":[72,540,234,62]}
+{"kind":"textbox","id":"sh/543y1g7u","slide":15,"name":"ai-gap-1","text":"CO","textPreview":"CO","textChars":2,"textLines":1,"bbox":[332,540,234,62]}
+{"kind":"textbox","id":"sh/43uhsbq9","slide":15,"name":"ai-gap-2","text":"H₂S","textPreview":"H₂S","textChars":3,"textLines":1,"bbox":[592,540,234,62]}
+{"kind":"textbox","id":"sh/32lgz6po","slide":15,"name":"ai-gap-3","text":"Metana belum tervalidasi","textPreview":"Metana belum tervalidasi","textChars":24,"textLines":1,"bbox":[852,540,234,62]}
+{"kind":"notes","id":"nt/chn2xy","slide":15,"text":"[Sources]\n- Sumber Dokumen/06 Aguatus Deteksi_Kebocoran_Gas_CNN_DualBranch (2)  -  Repaired.pptx\n- Sumber Dokumen/Notulensi_Rapat_5Agustus2026_GLD.pdf\n- memory/entities.md §Model AI"}
+{"kind":"slide","id":"sl/4vqo18","slide":16,"title":"11 · RU DEPLOYMENT SPECIFICATION","textShapes":21}
+{"kind":"shape","id":"sh/f2dwvul8","slide":16,"name":"topline-16","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/03mxoz2t","slide":16,"name":"section-16","text":"11 · RU DEPLOYMENT SPECIFICATION","textPreview":"11 · RU DEPLOYMENT SPECIFICATION","textChars":32,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/14vex43e","slide":16,"name":"title-16","text":"RU services pada server/VM internal Kilang","textPreview":"RU services pada server/VM internal Kilang","textChars":42,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/25ofq9kz","slide":16,"name":"subtitle-16","text":"Port yang ditampilkan adalah current repo/bench defaults. Production firewall rules ditetapkan IT/OT Kilang.","textPreview":"Port yang ditampilkan adalah current repo/bench defaults. Production firewall rules ditetapkan IT/OT Kilang.","textChars":108,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/n6xwze1k","slide":16,"name":"footer-rule-16","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/o76xsj2p","slide":16,"name":"footer-16","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/p8fe1oja","slide":16,"name":"page-16","text":"16","textPreview":"16","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/a9ofutkv","slide":16,"name":"net-0","bbox":[72,228,320,118]}
+{"kind":"textbox","id":"sh/baxw3e1g","slide":16,"name":"net-t-0","text":"INGRESS","textPreview":"INGRESS","textChars":7,"textLines":1,"bbox":[96,250,272,32]}
+{"kind":"textbox","id":"sh/7u14rmx4","slide":16,"name":"net-s-0","text":"MQTT 1884* • Node-RED 1880","textPreview":"MQTT 1884* • Node-RED 1880","textChars":26,"textLines":1,"bbox":[96,291,272,36]}
+{"kind":"textbox","id":"sh/6tsnihwj","slide":16,"name":"net-a-0","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[394,260,58,48]}
+{"kind":"shape","id":"sh/twjmtwfu","slide":16,"name":"net-1","bbox":[454,228,320,118]}
+{"kind":"textbox","id":"sh/8va5kre9","slide":16,"name":"net-t-1","text":"BACKEND","textPreview":"BACKEND","textChars":7,"textLines":1,"bbox":[478,250,272,32]}
+{"kind":"textbox","id":"sh/jqh4n2xs","slide":16,"name":"net-s-1","text":"GraphQL 4000 • database lokal","textPreview":"GraphQL 4000 • database lokal","textChars":29,"textLines":1,"bbox":[478,291,272,36]}
+{"kind":"textbox","id":"sh/yp83exw7","slide":16,"name":"net-a-1","text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[776,260,58,48]}
+{"kind":"shape","id":"sh/lsjmpcfy","slide":16,"name":"net-2","bbox":[836,228,320,118]}
+{"kind":"textbox","id":"sh/krq5g7ed","slide":16,"name":"net-t-2","text":"FRONTEND","textPreview":"FRONTEND","textChars":8,"textLines":1,"bbox":[860,250,272,32]}
+{"kind":"textbox","id":"sh/3ml4z6xw","slide":16,"name":"net-s-2","text":"RU web 3002 • browser operator","textPreview":"RU web 3002 • browser operator","textChars":30,"textLines":1,"bbox":[860,291,272,36]}
+{"kind":"shape","id":"sh/ilcnq1wr","slide":16,"name":"payload-bg","bbox":[72,392,332,108]}
+{"kind":"textbox","id":"sh/ehw7i5gz","slide":16,"name":"payload-label","text":"RUNTIME","textPreview":"RUNTIME","textChars":7,"textLines":1,"bbox":[90,404,296,24]}
+{"kind":"textbox","id":"sh/fi58rah4","slide":16,"name":"payload-value","text":"Docker Compose","textPreview":"Docker Compose","textChars":14,"textLines":1,"bbox":[90,431,296,54]}
+{"kind":"shape","id":"sh/0jypkfyp","slide":16,"name":"alarm-period-bg","bbox":[430,392,332,108]}
+{"kind":"textbox","id":"sh/1k7qt0za","slide":16,"name":"alarm-period-label","text":"RU DATABASE SAAT INI","textPreview":"RU DATABASE SAAT INI","textChars":20,"textLines":1,"bbox":[448,404,296,24]}
+{"kind":"textbox","id":"sh/2lg7m5gv","slide":16,"name":"alarm-period-value","text":"SQLite","textPreview":"SQLite","textChars":6,"textLines":1,"bbox":[448,431,296,54]}
+{"kind":"shape","id":"sh/nmp8vahg","slide":16,"name":"normal-period-bg","bbox":[788,392,332,108]}
+{"kind":"textbox","id":"sh/onypofy1","slide":16,"name":"normal-period-label","text":"HQ GATEWAY","textPreview":"HQ GATEWAY","textChars":10,"textLines":1,"bbox":[806,404,296,24]}
+{"kind":"textbox","id":"sh/po7qxkzm","slide":16,"name":"normal-period-value","text":"4100 + PostgreSQL","textPreview":"4100 + PostgreSQL","textChars":17,"textLines":1,"bbox":[806,431,296,54]}
+{"kind":"shape","id":"sh/ipc7qlgr","slide":16,"name":"wifi-security-bg","bbox":[72,536,1136,70]}
+{"kind":"shape","id":"sh/3qlojqhc","slide":16,"name":"wifi-security-bar","bbox":[72,536,7,70]}
+{"kind":"textbox","id":"sh/5gv258nq","slide":16,"name":"wifi-security-label","text":"MINIMUM FIREWALL POLICY","textPreview":"MINIMUM FIREWALL POLICY","textChars":23,"textLines":1,"bbox":[96,545,280,24]}
+{"kind":"textbox","id":"sh/kfm1cnm5","slide":16,"name":"wifi-security-body","text":"Allow: Gateway→MQTT, operator→frontend, frontend→backend, dan RU→VPS via VPN jika disetujui. Deny public access ke Node-RED admin.","textPreview":"Allow: Gateway→MQTT, operator→frontend, frontend→backend, dan RU→VPS via VPN jika disetujui. Deny public access ke Node-RED admin.","textChars":130,"textLines":1,"bbox":[96,568,1084,30]}
+{"kind":"notes","id":"nt/4vqo18","slide":16,"text":"[Sources]\n- https://github.com/RavellerH/gasleakdetectionV2-April/tree/660febbfceaca42ca3147fbf47ca09417bd93490/apps\n- https://github.com/fadlurrahmanf/PertaminaGLD/blob/69a493c32d2500134a21e029820cd4addea1794a/server/nodered/README.md"}
+{"kind":"slide","id":"sl/wbqhed","slide":17,"title":"12 · POWER SPECIFICATION","textShapes":20}
+{"kind":"shape","id":"sh/1kvatgby","slide":17,"name":"topline-17","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/ex4bilc7","slide":17,"name":"section-17","text":"12 · POWER SPECIFICATION","textPreview":"12 · POWER SPECIFICATION","textChars":24,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/fydsrqts","slide":17,"name":"title-17","text":"Baseline 24 VDC; portable battery tidak digunakan","textPreview":"Baseline 24 VDC; portable battery tidak digunakan","textChars":49,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/on6tovup","slide":17,"name":"subtitle-17","text":"Cluster Head menggunakan dual solar panel dan 18650 battery; hazardous-area certification belum tersedia.","textPreview":"Cluster Head menggunakan dual solar panel dan 18650 battery; hazardous-area certification belum tersedia.","textChars":105,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/pofux0ba","slide":17,"name":"footer-rule-17","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/2l4bmlcj","slide":17,"name":"footer-17","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/nmdsvqt4","slide":17,"name":"page-17","text":"17","textPreview":"17","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"textbox","id":"sh/cr6tsful","slide":17,"name":"power-gld","text":"GLD NODE","textPreview":"GLD NODE","textChars":8,"textLines":1,"bbox":[88,220,500,42]}
+{"kind":"textbox","id":"sh/xsfu10b6","slide":17,"name":"power-ch","text":"CLUSTER HEAD","textPreview":"CLUSTER HEAD","textChars":12,"textLines":1,"bbox":[682,220,500,42]}
+{"kind":"shape","id":"sh/tknyx0zu","slide":17,"name":"dot-88-294","bbox":[88,294,12,12]}
+{"kind":"textbox","id":"sh/8juxofyp","slide":17,"name":"p-gld-1-title","text":"Input 24 VDC ≥2 A per unit","textPreview":"Input 24 VDC ≥2 A per unit","textChars":26,"textLines":1,"bbox":[112,286,476,30]}
+{"kind":"textbox","id":"sh/7ilgvah4","slide":17,"name":"p-gld-1-detail","text":"Production power baseline","textPreview":"Production power baseline","textChars":25,"textLines":1,"bbox":[112,316,476,34]}
+{"kind":"shape","id":"sh/6hcfm5gj","slide":17,"name":"dot-88-384","bbox":[88,384,12,12]}
+{"kind":"textbox","id":"sh/hony1kz6","slide":17,"name":"p-gld-2-title","text":"Cable dan PSU disediakan RU","textPreview":"Cable dan PSU disediakan RU","textChars":27,"textLines":1,"bbox":[112,376,476,30]}
+{"kind":"textbox","id":"sh/gnexsfyl","slide":17,"name":"p-gld-2-detail","text":"Satu protected circuit per installation point","textPreview":"Satu protected circuit per installation point","textChars":45,"textLines":1,"bbox":[112,406,476,34]}
+{"kind":"shape","id":"sh/vm5gzah0","slide":17,"name":"dot-88-474","bbox":[88,474,12,12]}
+{"kind":"textbox","id":"sh/ulwfq5gf","slide":17,"name":"p-gld-3-title","text":"Portable battery excluded","textPreview":"Portable battery excluded","textChars":25,"textLines":1,"bbox":[112,466,476,30]}
+{"kind":"textbox","id":"sh/xsjepgz2","slide":17,"name":"p-gld-3-detail","text":"Measured endurance 1,76 hari; requirement 30 hari","textPreview":"Measured endurance 1,76 hari; requirement 30 hari","textChars":49,"textLines":1,"bbox":[112,496,476,34]}
+{"kind":"shape","id":"sh/craxwvyh","slide":17,"name":"dot-682-294","bbox":[682,294,12,12]}
+{"kind":"textbox","id":"sh/o7ypsfa9","slide":17,"name":"p-ch-1-title","text":"Dual-panel energy surplus","textPreview":"Dual-panel energy surplus","textChars":25,"textLines":1,"bbox":[706,286,476,30]}
+{"kind":"textbox","id":"sh/98761kbu","slide":17,"name":"p-ch-1-detail","text":"Calculated surplus 1,5–4,4 Wh/hari","textPreview":"Calculated surplus 1,5–4,4 Wh/hari","textChars":34,"textLines":1,"bbox":[706,316,476,34]}
+{"kind":"shape","id":"sh/2lg7qpsj","slide":17,"name":"dot-682-384","bbox":[682,384,12,12]}
+{"kind":"textbox","id":"sh/nmpozat4","slide":17,"name":"p-ch-2-title","text":"Panel → BQ25185 → 18650","textPreview":"Panel → BQ25185 → 18650","textChars":23,"textLines":1,"bbox":[706,376,476,30]}
+{"kind":"textbox","id":"sh/wbipwzal","slide":17,"name":"p-ch-2-detail","text":"TPS63020 3,3V menuju beban","textPreview":"TPS63020 3,3V menuju beban","textChars":26,"textLines":1,"bbox":[706,406,476,34]}
+{"kind":"shape","id":"sh/xcr654b6","slide":17,"name":"dot-682-474","bbox":[682,474,12,12]}
+{"kind":"textbox","id":"sh/a9g7upsf","slide":17,"name":"p-ch-3-title","text":"Solar/battery certification unavailable","textPreview":"Solar/battery certification unavailable","textChars":39,"textLines":1,"bbox":[706,466,476,30]}
+{"kind":"textbox","id":"sh/bapo3ut0","slide":17,"name":"p-ch-3-detail","text":"Hazardous-area verification mandatory","textPreview":"Hazardous-area verification mandatory","textChars":37,"textLines":1,"bbox":[706,496,476,34]}
+{"kind":"shape","id":"sh/kfip0zah","slide":17,"name":"battery-track","bbox":[88,584,1094,20]}
+{"kind":"shape","id":"sh/lgrqt4b2","slide":17,"name":"battery-fill","bbox":[88,584,64,20]}
+{"kind":"textbox","id":"sh/vadszyd4","slide":17,"name":"battery-label","text":"Baterai GLD: 1,76 / 30 hari","textPreview":"Baterai GLD: 1,76 / 30 hari","textChars":27,"textLines":1,"bbox":[88,615,400,30]}
+{"kind":"notes","id":"nt/wbqhed","slide":17,"text":"[Sources]\n- memory/blockers_metrics.md §Metrik daya\n- memory/decisions.md dec:39–41\n- Sumber Dokumen/Timeline_Kerjaan_Mingguan_GLD_updated_Juli_2026.pdf"}
+{"kind":"slide","id":"sl/xizt05","slide":18,"title":"13 · COMMISSIONING PREREQUISITES","textShapes":23}
+{"kind":"shape","id":"sh/0zq9sz61","slide":18,"name":"topline-18","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/zehszupg","slide":18,"name":"section-18","text":"13 · COMMISSIONING PREREQUISITES","textPreview":"13 · COMMISSIONING PREREQUISITES","textChars":32,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/yd8r69ov","slide":18,"name":"title-18","text":"Delapan open item memblokir commissioning","textPreview":"Delapan open item memblokir commissioning","textChars":41,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/94ja5o7i","slide":18,"name":"subtitle-18","text":"Tidak ada open item pada slide ini yang dapat ditutup hanya dengan hasil uji laboratorium.","textPreview":"Tidak ada open item pada slide ini yang dapat ditutup hanya dengan hasil uji laboratorium.","textChars":90,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/83q9wj6x","slide":18,"name":"footer-rule-18","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/n2hs3eps","slide":18,"name":"footer-18","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/m18ru9o7","slide":18,"name":"page-18","text":"18","textPreview":"18","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"shape","id":"sh/p8fatk7e","slide":18,"name":"gate-bg-0","bbox":[72,214,528,74]}
+{"kind":"shape","id":"sh/o7690f6t","slide":18,"name":"dot-90-233","bbox":[90,233,12,12]}
+{"kind":"textbox","id":"sh/qp0zm9w3","slide":18,"name":"gate-t-0","text":"TRA/JSA approval","textPreview":"TRA/JSA approval","textChars":16,"textLines":1,"bbox":[116,222,458,30]}
+{"kind":"textbox","id":"sh/bq9gfedo","slide":18,"name":"gate-d-0","text":"OPEN — internal draft only","textPreview":"OPEN — internal draft only","textChars":26,"textLines":1,"bbox":[116,252,458,26]}
+{"kind":"shape","id":"sh/crihoje9","slide":18,"name":"gate-bg-1","bbox":[640,214,528,74]}
+{"kind":"shape","id":"sh/dsbyh4vu","slide":18,"name":"dot-658-233","bbox":[658,233,12,12]}
+{"kind":"textbox","id":"sh/ytkzq9wf","slide":18,"name":"gate-t-1","text":"ATEX certification","textPreview":"ATEX certification","textChars":18,"textLines":1,"bbox":[684,222,458,30]}
+{"kind":"textbox","id":"sh/zutgjed0","slide":18,"name":"gate-d-1","text":"OPEN — permanent installation prohibited","textPreview":"OPEN — permanent installation prohibited","textChars":40,"textLines":1,"bbox":[684,252,458,26]}
+{"kind":"shape","id":"sh/0v2hsjel","slide":18,"name":"gate-bg-2","bbox":[72,306,528,74]}
+{"kind":"shape","id":"sh/lwbilovq","slide":18,"name":"dot-90-325","bbox":[90,325,12,12]}
+{"kind":"textbox","id":"sh/mxkzutwb","slide":18,"name":"gate-t-2","text":"MQTT ingestion adapter","textPreview":"MQTT ingestion adapter","textChars":22,"textLines":1,"bbox":[116,314,458,30]}
+{"kind":"textbox","id":"sh/nyt0nydw","slide":18,"name":"gate-d-2","text":"NOT IMPLEMENTED","textPreview":"NOT IMPLEMENTED","textChars":15,"textLines":1,"bbox":[116,344,458,26]}
+{"kind":"shape","id":"sh/jmdgbyt4","slide":18,"name":"gate-bg-3","bbox":[640,306,528,74]}
+{"kind":"shape","id":"sh/i14f2tsj","slide":18,"name":"dot-658-325","bbox":[658,325,12,12]}
+{"kind":"textbox","id":"sh/5ovyd8ba","slide":18,"name":"gate-t-3","text":"Gateway/server network approval","textPreview":"Gateway/server network approval","textChars":31,"textLines":1,"bbox":[684,314,458,30]}
+{"kind":"textbox","id":"sh/knmx43ap","slide":18,"name":"gate-d-3","text":"OPEN — VLAN, ACL, identity, firewall","textPreview":"OPEN — VLAN, ACL, identity, firewall","textChars":36,"textLines":1,"bbox":[684,344,458,26]}
+{"kind":"shape","id":"sh/vytg7et8","slide":18,"name":"gate-bg-4","bbox":[72,398,528,74]}
+{"kind":"shape","id":"sh/axkfy9sn","slide":18,"name":"dot-90-417","bbox":[90,417,12,12]}
+{"kind":"textbox","id":"sh/x0vy9oby","slide":18,"name":"gate-t-4","text":"Elevated-mounting approval","textPreview":"Elevated-mounting approval","textChars":26,"textLines":1,"bbox":[116,406,458,30]}
+{"kind":"textbox","id":"sh/wzmx0jad","slide":18,"name":"gate-d-4","text":"OPEN — test limited to human height","textPreview":"OPEN — test limited to human height","textChars":35,"textLines":1,"bbox":[116,436,458,26]}
+{"kind":"shape","id":"sh/nutg3etw","slide":18,"name":"gate-bg-5","bbox":[640,398,528,74]}
+{"kind":"shape","id":"sh/mtkfu9sb","slide":18,"name":"dot-658-417","bbox":[658,417,12,12]}
+{"kind":"textbox","id":"sh/cnylobmx","slide":18,"name":"gate-t-5","text":"Gateway/CH capacity limit","textPreview":"Gateway/CH capacity limit","textChars":25,"textLines":1,"bbox":[684,406,458,30]}
+{"kind":"textbox","id":"sh/do7mhgni","slide":18,"name":"gate-d-5","text":"OPEN — load test not available","textPreview":"OPEN — load test not available","textChars":30,"textLines":1,"bbox":[684,436,458,26]}
+{"kind":"shape","id":"sh/qlw3ml4r","slide":18,"name":"gate-bg-6","bbox":[72,490,528,74]}
+{"kind":"shape","id":"sh/rmp4f65c","slide":18,"name":"dot-90-509","bbox":[90,509,12,12]}
+{"kind":"textbox","id":"sh/0ry5svm9","slide":18,"name":"gate-t-6","text":"RU production database","textPreview":"RU production database","textChars":22,"textLines":1,"bbox":[116,498,458,30]}
+{"kind":"textbox","id":"sh/1s7ml0ne","slide":18,"name":"gate-d-6","text":"OPEN — SQLite pilot vs PostgreSQL","textPreview":"OPEN — SQLite pilot vs PostgreSQL","textChars":33,"textLines":1,"bbox":[116,528,458,26]}
+{"kind":"shape","id":"sh/epgnql43","slide":18,"name":"gate-bg-7","bbox":[640,490,528,74]}
+{"kind":"shape","id":"sh/zqp4jq5o","slide":18,"name":"dot-658-509","bbox":[658,509,12,12]}
+{"kind":"textbox","id":"sh/gvelgrmp","slide":18,"name":"gate-t-7","text":"RU server/VM allocation","textPreview":"RU server/VM allocation","textChars":23,"textLines":1,"bbox":[684,498,458,30]}
+{"kind":"textbox","id":"sh/hwnm9wna","slide":18,"name":"gate-d-7","text":"OPEN — resource confirmation required","textPreview":"OPEN — resource confirmation required","textChars":37,"textLines":1,"bbox":[684,528,458,26]}
+{"kind":"shape","id":"sh/94jm50rq","slide":18,"name":"progress-scope-bg","bbox":[72,594,1136,70]}
+{"kind":"shape","id":"sh/83q5cvql","slide":18,"name":"progress-scope-bar","bbox":[72,594,7,70]}
+{"kind":"textbox","id":"sh/72h43q90","slide":18,"name":"progress-scope-label","text":"PROGRESS BOUNDARY","textPreview":"PROGRESS BOUNDARY","textChars":17,"textLines":1,"bbox":[96,603,280,24]}
+{"kind":"textbox","id":"sh/m18nal8f","slide":18,"name":"progress-scope-body","text":"≈39% merepresentasikan engineering laboratory progress; tidak merepresentasikan certification, commissioning, atau operational acceptance.","textPreview":"≈39% merepresentasikan engineering laboratory progress; tidak merepresentasikan certification, commissioning, atau operational acceptance.","textChars":138,"textLines":1,"bbox":[96,626,1084,30]}
+{"kind":"notes","id":"nt/xizt05","slide":18,"text":"[Sources]\n- memory/blockers_metrics.md §Gate\n- memory/overview.md (baseline progres)\n- Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html §10"}
+{"kind":"slide","id":"sl/enhkca","slide":19,"title":"14 · ACCEPTANCE CRITERIA","textShapes":16}
+{"kind":"shape","id":"sh/4bmdc3u1","slide":19,"name":"topline-19","bbox":[0,0,1280,9]}
+{"kind":"textbox","id":"sh/jadw3ydg","slide":19,"name":"section-19","text":"14 · ACCEPTANCE CRITERIA","textPreview":"14 · ACCEPTANCE CRITERIA","textChars":24,"textLines":1,"bbox":[72,36,560,26]}
+{"kind":"textbox","id":"sh/i94vatcv","slide":19,"name":"title-19","text":"Minimum commissioning acceptance criteria","textPreview":"Minimum commissioning acceptance criteria","textChars":41,"textLines":1,"bbox":[72,70,1136,66]}
+{"kind":"textbox","id":"sh/h8vu1ova","slide":19,"name":"subtitle-19","text":"Sistem hanya dapat dinyatakan operational setelah seluruh evidence diverifikasi di RU.","textPreview":"Sistem hanya dapat dinyatakan operational setelah seluruh evidence diverifikasi di RU.","textChars":86,"textLines":1,"bbox":[72,136,1080,50]}
+{"kind":"shape","id":"sh/w7md83u5","slide":19,"name":"footer-rule-19","bbox":[72,678,1136,1]}
+{"kind":"textbox","id":"sh/v6tczydk","slide":19,"name":"footer-19","text":"Datasheet Sistem GLD — RU IV Cilacap","textPreview":"Datasheet Sistem GLD — RU IV Cilacap","textChars":36,"textLines":1,"bbox":[72,684,500,24]}
+{"kind":"textbox","id":"sh/u5kv6tcz","slide":19,"name":"page-19","text":"19","textPreview":"19","textChars":2,"textLines":1,"bbox":[1160,684,48,24]}
+{"kind":"textbox","id":"sh/94buxove","slide":19,"name":"close-n-0","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[92,226,58,58]}
+{"kind":"textbox","id":"sh/8j2d4jut","slide":19,"name":"close-h-0","text":"SITE READINESS","textPreview":"SITE READINESS","textChars":14,"textLines":1,"bbox":[178,224,330,30]}
+{"kind":"textbox","id":"sh/q1cn29w3","slide":19,"name":"close-b-0","text":"TRA/JSA approved; mounting structure released; protected 24 VDC circuit available.","textPreview":"TRA/JSA approved; mounting structure released; protected 24 VDC circuit available.","textChars":82,"textLines":1,"bbox":[178,254,930,50]}
+{"kind":"textbox","id":"sh/b2lovexo","slide":19,"name":"close-n-1","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[92,338,58,58]}
+{"kind":"textbox","id":"sh/c3e54je9","slide":19,"name":"close-h-1","text":"SYSTEM INTEGRATION","textPreview":"SYSTEM INTEGRATION","textChars":18,"textLines":1,"bbox":[178,336,330,30]}
+{"kind":"textbox","id":"sh/d4n6xofe","slide":19,"name":"close-b-1","text":"Server/VM allocated; network path approved; MQTT adapter and RU database operational.","textPreview":"Server/VM allocated; network path approved; MQTT adapter and RU database operational.","textChars":85,"textLines":1,"bbox":[178,366,930,50]}
+{"kind":"textbox","id":"sh/2dcnypwr","slide":19,"name":"close-n-2","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[92,450,58,58]}
+{"kind":"textbox","id":"sh/3eloruxc","slide":19,"name":"close-h-2","text":"SAFETY COMPLIANCE","textPreview":"SAFETY COMPLIANCE","textChars":17,"textLines":1,"bbox":[178,448,330,30]}
+{"kind":"textbox","id":"sh/ofu50zex","slide":19,"name":"close-b-2","text":"ATEX approval issued; required gas classes validated; permanent installation authorized.","textPreview":"ATEX approval issued; required gas classes validated; permanent installation authorized.","textChars":88,"textLines":1,"bbox":[178,478,930,50]}
+{"kind":"shape","id":"sh/p036t4fi","slide":19,"name":"close-proof-bg","bbox":[72,586,1136,70]}
+{"kind":"shape","id":"sh/u9snupwv","slide":19,"name":"close-proof-bar","bbox":[72,586,7,70]}
+{"kind":"textbox","id":"sh/fa14nuxg","slide":19,"name":"close-proof-label","text":"MANDATORY EVIDENCE","textPreview":"MANDATORY EVIDENCE","textChars":18,"textLines":1,"bbox":[96,595,280,24]}
+{"kind":"textbox","id":"sh/jehkvqd8","slide":19,"name":"close-proof-body","text":"MQTT broker online; ingestion tervalidasi; alarm tampil di dashboard; restore test lulus; hazardous-area approval diterbitkan.","textPreview":"MQTT broker online; ingestion tervalidasi; alarm tampil di dashboard; restore test lulus; hazardous-area approval diterbitkan.","textChars":126,"textLines":1,"bbox":[96,618,1084,30]}
+{"kind":"notes","id":"nt/enhkca","slide":19,"text":"[Sources]\n- Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html §08–11\n- memory/blockers_metrics.md\n- memory/deliverables.md"}

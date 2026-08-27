@@ -8,6 +8,7 @@
 | org:ITB-Fisika | Lab Fisika ITB | Dukungan solar/energi |
 | org:Pertamina | Pertamina Patra Niaga / Kilang Pertamina Internasional | Klien & partner |
 | org:emerson | Emerson | Vendor sistem **Corrosion Monitoring** (protokol **WirelessHART**) yang sudah terpasang & teruji di kilang — jadi rujukan desain mounting/bracket & topologi jaringan GLD (6 Agu). Bukan vendor/bagian dari proyek GLD. |
+| org:samindo | PT Samindo (ekosistem manufaktur Samsung Indonesia) | **Mitra manufaktur/skala** untuk permintaan volume besar (disebut 27 Agu di `Deliverables/GLD_Executive_Presentation.pptx`, instruksi langsung user — belum ada detail kontrak/kapasitas/status kerja sama tertulis di dokumen lain; disebut generik sbg "manufacturing/scale partner"). |
 
 ## Orang (`p:`) — dari notulen/laporan
 | ID | Nama | Peran/konteks |

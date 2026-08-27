@@ -47,6 +47,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 | [`memory/graph.md`](memory/graph.md) | **Knowledge graph (Mermaid)**: entitas, data-flow, dependensi |
 | [`memory/graph.json`](memory/graph.json) | Graph versi machine-readable (nodes + edges) |
 
+- 🆕 **27 Agu — Executive Presentation (pitch marketing/showcase)** dibuat: `Deliverables/GLD_Executive_Presentation.pptx`, 12 slide, tema navy+amber (beda dari palet biru dokumen client-facing lain). **Berbeda tujuan** dari Datasheet Sistem (teknis, non-persuasif, utk IT Pertamina) — deck ini untuk **calon klien baru** (RU lain/instansi lain), fokus diferensiator vs metode konvensional (multi-gas, AI trainable/edge, mesh self-healing privat sbg infrastruktur), bukti lapangan RU IV Cilacap + **RU VII Kasim/Sorong** (kolaborasi field test disebut eksplisit atas instruksi user), dan mitra manufaktur skala besar **PT Samindo (ekosistem Samsung Indonesia)** — entitas baru, generik tanpa detail kontrak. Detail → `memory/deliverables.md`, `memory/entities.md` (org:samindo).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).
@@ -55,6 +57,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - `Deliverables/Knowledge_Graph_GLD.html` — knowledge graph interaktif (force-directed) dari `memory/graph.json`.
 - `Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html` — datasheet konsolidasi untuk kilang/lapangan/IT: arsitektur, hardware, radio, ATEX, gas/AI, **server & jaringan**, catu daya, gate.
 - `Deliverables/GLD_V2_Progress_Report_Jul2026.pptx`, `Deliverables/REPORT_GLD_V2_2026.md` — laporan pendukung lain.
+- `Deliverables/GLD_Executive_Presentation.pptx` — pitch marketing/showcase ke calon klien baru (12 slide, tema navy+amber, terpisah dari Datasheet Sistem teknis).
 
 Dokumen sumber (dari tim/klien) ada di `Sumber Dokumen/` — katalog lengkap → [`memory/files_catalog.md`](memory/files_catalog.md).
 URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).

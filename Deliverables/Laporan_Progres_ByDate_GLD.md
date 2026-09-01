@@ -1,7 +1,7 @@
 # LAPORAN PROGRES PER TANGGAL — PROYEK GAS LEAK DETECTION (GLD) TAHAP 2
 
-**Periode:** 20 April – 9 Agustus 2026
-**Disusun per:** 24 Juli 2026 (progres) · diperbarui 30 Juli 2026 (jadwal &amp; arsitektur) · diperbarui 8 Agustus 2026 (mounting/topologi vs Emerson, requirement gas/alarm/material, push alarm) · diperbarui 9 Agustus 2026 (model AI CNN Dual-Branch menggantikan CNN 1D)
+**Periode:** 20 April – 31 Agustus 2026
+**Disusun per:** 24 Juli 2026 (progres) · diperbarui 30 Juli 2026 (jadwal &amp; arsitektur) · diperbarui 8 Agustus 2026 (mounting/topologi vs Emerson, requirement gas/alarm/material, push alarm) · diperbarui 9 Agustus 2026 (model AI CNN Dual-Branch menggantikan CNN 1D) · **diperbarui 31 Agustus 2026 (laporan final periode ini — Datasheet Sistem, Executive Presentation, desain bracket CAD)**
 **Scope aktif:** Pilot RU IV Cilacap (roadmap: 6 Refinery Unit)
 **Pihak terlibat:** LAPI Ganesha Utama (LGU) · Lab IoT & Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional
 
@@ -11,15 +11,18 @@
 
 | Indikator | Nilai |
 |---|---|
-| Progres pilot Cilacap (vs baseline resmi 9 bulan) | **39%** (rencana 19% · **+20 poin**, murni sisi lab) |
+| Progres pilot Cilacap (vs baseline resmi 9 bulan) | **39%** (rencana 19% · **+20 poin**, murni sisi lab — angka terakhir dari asesmen 24 Jul, **belum di-reassess** meski ada deliverable baru s.d. 31 Agu, lih. catatan transparansi di bawah) |
 | Blocker kritis aktif | 3 (catu daya · DC converter · jangkauan LoRa) |
+| Gate menuju field | **11** (4 gate awal + 7 gate baru sejak 19 Agu: solar-cert, keamanan baterai CH, tools bracket, registrasi jaringan, spek server, spek daya CH, port Ethernet GW) |
 | Action items | 24 (5 berjalan · 15 terbuka) |
 | Isu & risiko | 9 (4 prioritas tinggi) |
 | Dataset sensor terkumpul | 14.477 sampel · 9 sesi · 8 kanal MQ |
 | Model AI — TCN | Per-sensor (prediksi leak LPG 5 dtk ke depan): 8 model, semua ≥92% akurasi (MQ4V 93,9%) |
-| Model AI — CNN Dual-Branch (menggantikan CNN 1D, 9 Agu) | Klasifikasi jenis gas 4-kelas (LPG/CO₂/Udara Bersih/H2): **99,20%** akurasi on-chip ESP32-S3 (int8, 9,14 KB) — angka resmi dipakai |
+| Model AI — CNN Dual-Branch (menggantikan CNN 1D, 9 Agu) | Klasifikasi jenis gas 4-kelas (LPG/CO₂/Udara Bersih/H2): **99,20%** akurasi on-chip ESP32-S3 (int8, 9,14 KB) — angka resmi dipakai; **inferensi dikonfirmasi berjalan on-device** (19 Agu, dikonfirmasi user, belum ada bukti dokumen tertulis) |
 
 Baseline dikalibrasi ke *Project Timeline 9 bulan* (Deck Kick-Off, 12 Jun 2026 → Feb 2027). Engineering front-loaded sejak April sehingga progres di depan jadwal; namun eksekusi site survey menunggu **gate TRA/JSA** dan 3 blocker teknis belum tuntas.
+
+> ⚠️ **Catatan transparansi (penting):** kunjungan gabungan survey+instalasi RU IV Cilacap yang direncanakan **9–10 Agustus 2026** (lih. entri di bawah) **tidak memiliki dokumentasi hasil** di repo ini setelah tanggal tersebut — tidak ada notulen, foto, atau update status pasca-kunjungan yang ditemukan hingga 31 Agustus. Laporan ini **tidak mengasumsikan** kunjungan tersebut terlaksana sesuai rencana maupun hasilnya; seluruh aktivitas terdokumentasi setelah 9 Agustus (19 &amp; 27 Agustus) bersifat **engineering/dokumentasi di sisi LGU/ITB** (datasheet, EMC, desain bracket, materi presentasi), bukan laporan lapangan RU. Konfirmasi status kunjungan perlu ditanyakan langsung ke tim.
 
 ---
 
@@ -304,6 +307,49 @@ Detail lengkap → `memory/entities.md` § Model AI, `memory/decisions.md` dec:3
 
 ---
 
+## FASE 3 — Dokumentasi Teknis & Materi Klien (11–31 Agustus 2026)
+
+*Tidak ada dokumentasi hasil kunjungan lapangan RU IV Cilacap (9–10 Agu) yang ditemukan di repo pada periode ini — lihat catatan transparansi di atas. Aktivitas di bawah adalah pekerjaan engineering/dokumentasi sisi LGU–ITB.*
+
+### 19 Agustus — Datasheet Sistem GLD konsolidasi dibuat — *Milestone ✅*
+- `Deliverables/Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html` dibuat (redesain diagram-first, rev 0.2 → berkembang hingga rev 0.7 pada hari yang sama): dokumen konsolidasi untuk tim kilang/lapangan/IT Pertamina — arsitektur end-to-end, spesifikasi hardware GLD/CH/Gateway, protokol radio LoRa STAR/MESH, status ATEX/area berbahaya, kapabilitas gas/AI, **kebutuhan server & jaringan** (bagian 07), catu daya/instalasi, status gate/blocker.
+- Bagian 07 (server/jaringan) merangkum **apa adanya** 2 dokumen siap pakai yang ditemukan di repo `PertaminaGLD` (`Gateway-to-Server-Site-IT-Pertamina.docx` &amp; `...Technical-Datasheet.docx`, 13 Agu) — **masih berstatus draft/requirement, bukan konfigurasi live**, bukan ditulis ulang dari nol.
+- Disusun berdasarkan riset repo kode `PertaminaGLD` (firmware config, `final_design.md`) + `gasleakdetectionV2-April` (Architecture.md, Tech-Stack.md, docker-compose.vps.yml, deploy HQ Jakarta) + notulen ATEX + `memory/*`.
+
+### 19 Agustus — AI inference dikonfirmasi on-device di ESP32-S3 — *Milestone ✅ (dgn caveat)*
+- Inferensi CNN Dual-Branch **diklaim sudah berjalan langsung on-board ESP32-S3 GLD** (int8, 9,14 KB) — **menggantikan** status lama "PC + emulator" (`blk:ai-edge` resolved).
+- ⚠️ **Dikonfirmasi langsung oleh user, belum diverifikasi dari dokumen/commit firmware tertulis.** Source firmware terakhir yang bisa diperiksa (`PertaminaGLD/docs/design/gld/final_design.md`, mirror 29 Jun) masih mendeskripsikan skema klasifikasi lama 6-kelas, bukan 4-kelas CNN Dual-Branch — kemungkinan dokumen mirror belum ter-update, namun ini dugaan, bukan fakta terverifikasi. Klaim tetap dipakai di deliverable dengan catatan caveat ini.
+
+### 19 Agustus — Update besar Datasheet Sistem (rev 0.3–0.6) — *Milestone ✅*
+- **Catu daya GLD final: 24VDC ≥2A per unit**, siap pasang — kabel &amp; PSU 24V pengadaan oleh RU/kilang. Jalur baterai portable tetap dikembangkan **terpisah**, tidak menahan deployment 24V.
+- **Bracket GLD & CH+solar panel: L-bracket**, referensi desain Emerson, dipasang ke struktur existing kilang; kilang siap bikin tiang baru bila diperlukan.
+- **3 gate baru**: sertifikasi solar panel untuk hazardous area (`gate:solar-cert`); keamanan baterai Li-ion 18650 CH di kilang, sertifikasi sel/BMS (`gate:ch-batt-safety`); ukuran tools/fastener bracket (`gate:bracket-tools`) — semua PIC LGU.
+- **Arsitektur jaringan Gateway↔Server diperjelas**: MAC address GW wajib didaftarkan ke intranet kilang (DHCP reservation/IP statis); GW &amp; server/VM **wajib satu jaringan**; server/VM jadi web server internal. Pembagian kerja: **LGU/ITB** — install broker+backend+frontend (installer satu-paket); **Pertamina** — sediakan server/VM &amp; satukan jaringan. Gate baru `gate:net-registration` menunggu jawaban Pertamina.
+- **Payload &amp; periode GW→broker**: alarm &amp; normal masing-masing &lt;1KB; alarm push tercepat ~10 dtk, kondisi normal pull/polling ~90 dtk.
+- **Rekomendasi spek server/VM** diusulkan LGU (4 vCore / 8GB RAM / 100GB SSD / Ubuntu 22.04 / PostgreSQL) — bukan angka final, gate `gate:server-spec` menunggu konfirmasi kapasitas aktual dari Pertamina.
+- **Spek EMC/fisik resmi diterima**: `Sumber Dokumen/Parameter spesifikasi EMC_lengkap.docx` (Dr. Nina Siti Aminah, ITB Fisika) — tabel parameter lengkap (modul radio E22-900MM22S, TX power maks 22dBm, antena, dimensi fisik, enclosure metal, konsumsi daya, port eksternal) + 3 foto produk aktual (GLD assembled, sensor cartridge 8×MQ+fan, CH/GW) — dirangkum ke Datasheet Sistem bagian 04 (rev 0.6), foto di-embed base64 (self-contained). TX power 22dBm (modul) &amp; 7,995W (24VDC) direkonsiliasi sbg **bukan kontradiksi** dgn 17dBm (firmware-configured) &amp; 5,75W (versi baterai) — beda titik ukur, dijelaskan berdampingan. **2 gate baru dari temuan ini**: input power CH tertulis 5VDC vs solar+18650 di lapangan (`gate:ch-power-spec`); Gateway punya port Ethernet fisik selain Wi-Fi, belum jelas didukung firmware (`gate:gw-ethernet`).
+
+### 19 Agustus — Versi slide Datasheet Sistem (PDF + PowerPoint) — *Update*
+- `Deliverables/Datasheet_Sistem_GLD_Slides.pptx` (PowerPoint editable, objek native + blok `[Sources]` di speaker notes tiap slide) &amp; `Datasheet_Sistem_GLD_Slides.pdf` (14 halaman, 16:9, tema terang) dirilis sebagai versi presentasi dari datasheet HTML. Koreksi audit rev 0.5→0.6: status TRA/JSA jadi "draft tersedia, belum disahkan"; klaim AI on-device tetap bawa caveat; paket server dibedakan dari bukti commissioning. PPTX lolos render penuh tanpa overflow; PDF diverifikasi via headless Chrome.
+
+### 27 Agustus — Executive Presentation dibuat — *Milestone ✅*
+- `Deliverables/GLD_Executive_Presentation.pptx` — deck pitch marketing/showcase untuk **calon klien baru** (RU lain/instansi lain), **berbeda tujuan** dari Datasheet Sistem (teknis, non-persuasif, untuk IT Pertamina).
+- Fokus diferensiator vs metode konvensional: multi-gas, AI trainable/edge, mesh self-healing privat sebagai infrastruktur. Bukti lapangan: RU IV Cilacap + **RU VII Kasim/Sorong** (kolaborasi field test disebut eksplisit). Mitra manufaktur skala besar disebutkan: **PT Samindo** (ekosistem Samsung Indonesia) — entitas baru, generik tanpa detail kontrak.
+
+### 27 Agustus — Redesain total ke template resmi ITB — *Update*
+- Atas permintaan user, seluruh deck di-rebuild mengikuti `Sumber Dokumen/Deck Presentasi Template (1).pptx` — template brand resmi **Korporasi Kinarya ITB** (navy `133765`/`002B5F`, biru `2D64AC`, cyan `38C0EF`/`1CD8FF`, motif blok kuartal-lingkaran), menggantikan tema navy+amber lama.
+- Kini **13 slide** (+1 slide baru "Arsitektur Jaringan" berisi diagram Network Architecture dari deck kickoff internal 66-halaman), + 4 foto lapangan/hardware asli baru (unit GLD, instalasi Cluster Head+solar RU-VII, foto aerial situs RU-VII). Semua angka/klaim &amp; catatan provenance dipertahankan verbatim.
+- **Template ITB ini kini jadi referensi desain baku** untuk deliverable client-facing PPTX berikutnya.
+
+### 31 Agustus — Desain CAD bracket U-Bolt v2 ("ATEX Casing v2") — *Update*
+- `Sumber Dokumen/GLD U-Bolt Bracket V2.png` — gambar teknis CAD (Farhan Budiman, 31/08/2026) berjudul **"ATEX CASING v2"**: desain mounting sensor GLD ke pipa existing memakai **U-bolt 2"/DN50** (target pipa OD 60,3 mm, thread M10, lebar dalam 62–65 mm, tinggi dalam 95–100 mm, panjang thread per kaki 40 mm), lengkap dengan pelat spacer &amp; tampilan isometrik/ortografik terdimensi.
+- Konkretisasi lanjutan dari arahan mounting "bracket L/U-clamp ke struktur existing, tanpa las/bor" (rapat 6 Agu, dec:27) &amp; "L-bracket ref. Emerson" (19 Agu, dec:40) — kini dalam bentuk gambar kerja CAD siap-fabrikasi, melengkapi desain bracket tiang CH+solar yang sudah ada (`POLE-BRACKET-GLD-CH-SOLAR.pdf.pdf`).
+- File ini dan `AGENTS.md` (salinan lama entry-point memory, mendahului update 19–27 Agu) di-push langsung oleh Farhan Budiman ke `main`, di luar sesi Claude — belum ada narasi/notulen pendukung terkait konteks pembuatan gambar ini di repo.
+
+Detail lengkap → `memory/deliverables.md`, `memory/decisions.md` dec:38–45.
+
+---
+
 ## Blocker Kritis Aktif (per 20 Juli)
 
 | # | Blocker | Metrik | Dampak |
@@ -312,13 +358,26 @@ Detail lengkap → `memory/entities.md` § Model AI, `memory/decisions.md` dec:3
 | 2 | DC converter perlu diganti/dimodifikasi | Arahan 20 Jul | Menahan finalisasi desain catu daya |
 | 3 | Jangkauan LoRa jauh di bawah spec | ~100 m / 1–2 km | Menaikkan jumlah CH & biaya deployment |
 
-## Gate Menuju Field (RU IV Cilacap)
+## Gate Menuju Field (RU IV Cilacap) — 11 gate aktif per 31 Agustus
+
+**Gate awal (s.d. 6 Agu):**
 - ⛔ **TRA/JSA** — rencana & workflow survei Cilacap sudah siap; **penyusunan TRA/JSA menjadi gate** untuk eksekusi site survey fisik.
 - ⛔ **Gas capability minimum 6 kelas** (H₂/LPG/Metana/CO₂/Clean Air) harus terverifikasi sebelum deployment (keputusan meeting 24 Jul).
 - ⛔ **Perizinan administratif RU Cilacap**: izin visitor survey, izin kerja + surat masuk barang instalasi, dokumen HSE (APD non-merah) — dikoordinasikan dengan tim HSE RU sejak awal.
-- ⛔ **Sertifikasi ketinggian pemasangan** (baru, 6 Agu) — kilang baru mengizinkan instalasi setinggi orang, belum tersertifikasi untuk lebih tinggi.
-- ⛔ **Requirement gas Benzena/CO/H2S** (baru, 6 Agu) — belum direkonsiliasi dengan gate 6-kelas di atas.
-- Site visit Pertamina ke lab LGU → uji lab → kunjungan RU.
+- ⛔ **Sertifikasi ketinggian pemasangan** (6 Agu) — kilang baru mengizinkan instalasi setinggi orang, belum tersertifikasi untuk lebih tinggi.
+- ⛔ **Requirement gas Benzena/CO/H2S** (6 Agu) — model AI resmi (CNN Dual-Branch) kini sudah cakup H2, tapi **masih tidak** cakup H2S/Benzena; belum direkonsiliasi dengan gate 6-kelas di atas.
+- ⛔ **Kapasitas Gateway/CH vs jumlah sensor** (6 Agu) — belum ada angka resmi, action item terbuka (Tim Komunikasi ITB).
+
+**Gate baru (19 Agustus, dari Datasheet Sistem & spek EMC):**
+- ⛔ **Sertifikasi solar panel** untuk hazardous area kilang (`gate:solar-cert`) — belum disourcing, PIC LGU.
+- ⛔ **Keamanan baterai Li-ion 18650 CH** di kondisi kilang, sertifikasi sel/BMS (mis. IEC 62133/UN38.3) (`gate:ch-batt-safety`) — belum didokumentasikan, PIC LGU.
+- ⛔ **Ukuran tools/fastener bracket** GLD & CH (`gate:bracket-tools`) — belum ditentukan, PIC LGU/Tim Mekanik.
+- ⛔ **Registrasi jaringan Gateway** ke intranet kilang + kebijakan security selain SSID/password (`gate:net-registration`) — menunggu jawaban Pertamina.
+- ⛔ **Spesifikasi server/VM aktual** RU IV (`gate:server-spec`) — LGU sudah usulkan rekomendasi minimum, menunggu konfirmasi Pertamina.
+- ⛔ **Spek input power CH**: EMC tertulis 5VDC vs notulen lapangan solar+18650 (`gate:ch-power-spec`) — belum rekonsiliasi.
+- ⛔ **Port Ethernet Gateway**: ada secara fisik di spek EMC, belum jelas didukung firmware (`gate:gw-ethernet`).
+
+Alur eksekusi: LGU undang Pertamina ke lab → uji lab → kunjungan RU. *(Status kunjungan 9–10 Agustus tidak terkonfirmasi di repo — lihat catatan transparansi di awal laporan.)*
 
 > ⚠️ Catatan transparansi: angka "action items" & "isu/risiko" pada tabel Ringkasan di atas belum mencakup rekonsiliasi penuh dengan 18 action item baru dari meeting 24 Jul (kemungkinan sebagian overlap) — lihat `memory/blockers_metrics.md` untuk detail & status rekonsiliasi.
 
@@ -339,4 +398,4 @@ Detail lengkap → `memory/entities.md` § Model AI, `memory/decisions.md` dec:3
 
 ---
 
-*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Deteksi Kebocoran Gas CNN Dual-Branch (6 Agu) · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · Notulensi Rapat GLD 6 Agustus 2026 (Labtek XV ITB) · WhatsApp follow-up 6–8 Agustus 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas · diperbarui 9 Agustus 2026.*
+*Laporan disusun dari: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Deteksi Kebocoran Gas CNN Dual-Branch (6 Agu) · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · Notulensi Rapat GLD 6 Agustus 2026 (Labtek XV ITB) · WhatsApp follow-up 6–8 Agustus 2026 · Parameter spesifikasi EMC_lengkap.docx (19 Agu) · Datasheet Sistem GLD rev 0.2–0.7 (19 Agu) · GLD Executive Presentation (27 Agu) · GLD U-Bolt Bracket V2.png / ATEX Casing v2 (31 Agu) · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres bersifat estimasi turunan dari status aktivitas, terakhir diukur 24 Juli 2026 (belum di-reassess ulang) · laporan diperbarui &amp; difinalisasi untuk periode ini pada 31 Agustus 2026.*

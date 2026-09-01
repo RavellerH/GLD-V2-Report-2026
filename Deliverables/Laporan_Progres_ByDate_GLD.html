@@ -164,15 +164,15 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
       <p class="parties">LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga</p>
     </div>
     <div class="mast-right">
-      <div class="asof">Periode <b>20 Apr – 9 Agu 2026</b></div>
-      <div class="asof">Progres <b>24 Jul</b> · Update <b>9 Agu</b></div>
+      <div class="asof">Periode <b>20 Apr – 31 Agu 2026</b></div>
+      <div class="asof">Progres <b>24 Jul</b> · Final <b>31 Agu</b></div>
       <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
     </div>
   </header>
 
   <section class="exec">
     <div class="el">Ringkasan Eksekutif</div>
-    <p>Progres pilot Cilacap <b>39%</b> terhadap rencana <b>19%</b>, murni sisi lab/engineering. Rantai GLD-CH-GW-Server berjalan end-to-end dengan dua model AI (TCN &amp; CNN Dual-Branch). Meeting 24 Jul mengonfirmasi <b>24V siap sertifikasi</b>; update 30 Jul memajukan &amp; menggabungkan kunjungan RU IV Cilacap — survey + instalasi pada <b>9–10 Agustus</b> — serta memperjelas arsitektur (app+DB lokal, cloud sebagai gateway ringan). <b>Update 6–8 Agustus (H-1 kunjungan):</b> mounting &amp; topologi GLD/CH diarahkan mengikuti pola sistem Corrosion Monitoring Emerson yang sudah teruji di kilang, muncul requirement tambahan (deteksi Benzena/CO/H2S, alarm toksik langsung, larangan PVC/las/bor) yang <b>belum sepenuhnya direkonsiliasi</b> dengan scope resmi — dan <b>push alarm berhasil diuji</b> di demo mesh kampus (GLD disemprot LPG → alarm otomatis tanpa pull request). Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
+    <p>Progres pilot Cilacap <b>39%</b> terhadap rencana <b>19%</b>, murni sisi lab/engineering — angka ini berasal dari asesmen terakhir 24 Jul dan <b>belum di-reassess</b> meski ada deliverable teknis baru s.d. 31 Agu. Rantai GLD-CH-GW-Server berjalan end-to-end dengan dua model AI (TCN &amp; CNN Dual-Branch, inferensi diklaim sudah on-device 19 Agu). Meeting 24 Jul mengonfirmasi <b>24V siap sertifikasi</b>; update 30 Jul memajukan &amp; menggabungkan kunjungan RU IV Cilacap — survey + instalasi pada <b>9–10 Agustus</b> — serta memperjelas arsitektur (app+DB lokal, cloud sebagai gateway ringan). <b>Update 6–8 Agustus (H-1 kunjungan):</b> mounting &amp; topologi GLD/CH diarahkan mengikuti pola sistem Corrosion Monitoring Emerson, muncul requirement tambahan (Benzena/CO/H2S, alarm toksik langsung, larangan PVC/las/bor) yang <b>belum sepenuhnya direkonsiliasi</b>, dan <b>push alarm berhasil diuji</b> di demo mesh kampus. ⚠️ <b>Tidak ada dokumentasi hasil kunjungan Cilacap itu sendiri</b> yang ditemukan di repo setelah 9 Agu. Periode 19–27 Agustus diisi pekerjaan dokumentasi teknis sisi LGU–ITB: <b>Datasheet Sistem</b> konsolidasi (arsitektur, EMC, server/jaringan — 7 gate baru), <b>Executive Presentation</b> untuk calon klien baru (di-redesain ke template resmi ITB), dan pada <b>31 Agustus</b> gambar CAD bracket mounting U-bolt v2. Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
   </section>
 
   <div class="card heatcard">
@@ -192,12 +192,13 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
   </div>
 
   <section class="summary">
-    <div class="scell good"><div class="v">39%</div><div class="l">Progres pilot · rencana <b>19%</b></div></div>
+    <div class="scell good"><div class="v">39%</div><div class="l">Progres pilot · rencana <b>19%</b> <b>(per 24 Jul)</b></div></div>
     <div class="scell crit"><div class="v">3</div><div class="l">Blocker kritis</div></div>
+    <div class="scell crit"><div class="v">11</div><div class="l">Gate menuju field <b>(+7 baru sejak 19 Agu)</b></div></div>
     <div class="scell"><div class="v">24</div><div class="l">Action items</div></div>
     <div class="scell"><div class="v">14.477</div><div class="l">Sampel dataset</div></div>
     <div class="scell"><div class="v">≥92%</div><div class="l">Akurasi TCN <b>(8 model, prediksi leak)</b></div></div>
-    <div class="scell good"><div class="v">99,20%</div><div class="l">Akurasi CNN Dual-Branch <b>(klasifikasi gas, on-chip)</b></div></div>
+    <div class="scell good"><div class="v">99,20%</div><div class="l">Akurasi CNN Dual-Branch <b>(klasifikasi gas, on-device)</b></div></div>
   </section>
 
   <div class="phase">
@@ -212,6 +213,12 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
   </div>
   <div class="phase-wrap"><div class="tl" id="tl2"></div></div>
 
+  <div class="phase">
+    <span class="pn">FASE 3</span>
+    <div><h2>Dokumentasi Teknis &amp; Materi Klien</h2><p class="phase-sub">11–31 Agustus 2026 · tidak ada dokumentasi hasil kunjungan lapangan RU IV Cilacap pada periode ini</p></div>
+  </div>
+  <div class="phase-wrap"><div class="tl" id="tl3"></div></div>
+
   <div class="callout">
     <h3>⚠ Blocker Kritis Aktif (per 20 Juli)</h3>
     <table>
@@ -222,12 +229,12 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
   </div>
 
   <div class="gatebox">
-    <span class="gt">⛔ Gate menuju field — RU IV Cilacap</span>
-    Rencana &amp; workflow site survey Cilacap sudah siap. <b>Penyusunan TRA/JSA menjadi gate</b> untuk eksekusi survei fisik &amp; instalasi. Gate tambahan (meeting 24 Jul): <b>gas capability minimum 6 kelas</b> harus terverifikasi; <b>perizinan visitor/kerja/HSE RU Cilacap</b> harus lengkap sejak awal. Gate baru (6 Agu): <b>sertifikasi ketinggian pemasangan</b> — kilang baru mengizinkan instalasi setinggi orang, belum tersertifikasi untuk lebih tinggi; <b>requirement gas Benzena/CO/H2S</b> belum direkonsiliasi dengan gate 6-kelas di atas. Alur: LGU undang Pertamina ke lab → uji lab → kunjungan RU.
+    <span class="gt">⛔ Gate menuju field — RU IV Cilacap (11 aktif per 31 Agu)</span>
+    Rencana &amp; workflow site survey Cilacap sudah siap. <b>Penyusunan TRA/JSA menjadi gate</b> untuk eksekusi survei fisik &amp; instalasi. Gate tambahan (meeting 24 Jul): <b>gas capability minimum 6 kelas</b> harus terverifikasi; <b>perizinan visitor/kerja/HSE RU Cilacap</b> harus lengkap sejak awal. Gate (6 Agu): <b>sertifikasi ketinggian pemasangan</b>; <b>requirement gas Benzena/CO/H2S</b> belum direkonsiliasi dengan gate 6-kelas; <b>kapasitas Gateway/CH vs jumlah sensor</b> belum ada angka resmi. <b>7 gate baru (19 Agu)</b> dari Datasheet Sistem &amp; spek EMC: sertifikasi solar panel hazardous, keamanan baterai 18650 CH, tools/fastener bracket, registrasi jaringan Gateway ke intranet kilang, spesifikasi server/VM aktual, rekonsiliasi spek input power CH (5VDC vs solar+18650), dan dukungan firmware utk port Ethernet Gateway. Alur: LGU undang Pertamina ke lab → uji lab → kunjungan RU — <b>status kunjungan 9–10 Agustus tidak terkonfirmasi di repo</b>.
   </div>
 
   <footer>
-    Sumber: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Deteksi Kebocoran Gas CNN Dual-Branch (6 Agu) · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · diskusi teknis &amp; WhatsApp 6–8 Agustus 2026 · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres estimasi turunan dari status aktivitas · progres terukur 24 Juli, diperbarui 9 Agustus 2026.
+    Sumber: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Deteksi Kebocoran Gas CNN Dual-Branch (6 Agu) · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · diskusi teknis &amp; WhatsApp 6–8 Agustus 2026 · Parameter spesifikasi EMC_lengkap.docx (19 Agu) · Datasheet Sistem GLD rev 0.2–0.7 (19 Agu) · GLD Executive Presentation (27 Agu) · GLD U-Bolt Bracket V2.png / ATEX Casing v2 (31 Agu) · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres estimasi turunan dari status aktivitas, terakhir diukur 24 Juli 2026 · laporan difinalisasi untuk periode ini 31 Agustus 2026.
   </footer>
 </div>
 
@@ -308,6 +315,25 @@ const P2=[
   {d:'9 Agu',date:'2026-08-09',title:'Model AI baru — CNN Dual-Branch resmi menggantikan CNN 1D',stat:['milestone','Milestone'],tags:[['ml','AI/ML']],
    body:'File presentasi ditemukan di <i>Sumber Dokumen/</i> (push langsung Farhan Budiman ke main, di luar sesi Claude; dibuat Lab IoT ITB, edit terakhir 6 Agu oleh <b>Ilmania Syakira</b>). <b>Penerus CNN 1D</b> (dinyatakan eksplisit di deck), dikonfirmasi user <b>menggantikan CNN 1D</b> di seluruh deliverable. Arsitektur 2-cabang: Conv1D dari 8 sensor MQ + Dense dari 7 fitur sensitivitas datasheet MQ → digabung → Dense→Softmax, 1.347 parameter. Klasifikasi kini <b>4 kelas: LPG/CO2/Udara Bersih/H2</b>. <b>Akurasi resmi 99,20%</b> on-chip ESP32-S3 (TFLite int8, 9,14 KB) — dikonfirmasi user sbg angka dipakai (bukan 99,73% pre-kuantisasi). ⚠️ Masih <b>belum mencakup H2S &amp; Benzena</b> (requirement 6 Agu) — gate gas tambahan belum tertutup sepenuhnya.'}
 ];
+const P3=[
+  {m:'Agustus 2026'},
+  {d:'9–10 Agu',range:['2026-08-09','2026-08-10'],title:'Kunjungan Cilacap direncanakan — hasil tidak terdokumentasi',stat:['temuan','⚠ Belum Terkonfirmasi'],tags:[['coord','Koordinasi']],
+   body:'Sesuai jadwal 30 Jul (berangkat 9 Agu, instalasi 10 Agu, survey+instalasi digabung), urutan demo disiapkan: aktifkan server → pasang GW → pasang CH → pasang GLD 24V. <b>Tidak ada notulen, foto, atau update status pasca-kunjungan yang ditemukan di repo</b> setelah tanggal ini hingga 31 Agustus — laporan ini tidak mengasumsikan pelaksanaan maupun hasilnya.'},
+  {d:'19 Agu',date:'2026-08-19',title:'Datasheet Sistem GLD konsolidasi dibuat',stat:['milestone','Milestone'],tags:[['sw','Dokumentasi'],['coord','Server/Jaringan']],
+   body:'<i>Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html</i> dibuat (redesain diagram-first, rev 0.2→0.7 di hari yang sama): arsitektur end-to-end, spek hardware GLD/CH/Gateway, protokol radio LoRa STAR/MESH, status ATEX, kapabilitas gas/AI, <b>kebutuhan server &amp; jaringan utk IT Pertamina</b> (bag. 07 — merangkum 2 dokumen draft dari repo <i>PertaminaGLD</i> apa adanya, bukan konfigurasi live), catu daya/instalasi, status gate.'},
+  {d:'19 Agu',date:'2026-08-19',title:'AI inference dikonfirmasi on-device ESP32-S3',stat:['milestone','Milestone (caveat)'],tags:[['ml','AI/ML']],
+   body:'Inferensi CNN Dual-Branch diklaim <b>sudah berjalan on-board ESP32-S3 GLD</b> (int8, 9,14 KB) — menggantikan status "PC + emulator". ⚠️ <b>Dikonfirmasi langsung user, belum diverifikasi dari dokumen/commit firmware tertulis</b> — source firmware terakhir yg bisa diperiksa masih deskripsikan skema 6-kelas lama, kemungkinan dokumen mirror belum update (dugaan, bukan fakta terverifikasi).'},
+  {d:'19 Agu',date:'2026-08-19',title:'Update besar Datasheet: catu daya final, bracket, jaringan, EMC',stat:['milestone','Milestone'],tags:[['power','Daya'],['hw','Hardware'],['net','Jaringan']],
+   body:'<b>Catu daya GLD final: 24VDC ≥2A/unit</b>, siap pasang (kabel+PSU oleh RU/kilang); jalur baterai portable tetap terpisah. <b>Bracket GLD &amp; CH+solar: L-bracket ref. Emerson</b>. Arsitektur GW↔Server diperjelas: MAC GW didaftarkan, GW+server satu jaringan; pembagian kerja LGU (install stack) vs Pertamina (server/VM+jaringan). Payload GW→broker &lt;1KB, alarm push ~10 dtk/normal pull ~90 dtk. Rekomendasi spek server (4 vCore/8GB/100GB/Ubuntu/PostgreSQL) diusulkan LGU. <b>Spek EMC/fisik resmi diterima</b> (Dr. Nina Siti Aminah, ITB Fisika) — 3 foto produk aktual di-embed, TX power 22dBm/7,995W direkonsiliasi bukan kontradiksi dgn 17dBm firmware/5,75W baterai. <b>7 gate baru</b>: sertifikasi solar panel, keamanan baterai 18650 CH, tools bracket, registrasi jaringan, spek server, spek power CH (5VDC vs solar+18650), dukungan firmware Ethernet GW.'},
+  {d:'19 Agu',date:'2026-08-19',title:'Versi slide Datasheet Sistem (PDF + PowerPoint)',stat:['berjalan','Update'],tags:[['sw','Dokumentasi']],
+   body:'<i>Datasheet_Sistem_GLD_Slides.pptx</i> (editable, blok [Sources] di speaker notes) &amp; <i>...Slides.pdf</i> (14 halaman, 16:9) dirilis sbg versi presentasi datasheet. Koreksi audit: status TRA/JSA "draft tersedia, belum disahkan"; klaim AI on-device tetap bawa caveat.'},
+  {d:'27 Agu',date:'2026-08-27',title:'Executive Presentation dibuat — pitch klien baru',stat:['milestone','Milestone'],tags:[['coord','Marketing']],
+   body:'<i>GLD_Executive_Presentation.pptx</i> — deck pitch/showcase utk <b>calon klien baru</b> (RU lain/instansi lain), berbeda tujuan dari Datasheet Sistem (teknis, non-persuasif). Fokus diferensiator: multi-gas, AI trainable/edge, mesh self-healing privat. Bukti lapangan RU IV Cilacap + <b>RU VII Kasim/Sorong</b>; mitra manufaktur skala besar <b>PT Samindo</b> (ekosistem Samsung Indonesia) disebutkan generik tanpa detail kontrak.'},
+  {d:'27 Agu',date:'2026-08-27',title:'Redesain total ke template resmi Korporasi Kinarya ITB',stat:['berjalan','Update'],tags:[['sw','Desain']],
+   body:'Seluruh deck di-rebuild mengikuti template brand resmi ITB (navy 133765/002B5F, biru 2D64AC, cyan 38C0EF/1CD8FF, motif blok kuartal-lingkaran), menggantikan tema navy+amber lama. Kini <b>13 slide</b> (+1 slide baru "Arsitektur Jaringan") + 4 foto lapangan/hardware asli baru. Template ini jadi <b>referensi desain baku</b> utk deck client-facing berikutnya.'},
+  {d:'31 Agu',date:'2026-08-31',title:'Desain CAD bracket U-Bolt v2 ("ATEX Casing v2")',stat:['berjalan','Update'],tags:[['hw','Hardware']],
+   body:'<i>GLD U-Bolt Bracket V2.png</i> — gambar teknis CAD (Farhan Budiman) mounting sensor GLD ke pipa existing pakai <b>U-bolt 2"/DN50</b> (target pipa OD 60,3 mm, thread M10, lebar dalam 62–65 mm), lengkap pelat spacer &amp; tampilan terdimensi. Konkretisasi lanjutan dari arahan bracket L/U-clamp (6 &amp; 19 Agu) — kini gambar kerja siap-fabrikasi. Di-push langsung ke <i>main</i> di luar sesi Claude, belum ada notulen pendukung konteksnya.'}
+];
 function render(data,elId){
   const c=document.getElementById(elId);let cur=null;
   data.forEach(e=>{
@@ -327,11 +353,11 @@ function render(data,elId){
     c.appendChild(row);
   });
 }
-render(P1,'tl1');render(P2,'tl2');
+render(P1,'tl1');render(P2,'tl2');render(P3,'tl3');
 
 /* ---------- HEATMAP NAVIGASI TANGGAL ---------- */
 (function(){
-  const HEAT_START=new Date(2026,3,20), HEAT_END=new Date(2026,7,9);
+  const HEAT_START=new Date(2026,3,20), HEAT_END=new Date(2026,7,31);
   const MONTH_ID=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
   const TYPE_COLOR={blocker:'var(--crit)',milestone:'var(--accent)',temuan:'var(--info)',selesai:'var(--good)',berjalan:'var(--ink-soft)'};
   const TYPE_PRI=['blocker','milestone','temuan','selesai','berjalan'];
@@ -343,7 +369,7 @@ render(P1,'tl1');render(P2,'tl2');
     heatData[key].count++;
     heatData[key].types[type]=(heatData[key].types[type]||0)+1;
   }
-  [...P1,...P2].forEach(e=>{
+  [...P1,...P2,...P3].forEach(e=>{
     if(e.m)return;
     const type=e.stat[0];
     if(e.range){

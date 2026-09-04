@@ -237,7 +237,29 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
           <span><i style="background:var(--accent)"></i>Aktual (bottom-up, per 5 Sep 2026)</span>
         </div>
       </div>
-      <div class="banner warn"><span class="ic">⚠️</span><span><b>Baru 1 titik data aktual</b> — dashboard ini baru dibuat 5 Sep 2026, jadi kurva aktual belum punya riwayat mingguan seperti Dashboard proyek utama. Titik berikutnya akan menambah histori riil setelah update berikutnya.</span></span></div>
+      <div class="banner warn"><span class="ic">⚠️</span><span><b>Baru 1 titik data aktual</b> — dashboard ini baru dibuat 5 Sep 2026, jadi kurva aktual belum punya riwayat mingguan seperti Dashboard proyek utama. Titik berikutnya akan menambah histori riil setelah update berikutnya.</span></div>
+
+      <div class="subhead"><h3>Artinya konkret 20% / 40% / 60% — supaya angka tidak abstrak</h3></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Progres</th><th>Fase yang harus SELESAI</th><th>Fase yang sedang berjalan</th><th>Artinya konkret</th></tr>
+        <tr class="hl"><td><b>≈20% (sekarang)</b></td><td>Perencanaan</td><td>Redesign (~35% jalan)</td><td>Target klasifikasi sudah ada, material dipilih — tapi BOM, gambar teknik, kalkulasi hot-spot <b>belum selesai</b></td></tr>
+        <tr><td><b>≈40%</b></td><td>Perencanaan + Redesign penuh</td><td>Pre-Compliance (~45% jalan)</td><td>Semua BOM/gambar/kalkulasi termal <b>rampung</b>, DAN pengukuran suhu aktual + pre-scan EMC + pre-test RF <b>sudah dijalankan internal</b></td></tr>
+        <tr><td><b>≈60%</b></td><td>Perencanaan + Redesign + Pre-Compliance</td><td>Uji Lab Terakreditasi (~30% jalan)</td><td>Sample <b>sudah dikirim ke lab akreditasi</b>, sebagian pengujian resmi ATEX/IP/EMC/RF sudah lolos</td></tr>
+      </table></div>
+      <p style="font-size:11.5px;color:var(--ink-soft)">Dihitung dari titik-tengah bobot 5-fase (bagian 02 atas) — bukan skala linear sederhana, krn tiap fase punya durasi &amp; bobot berbeda (Uji Lab sendiri 41,7% dari total).</p>
+
+      <div class="subhead"><h3>Breakdown per aktivitas — Rencana vs Aktual (gaya sama dgn Dashboard Proyek Pilot)</h3></div>
+      <div class="card">
+        <div class="card-head"><h3>Gantt Sertifikasi — 8 Aktivitas</h3></div>
+        <div class="chart-scroll"><svg id="gantt-cert" viewBox="0 0 960 400" role="img" aria-label="Gantt sertifikasi 8 aktivitas"></svg></div>
+        <div class="legend-row">
+          <span><i style="background:var(--good)"></i>Sesuai/lebih cepat rencana</span>
+          <span><i style="background:var(--warn)"></i>Baru mulai, di belakang rencana</span>
+          <span><i style="background:var(--line-2)"></i>Belum mulai</span>
+          <span>│ garis vertikal hitam = target rencana pada tanggal ini</span>
+        </div>
+        <p style="font-size:11px;color:var(--ink-soft);margin:10px 0 0;line-height:1.6">Detail per baris: <b>01</b> target Zona/T-class/gas group/metode proteksi · <b>02</b> Redesign ATEX (enclosure, BOM, kalkulasi termal) · <b>03</b> Redesign IP (sealing/gasket GLD) · <b>04</b> Redesign EMC (review PCB grounding/shielding) · <b>05</b> Redesign RF (leverage sertifikat modul, config antena) · <b>06</b> Pre-Compliance Testing internal (4 track) · <b>07</b> Uji Lab Terakreditasi resmi (4 track) · <b>08</b> Finalisasi TCF/DoC/label/sertifikat.</p>
+      </div>
     </section>
 
     <section class="zone" id="z3">
@@ -477,5 +499,61 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
   const opt=new Date(2026,10,27);
   svg.appendChild(el('line',{x1:x(opt),y1:m.t,x2:x(opt),y2:m.t+ph,stroke:'var(--good)','stroke-width':1.5,'stroke-dasharray':'2 3',opacity:.6}));
   const ot=el('text',{x:x(opt)+5,y:H-m.b+35,'text-anchor':'start',fill:'var(--good)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});ot.textContent='Titik-tengah (5,5 bln)';svg.appendChild(ot);
+})();
+</script>
+<script>
+(function(){
+  const START=new Date(2026,5,12), END=new Date(2026,10,27);
+  const TODAY=new Date(2026,8,5);
+  function D(a){return new Date(a[0],a[1],a[2]);}
+  const ACT=[
+    {id:1,name:'Perencanaan & Scoping',s:[2026,5,12],e:[2026,6,3],act:90,plan:100,st:'good'},
+    {id:2,name:'Redesign — ATEX',s:[2026,6,3],e:[2026,7,7],act:15,plan:100,st:'warn'},
+    {id:3,name:'Redesign — IP',s:[2026,6,3],e:[2026,7,7],act:30,plan:100,st:'warn'},
+    {id:4,name:'Redesign — EMC',s:[2026,6,3],e:[2026,7,7],act:60,plan:100,st:'warn'},
+    {id:5,name:'Redesign — RF',s:[2026,6,3],e:[2026,7,7],act:65,plan:100,st:'accent'},
+    {id:6,name:'Pre-Compliance Testing',s:[2026,7,7],e:[2026,7,30],act:0,plan:100,st:'neutral'},
+    {id:7,name:'Uji Lab Terakreditasi',s:[2026,7,30],e:[2026,10,9],act:0,plan:9,st:'neutral'},
+    {id:8,name:'Finalisasi & Sertifikat',s:[2026,10,9],e:[2026,10,27],act:0,plan:0,st:'neutral'}
+  ];
+  const GMILES=[
+    {d:[2026,5,12],lab:'Kick-Off',done:true},
+    {d:[2026,6,3],lab:'Target: Scoping selesai',done:false},
+    {d:[2026,7,7],lab:'Target: Redesign selesai',done:false},
+    {d:[2026,7,30],lab:'Target: Pre-Compliance selesai',done:false},
+    {d:[2026,10,9],lab:'Target: Lab test selesai',done:false},
+    {d:[2026,10,27],lab:'Target: Sertifikat terbit',done:false}
+  ];
+  const svg=document.getElementById('gantt-cert');
+  const W=960,H=400,m={l:270,r:44,t:34,b:30};
+  const x=d=>m.l+((d-START)/(END-START))*(W-m.l-m.r);
+  const NS='http://www.w3.org/2000/svg';
+  function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt',2026,9],['Nov',2026,10]];
+  MONTHS.forEach(([lab,yr,mo])=>{const d=new Date(yr,mo,1);if(d<START||d>END)return;
+    svg.appendChild(el('line',{x1:x(d),y1:m.t-6,x2:x(d),y2:H-m.b,stroke:'var(--line)','stroke-width':1,opacity:.7}));
+    const t=el('text',{x:x(d)+4,y:m.t-12,fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});t.textContent=lab;svg.appendChild(t);
+  });
+  const rowH=(H-m.t-m.b)/(ACT.length+1);
+  ACT.forEach((p,i)=>{
+    const cy=m.t+rowH*i+rowH/2;
+    const nm=el('text',{x:m.l-14,y:cy+2,'text-anchor':'end',fill:'var(--ink)','font-size':11.5,'font-weight':600});
+    nm.textContent=p.name;svg.appendChild(nm);
+    const idl=el('text',{x:14,y:cy+2,fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});idl.textContent=('0'+p.id).slice(-2);svg.appendChild(idl);
+    const xs=x(D(p.s)), xe=x(D(p.e)); const bw=Math.max(xe-xs,3), bh=15;
+    svg.appendChild(el('rect',{x:xs,y:cy-bh/2,width:bw,height:bh,rx:7,fill:'var(--surface-3)'}));
+    const col=p.st==='neutral'?'var(--line-2)':'var(--'+p.st+')';
+    svg.appendChild(el('rect',{x:xs,y:cy-bh/2,width:Math.max(bw*p.act/100,p.act>0?3:0),height:bh,rx:7,fill:col}));
+    if(p.plan>0){const px=xs+bw*p.plan/100;
+      svg.appendChild(el('rect',{x:px-1.2,y:cy-bh/2-4,width:2.4,height:bh+8,fill:'var(--ink)',opacity:.55,rx:1}));}
+    const pct=el('text',{x:xe+7,y:cy+3.5,fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});
+    pct.textContent=p.act+'%';svg.appendChild(pct);
+  });
+  svg.appendChild(el('line',{x1:x(TODAY),y1:m.t-6,x2:x(TODAY),y2:H-m.b,stroke:'var(--accent)','stroke-width':1.5,'stroke-dasharray':'3 3'}));
+  const my=H-m.b+2;
+  GMILES.forEach(ms=>{const d=D(ms.d);const cx=x(d);const s=6;
+    svg.appendChild(el('path',{d:`M${cx} ${my-s} L${cx+s} ${my} L${cx} ${my+s} L${cx-s} ${my} Z`,
+      fill:ms.done?'var(--accent)':'var(--surface)',stroke:ms.done?'var(--accent)':'var(--ink-soft)','stroke-width':1.6}));
+  });
 })();
 </script>

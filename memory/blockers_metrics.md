@@ -34,10 +34,11 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 | gate:solar-cert | Sertifikasi solar panel (CH) utk hazardous area | **Belum disourcing** — PIC LGU (dec:41) |
 | gate:ch-batt-safety | Keamanan baterai Li-ion 18650 CH di kondisi kilang | **Belum didokumentasikan** — perlu verifikasi sertifikasi sel/BMS (mis. IEC 62133/UN38.3) — PIC LGU (dec:41) |
 | gate:bracket-tools | Ukuran kunci/mur-baut bracket GLD & CH | **Belum ditentukan** — PIC LGU/Tim Mekanik (dec:40) |
-| gate:net-registration | Step-by-step registrasi Gateway ke jaringan kilang + kebijakan security jaringan (selain SSID/password) | **Perlu jawaban Pertamina** — belum ada (dec:42) |
-| gate:server-spec | Spesifikasi server/VM aktual (CPU/RAM/storage/OS/DB) RU IV | LGU sudah usulkan rekomendasi minimum (dec:44) — **menunggu konfirmasi Pertamina** |
+| gate:net-registration | Step-by-step registrasi ke jaringan kilang + kebijakan security jaringan (selain SSID/password) | **Perlu jawaban Pertamina** — belum ada (dec:42). ⚠️ **Update dec:46**: kemungkinan yang didaftarkan bukan MAC Gateway langsung, melainkan NIC kedua PC server LGU (dual-homed) — perlu dikonfirmasi mana yang benar |
+| gate:server-spec | Spesifikasi server/VM aktual (CPU/RAM/storage/OS/DB) RU IV, disediakan Pertamina | LGU sudah usulkan rekomendasi minimum (dec:44) — **menunggu konfirmasi Pertamina**. ⚠️ **Update dec:46**: PC dedicated dekat GW (dikelola LGU) adalah TAMBAHAN dari server/VM ini, bukan pengganti — relasi/pembagian fungsi persis antara keduanya **masih perlu diklarifikasi** |
 | gate:ch-power-spec | Input power CH: spek EMC tertulis 5VDC vs notulen daya sebut solar+18650 | **Belum rekonsiliasi** — perlu klarifikasi apakah 5VDC referensi internal board atau beda konfigurasi (dec:45) |
 | gate:gw-ethernet | Gateway punya port Ethernet fisik (spek EMC) selain Wi-Fi | **Belum jelas** apakah firmware Gateway saat ini sudah mendukung jalur Ethernet (dec:45) — berpotensi menyederhanakan isu keamanan Wi-Fi di bagian 08 |
+| gate:dashboard-exposure | Keamanan akses dashboard dari PC server LGU ke LAN kantor kilang | **Direncanakan langsung via NIC kedua, tanpa firewall/VPN tambahan** (dec:46) — belum ada review keamanan/kebijakan akses; berpotensi jadi celah eksposur ke seluruh intranet kantor kilang, perlu diklarifikasi ke Pertamina & tim jaringan |
 
 ## Metrik daya (Update Timeline Juli, 16 Jul 2026)
 **GLD node (baterai 7P = 7×4000 mAh = 28 Ah, ~70,4 Wh usable):**

@@ -51,5 +51,9 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 - **31 Agu** 🔧 **Desain CAD bracket U-Bolt v2 "ATEX Casing v2"** (`Sumber Dokumen/GLD U-Bolt Bracket V2.png`, Farhan Budiman) — mounting sensor GLD ke pipa existing pakai U-bolt 2"/DN50 (pipa OD 60,3mm, thread M10). Konkretisasi lanjutan arahan bracket 6 & 19 Agu. Di-push langsung ke `main` di luar sesi Claude (commit "commit CAD"), belum ada notulen pendukung konteksnya.
 - **31 Agu** 📄 Laporan progres kronologis (`Laporan_Progres_ByDate_GLD.{html,md}`) difinalisasi utk periode 20 Apr–31 Agu & diekspor PDF (`Laporan_Progres_GLD_Final_31Agustus2026.pdf`, 12 halaman).
 
+## Fase 4 — Awal September 2026
+- **1 Sep** Notulen rapat ATEX/sertifikasi RU IV Cilacap ditambahkan ke repo (`Sumber Dokumen/Notulen_Meeting_Pertamina_RU4_Cilacap.pdf`, diunggah user) — bahas sertifikasi ATEX (~3 minggu, lembaga China), desain enclosure Ex-proof, topologi Gateway, catu daya. Rapat perencanaan terpisah, bukan hasil kunjungan 9–10 Agu.
+- **~Sep** 🔵 **Arsitektur server RU IV diperjelas** (dec:46) — PC fisik dedicated dikelola LGU dekat Gateway, MQTT broker sendiri via router LGU di lokasi, dual-homed ke intranet kantor kilang utk akses dashboard langsung. Tambahan (bukan pengganti) dari rencana server/VM Pertamina (dec:42/44). Keputusan/diskusi baru, **terpisah** dari kunjungan 9–10 Agu. Gate baru `gate:dashboard-exposure` (keamanan akses langsung ke LAN kantor, belum direview).
+
 ## Rencana ke depan (baseline resmi)
 Integration test (Sep) · HSE/permit (Nov) · **Field installation = target implementasi (Des)** · Field trial (Des–Jan) · Evaluation (Jan) · Industrialization roadmap (Feb 2027).

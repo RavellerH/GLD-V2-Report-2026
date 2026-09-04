@@ -2,6 +2,9 @@
 
 Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineering
 
+## Pra-Tahap 2 (sebelum timeline tracked ini dimulai)
+- **Des 2025** 🔵 **Field test pertama sistem versi 1 (V1) di RU VII Kasim/Sorong** — konfigurasi single-channel (vs V2 saat ini yang multi-channel, lih. rapat 6 Agu). Ditemukan 5 Sep 2026 (dikoreksi user dari framing lama yang menyiratkan "target implementasi Des 2026" adalah pengujian Kasim pertama — sebenarnya kelanjutan dari kolaborasi yang sudah berjalan sejak V1). Detail lengkap belum ada di repo ini — konteks/laporan hasil V1 belum ditemukan.
+
 ## Fase 1 — Lab (20 Apr – 7 Jun 2026), rencana mingguan M1–M7
 - **M1 (20–26 Apr)** ✅ Desain chamber · uji node GLD lama · uji routing CH (CH_Hello/CH_Config).
 - **M2 (27 Apr–3 Mei)** ✅ Uji node GLD baru (#0001/#0002; ADS1115, MCP3208 8ch, LoRa ok) · uji baterai CH (3 CH + 1 node).
@@ -13,7 +16,7 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 - **M7 (1–7 Jun)** 🔧 Persiapan pemasangan.
 
 ## Fase 2 — Kick-off & menuju field (12 Jun – 23 Jul 2026)
-- **12 Jun** 🔵 **Kick-Off Pertamina** — baseline 9 bulan, scope 6 RU, target Des, field test RU-VII Kasim.
+- **12 Jun** 🔵 **Kick-Off Pertamina** — baseline 9 bulan, scope 6 RU, target implementasi program Des; field test V2 RU-VII Kasim direncanakan menyusul V1 (Des 2025) di lokasi yang sama, jadwal pasti belum dikonfirmasi.
 - **18 Jun** Prinsip AI: fingerprint 8-sensor; TRL-7.
 - **26 Jun** ⚠️ Antena LoRa 6 m maks ±100 m (spec 1–2 km); TCNN mulai.
 - **30 Jun** Project Report June: PCB v1/v2 done; chamber assembly & dataset progress.

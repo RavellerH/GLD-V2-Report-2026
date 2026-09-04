@@ -12,7 +12,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - **Arsitektur:** sensor node (8× MQ + AI edge) → **LoRa star-mesh** → Cluster Head → Gateway → PC Server → Dashboard.
 - **Program:** 9 bulan (Jun 2026 → Feb 2027), rollout **6 Refinery Unit (RU II–VII)**.
 - **Scope aktif sekarang:** **pilot RU IV Cilacap** (5 RU lain = roadmap).
-- **Field test kolaborasi:** RU-VII Kasim/Sorong. **Target implementasi:** Des 2026.
+- **Field test kolaborasi:** RU-VII Kasim/Sorong — **V1 sudah diuji di sana Desember 2025** (single-channel); **V2 (saat ini) akan menyusul diuji di sana juga** sesuai timeline program, jadwal pasti belum dikonfirmasi (dikoreksi user 5 Sep dari framing lama "target implementasi Des 2026" yang menyiratkan ini pengujian pertama — dec:73).
 
 ## 2. Status singkat (per 4 Sep 2026)
 

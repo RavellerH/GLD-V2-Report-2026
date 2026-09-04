@@ -10,7 +10,7 @@
 ## Blocker kritis aktif (2)
 | ID | Blocker | Metrik | Dampak |
 |---|---|---|---|
-| blk:power | Autonomi baterai GLD < target 30 hari | draw ON **5,75 W**; 7P(28Ah)=**1,76 hari**; 30 hari butuh ~120 sel | Jalur baterai **terpisah**, tidak menahan deployment — GLD sekarang pakai **24VDC ≥2A/unit (final, siap pasang, dec:39)**, kabel+PSU pengadaan RU/kilang |
+| blk:power | Autonomi baterai GLD < target 30 hari | draw ON **5,75 W**; 7P(28Ah)=**1,76 hari**; 30 hari butuh ~120 sel | Jalur baterai **terpisah**, tidak menahan deployment — GLD sekarang pakai **24VDC ≥1A/unit (final, siap pasang, dec:39, direvisi dari ≥2A per dec:47)**, kabel+PSU pengadaan RU/kilang |
 | blk:tpl | TPL5010 belum memutus daya | board ~**0,4 V** & cuplik data saat "off" | Duty-cycle belum efektif hemat daya |
 | blk:conv | DC converter perlu diganti/dimodifikasi | arahan 20 Jul | Menahan finalisasi catu daya |
 
@@ -29,7 +29,7 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 |---|---|---|
 | gate:jsa | TRA/JSA | Belum disusun → menahan eksekusi site survey fisik RU IV Cilacap |
 | gate:cert-height | Sertifikasi ketinggian pemasangan | Percobaan di kilang baru setinggi orang; **belum tersertifikasi** utk instalasi permanen (rapat resmi 6 Agu) |
-| gate:gas-extra | Requirement gas tambahan (Benzena/CO/H2S) | Belum direkonsiliasi dgn gate 6-kelas (dec:17/dec:30) — status verifikasi belum ada. Model AI resmi saat ini (**CNN Dual-Branch**, dec:36) sudah cakup H2 (gate lama) tapi **masih TIDAK cakup H2S/Benzena** — gate ini belum tertutup |
+| gate:gas-extra | Requirement gas tambahan (Benzena/CO/H2S) | Belum direkonsiliasi dgn gate 6-kelas (dec:17/dec:30) — status verifikasi belum ada. Model AI resmi saat ini (**CNN Dual-Branch**, dec:36) sudah cakup H2 (gate lama) tapi **masih TIDAK cakup H2S/Benzena** — gate ini belum tertutup. ⚠️ **Blocker konkret (dec:48, ~awal Sep)**: sampel gas (H2S, metana, amonia, dll.) dari Pertamina **belum diterima sampai sekarang**; LGU sudah cari suplier di Bandung tapi **masih sulit dapat sampel gas-gas ini** — tanpa sampel, dataset/model utk gas-gas tambahan ini tidak bisa dikembangkan/divalidasi |
 | gate:capacity | Kapasitas GW/CH vs jumlah sensor | **Belum ada angka resmi** — action item terbuka (Tim Komunikasi ITB), lih. dec:28 |
 | gate:solar-cert | Sertifikasi solar panel (CH) utk hazardous area | **Belum disourcing** — PIC LGU (dec:41) |
 | gate:ch-batt-safety | Keamanan baterai Li-ion 18650 CH di kondisi kilang | **Belum didokumentasikan** — perlu verifikasi sertifikasi sel/BMS (mis. IEC 62133/UN38.3) — PIC LGU (dec:41) |

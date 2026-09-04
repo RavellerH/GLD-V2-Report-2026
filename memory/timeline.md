@@ -53,6 +53,8 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 
 ## Fase 4 — Awal September 2026
 - **1 Sep** Notulen rapat ATEX/sertifikasi RU IV Cilacap ditambahkan ke repo (`Sumber Dokumen/Notulen_Meeting_Pertamina_RU4_Cilacap.pdf`, diunggah user) — bahas sertifikasi ATEX (~3 minggu, lembaga China), desain enclosure Ex-proof, topologi Gateway, catu daya. Rapat perencanaan terpisah, bukan hasil kunjungan 9–10 Agu.
+- **~Sep** ⚠️ **Sampel gas tambahan masih terhambat**: sampel H2S/metana/amonia/dll dari Pertamina belum diterima; LGU cari suplier alternatif di Bandung, masih sulit dapat. Blocker konkret `gate:gas-extra` (dec:48).
+- **~Sep** 🔧 **Revisi spek PSU/kabel GLD**: 24VDC **≥1A**/unit (turun dari ≥2A, dec:39→dec:47) — margin sizing saja, konsumsi aktual tak berubah (maks 7,995W@24VDC≈0,33A). Diterapkan ke Datasheet Sistem (rev 0.6→0.7).
 - **~Sep** 🔵 **Arsitektur server RU IV diperjelas** (dec:46) — PC fisik dedicated dikelola LGU dekat Gateway, MQTT broker sendiri via router LGU di lokasi, dual-homed ke intranet kantor kilang utk akses dashboard langsung. Tambahan (bukan pengganti) dari rencana server/VM Pertamina (dec:42/44). Keputusan/diskusi baru, **terpisah** dari kunjungan 9–10 Agu. Gate baru `gate:dashboard-exposure` (keamanan akses langsung ke LAN kantor, belum direview).
 
 ## Rencana ke depan (baseline resmi)

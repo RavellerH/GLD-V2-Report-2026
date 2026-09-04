@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "Gas Leak Detection (GLD) Tahap 2",
-    "as_of": "2026-08-08",
+    "as_of": "2026-09-04",
     "scope_active": "Pilot RU IV Cilacap",
     "note": "Machine-readable knowledge graph. Update bersama memory/graph.md."
   },
@@ -16,7 +16,7 @@
     { "id": "sub:net", "type": "subsystem", "label": "Jaringan LoRa & CH", "progress": 65 },
     { "id": "sub:ai", "type": "subsystem", "label": "AI & Sensor MQ", "progress": 55 },
     { "id": "sub:power", "type": "subsystem", "label": "Catu Daya & Energi", "progress": 50 },
-    { "id": "sub:chamber", "type": "subsystem", "label": "Chamber/HW/QC", "progress": 55 },
+    { "id": "sub:chamber", "type": "subsystem", "label": "Chamber/HW/QC", "progress": 35 },
     { "id": "sub:sw", "type": "subsystem", "label": "Software/Server/Dashboard", "progress": 58 },
     { "id": "sub:integ", "type": "subsystem", "label": "Integrasi Sistem", "progress": 68 },
     { "id": "sub:ruprep", "type": "subsystem", "label": "Survei RU / HSE", "progress": 40 },
@@ -42,7 +42,8 @@
     { "id": "repo:ml", "type": "repo", "label": "gas-leak-ml-chamber-system", "updated": "2026-06-24" },
 
     { "id": "model:tcn", "type": "model", "label": "TCN LPG 8-model (>=92%), prediksi leak time-series" },
-    { "id": "model:cnn1d", "type": "model", "label": "CNN 1D klasifikasi jenis gas (97,6% PC / 97,3% ESP32-S3 int8)" },
+    { "id": "model:cnn1d", "type": "model", "label": "CNN 1D klasifikasi jenis gas (97,6% PC / 97,3% ESP32-S3 int8) — superseded 9 Agu oleh CNN Dual-Branch" },
+    { "id": "model:cnndual", "type": "model", "label": "CNN Dual-Branch (model resmi sejak 9 Agu): 4 kelas LPG/CO2/Udara Bersih/H2, 99,20% on-chip int8 9,14KB, on-device ESP32-S3 (dikonfirmasi user, blm dok tertulis)" },
 
     { "id": "ru:2", "type": "ru", "label": "RU II Dumai", "status": "roadmap", "sensor": 10, "ch": 3, "gw": 1 },
     { "id": "ru:3", "type": "ru", "label": "RU III Plaju", "status": "roadmap", "sensor": 4, "ch": 3, "gw": 1 },
@@ -68,16 +69,23 @@
     { "id": "blk:tpl", "type": "blocker", "label": "TPL5010 belum optimal (~0,4V saat off)" },
     { "id": "blk:conv", "type": "blocker", "label": "DC converter perlu diganti" },
     { "id": "blk:lora", "type": "blocker", "label": "LoRa per-hop ~100m (disiasati mesh)" },
-    { "id": "gate:jsa", "type": "gate", "label": "TRA/JSA belum disusun" },
+    { "id": "gate:jsa", "type": "gate", "label": "TRA/JSA belum disahkan" },
     { "id": "gate:cert-height", "type": "gate", "label": "Sertifikasi ketinggian pemasangan belum ada" },
     { "id": "gate:gas-extra", "type": "gate", "label": "Requirement gas Benzena/CO/H2S belum direkonsiliasi dgn gate 6-kelas" },
+    { "id": "gate:atex-scoping", "type": "gate", "label": "Scoping ATEX (gas group/kelas temperatur/zona) belum ditentukan sama sekali — gate paling fundamental" },
+    { "id": "gate:dashboard-exposure", "type": "gate", "label": "Eksposur dashboard ke LAN kantor kilang tanpa firewall/VPN — satu-satunya sisi jaringan yg masih perlu koordinasi Pertamina" },
+    { "id": "gate:gw-ethernet", "type": "gate", "label": "Gateway punya port Ethernet fisik? Konflik spek EMC vs TDS R4" },
+    { "id": "gate:solar-cert", "type": "gate", "label": "Sertifikasi solar panel hazardous belum disourcing" },
+    { "id": "gate:ch-batt-safety", "type": "gate", "label": "Keamanan baterai Li-ion CH & GLD belum terverifikasi Ex" },
 
     { "id": "cand:jetson", "type": "candidate", "label": "Flame detection (Jetson Nano, 79%) — belum dikonfirmasi scope" },
 
     { "id": "deliv:dashboard", "type": "deliverable", "label": "Dashboard proyek (HTML)" },
     { "id": "deliv:progres", "type": "deliverable", "label": "Laporan progres per tanggal" },
     { "id": "deliv:jsa", "type": "deliverable", "label": "Draft JSA/HSE Cilacap" },
-    { "id": "deliv:chamber", "type": "deliverable", "label": "Laporan progress chamber gas (Jul 2026)" }
+    { "id": "deliv:chamber", "type": "deliverable", "label": "Laporan progress chamber gas (Jul 2026)" },
+
+    { "id": "p:raihan", "type": "person", "label": "Raihan — PIC RU VII Kasim/Sorong" }
   ],
   "edges": [
     { "s": "org:LGU", "t": "proj:GLD", "r": "pelaksana" },
@@ -108,8 +116,10 @@
     { "s": "repo:fe", "t": "dev:server", "r": "backend-graphql" },
 
     { "s": "dev:node", "t": "model:tcn", "r": "menjalankan" },
-    { "s": "dev:node", "t": "model:cnn1d", "r": "menjalankan" },
-    { "s": "model:cnn1d", "t": "sub:ai", "r": "bagian-dari" },
+    { "s": "dev:node", "t": "model:cnn1d", "r": "menjalankan-historis" },
+    { "s": "model:cnn1d", "t": "sub:ai", "r": "bagian-dari-historis" },
+    { "s": "dev:node", "t": "model:cnndual", "r": "menjalankan-on-device" },
+    { "s": "model:cnndual", "t": "sub:ai", "r": "bagian-dari" },
     { "s": "sub:power", "t": "dev:tpl5010", "r": "pakai" },
     { "s": "sub:power", "t": "dev:bq25185", "r": "pakai" },
     { "s": "sub:power", "t": "dev:tps63020", "r": "pakai" },
@@ -150,6 +160,12 @@
     { "s": "cand:jetson", "t": "proj:GLD", "r": "usulan-belum-dikonfirmasi" },
     { "s": "org:emerson", "t": "sub:net", "r": "referensi-topologi-mounting" },
     { "s": "p:raihan", "t": "org:Pertamina", "r": "PIC-RU-VII-Kasim" },
-    { "s": "p:raihan", "t": "ms:meeting0806", "r": "sumber-arahan-mounting" }
+    { "s": "p:raihan", "t": "ms:meeting0806", "r": "sumber-arahan-mounting" },
+
+    { "s": "gate:atex-scoping", "t": "proj:GLD", "r": "menahan-sertifikasi-fundamental" },
+    { "s": "gate:dashboard-exposure", "t": "sub:sw", "r": "risiko-keamanan" },
+    { "s": "gate:gw-ethernet", "t": "dev:gw", "r": "konflik-spek" },
+    { "s": "gate:solar-cert", "t": "sub:power", "r": "menahan" },
+    { "s": "gate:ch-batt-safety", "t": "sub:power", "r": "menahan" }
   ]
 }

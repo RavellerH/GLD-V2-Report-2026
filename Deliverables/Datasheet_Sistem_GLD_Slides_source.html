@@ -114,12 +114,8 @@ td b{color:#2B2B2B}
 </style>
 </head>
 <body>
-<!-- GLD-NAV-START -->
-<div style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
-<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
-<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Slide Deck (Arsip) <span style="opacity:.6;font-size:11px">(arsip)</span></span><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Notulen_Meeting_GLD_24Jul2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Notulen 24 Jul</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Notulen_Meeting_GLD_30Jul2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Notulen 30 Jul</a>
-</div>
-<!-- GLD-NAV-END -->
+
+
 
 
 <!-- ============ SLIDE 1: COVER ============ -->
@@ -133,7 +129,7 @@ td b{color:#2B2B2B}
     <span class="tag">RU IV Cilacap — Tangki LPG &amp; SRU</span>
     <span class="tag warn">Draft — belum disahkan</span>
   </div>
-  <div class="meta">Rev 0.6 · 19 Agustus 2026 · Sinkron dengan audit sumber rev 0.5 + perbaikan keterbacaan dan status</div>
+  <div class="meta">Rev 0.6 · 19 Agustus 2026 (arsip — 2 angka dikoreksi 4 Sep 2026: PSU ≥1A, timeline ATEX 5–8 bulan; lihat Datasheet Sistem rev 0.8 utk versi terkini) · Sinkron dengan audit sumber rev 0.5 + perbaikan keterbacaan dan status</div>
 </div>
 
 <!-- ============ SLIDE 2: RINGKASAN ============ -->
@@ -170,7 +166,7 @@ td b{color:#2B2B2B}
   <div class="clist" style="margin-top:14px">
     <div class="citem"><span class="ic">✅</span><div><b>Firmware GLD/CH/Gateway berfungsi</b><span>Rantai komunikasi end-to-end teruji — mesh 8-CH &amp; push alarm otomatis</span></div></div>
     <div class="citem"><span class="ic">✅</span><div><b>Model AI on-device (konfirmasi langsung)</b><span>CNN Dual-Branch di ESP32-S3 GLD, akurasi resmi 99,20%; bukti firmware tertulis terbaru belum tersedia</span></div></div>
-    <div class="citem"><span class="ic">✅</span><div><b>Catu daya GLD final</b><span>24VDC ≥2A per unit — desain selesai, siap pasang</span></div></div>
+    <div class="citem"><span class="ic">✅</span><div><b>Catu daya GLD final</b><span>24VDC ≥1A per unit (direvisi dari ≥2A, awal Sep — margin sizing saja, konsumsi aktual tak berubah) — desain selesai, siap pasang</span></div></div>
     <div class="citem"><span class="ic">✅</span><div><b>Desain mounting</b><span>L-bracket referensi Emerson untuk GLD &amp; CH + solar panel</span></div></div>
     <div class="citem"><span class="ic">✅</span><div><b>Paket deployment server sudah disiapkan</b><span>MQTT broker, backend, frontend, dan installer satu-paket; belum menjadi bukti commissioning di server RU</span></div></div>
     <div class="citem"><span class="ic">✅</span><div><b>Rekomendasi spesifikasi server/VM</b><span>CPU/RAM/storage/OS/database diusulkan, tinggal dikonfirmasi</span></div></div>
@@ -193,7 +189,7 @@ td b{color:#2B2B2B}
       <div class="citem"><span class="ic">☐</span><div><b style="font-size:13px">Kebijakan keamanan jaringan</b></div></div>
     </div></div>
     <div class="panel"><h3>🔧 Instalasi &amp; daya</h3><div class="clist">
-      <div class="citem"><span class="ic">☐</span><div><b style="font-size:13px">Kabel &amp; PSU 24VDC ≥2A</b></div></div>
+      <div class="citem"><span class="ic">☐</span><div><b style="font-size:13px">Kabel &amp; PSU 24VDC ≥1A (revisi dari ≥2A)</b></div></div>
       <div class="citem"><span class="ic">☐</span><div><b style="font-size:13px">Konfirmasi struktur mounting</b></div></div>
       <div class="citem"><span class="ic">☐</span><div><b style="font-size:13px">Sertifikasi solar &amp; baterai CH</b></div></div>
     </div></div>
@@ -242,7 +238,7 @@ td b{color:#2B2B2B}
     <div class="stat"><span class="k">Transmit LoRa</span><span class="v">tiap 10 detik</span></div>
     <div class="stat"><span class="k">Model AI</span><span class="v">CNN Dual-Branch, 99,20%</span></div>
     <div class="stat"><span class="k">Alarm trigger</span><span class="v">gasClass≠0 &amp; conf≥30%</span></div>
-    <div class="stat"><span class="k">Sumber daya</span><span class="v">24VDC ≥2A (final) per unit</span></div>
+    <div class="stat"><span class="k">Sumber daya</span><span class="v">24VDC ≥1A (final, direvisi dari ≥2A) per unit</span></div>
     <div class="stat"><span class="k">Kabel &amp; PSU</span><span class="v">Pengadaan oleh RU/kilang</span></div>
     <div class="stat"><span class="k">Mounting</span><span class="v">L-bracket ref. Emerson</span></div>
     <div class="stat"><span class="k">Enkripsi</span><span class="v">AES-128-GCM, frame 39 byte</span></div>
@@ -304,7 +300,7 @@ td b{color:#2B2B2B}
   <div class="topline"></div>
   <div class="eyebrow">06 · Area berbahaya &amp; sertifikasi ATEX</div>
   <h2>Desain Ex-Proof — 2 kompartemen + seal/gland</h2>
-  <div class="banner crit"><span class="ic">🔥</span><span><b>Belum disertifikasi.</b> Target pengajuan ~3 minggu sejak notulen (via rombongan sertifikasi China). Belum siap pasang permanen di Tangki LPG/SRU.</span></div>
+  <div class="banner crit"><span class="ic">🔥</span><span><b>Belum disertifikasi.</b> Estimasi realistis total 5–8 bulan sejak Kick-Off 12 Jun 2026 (dikoreksi dari perkiraan awal "~3 minggu" — angka itu kemungkinan hanya satu milestone dalam proses, bukan total dari nol). Belum siap pasang permanen di Tangki LPG/SRU.</span></div>
   <div class="enclosure">
     <div class="ebox"><span class="ic">🔌</span><b>Modul elektronik</b><p>PCB &amp; power, enclosure Ex-Proof, tak boleh terekspos udara luar</p></div>
     <div class="eseal">SEAL / GLAND →</div>
@@ -369,7 +365,7 @@ td b{color:#2B2B2B}
   <div class="cols2" style="margin-top:14px">
     <div class="panel"><h3>✅ GLD Node</h3>
       <div class="clist">
-        <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">24VDC ≥2A per unit — final, siap pasang</b></div></div>
+        <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">24VDC ≥1A per unit (direvisi dari ≥2A) — final, siap pasang</b></div></div>
         <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Kabel &amp; PSU: pengadaan RU/kilang</b></div></div>
         <div class="citem"><span class="ic">•</span><div><b style="font-size:13.5px">Jalur baterai portabel: terpisah, tidak menahan instalasi 24VDC</b></div></div>
       </div>
@@ -395,7 +391,7 @@ td b{color:#2B2B2B}
   <h2>Status ringkas per 19 Agustus 2026</h2>
   <div class="rolegrid">
     <div class="rcard"><span class="ic">🔴</span><div><b>TRA/JSA belum disahkan</b><span>Draft internal tersedia, tetapi persetujuan site masih menahan eksekusi fisik</span></div></div>
-    <div class="rcard"><span class="ic">🔴</span><div><b>Sertifikasi ATEX</b><span>Belum terbit — target ~3 minggu sejak notulen</span></div></div>
+    <div class="rcard"><span class="ic">🔴</span><div><b>Sertifikasi ATEX</b><span>Belum terbit — estimasi realistis 5–8 bulan sejak Kick-Off (dikoreksi dari "~3 minggu")</span></div></div>
     <div class="rcard"><span class="ic">🔴</span><div><b>Gas tambahan belum direkonsiliasi</b><span>Benzena/CO/H2S vs gate 6-kelas</span></div></div>
     <div class="rcard"><span class="ic">🔴</span><div><b>Registrasi jaringan GW↔server</b><span>Langkah registrasi &amp; kebijakan keamanan — perlu dari Pertamina</span></div></div>
     <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi ketinggian pemasangan</b><span>Baru diuji setinggi manusia</span></div></div>

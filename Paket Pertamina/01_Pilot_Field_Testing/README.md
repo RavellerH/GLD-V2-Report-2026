@@ -1,6 +1,8 @@
-# Pilot / Field Testing — RU IV Cilacap
+# Pilot / Field Testing
 
-Dokumen progres rekayasa & kesiapan lapangan untuk pilot Gas Leak Detection (GLD) Tahap 2 di RU IV Cilacap. **Progres resmi per 5 September 2026: 44%** (vs baseline rencana 43% pada tanggal yang sama) — angka ini murni progres sisi rekayasa/lab, **bukan** bukti kesiapan instalasi fisik di lapangan (survey lokasi sudah selesai 9–10 Agustus 2026, instalasi fisik belum dimulai, akan dieksekusi oleh vendor Pertamina dengan supervisi teknis LGU/ITB).
+Dokumen progres rekayasa & kesiapan lapangan untuk program pilot/field testing Gas Leak Detection (GLD) Tahap 2. **Progres resmi per 5 September 2026: 44%** (vs baseline rencana 43% pada tanggal yang sama) — angka ini murni progres sisi rekayasa/lab, **bukan** bukti kesiapan instalasi fisik di lapangan.
+
+⚠️ **Cakupan program ini adalah 6 Refinery Unit (RU II–VII), bukan cuma RU IV Cilacap.** RU IV Cilacap saat ini **satu-satunya RU yang aktif dieksekusi** (survey lokasi selesai 9–10 Agustus 2026, instalasi fisik belum dimulai, akan dieksekusi vendor Pertamina dengan supervisi teknis LGU/ITB) — karena itu sebagian besar dokumen di folder ini (laporan progres, JSA, desain bracket) memang berfokus ke Cilacap, sesuai lokasi eksekusi yang sedang berjalan. RU VII Kasim/Sorong dicatat terpisah sebagai "field test kolaborasi" (target Desember 2026); 4 RU lainnya (Dumai, Plaju, Balikpapan, Balongan) masih roadmap, belum dimulai. Cakupan 6 RU lengkap ada di bagian 02 `Dashboard_GLD_ProjectManagement.html`.
 
 ## Isi folder
 

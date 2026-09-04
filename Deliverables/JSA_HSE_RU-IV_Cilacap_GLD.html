@@ -1,37 +1,38 @@
+<meta charset="utf-8">
 <title>DRAFT JSA/HSE — GLD RU IV Cilacap</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root{
-  --bg:#F4F6FA;--surface:#FFFFFF;--surface-2:#EDF1F8;--surface-3:#E1E8F3;
-  --ink:#20242B;--ink-2:#454B57;--ink-soft:#6B7480;--line:#DCE3EE;--line-2:#C6CFDD;
-  --accent:#2B5FCB;--accent-2:#1D3F8F;--accent-soft:#DCE6F8;
-  --low:#2E7D57;--low-s:#DBEDE3;--med:#B0771B;--med-s:#F4EAD3;
-  --high:#C2701C;--high-s:#F6E2CC;--ext:#BC3B32;--ext-s:#F5DEDB;
-  --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
+  --bg:#F3F3F4;--surface:#FFFFFF;--surface-2:#F7F8F9;--surface-3:#ECEEF1;
+  --ink:#2B2B2B;--ink-2:#676A6C;--ink-soft:#9CA0A3;--line:#E7EAEC;--line-2:#D7DADE;
+  --accent:#1ABB9C;--accent-2:#149174;--accent-soft:#E6F8F4;
+  --low:#1ABB9C;--low-s:#E6F8F4;--med:#E5934F;--med-s:#FDF1E6;
+  --high:#C2701C;--high-s:#F6E2CC;--ext:#E2495A;--ext-s:#FBE7E9;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
   --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
   --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#16181C;--surface:#1E2127;--surface-2:#252A32;--surface-3:#2F343E;
-  --ink:#EDEFF3;--ink-2:#B9C0CC;--ink-soft:#828B99;--line:#2C313A;--line-2:#3A404B;
-  --accent:#5A8AE0;--accent-2:#83A9EC;--accent-soft:#182740;
-  --low:#4FAE7C;--low-s:#12291F;--med:#D6A24A;--med-s:#332811;
-  --high:#E08A3C;--high-s:#33230F;--ext:#DE6A5E;--ext-s:#331B18;
-  --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
+  --bg:#1A2330;--surface:#212B3A;--surface-2:#26313F;--surface-3:#2E3B4A;
+  --ink:#E7EBEF;--ink-2:#AAB2BC;--ink-soft:#7C8794;--line:#31404F;--line-2:#3C4E5F;
+  --accent:#33D9B4;--accent-2:#7FE8CC;--accent-soft:#153A32;
+  --low:#33D9B4;--low-s:#123A31;--med:#F5AD6C;--med-s:#3B2A15;
+  --high:#E08A3C;--high-s:#33230F;--ext:#F1727F;--ext-s:#3B1A1E;
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
 }}
 :root[data-theme="light"]{
-  --bg:#F4F6FA;--surface:#FFFFFF;--surface-2:#EDF1F8;--surface-3:#E1E8F3;
-  --ink:#20242B;--ink-2:#454B57;--ink-soft:#6B7480;--line:#DCE3EE;--line-2:#C6CFDD;
-  --accent:#2B5FCB;--accent-2:#1D3F8F;--accent-soft:#DCE6F8;
-  --low:#2E7D57;--low-s:#DBEDE3;--med:#B0771B;--med-s:#F4EAD3;--high:#C2701C;--high-s:#F6E2CC;--ext:#BC3B32;--ext-s:#F5DEDB;
-  --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
+  --bg:#F3F3F4;--surface:#FFFFFF;--surface-2:#F7F8F9;--surface-3:#ECEEF1;
+  --ink:#2B2B2B;--ink-2:#676A6C;--ink-soft:#9CA0A3;--line:#E7EAEC;--line-2:#D7DADE;
+  --accent:#1ABB9C;--accent-2:#149174;--accent-soft:#E6F8F4;
+  --low:#1ABB9C;--low-s:#E6F8F4;--med:#E5934F;--med-s:#FDF1E6;--high:#C2701C;--high-s:#F6E2CC;--ext:#E2495A;--ext-s:#FBE7E9;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
 }
 :root[data-theme="dark"]{
-  --bg:#16181C;--surface:#1E2127;--surface-2:#252A32;--surface-3:#2F343E;
-  --ink:#EDEFF3;--ink-2:#B9C0CC;--ink-soft:#828B99;--line:#2C313A;--line-2:#3A404B;
-  --accent:#5A8AE0;--accent-2:#83A9EC;--accent-soft:#182740;
-  --low:#4FAE7C;--low-s:#12291F;--med:#D6A24A;--med-s:#332811;--high:#E08A3C;--high-s:#33230F;--ext:#DE6A5E;--ext-s:#331B18;
-  --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
+  --bg:#1A2330;--surface:#212B3A;--surface-2:#26313F;--surface-3:#2E3B4A;
+  --ink:#E7EBEF;--ink-2:#AAB2BC;--ink-soft:#7C8794;--line:#31404F;--line-2:#3C4E5F;
+  --accent:#33D9B4;--accent-2:#7FE8CC;--accent-soft:#153A32;
+  --low:#33D9B4;--low-s:#123A31;--med:#F5AD6C;--med-s:#3B2A15;--high:#E08A3C;--high-s:#33230F;--ext:#F1727F;--ext-s:#3B1A1E;
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.5}
@@ -39,7 +40,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font
 h1,h2,h3{margin:0;font-weight:650;letter-spacing:-.01em;line-height:1.2}
 .mono{font-family:var(--mono)}
 .draftbar{background:repeating-linear-gradient(45deg,var(--med-s),var(--med-s) 12px,transparent 12px,transparent 24px);
-  border:1px solid var(--med);color:var(--ink);border-radius:10px;padding:11px 15px;font-size:12.5px;margin-bottom:20px}
+  border:1px solid var(--med);color:var(--ink);border-radius:6px;padding:11px 15px;font-size:12.5px;margin-bottom:20px}
 .draftbar b{color:var(--med)}
 .masthead{border-bottom:2px solid var(--accent);padding-bottom:16px;margin-bottom:18px}
 .tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px;align-items:center}
@@ -48,12 +49,12 @@ h1,h2,h3{margin:0;font-weight:650;letter-spacing:-.01em;line-height:1.2}
 .chip.draft{background:var(--ext-s);color:var(--ext);border-color:transparent}
 h1{font-size:23px;margin-bottom:6px}
 .sub{color:var(--ink-soft);font-size:13px;max-width:70ch}
-.themebtn{float:right;font-family:var(--mono);font-size:11px;cursor:pointer;background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);padding:5px 11px;border-radius:8px}
+.themebtn{float:right;font-family:var(--mono);font-size:11px;cursor:pointer;background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);padding:5px 11px;border-radius:6px}
 .themebtn:hover{border-color:var(--accent);color:var(--accent)}
 .topbar{height:4px;background:linear-gradient(90deg,var(--accent) 0%,var(--high) 55%,var(--accent-2) 100%)}
 .identity{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--ink-soft);text-transform:uppercase;margin:0 0 14px;font-weight:600}
 .identity .sq{width:9px;height:9px;background:var(--accent);border-radius:2px;flex:none}
-.docmeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:16px 0 6px}
+.docmeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:16px 0 6px}
 .docmeta div{padding:9px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12.5px}
 .docmeta .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:2px}
 .docmeta .v{color:var(--ink);font-weight:600}
@@ -71,7 +72,7 @@ ul.req li b{color:var(--ink)}
 .mband.high{background:var(--high-s);color:var(--high)} .mband.ext{background:var(--ext-s);color:var(--ext)}
 .jsa-title{font-size:14.5px;font-weight:650;margin:2px 0 3px}
 .jsa-meta{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-bottom:10px}
-.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
 table.jsa{border-collapse:collapse;width:100%;font-size:12px;min-width:820px}
 table.jsa th{background:var(--surface-2);font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);
   text-align:left;padding:9px 10px;border-bottom:1px solid var(--line-2);font-weight:700;vertical-align:bottom}
@@ -86,13 +87,13 @@ table.jsa tr:last-child td{border-bottom:0}
 .pj{font-size:11.5px;color:var(--ink-soft)}
 .emg{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:760px){.emg{grid-template-columns:1fr 1fr}}
-.emgcard{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:var(--surface)}
+.emgcard{border:1px solid var(--line);border-radius:6px;padding:13px 15px;background:var(--surface)}
 .emgcard h3{font-size:13px;margin-bottom:7px;color:var(--ink)}
 .emgcard.alarm{border-left:3px solid var(--ext)} .emgcard.fire{border-left:3px solid var(--high)}
 .emgcard.injury{border-left:3px solid var(--med)} .emgcard.contact{border-left:3px solid var(--accent)}
 .emgcard ul{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink-2)}
 .emgcard li{margin:3px 0}
-.sign{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--line-2);border-radius:10px;overflow:hidden;margin-top:8px}
+.sign{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--line-2);border-radius:6px;overflow:hidden;margin-top:8px}
 @media(min-width:680px){.sign{grid-template-columns:repeat(4,1fr)}}
 .sigcell{padding:13px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .sigcell .role{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
@@ -103,9 +104,9 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
 @media print{.themebtn{display:none}body{background:#fff}}
 </style>
 <!-- GLD-NAV-START -->
-<div style="background:#262321;border-bottom:3px solid #2B5FCB;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
-<span style="font-weight:700;color:#8FB3FF;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
-<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Datasheet_Sistem_GLD_Slides_source.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Slide Deck (Arsip) <span style="opacity:.6;font-size:11px">(arsip)</span></a><span style="opacity:.35;color:#89827A">&middot;</span><span style="background:#2B5FCB;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Draft JSA/HSE</span><span style="opacity:.35;color:#89827A">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Notulen_Meeting_GLD_24Jul2026.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Notulen 24 Jul</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Notulen_Meeting_GLD_30Jul2026.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Notulen 30 Jul</a>
+<div style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
+<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
+<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Slides_source.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Slide Deck (Arsip) <span style="opacity:.6;font-size:11px">(arsip)</span></a><span style="opacity:.35;color:#8A97A6">&middot;</span><span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Draft JSA/HSE</span><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Notulen_Meeting_GLD_24Jul2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Notulen 24 Jul</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Notulen_Meeting_GLD_30Jul2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Notulen 30 Jul</a>
 </div>
 <!-- GLD-NAV-END -->
 

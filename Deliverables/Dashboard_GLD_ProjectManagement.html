@@ -1,56 +1,57 @@
+<meta charset="utf-8">
 <title>Dashboard Proyek GLD V2 — Pemantauan &amp; Manajemen</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root{
-  --paper:#F6F3EC; --surface:#FFFFFF; --surface-2:#EFEAE0; --surface-3:#E3DCCE;
-  --ink:#262321; --ink-2:#57514A; --ink-soft:#89827A; --line:#E2DBCC; --line-2:#CFC6B4;
-  --accent:#2B5FCB; --accent-2:#1D3F8F; --accent-soft:#E1E8F8;
-  --good:#2E7D57; --good-soft:#E1EEE5;
-  --warn:#A66B16; --warn-soft:#F3E6CE;
-  --crit:#B23A2E; --crit-soft:#F5DFD9;
-  --info:#3B78C4; --info-soft:#DFE9F6;
-  --charcoal:#262321; --charcoal-2:#332E29; --charcoal-3:#403A32;
-  --repo-app:#2B5FCB; --repo-net:#3B78C4; --repo-ml:#6B54A6;
-  --repo-app-soft:#E1E8F8; --repo-net-soft:#DFE9F6; --repo-ml-soft:#E9E3F3;
-  --shadow:0 1px 2px rgba(38,35,33,.06),0 8px 22px rgba(38,35,33,.07);
-  --radius:12px;
+  --paper:#F3F3F4; --surface:#FFFFFF; --surface-2:#F7F8F9; --surface-3:#ECEEF1;
+  --ink:#2B2B2B; --ink-2:#676A6C; --ink-soft:#9CA0A3; --line:#E7EAEC; --line-2:#D7DADE;
+  --accent:#1ABB9C; --accent-2:#149174; --accent-soft:#E6F8F4;
+  --good:#1ABB9C; --good-soft:#E6F8F4;
+  --warn:#E5934F; --warn-soft:#FDF1E6;
+  --crit:#E2495A; --crit-soft:#FBE7E9;
+  --info:#1C93C6; --info-soft:#E4F2FA;
+  --charcoal:#2F4050; --charcoal-2:#293846; --charcoal-3:#3A4C5E;
+  --repo-app:#1ABB9C; --repo-net:#1C93C6; --repo-ml:#6B54A6;
+  --repo-app-soft:#E6F8F4; --repo-net-soft:#E4F2FA; --repo-ml-soft:#E9E3F3;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
+  --radius:6px;
   --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
   --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){
   :root{
-    --paper:#18181A; --surface:#221F1C; --surface-2:#2A2621; --surface-3:#342F28;
-    --ink:#EFEBE4; --ink-2:#C3BCB0; --ink-soft:#8E877C; --line:#3A342C; --line-2:#4A4237;
-    --accent:#6F98E8; --accent-2:#94B4F0; --accent-soft:#232C42;
-    --good:#5FB68A; --good-soft:#1B2A21; --warn:#D3A24E; --warn-soft:#33290F;
-    --crit:#E17E6E; --crit-soft:#331E19; --info:#6BA6E3; --info-soft:#1C2836;
-    --charcoal:#0F0E0C; --charcoal-2:#1B1815; --charcoal-3:#272220;
-    --repo-app:#6F98E8; --repo-net:#6BA6E3; --repo-ml:#AE97DE;
-    --repo-app-soft:#232C42; --repo-net-soft:#1C2836; --repo-ml-soft:#271F35;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 26px rgba(0,0,0,.34);
+    --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+    --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+    --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+    --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+    --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+    --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+    --repo-app:#33D9B4; --repo-net:#4FC1EE; --repo-ml:#AE97DE;
+    --repo-app-soft:#153A32; --repo-net-soft:#123244; --repo-ml-soft:#271F35;
+    --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
   }
 }
 :root[data-theme="light"]{
-  --paper:#F6F3EC; --surface:#FFFFFF; --surface-2:#EFEAE0; --surface-3:#E3DCCE;
-  --ink:#262321; --ink-2:#57514A; --ink-soft:#89827A; --line:#E2DBCC; --line-2:#CFC6B4;
-  --accent:#2B5FCB; --accent-2:#1D3F8F; --accent-soft:#E1E8F8;
-  --good:#2E7D57; --good-soft:#E1EEE5; --warn:#A66B16; --warn-soft:#F3E6CE;
-  --crit:#B23A2E; --crit-soft:#F5DFD9; --info:#3B78C4; --info-soft:#DFE9F6;
-  --charcoal:#262321; --charcoal-2:#332E29; --charcoal-3:#403A32;
-  --repo-app:#2B5FCB; --repo-net:#3B78C4; --repo-ml:#6B54A6;
-  --repo-app-soft:#E1E8F8; --repo-net-soft:#DFE9F6; --repo-ml-soft:#E9E3F3;
-  --shadow:0 1px 2px rgba(38,35,33,.06),0 8px 22px rgba(38,35,33,.07);
+  --paper:#F3F3F4; --surface:#FFFFFF; --surface-2:#F7F8F9; --surface-3:#ECEEF1;
+  --ink:#2B2B2B; --ink-2:#676A6C; --ink-soft:#9CA0A3; --line:#E7EAEC; --line-2:#D7DADE;
+  --accent:#1ABB9C; --accent-2:#149174; --accent-soft:#E6F8F4;
+  --good:#1ABB9C; --good-soft:#E6F8F4; --warn:#E5934F; --warn-soft:#FDF1E6;
+  --crit:#E2495A; --crit-soft:#FBE7E9; --info:#1C93C6; --info-soft:#E4F2FA;
+  --charcoal:#2F4050; --charcoal-2:#293846; --charcoal-3:#3A4C5E;
+  --repo-app:#1ABB9C; --repo-net:#1C93C6; --repo-ml:#6B54A6;
+  --repo-app-soft:#E6F8F4; --repo-net-soft:#E4F2FA; --repo-ml-soft:#E9E3F3;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
 }
 :root[data-theme="dark"]{
-  --paper:#18181A; --surface:#221F1C; --surface-2:#2A2621; --surface-3:#342F28;
-  --ink:#EFEBE4; --ink-2:#C3BCB0; --ink-soft:#8E877C; --line:#3A342C; --line-2:#4A4237;
-  --accent:#6F98E8; --accent-2:#94B4F0; --accent-soft:#232C42;
-  --good:#5FB68A; --good-soft:#1B2A21; --warn:#D3A24E; --warn-soft:#33290F;
-  --crit:#E17E6E; --crit-soft:#331E19; --info:#6BA6E3; --info-soft:#1C2836;
-  --charcoal:#0F0E0C; --charcoal-2:#1B1815; --charcoal-3:#272220;
-  --repo-app:#6F98E8; --repo-net:#6BA6E3; --repo-ml:#AE97DE;
-  --repo-app-soft:#232C42; --repo-net-soft:#1C2836; --repo-ml-soft:#271F35;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 26px rgba(0,0,0,.34);
+  --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+  --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+  --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+  --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+  --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+  --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+  --repo-app:#33D9B4; --repo-net:#4FC1EE; --repo-ml:#AE97DE;
+  --repo-app-soft:#153A32; --repo-net-soft:#123244; --repo-ml-soft:#271F35;
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -72,8 +73,8 @@ a{color:var(--accent)}
 .side-brand{display:flex;align-items:center;gap:10px}
 .brandmark{width:15px;height:15px;border-radius:4px;flex:none;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
 .brandtext b{display:block;font-size:13.5px;letter-spacing:-.01em;color:#fff}
-.brandtext small{display:block;font-family:var(--mono);font-size:10px;color:#B9B2A6;letter-spacing:.04em;margin-top:2px}
-.side-status{background:var(--charcoal-2);border:1px solid var(--charcoal-3);border-radius:10px;padding:13px 14px;display:flex;flex-direction:column;gap:9px}
+.brandtext small{display:block;font-family:var(--mono);font-size:10px;color:#AAB2BC;letter-spacing:.04em;margin-top:2px}
+.side-status{background:var(--charcoal-2);border:1px solid var(--charcoal-3);border-radius:6px;padding:13px 14px;display:flex;flex-direction:column;gap:9px}
 .ss-row{display:flex;justify-content:space-between;align-items:baseline}
 .ss-lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#ADA69A}
 .ss-val{font-family:var(--mono);font-size:19px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
@@ -86,7 +87,7 @@ a{color:var(--accent)}
 .ss-flag:hover{background:rgba(255,180,90,.22)}
 .zonenav{display:flex;flex-direction:column;gap:2px;flex:1}
 .zonenav a{display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:#C9C3B8;
-  text-decoration:none;padding:9px 10px;border-radius:8px;transition:background .15s,color .15s}
+  text-decoration:none;padding:9px 10px;border-radius:6px;transition:background .15s,color .15s}
 .zonenav a .zi{font-family:var(--mono);font-size:10.5px;font-weight:700;color:#8B8478;width:18px;flex:none}
 .zonenav a:hover{background:rgba(255,255,255,.06);color:#fff}
 .zonenav a.active{background:var(--accent);color:#fff}
@@ -95,7 +96,7 @@ a{color:var(--accent)}
 .hublink{font-family:var(--mono);font-size:11px;color:#C9C3B8;text-decoration:none;display:flex;align-items:center;gap:6px}
 .hublink:hover{color:#fff}
 .themebtn{font-family:var(--mono);font-size:11px;letter-spacing:.03em;cursor:pointer;
-  background:var(--charcoal-2);border:1px solid var(--charcoal-3);color:#D8D2C6;padding:7px 10px;border-radius:8px;text-align:left}
+  background:var(--charcoal-2);border:1px solid var(--charcoal-3);color:#D8D2C6;padding:7px 10px;border-radius:6px;text-align:left}
 .themebtn:hover{border-color:var(--accent);color:#fff}
 
 .content{flex:1;min-width:0;max-width:1180px;padding:28px 34px 90px}
@@ -109,7 +110,7 @@ a{color:var(--accent)}
 h1{font-size:25px}
 .subtitle{color:var(--ink-2);font-size:14px;max-width:68ch;line-height:1.55}
 .parties{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.02em}
-.docmeta-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:14px;background:var(--surface)}
+.docmeta-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:14px;background:var(--surface)}
 .docmeta-row>div{padding:10px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .docmeta-row .k{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
 .docmeta-row .v{font-size:12.5px;color:var(--ink);font-weight:600}
@@ -125,7 +126,7 @@ h1{font-size:25px}
 .subhead:first-of-type{margin-top:4px}
 .subhead::after{content:"";height:1px;background:var(--line);flex:1}
 
-.exec{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:21px 24px;margin:2px 0 22px;box-shadow:var(--shadow)}
+.exec{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:21px 24px;margin:2px 0 22px;box-shadow:var(--shadow)}
 .exec .el{color:var(--accent-2);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
 .exec h3{font-size:18.5px;color:var(--ink);margin-bottom:10px;max-width:52ch;line-height:1.34;font-weight:700}
 .exec p{font-size:13.3px;color:var(--ink-2);max-width:82ch;line-height:1.68;margin:0}
@@ -147,12 +148,12 @@ h1{font-size:25px}
 .delta{font-family:var(--mono);font-size:11.5px;font-weight:600;padding:1px 7px;border-radius:6px;display:inline-block}
 .delta.pos{background:var(--good-soft);color:var(--good)}
 .baseline-note{font-size:12px;color:var(--ink-2);margin:22px 0 0;padding:12px 14px;background:var(--surface-2);
-  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;line-height:1.6}
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;line-height:1.6}
 .baseline-note b{color:var(--ink)}
 
 .po{display:grid;grid-template-columns:1fr;gap:14px;margin-top:2px}
 @media(min-width:820px){.po{grid-template-columns:1fr 1fr}}
-.pocol{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:18px 19px}
+.pocol{background:var(--surface);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);padding:18px 19px}
 .pocol.out{border-top:3px solid var(--warn)} .pocol.done{border-top:3px solid var(--good)}
 .pocol h3{font-size:14px;display:flex;align-items:center;gap:9px;margin-bottom:3px;font-weight:700}
 .pocol .cnt{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);font-weight:600;margin-left:auto}
@@ -226,7 +227,7 @@ svg{display:block;max-width:100%}
 .rutbl tr.pilot td:first-child::after{content:" ●";color:var(--accent)}
 
 .rr{display:grid;grid-template-columns:repeat(auto-fit,minmax(206px,1fr));gap:10px;margin-top:4px}
-.rrcell{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;display:flex;flex-direction:column;gap:5px}
+.rrcell{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:11px 13px;display:flex;flex-direction:column;gap:5px}
 .rrcell .rn2{font-size:12.8px;font-weight:600;color:var(--ink)}
 .rrcell .rd{font-family:var(--mono);font-size:10.3px;color:var(--ink-soft)}
 
@@ -242,7 +243,7 @@ svg{display:block;max-width:100%}
 .ev-tag.ml{background:var(--repo-ml-soft);color:var(--repo-ml);border-color:transparent}
 
 .telem{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:4px}
-.tcell{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.tcell{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:12px 13px}
 .tcell .v{font-family:var(--mono);font-size:21px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
 .tcell .l{font-family:var(--mono);font-size:9.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
 .gaslist{margin-top:12px;display:flex;flex-direction:column;gap:7px}
@@ -338,9 +339,9 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
 }
 </style>
 <!-- GLD-NAV-START -->
-<div style="background:#262321;border-bottom:3px solid #2B5FCB;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
-<span style="font-weight:700;color:#8FB3FF;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
-<span style="background:#2B5FCB;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Dashboard Proyek</span><span style="opacity:.35;color:#89827A">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Datasheet_Sistem_GLD_Slides_source.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Slide Deck (Arsip) <span style="opacity:.6;font-size:11px">(arsip)</span></a><span style="opacity:.35;color:#89827A">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Notulen_Meeting_GLD_24Jul2026.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Notulen 24 Jul</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Notulen_Meeting_GLD_30Jul2026.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Notulen 30 Jul</a>
+<div style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
+<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
+<span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Dashboard Proyek</span><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Slides_source.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Slide Deck (Arsip) <span style="opacity:.6;font-size:11px">(arsip)</span></a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Notulen_Meeting_GLD_24Jul2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Notulen 24 Jul</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Notulen_Meeting_GLD_30Jul2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Notulen 30 Jul</a>
 </div>
 <!-- GLD-NAV-END -->
 

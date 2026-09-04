@@ -61,7 +61,7 @@
     { "id": "ms:meeting0730", "type": "milestone", "label": "Weekly meeting: jadwal Cilacap 9-10 Agu, arsitektur lokal+cloud-gateway diperjelas", "date": "2026-07-30", "done": true },
     { "id": "ms:meeting0806", "type": "milestone", "label": "Diskusi mounting/topologi vs Corrosion Monitoring Emerson + requirement gas/alarm/material baru", "date": "2026-08-06", "done": true },
     { "id": "ms:pushalarm", "type": "milestone", "label": "Push alarm berhasil diuji (mesh kampus GW+CH1-3, semprot LPG, tanpa pull request)", "date": "2026-08-08", "done": true },
-    { "id": "ms:cilacap-visit", "type": "milestone", "label": "Kunjungan Cilacap: survey+instalasi gabungan (menggantikan rencana Sep)", "date": "2026-08-10", "done": false },
+    { "id": "ms:cilacap-visit", "type": "milestone", "label": "Survey lokasi RU IV Cilacap selesai — instalasi belum dimulai", "date": "2026-08-10", "done": true },
     { "id": "ms:install", "type": "milestone", "label": "Field installation (target, baseline resmi 9-bulan)", "date": "2026-12-01", "done": false },
 
     { "id": "blk:power", "type": "blocker", "label": "Autonomi baterai GLD < 30 hari (7P=1,76 hari)" },

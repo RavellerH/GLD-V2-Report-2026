@@ -1,41 +1,42 @@
+<meta charset="utf-8">
 <title>Laporan Progres per Tanggal — GLD Tahap 2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root{
-  --bg:#F4F6FA;--surface:#FFFFFF;--surface-2:#EDF1F8;--surface-3:#E1E8F3;
-  --ink:#20242B;--ink-2:#454B57;--ink-soft:#6B7480;--line:#DCE3EE;--line-2:#C6CFDD;
-  --accent:#2B5FCB;--accent-2:#1D3F8F;--accent-soft:#DCE6F8;
-  --good:#2E7D57;--good-soft:#DBEDE3;--warn:#B0771B;--warn-soft:#F4EAD3;
-  --crit:#BC3B32;--crit-soft:#F5DEDB;--info:#3B78C4;--info-soft:#DCE8F6;
+  --bg:#F3F3F4;--surface:#FFFFFF;--surface-2:#F7F8F9;--surface-3:#ECEEF1;
+  --ink:#2B2B2B;--ink-2:#676A6C;--ink-soft:#9CA0A3;--line:#E7EAEC;--line-2:#D7DADE;
+  --accent:#1ABB9C;--accent-2:#149174;--accent-soft:#E6F8F4;
+  --good:#1ABB9C;--good-soft:#E6F8F4;--warn:#E5934F;--warn-soft:#FDF1E6;
+  --crit:#E2495A;--crit-soft:#FBE7E9;--info:#1C93C6;--info-soft:#E4F2FA;
   --ml:#6B54A6;--ml-soft:#E5E1F2;
-  --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
   --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
   --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#16181C;--surface:#1E2127;--surface-2:#252A32;--surface-3:#2F343E;
-  --ink:#EDEFF3;--ink-2:#B9C0CC;--ink-soft:#828B99;--line:#2C313A;--line-2:#3A404B;
-  --accent:#5A8AE0;--accent-2:#83A9EC;--accent-soft:#182740;
-  --good:#4FAE7C;--good-soft:#12291F;--warn:#D6A24A;--warn-soft:#332811;
-  --crit:#DE6A5E;--crit-soft:#331B18;--info:#5EA0DA;--info-soft:#112536;
+  --bg:#1A2330;--surface:#212B3A;--surface-2:#26313F;--surface-3:#2E3B4A;
+  --ink:#E7EBEF;--ink-2:#AAB2BC;--ink-soft:#7C8794;--line:#31404F;--line-2:#3C4E5F;
+  --accent:#33D9B4;--accent-2:#7FE8CC;--accent-soft:#153A32;
+  --good:#33D9B4;--good-soft:#123A31;--warn:#F5AD6C;--warn-soft:#3B2A15;
+  --crit:#F1727F;--crit-soft:#3B1A1E;--info:#4FC1EE;--info-soft:#123244;
   --ml:#A490DC;--ml-soft:#221B33;
-  --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
 }}
 :root[data-theme="light"]{
-  --bg:#F4F6FA;--surface:#FFFFFF;--surface-2:#EDF1F8;--surface-3:#E1E8F3;
-  --ink:#20242B;--ink-2:#454B57;--ink-soft:#6B7480;--line:#DCE3EE;--line-2:#C6CFDD;
-  --accent:#2B5FCB;--accent-2:#1D3F8F;--accent-soft:#DCE6F8;
-  --good:#2E7D57;--good-soft:#DBEDE3;--warn:#B0771B;--warn-soft:#F4EAD3;
-  --crit:#BC3B32;--crit-soft:#F5DEDB;--info:#3B78C4;--info-soft:#DCE8F6;--ml:#6B54A6;--ml-soft:#E5E1F2;
-  --shadow:0 1px 2px rgba(21,32,47,.07),0 6px 20px rgba(21,32,47,.06);
+  --bg:#F3F3F4;--surface:#FFFFFF;--surface-2:#F7F8F9;--surface-3:#ECEEF1;
+  --ink:#2B2B2B;--ink-2:#676A6C;--ink-soft:#9CA0A3;--line:#E7EAEC;--line-2:#D7DADE;
+  --accent:#1ABB9C;--accent-2:#149174;--accent-soft:#E6F8F4;
+  --good:#1ABB9C;--good-soft:#E6F8F4;--warn:#E5934F;--warn-soft:#FDF1E6;
+  --crit:#E2495A;--crit-soft:#FBE7E9;--info:#1C93C6;--info-soft:#E4F2FA;--ml:#6B54A6;--ml-soft:#E5E1F2;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
 }
 :root[data-theme="dark"]{
-  --bg:#16181C;--surface:#1E2127;--surface-2:#252A32;--surface-3:#2F343E;
-  --ink:#EDEFF3;--ink-2:#B9C0CC;--ink-soft:#828B99;--line:#2C313A;--line-2:#3A404B;
-  --accent:#5A8AE0;--accent-2:#83A9EC;--accent-soft:#182740;
-  --good:#4FAE7C;--good-soft:#12291F;--warn:#D6A24A;--warn-soft:#332811;
-  --crit:#DE6A5E;--crit-soft:#331B18;--info:#5EA0DA;--info-soft:#112536;--ml:#A490DC;--ml-soft:#221B33;
-  --shadow:0 1px 2px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.3);
+  --bg:#1A2330;--surface:#212B3A;--surface-2:#26313F;--surface-3:#2E3B4A;
+  --ink:#E7EBEF;--ink-2:#AAB2BC;--ink-soft:#7C8794;--line:#31404F;--line-2:#3C4E5F;
+  --accent:#33D9B4;--accent-2:#7FE8CC;--accent-soft:#153A32;
+  --good:#33D9B4;--good-soft:#123A31;--warn:#F5AD6C;--warn-soft:#3B2A15;
+  --crit:#F1727F;--crit-soft:#3B1A1E;--info:#4FC1EE;--info-soft:#123244;--ml:#A490DC;--ml-soft:#221B33;
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -53,12 +54,12 @@ h1{font-size:25px;margin-bottom:8px}
 .mast-right{text-align:right;display:flex;flex-direction:column;gap:5px}
 .asof{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
 .asof b{color:var(--ink)}
-.themebtn{margin-top:4px;font-family:var(--mono);font-size:11px;cursor:pointer;background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);padding:5px 11px;border-radius:8px}
+.themebtn{margin-top:4px;font-family:var(--mono);font-size:11px;cursor:pointer;background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);padding:5px 11px;border-radius:6px}
 .themebtn:hover{border-color:var(--accent);color:var(--accent)}
 .topbar{height:4px;background:linear-gradient(90deg,var(--accent) 0%,var(--info) 55%,var(--accent-2) 100%)}
 .identity{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:14px;font-weight:600}
 .identity .sq{width:9px;height:9px;background:var(--accent);border-radius:2px;flex:none}
-.exec{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:19px 22px;margin:18px 0 6px;box-shadow:var(--shadow)}
+.exec{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:19px 22px;margin:18px 0 6px;box-shadow:var(--shadow)}
 .exec .el{color:var(--accent-2);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:9px}
 .exec p{font-size:13px;color:var(--ink-2);max-width:80ch;line-height:1.62;margin:0}
 .exec p b{color:var(--ink);font-weight:700}
@@ -149,9 +150,9 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
 .heat-sep{width:1px;height:12px;background:var(--line-2);margin:0 4px;display:inline-block}
 </style>
 <!-- GLD-NAV-START -->
-<div style="background:#262321;border-bottom:3px solid #2B5FCB;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
-<span style="font-weight:700;color:#8FB3FF;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
-<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Datasheet_Sistem_GLD_Slides_source.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Slide Deck (Arsip) <span style="opacity:.6;font-size:11px">(arsip)</span></a><span style="opacity:.35;color:#89827A">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#89827A">&middot;</span><span style="background:#2B5FCB;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Laporan Progres</span><span style="opacity:.35;color:#89827A">&middot;</span><a href="Notulen_Meeting_GLD_24Jul2026.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Notulen 24 Jul</a><span style="opacity:.35;color:#89827A">&middot;</span><a href="Notulen_Meeting_GLD_30Jul2026.html" style="color:#D8E2FA;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#39352F'" onmouseout="this.style.background='transparent'">Notulen 30 Jul</a>
+<div style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
+<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
+<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Slides_source.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Slide Deck (Arsip) <span style="opacity:.6;font-size:11px">(arsip)</span></a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Laporan Progres</span><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Notulen_Meeting_GLD_24Jul2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Notulen 24 Jul</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Notulen_Meeting_GLD_30Jul2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Notulen 30 Jul</a>
 </div>
 <!-- GLD-NAV-END -->
 
@@ -179,7 +180,7 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
 
   <section class="exec">
     <div class="el">Ringkasan Eksekutif</div>
-    <p>Progres pilot Cilacap <b>39%</b> terhadap rencana <b>19%</b>, murni sisi lab/engineering — angka ini berasal dari asesmen terakhir 24 Jul dan <b>belum di-reassess</b> meski ada deliverable teknis baru s.d. 31 Agu. Rantai GLD-CH-GW-Server berjalan end-to-end dengan dua model AI (TCN &amp; CNN Dual-Branch, inferensi diklaim sudah on-device 19 Agu). Meeting 24 Jul mengonfirmasi <b>24V siap sertifikasi</b>; update 30 Jul memajukan &amp; menggabungkan kunjungan RU IV Cilacap — survey + instalasi pada <b>9–10 Agustus</b> — serta memperjelas arsitektur (app+DB lokal, cloud sebagai gateway ringan). <b>Update 6–8 Agustus (H-1 kunjungan):</b> mounting &amp; topologi GLD/CH diarahkan mengikuti pola sistem Corrosion Monitoring Emerson, muncul requirement tambahan (Benzena/CO/H2S, alarm toksik langsung, larangan PVC/las/bor) yang <b>belum sepenuhnya direkonsiliasi</b>, dan <b>push alarm berhasil diuji</b> di demo mesh kampus. ⚠️ <b>Tidak ada dokumentasi hasil kunjungan Cilacap itu sendiri</b> yang ditemukan di repo setelah 9 Agu. Periode 19–27 Agustus diisi pekerjaan dokumentasi teknis sisi LGU–ITB: <b>Datasheet Sistem</b> konsolidasi (arsitektur, EMC, server/jaringan — 7 gate baru), <b>Executive Presentation</b> untuk calon klien baru (di-redesain ke template resmi ITB), dan pada <b>31 Agustus</b> gambar CAD bracket mounting U-bolt v2. Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
+    <p>Progres pilot Cilacap <b>39%</b> terhadap rencana <b>19%</b>, murni sisi lab/engineering — angka ini berasal dari asesmen terakhir 24 Jul dan <b>belum di-reassess</b> meski ada deliverable teknis baru s.d. 31 Agu. Rantai GLD-CH-GW-Server berjalan end-to-end dengan dua model AI (TCN &amp; CNN Dual-Branch, inferensi diklaim sudah on-device 19 Agu). Meeting 24 Jul mengonfirmasi <b>24V siap sertifikasi</b>; update 30 Jul memajukan &amp; menggabungkan kunjungan RU IV Cilacap — survey + instalasi pada <b>9–10 Agustus</b> — serta memperjelas arsitektur (app+DB lokal, cloud sebagai gateway ringan). <b>Update 6–8 Agustus (H-1 kunjungan):</b> mounting &amp; topologi GLD/CH diarahkan mengikuti pola sistem Corrosion Monitoring Emerson, muncul requirement tambahan (Benzena/CO/H2S, alarm toksik langsung, larangan PVC/las/bor) yang <b>belum sepenuhnya direkonsiliasi</b>, dan <b>push alarm berhasil diuji</b> di demo mesh kampus. <b>9–10 Agustus:</b> survey lokasi RU IV Cilacap selesai, <b>instalasi fisik belum dimulai</b> (dikonfirmasi user). Periode 19–31 Agustus diisi pekerjaan dokumentasi teknis sisi LGU–ITB: <b>Datasheet Sistem</b> konsolidasi (arsitektur, EMC, server/jaringan — 7 gate baru), dan pada <b>31 Agustus</b> gambar CAD bracket mounting U-bolt v2. Kronologi lengkap di bawah disajikan terbuka sebagai basis kolaborasi partner.</p>
   </section>
 
   <div class="card heatcard">
@@ -222,7 +223,7 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
 
   <div class="phase">
     <span class="pn">FASE 3</span>
-    <div><h2>Dokumentasi Teknis &amp; Materi Klien</h2><p class="phase-sub">11–31 Agustus 2026 · tidak ada dokumentasi hasil kunjungan lapangan RU IV Cilacap pada periode ini</p></div>
+    <div><h2>Dokumentasi Teknis &amp; Materi Klien</h2><p class="phase-sub">11–31 Agustus 2026 · survey RU IV Cilacap selesai 9–10 Agu, instalasi belum dimulai</p></div>
   </div>
   <div class="phase-wrap"><div class="tl" id="tl3"></div></div>
 
@@ -237,11 +238,11 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
 
   <div class="gatebox">
     <span class="gt">⛔ Gate menuju field — RU IV Cilacap (11 aktif per 31 Agu)</span>
-    Rencana &amp; workflow site survey Cilacap sudah siap. <b>Penyusunan TRA/JSA menjadi gate</b> untuk eksekusi survei fisik &amp; instalasi. Gate tambahan (meeting 24 Jul): <b>gas capability minimum 6 kelas</b> harus terverifikasi; <b>perizinan visitor/kerja/HSE RU Cilacap</b> harus lengkap sejak awal. Gate (6 Agu): <b>sertifikasi ketinggian pemasangan</b>; <b>requirement gas Benzena/CO/H2S</b> belum direkonsiliasi dengan gate 6-kelas; <b>kapasitas Gateway/CH vs jumlah sensor</b> belum ada angka resmi. <b>7 gate baru (19 Agu)</b> dari Datasheet Sistem &amp; spek EMC: sertifikasi solar panel hazardous, keamanan baterai 18650 CH, tools/fastener bracket, registrasi jaringan Gateway ke intranet kilang, spesifikasi server/VM aktual, rekonsiliasi spek input power CH (5VDC vs solar+18650), dan dukungan firmware utk port Ethernet Gateway. Alur: LGU undang Pertamina ke lab → uji lab → kunjungan RU — <b>status kunjungan 9–10 Agustus tidak terkonfirmasi di repo</b>.
+    Rencana &amp; workflow site survey Cilacap sudah siap. <b>Penyusunan TRA/JSA menjadi gate</b> untuk eksekusi instalasi fisik. Gate tambahan (meeting 24 Jul): <b>gas capability minimum 6 kelas</b> harus terverifikasi; <b>perizinan visitor/kerja/HSE RU Cilacap</b> harus lengkap sejak awal. Gate (6 Agu): <b>sertifikasi ketinggian pemasangan</b>; <b>requirement gas Benzena/CO/H2S</b> belum direkonsiliasi dengan gate 6-kelas; <b>kapasitas Gateway/CH vs jumlah sensor</b> belum ada angka resmi. <b>7 gate baru (19 Agu)</b> dari Datasheet Sistem &amp; spek EMC: sertifikasi solar panel hazardous, keamanan baterai 18650 CH, tools/fastener bracket, registrasi jaringan Gateway ke intranet kilang, spesifikasi server/VM aktual, rekonsiliasi spek input power CH (5VDC vs solar+18650), dan dukungan firmware utk port Ethernet Gateway. Alur: LGU undang Pertamina ke lab → uji lab → survey RU (selesai 9–10 Agu) → <b>instalasi fisik (belum terjadwal)</b>.
   </div>
 
   <footer>
-    Sumber: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Deteksi Kebocoran Gas CNN Dual-Branch (6 Agu) · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · diskusi teknis &amp; WhatsApp 6–8 Agustus 2026 · Parameter spesifikasi EMC_lengkap.docx (19 Agu) · Datasheet Sistem GLD rev 0.2–0.7 (19 Agu) · GLD Executive Presentation (27 Agu) · GLD U-Bolt Bracket V2.png / ATEX Casing v2 (31 Agu) · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres estimasi turunan dari status aktivitas, terakhir diukur 24 Juli 2026 · laporan difinalisasi untuk periode ini 31 Agustus 2026.
+    Sumber: Timeline Kerjaan Mingguan · Deck Kick-Off 12 Jun · Notulensi Kick-Off · MoM RU IV Cilacap · Laporan Progres 18 Jun–20 Jul · Project Report June · Board12 TCN per-Sensor · Deteksi Gas CNN Presentasi · Deteksi Kebocoran Gas CNN Dual-Branch (6 Agu) · Notulen Meeting GLD 24 Juli 2026 · Notulen Meeting GLD 30 Juli 2026 · diskusi teknis &amp; WhatsApp 6–8 Agustus 2026 · Parameter spesifikasi EMC_lengkap.docx (19 Agu) · Datasheet Sistem GLD rev 0.2–0.7 (19 Agu) · GLD U-Bolt Bracket V2.png / ATEX Casing v2 (31 Agu) · dataset GLD-F001 · Test Sinyal LoRa. Persentase progres estimasi turunan dari status aktivitas, terakhir diukur 24 Juli 2026 · laporan difinalisasi untuk periode ini 31 Agustus 2026.
   </footer>
 </div>
 
@@ -324,8 +325,8 @@ const P2=[
 ];
 const P3=[
   {m:'Agustus 2026'},
-  {d:'9–10 Agu',range:['2026-08-09','2026-08-10'],title:'Kunjungan Cilacap direncanakan — hasil tidak terdokumentasi',stat:['temuan','⚠ Belum Terkonfirmasi'],tags:[['coord','Koordinasi']],
-   body:'Sesuai jadwal 30 Jul (berangkat 9 Agu, instalasi 10 Agu, survey+instalasi digabung), urutan demo disiapkan: aktifkan server → pasang GW → pasang CH → pasang GLD 24V. <b>Tidak ada notulen, foto, atau update status pasca-kunjungan yang ditemukan di repo</b> setelah tanggal ini hingga 31 Agustus — laporan ini tidak mengasumsikan pelaksanaan maupun hasilnya.'},
+  {d:'9–10 Agu',range:['2026-08-09','2026-08-10'],title:'Survey lokasi RU IV Cilacap selesai — instalasi belum',stat:['selesai','Selesai (partial)'],tags:[['coord','Koordinasi']],
+   body:'Kunjungan gabungan survey+instalasi ke RU IV Cilacap dilaksanakan 9–10 Agustus sesuai jadwal 30 Jul (dec:22). <b>Survey lokasi selesai</b>; <b>instalasi fisik belum dimulai</b> (dikonfirmasi user, dec:55). Urutan demo yang disiapkan (aktifkan server → pasang GW → pasang CH → pasang GLD 24V) belum dijalankan di site. Jadwal instalasi aktual masih belum ditentukan.'},
   {d:'19 Agu',date:'2026-08-19',title:'Datasheet Sistem GLD konsolidasi dibuat',stat:['milestone','Milestone'],tags:[['sw','Dokumentasi'],['coord','Server/Jaringan']],
    body:'<i>Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html</i> dibuat (redesain diagram-first, rev 0.2→0.7 di hari yang sama): arsitektur end-to-end, spek hardware GLD/CH/Gateway, protokol radio LoRa STAR/MESH, status ATEX, kapabilitas gas/AI, <b>kebutuhan server &amp; jaringan utk IT Pertamina</b> (bag. 07 — merangkum 2 dokumen draft dari repo <i>PertaminaGLD</i> apa adanya, bukan konfigurasi live), catu daya/instalasi, status gate.'},
   {d:'19 Agu',date:'2026-08-19',title:'AI inference dikonfirmasi on-device ESP32-S3',stat:['milestone','Milestone (caveat)'],tags:[['ml','AI/ML']],
@@ -334,10 +335,6 @@ const P3=[
    body:'<b>Catu daya GLD final: 24VDC ≥2A/unit</b>, siap pasang (kabel+PSU oleh RU/kilang); jalur baterai portable tetap terpisah. <b>Bracket GLD &amp; CH+solar: L-bracket ref. Emerson</b>. Arsitektur GW↔Server diperjelas: MAC GW didaftarkan, GW+server satu jaringan; pembagian kerja LGU (install stack) vs Pertamina (server/VM+jaringan). Payload GW→broker &lt;1KB, alarm push ~10 dtk/normal pull ~90 dtk. Rekomendasi spek server (4 vCore/8GB/100GB/Ubuntu/PostgreSQL) diusulkan LGU. <b>Spek EMC/fisik resmi diterima</b> (Dr. Nina Siti Aminah, ITB Fisika) — 3 foto produk aktual di-embed, TX power 22dBm/7,995W direkonsiliasi bukan kontradiksi dgn 17dBm firmware/5,75W baterai. <b>7 gate baru</b>: sertifikasi solar panel, keamanan baterai 18650 CH, tools bracket, registrasi jaringan, spek server, spek power CH (5VDC vs solar+18650), dukungan firmware Ethernet GW.'},
   {d:'19 Agu',date:'2026-08-19',title:'Versi slide Datasheet Sistem (PDF + PowerPoint)',stat:['berjalan','Update'],tags:[['sw','Dokumentasi']],
    body:'<i>Datasheet_Sistem_GLD_Slides.pptx</i> (editable, blok [Sources] di speaker notes) &amp; <i>...Slides.pdf</i> (14 halaman, 16:9) dirilis sbg versi presentasi datasheet. Koreksi audit: status TRA/JSA "draft tersedia, belum disahkan"; klaim AI on-device tetap bawa caveat.'},
-  {d:'27 Agu',date:'2026-08-27',title:'Executive Presentation dibuat — pitch klien baru',stat:['milestone','Milestone'],tags:[['coord','Marketing']],
-   body:'<i>GLD_Executive_Presentation.pptx</i> — deck pitch/showcase utk <b>calon klien baru</b> (RU lain/instansi lain), berbeda tujuan dari Datasheet Sistem (teknis, non-persuasif). Fokus diferensiator: multi-gas, AI trainable/edge, mesh self-healing privat. Bukti lapangan RU IV Cilacap + <b>RU VII Kasim/Sorong</b>; mitra manufaktur skala besar <b>PT Samindo</b> (ekosistem Samsung Indonesia) disebutkan generik tanpa detail kontrak.'},
-  {d:'27 Agu',date:'2026-08-27',title:'Redesain total ke template resmi Korporasi Kinarya ITB',stat:['berjalan','Update'],tags:[['sw','Desain']],
-   body:'Seluruh deck di-rebuild mengikuti template brand resmi ITB (navy 133765/002B5F, biru 2D64AC, cyan 38C0EF/1CD8FF, motif blok kuartal-lingkaran), menggantikan tema navy+amber lama. Kini <b>13 slide</b> (+1 slide baru "Arsitektur Jaringan") + 4 foto lapangan/hardware asli baru. Template ini jadi <b>referensi desain baku</b> utk deck client-facing berikutnya.'},
   {d:'31 Agu',date:'2026-08-31',title:'Desain CAD bracket U-Bolt v2 ("ATEX Casing v2")',stat:['berjalan','Update'],tags:[['hw','Hardware']],
    body:'<i>GLD U-Bolt Bracket V2.png</i> — gambar teknis CAD (Farhan Budiman) mounting sensor GLD ke pipa existing pakai <b>U-bolt 2"/DN50</b> (target pipa OD 60,3 mm, thread M10, lebar dalam 62–65 mm), lengkap pelat spacer &amp; tampilan terdimensi. Konkretisasi lanjutan dari arahan bracket L/U-clamp (6 &amp; 19 Agu) — kini gambar kerja siap-fabrikasi. Di-push langsung ke <i>main</i> di luar sesi Claude, belum ada notulen pendukung konteksnya.'}
 ];

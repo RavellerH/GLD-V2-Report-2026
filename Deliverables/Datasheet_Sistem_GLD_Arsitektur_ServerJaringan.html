@@ -265,7 +265,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="sm-row"><span class="k">STATUS</span><span class="v">Draft engineering</span></div>
       <div class="sm-row"><span class="k">SCOPE</span><span class="v">Pilot RU IV Cilacap</span></div>
       <div class="sm-row"><span class="k">TANGGAL</span><span class="v">19 Agu 2026</span></div>
-      <div class="sm-row"><span class="k">REV</span><span class="v">0.6</span></div>
+      <div class="sm-row"><span class="k">REV</span><span class="v">0.8</span></div>
     </div>
     <div class="zonenav">
       <a href="#z1"><span class="zi">01</span>Ringkasan</a>
@@ -318,7 +318,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="acard"><span class="ic">🔧</span><h4>Tim lapangan / instalasi</h4><ul><li>Bagian 04, 05, 06, 09</li><li>Spesifikasi perangkat, radio, mounting, catu daya</li></ul></div>
         <div class="acard"><span class="ic">💻</span><h4>Tim IT Pertamina</h4><ul><li>Bagian 08</li><li>Jaringan, MQTT, keamanan, checklist go-live</li></ul></div>
       </div>
-      <div class="banner warn"><span class="ic">⚠️</span><span><b>Belum siap pasang permanen di area berbahaya.</b> Item bertanda <span class="status wip">wip</span>/<span class="status gap">gap</span> di dokumen ini belum selesai atau belum diverifikasi lapangan.</span></div>
+      <div class="banner crit"><span class="ic">🚧</span><span><b>Status sistem: RU NOT COMMISSIONED.</b> Kunjungan RU IV Cilacap 9–10 Agu 2026 = survey lokasi saja, instalasi belum dimulai. Item bertanda <span class="status wip">wip</span>/<span class="status gap">gap</span> di dokumen ini belum selesai atau belum diverifikasi lapangan — belum siap pasang permanen di area berbahaya. Detail lengkap → bagian 10.</span></div>
     </section>
 
     <!-- ===================== ZONE 2 ===================== -->
@@ -332,7 +332,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="citem"><span class="ic">✅</span><div><b>Model AI on-device</b><span>CNN Dual-Branch berjalan langsung di ESP32-S3 GLD, akurasi 99,20% (bagian 03, 07)</span></div></div>
         <div class="citem"><span class="ic">✅</span><div><b>Catu daya GLD final</b><span>24VDC ≥1A per unit — desain selesai, siap pasang (bagian 04, 09)</span></div></div>
         <div class="citem"><span class="ic">✅</span><div><b>Desain mounting</b><span>L-bracket referensi Emerson untuk GLD &amp; CH+solar panel (bagian 04, 06, 09)</span></div></div>
-        <div class="citem"><span class="ic">✅</span><div><b>Software server siap</b><span>Konfigurasi MQTT broker, backend, frontend — installer satu-paket disiapkan LGU/ITB (bagian 08)</span></div></div>
+        <div class="citem"><span class="ic">✅</span><div><b>Software server siap sebagian</b><span>Konfigurasi MQTT broker, backend, frontend ada — <span class="status gap">adapter MQTT→backend masih perlu dibangun</span> (bagian 03, 08)</span></div></div>
         <div class="citem"><span class="ic">✅</span><div><b>Rekomendasi spesifikasi server/VM</b><span>CPU/RAM/storage/OS/database diusulkan, tinggal dikonfirmasi Pertamina (bagian 08)</span></div></div>
         <div class="citem"><span class="ic">✅</span><div><b>Dokumen integrasi jaringan</b><span>Kontrak MQTT, keamanan, checklist go-live sudah didraft (bagian 08)</span></div></div>
       </div>
@@ -345,6 +345,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="citem"><span class="ic">☐</span><div><b>Registrasi MAC Gateway</b><span>Ke sistem IT kilang agar IP tidak berubah (DHCP reservation/IP statis) (bagian 08)</span></div></div>
         <div class="citem"><span class="ic">☐</span><div><b>Satukan jaringan Gateway + server</b><span>Satu subnet, plus jelaskan langkah-langkah konkretnya (bagian 08)</span></div></div>
         <div class="citem"><span class="ic">☐</span><div><b>Kebijakan keamanan jaringan</b><span>Ada/tidak lapisan tambahan selain SSID+password (VLAN/802.1X/firewall) (bagian 08)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Review akses dashboard ke LAN kantor</b><span>PC dedicated LGU direncanakan dual-homed ke intranet kantor tanpa firewall/VPN tambahan — perlu kajian keamanan (bagian 08, 10)</span></div></div>
       </div>
 
       <p style="font-size:12.8px;color:var(--ink-soft);margin:16px 0 8px;font-weight:600">Instalasi &amp; catu daya</p>
@@ -360,6 +361,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="citem"><span class="ic">☐</span><div><b>Sertifikasi ketinggian pemasangan</b><span>Bila instalasi permanen di atas tinggi manusia (bagian 06, 10)</span></div></div>
         <div class="citem"><span class="ic">☐</span><div><b>Sampel gas ke lokasi pengujian</b><span>Disiapkan &amp; dibawa tim Pertamina, tidak diambil langsung di kilang (bagian 06) — <b>belum diterima sampai sekarang</b> (H2S/metana/amonia/dll.); LGU sudah coba cari suplier alternatif di Bandung, masih sulit</span></div></div>
         <div class="citem"><span class="ic">☐</span><div><b>Rekonsiliasi requirement gas tambahan</b><span>Benzena/CO/H2S — apakah menambah atau menggantikan sebagian gate 6-kelas (bagian 07, 10)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Tetapkan scoping ATEX</b><span>Kelompok gas (IIC/IIB/IIA), kelas temperatur (T1–T6), klasifikasi zona — gate paling fundamental, belum ditentukan sama sekali (bagian 06, 10)</span></div></div>
       </div>
 
       <div class="banner info"><span class="ic">🤝</span><span>Kolom "perlu disiapkan Kilang" ini adalah <b>daftar kerja bersama</b> — bukan tuntutan sepihak. LGU/ITB siap membantu diskusi teknis untuk tiap item begitu PIC dari Pertamina ditentukan.</span></div>
@@ -406,12 +408,41 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="rcard"><span class="ic">📶</span><div><b>Cluster Head <span class="status ok">Fungsional</span></b><span>Cache, relay mesh, failover parent — teruji 8-CH</span></div></div>
         <div class="rcard"><span class="ic">🌐</span><div><b>Gateway <span class="status ok">Fungsional</span></b><span>Jembatan mesh↔MQTT, publish uplink/status/topologi</span></div></div>
         <div class="rcard"><span class="ic">📨</span><div><b>MQTT Broker <span class="status wip">Perlu setup</span></b><span>Parameter produksi RU IV belum ditetapkan</span></div></div>
-        <div class="rcard"><span class="ic">⚙️</span><div><b>Node-RED + Backend <span class="status wip">Perlu deploy</span></b><span>Fungsional di lab; deployment site pending</span></div></div>
+        <div class="rcard"><span class="ic">⚙️</span><div><b>Node-RED <span class="status ok">Fungsional</span></b><span>Decode, validasi kripto, replay protection, topologi</span></div></div>
+        <div class="rcard"><span class="ic">🧩</span><div><b>Adapter Node-RED → Backend <span class="status gap">NOT IMPLEMENTED</span></b><span>Belum ada di repo aplikasi — lihat banner di bawah</span></div></div>
         <div class="rcard"><span class="ic">📊</span><div><b>Dashboard <span class="status ok">Fungsional</span></b><span>Peta, topologi, event log, multi-tenant per RU</span></div></div>
       </div>
 
+      <div class="banner crit"><span class="ic">🧩</span><span><b>Gap integrasi ditemukan (audit repo terbaru): adapter MQTT → backend BELUM ADA.</b> Node-RED (repo <span class="mono">PertaminaGLD</span>) menghasilkan topic MQTT ternormalisasi (decoded/alarm/status/events), tapi repo aplikasi (<span class="mono">gasleakdetectionV2-April/apps/backend</span>) <b>tidak memiliki adapter</b> yang mengubah pesan MQTT itu menjadi pemanggilan <span class="mono">addReading</span>/<span class="mono">device</span> ke database. Artinya secara teknis, jalur data lapangan → dashboard <b>belum tersambung penuh ujung-ke-ujung di level aplikasi</b> — Node-RED dan dashboard masing-masing berfungsi, tapi jembatan di antaranya belum dibangun. Implementasi &amp; integration test adapter ini bersifat <b>mandatory</b> sebelum commissioning. Data contract minimum yang wajib dibawa adapter: <span class="mono">deviceId, timestamp, gasClass/aiClass, confidence, battery, network/health, messageId</span> (utk deduplication).</span></div>
+      <p style="font-size:11.5px;color:var(--ink-soft)">Temuan dari audit repo terkunci pada commit <span class="mono">gasleakdetectionV2-April@660febbf</span> &amp; <span class="mono">PertaminaGLD@69a493c3</span> — commit lebih baru berpotensi sudah mengisi gap ini, perlu recheck sebelum dianggap masih terbuka.</p>
+
       <div class="banner info"><span class="ic">🤖</span><span><b>AI sudah on-device (dikonfirmasi user, 19 Agu).</b> Inferensi CNN Dual-Branch berjalan langsung di ESP32-S3 GLD (bukan lagi PC/emulator) — model terkuantisasi int8 (9,14 KB) dieksekusi on-chip tiap siklus transmit.</span></div>
       <div class="banner warn"><span class="ic">⚠️</span><span><b>Catatan verifikasi:</b> klaim ini berasal dari konfirmasi langsung user, <b>belum dari dokumen tertulis</b>. Salinan source firmware terbaru yang tersedia untuk diperiksa (<span class="mono">docs/design/gld/final_design.md</span>, mirror per 29 Jun 2026) masih mendeskripsikan skema klasifikasi 6 kelas yang berbeda (clear/LPG/methane/propane/butane/anomaly) — bukan 4 kelas CNN Dual-Branch (LPG/CO2/Udara Bersih/H2). Kemungkinan besar mirror dokumen ini belum diperbarui sejak integrasi CNN Dual-Branch (~29 Jul–9 Agu), tapi ini <b>belum diverifikasi tertulis</b> — perlu konfirmasi commit firmware terbaru dari tim sebelum diklaim final ke klien.</span></div>
+
+      <div class="subhead"><h3>Spesifikasi aplikasi RU — frontend &amp; backend</h3></div>
+      <div class="grid2">
+        <div class="acard"><span class="ic">🖥️</span><h4>Frontend</h4>
+          <div class="statgrid" style="margin-top:8px">
+            <div class="stat"><span class="k">Framework</span><span class="v">Next.js 15 · React 18 · TypeScript</span></div>
+            <div class="stat"><span class="k">Visualisasi</span><span class="v">Mapbox GL · Recharts · Tailwind</span></div>
+            <div class="stat"><span class="k">Akses data</span><span class="v">GraphQL, endpoint RU :4000/graphql</span></div>
+            <div class="stat"><span class="k">Refresh</span><span class="v">Polling ~10 dtk (bukan subscription)</span></div>
+            <div class="stat"><span class="k">Mode RU</span><span class="v">Penuh, termasuk admin/settings</span></div>
+            <div class="stat"><span class="k">Mode HQ</span><span class="v">Read-only, mutation/settings disembunyikan</span></div>
+          </div>
+        </div>
+        <div class="acard"><span class="ic">🗄️</span><h4>Backend</h4>
+          <div class="statgrid" style="margin-top:8px">
+            <div class="stat"><span class="k">Runtime</span><span class="v">Node.js · NestJS · Apollo GraphQL · port 4000</span></div>
+            <div class="stat"><span class="k">Data layer</span><span class="v">Prisma ORM · <span class="status gap">SQLite (RU saat ini)</span></span></div>
+            <div class="stat"><span class="k">Entitas inti</span><span class="v">Device, GasReading, SystemSettings, EventLog, User</span></div>
+            <div class="stat"><span class="k">Alarm logic</span><span class="v">Warning ≥0,70 · Critical ≥0,80 · dedup 15 mnt</span></div>
+            <div class="stat"><span class="k">Keamanan</span><span class="v">Playground/introspection ditutup di produksi; <span class="status gap">CORS masih luas</span></span></div>
+            <div class="stat"><span class="k">Open item</span><span class="v">Adapter MQTT, backup/retention, auth/TLS hardening</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="banner warn"><span class="ic">🗄️</span><span><b>Baseline database — OPEN.</b> RU saat ini pakai SQLite file-based (belum production-grade). Migrasi ke PostgreSQL/TimescaleDB <b>belum jadi keputusan resmi</b> — perlu ditetapkan bersama sizing, backup, retention, HA, dan recovery objective sebelum commissioning.</span></div>
     </section>
 
     <!-- ===================== ZONE 4 ===================== -->
@@ -552,7 +583,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
     <!-- ===================== ZONE 6 ===================== -->
     <section class="zone" id="z6">
       <div class="zone-head"><span class="zn">06</span><h2>Area berbahaya &amp; sertifikasi ATEX</h2></div>
-      <div class="banner crit"><span class="ic">🔥</span><span><b>Belum disertifikasi.</b> Target pengajuan ~3 minggu sejak notulen (menumpang rombongan sertifikasi ke China, lebih ekonomis). Sampai terbit, jangan dianggap siap pasang permanen di Tangki LPG / SRU.</span></div>
+      <div class="banner crit"><span class="ic">🔥</span><span><b>Belum disertifikasi — instalasi permanen dilarang.</b> Estimasi realistis total <b>5–8 bulan</b> sejak Kick-Off (12 Jun 2026), berdasarkan proposal sertifikasi formal (breakdown: perencanaan 2–4mgu, redesign 4–6mgu, pre-compliance 3–4mgu, <b>uji lab terakreditasi 8–12mgu — fase terpanjang</b>, finalisasi dok 2–3mgu). Angka "~3 minggu" dari notulen awal kemungkinan hanya milestone/submission dalam proses ini, bukan estimasi total dari nol. Sampai sertifikat terbit, jangan dianggap siap pasang permanen di Tangki LPG / SRU.</span></div>
 
       <div class="subhead"><h3>Desain Ex-Proof — 2 kompartemen terpisah, disambung seal/cable gland</h3></div>
       <div class="enclosure">
@@ -561,6 +592,13 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="ebox"><span class="ic">🧪</span><b>Sensor cartridge</b><p>Elektronik sensor gas, kompartemen terpisah</p></div>
       </div>
       <p style="font-size:11.8px;color:var(--ink-soft)">Notulen menyebut "3 komponen utama" secara verbal, tapi ringkasan tertulisnya hanya merinci 2 kompartemen fisik (elektronik &amp; sensor) yang dihubungkan via seal/cable gland — bukan 3 kompartemen terpisah. Diperbaiki di sini agar tidak overclaim dari transkrip yang ambigu. Foto perangkat aktual (bagian 04) mengonfirmasi desain ini: enclosure metal biru dengan sensor cartridge mesh terpisah, disambung via conduit fitting.</p>
+
+      <div class="subhead"><h3>Scoping ATEX — belum ditentukan sama sekali (gate paling fundamental)</h3></div>
+      <div class="banner crit"><span class="ic">🚧</span><span><b>gate:atex-scoping.</b> Kelompok gas (IIC/IIB/IIA), kelas temperatur (T1–T6), dan klasifikasi zona (0/1/2 atau 20/21/22) untuk GLD V2 <b>belum ditentukan sama sekali</b> — ini lebih fundamental dari gate sertifikasi lain manapun, karena tanpa scoping ini lingkup pengujian ATEX/IECEx belum bisa dimulai. Sensor MQ memakai heater internal ~300–400°C yang berpotensi <b>gagal syarat suhu permukaan</b> di zona berbahaya (kelas T6 = maks 85°C) — belum ada perhitungan hot-spot.</span></div>
+      <ul class="tight">
+        <li>Material enclosure mengarah ke <b>Aluminum alloy + Stainless steel</b> (riset pembanding produk sejenis) — grade spesifik (seri aluminium/SS 304 vs 316L) belum ditentukan.</li>
+        <li>Baterai Li-ion 18650 cadangan bukan cuma di Cluster Head — <b>Node Sensor GLD juga memakainya</b>, dan sama sekali belum diverifikasi Ex (dokumen sumber sertifikasi sempat tulis "28000 mAh", dicurigai typo dari ~2800mAh, belum dikonfirmasi).</li>
+      </ul>
 
       <div class="subhead"><h3>Mounting &amp; instalasi</h3></div>
       <ul class="tight">
@@ -580,7 +618,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="rolegrid">
         <div class="rcard"><span class="ic">🔩</span><div><b>Isolasi elektronik ↔ sensor</b><span>PIC: Mas Adit / Mas Hanif</span></div></div>
         <div class="rcard"><span class="ic">📄</span><div><b>Skematik final + BOM utk ATEX</b><span>PIC: Tim ITB + Pertamina</span></div></div>
-        <div class="rcard"><span class="ic">🧪</span><div><b>Dataset gas tambahan (LPG/H2S/CH4/CO/NH3)</b><span>PIC: Tim AI/chamber ITB</span></div></div>
+        <div class="rcard"><span class="ic">🧪</span><div><b>Dataset gas tambahan (LPG/H2S/CH4/CO/NH3) <span class="status gap">Terhambat sampel</span></b><span>PIC: Tim AI/chamber ITB — lihat blocker di bagian 07</span></div></div>
         <div class="rcard"><span class="ic">📍</span><div><b>Survei lanjutan RU IV Cilacap</b><span>PIC: Tim lapangan</span></div></div>
         <div class="rcard"><span class="ic">🛠️</span><div><b>Desain mounting/bracket standar kilang</b><span>PIC: Tim Mekanik ITB</span></div></div>
         <div class="rcard"><span class="ic">📐</span><div><b>Skenario instalasi + dimensi</b><span>PIC: Tim Mekanik + Vendor</span></div></div>
@@ -609,6 +647,13 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="gbadge gap"><span class="gi">⛔</span><div><b>CO</b><span>Tidak dicakup — requirement baru</span></div></div>
         <div class="gbadge gap"><span class="gi">⛔</span><div><b>H2S</b><span>Tidak dicakup — requirement baru</span></div></div>
       </div>
+
+      <div class="subhead"><h3>Blocker: sampel gas tambahan belum tersedia</h3></div>
+      <div class="banner crit"><span class="ic">🧪</span><span><b>Sampel gas (H2S, metana, amonia, dll.) dari Pertamina belum diterima sampai sekarang.</b> Tanpa sampel, dataset &amp; training model untuk gas tambahan ini tidak bisa berjalan — blocker langsung ke gap requirement gas di atas. LGU sudah mencari suplier alternatif di Bandung (masih aktif, lebih cepat bila Pertamina sediakan langsung), tapi <b>masih sulit</b> mendapatkan sampel gas-gas ini.</span></div>
+      <ul class="tight">
+        <li><b>Mitigasi:</b> gas test chamber portable sudah dibangun, dibawa ke <b>kantor kilang</b> (bukan area proses/hazardous) untuk minimalisir risiko kebocoran — training model dilakukan di luar area proses.</li>
+        <li>Ini <b>salah satu jalur alternatif</b> untuk dapat sampel dari Pertamina langsung di lokasi — bukan pengganti pencarian suplier Bandung, keduanya berjalan paralel.</li>
+      </ul>
 
       <div class="subhead"><h3>Logika alarm</h3></div>
       <ul class="tight">
@@ -658,6 +703,14 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <li><span class="status gap">Perlu dari Pertamina</span>: langkah-langkah konkret untuk menyatukan Gateway + server ke satu jaringan (proses registrasi, siapa PIC, berapa lama).</li>
       </ul>
 
+      <div class="subhead"><h3>Klarifikasi arsitektur: PC dedicated LGU dekat Gateway</h3></div>
+      <div class="banner warn"><span class="ic">🖥️</span><span><b>Arah arsitektur diperjelas (belum full dirinci):</b> Pertamina diminta sediakan <b>PC fisik</b> (bukan VM/cloud) di dekat Gateway, dikelola penuh oleh LGU. LGU pasang <b>PC server + MQTT broker sendiri</b> di situ, dihubungkan ke jaringan field (Gateway→CH→sensor) via <b>router milik LGU di lokasi</b>. PC ini juga terhubung <b>langsung via NIC kedua</b> ke intranet kantor kilang, sehingga dashboard bisa diakses dari sana <b>tanpa firewall/VPN tambahan</b> (belum dirinci lebih jauh).</span></div>
+      <ul class="tight">
+        <li>Ini <b>tambahan</b>, bukan pengganti, dari rencana server/VM Pertamina di atas — server/VM itu kemungkinan tetap dipakai untuk keperluan lain (mis. sync HQ Jakarta). <span class="status gap">Relasi persis antara keduanya masih perlu diklarifikasi</span>.</li>
+        <li>Ini juga memperjelas registrasi jaringan: kemungkinan yang perlu didaftarkan ke intranet kilang <b>bukan MAC Gateway langsung</b>, melainkan <b>NIC kedua PC ini</b> — <span class="status gap">perlu dikonfirmasi mana yang benar</span>.</li>
+        <li><b>gate:dashboard-exposure</b> — akses dashboard langsung dari LAN kantor kilang tanpa firewall/VPN tambahan berpotensi jadi celah eksposur ke seluruh intranet kantor; belum ada review keamanan/kebijakan akses. Perlu diklarifikasi ke Pertamina &amp; tim jaringan.</li>
+      </ul>
+
       <div class="subhead"><h3>Catu daya &amp; pemasangan Gateway</h3></div>
       <div class="statgrid" style="border:1px solid var(--line);border-radius:11px;overflow:hidden">
         <div class="stat"><span class="k">Catu daya</span><span class="v">5V via adaptor</span></div>
@@ -702,6 +755,27 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="trow"><span class="dir int">Internal</span><span class="topic">gld/server/alarm</span><span class="desc">Alarm tervalidasi</span></div>
         <div class="trow"><span class="dir int">Internal</span><span class="topic">gld/server/replay</span><span class="desc">Karantina gagal validasi / replay</span></div>
       </div>
+      <p style="font-size:11.8px;color:var(--ink-soft)">Data contract minimum yang wajib dibawa hasil decode ke aplikasi: <span class="mono">deviceId, timestamp, gasClass/aiClass, confidence, battery, network/health, messageId</span> (messageId utk deduplication).</p>
+
+      <div class="subhead"><h3>Port layanan RU (default repo/bench — bukan final)</h3></div>
+      <div class="tbl-scroll"><table class="compact">
+        <tr><th>Layanan</th><th>Port</th><th>Catatan</th></tr>
+        <tr><td>MQTT broker</td><td>1884*</td><td>Bench default — <span class="status gap">TBD produksi</span></td></tr>
+        <tr><td>Node-RED</td><td>1880</td><td>Admin UI — jangan expose ke publik</td></tr>
+        <tr><td>Backend GraphQL</td><td>4000</td><td>NestJS/Apollo</td></tr>
+        <tr><td>Frontend RU</td><td>3002</td><td>Web operator</td></tr>
+        <tr><td>Gateway VPS (HQ sync)</td><td>4100</td><td>+ PostgreSQL, akses VPN-only</td></tr>
+      </table></div>
+      <p style="font-size:11.5px;color:var(--ink-soft)"><b>Kebijakan firewall minimum:</b> izinkan Gateway→MQTT, operator→frontend, frontend→backend, dan RU→VPS via VPN (jika disetujui). <b>Tolak akses publik ke Node-RED admin.</b> Port di atas adalah default repo/bench — aturan firewall produksi ditetapkan IT/OT Kilang.</p>
+
+      <div class="subhead"><h3>Sinkronisasi RU → VPS/HQ — status &amp; retensi</h3></div>
+      <div class="statgrid" style="border:1px solid var(--line);border-radius:11px;overflow:hidden">
+        <div class="stat"><span class="k">Status</span><span class="v"><span class="status gap">NOT COMMISSIONED</span></span></div>
+        <div class="stat"><span class="k">Mekanisme</span><span class="v">gatewayPull (GraphQL+auth) via VPN, tarik tiap ~30 dtk</span></div>
+        <div class="stat"><span class="k">Retensi reading/event non-kritis</span><span class="v">7 hari</span></div>
+        <div class="stat"><span class="k">Retensi event kritis</span><span class="v">90 hari</span></div>
+      </div>
+      <p style="font-size:11.5px;color:var(--ink-soft)">RU beroperasi mandiri (tidak bergantung ke VPS). Layanan Gateway VPS tersedia di repo, tapi deployment produksi, VPN, credential, DNS, backup, dan monitoring <b>belum diverifikasi</b>. Retensi masih target — perlu persetujuan Kilang.</p>
 
       <div class="subhead"><h3>Keamanan — minimum</h3></div>
       <div class="rolegrid">
@@ -765,7 +839,8 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="brow"><span class="lab">Target</span><div class="btrack"><div class="bfill" style="width:100%;opacity:.35"></div></div><span class="val">30 hari</span></div>
       </div>
       <ul class="tight">
-        <li>Draw ON 5,75 W, duty 29% (baterai 7P/28Ah). Target baru: &lt;100 mA, desain rechargeable berpotensi 6–8 bulan.</li>
+        <li>Draw ON 5,75 W, duty 29% (baterai 7P/28Ah = 28Ah). Target baru: &lt;100 mA, desain rechargeable berpotensi 6–8 bulan.</li>
+        <li><span class="status gap">Spek baterai node berubah dari proposal</span> (Li-ion 3.7V 14.000mAh) — dikonfirmasi berubah, tapi <b>nilai baru belum diberikan</b>. Jangan pakai angka proposal maupun 7P×4000mAh lama sbg spek final baterai portable sampai dikonfirmasi.</li>
         <li>Solar+baterai untuk GLD portable: ukuran fisik besar tidak masalah bagi Pertamina, tapi cost-benefit vs kabel (+CAPEX) <span class="status gap">belum dihitung</span> (PIC: Beny/ITB Fisika).</li>
       </ul>
 
@@ -799,20 +874,27 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
     <section class="zone" id="z10">
       <div class="zone-head"><span class="zn">10</span><h2>Gate &amp; item terbuka</h2></div>
 
+      <div class="banner crit"><span class="ic">🚧</span><span><b>Status sistem: NOT COMMISSIONED.</b> Kunjungan RU IV Cilacap 9–10 Agustus 2026 = <b>survey lokasi saja, instalasi fisik belum dimulai</b>. Operasi RU memerlukan server, jalur jaringan, izin site, dan sertifikasi hazardous-area sebelum bisa dinyatakan berjalan — hasil uji laboratorium (PASS) bukan bukti operational acceptance di RU.</span></div>
+
       <div class="rolegrid">
-        <div class="rcard"><span class="ic">🟡</span><div><b>Baterai GLD &lt; 30 hari</b><span>Jalur terpisah, tidak menahan deployment 24VDC</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>Adapter MQTT → backend NOT IMPLEMENTED</b><span>Belum ada di repo aplikasi — mandatory sebelum commissioning (bagian 03)</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Baterai GLD &lt; 30 hari</b><span>Jalur terpisah, tidak menahan deployment 24VDC — spek baterai baru juga belum diberikan</span></div></div>
         <div class="rcard"><span class="ic">🔴</span><div><b>TPL5010 belum efektif</b><span>Masih cuplik data saat "off" (~0,4V)</span></div></div>
         <div class="rcard"><span class="ic">🟡</span><div><b>DC converter</b><span>Perlu diganti/dimodifikasi</span></div></div>
-        <div class="rcard"><span class="ic">🔴</span><div><b>TRA/JSA belum disusun</b><span>Menahan eksekusi site survey fisik</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>TRA/JSA belum disahkan</b><span>Baru draft internal — menahan eksekusi site survey fisik</span></div></div>
         <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi ketinggian</b><span>Baru diuji setinggi manusia</span></div></div>
         <div class="rcard"><span class="ic">🔴</span><div><b>Gas tambahan belum direkonsiliasi</b><span>Benzena/CO/H2S vs gate 6-kelas — sampel dari Pertamina belum ada, suplier Bandung juga sulit</span></div></div>
-        <div class="rcard"><span class="ic">🟡</span><div><b>Kapasitas GW/CH</b><span>Belum ada angka resmi vs jumlah sensor</span></div></div>
-        <div class="rcard"><span class="ic">🔴</span><div><b>Sertifikasi ATEX</b><span>Belum terbit — target ~3 minggu sejak notulen</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Kapasitas GW/CH</b><span>Belum ada angka resmi vs jumlah sensor — load test belum dilakukan</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>Sertifikasi ATEX</b><span>Belum terbit — estimasi realistis 5–8 bulan sejak Kick-Off</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>Scoping ATEX belum ditentukan</b><span>Gas group/kelas temperatur/zona — gate paling fundamental, blm bisa mulai uji</span></div></div>
         <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi solar panel hazardous</b><span>Belum disourcing — PIC LGU</span></div></div>
-        <div class="rcard"><span class="ic">🟡</span><div><b>Keamanan baterai CH di kilang</b><span>Sertifikasi sel/BMS belum didokumentasikan — PIC LGU</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Keamanan baterai Li-ion CH &amp; GLD</b><span>Sertifikasi sel/BMS belum didokumentasikan utk keduanya — PIC LGU</span></div></div>
         <div class="rcard"><span class="ic">🟡</span><div><b>Tools/fastener bracket</b><span>Ukuran kunci &amp; mur-baut belum ditentukan — PIC LGU</span></div></div>
-        <div class="rcard"><span class="ic">🔴</span><div><b>Registrasi jaringan GW↔server</b><span>Step-by-step &amp; kebijakan security — perlu dari Pertamina</span></div></div>
-        <div class="rcard"><span class="ic">🟡</span><div><b>Spek server/VM aktual</b><span>Masih rekomendasi LGU — perlu dikonfirmasi Pertamina</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>Registrasi jaringan GW↔server</b><span>MAC GW atau NIC2 PC dedicated — belum jelas mana; kebijakan security perlu dari Pertamina</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Spek server/VM aktual</b><span>Masih rekomendasi LGU — relasi dgn PC dedicated LGU juga belum jelas</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>Eksposur dashboard ke LAN kantor</b><span>Direncanakan tanpa firewall/VPN tambahan — belum ada review keamanan</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Baseline database RU</b><span>SQLite saat ini — migrasi PostgreSQL/TimescaleDB belum jadi keputusan resmi</span></div></div>
+        <div class="rcard"><span class="ic">🟡</span><div><b>Input power CH: 5VDC vs solar+18650</b><span>Belum rekonsiliasi antara spek EMC &amp; notulen daya</span></div></div>
       </div>
 
       <div class="subhead"><h3>Sudah selesai (untuk konteks)</h3></div>
@@ -822,8 +904,18 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <li>Catu daya CH → teratasi (2 panel solar).</li>
         <li>Push alarm → berhasil diuji di mesh kampus (belum lapangan produksi).</li>
         <li>Catu daya GLD → <b>24VDC ≥1A final, siap pasang</b> (jalur baterai berjalan terpisah).</li>
+        <li>Firmware GLD/CH/Gateway → integrasi diuji <b>PASS</b> di lab (mesh 8-CH, push alarm otomatis) — bukan bukti operational acceptance di RU.</li>
       </ul>
-      <div class="banner info"><span class="ic">📈</span><span>Progres pilot Cilacap ≈ 39% (baseline 19%) — <b>sisi engineering lab saja</b>, bukan kesiapan lapangan/sertifikasi.</span></div>
+
+      <div class="subhead"><h3>Kriteria penerimaan minimum (acceptance criteria)</h3></div>
+      <div class="rolegrid">
+        <div class="rcard"><span class="ic">1️⃣</span><div><b>Kesiapan site</b><span>TRA/JSA disahkan; struktur mounting dirilis; sirkuit 24VDC terproteksi tersedia</span></div></div>
+        <div class="rcard"><span class="ic">2️⃣</span><div><b>Integrasi sistem</b><span>Server/VM teralokasi; jalur jaringan disetujui; adapter MQTT &amp; database RU beroperasi</span></div></div>
+        <div class="rcard"><span class="ic">3️⃣</span><div><b>Kepatuhan keselamatan</b><span>Persetujuan ATEX terbit; kelas gas wajib tervalidasi; instalasi permanen diotorisasi</span></div></div>
+      </div>
+      <p style="font-size:11.5px;color:var(--ink-soft)"><b>Bukti wajib:</b> broker MQTT online; ingestion tervalidasi; alarm tampil di dashboard; restore test lulus; persetujuan hazardous-area diterbitkan.</p>
+
+      <div class="banner info"><span class="ic">📈</span><span>Progres pilot Cilacap ≈ 39% (baseline 19%) — <b>sisi engineering lab saja</b>, bukan kesiapan lapangan/sertifikasi/commissioning/operational acceptance.</span></div>
     </section>
 
     <!-- ===================== ZONE 11 ===================== -->
@@ -836,14 +928,17 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <tr><td><span class="mono">PertaminaGLD/docs/design/*/final_design.md</span> + <span class="mono">firmware/config/*.h</span></td><td>Bagian 04–05</td></tr>
         <tr><td><span class="mono">PertaminaGLD/docs/manual/Gateway-to-Server-Site-{IT-Pertamina,Technical-Datasheet}.docx</span> (13 Agu)</td><td>Bagian 02, 08</td></tr>
         <tr><td><span class="mono">gasleakdetectionV2-April/Documentation/*.md</span>, <span class="mono">docker-compose.vps.yml</span>, <span class="mono">deploy/hq/</span></td><td>Bagian 03, 08</td></tr>
-        <tr><td><span class="mono">memory/blockers_metrics.md</span>, <span class="mono">entities.md</span>, <span class="mono">decisions.md</span></td><td>Bagian 02, 07, 09, 10</td></tr>
+        <tr><td><span class="mono">memory/blockers_metrics.md</span>, <span class="mono">entities.md</span>, <span class="mono">decisions.md</span></td><td>Bagian 02, 06, 07, 08, 09, 10</td></tr>
+        <tr><td>Audit repo terkunci: <span class="mono">gasleakdetectionV2-April@660febbf</span>, <span class="mono">PertaminaGLD@69a493c3</span></td><td>Bagian 03, 08 (temuan adapter MQTT, spek frontend/backend, ports)</td></tr>
+        <tr><td>Proposal formal: <span class="mono">proposal_GLD_1906M_KONTRAK_PAYUNG...pdf</span>, <span class="mono">PROPOSAL_SERTIFIKASI...[21 FEB 2026].pdf</span> (4 Sep)</td><td>Bagian 06, 09 (estimasi timeline sertifikasi 5–8 bulan, spek baterai berubah)</td></tr>
+        <tr><td>Repo sister <span class="mono">RavellerH/sertifikasi-atex-gld-v2-2026</span> (gap-analysis, 27 Agu)</td><td>Bagian 06 (scoping ATEX, material enclosure, baterai GLD)</td></tr>
       </table></div>
       <div class="banner warn"><span class="ic">📌</span><span>Dokumen ini <b>tidak membuktikan</b> broker aktif, server dideploy, atau ATEX tersertifikasi — status itu baru sah setelah commissioning &amp; sertifikasi menghasilkan bukti (checklist di bagian 8).</span></div>
     </section>
 
     <footer>
       GLD Tahap 2 — LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga (RU IV Cilacap)<br>
-      Disusun 19 Agustus 2026, direvisi awal September 2026 (catu daya GLD 24VDC ≥2A→≥1A). Rev 0.7 — draft engineering, belum disahkan.
+      Disusun 19 Agustus 2026, direvisi 4 September 2026 (sinkron dgn temuan audit repo terbaru &amp; slide deck rev 0.8: gap adapter MQTT, spek frontend/backend, scoping ATEX, PSU 24VDC ≥2A→≥1A, arsitektur PC dedicated). Rev 0.8 — draft engineering, belum disahkan.
     </footer>
   </main>
 </div>

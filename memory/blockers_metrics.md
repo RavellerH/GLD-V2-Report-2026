@@ -40,6 +40,8 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 | gate:ch-power-spec | Input power CH: spek EMC tertulis 5VDC vs notulen daya sebut solar+18650 | **Belum rekonsiliasi** — perlu klarifikasi apakah 5VDC referensi internal board atau beda konfigurasi (dec:45) |
 | gate:gw-ethernet | Gateway punya port Ethernet fisik (spek EMC) selain Wi-Fi | **Belum jelas** apakah firmware Gateway saat ini sudah mendukung jalur Ethernet (dec:45) — berpotensi menyederhanakan isu keamanan Wi-Fi di bagian 08 |
 | gate:dashboard-exposure | Keamanan akses dashboard dari PC server LGU ke LAN kantor kilang | **Direncanakan langsung via NIC kedua, tanpa firewall/VPN tambahan** (dec:46) — belum ada review keamanan/kebijakan akses; berpotensi jadi celah eksposur ke seluruh intranet kantor kilang, perlu diklarifikasi ke Pertamina & tim jaringan |
+| gate:mqtt-adapter | Adapter MQTT (Node-RED decoded topics) → backend (`addReading`/`device`) | 🆕 **NOT IMPLEMENTED** — tidak ditemukan di repo aplikasi (`gasleakdetectionV2-April/apps/backend`, dikunci commit `660febbf`) per audit repo lebih dalam (dec:56). Jalur data lapangan→dashboard belum tersambung penuh di level aplikasi meski Node-RED & dashboard masing-masing fungsional. Implementasi + integration test bersifat mandatory sebelum commissioning — commit lebih baru berpotensi sudah mengisi gap ini, perlu recheck |
+| gate:db-baseline | Baseline database produksi RU (SQLite pilot vs PostgreSQL/TimescaleDB) | 🆕 RU saat ini pakai **SQLite file-based** (dec:56) — migrasi ke Postgres/TimescaleDB belum jadi keputusan resmi; perlu sizing, backup, retention, HA, recovery objective |
 
 ## Metrik daya (Update Timeline Juli, 16 Jul 2026)
 **GLD node (baterai 7P = 7×4000 mAh = 28 Ah, ~70,4 Wh usable):**

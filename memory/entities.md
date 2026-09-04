@@ -10,6 +10,13 @@
 | org:emerson | Emerson | Vendor sistem **Corrosion Monitoring** (protokol **WirelessHART**) yang sudah terpasang & teruji di kilang — jadi rujukan desain mounting/bracket & topologi jaringan GLD (6 Agu). Bukan vendor/bagian dari proyek GLD. |
 | org:samindo | PT Samindo (ekosistem manufaktur Samsung Indonesia) | **Mitra manufaktur/skala** untuk permintaan volume besar (disebut 27 Agu di `Deliverables/GLD_Executive_Presentation.pptx`, instruksi langsung user — belum ada detail kontrak/kapasitas/status kerja sama tertulis di dokumen lain; disebut generik sbg "manufacturing/scale partner"). |
 
+## Kontrak & Proposal (`doc:`)
+| ID | Nama | Isi ringkas |
+|---|---|---|
+| doc:kontrak-payung | Kontrak Payung SP-26015 | Referensi kontrak yg jadi basis perhitungan tarif personil (SBOB/SBOH, Lamp.No.02 KP–Inkindo 2021) di RAB `proposal_GLD_1906M_KONTRAK_PAYUNG_rev2204260830.pdf` (4 Sep, dec:50). Belum ada salinan dokumen kontrak itu sendiri di repo — hanya referensi nomornya di RAB. |
+| doc:proposal-gld | Proposal GLD Tahap 2 (rev 22 Apr 2026) | `Sumber Dokumen/proposal_GLD_1906M_KONTRAK_PAYUNG_rev2204260830.pdf` — proposal formal ke Pertamina Patra Niaga, LGU+Korporasi Kinarya ITB. RAB Rp1.906.638.909. **Mencakup integrasi OGI Thermal Camera sbg scope inti** — bertentangan dgn dec:05 (OGI dihapus dari report), lih. dec:50. |
+| doc:proposal-sertifikasi | Proposal Sertifikasi GLD v4 | `Sumber Dokumen/PROPOSAL_SERTIFIKASI_GAS_LEAK_DETECTION_SYSTEM_v4.pdf` — cakupan ATEX+IP+EMC+RF terpadu, RAB Rp2.099.240.000, estimasi 5–8 bulan. Cover tertulis "Februari 2025" (belum dikonfirmasi typo atau bukan). Lih. dec:50. |
+
 ## Orang (`p:`) — dari notulen/laporan
 | ID | Nama | Peran/konteks |
 |---|---|---|

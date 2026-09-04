@@ -1,0 +1,1116 @@
+<meta charset="utf-8">
+<title>Dashboard Proyek GLD V2 — Pemantauan &amp; Manajemen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --paper:#F3F3F4; --surface:#FFFFFF; --surface-2:#F7F8F9; --surface-3:#ECEEF1;
+  --ink:#2B2B2B; --ink-2:#676A6C; --ink-soft:#9CA0A3; --line:#E7EAEC; --line-2:#D7DADE;
+  --accent:#1ABB9C; --accent-2:#149174; --accent-soft:#E6F8F4;
+  --good:#1ABB9C; --good-soft:#E6F8F4;
+  --warn:#E5934F; --warn-soft:#FDF1E6;
+  --crit:#E2495A; --crit-soft:#FBE7E9;
+  --info:#1C93C6; --info-soft:#E4F2FA;
+  --charcoal:#2F4050; --charcoal-2:#293846; --charcoal-3:#3A4C5E;
+  --repo-app:#1ABB9C; --repo-net:#1C93C6; --repo-ml:#6B54A6;
+  --repo-app-soft:#E6F8F4; --repo-net-soft:#E4F2FA; --repo-ml-soft:#E9E3F3;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
+  --radius:6px;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+    --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+    --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+    --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+    --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+    --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+    --repo-app:#33D9B4; --repo-net:#4FC1EE; --repo-ml:#AE97DE;
+    --repo-app-soft:#153A32; --repo-net-soft:#123244; --repo-ml-soft:#271F35;
+    --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#F3F3F4; --surface:#FFFFFF; --surface-2:#F7F8F9; --surface-3:#ECEEF1;
+  --ink:#2B2B2B; --ink-2:#676A6C; --ink-soft:#9CA0A3; --line:#E7EAEC; --line-2:#D7DADE;
+  --accent:#1ABB9C; --accent-2:#149174; --accent-soft:#E6F8F4;
+  --good:#1ABB9C; --good-soft:#E6F8F4; --warn:#E5934F; --warn-soft:#FDF1E6;
+  --crit:#E2495A; --crit-soft:#FBE7E9; --info:#1C93C6; --info-soft:#E4F2FA;
+  --charcoal:#2F4050; --charcoal-2:#293846; --charcoal-3:#3A4C5E;
+  --repo-app:#1ABB9C; --repo-net:#1C93C6; --repo-ml:#6B54A6;
+  --repo-app-soft:#E6F8F4; --repo-net-soft:#E4F2FA; --repo-ml-soft:#E9E3F3;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
+}
+:root[data-theme="dark"]{
+  --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+  --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+  --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+  --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+  --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+  --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+  --repo-app:#33D9B4; --repo-net:#4FC1EE; --repo-ml:#AE97DE;
+  --repo-app-soft:#153A32; --repo-net-soft:#123244; --repo-ml-soft:#271F35;
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:14.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.012em;line-height:1.18;text-wrap:balance}
+a{color:var(--accent)}
+.mono{font-family:var(--mono)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:600}
+
+/* ---------- shell / sidebar ---------- */
+.topbar{height:4px;background:linear-gradient(90deg,var(--charcoal) 0%,var(--accent) 46%,var(--accent-2) 100%)}
+.shell{display:flex;align-items:stretch;min-height:100vh}
+.side{width:258px;flex:none;position:sticky;top:0;align-self:flex-start;height:100vh;overflow-y:auto;
+  background:var(--charcoal);color:#EDE9E2;display:flex;flex-direction:column;gap:22px;padding:22px 18px 18px;
+  scrollbar-width:thin}
+.side-brand{display:flex;align-items:center;gap:10px}
+.brandmark{width:15px;height:15px;border-radius:4px;flex:none;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+.brandtext b{display:block;font-size:13.5px;letter-spacing:-.01em;color:#fff}
+.brandtext small{display:block;font-family:var(--mono);font-size:10px;color:#AAB2BC;letter-spacing:.04em;margin-top:2px}
+.side-status{background:var(--charcoal-2);border:1px solid var(--charcoal-3);border-radius:6px;padding:13px 14px;display:flex;flex-direction:column;gap:9px}
+.ss-row{display:flex;justify-content:space-between;align-items:baseline}
+.ss-lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#ADA69A}
+.ss-val{font-family:var(--mono);font-size:19px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.ss-track{position:relative;height:7px;background:var(--charcoal-3);border-radius:4px}
+.ss-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:4px}
+.ss-mark{position:absolute;top:-2px;bottom:-2px;width:2px;background:#fff;opacity:.55}
+.ss-note{font-family:var(--mono);font-size:10px;color:#ADA69A}
+.ss-flag{display:block;margin-top:2px;font-family:var(--mono);font-size:11px;font-weight:700;color:#FFD9A8;
+  text-decoration:none;background:rgba(255,180,90,.14);border:1px solid rgba(255,180,90,.32);border-radius:7px;padding:6px 9px}
+.ss-flag:hover{background:rgba(255,180,90,.22)}
+.zonenav{display:flex;flex-direction:column;gap:2px;flex:1}
+.zonenav a{display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:#C9C3B8;
+  text-decoration:none;padding:9px 10px;border-radius:6px;transition:background .15s,color .15s}
+.zonenav a .zi{font-family:var(--mono);font-size:10.5px;font-weight:700;color:#8B8478;width:18px;flex:none}
+.zonenav a:hover{background:rgba(255,255,255,.06);color:#fff}
+.zonenav a.active{background:var(--accent);color:#fff}
+.zonenav a.active .zi{color:rgba(255,255,255,.75)}
+.side-foot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--charcoal-3);padding-top:14px}
+.hublink{font-family:var(--mono);font-size:11px;color:#C9C3B8;text-decoration:none;display:flex;align-items:center;gap:6px}
+.hublink:hover{color:#fff}
+.themebtn{font-family:var(--mono);font-size:11px;letter-spacing:.03em;cursor:pointer;
+  background:var(--charcoal-2);border:1px solid var(--charcoal-3);color:#D8D2C6;padding:7px 10px;border-radius:6px;text-align:left}
+.themebtn:hover{border-color:var(--accent);color:#fff}
+
+.content{flex:1;min-width:0;max-width:1180px;padding:28px 34px 90px}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px;display:flex;flex-direction:column;gap:10px}
+.tagrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--surface)}
+.chip.accent{background:var(--accent-soft);color:var(--accent-2);border-color:transparent}
+h1{font-size:25px}
+.subtitle{color:var(--ink-2);font-size:14px;max-width:68ch;line-height:1.55}
+.parties{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.02em}
+.docmeta-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:14px;background:var(--surface)}
+.docmeta-row>div{padding:10px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.docmeta-row .k{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
+.docmeta-row .v{font-size:12.5px;color:var(--ink);font-weight:600}
+
+/* ---------- zones ---------- */
+.zone{scroll-margin-top:78px}
+.zone + .zone{margin-top:10px;padding-top:38px;border-top:1px solid var(--line)}
+.zone-head{display:flex;align-items:baseline;gap:13px;margin-bottom:6px}
+.zone-head .zn{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:.05em}
+.zone-head h2{font-size:21px}
+.zone-intro{color:var(--ink-soft);font-size:12.8px;max-width:76ch;margin:5px 0 22px;line-height:1.6}
+.subhead{display:flex;align-items:center;gap:10px;margin:30px 0 13px}
+.subhead:first-of-type{margin-top:4px}
+.subhead::after{content:"";height:1px;background:var(--line);flex:1}
+
+.exec{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:21px 24px;margin:2px 0 22px;box-shadow:var(--shadow)}
+.exec .el{color:var(--accent-2);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.exec h3{font-size:18.5px;color:var(--ink);margin-bottom:10px;max-width:52ch;line-height:1.34;font-weight:700}
+.exec p{font-size:13.3px;color:var(--ink-2);max-width:82ch;line-height:1.68;margin:0}
+.exec p b{color:var(--ink);font-weight:700}
+.exec .statuschips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.exec .sc{font-family:var(--mono);font-size:10.8px;font-weight:700;padding:4px 11px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line-2)}
+.exec .sc.g{background:var(--good-soft);color:var(--good);border-color:transparent}
+.exec .sc.w{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(172px,1fr));gap:11px;margin-bottom:20px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 15px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.kpi .lab{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.kpi .val{font-family:var(--mono);font-size:27px;font-weight:700;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:11.5px;color:var(--ink-soft)}
+.kpi .sub b{font-variant-numeric:tabular-nums;color:var(--ink)}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.kpi.warn::before{background:var(--warn)} .kpi.crit::before{background:var(--crit)} .kpi.good::before{background:var(--good)} .kpi.info::before{background:var(--info)}
+.delta{font-family:var(--mono);font-size:11.5px;font-weight:600;padding:1px 7px;border-radius:6px;display:inline-block}
+.delta.pos{background:var(--good-soft);color:var(--good)}
+.baseline-note{font-size:12px;color:var(--ink-2);margin:22px 0 0;padding:12px 14px;background:var(--surface-2);
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;line-height:1.6}
+.baseline-note b{color:var(--ink)}
+
+.po{display:grid;grid-template-columns:1fr;gap:14px;margin-top:2px}
+@media(min-width:820px){.po{grid-template-columns:1fr 1fr}}
+.pocol{background:var(--surface);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);padding:18px 19px}
+.pocol.out{border-top:3px solid var(--warn)} .pocol.done{border-top:3px solid var(--good)}
+.pocol h3{font-size:14px;display:flex;align-items:center;gap:9px;margin-bottom:3px;font-weight:700}
+.pocol .cnt{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);font-weight:600;margin-left:auto}
+.pocol .hint2{font-size:11.5px;color:var(--ink-soft);margin:5px 0 12px}
+.poitem{display:grid;grid-template-columns:18px 1fr;gap:9px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12.6px;color:var(--ink-2);line-height:1.45}
+.poitem:last-child{border-bottom:0}
+.poitem b{color:var(--ink)}
+.poitem .ic{font-size:12px;line-height:1.5}
+.potag{font-family:var(--mono);font-size:8.5px;text-transform:uppercase;letter-spacing:.03em;padding:1px 6px;border-radius:5px;margin-left:5px;white-space:nowrap;font-weight:700;vertical-align:middle}
+.potag.blk{background:var(--crit-soft);color:var(--crit)} .potag.gate{background:var(--warn-soft);color:var(--warn)} .potag.risk{background:var(--info-soft);color:var(--info)}
+
+.grid{display:grid;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:19px 20px 21px}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap}
+.card h2{font-size:15.5px}
+.card .hint{font-size:12px;color:var(--ink-soft);max-width:72ch;margin:6px 0 16px;line-height:1.55}
+.two{grid-template-columns:1fr}
+@media(min-width:900px){.two{grid-template-columns:1.35fr 1fr}}
+
+.chart-scroll{overflow-x:auto}
+svg{display:block;max-width:100%}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px}
+.lg-swatch{width:16px;height:3px;border-radius:2px;display:inline-block}
+.lg-dash{width:16px;height:0;border-top:2px dashed currentColor;display:inline-block}
+
+.ws{display:flex;flex-direction:column;gap:15px;margin-top:6px}
+.ws-row{display:grid;grid-template-columns:1fr;gap:6px}
+.ws-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ws-name{font-size:13.2px;font-weight:600}
+.ws-name small{font-family:var(--mono);color:var(--ink-soft);font-weight:500;font-size:10.5px;margin-left:6px}
+.ws-nums{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ws-nums b{color:var(--ink)}
+.track{position:relative;height:11px;background:var(--surface-3);border-radius:6px;overflow:visible}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--accent)}
+.fill.warn{background:var(--warn)} .fill.crit{background:var(--crit)} .fill.good{background:var(--good)}
+.plan-mark{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);border-radius:2px;opacity:.5}
+
+.arch{display:grid;grid-template-columns:1fr;gap:0;margin-top:8px}
+@media(min-width:820px){.arch{grid-template-columns:repeat(5,1fr);gap:0;align-items:stretch}}
+.node{background:var(--surface-2);border:1px solid var(--line-2);border-radius:11px;padding:13px 13px 14px;position:relative;display:flex;flex-direction:column;gap:8px}
+.node + .node{margin-top:24px}
+@media(min-width:820px){.node + .node{margin-top:0}}
+.node .nh{font-size:13.2px;font-weight:700;color:var(--ink);line-height:1.25}
+.node .nspec{font-family:var(--mono);font-size:10.3px;color:var(--ink-soft);line-height:1.5}
+.node .layer{font-family:var(--mono);font-size:9.3px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.repobadge{font-family:var(--mono);font-size:9.8px;font-weight:600;padding:2px 7px;border-radius:6px;display:inline-block;margin-top:2px;line-height:1.4}
+.repobadge.app{background:var(--repo-app-soft);color:var(--repo-app)}
+.repobadge.net{background:var(--repo-net-soft);color:var(--repo-net)}
+.repobadge.ml{background:var(--repo-ml-soft);color:var(--repo-ml)}
+.conn{display:flex;align-items:center;justify-content:center;padding:8px 0;color:var(--ink-soft)}
+@media(min-width:820px){.conn{padding:0 2px}}
+.archflow{display:flex;flex-direction:column;gap:0}
+@media(min-width:820px){.archflow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr 40px 1fr 40px 1fr;align-items:center}}
+.arrow{font-size:17px;color:var(--accent);text-align:center}
+.arrow .lab2{display:block;font-family:var(--mono);font-size:8.3px;color:var(--ink-soft);letter-spacing:.02em;margin-top:2px}
+.repolegend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:12px}
+.repolegend span{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.8px;color:var(--ink-2)}
+.rl-dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+.ru-scroll{overflow-x:auto}
+.rutbl{border-collapse:collapse;width:100%;font-size:12.8px}
+.rutbl th{font-family:var(--mono);font-size:9.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);
+  text-align:right;padding:9px 10px;border-bottom:1px solid var(--line-2);font-weight:600}
+.rutbl th:first-child,.rutbl th:nth-child(2){text-align:left}
+.rutbl td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--ink-2);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.rutbl td:first-child{font-weight:600;color:var(--ink);text-align:left;font-family:var(--sans)}
+.rutbl td:nth-child(2){text-align:left;color:var(--ink-soft);font-family:var(--sans)}
+.rutbl tr.total td{border-top:2px solid var(--line-2);border-bottom:0;font-weight:700;color:var(--ink)}
+.rutbl tr.pilot td:first-child::after{content:" ●";color:var(--accent)}
+
+.rr{display:grid;grid-template-columns:repeat(auto-fit,minmax(206px,1fr));gap:10px;margin-top:4px}
+.rrcell{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:11px 13px;display:flex;flex-direction:column;gap:5px}
+.rrcell .rn2{font-size:12.8px;font-weight:600;color:var(--ink)}
+.rrcell .rd{font-family:var(--mono);font-size:10.3px;color:var(--ink-soft)}
+
+.feed{display:flex;flex-direction:column;gap:0;margin-top:4px;max-height:560px;overflow-y:auto;padding-right:4px}
+.ev{display:grid;grid-template-columns:60px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.ev:last-child{border-bottom:0}
+.ev-date{font-family:var(--mono);font-size:11px;color:var(--ink-soft);font-weight:600;padding-top:1px;text-align:right}
+.ev-body{font-size:12.8px;color:var(--ink-2);line-height:1.52}
+.ev-body b{color:var(--ink);font-weight:600}
+.ev-tag{font-family:var(--mono);font-size:9.6px;letter-spacing:.04em;text-transform:uppercase;padding:1px 6px;border-radius:5px;
+  background:var(--surface-2);color:var(--ink-soft);margin-left:6px;white-space:nowrap;border:1px solid var(--line)}
+.ev-tag.m{background:var(--accent-soft);color:var(--accent-2);border-color:transparent}
+.ev-tag.ml{background:var(--repo-ml-soft);color:var(--repo-ml);border-color:transparent}
+
+.telem{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:4px}
+.tcell{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:12px 13px}
+.tcell .v{font-family:var(--mono);font-size:21px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.tcell .l{font-family:var(--mono);font-size:9.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+.gaslist{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+.gasrow{display:grid;grid-template-columns:96px 1fr 52px;align-items:center;gap:10px;font-size:12px}
+.gasrow .gn{font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+.gasrow .gt{height:8px;background:var(--surface-3);border-radius:5px;overflow:hidden}
+.gasrow .gt i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.gasrow .gv{font-family:var(--mono);font-size:10.8px;color:var(--ink-soft);text-align:right;font-variant-numeric:tabular-nums}
+
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 14px}
+.fbtn{font-family:var(--mono);font-size:11.3px;letter-spacing:.02em;cursor:pointer;padding:5px 11px;border-radius:7px;
+  border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2)}
+.fbtn[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:transparent}
+.fbtn:hover{border-color:var(--accent)}
+.tbl-scroll{overflow-x:auto}
+table.ai{border-collapse:collapse;width:100%;font-size:12.8px}
+table.ai th{font-family:var(--mono);font-size:10.3px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+  text-align:left;padding:8px 10px;border-bottom:1px solid var(--line-2);font-weight:600}
+table.ai td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+td.num{font-family:var(--mono);color:var(--ink-soft);width:34px;text-align:right;font-variant-numeric:tabular-nums}
+td.act{color:var(--ink)}
+table.ai tr:last-child td{border-bottom:0}
+.pic{font-family:var(--mono);font-size:11.3px;color:var(--ink-soft);white-space:nowrap}
+.pill{font-family:var(--mono);font-size:10.3px;font-weight:600;letter-spacing:.02em;padding:2px 8px;border-radius:999px;white-space:nowrap;display:inline-block}
+.pill.terbuka{background:var(--surface-3);color:var(--ink-2)}
+.pill.berjalan{background:var(--accent-soft);color:var(--accent-2)}
+.pill.terencana{background:var(--warn-soft);color:var(--warn)}
+.pill.menunggu{background:var(--warn-soft);color:var(--warn)}
+.pill.selesai{background:var(--good-soft);color:var(--good)}
+.pill.ready{background:var(--good-soft);color:var(--good)}
+.pill.confirm{background:var(--warn-soft);color:var(--warn)}
+.pill.prep{background:var(--info-soft);color:var(--info)}
+.prio{font-family:var(--mono);font-size:10.8px;font-weight:600;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dot.t{background:var(--crit)} .dot.s{background:var(--warn)} .dot.r{background:var(--ink-soft)}
+
+.issue{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:start;padding:13px 0;border-bottom:1px solid var(--line)}
+.issue:last-child{border-bottom:0}
+.sev{width:4px;align-self:stretch;border-radius:3px;background:var(--warn);min-height:34px}
+.sev.t{background:var(--crit)} .sev.s{background:var(--warn)} .sev.r{background:var(--ink-soft)}
+.issue-txt{font-size:12.8px;color:var(--ink);font-weight:600}
+.issue-imp{font-size:11.8px;color:var(--ink-soft);margin-top:3px}
+.issue-p{align-self:center}
+.blockers{display:grid;grid-template-columns:1fr;gap:12px;margin-top:4px}
+@media(min-width:760px){.blockers{grid-template-columns:repeat(3,1fr)}}
+.blk{border:1px solid var(--crit);border-radius:11px;padding:14px 15px;background:var(--crit-soft);position:relative}
+.blk .bt{font-family:var(--mono);font-size:10.3px;letter-spacing:.06em;text-transform:uppercase;color:var(--crit);font-weight:700}
+.blk .bh{font-size:13.6px;font-weight:700;margin:7px 0 6px;color:var(--ink)}
+.blk .bd{font-size:12.3px;color:var(--ink-2);line-height:1.5}
+.blk .bm{font-family:var(--mono);font-size:11.6px;color:var(--crit);font-weight:600;margin-top:8px}
+
+.recs{display:flex;flex-direction:column;gap:2px;counter-reset:r}
+.rec{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.rec:last-child{border-bottom:0}
+.rec .rn{counter-increment:r;font-family:var(--mono);font-size:12.6px;font-weight:700;color:var(--accent)}
+.rec .rn::before{content:counter(r,decimal-leading-zero)}
+.rec .rt{font-size:13px;color:var(--ink-2);line-height:1.55}
+.rec .rt b{color:var(--ink)}
+
+.evo{display:flex;flex-direction:column;gap:0;margin-top:6px}
+.evostep{display:grid;grid-template-columns:26px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.evostep:last-child{border-bottom:0}
+.evostep .en{font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--ink-soft);
+  width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.evostep.cur .en{background:var(--accent)}
+.evostep.old .en{background:var(--line-2);color:var(--ink-2)}
+.evostep .eh{font-size:12.8px;font-weight:700;color:var(--ink);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.evostep .ed{font-family:var(--mono);font-size:9.8px;color:var(--ink-soft)}
+.evostep .eb{font-size:12px;color:var(--ink-2);line-height:1.5;margin-top:3px}
+.evostep .etag{font-family:var(--mono);font-size:8.8px;text-transform:uppercase;letter-spacing:.04em;padding:1px 6px;border-radius:5px;font-weight:700}
+.evostep .etag.now{background:var(--accent-soft);color:var(--accent)}
+.evostep .etag.done{background:var(--good-soft);color:var(--good)}
+
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:11px;color:var(--ink-soft);font-family:var(--mono);line-height:1.7}
+
+@media(max-width:900px){
+  .shell{flex-direction:column}
+  .side{position:sticky;top:0;width:100%;height:auto;flex-direction:row;align-items:center;
+    padding:10px 14px;gap:14px;overflow-x:auto;z-index:70}
+  .side-status{display:none}
+  .zonenav{flex-direction:row;gap:2px}
+  .zonenav a{padding:7px 9px}
+  .zonenav a .zi{display:none}
+  .side-foot{flex-direction:row;border-top:0;padding-top:0;margin-left:auto;gap:8px;flex:none}
+  .hublink{display:none}
+  .content{padding:20px 16px 70px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.4s ease forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .fill,.gt i,.ss-fill{transition:width .9s cubic-bezier(.22,1,.36,1)}
+}
+</style>
+<!-- GLD-NAV-START -->
+<div style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
+<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Paket Pilot/Field Testing</span>
+<span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Dashboard Proyek</span><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Detail Assessment/Field Testing</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Desain_Bracket_L_UBolt_GLD_Mounting.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Desain Bracket U-Bolt</a>
+</div>
+<!-- GLD-NAV-END -->
+
+
+
+
+
+
+
+<div class="topbar"></div>
+<div class="shell">
+
+  <aside class="side">
+    <div class="side-brand">
+      <span class="brandmark"></span>
+      <div class="brandtext"><b>GLD · Tahap 2</b><small>Dashboard Proyek</small></div>
+    </div>
+
+    <div class="side-status">
+      <div class="ss-row"><span class="ss-lab">Progres pilot</span><span class="ss-val">44%</span></div>
+      <div class="ss-track"><div class="ss-fill" style="width:44%"></div><div class="ss-mark" style="left:43%"></div></div>
+      <div class="ss-note">vs rencana 43% (4 Sep) · murni sisi lab</div>
+      <a class="ss-flag" href="#zona-2">✓ Survey Cilacap selesai (9-10 Agu) · ⚠ instalasi belum dimulai</a>
+    </div>
+
+    <nav class="zonenav" id="zonenav" aria-label="Navigasi zona">
+      <a href="#zona-1" data-z="zona-1"><span class="zi">01</span>Ringkasan</a>
+      <a href="#zona-2" data-z="zona-2"><span class="zi">02</span>Jadwal &amp; Cakupan</a>
+      <a href="#zona-3" data-z="zona-3"><span class="zi">03</span>Arsitektur &amp; Kesiapan</a>
+      <a href="#zona-4" data-z="zona-4"><span class="zi">04</span>Aktivitas &amp; AI</a>
+      <a href="#zona-5" data-z="zona-5"><span class="zi">05</span>Risiko &amp; Tindak Lanjut</a>
+    </nav>
+
+    <div class="side-foot">
+      <a class="hublink" href="index.html">← Semua deliverable</a>
+      <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <header class="masthead">
+      <div class="tagrow">
+        <span class="chip accent">GLD · TAHAP 2</span>
+        <span class="chip">TRL-7</span>
+        <span class="chip">Pilot aktif: RU IV Cilacap</span>
+        <span class="chip">Program 6 RU · roadmap</span>
+        <span class="chip">Jun 2026 – Feb 2027</span>
+      </div>
+      <h1>Sistem Gas Leak Detection — Dashboard Proyek</h1>
+      <p class="subtitle">Pemantauan progres, aktivitas, arsitektur sistem, dan risiko pengembangan GLD Point Sensor Network berbasis multi-sensor MQ, LoRa star-mesh, AI edge, dan catu daya solar–baterai — fokus aktif pilot RU IV Cilacap, dengan roadmap rollout 6 Refinery Unit.</p>
+      <p class="parties">LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga / Kilang Pertamina Internasional</p>
+      <div class="docmeta-row">
+        <div><span class="k">Proyek</span><span class="v">GLD Point Sensor Network</span></div>
+        <div><span class="k">Klien / Partner</span><span class="v">Pertamina Patra Niaga</span></div>
+        <div><span class="k">Scope aktif</span><span class="v">Pilot RU IV Cilacap</span></div>
+        <div><span class="k">Status per</span><span class="v">4 Sep (update &amp; progres di-reassess)</span></div>
+        <div><span class="k">Survey Cilacap</span><span class="v">9-10 Agu 2026 (selesai) · instalasi fisik belum dimulai</span></div>
+        <div><span class="k">Target implementasi</span><span class="v">Desember 2026</span></div>
+      </div>
+    </header>
+
+    <!-- ================= ZONA 01 — RINGKASAN ================= -->
+    <section class="zone" id="zona-1">
+      <div class="zone-head"><span class="zn">01</span><h2>Ringkasan</h2></div>
+      <p class="zone-intro">Status eksekutif, indikator kunci, dan pemetaan progres-vs-outstanding — baca bagian ini dulu sebelum masuk ke detail jadwal, arsitektur, atau risiko di zona berikutnya.</p>
+
+      <section class="exec" aria-label="Ringkasan eksekutif">
+        <div class="el">Ringkasan Eksekutif</div>
+        <h3>Keunggulan jadwal menyusut — kesiapan lapangan kini bergantung pada gate eksternal, bukan lagi throughput rekayasa.</h3>
+        <p>Progres pilot Cilacap <b>44%</b> per 4 September (di-reassess dari 39%/24 Jul), terhadap rencana <b>43%</b> di tanggal yang sama — <b>hampir sejajar rencana</b>, murni dari sisi rekayasa lab. Ini turun signifikan dari keunggulan <b>+20 poin</b> yang tercatat 24 Juli, karena pekerjaan sejak Agustus makin bergantung pada gate eksternal (scoping ATEX, TRA/JSA, sampel gas) yang tidak bisa dipercepat murni lewat rekayasa — bukan karena progres melambat (CNN Dual-Branch, adapter MQTT, survey Cilacap semua selesai di periode ini). Rantai GLD-CH-GW-Server sudah berjalan end-to-end dengan AI kini on-device (CNN Dual-Branch, ESP32-S3). Kunjungan RU IV Cilacap 9–10 Agustus <b>menyelesaikan survey lokasi</b> — instalasi fisik <b>belum dimulai</b>, jadwal aktual masih menunggu penyelesaian gate (TRA/JSA, ATEX). Rincian lengkap ada di lima zona pada navigasi kiri; ringkasan status per topik ada di bawah ini.</p>
+        <div class="statuschips">
+          <span class="sc g">✓ Rantai GLD→server end-to-end + AI on-device — didemokan sebelum Cilacap</span>
+          <span class="sc g">✓ Mesh 8-CH multi-hop terbukti + push alarm otomatis (lab)</span>
+          <span class="sc g">✓ TCN LPG ≥92% + CNN Dual-Branch 99,20% · dataset konsisten</span>
+          <span class="sc g">✓ 24V siap sertifikasi · PSU final ≥1A</span>
+          <span class="sc g">✓ Survey lokasi Cilacap selesai (9-10 Agu)</span>
+          <span class="sc g">✓ Adapter MQTT→backend sudah dibangun · jaringan field LGU independen</span>
+          <span class="sc w">⚠ Instalasi fisik Cilacap belum dimulai</span>
+          <span class="sc w">⚠ Sertifikasi ATEX (5-8 bln) · scoping ATEX blm ditentukan</span>
+          <span class="sc w">⚠ Gate TRA/JSA · gas capability 4/6 (H2S/Benzena/CO blm tercakup)</span>
+        </div>
+      </section>
+
+      <section class="kpis" aria-label="Ringkasan indikator">
+        <div class="kpi info">
+          <div class="lab">Progres Pilot Cilacap</div>
+          <div class="val">44%</div>
+          <div class="sub">Rencana <b>43%</b> (4 Sep) · <span class="delta pos">+1 poin (lab)</span></div>
+        </div>
+        <div class="kpi info">
+          <div class="lab">RU Aktif / Program</div>
+          <div class="val">1 / 6</div>
+          <div class="sub">Cilacap · <b>3</b> sensor · <b>2</b> CH · <b>1</b> GW</div>
+        </div>
+        <div class="kpi">
+          <div class="lab">Blocker Kritis Aktif</div>
+          <div class="val">0</div>
+          <div class="sub">Baterai/TPL5010/konverter dideprioritaskan (fokus 24VDC) — lihat Progres/Outstanding</div>
+        </div>
+        <div class="kpi">
+          <div class="lab">Action Items</div>
+          <div class="val" id="aikpi-total">—</div>
+          <div class="sub" id="aikpi-breakdown">—</div>
+        </div>
+        <div class="kpi warn">
+          <div class="lab">Isu &amp; Risiko</div>
+          <div class="val" id="isskpi-total">—</div>
+          <div class="sub" id="isskpi-breakdown">—</div>
+        </div>
+        <div class="kpi warn">
+          <div class="lab">Gas Capability Gate</div>
+          <div class="val">4/6</div>
+          <div class="sub">Clean Air, LPG, CO₂, H₂ tervalidasi (CNN Dual-Branch) · Metana tersisa · Benzena/CO/H2S di luar gate 6-kelas</div>
+        </div>
+      </section>
+
+      <div class="po">
+        <div class="pocol done">
+          <h3><span>✓ Progres — Tercapai</span><span class="cnt" id="donecnt"></span></h3>
+          <p class="hint2">Capaian yang telah diverifikasi hingga 24 Jul 2026.</p>
+          <div id="donelist"></div>
+        </div>
+        <div class="pocol out">
+          <h3><span>⚠ Outstanding — Perlu Perhatian</span><span class="cnt" id="outcnt"></span></h3>
+          <p class="hint2">Item terbuka, blocker, dan gate menuju kesiapan lapangan — disajikan terbuka untuk partner.</p>
+          <div id="outlist"></div>
+        </div>
+      </div>
+
+      <p class="baseline-note">📐 <b>Baseline resmi:</b> Kurva-S &amp; timeline dikalibrasi ke <b>Project Timeline 9 bulan</b> pada Deck Kick-Off (12 Jun 2026 → Feb 2027, 12 aktivitas). Scope aktif saat ini <b>fokus 1 RU — pilot RU IV Cilacap</b> (5 RU lainnya = roadmap). Progres di-reassess 4 Sep 2026: <b>44% vs rencana 43%</b> (hanya <b>+1 poin</b>, menyusut dari +20 poin per 24 Jul — lihat catatan Kurva-S di zona 02) — ini <b>murni sisi engineering lab</b> — <b>bukan</b> kesiapan lapangan/sertifikasi/commissioning. Inferensi AI kini <b>on-device</b> (CNN Dual-Branch, ESP32-S3 int8), <b>didemokan langsung sebelum kunjungan Cilacap</b> — dokumen firmware tertulis terpisah masih menyusul. <b>Survey lokasi RU IV Cilacap (9-10 Agu) sudah selesai — instalasi fisik belum dimulai</b> (dilakukan vendor Pertamina), menunggu gate TRA/JSA disahkan dan sertifikasi ATEX (estimasi realistis 5-8 bulan sejak Kick-Off). <b>Fokus deployment kini 24VDC saja</b> — GLD versi baterai portable dideprioritaskan, sehingga blocker autonomi baterai/TPL5010/DC converter tidak lagi relevan utk scope saat ini. Jangkauan LoRa per-hop terbatas namun sudah <b>disiasati mesh multi-hop 8-CH</b> (kapasitas Gateway/CH thd jumlah sensor bisa di-mitigasi dgn adjust interval kirim), dan <b>push alarm sudah berhasil diuji</b> otomatis di mesh kampus (belum validasi lapangan RU). Arsitektur deployment: app + database penuh berjalan <b>lokal</b> (site RU IV &amp; kantor Jakarta, plus PC dedicated LGU dekat Gateway) — akses dari kantor kilang hanya lewat API/dashboard endpoint, bukan akses jaringan penuh; cloud hanya sebagai <b>gateway/relay ringan</b>. ⚠️ <b>Gate terbuka lain:</b> scoping ATEX (gas group/kelas temperatur/zona) belum ditentukan sama sekali, requirement gas Benzena/CO/H2S belum direkonsiliasi dgn gate 6-kelas (sampel gas dari Pertamina belum diterima). <b>Sertifikasi ketinggian pemasangan bukan tanggung jawab LGU</b> — ditangani vendor Pertamina. Lihat Datasheet Sistem (rev 0.9) untuk daftar gate lengkap.</p>
+    </section>
+
+    <!-- ================= ZONA 02 — JADWAL & CAKUPAN ================= -->
+    <section class="zone" id="zona-2">
+      <div class="zone-head"><span class="zn">02</span><h2>Jadwal &amp; Cakupan</h2></div>
+      <p class="zone-intro">Progres kumulatif terhadap baseline resmi, timeline 12 aktivitas, dan cakupan perangkat di 6 Refinery Unit.</p>
+
+      <div class="subhead"><span class="eyebrow">Kurva-S · Progres Kumulatif</span></div>
+      <div class="card">
+        <div class="card-head"><h2>Kurva-S: Rencana vs Aktual vs Proyeksi</h2></div>
+        <p class="hint">Baseline = Project Timeline 9 bulan (Deck Kick-Off), mewakili perjalanan pilot RU IV Cilacap. Aktual di-<b>reassess 4 September 2026</b> (dari 39%/24 Jul menjadi <b>44%</b>) berdasar milestone yg selesai sejak itu: CNN Dual-Branch on-device (9 Agu), push alarm end-to-end teruji (6-8 Agu), survey lokasi Cilacap (9-10 Agu), adapter MQTT→backend (4 Sep). Rencana per 4 Sep ≈ <b>43%</b> — keunggulan menyusut dari +20 poin (24 Jul) jadi <b>+1 poin</b>, karena sisa pekerjaan makin bergantung gate eksternal (ATEX scoping, TRA/JSA) yg tak bisa dipercepat murni lewat rekayasa. Area terarsir = kelebihan aktual terhadap baseline. Titik pudar "39% (24 Jul)" = data lama sebelum reassessment. Garis merah = target implementasi Desember (field installation).</p>
+        <div class="chart-scroll"><svg id="scurve" viewBox="0 0 960 420" role="img" aria-label="Kurva-S progres proyek"></svg></div>
+        <div class="legend">
+          <span style="color:var(--accent)"><i class="lg-swatch" style="background:var(--accent)"></i>Aktual</span>
+          <span style="color:var(--ink-soft)"><i class="lg-dash"></i>Rencana / Baseline resmi</span>
+          <span style="color:var(--info)"><i class="lg-dash"></i>Proyeksi</span>
+          <span style="color:var(--good)"><i class="lg-swatch" style="background:var(--good);opacity:.35"></i>Kelebihan (ahead)</span>
+        </div>
+      </div>
+
+      <div class="subhead"><span class="eyebrow">Timeline · Gantt 12 Aktivitas</span></div>
+      <div class="card">
+        <div class="card-head"><h2>Timeline Resmi 9 Bulan &amp; Milestone</h2></div>
+        <p class="hint">12 aktivitas dari Deck Kick-Off (Jun 2026 – Feb 2027). Rentang = rencana; pengisian = progres aktual; penanda ▮ = target progres sampai hari ini. Warna bilah = status (hijau: on/ahead, merah: tertinggal, teal: berjalan, kuning: menyusul, abu: belum mulai). Wajik = milestone; terisi = tercapai.</p>
+        <div class="chart-scroll"><svg id="gantt" viewBox="0 0 960 560" role="img" aria-label="Timeline Gantt 12 aktivitas"></svg></div>
+      </div>
+
+      <div class="subhead"><span class="eyebrow">Cakupan Deployment · Pilot Cilacap + Roadmap 6 RU</span></div>
+      <div class="card">
+        <div class="card-head"><h2>Kebutuhan Perangkat per RU (scope LGU)</h2>
+          <span class="mono" style="font-size:11.5px;color:var(--ink-soft)">RU II–VII · v1.0 Mei 2026</span>
+        </div>
+        <p class="hint">Scope aktif saat ini hanya <b>RU IV Cilacap</b> (pilot, ●); 5 RU lainnya berstatus <b>roadmap</b> program dan belum dimulai. Field test kolaborasi diarahkan ke RU-VII Kasim.</p>
+        <div class="ru-scroll">
+          <table class="rutbl" id="rutbl">
+            <thead><tr><th>RU</th><th>Lokasi</th><th>Gas Sensor</th><th>Cluster Head</th><th>Gateway</th><th>Solar CH</th><th>Solar GW</th><th>Status</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ZONA 03 — ARSITEKTUR & KESIAPAN ================= -->
+    <section class="zone" id="zona-3">
+      <div class="zone-head"><span class="zn">03</span><h2>Arsitektur &amp; Kesiapan</h2></div>
+      <p class="zone-intro">Alur data end-to-end, pemetaan repositori, kesehatan tiap sub-sistem, dan kesiapan sumber daya program.</p>
+
+      <div class="subhead"><span class="eyebrow">Arsitektur Sistem &amp; Repositori</span></div>
+      <div class="card">
+        <div class="card-head"><h2>Alur Data End-to-End &amp; Pemetaan 3 Repositori</h2></div>
+        <p class="hint">Sensor node mendeteksi &amp; melakukan inferensi AI di edge, mengirim via LoRa ke Cluster Head (star) lalu antar-CH ke Gateway (mesh), diteruskan ke PC Server, dan divisualisasikan di dashboard. Tiga repositori kode memetakan ke lapisan berikut — <b>ketiganya aktif dikembangkan</b>.</p>
+        <div class="archflow">
+          <div class="node">
+            <div class="layer">Edge · Sensor Node</div>
+            <div class="nh">Gas Point Sensor Unit</div>
+            <div class="nspec">ESP32-S3 · 8× MQ (MQ2/3/4/5/6/7/8/135) · ADS1256 24-bit · TCN per-sensor + CNN Dual-Branch + multi-task NN · <b>inferensi AI on-device</b> (TFLite Micro/int8, ESP32-S3 — didemokan langsung sebelum kunjungan Cilacap, dok firmware tertulis menyusul) · duty-cycle (TPL5010)</div>
+            <span class="repobadge ml">gas-leak-ml-chamber-system</span>
+            <span class="repobadge net">PertaminaGLD · firmware GLD</span>
+          </div>
+          <div class="arrow">→<span class="lab2">LoRa 915MHz<br>STAR</span></div>
+          <div class="node">
+            <div class="layer">Level 1 · Routing</div>
+            <div class="nh">Cluster Head</div>
+            <div class="nspec">Aggregator · LoRa dual-channel · solar + baterai 18650 · failover otomatis (RSSI parent) · IP66/67 · tiang 6 m</div>
+            <span class="repobadge net">PertaminaGLD · firmware CH</span>
+          </div>
+          <div class="arrow">→<span class="lab2">LoRa<br>MESH</span></div>
+          <div class="node">
+            <div class="layer">Level 2 · Aggregator</div>
+            <div class="nh">Gateway</div>
+            <div class="nspec">Pengumpul data mesh · solar/power · uplink WiFi / 4G LTE · MQTT ke server</div>
+            <span class="repobadge net">PertaminaGLD · firmware GW</span>
+          </div>
+          <div class="arrow">→<span class="lab2">WiFi/4G<br>MQTT</span></div>
+          <div class="node">
+            <div class="layer">Server</div>
+            <div class="nh">PC Server / Backend</div>
+            <div class="nspec">Node-RED flows · <b>Operator Hub</b> · NestJS + GraphQL API · SQLite/Prisma · app+DB penuh lokal (site &amp; Jakarta); cloud = gateway ringan</div>
+            <span class="repobadge net">PertaminaGLD · Node-RED</span>
+            <span class="repobadge app">gasleakdetectionV2-April · backend</span>
+          </div>
+          <div class="arrow">→<span class="lab2">GraphQL</span></div>
+          <div class="node">
+            <div class="layer">Presentasi</div>
+            <div class="nh">Dashboard</div>
+            <div class="nspec">Next.js 15 · peta <b>MapLibre</b> (local tiles) · default RU IV Cilacap · Recharts + gas trend heatmap · device CRUD · topologi jaringan · RBAC</div>
+            <span class="repobadge app">gasleakdetectionV2-April · frontend</span>
+          </div>
+        </div>
+        <div class="repolegend">
+          <span><i class="rl-dot" style="background:var(--repo-ml)"></i>gas-leak-ml-chamber-system — ML/AI edge (TFLite Micro, chamber training)</span>
+          <span><i class="rl-dot" style="background:var(--repo-net)"></i>PertaminaGLD — firmware GLD/CH/GW + server Node-RED</span>
+          <span><i class="rl-dot" style="background:var(--repo-app)"></i>gasleakdetectionV2-April — backend GraphQL + dashboard Next.js</span>
+        </div>
+      </div>
+
+      <div class="subhead"><span class="eyebrow">Kesiapan Teknis per Sub-sistem</span></div>
+      <div class="card">
+        <div class="card-head"><h2>Progres &amp; Kesehatan Sub-sistem</h2></div>
+        <p class="hint">Lensa teknis (kesiapan sub-sistem) sebagai pelengkap timeline aktivitas. Penanda ▮ = target sampai kini; warna bilah = status kesehatan.</p>
+        <div class="ws" id="ws"></div>
+      </div>
+
+      <div class="subhead"><span class="eyebrow">Kesiapan Sumber Daya (Resource Readiness)</span></div>
+      <div class="card">
+        <p class="hint" style="margin-top:0">Matriks kesiapan sumber daya dari Deck Kick-Off — dikonfirmasi saat kickoff &amp; dimonitor via milestone review.</p>
+        <div class="rr" id="rr"></div>
+      </div>
+    </section>
+
+    <!-- ================= ZONA 04 — AKTIVITAS & MODEL AI ================= -->
+    <section class="zone" id="zona-4">
+      <div class="zone-head"><span class="zn">04</span><h2>Aktivitas &amp; Model AI</h2></div>
+      <p class="zone-intro">Kronologi kegiatan terbaru, dan evolusi dataset &amp; metode model AI — dari Tahap 1 hingga TCN + CNN Dual-Branch yang berjalan saat ini.</p>
+      <div class="grid two">
+        <div class="card">
+          <div class="card-head"><h2>Log Aktivitas Terbaru</h2></div>
+          <p class="hint">Kronologi kegiatan, temuan, &amp; capaian model dari catatan koordinasi.</p>
+          <div class="feed" id="feed"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>Evolusi Data &amp; Metode Model</h2></div>
+          <p class="hint">Rekap dataset GLD-F001 (15 Jul) dan perkembangan metode AI — dari Tahap 1 hingga metode saat ini.</p>
+          <div class="telem">
+            <div class="tcell"><div class="v">14.477</div><div class="l">Total sampel</div></div>
+            <div class="tcell"><div class="v">4</div><div class="l">Jenis gas</div></div>
+            <div class="tcell"><div class="v">8</div><div class="l">Kanal MQ</div></div>
+            <div class="tcell"><div class="v">≥92%</div><div class="l">Akurasi TCN (leak)</div></div>
+            <div class="tcell"><div class="v">99,20%</div><div class="l">Akurasi CNN Dual-Branch (klasifikasi gas, on-chip)</div></div>
+          </div>
+          <div class="gaslist" id="gaslist"></div>
+          <div class="evo" id="evo" style="margin-top:16px"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ZONA 05 — RISIKO & TINDAK LANJUT ================= -->
+    <section class="zone" id="zona-5">
+      <div class="zone-head"><span class="zn">05</span><h2>Risiko &amp; Tindak Lanjut</h2></div>
+      <p class="zone-intro">Blocker kritis, register lengkap 41 action item (dengan filter), daftar isu &amp; risiko, serta rekomendasi tindak lanjut.</p>
+
+      <div class="subhead"><span class="eyebrow">Blocker Kritis</span></div>
+      <div class="blockers" id="blockers"></div>
+
+      <div class="subhead"><span class="eyebrow">Registrasi Tindak Lanjut</span></div>
+      <div class="card">
+        <div class="card-head"><h2>Action Item Register</h2>
+          <span class="mono" style="font-size:11.5px;color:var(--ink-soft)" id="aicount"></span>
+        </div>
+        <div class="filters" id="filters">
+          <button class="fbtn" data-f="all" aria-pressed="true" type="button">Semua</button>
+          <button class="fbtn" data-f="berjalan" aria-pressed="false" type="button">Berjalan</button>
+          <button class="fbtn" data-f="terbuka" aria-pressed="false" type="button">Terbuka</button>
+          <button class="fbtn" data-f="tinggi" aria-pressed="false" type="button">Prioritas Tinggi</button>
+        </div>
+        <div class="tbl-scroll">
+          <table class="ai">
+            <thead><tr><th>#</th><th>Tindakan</th><th>Penanggung Jawab</th><th>Prioritas</th><th>Status</th></tr></thead>
+            <tbody id="aibody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subhead"><span class="eyebrow">Isu Terbuka &amp; Risiko</span></div>
+      <div class="card">
+        <div class="card-head"><h2>Daftar Isu &amp; Risiko</h2></div>
+        <div id="issues"></div>
+      </div>
+
+      <div class="subhead"><span class="eyebrow">Rekomendasi</span></div>
+      <div class="card">
+        <div class="recs" id="recs"></div>
+      </div>
+    </section>
+
+    <footer>
+      Sumber: Deck Kick-Off GLD (12 Jun 2026, timeline 9 bulan &amp; resource plan) · Dokumen Kebutuhan Peralatan GLD per RU v1.0 · Laporan Progres 18 Jun–20 Jul · Notulensi Kick-Off · MoM RU IV Cilacap · Board12 TCN per-Sensor (LPG) · Deteksi Gas CNN Presentasi · Notulen Meeting GLD 24 Juli 2026 · Notulen weekly meeting 30 Jul · Notulensi Rapat GLD 6 Agustus 2026 (Labtek XV ITB) · Notulen kunjungan RU IV Cilacap 9-10 Agustus · Datasheet Sistem GLD rev 0.8 (4 Sep) · repo gasleakdetectionV2-April, PertaminaGLD, gas-leak-ml-chamber-system · dataset GLD-F001.<br>
+      Baseline Kurva-S dikalibrasi ke Project Timeline 9 bulan (Deck Kick-Off); persentase progres bersifat estimasi turunan dari status aktivitas &amp; dapat dikalibrasi lebih lanjut dengan laporan milestone resmi. Progres awalnya terukur 39% per 24 Juli 2026, <b>di-reassess menjadi 44% per 4 September 2026</b> (vs rencana 43% di tanggal sama — keunggulan menyusut dari +20 jadi +1 poin, metodologi rata-rata 12 aktivitas Gantt tak berubah); jadwal &amp; arsitektur diperbarui per 30 Juli 2026; mounting/topologi &amp; requirement tambahan per 8 Agustus 2026; status AI on-device, gate ATEX/MQTT-adapter/jaringan, dan hasil survey lokasi Cilacap diperbarui per 4 September 2026 (sinkron dgn Datasheet Sistem rev 0.9).
+    </footer>
+  </main>
+</div>
+
+<script>
+const START=new Date(2026,5,1), END=new Date(2027,1,28);
+const TODAY=new Date(2026,8,4);
+const LAST_ACT=new Date(2026,8,4);
+const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt',2026,9],['Nov',2026,10],['Des',2026,11],['Jan',2027,0],['Feb',2027,1]];
+
+/* ---------- S-CURVE ---------- */
+(function(){
+  const svg=document.getElementById('scurve');
+  const W=960,H=420,m={l:46,r:20,t:22,b:46};
+  const pw=W-m.l-m.r, ph=H-m.t-m.b;
+  const x=d=>m.l+((d-START)/(END-START))*pw;
+  const y=v=>m.t+(1-v/100)*ph;
+  const NS='http://www.w3.org/2000/svg';
+  function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  function path(pts){return pts.map((p,i)=>(i?'L':'M')+x(p.d).toFixed(1)+' '+y(p.v).toFixed(1)).join(' ');}
+  const plan=[
+    [new Date(2026,5,1),0],[new Date(2026,5,30),8],[new Date(2026,6,30),21],[new Date(2026,7,31),40],
+    [new Date(2026,8,30),62],[new Date(2026,9,31),71],[new Date(2026,10,30),84],[new Date(2026,11,31),93],
+    [new Date(2027,0,31),98],[new Date(2027,1,28),100]
+  ].map(a=>({d:a[0],v:a[1]}));
+  const act=[
+    [new Date(2026,5,1),0],[new Date(2026,5,12),6],[new Date(2026,5,30),16],
+    [new Date(2026,6,7),23],[new Date(2026,6,15),30],[new Date(2026,6,24),39],
+    [new Date(2026,8,4),44]
+  ].map(a=>({d:a[0],v:a[1]}));
+  const fc=[
+    [new Date(2026,8,4),44],[new Date(2026,8,30),58],[new Date(2026,9,31),69],
+    [new Date(2026,10,30),80],[new Date(2026,11,31),90],[new Date(2027,0,31),97],[new Date(2027,1,28),100]
+  ].map(a=>({d:a[0],v:a[1]}));
+  for(let v=0;v<=100;v+=20){
+    svg.appendChild(el('line',{x1:m.l,y1:y(v),x2:W-m.r,y2:y(v),stroke:'var(--line)','stroke-width':1}));
+    const t=el('text',{x:m.l-10,y:y(v)+4,'text-anchor':'end',fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});t.textContent=v+'%';svg.appendChild(t);
+  }
+  MONTHS.forEach(([lab,yr,mo])=>{const d=new Date(yr,mo,1);if(d<START||d>END)return;
+    svg.appendChild(el('line',{x1:x(d),y1:m.t,x2:x(d),y2:m.t+ph,stroke:'var(--line)','stroke-width':1,'stroke-dasharray':'2 4',opacity:.55}));
+    const t=el('text',{x:x(d),y:H-m.b+20,'text-anchor':'middle',fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});t.textContent=lab;svg.appendChild(t);
+  });
+  function planAt(d){
+    for(let i=0;i<plan.length-1;i++){
+      if(d>=plan[i].d&&d<=plan[i+1].d){
+        const t=(d-plan[i].d)/(plan[i+1].d-plan[i].d);
+        return plan[i].v+t*(plan[i+1].v-plan[i].v);
+      }
+    }
+    return d<plan[0].d?plan[0].v:plan[plan.length-1].v;
+  }
+  const planToday=plan.filter(p=>p.d<=LAST_ACT).concat([{d:LAST_ACT,v:planAt(LAST_ACT)}]);
+  const aheadPts=act.map(p=>x(p.d)+','+y(p.v)).concat(planToday.slice().reverse().map(p=>x(p.d)+','+y(p.v)));
+  svg.appendChild(el('polygon',{points:aheadPts.join(' '),fill:'var(--good)',opacity:.15}));
+  const aArea=act.map(p=>x(p.d)+','+y(p.v));
+  aArea.push(x(act[act.length-1].d)+','+y(0)); aArea.unshift(x(act[0].d)+','+y(0));
+  svg.appendChild(el('polygon',{points:aArea.join(' '),fill:'var(--accent)',opacity:.08}));
+  svg.appendChild(el('path',{d:path(plan),fill:'none',stroke:'var(--ink-soft)','stroke-width':2,'stroke-dasharray':'6 5',opacity:.85}));
+  svg.appendChild(el('path',{d:path(fc),fill:'none',stroke:'var(--info)','stroke-width':2,'stroke-dasharray':'2 5'}));
+  const ap=el('path',{d:path(act),fill:'none',stroke:'var(--accent)','stroke-width':3,'stroke-linejoin':'round','stroke-linecap':'round'});
+  ap.classList.add('draw');svg.appendChild(ap);
+  requestAnimationFrame(()=>{const L=ap.getTotalLength();ap.style.setProperty('--len',L);});
+  svg.appendChild(el('line',{x1:x(TODAY),y1:m.t-2,x2:x(TODAY),y2:m.t+ph,stroke:'var(--ink)','stroke-width':1.5,'stroke-dasharray':'3 3',opacity:.5}));
+  const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini (4 Sep)';svg.appendChild(tl);
+  const planTodayVal=planAt(TODAY);
+  svg.appendChild(el('circle',{cx:x(TODAY),cy:y(planTodayVal),r:3.5,fill:'var(--ink-soft)'}));
+  const ptl=el('text',{x:x(TODAY)-8,y:y(planTodayVal)+4,'text-anchor':'end',fill:'var(--ink-soft)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});ptl.textContent='rencana '+Math.round(planTodayVal)+'%';svg.appendChild(ptl);
+  const last=act[act.length-1];
+  svg.appendChild(el('circle',{cx:x(last.d),cy:y(last.v),r:5,fill:'var(--accent)',stroke:'var(--surface)','stroke-width':2}));
+  const lt=el('text',{x:x(last.d)+8,y:y(last.v)-8,'text-anchor':'start',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='44%';svg.appendChild(lt);
+  const prevPt=act[act.length-2];
+  svg.appendChild(el('circle',{cx:x(prevPt.d),cy:y(prevPt.v),r:3.5,fill:'var(--accent)',opacity:.5}));
+  const prevLt=el('text',{x:x(prevPt.d),y:y(prevPt.v)-10,'text-anchor':'middle',fill:'var(--ink-soft)','font-size':10.5,'font-family':'var(--mono)'});prevLt.textContent='39% (24 Jul)';svg.appendChild(prevLt);
+  const dec=new Date(2026,11,1);
+  svg.appendChild(el('line',{x1:x(dec),y1:m.t,x2:x(dec),y2:m.t+ph,stroke:'var(--crit)','stroke-width':1.5,opacity:.5}));
+  const dt=el('text',{x:x(dec)-5,y:m.t+11,'text-anchor':'end',fill:'var(--crit)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});dt.textContent='Target Des';svg.appendChild(dt);
+})();
+
+/* ---------- GANTT (12 activities) ---------- */
+const ACT=[
+  {id:1,name:'Kick-off & requirement confirmation',s:[2026,5,8],e:[2026,5,15],act:100,plan:100,st:'good'},
+  {id:2,name:'Site survey & data collection plan',s:[2026,5,15],e:[2026,6,7],act:65,plan:100,st:'warn'},
+  {id:3,name:'Detailed design',s:[2026,6,1],e:[2026,6,21],act:90,plan:90,st:'good'},
+  {id:4,name:'Prototype build',s:[2026,6,15],e:[2026,7,21],act:62,plan:5,st:'accent'},
+  {id:5,name:'Lab test',s:[2026,7,15],e:[2026,8,21],act:55,plan:0,st:'accent'},
+  {id:6,name:'AI model training / validation',s:[2026,7,15],e:[2026,8,21],act:75,plan:0,st:'accent'},
+  {id:7,name:'Integration test (fungsional; AI on-device sejak 19 Agu, adapter MQTT sejak 4 Sep)',s:[2026,6,1],e:[2026,9,7],act:75,plan:0,st:'accent'},
+  {id:8,name:'HSE review & permit preparation',s:[2026,10,1],e:[2026,10,14],act:5,plan:0,st:'warn'},
+  {id:9,name:'Field installation',s:[2026,10,15],e:[2026,11,7],act:0,plan:0,st:'neutral'},
+  {id:10,name:'Field trial',s:[2026,11,8],e:[2027,0,7],act:0,plan:0,st:'neutral'},
+  {id:11,name:'Evaluation & final report',s:[2027,0,1],e:[2027,0,21],act:0,plan:0,st:'neutral'},
+  {id:12,name:'Industrialization roadmap',s:[2027,1,8],e:[2027,1,21],act:5,plan:0,st:'neutral'}
+];
+const GMILES=[
+  {d:[2026,5,12],lab:'Kick-off',done:true},
+  {d:[2026,6,16],lab:'Uji fungsional + AI ✓',done:true},
+  {d:[2026,7,1],lab:'TRA/JSA gate',done:false},
+  {d:[2026,7,10],lab:'Survey lokasi Cilacap ✓ (instalasi belum)',done:true},
+  {d:[2026,8,20],lab:'Integration',done:false},
+  {d:[2026,10,10],lab:'HSE permit',done:false},
+  {d:[2026,11,1],lab:'Field install (target)',done:false},
+  {d:[2027,0,15],lab:'Field trial',done:false},
+  {d:[2027,1,15],lab:'Final report',done:false}
+];
+(function(){
+  const svg=document.getElementById('gantt');
+  const W=960,H=560,m={l:250,r:44,t:52,b:30};
+  const x=d=>m.l+((d-START)/(END-START))*(W-m.l-m.r);
+  const NS='http://www.w3.org/2000/svg';
+  function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  function D(a){return new Date(a[0],a[1],a[2]);}
+  MONTHS.forEach(([lab,yr,mo])=>{const d=new Date(yr,mo,1);if(d<START||d>END)return;
+    svg.appendChild(el('line',{x1:x(d),y1:m.t-6,x2:x(d),y2:H-m.b,stroke:'var(--line)','stroke-width':1,opacity:.7}));
+    const t=el('text',{x:x(d)+4,y:m.t-12,fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});t.textContent=lab;svg.appendChild(t);
+  });
+  const rowH=(H-m.t-m.b)/(ACT.length+1);
+  ACT.forEach((p,i)=>{
+    const cy=m.t+rowH*i+rowH/2;
+    const nm=el('text',{x:m.l-14,y:cy+2,'text-anchor':'end',fill:'var(--ink)','font-size':12,'font-weight':600});
+    nm.textContent=p.name;svg.appendChild(nm);
+    const idl=el('text',{x:14,y:cy+2,fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});idl.textContent=('0'+p.id).slice(-2);svg.appendChild(idl);
+    const xs=x(D(p.s)), xe=x(D(p.e)); const bw=Math.max(xe-xs,3), bh=15;
+    svg.appendChild(el('rect',{x:xs,y:cy-bh/2,width:bw,height:bh,rx:7,fill:'var(--surface-3)'}));
+    const col=p.st==='neutral'?'var(--line-2)':'var(--'+p.st+')';
+    svg.appendChild(el('rect',{x:xs,y:cy-bh/2,width:Math.max(bw*p.act/100,p.act>0?3:0),height:bh,rx:7,fill:col}));
+    if(p.plan>0){const px=xs+bw*p.plan/100;
+      svg.appendChild(el('rect',{x:px-1.2,y:cy-bh/2-4,width:2.4,height:bh+8,fill:'var(--ink)',opacity:.55,rx:1}));}
+    const pct=el('text',{x:xe+7,y:cy+3.5,fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});
+    pct.textContent=p.act+'%';svg.appendChild(pct);
+  });
+  svg.appendChild(el('line',{x1:x(TODAY),y1:m.t-6,x2:x(TODAY),y2:H-m.b,stroke:'var(--accent)','stroke-width':1.5,'stroke-dasharray':'3 3'}));
+  const my=H-m.b+2;
+  GMILES.forEach(ms=>{const d=D(ms.d);const cx=x(d);const s=6;
+    svg.appendChild(el('path',{d:`M${cx} ${my-s} L${cx+s} ${my} L${cx} ${my+s} L${cx-s} ${my} Z`,
+      fill:ms.done?'var(--accent)':'var(--surface)',stroke:ms.done?'var(--accent)':'var(--ink-soft)','stroke-width':1.6}));
+  });
+})();
+
+/* ---------- RU TABLE ---------- */
+const RU=[
+  ['RU II','Dumai',10,3,1,3,1,'roadmap'],
+  ['RU III','Plaju',4,3,1,3,1,'roadmap'],
+  ['RU IV','Cilacap',3,2,1,2,1,'active'],
+  ['RU V','Balikpapan',2,1,1,1,1,'roadmap'],
+  ['RU VI','Balongan',4,2,2,2,2,'roadmap'],
+  ['RU VII','Kasim/Sorong',5,11,1,11,1,'roadmap']
+];
+(function(){
+  const b=document.querySelector('#rutbl tbody');
+  RU.forEach(r=>{const tr=document.createElement('tr');if(r[7]==='active')tr.className='pilot';
+    const st=r[7]==='active'?'<span class="pill ready">Aktif · pilot</span>':'<span class="pill prep">Roadmap</span>';
+    tr.innerHTML=`<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td style="text-align:left">${st}</td>`;b.appendChild(tr);});
+  const t=document.createElement('tr');t.className='total';
+  t.innerHTML=`<td>TOTAL</td><td>6 RU</td><td>28</td><td>22</td><td>7</td><td>22</td><td>7</td><td></td>`;b.appendChild(t);
+})();
+
+/* ---------- SUBSYSTEM READINESS ---------- */
+const WSW=[
+  {n:'Jaringan LoRa & Cluster Head',w:20,act:68,plan:85,st:'warn'},
+  {n:'AI & Sensor MQ (TCN LPG + CNN Dual-Branch · dataset konsisten)',w:22,act:68,plan:70,st:'accent'},
+  {n:'Catu Daya & Manajemen Energi',w:15,act:52,plan:72,st:'crit'},
+  {n:'Gas Chamber, Hardware & QC',w:12,act:35,plan:62,st:'crit'},
+  {n:'Perangkat Lunak, Server & Dashboard (adapter MQTT selesai 4 Sep)',w:13,act:70,plan:60,st:'good'},
+  {n:'Integrasi Sistem (fungsional; AI on-device sejak 19 Agu)',w:10,act:78,plan:45,st:'accent'},
+  {n:'Persiapan & Survei RU / HSE (survey lokasi Cilacap selesai, instalasi belum)',w:8,act:52,plan:60,st:'warn'},
+  {n:'Inisiasi & Desain Sistem',w:10,act:95,plan:100,st:'good'}
+];
+(function(){
+  const c=document.getElementById('ws');
+  WSW.forEach(r=>{
+    const row=document.createElement('div');row.className='ws-row';
+    const fc=r.st==='good'?'good':r.st==='crit'?'crit':r.st==='warn'?'warn':'';
+    row.innerHTML=`<div class="ws-top">
+        <div class="ws-name">${r.n}<small>bobot ${r.w}%</small></div>
+        <div class="ws-nums">aktual <b>${r.act}%</b> / rencana ${r.plan}%</div></div>
+      <div class="track"><div class="fill ${fc}" style="width:0%" data-w="${r.act}"></div>
+        <div class="plan-mark" style="left:${r.plan}%"></div></div>`;
+    c.appendChild(row);
+  });
+  requestAnimationFrame(()=>document.querySelectorAll('#ws .fill').forEach(f=>f.style.width=f.dataset.w+'%'));
+})();
+
+/* ---------- RESOURCE READINESS ---------- */
+const RES=[
+  ['Engineering','Test Equipment, Vendor','ready','Ready'],
+  ['AI / ML','Dataset (tambahan gas H2S/Benzena/CO)','confirm','Need Confirmation'],
+  ['Field','Access to Field Location, HSE — instalasi oleh vendor Pertamina','ready','Ready'],
+  ['HSE','RU Site, Field Team — sertifikasi ketinggian bukan tanggung jawab LGU','ready','Ready'],
+  ['RU Site','Permit, Access','confirm','Need Confirmation'],
+  ['Procurement / Vendor','Budget, Delivery Lead Time','confirm','Need Confirmation'],
+  ['Test Equipment','Procurement / Vendor','prep','To Be Prepared'],
+  ['Gas Test Setup','Chamber selesai; gas supply kelas tambahan masih terhambat sampel','confirm','Chamber Ready · Gas Supply Pending'],
+  ['Server / Dashboard','Adapter MQTT &amp; dashboard selesai; akses kantor kilang dibatasi API/dashboard endpoint saja','ready','Ready']
+];
+(function(){
+  const c=document.getElementById('rr');
+  RES.forEach(r=>{const d=document.createElement('div');d.className='rrcell';
+    d.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <span class="rn2">${r[0]}</span><span class="pill ${r[2]}">${r[3]}</span></div>
+      <div class="rd">Dep: ${r[1]}</div>`;c.appendChild(d);});
+})();
+
+/* ---------- ACTIVITY FEED ---------- */
+const FEED=[
+  {d:'9 Agu',t:'Model AI baru — CNN Dual-Branch resmi menggantikan CNN 1D',b:'File presentasi ditemukan di <i>Sumber Dokumen/</i> (push langsung Farhan Budiman, di luar sesi Claude; dibuat Lab IoT ITB, edit terakhir 6 Agu oleh Ilmania Syakira). <b>Penerus CNN 1D</b> — arsitektur 2-cabang (Conv1D dari 8 sensor MQ + Dense dari 7 fitur sensitivitas datasheet MQ), 1.347 parameter. Klasifikasi kini <b>4 kelas: LPG/CO2/Udara Bersih/H2</b>. <b>Akurasi resmi 99,20%</b> on-chip ESP32-S3 (TFLite int8, 9,14 KB) — dikonfirmasi user sbg angka dipakai (bukan 99,73% pre-kuantisasi). ⚠️ Masih <b>belum mencakup H2S &amp; Benzena</b> (requirement 6 Agu, gate belum tertutup).',tag:'Milestone',m:true},
+  {d:'6–8 Agu',t:'Demo mesh siap-uji & push alarm berhasil',b:'Tiang <b>GW, CH1, CH2, CH3</b> disiapkan, semua CH terhubung ke GW. Uji star GLD di CH1 &amp; CH2 — data masuk saat direquest, OK. <b>GLD disemprot LPG → alarm otomatis tanpa pull request</b> — push alarm berhasil diuji (menyelesaikan risiko "push alarm belum dicoba" dari 30 Jul; uji di mesh kampus, belum validasi lapangan RU). Urutan demo: aktifkan server → pasang GW → pasang CH → pasang GLD 24V. Follow-up: contoh app "Gateway Manager" (requirement fitur baru); kelanjutan pertanyaan solar panel dari Pak Raihan (rapat 6 Agu) diteruskan ke Beny — perhitungan belum dibuat.',tag:'Milestone',m:true},
+  {d:'6 Agu',t:'Rapat resmi — mounting & topologi vs Corrosion Monitoring Emerson',b:'Rapat resmi Labtek XV ITB (Tim ITB, Pertamina, LGU) — sumber <i>Notulensi_Rapat_5Agustus2026_GLD.pdf</i> (badan dokumen salah tulis tanggal, tanggal benar 6 Agustus). Mounting ikut standar existing: <b>bracket L/U-clamp</b> ke struktur existing, tanpa struktur baru/bor/las; vendor mekanik dilibatkan sejak awal. CH besar krn jangkauan &amp; kapasitas ekspansi, multi-channel (vs Kasim single-channel dulu); 3 repeater existing jadi referensi. <b>GLD diharapkan bisa adopsi topologi shg CH juga jadi repeater</b> — ⚠️ kapasitas GW/CH thd jumlah sensor <b>belum ditentukan</b> (action item evaluasi, Tim Komunikasi ITB), bukan angka pasti "&lt;30" spt sempat dicatat informal. Instalasi kilang baru setinggi manusia (belum tersertifikasi permanen). <b>Requirement resmi:</b> wajib deteksi <b>Benzena, CO, H2S</b> (⚠️ di luar gate 6-kelas 24 Jul, belum direkonsiliasi); sistem wajib tampilkan <b>ppm real-time</b>; alarm toksik (CO/H2S) langsung vs gas mudah-terbakar threshold; sampel gas tak diambil di kilang (dibawa tim Pertamina); hindari PVC; app perlu kolom <b>Area + Equipment</b>. Status produksi: <b>CH 16 unit</b> (9 besar+7 kecil), <b>GLD 4 unit</b>. <b>Pak Raihan (RU VII Kasim)</b> juga menanyakan kebutuhan <b>solar panel</b> untuk GLD (baterai+solar) — Pertamina OK dgn ukuran fisik besar (contoh: setara panel PJU); diminta juga <b>cost-benefit analysis vs catu daya kabel (+ CAPEX kabel)</b>. 9 tindak lanjut resmi ber-PIC: Tim Mekanik ITB, Tim Komunikasi ITB, Tim AI ITB, Tim UI ITB, Tim Instrumentasi ITB, Tim ITB+Pertamina, Beny/ITB Fisika.',tag:'Milestone',m:true},
+  {d:'30 Jul',t:'Weekly meeting — jadwal Cilacap maju, arsitektur diperjelas',b:'<b>Kunjungan RU IV Cilacap dimajukan &amp; digabung</b>: survey + instalasi pada <b>9–10 Agustus</b> (berangkat 9 Agu, instalasi Senin 10 Agu) — menggantikan rencana 24 Jul (survey akhir Jul → instalasi Sep). Arsitektur diperjelas: <b>app+DB penuh lokal</b> (site + kantor Jakarta, request Pak Pindoan), <b>cloud hanya gateway/relay ringan</b>. Wi-Fi ESP32 dikonfirmasi hanya untuk config/serial lokal — LoRa tetap backbone telemetri. Risiko baru: kondensasi casing, data collision LoRa belum diuji, push alarm belum dicoba, protokol missed-report GLD portable, dan kekhawatiran akurasi model tinggi → direkomendasikan verifikasi ulang.',tag:'Milestone',m:true},
+  {d:'24 Jul',t:'Meeting LGU–Pertamina — sertifikasi, gas capability, CNN 1D',b:'<b>24V siap sertifikasi</b> (biro Shanghai); battery version target <b>&lt;100 mA</b>/min 30 hari (paralel, tak menghambat 24V). Gate baru: <b>gas capability min 6 kelas</b> (baru 3/6 tervalidasi). Model <b>CNN 1D</b> (Lab IoT ITB) dikonfirmasi <b>97,6%</b> akurasi test (97,3% versi ESP32-S3 int8) — model klasifikasi jenis gas, terpisah &amp; berdampingan dengan TCN (prediksi leak). 18 action items dicatat; flame detection (Jetson Nano) &amp; sensor arah angin masih belum masuk scope resmi.',tag:'Milestone',m:true},
+  {d:'23 Jul',t:'Progress Gas Test Chamber — sistem kendali berfungsi',b:'Kendali dua-arah real-time via ESP32: <b>solenoid valve</b> (aliran gas presisi), <b>pompa penghisap duty-cycle</b>, <b>2× BME280</b> (komparasi internal/eksternal, I²C 0x76/0x77), <b>TGS2610</b> via ADS1115 + voltage divider. Daya LM2596 + driver BTS7960. Lanjut: PCB layout, pompa senyap.',tag:'Milestone',m:true},
+  {d:'23 Jul',t:'Repo PertaminaGLD — firmware & Operator Hub (aktif)',b:'Commit terbaru: firmware GLD/CH/GW + <b>Operator Hub workflows</b>, reliability &amp; test coverage; manajemen daya <b>TPL5010</b> &amp; algoritma nulling.',tag:'Repo'},
+  {d:'20 Jul',t:'Simulasi siklus operasi diunggah ke board GLD',b:'Warm-up → akuisisi → inferensi → transmit LoRa. <b>ON 60 s / OFF 100 s / WAKE 160 s</b>. Arahan: <b>ganti/modifikasi DC converter</b>; modifikasi baterai ditahan.',tag:'Fahmi'},
+  {d:'16 Jul',t:'Uji fungsional GLD-CH-GW-Server + inferensi AI',b:'Rantai penuh <b>sensor → CH → GW → server</b> berjalan end-to-end. <b>Inferensi AI jalan di komputer/laptop dengan emulator ESP32</b> — deploy on-device ESP32 = langkah berikutnya. Fungsional terintegrasi tercapai jauh sebelum jadwal resmi (Sep).',tag:'Milestone',m:true},
+  {d:'16 Jul',t:'Analisis daya · uji mesh 8-CH · uji downlink',b:'<b>Mesh 8-CH se-kampus ITB terbukti</b> — multi-hop hingga Layer 3 (route depth 1–3); <b>downlink GLD</b> tembus lewat mesh + fix firmware → keterbatasan jangkauan LoRa disiasati. <b>Budget daya:</b> GLD 7P runtime 1,76 hari; <b>CH 2 panel surplus 1,5–4,4 Wh/hari</b>. Catatan: TPL5010 belum optimal.',tag:'Milestone',m:true},
+  {d:'16 Jul',t:'Temuan sensor & aplikasi UI',b:'Respons sensor berkorelasi positif pada <b>CO₂</b>, tidak pada <b>O₂</b>. Baseline berbeda per sensor → <b>threshold per-MQ</b>. Aplikasi UI GLD dibuat (capture/save/download).',tag:'Milestone',m:true},
+  {d:'15 Jul',t:'Model TCN per-sensor selesai (Board12)',b:'8 model TCN independen (1/sensor), semua <b>≥92% akurasi</b> prediksi LPG 5 s ke depan. Terbaik <b>MQ4V 93,9%</b> (F1 0,923). Ekspor TFLite int8 ~72 KB untuk edge.',tag:'ML',ml:true},
+  {d:'15 Jul',t:'Akuisisi dataset sensor',b:'Sesi Clean Air, LPG, O₂, CO₂ pada GLD-F001 — total <b>14.477 sampel</b> di 8 kanal MQ.',tag:''},
+  {d:'14 Jul',t:'',b:'Solar panel stabil <b>±4,17 V</b> pukul 11–15; baterai penuh. Setelah 14:00 arus/daya negatif (mulai discharge).',tag:''},
+  {d:'13 Jul',t:'Profil beban daya GLD terukur',b:'Jalur 5 V &amp; 24 V normal (±6 W). <b>Mode baterai hanya 2,43 W</b> vs kebutuhan ±6 W — teridentifikasi sebagai blocker.',tag:'Blocker',m:true},
+  {d:'13 Jul',t:'Repo frontend — MapLibre & default RU IV Cilacap',b:'Dashboard pindah peta ke <b>MapLibre</b> (hapus Mapbox, local tiles), <b>default deployment RU IV Cilacap</b>, device CRUD penuh + gas trend heatmap overlay.',tag:'Repo'},
+  {d:'9 Jul',t:'Rantai komunikasi GLD-CH-GW-Server tersambung',b:'Data mengalir penuh <b>Node → CH → GW → server</b> (MQTT) — rantai komunikasi end-to-end terbukti, dasar untuk uji fungsional terintegrasi.',tag:'Milestone',m:true},
+  {d:'9 Jul',t:'',b:'Pengisian belum optimal (Vp 7,25 V). Lokasi hanya optimal 10:00–13:00 → rekomendasi pindah ke rooftop.',tag:''},
+  {d:'6 Jul',t:'Uji komunikasi 2 Cluster Head',b:'Charging 08:00–16:00 menaikkan baterai 3,0→3,4 V. Failover CH otomatis terbukti (parent pindah saat CH mati). PJ chamber didapatkan.',tag:'Milestone',m:true},
+  {d:'6–8 Jul',t:'Uji ketahanan baterai CH (LitoKala)',b:'1 baterai LitoKala supply board CH <b>~40 jam</b> (transmit 10 s); 3 baterai ~33 jam. Lapangan (dgn solar): CH3 hidup 8 hari (baterai awal 4,0 V), CH5 5 hari — defisit energi kecil pada 1 panel.',tag:'Daya'},
+  {d:'26 Jun',t:'',b:'Temuan: <b>antena LoRa 6 m maks ±100 m</b> di kondisi obstruksi (spec target 1–2 km LOS). Model TCNN mulai (prediksi 5 s dari 5 s).',tag:''},
+  {d:'18 Jun',t:'Prinsip pemodelan AI ditetapkan',b:'Pergeseran ke <b>fingerprint 8-sensor</b> &amp; pola relatif (transien/stasioner/saturasi). Proyek ditegaskan setara TRL-7.',tag:''},
+  {d:'12 Jun',t:'Kick-Off Meeting Pertamina',b:'Baseline timeline <b>9 bulan</b> disepakati; scope 6 RU (RU II–VII); target implementasi Des; field test RU-VII Kasim; instalasi via pihak ke-3 + koordinasi HSE.',tag:'Milestone',m:true}
+];
+(function(){
+  const c=document.getElementById('feed');
+  FEED.forEach(e=>{
+    const cls=e.ml?'ml':(e.m?'m':'');
+    const div=document.createElement('div');div.className='ev';
+    div.innerHTML=`<div class="ev-date">${e.d}</div>
+      <div class="ev-body">${e.t?`<b>${e.t}</b>${e.tag?`<span class="ev-tag ${cls}">${e.tag}</span>`:''}<br>`:(e.tag?`<span class="ev-tag ${cls}">${e.tag}</span> `:'')}${e.b}</div>`;
+    c.appendChild(div);
+  });
+})();
+
+/* ---------- GAS SESSIONS ---------- */
+const GASES=[['Carbon Dioxide',6507],['LPG',5655],['Clean Air',616],['Oksigen',205],['Baseline/uji',1494]];
+(function(){
+  const c=document.getElementById('gaslist');const max=6507;
+  GASES.forEach(([n,v])=>{const r=document.createElement('div');r.className='gasrow';
+    r.innerHTML=`<div class="gn">${n}</div><div class="gt"><i style="width:0" data-w="${(v/max*100).toFixed(0)}"></i></div><div class="gv">${v.toLocaleString('id-ID')}</div>`;c.appendChild(r);});
+  requestAnimationFrame(()=>document.querySelectorAll('#gaslist .gt i').forEach(f=>f.style.width=f.dataset.w+'%'));
+})();
+
+/* ---------- BLOCKERS ---------- */
+const BLK=[];
+(function(){
+  const c=document.getElementById('blockers');
+  if(BLK.length===0){
+    c.innerHTML='<div class="blk" style="border-left-color:var(--good)"><div class="bt" style="color:var(--good)">✓ Tidak ada blocker kritis aktif</div><div class="bh">Autonomi baterai GLD, TPL5010, dan DC converter dideprioritaskan</div><div class="bd">Ketiganya terkait GLD versi baterai portable, yang untuk saat ini <b>tidak digunakan</b> — fokus deployment adalah <b>24VDC saja</b> (siap pasang, ≥1A final). Jalur baterai portable bisa dilanjutkan sbg pekerjaan terpisah di masa depan bila diperlukan, tapi tidak menahan commissioning pilot saat ini.</div><div class="bm">Dideprioritaskan, bukan diselesaikan teknis</div></div>';
+    return;
+  }
+  BLK.forEach(b=>{const d=document.createElement('div');d.className='blk';
+    d.innerHTML=`<div class="bt">⚠ ${b.t}</div><div class="bh">${b.h}</div><div class="bd">${b.d}</div><div class="bm">${b.m}</div>`;c.appendChild(d);});
+})();
+
+/* ---------- ACTION ITEMS ---------- */
+const AI=[
+  ['Mengganti/memodifikasi circuit DC converter (GLD versi baterai)','Tim Elektronik (Fahmi)','r','selesai','Dideprioritaskan'],
+  ['Menahan modifikasi baterai, alihkan ke pekerjaan lain','Tim Elektronik','r','selesai','Selesai'],
+  ['Pengukuran ulang beban mode baterai + data tegangan','Fahmi','r','selesai','Dideprioritaskan'],
+  ['Melanjutkan pengumpulan data solar ≥1 bulan','Lab IoT (Ryan)','s','berjalan','Berjalan (10/30)'],
+  ['Memindahkan titik pengecasan ke rooftop','Ilmania / Lab Fisika','s','berjalan','Diusulkan'],
+  ['Bukti empirik stabilitas CH posisi tinggi → CH1 Labtek XV','Tim Jaringan','t','terbuka','Terbuka'],
+  ['Eksperimen penentuan jumlah CH minimum','Tim Jaringan','t','terbuka','Terbuka'],
+  ['Mengajukan izin pemasangan CH Labtek XV lt.8','—','s','terbuka','Terbuka'],
+  ['Menyusun daftar titik tinggi survei untuk Pertamina','Tim Survei','s','terbuka','Terbuka'],
+  ['Pemetaan MQ dominan per jenis gas (datasheet)','Tim GLD & AI','t','berjalan','Berjalan'],
+  ['Replot grafik per jenis gas (8 parameter)','Tim GLD & AI','s','terbuka','Terbuka'],
+  ['Pengembangan & validasi model TCN/TCNN','Pak Fahdzi','t','berjalan','Berjalan'],
+  ['Investigasi konsistensi akuisisi data — dataset konsisten & siap pakai','Tim GLD & AI','t','selesai','Selesai'],
+  ['Verifikasi tertulis AI on-device (firmware/dok pendukung CNN Dual-Branch di ESP32-S3)','Tim GLD & AI','s','terbuka','Terbuka'],
+  ['Penetapan threshold per MQ berbasis baseline','Tim GLD & AI','s','terbuka','Terbuka'],
+  ['Penyelesaian gas test chamber (pompa, valve, mounting)','Mahasiswa PJ Chamber','t','berjalan','Berjalan'],
+  ['Uji metode aliran gas: disedot vs didorong','Tim Chamber','s','terbuka','Terbuka'],
+  ['Konsolidasi 3 repositori menjadi satu repo utama','Farhan Budiman','s','terencana','Terencana'],
+  ['Menambahkan collaborator GitHub dari Pertamina','Farhan Budiman','r','menunggu','Menunggu'],
+  ['Penyiapan dokumen JSA/TRA','Pak Tresnandi / LGU','t','terbuka','Terbuka'],
+  ['Penjadwalan site visit Pertamina ke lab LGU','LGU','t','terbuka','Terbuka'],
+  ['Pencatatan jenis gas Cilacap & cek tabung gas','Tim Pengujian','s','terbuka','Terbuka'],
+  ['Penyusunan SOP keselamatan (larangan cabut saat on)','Tim Lab','s','terbuka','Terbuka'],
+  ['Evaluasi keputusan solder vs soket sensor','Tim Elektronik','s','terbuka','Terbuka'],
+  ['Penataan ulang lab','Pak Maman','r','berjalan','Berjalan'],
+  ['Verifikasi kapasitas deteksi gas minimum 6 kelas (H₂/LPG/Metana/CO₂/Clean Air)','Pak Farhan / Ilma','t','terbuka','Terbuka'],
+  ['Keluarkan antena Wi-Fi 2,4G dari dalam casing GLD','Tim Elektronik','s','terbuka','Terbuka'],
+  ['Verifikasi ulang akurasi model CNN Dual-Branch/TCN (cek data leakage/overfitting)','Tim AI','t','terbuka','Terbuka'],
+  ['Definisikan protokol missed-report GLD portable (cek baterai/sensor bila tak lapor rutin)','Beni','s','terbuka','Terbuka'],
+  ['Instalasi aplikasi lokal + database di site RU IV Cilacap & kantor Jakarta','Tim Server','t','terbuka','Terbuka'],
+  ['Klarifikasi scope requirement gas Benzena/CO/H2S vs gate 6-kelas','Pak Farhan / Ilma','t','terbuka','Terbuka'],
+  ['Desain mounting & bracket L/U-clamp sesuai standar kilang','Tim Mekanik ITB','t','terbuka','Terbuka'],
+  ['Evaluasi kapasitas Gateway & Cluster Head terhadap jumlah sensor','Tim Komunikasi ITB','t','terbuka','Terbuka'],
+  ['Kembangkan fitur alarm berbasis threshold gas (+ tampilan ppm real-time)','Tim AI ITB','t','terbuka','Terbuka'],
+  ['Tambahkan info kolom "Area" & "Equipment" pada dashboard','Tim UI ITB','s','terbuka','Terbuka'],
+  ['Kembangkan app "Gateway Manager" (device terdaftar/terhubung, kapasitas, visualisasi jaringan)','Tim UI ITB','s','terbuka','Terbuka'],
+  ['Cost-benefit analysis solar panel vs catu daya kabel (termasuk CAPEX kabel) untuk GLD','Beny (ITB Fisika)','s','terbuka','Terbuka'],
+  ['Kaji sistem pembuangan gas pasca-sampling (cegah paparan)','Tim Instrumentasi ITB','s','terbuka','Terbuka'],
+  ['Studi banding topologi jaringan dengan sistem Emerson/WirelessHART','Tim Komunikasi ITB','s','terbuka','Terbuka'],
+  ['Susun rencana sertifikasi perangkat untuk implementasi di kilang','Tim ITB bersama Pertamina','t','terbuka','Terbuka'],
+  ['Susun skenario instalasi lengkap dengan dimensi pemasangan','Tim Mekanik & Vendor Mekanik','t','terbuka','Terbuka']
+];
+const PRIO={t:['t','Tinggi'],s:['s','Sedang'],r:['r','Rendah']};
+(function(){
+  const body=document.getElementById('aibody');const cnt=document.getElementById('aicount');let filter='all';
+  function render(){
+    body.innerHTML='';let shown=0;
+    AI.forEach((a,i)=>{const [txt,pic,pr,stKey,stLab]=a;
+      const match=filter==='all'||(filter==='tinggi'&&pr==='t')||(filter===stKey);
+      if(!match)return;shown++;
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td class="num">${i+1}</td><td class="act">${txt}</td>
+        <td><span class="pic">${pic}</span></td>
+        <td><span class="prio"><span class="dot ${pr}"></span>${PRIO[pr][1]}</span></td>
+        <td><span class="pill ${stKey}">${stLab}</span></td>`;
+      body.appendChild(tr);});
+    cnt.textContent=shown+' / '+AI.length+' item';
+  }
+  document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('.fbtn');if(!b)return;
+    filter=b.dataset.f;document.querySelectorAll('#filters .fbtn').forEach(x=>x.setAttribute('aria-pressed',x===b));render();});
+  render();
+})();
+
+/* ---------- ISSUES ---------- */
+const ISS=[
+  ['AI on-device — dokumen firmware tertulis menyusul','Didemokan langsung sebelum kunjungan Cilacap; firmware/dok tertulis pendukung masih menyusul','r','Rendah'],
+  ['Eksekusi site survey Cilacap menunggu gate TRA/JSA','Rencana & workflow survei siap; TRA/JSA menahan survei fisik','s','Sedang'],
+  ['Jangkauan LoRa ~100 m/hop — disiasati mesh multi-hop','Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH)','s','Sedang'],
+  ['Keputusan solder vs soket & konsolidasi 3 repo belum tuntas','Berdampak pada maintenance & tata kelola kode','s','Sedang'],
+  ['Anomali pencatatan data tegangan baterai (tertulis 309 V)','Integritas dokumentasi pengukuran','r','Rendah'],
+  ['Akurasi model (CNN Dual-Branch/TCN) dinilai tinggi/mencurigakan','Perlu verifikasi independen — cek potensi data leakage/overfitting','t','Tinggi'],
+  ['Gas capability minimum 6 kelas belum lengkap (baru 4/6 tervalidasi)','CNN Dual-Branch kini cakup H₂ (sejak 9 Agu); Metana masih belum diuji; gate deployment','s','Sedang'],
+  ['Potensi kondensasi/genangan air dalam casing GLD','Mekanisme pencegahan (lubang sirkulasi/kipas/pemanas) belum dipilih','s','Sedang'],
+  ['Antena Wi-Fi 2,4G masih di dalam casing','Perlu dikeluarkan agar channel config lokal berfungsi andal','r','Rendah'],
+  ['Requirement gas Benzena/CO/H2S belum direkonsiliasi dengan gate 6-kelas','Pertamina wajibkan deteksi tambahan (6 Agu); scope resmi belum diperbarui','t','Tinggi'],
+  ['Cost-benefit analysis solar panel vs catu daya kabel (+ CAPEX kabel) belum dihitung','Sebelumnya solar dinilai menyulitkan instalasi & sempat tidak diizinkan Pertamina','s','Sedang'],
+  ['Pertanyaan buangan gas hasil sedotan pompa chamber belum dijawab','Potensi risiko paparan user jika dibuang ke udara bebas','s','Sedang'],
+  ['Opsi gateway indoor + kabel (antena saja di luar) belum dikonfirmasi','Dari catatan informal — tidak disebut di notulensi resmi 6 Agu','r','Rendah']
+];
+(function(){
+  const byStatus={};AI.forEach(a=>{byStatus[a[3]]=(byStatus[a[3]]||0)+1;});
+  document.getElementById('aikpi-total').textContent=AI.length;
+  document.getElementById('aikpi-breakdown').innerHTML=
+    `<b>${byStatus.berjalan||0}</b> berjalan · <b>${byStatus.terbuka||0}</b> terbuka · <b>${byStatus.selesai||0}</b> selesai · <b>${(byStatus.terencana||0)+(byStatus.menunggu||0)}</b> lainnya`;
+  const issTinggi=ISS.filter(x=>x[2]==='t').length;
+  document.getElementById('isskpi-total').textContent=ISS.length;
+  document.getElementById('isskpi-breakdown').innerHTML=`<b>${issTinggi}</b> prioritas tinggi`;
+})();
+(function(){
+  const c=document.getElementById('issues');
+  ISS.forEach((x,i)=>{const [txt,imp,sv,lab]=x;const d=document.createElement('div');d.className='issue';
+    d.innerHTML=`<div class="sev ${sv}"></div>
+      <div><div class="issue-txt">${i+1}. ${txt}</div><div class="issue-imp">${imp}</div></div>
+      <div class="issue-p"><span class="prio"><span class="dot ${sv}"></span>${lab}</span></div>`;c.appendChild(d);});
+})();
+
+/* ---------- RECOMMENDATIONS ---------- */
+const RECS=[
+  'Manfaatkan posisi <b>di depan jadwal engineering</b> untuk menuntaskan 3 blocker teknis (catu daya, DC converter, LoRa) sebelum masuk fase field. Keunggulan jadwal akan tergerus bila blocker terbawa ke instalasi.',
+  'Tuntaskan <b>gate TRA/JSA</b> untuk membuka eksekusi site survey RU IV Cilacap — rencana &amp; workflow survei sudah siap, sehingga TRA/JSA kini menjadi jalur kritis tunggal yang bergantung pihak RU sebelum penentuan titik GLD/CH &amp; DED.',
+  'Segera <b>kuantifikasi ulang jangkauan LoRa</b> (±100 m vs target 1–2 km) menjadi estimasi jumlah CH per RU. RU VII sudah butuh 11 CH; validasi antena/tinggi mounting sebelum survei agar biaya deployment realistis.',
+  'Formalkan <b>SOP pengujian &amp; QC per unit</b> serta <b>konsolidasi 3 repositori</b> (frontend, server, ML) menjadi satu repo utama untuk tata kelola menuju rollout 6 RU.',
+  'Konfirmasikan kesiapan sumber daya berstatus <b>Need Confirmation</b> (dataset gas tambahan, RU Site, Procurement) dan siapkan <b>Test Equipment</b> yang masih To Be Prepared — Gas Test Setup &amp; Server/Dashboard sudah lebih siap, sisa gas supply utk kelas tambahan.'
+];
+(function(){
+  const c=document.getElementById('recs');
+  RECS.forEach(t=>{const d=document.createElement('div');d.className='rec';
+    d.innerHTML=`<div class="rn"></div><div class="rt">${t}</div>`;c.appendChild(d);});
+})();
+
+/* ---------- PROGRES vs OUTSTANDING ---------- */
+const DONE=[
+  ['Rantai <b>GLD-CH-GW-Server</b> + <b>inferensi AI on-device</b> jalan (ESP32-S3) — <b>didemokan langsung sebelum kunjungan Cilacap</b>, dokumen firmware tertulis terpisah masih menyusul'],
+  ['<b>Survey lokasi RU IV Cilacap selesai</b> (9-10 Agu) — instalasi fisik belum dimulai'],
+  ['<b>Fokus deployment kini 24VDC saja</b> — GLD versi baterai portable dideprioritaskan; autonomi baterai (7P=1,76 hari), TPL5010, dan DC converter jadi <b>tidak relevan utk scope saat ini</b>'],
+  ['<b>Sertifikasi ketinggian pemasangan bukan tanggung jawab LGU</b> — instalasi fisik RU dilakukan vendor Pertamina, termasuk sertifikasi HSE ketinggian'],
+  ['<b>Eksposur dashboard ke LAN kantor diperjelas</b> — PC dedicated LGU hanya expose API/dashboard endpoint ke kantor kilang, bukan akses jaringan penuh'],
+  ['Rantai komunikasi <b>Node→CH→GW→server</b> (MQTT) tersambung (9 Jul)'],
+  ['<b>Failover CH otomatis</b> (star-mesh) terbukti — 0 data loss'],
+  ['Model <b>TCN LPG</b> 8-sensor: semua ≥92% akurasi (MQ4V 93,9%)'],
+  ['Dataset <b>14.477 sampel</b> (4 gas, 8 kanal) — <b>konsisten &amp; siap dipakai</b>'],
+  ['<b>PCB GLD v1 &amp; v2</b> terverifikasi; board & ADC OK'],
+  ['<b>Dashboard</b> (Next.js/MapLibre) default <b>RU IV Cilacap</b> + device CRUD'],
+  ['Karakterisasi RF LoRa &amp; profil beban daya terukur'],
+  ['Simulasi <b>duty-cycle</b> di board (ON 60 / OFF 100 / WAKE 160 s)'],
+  ['<b>CH:</b> catu daya teratasi dgn <b>2 panel surya</b> (surplus 1,5–4,4 Wh/hari)'],
+  ['<b>Mesh 8-CH se-kampus</b> (multi-hop Layer 3) &amp; <b>downlink GLD</b> terbukti + fix firmware'],
+  ['Budget daya GLD <b>terkuantifikasi</b> (runtime per konfigurasi baterai)'],
+  ['<b>Gas Test Chamber</b> — sistem kendali (valve, pompa, 2×BME280, TGS2610, ESP32) berfungsi real-time'],
+  ['<b>Push alarm berhasil diuji</b> — GLD disemprot LPG di mesh kampus (GW+CH1-3) → alarm otomatis tanpa pull request'],
+  ['<b>Model CNN Dual-Branch</b> menggantikan CNN 1D — akurasi naik ke 99,20% on-chip, kini cakup 4 kelas (+H2)'],
+  ['<b>Adapter MQTT→backend</b> sudah dibangun — jalur data lapangan→dashboard tersambung penuh di level aplikasi'],
+  ['<b>Jaringan field GW↔server independen</b> — router LGU sendiri, tak perlu registrasi MAC/satukan jaringan ke IT kilang'],
+  ['<b>Data collision multi-sensor</b> pada mesh produksi — sudah diuji']
+];
+const OUT=[
+  ['Pengesahan <b>TRA/JSA</b> — gate eksekusi instalasi fisik (survey sudah selesai)','gate','Gate'],
+  ['Eksekusi <b>instalasi fisik</b> RU IV Cilacap (pasca-survey 9-10 Agu, jadwal belum ditentukan; dilakukan vendor Pertamina)','gate','Gate'],
+  ['<b>Sertifikasi ATEX</b> belum terbit — estimasi realistis 5-8 bulan sejak Kick-Off','gate','Gate'],
+  ['<b>Scoping ATEX</b> (gas group/kelas temperatur/zona) belum ditentukan sama sekali — gate paling fundamental','gate','Gate'],
+  ['<b>Requirement gas H2S/Benzena/CO</b> — CNN Dual-Branch (9 Agu) sudah cakup H2, tapi H2S/Benzena/CO masih belum direkonsiliasi dgn gate 6-kelas; sampel gas dari Pertamina belum diterima','gate','Gate'],
+  ['<b>Kapasitas Gateway/CH</b> thd jumlah sensor — belum ada angka resmi; mitigasi: adjust interval kirim per sensor (trade-off bandwidth LoRa), action item verifikasi formal','gate','Gate'],
+  ['Jangkauan LoRa ~100 m/hop — <b>disiasati mesh</b> (konsekuensi: lebih banyak CH)','risk','Risiko'],
+  ['Konsolidasi <b>3 repositori</b> jadi satu repo utama','risk','Risiko'],
+  ['Keputusan <b>solder vs soket</b> sensor','risk','Risiko'],
+  ['Skenario instalasi lengkap + ukuran-ukuran konkret <b>belum dibuat</b>','risk','Risiko'],
+  ['<b>Cost-benefit analysis</b> solar panel vs kabel (+ CAPEX kabel) belum dihitung','risk','Risiko']
+];
+(function(){
+  const dl=document.getElementById('donelist'),ol=document.getElementById('outlist');
+  DONE.forEach(d=>{const e=document.createElement('div');e.className='poitem';
+    e.innerHTML=`<span class="ic" style="color:var(--good)">✓</span><span>${d[0]}</span>`;dl.appendChild(e);});
+  OUT.forEach(o=>{const e=document.createElement('div');e.className='poitem';
+    e.innerHTML=`<span class="ic" style="color:var(--warn)">◇</span><span>${o[0]}<span class="potag ${o[1]}">${o[2]}</span></span>`;ol.appendChild(e);});
+  document.getElementById('donecnt').textContent=DONE.length+' item';
+  document.getElementById('outcnt').textContent=OUT.length+' item';
+})();
+
+/* ---------- EVOLUSI DATA & METODE MODEL ---------- */
+const EVO=[
+ {n:'Tahap 1 (baseline)',d:'sebelumnya',cls:'old',tag:'Lama',tagcls:'',b:'Data Excel Tahap 1 · analisis per-MQ individual · output biner gas/no-gas (respons tangga).'},
+ {n:'Pergeseran paradigma',d:'18 Jun',cls:'',tag:'Selesai',tagcls:'done',b:'Fingerprint 8-sensor · grafik per jenis gas · fokus pola/amplitudo relatif · fase transien/stasioner/saturasi.'},
+ {n:'Model TCNN',d:'26 Jun',cls:'',tag:'Selesai',tagcls:'done',b:'Prediksi 5 dtk ke depan dari 5 dtk sebelumnya (data tegangan MQx).'},
+ {n:'Akuisisi dataset',d:'15 Jul',cls:'',tag:'Selesai',tagcls:'done',b:'14.477 sampel · 4 gas (Clean Air/LPG/O₂/CO₂) · 8 kanal MQ · <b>dataset konsisten &amp; siap dipakai</b>.'},
+ {n:'TCN per-sensor (Board12)',d:'15 Jul',cls:'',tag:'Selesai',tagcls:'done',b:'8 model univariat, semua ≥92% (MQ4V 93,9%, F1 0,923) · ekspor TFLite float32 + int8 (~72 KB).'},
+ {n:'Model CNN 1D (klasifikasi jenis gas, v1)',d:'dikonfirmasi 24 Jul',cls:'old',tag:'Digantikan',tagcls:'',b:'Model kedua, terpisah dari TCN — klasifikasi 3 kelas (Clean Air/LPG/CO2). 97,6% akurasi test (PC, 374 data holdout), 97,3% versi ESP32-S3 int8 (kompresi 83%). <b>Digantikan CNN Dual-Branch per 9 Agu.</b>'},
+ {n:'Model CNN Dual-Branch (klasifikasi jenis gas, v2)',d:'6 Agu, dikonfirmasi 9 Agu',cls:'',tag:'Selesai',tagcls:'done',b:'<b>Penerus CNN 1D</b> — arsitektur 2-cabang (Conv1D dari 8 sensor MQ + Dense dari 7 fitur sensitivitas datasheet MQ). Klasifikasi 4 kelas: LPG/CO2/Udara Bersih/H2. <b>Akurasi 99,20%</b> on-chip ESP32-S3 (TFLite int8, 9,14 KB). ⚠️ Masih belum mencakup H2S/Benzena (requirement 6 Agu).'},
+ {n:'Metode saat ini',d:'kini',cls:'cur',tag:'Sekarang',tagcls:'now',b:'Inferensi <b>on-device di ESP32-S3</b> (TFLite int8) · threshold per-MQ · model klasifikasi gas kini <b>CNN Dual-Branch</b> 99,20%. Status on-device <b>didemokan langsung sebelum kunjungan Cilacap</b> — dokumen firmware tertulis terpisah masih menyusul (firmware repo yg bisa diperiksa masih describe skema klasifikasi lama). ⚠️ Akurasi model dipertanyakan ulang (30 Jul) → verifikasi independen direkomendasikan. Target berikutnya: dokumentasi firmware tertulis + cakupan gas H2S/Benzena/CO.'}
+];
+(function(){const c=document.getElementById('evo');
+  EVO.forEach((e,i)=>{const d=document.createElement('div');d.className='evostep '+e.cls;
+    d.innerHTML='<div class="en">'+(i+1)+'</div><div><div class="eh">'+e.n+' <span class="ed">'+e.d+'</span> <span class="etag '+e.tagcls+'">'+e.tag+'</span></div><div class="eb">'+e.b+'</div></div>';
+    c.appendChild(d);});
+})();
+
+/* ---------- ZONE NAV + SCROLLSPY ---------- */
+(function(){
+  const links=[...document.querySelectorAll('#zonenav a')];
+  const zones=links.map(a=>document.getElementById(a.dataset.z)).filter(Boolean);
+  function spy(){
+    const y=window.scrollY+110;
+    let cur=zones[0]?zones[0].id:null;
+    zones.forEach(z=>{if(z.offsetTop<=y)cur=z.id;});
+    links.forEach(a=>a.classList.toggle('active',a.dataset.z===cur));
+  }
+  window.addEventListener('scroll',spy,{passive:true});
+  window.addEventListener('resize',spy);
+  setTimeout(spy,120);
+})();
+
+/* ---------- THEME TOGGLE ---------- */
+(function(){
+  const btn=document.getElementById('themebtn');
+  btn.addEventListener('click',()=>{
+    const cur=document.documentElement.getAttribute('data-theme');
+    const sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+    const now=cur?cur:(sysDark?'dark':'light');
+    document.documentElement.setAttribute('data-theme',now==='dark'?'light':'dark');
+  });
+})();
+</script>

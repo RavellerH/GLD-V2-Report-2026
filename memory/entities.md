@@ -7,7 +7,7 @@
 | org:ITB-IoT | Lab IoT ITB | Engineering, firmware, AI/ML |
 | org:ITB-Fisika | Lab Fisika ITB | Dukungan solar/energi |
 | org:Pertamina | Pertamina Patra Niaga / Kilang Pertamina Internasional | Klien & partner |
-| org:emerson | Emerson | Vendor sistem **Corrosion Monitoring** (protokol **WirelessHART**) yang sudah terpasang & teruji di kilang — jadi rujukan desain mounting/bracket & topologi jaringan GLD (6 Agu). Bukan vendor/bagian dari proyek GLD. |
+| org:emerson | Emerson | Vendor sistem **Corrosion Monitoring** (protokol **WirelessHART**) yang sudah terpasang & teruji di kilang — jadi rujukan desain mounting/bracket & topologi jaringan GLD (6 Agu). Bukan vendor/bagian dari proyek GLD. **5 Sep**: user tautkan contoh produk konkret — Rosemount/Emerson **Panel/Pipe Bracket Kit 03031-0189-0004** (SST, 2" pipe bracket + panel bracket, dipakai transmitter 3051T) — bracket J/L melengkung dgn U-bolt di satu ujung (klem ke pipa 2") & pelat panel-mount berlubang di ujung lain. Ini konfirmasi visual konkret pertama utk istilah "L-bracket ref. Emerson" yg sudah dipakai sejak dec:27/40 — pola bentuknya (bracket melengkung + U-bolt + pelat mounting) konsisten dgn pendekatan desain `Desain_Bracket_L_UBolt_GLD_Mounting.html` (31 Agu), meski desain GLD pakai pelat datar bukan bracket melengkung/offset spt Emerson. |
 
 ## Kontrak & Proposal (`doc:`)
 | ID | Nama | Isi ringkas |

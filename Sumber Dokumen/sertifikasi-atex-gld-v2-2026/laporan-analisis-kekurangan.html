@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Analisis Kekurangan — Sertifikasi IECEx/ATEX GLD V2 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #171714;
+    --bg-panel: #1f1f1b;
+    --bg-item: #242420;
+    --line: #35352e;
+    --line-strong: #4a4a40;
+    --amber: #ffb400;
+    --amber-dim: #b57e00;
+    --text: #e8e5dc;
+    --text-dim: #9a968a;
+    --text-faint: #6b685e;
+    --green: #7ec96a;
+    --mono: 'IBM Plex Mono', monospace;
+    --head: 'Chakra Petch', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background:
+      repeating-linear-gradient(-45deg, transparent 0 22px, rgba(255,180,0,.012) 22px 44px),
+      radial-gradient(1200px 600px at 80% -10%, rgba(255,180,0,.05), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+  .hazard-top { height: 10px; background: repeating-linear-gradient(-45deg, var(--amber) 0 16px, #14140f 16px 32px); }
+  header.masthead { max-width: 1060px; margin: 0 auto; padding: 48px 28px 8px; }
+  .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .28em; color: var(--amber);
+    text-transform: uppercase; display: flex; align-items: center; gap: 12px;
+  }
+  .kicker::before { content: ""; width: 34px; height: 2px; background: var(--amber); }
+  h1 {
+    font-family: var(--head); font-weight: 700; font-size: clamp(28px, 4.6vw, 42px);
+    line-height: 1.08; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: .01em;
+  }
+  h1 .ex-badge {
+    display: inline-block; border: 3px solid var(--amber); color: var(--amber); padding: 0 10px;
+    transform: rotate(-2deg) translateY(-4px); font-size: .6em;
+  }
+  .subtitle { color: var(--text-dim); font-size: 15px; max-width: 760px; }
+  .subtitle b { color: var(--text); font-weight: 600; }
+  .meta-row {
+    display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px;
+    font-family: var(--mono); font-size: 11px; color: var(--text-faint); letter-spacing: .04em;
+  }
+  .meta-row span b { color: var(--text-dim); }
+
+  main { max-width: 1060px; margin: 0 auto; padding: 30px 28px 0; }
+  section.block { margin-bottom: 44px; scroll-margin-top: 90px; }
+  .block-head {
+    display: flex; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 10px; margin-bottom: 6px;
+  }
+  .block-num {
+    font-family: var(--head); font-weight: 700; font-size: 26px; color: #14140f;
+    background: var(--amber); padding: 0 10px; line-height: 1.4;
+  }
+  .block-title { font-family: var(--head); font-weight: 700; font-size: 19px; text-transform: uppercase; letter-spacing: .03em; }
+
+  .subhead {
+    font-family: var(--head); font-weight: 600; font-size: 15px; text-transform: uppercase;
+    letter-spacing: .03em; color: var(--text); margin: 26px 0 4px;
+  }
+
+  .callout {
+    border: 1px solid var(--line); border-left: 4px solid var(--amber); background: var(--bg-panel);
+    padding: 16px 18px; margin: 18px 0;
+  }
+  .callout.risk { border-left-color: #e05a4e; }
+  .callout h4 { font-family: var(--head); font-size: 13.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--amber); margin-bottom: 8px; }
+  .callout.risk h4 { color: #e05a4e; }
+  .callout p, .callout li { font-size: 13.5px; line-height: 1.6; color: var(--text-dim); }
+  .callout ul { padding-left: 18px; margin-top: 6px; }
+  .callout b { color: var(--text); }
+
+  .priority-list { counter-reset: pr; margin: 18px 0; }
+  .priority-item {
+    display: flex; gap: 14px; background: var(--bg-item); border: 1px solid var(--line);
+    border-left: 3px solid #e05a4e; padding: 13px 16px; margin-bottom: 8px;
+  }
+  .priority-item .pnum { font-family: var(--head); font-weight: 700; font-size: 18px; color: #e05a4e; flex: none; min-width: 22px; }
+  .priority-item p { font-size: 13.5px; line-height: 1.6; color: var(--text-dim); }
+  .priority-item b { color: var(--text); }
+
+  .status-pill {
+    display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em;
+    padding: 2px 8px; border-radius: 2px; white-space: nowrap;
+  }
+  .status-pill.ok { background: rgba(126,201,106,.14); color: var(--green); border: 1px solid rgba(126,201,106,.4); }
+  .status-pill.warn { background: rgba(255,180,0,.14); color: var(--amber); border: 1px solid rgba(255,180,0,.4); }
+  .status-pill.no { background: rgba(224,90,78,.14); color: #e88a80; border: 1px solid rgba(224,90,78,.4); }
+
+  table.gap { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 14px; }
+  table.gap th, table.gap td { border: 1px solid var(--line); padding: 8px 11px; text-align: left; vertical-align: top; }
+  table.gap th {
+    font-family: var(--head); font-size: 12px; text-transform: uppercase; letter-spacing: .05em;
+    background: #26261f; color: var(--amber); border-bottom: 2px solid var(--amber);
+  }
+  table.gap td:first-child { color: var(--text); width: 46%; }
+  table.gap td:last-child { color: var(--text-dim); }
+
+  .spec-note { font-family: var(--mono); font-size: 11px; color: var(--text-faint); margin-top: 14px; line-height: 1.7; }
+  .spec-note b { color: var(--amber); font-weight: 500; }
+
+  .reco-list { counter-reset: rc; margin: 14px 0; padding-left: 0; list-style: none; }
+  .reco-list li {
+    counter-increment: rc; position: relative; padding: 10px 14px 10px 40px;
+    background: var(--bg-item); border: 1px solid var(--line); margin-bottom: 6px;
+    font-size: 13.5px; line-height: 1.6; color: var(--text-dim);
+  }
+  .reco-list li::before {
+    content: counter(rc); position: absolute; left: 12px; top: 9px;
+    font-family: var(--head); font-weight: 700; color: var(--amber); font-size: 14px;
+  }
+  .reco-list li b { color: var(--text); }
+
+  footer {
+    max-width: 1060px; margin: 50px auto 0; padding: 0 28px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--text-faint); line-height: 1.8;
+  }
+  footer .src { color: var(--text-dim); }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { padding-bottom: 0; }
+    section.block { break-inside: avoid-page; }
+    table.gap, .priority-item, .callout { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hazard-top"></div>
+
+<header class="masthead">
+  <div class="kicker">Laporan &mdash; Sertifikasi Ledakan</div>
+  <h1>Analisis Kekurangan <span class="ex-badge">IECEx&nbsp;/&nbsp;ATEX</span></h1>
+  <p class="subtitle">Sistem deteksi kebocoran gas nirkabel LoRa GLD V2 2026 &mdash; <b>Node Sensor &middot; Cluster Head &middot; Gateway</b>. Perbandingan persyaratan IECEx/ATEX dengan dokumen spesifikasi yang tersedia, untuk mengidentifikasi apa yang masih kurang sebelum berkas diajukan ke lembaga sertifikasi.</p>
+  <div class="meta-row">
+    <span><b>Sumber:</b> IECEx ATEX Certification Information Requirements_Ind.docx</span>
+    <span><b>&middot;</b> Dokumen_spesifikasi_input_2.docx</span>
+    <span><b>&middot;</b> Parameter spesifikasi EMC_lengkap.docx</span>
+  </div>
+</header>
+
+<main>
+  <section class="block" id="sec1">
+    <div class="block-head">
+      <div class="block-num">01</div>
+      <div class="block-title">Ringkasan Prioritas</div>
+    </div>
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:10px 0 6px;">
+      Legenda status: <span class="status-pill ok">✔ LENGKAP</span> &nbsp;
+      <span class="status-pill warn">⚠ SEBAGIAN</span> &nbsp;
+      <span class="status-pill no">✕ BELUM ADA</span>
+    </p>
+    <div class="priority-list">
+      <div class="priority-item"><span class="pnum">1</span><p><b>Sensor gas MQ (MQ-2/3B/4/5/6/7B/8/135) memakai elemen pemanas (heater) internal</b>, biasanya beroperasi di kisaran 300&ndash;400&deg;C. Ini sangat menentukan <b>kelas temperatur (T1&ndash;T6)</b> dan berpotensi membuat desain saat ini gagal syarat suhu permukaan maksimum untuk zona berbahaya. Belum ada perhitungan hot-spot/estimasi titik terpanas. Kemungkinan <b>blocker teknis utama</b>, bukan sekadar isu dokumentasi.</p></div>
+      <div class="priority-item"><span class="pnum">2</span><p><b>Baterai Li-ion tanpa sertifikasi Ex</b> &mdash; Node Sensor memakai baterai cadangan Li-ion 18650 (4.2V, tertulis "28000 mAh" &mdash; kemungkinan salah ketik) dan Cluster Head memakai baterai Li-ion 12000 mAh + panel surya. Baterai wajib bersertifikat Ex atau dievaluasi tersendiri (thermal runaway, hubung singkat) &mdash; belum ada data produsen/model/sertifikasi maupun rangkaian proteksinya.</p></div>
+      <div class="priority-item"><span class="pnum">3</span><p><b>Kelompok gas (IIC/IIB/IIA), kelas temperatur (T1&ndash;T6), rentang suhu lingkungan, dan klasifikasi zona (0/1/2)</b> &mdash; parameter dasar yang menentukan skema sertifikasi &mdash; <b>sama sekali belum didefinisikan</b> di dokumen manapun.</p></div>
+      <div class="priority-item"><span class="pnum">4</span><p><b>Ingress Protection (IP rating)</b> masih "to be confirmed" di ketiga perangkat, padahal ini persyaratan dasar enclosure untuk area berbahaya.</p></div>
+      <div class="priority-item"><span class="pnum">5</span><p>Enclosure disebut <b>"metal"</b> pada tabel EMC, tetapi gambar teknik struktur enclosure dengan parameter celah (gap)/panjang/volume &mdash; krusial jika desain memakai proteksi flameproof (Ex&nbsp;d) &mdash; <b>belum tersedia sama sekali</b>.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="sec2">
+    <div class="block-head">
+      <div class="block-num">02</div>
+      <div class="block-title">Dokumentasi Teknis (ref. checklist &sect;1)</div>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:14px 0 4px;">1.1 Deskripsi Produk</p>
+    <table class="gap">
+      <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
+      <tr><td>Nama produk, model, spesifikasi</td><td><span class="status-pill ok">✔ LENGKAP</span></td><td>Ada di Dokumen_spesifikasi_input_2 &amp; tabel EMC</td></tr>
+      <tr><td>Parameter kelistrikan lengkap</td><td><span class="status-pill warn">⚠ SEBAGIAN</span></td><td>Banyak field "to be confirmed": arus maks, tegangan internal, daya adaptor, dll.</td></tr>
+      <tr><td>Foto produk keseluruhan + komponen utama</td><td><span class="status-pill warn">⚠ SEBAGIAN</span></td><td>6 foto ada di folder GLD/, tapi belum ada foto produk jadi per tipe (Node/Cluster/Gateway) dan foto komponen individual (baterai, gasket, terminal, cable gland)</td></tr>
+      <tr><td>Kelompok gas IIC/IIB/IIA</td><td><span class="status-pill no">✕ BELUM ADA</span></td><td>Belum ditentukan</td></tr>
+      <tr><td>Kelas temperatur T1&ndash;T6</td><td><span class="status-pill no">✕ BELUM ADA</span></td><td>Belum dihitung/ditentukan</td></tr>
+      <tr><td>Rentang temperatur lingkungan</td><td><span class="status-pill warn">⚠ SEBAGIAN</span></td><td>Operating temperature masih "to be confirmed" di ketiga perangkat</td></tr>
+      <tr><td>Klasifikasi area Zona</td><td><span class="status-pill no">✕ BELUM ADA</span></td><td>Belum ditentukan</td></tr>
+    </table>
+
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:18px 0 4px;">1.2 Gambar Teknik</p>
+    <table class="gap">
+      <tr><th>Item</th><th>Status</th></tr>
+      <tr><td>Assembly drawing</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Gambar komponen</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Diagram skematik kelistrikan</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Layout PCB</td><td><span class="status-pill no">✕ BELUM ADA</span> &mdash; foto motherboard ada, bukan layout/gerber resmi</td></tr>
+      <tr><td>Struktur enclosure + parameter proteksi ledakan (celah/panjang/volume)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Gambar junction box</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Gambar terminal</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Gambar sambungan grounding</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+    </table>
+    <p class="spec-note">Semua gambar di atas wajib mencantumkan <b>dimensi, toleransi, dan material</b> &mdash; belum ada satupun draft.</p>
+
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:18px 0 4px;">1.3 Bill of Materials (BOM)</p>
+    <div class="callout risk">
+      <h4>✕ Belum ada BOM formal</h4>
+      <p>Yang tersedia baru sebatas nama komponen tingkat tinggi (ESP32S3-WROOM-1U, modul LoRa E22-900MM22S, sensor MQ). Untuk tiap komponen berikut, checklist mensyaratkan produsen, model, grade material, sertifikasi (UL/ATEX/CCC), dan parameter teknis (CTI, flame retardancy, ketahanan kimia, Tg) &mdash; <b>semuanya belum ada</b>:</p>
+      <ul>
+        <li>Enclosure/casing &middot; Gasket/seal &middot; Terminal &middot; Cable entry device (masih "to be confirmed")</li>
+        <li>Sakelar &middot; Sumber cahaya &middot; Baterai (Li-ion 18650, Li-ion 12000 mAh) &middot; Bahan potting &middot; Komponen plastik &middot; PCB</li>
+      </ul>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:18px 0 4px;">1.4&ndash;1.8 Data Sheet, Proses Manufaktur, Perhitungan, Manual, Label &amp; Sertifikat</p>
+    <table class="gap">
+      <tr><th>Item</th><th>Status</th></tr>
+      <tr><td>Datasheet material non-logam (tahan suhu, anti-aging, antistatik, tahan api, CTI, ketahanan kimia, deklarasi kesesuaian)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Deskripsi proses manufaktur (kontrol presisi enclosure, perlakuan permukaan, pengelasan, potting, die casting, bonding)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Perhitungan proteksi ledakan</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Perhitungan/estimasi titik terpanas (hot-spot heater MQ)</td><td><span class="status-pill no">✕ BELUM ADA</span> &mdash; lihat isu kritis #1</td></tr>
+      <tr><td>Draft manual (keselamatan, kabel, torsi, grounding, pembersihan, operasi, pemeliharaan)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Desain nameplate/label dengan marking ATEX</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Sertifikat Ex untuk komponen bersertifikat (ESP32, modul LoRa E22)</td><td><span class="status-pill no">✕ BELUM ADA</span> &mdash; kebutuhan sudah ditandai di checklist §1.8 tapi dokumen sertifikat belum terlampir</td></tr>
+    </table>
+  </section>
+
+  <section class="block" id="sec3">
+    <div class="block-head">
+      <div class="block-num">03</div>
+      <div class="block-title">Informasi Sampel (ref. checklist &sect;2)</div>
+    </div>
+    <table class="gap">
+      <tr><th>Item</th><th>Status</th></tr>
+      <tr><td>Model sampel per tipe (Node Sensor / Cluster Head / Gateway)</td><td><span class="status-pill ok">✔ LENGKAP</span></td></tr>
+      <tr><td>Nomor seri</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Kondisi/status sampel (bisa dinyalakan?)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Fixture pengujian</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+    </table>
+  </section>
+
+  <section class="block" id="sec4">
+    <div class="block-head">
+      <div class="block-num">04</div>
+      <div class="block-title">Field "To Be Confirmed" yang Masih Terbuka</div>
+    </div>
+    <p class="spec-note" style="margin-top:0;"><b>Node Sensor:</b> tegangan internal (5V/3.3V) &middot; arus &amp; daya maksimum (tidak konsisten dengan tabel EMC 7.995 W) &middot; kapasitas baterai (tertulis "28000 mAh" &mdash; kemungkinan typo) &middot; proteksi elektrikal (ditulis "all" tanpa bukti desain) &middot; environmental sensor &middot; enclosure material, dimensi, berat, mounting, IP rating, cable entry.</p>
+    <p class="spec-note"><b>Cluster Head:</b> kapasitas baterai, daya &amp; tegangan panel surya, jenis charge controller &middot; tegangan/arus/daya internal &middot; proteksi elektrikal (overcharge/over-discharge/short-circuit) &middot; frekuensi &amp; daya RF (tidak konsisten dengan tabel EMC yang sudah menyebut 920/921 MHz, 22 dBm) &middot; jumlah maksimum Sensor Node &middot; enclosure, dimensi, berat, IP rating, cable entry, mounting antena &amp; panel surya.</p>
+    <p class="spec-note"><b>LoRa Gateway:</b> arus &amp; daya maksimum, konektor DC, proteksi elektrikal &middot; frekuensi, daya RF, antena, gain (tidak konsisten dengan tabel EMC) &middot; backhaul (Ethernet/Wi-Fi/4G) &amp; protokol komunikasi &middot; enclosure, dimensi, berat, IP rating, mounting, konektor antena.</p>
+    <div class="callout">
+      <h4>Catatan Konsistensi Dokumen</h4>
+      <p>Dokumen_spesifikasi_input_2.docx dan Parameter spesifikasi EMC_lengkap.docx perlu disatukan &mdash; beberapa nilai (frekuensi, daya pancar, gain antena, konsumsi daya) sudah final di tabel EMC tetapi belum disalin ke dokumen spesifikasi utama, sehingga dokumen resmi yang diserahkan ke lembaga sertifikasi berisiko terlihat belum matang/tidak konsisten.</p>
+    </div>
+  </section>
+
+  <section class="block" id="sec5">
+    <div class="block-head">
+      <div class="block-num">05</div>
+      <div class="block-title">Rekomendasi Langkah Berikutnya</div>
+    </div>
+    <ol class="reco-list">
+      <li>Tentukan lebih dulu <b>skema sertifikasi target</b>: kelompok gas, kelas temperatur, zona instalasi (Zona 1/2 atau 21/22) &mdash; ini menentukan semua pengujian selanjutnya.</li>
+      <li>Lakukan <b>pengukuran/estimasi suhu permukaan</b> dengan heater sensor MQ menyala terus-menerus pada kondisi terburuk (worst case) untuk menentukan kelas T.</li>
+      <li>Putuskan skema proteksi ledakan (Ex d / Ex e / Ex i / Ex n, dst.) &mdash; menentukan apakah perlu gambar celah/gap flameproof atau cukup jalur proteksi lain (mis. Ex i untuk baterai/sirkuit daya rendah).</li>
+      <li>Kumpulkan datasheet resmi untuk komponen kritikal: baterai (dengan sertifikasi/UN38.3 minimal), modul LoRa E22, cable gland, gasket, konektor.</li>
+      <li>Selesaikan seluruh field "to be confirmed" di Dokumen_spesifikasi_input_2.docx, sinkronkan dengan tabel EMC.</li>
+      <li>Buat gambar teknik resmi (assembly, skematik, PCB layout, enclosure) &mdash; bukan hanya foto.</li>
+      <li>Susun BOM lengkap dan draft manual sesuai format checklist.</li>
+    </ol>
+  </section>
+</main>
+
+<footer>
+  <p class="src">Sumber: IECEx ATEX Certification Information Requirements_Ind.docx &middot; Parameter spesifikasi EMC_lengkap.docx &middot; Dokumen_spesifikasi_input_2.docx</p>
+  <p>Dibuat otomatis berdasarkan isi folder pada 2026-08-26. Lihat juga checklist-sertifikasi.html untuk pelacakan progres interaktif.</p>
+</footer>
+
+</body>
+</html>

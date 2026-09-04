@@ -11,6 +11,7 @@ FILES = [
     ("Laporan_Progres_ByDate_GLD.html", "Laporan Progres", False),
     ("Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html", "Detail Assessment/Field Testing", False),
     ("Desain_Bracket_L_UBolt_GLD_Mounting.html", "Desain Bracket U-Bolt", False),
+    ("Dashboard_Sertifikasi_GLD_ATEX_IECEx.html", "Dashboard Sertifikasi", False),
 ]
 
 # Dikeluarkan dari navigasi atas permintaan user (4 Sep) - tidak perlu ditampilkan/dinavigasikan:

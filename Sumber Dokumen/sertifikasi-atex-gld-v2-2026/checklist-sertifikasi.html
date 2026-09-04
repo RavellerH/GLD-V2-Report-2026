@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Persiapan Sertifikasi IECEx/ATEX — GLD V2 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #171714;
+    --bg-panel: #1f1f1b;
+    --bg-item: #242420;
+    --bg-hover: #2c2c27;
+    --line: #35352e;
+    --line-strong: #4a4a40;
+    --amber: #ffb400;
+    --amber-dim: #b57e00;
+    --text: #e8e5dc;
+    --text-dim: #9a968a;
+    --text-faint: #6b685e;
+    --green: #7ec96a;
+    --mono: 'IBM Plex Mono', monospace;
+    --head: 'Chakra Petch', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background:
+      repeating-linear-gradient(-45deg, transparent 0 22px, rgba(255,180,0,.012) 22px 44px),
+      radial-gradient(1200px 600px at 80% -10%, rgba(255,180,0,.05), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    min-height: 100vh;
+    padding-bottom: 120px;
+  }
+  .hazard-top {
+    height: 10px;
+    background: repeating-linear-gradient(-45deg, var(--amber) 0 16px, #14140f 16px 32px);
+  }
+  header.masthead {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 48px 28px 8px;
+  }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .28em;
+    color: var(--amber);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .kicker::before { content: ""; width: 34px; height: 2px; background: var(--amber); }
+  h1 {
+    font-family: var(--head);
+    font-weight: 700;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.05;
+    margin: 14px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: .01em;
+  }
+  h1 .ex-badge {
+    display: inline-block;
+    border: 3px solid var(--amber);
+    color: var(--amber);
+    padding: 0 10px;
+    transform: rotate(-2deg) translateY(-4px);
+    font-size: .62em;
+  }
+  .subtitle { color: var(--text-dim); font-size: 15px; max-width: 720px; }
+  .subtitle b { color: var(--text); font-weight: 600; }
+
+  .panel-progress { max-width: 1060px; margin: 26px auto 0; padding: 0 28px; }
+  .progress-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--amber);
+    padding: 20px 22px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 22px;
+    align-items: center;
+  }
+  .big-count {
+    font-family: var(--head);
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1;
+    color: var(--amber);
+    min-width: 130px;
+  }
+  .big-count small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    color: var(--text-faint);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+  .bar-track {
+    height: 14px;
+    background: #121210;
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .bar-fill {
+    position: absolute; inset: 0 auto 0 0;
+    width: 0%;
+    background: repeating-linear-gradient(-45deg, var(--amber) 0 10px, var(--amber-dim) 10px 20px);
+    transition: width .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .bar-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    color: var(--text-dim);
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+  .actions { display: flex; gap: 10px; }
+  button.btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--line-strong);
+    padding: 9px 14px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  button.btn:hover { color: var(--amber); border-color: var(--amber); }
+  button.btn.active-filter { background: var(--amber); color: #14140f; border-color: var(--amber); font-weight: 500; }
+
+  main { max-width: 1060px; margin: 0 auto; padding: 30px 28px 0; }
+
+  section.block { margin-bottom: 44px; scroll-margin-top: 90px; }
+  .block-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 10px;
+    margin-bottom: 6px;
+  }
+  .block-num {
+    font-family: var(--head);
+    font-weight: 700;
+    font-size: 30px;
+    color: #14140f;
+    background: var(--amber);
+    padding: 0 10px;
+    line-height: 1.4;
+  }
+  .block-title {
+    font-family: var(--head);
+    font-weight: 700;
+    font-size: 21px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+  .block-status {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: var(--text-dim);
+  }
+  .block-status.done { color: var(--green); }
+
+  .group { margin-top: 22px; }
+  .group-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+  .group-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .group-head .gnum { color: var(--text-faint); }
+  .group-head .gnote { color: var(--text-faint); text-transform: none; letter-spacing: .04em; }
+  .group-head .gprog { color: var(--text-dim); font-size: 10.5px; }
+  .group.all-done .gprog { color: var(--green); }
+
+  ul.checklist { list-style: none; }
+  ul.checklist li {
+    background: var(--bg-item);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--line-strong);
+    margin-bottom: 5px;
+    transition: border-color .15s, background .15s, opacity .15s;
+  }
+  ul.checklist li:hover { background: var(--bg-hover); }
+  ul.checklist li.done { border-left-color: var(--green); }
+  ul.checklist li.sub {
+    margin-left: 34px;
+    background: transparent;
+    border-left: 3px solid var(--line);
+  }
+  li label {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 11px 14px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  li input[type=checkbox] { display: none; }
+  .box {
+    flex: none;
+    width: 19px; height: 19px;
+    border: 2px solid var(--line-strong);
+    margin-top: 1px;
+    position: relative;
+    transition: all .15s;
+    background: #14140f;
+  }
+  li:hover .box { border-color: var(--amber); }
+  li input:checked + .box { background: var(--green); border-color: var(--green); }
+  li input:checked + .box::after {
+    content: "";
+    position: absolute;
+    left: 5px; top: 1px;
+    width: 5px; height: 9px;
+    border: solid #14140f;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+  .lbl-text { font-size: 14.5px; line-height: 1.45; }
+  li.done .lbl-text { color: var(--text-faint); text-decoration: line-through; text-decoration-color: rgba(126,201,106,.5); }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .08em;
+    color: var(--text-faint);
+    border: 1px solid var(--line);
+    padding: 1px 6px;
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+  li.sub .lbl-text { font-size: 13.5px; color: var(--text-dim); }
+  li.sub.done .lbl-text { color: var(--text-faint); }
+
+  li.filtered-out { display: none !important; }
+
+  table.spec {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 18px;
+  }
+  table.spec th, table.spec td {
+    border: 1px solid var(--line);
+    padding: 9px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.spec th {
+    font-family: var(--head);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    background: #26261f;
+    color: var(--amber);
+    border-bottom: 2px solid var(--amber);
+  }
+  table.spec td:first-child {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    width: 210px;
+    background: rgba(0,0,0,.15);
+  }
+  .spec-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 14px;
+    line-height: 1.7;
+  }
+  .spec-note b { color: var(--amber); font-weight: 500; }
+
+  .callout {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--amber);
+    background: var(--bg-panel);
+    padding: 16px 18px;
+    margin: 18px 0;
+  }
+  .callout.risk { border-left-color: #e05a4e; }
+  .callout h4 {
+    font-family: var(--head);
+    font-size: 13.5px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .callout.risk h4 { color: #e05a4e; }
+  .callout p, .callout li { font-size: 13.5px; line-height: 1.6; color: var(--text-dim); }
+  .callout ul { padding-left: 18px; margin-top: 6px; }
+  .callout b { color: var(--text); }
+
+  .priority-list { counter-reset: pr; margin: 18px 0; }
+  .priority-item {
+    display: flex;
+    gap: 14px;
+    background: var(--bg-item);
+    border: 1px solid var(--line);
+    border-left: 3px solid #e05a4e;
+    padding: 13px 16px;
+    margin-bottom: 8px;
+  }
+  .priority-item .pnum {
+    font-family: var(--head);
+    font-weight: 700;
+    font-size: 18px;
+    color: #e05a4e;
+    flex: none;
+    min-width: 22px;
+  }
+  .priority-item p { font-size: 13.5px; line-height: 1.6; color: var(--text-dim); }
+  .priority-item b { color: var(--text); }
+
+  .status-pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .04em;
+    padding: 2px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .status-pill.ok { background: rgba(126,201,106,.14); color: var(--green); border: 1px solid rgba(126,201,106,.4); }
+  .status-pill.warn { background: rgba(255,180,0,.14); color: var(--amber); border: 1px solid rgba(255,180,0,.4); }
+  .status-pill.no { background: rgba(224,90,78,.14); color: #e88a80; border: 1px solid rgba(224,90,78,.4); }
+
+  table.gap { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 14px; }
+  table.gap th, table.gap td { border: 1px solid var(--line); padding: 8px 11px; text-align: left; vertical-align: top; }
+  table.gap th {
+    font-family: var(--head); font-size: 12px; text-transform: uppercase; letter-spacing: .05em;
+    background: #26261f; color: var(--amber); border-bottom: 2px solid var(--amber);
+  }
+  table.gap td:first-child { color: var(--text); width: 46%; }
+  table.gap td:last-child { color: var(--text-dim); }
+
+  .subhead {
+    font-family: var(--head);
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--text);
+    margin: 26px 0 4px;
+  }
+  .reco-list { counter-reset: rc; margin: 14px 0; padding-left: 0; list-style: none; }
+  .reco-list li {
+    counter-increment: rc;
+    position: relative;
+    padding: 10px 14px 10px 40px;
+    background: var(--bg-item);
+    border: 1px solid var(--line);
+    margin-bottom: 6px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+  .reco-list li::before {
+    content: counter(rc);
+    position: absolute; left: 12px; top: 9px;
+    font-family: var(--head); font-weight: 700; color: var(--amber); font-size: 14px;
+  }
+  .reco-list li b { color: var(--text); }
+
+  footer {
+    max-width: 1060px;
+    margin: 60px auto 0;
+    padding: 0 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .06em;
+    color: var(--text-faint);
+    line-height: 1.8;
+  }
+  footer .src { color: var(--text-dim); }
+
+  .toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--bg-panel);
+    border: 1px solid var(--amber);
+    border-left-width: 4px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 12px 18px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all .25s;
+    pointer-events: none;
+    z-index: 50;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 760px) {
+    .progress-card { grid-template-columns: 1fr; gap: 14px; }
+    .actions { justify-content: flex-start; }
+    table.spec tr { display: block; border: 1px solid var(--line); margin-bottom: 10px; }
+    table.spec th { display: block; width: 100%; }
+    table.spec td { display: block; width: 100%; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { padding-bottom: 0; }
+    .actions, .toast { display: none !important; }
+    section.block { break-inside: avoid-page; margin-bottom: 30px; }
+    table.gap, table.spec, .priority-item, .callout { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hazard-top"></div>
+
+<header class="masthead">
+  <div class="kicker">Dokumen Persiapan &mdash; Sertifikasi Ledakan</div>
+  <h1>Checklist IECEx / ATEX <span class="ex-badge">GLD&nbsp;V2</span></h1>
+  <p class="subtitle">Sistem deteksi kebocoran gas nirkabel LoRa &mdash; <b>Node Sensor &middot; Cluster Head &middot; Gateway</b>, prototipe Versi 2, target sertifikasi 2026.</p>
+</header>
+
+<div class="panel-progress">
+  <div class="progress-card">
+    <div class="big-count"><span id="doneCount">0</span>/<span id="totalCount">0</span><small>item selesai</small></div>
+    <div class="bar-wrap">
+      <div class="bar-track"><div class="bar-fill" id="barFill"></div></div>
+      <div class="bar-meta"><span id="pctLabel">0%</span><span id="remainLabel"></span></div>
+    </div>
+    <div class="actions">
+      <button class="btn active-filter" data-filter="all">Semua</button>
+      <button class="btn" data-filter="todo">Belum</button>
+      <button class="btn" id="btnReset">Reset</button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <section class="block" id="sec1">
+    <div class="block-head">
+      <div class="block-num">01</div>
+      <div class="block-title">Dokumentasi Teknis</div>
+      <div class="block-status" data-status-for="sec1"></div>
+    </div>
+    <div class="group" data-group>
+      <div class="group-head"><span class="gnum">1.1</span> Deskripsi Produk <span class="gprog" data-gprog></span></div>
+      <ul class="checklist">
+        <li><label><input type="checkbox" data-id="s11a" checked><span class="box"></span><span class="lbl-text">Nama produk, model, dan daftar spesifikasi<span class="tag">DOCX</span></span></label></li>
+        <li><label><input type="checkbox" data-id="s11b"><span class="box"></span><span class="lbl-text">Deskripsi fungsi + parameter teknis lengkap (kelistrikan, mekanik, lainnya)<span class="tag">DOCX</span></span></label></li>
+        <li><label><input type="checkbox" data-id="s11c"><span class="box"></span><span class="lbl-text">Foto produk jelas: keseluruhan + komponen utama</span></label></li>
+        <li><label><input type="checkbox" data-id="s11d"><span class="box"></span><span class="lbl-text">Tujuan penggunaan &amp; lingkungan pemasangan</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s11d1"><span class="box"></span><span class="lbl-text">Kelompok gas IIC / IIB / IIA (jika berlaku)</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s11d2"><span class="box"></span><span class="lbl-text">Kelas temperatur T1&ndash;T6</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s11d3"><span class="box"></span><span class="lbl-text">Rentang temperatur lingkungan</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s11d4"><span class="box"></span><span class="lbl-text">Klasifikasi area Zona 0/1/2 atau Zona 20/21/22</span></label></li>
+      </ul>
+    </div>
+
+    <div class="group" data-group>
+      <div class="group-head"><span class="gnum">1.2</span> Gambar Teknik <span class="gnote">&mdash; dimensi, toleransi, material harus jelas</span><span class="gprog" data-gprog></span></div>
+      <ul class="checklist">
+        <li><label><input type="checkbox" data-id="s12a" checked><span class="box"></span><span class="lbl-text">Gambar perakitan (assembly drawing)<span class="tag">Base Plate Assembled.dwg</span></span></label></li>
+        <li><label><input type="checkbox" data-id="s12b"><span class="box"></span><span class="lbl-text">Gambar komponen</span></label></li>
+        <li><label><input type="checkbox" data-id="s12c"><span class="box"></span><span class="lbl-text">Diagram skematik kelistrikan</span></label></li>
+        <li><label><input type="checkbox" data-id="s12d"><span class="box"></span><span class="lbl-text">Layout PCB (jika berlaku)</span></label></li>
+        <li><label><input type="checkbox" data-id="s12e"><span class="box"></span><span class="lbl-text">Struktur enclosure/casing + parameter proteksi ledakan: celah (gap), panjang, volume</span></label></li>
+        <li><label><input type="checkbox" data-id="s12f"><span class="box"></span><span class="lbl-text">Gambar junction box</span></label></li>
+        <li><label><input type="checkbox" data-id="s12g"><span class="box"></span><span class="lbl-text">Gambar terminal</span></label></li>
+        <li><label><input type="checkbox" data-id="s12h"><span class="box"></span><span class="lbl-text">Gambar sambungan pentanahan (grounding)</span></label></li>
+      </ul>
+    </div>
+    <div class="group" data-group>
+      <div class="group-head"><span class="gnum">1.3</span> Bill of Materials <span class="gnote">&mdash; komponen yang memengaruhi proteksi ledakan</span><span class="gprog" data-gprog></span></div>
+      <ul class="checklist">
+        <li><label><input type="checkbox" data-id="s13a"><span class="box"></span><span class="lbl-text">Enclosure / casing</span></label></li>
+        <li><label><input type="checkbox" data-id="s13b"><span class="box"></span><span class="lbl-text">Gasket / seal</span></label></li>
+        <li><label><input type="checkbox" data-id="s13c"><span class="box"></span><span class="lbl-text">Terminal</span></label></li>
+        <li><label><input type="checkbox" data-id="s13d"><span class="box"></span><span class="lbl-text">Perangkat masuk kabel (cable entry device)</span></label></li>
+        <li><label><input type="checkbox" data-id="s13e"><span class="box"></span><span class="lbl-text">Sakelar</span></label></li>
+        <li><label><input type="checkbox" data-id="s13f"><span class="box"></span><span class="lbl-text">Sumber cahaya</span></label></li>
+        <li><label><input type="checkbox" data-id="s13g"><span class="box"></span><span class="lbl-text">Baterai</span></label></li>
+        <li><label><input type="checkbox" data-id="s13h"><span class="box"></span><span class="lbl-text">Bahan potting</span></label></li>
+        <li><label><input type="checkbox" data-id="s13i"><span class="box"></span><span class="lbl-text">Komponen plastik</span></label></li>
+        <li><label><input type="checkbox" data-id="s13j"><span class="box"></span><span class="lbl-text">PCB</span></label></li>
+      </ul>
+      <p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin:14px 0 8px;">Data wajib per komponen:</p>
+      <ul class="checklist">
+        <li class="sub"><label><input type="checkbox" data-id="s13m1"><span class="box"></span><span class="lbl-text">Produsen</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s13m2"><span class="box"></span><span class="lbl-text">Model dan spesifikasi</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s13m3"><span class="box"></span><span class="lbl-text">Jenis/grade material (mis. IEC 60079-0 Appendix A)</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s13m4"><span class="box"></span><span class="lbl-text">Sertifikasi yang sudah dimiliki (UL, ATEX, CCC, dll)</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s13m5"><span class="box"></span><span class="lbl-text">Parameter teknis: CTI, flame retardancy, ketahanan kimia, Tg</span></label></li>
+      </ul>
+    </div>
+    <div class="group" data-group>
+      <div class="group-head"><span class="gnum">1.4</span> Data Sheet Material Non-Logam <span class="gprog" data-gprog></span></div>
+      <ul class="checklist">
+        <li><label><input type="checkbox" data-id="s14a"><span class="box"></span><span class="lbl-text">Ketahanan temperatur tinggi &amp; rendah</span></label></li>
+        <li><label><input type="checkbox" data-id="s14b"><span class="box"></span><span class="lbl-text">Ketahanan penuaan (anti-aging)</span></label></li>
+        <li><label><input type="checkbox" data-id="s14c"><span class="box"></span><span class="lbl-text">Sifat antistatik</span></label></li>
+        <li><label><input type="checkbox" data-id="s14d"><span class="box"></span><span class="lbl-text">Ketahanan api</span></label></li>
+        <li><label><input type="checkbox" data-id="s14e"><span class="box"></span><span class="lbl-text">Nilai CTI (Comparative Tracking Index)</span></label></li>
+        <li><label><input type="checkbox" data-id="s14f"><span class="box"></span><span class="lbl-text">Ketahanan kimia</span></label></li>
+        <li><label><input type="checkbox" data-id="s14g"><span class="box"></span><span class="lbl-text">Laporan pengujian / deklarasi kesesuaian dari pemasok material</span></label></li>
+      </ul>
+    </div>
+
+    <div class="group" data-group>
+      <div class="group-head"><span class="gnum">1.5</span> Proses Manufaktur <span class="gnote">&mdash; yang berdampak pada proteksi ledakan</span><span class="gprog" data-gprog></span></div>
+      <ul class="checklist">
+        <li><label><input type="checkbox" data-id="s15a"><span class="box"></span><span class="lbl-text">Pengendalian ketelitian pembuatan enclosure</span></label></li>
+        <li><label><input type="checkbox" data-id="s15b"><span class="box"></span><span class="lbl-text">Perlakuan permukaan tahan ledakan</span></label></li>
+        <li><label><input type="checkbox" data-id="s15c"><span class="box"></span><span class="lbl-text">Proses pengelasan</span></label></li>
+        <li><label><input type="checkbox" data-id="s15d"><span class="box"></span><span class="lbl-text">Proses potting</span></label></li>
+        <li><label><input type="checkbox" data-id="s15e"><span class="box"></span><span class="lbl-text">Proses die casting</span></label></li>
+        <li><label><input type="checkbox" data-id="s15f"><span class="box"></span><span class="lbl-text">Proses bonding / perekat</span></label></li>
+      </ul>
+    </div>
+    <div class="group" data-group>
+      <div class="group-head"><span class="gnum">1.6</span> Perhitungan <span class="gprog" data-gprog></span></div>
+      <ul class="checklist">
+        <li><label><input type="checkbox" data-id="s16a"><span class="box"></span><span class="lbl-text">Perhitungan &amp; penjelasan proteksi ledakan (jika berlaku)</span></label></li>
+        <li><label><input type="checkbox" data-id="s16b"><span class="box"></span><span class="lbl-text">Perhitungan kelompok/kelas temperatur &mdash; estimasi titik terpanas produk</span></label></li>
+      </ul>
+    </div>
+
+    <div class="group" data-group>
+      <div class="group-head"><span class="gnum">1.7</span> Draft Manual Penggunaan &amp; Instalasi <span class="gprog" data-gprog></span></div>
+      <ul class="checklist">
+        <li><label><input type="checkbox" data-id="s17a"><span class="box"></span><span class="lbl-text">Peringatan keselamatan yang jelas</span></label></li>
+        <li><label><input type="checkbox" data-id="s17b"><span class="box"></span><span class="lbl-text">Persyaratan instalasi rinci:</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s17b1"><span class="box"></span><span class="lbl-text">Metode pemasukan kabel</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s17b2"><span class="box"></span><span class="lbl-text">Torsi pengencangan</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s17b3"><span class="box"></span><span class="lbl-text">Persyaratan grounding</span></label></li>
+        <li class="sub"><label><input type="checkbox" data-id="s17b4"><span class="box"></span><span class="lbl-text">Persyaratan pembersihan</span></label></li>
+        <li><label><input type="checkbox" data-id="s17c"><span class="box"></span><span class="lbl-text">Petunjuk pengoperasian</span></label></li>
+        <li><label><input type="checkbox" data-id="s17d"><span class="box"></span><span class="lbl-text">Pemeliharaan: frekuensi, kegiatan, tindakan pencegahan</span></label></li>
+      </ul>
+    </div>
+
+    <div class="group" data-group>
+      <div class="group-head"><span class="gnum">1.8</span> Label &amp; Sertifikat Komponen <span class="gprog" data-gprog></span></div>
+      <ul class="checklist">
+        <li><label><input type="checkbox" data-id="s18a"><span class="box"></span><span class="lbl-text">Informasi nameplate/label produk &mdash; seluruh marking wajib ATEX</span></label></li>
+        <li><label><input type="checkbox" data-id="s18b"><span class="box"></span><span class="lbl-text">Sertifikat ATEX Ex Components untuk semua komponen bersertifikat Ex<span class="tag">ESP32&middot;E22</span></span></label></li>
+      </ul>
+    </div>
+  </section>
+  <section class="block" id="sec2">
+    <div class="block-head">
+      <div class="block-num">02</div>
+      <div class="block-title">Informasi Sampel</div>
+      <div class="block-status" data-status-for="sec2"></div>
+    </div>
+
+    <div class="group" data-group>
+      <div class="group-head"><span class="gnum">2.1</span> Data Sampel &amp; Peralatan Uji <span class="gprog" data-gprog></span></div>
+      <ul class="checklist">
+        <li><label><input type="checkbox" data-id="s21a" checked><span class="box"></span><span class="lbl-text">Model sampel (Node Sensor / Cluster Head / Gateway)</span></label></li>
+        <li><label><input type="checkbox" data-id="s21b"><span class="box"></span><span class="lbl-text">Nomor seri tiap unit</span></label></li>
+        <li><label><input type="checkbox" data-id="s21c"><span class="box"></span><span class="lbl-text">Kondisi/status sampel &mdash; bisa dinyalakan dan dioperasikan?</span></label></li>
+        <li><label><input type="checkbox" data-id="s21d"><span class="box"></span><span class="lbl-text">Fixture pengujian / peralatan bantu untuk pelaksanaan uji</span></label></li>
+      </ul>
+    </div>
+  </section>
+  <section class="block" id="sec3">
+    <div class="block-head">
+      <div class="block-num">03</div>
+      <div class="block-title">Referensi &mdash; Spesifikasi Perangkat V2</div>
+      <div class="block-status"></div>
+    </div>
+
+    <table class="spec">
+      <tr>
+        <th>Parameter</th>
+        <th>Node Sensor</th>
+        <th>Cluster Head</th>
+        <th>LoRa Gateway</th>
+      </tr>
+      <tr><td>Fungsi utama</td><td>Akuisisi data sensor + transmisi LoRa</td><td>Menerima/mengumpulkan data node, meneruskan data</td><td>Gateway jaringan LoRa ke server/cloud</td></tr>
+      <tr><td>Versi prototipe</td><td>V2</td><td>V2</td><td>V2</td></tr>
+      <tr><td>Mikrokontroler</td><td>ESP32S3-WROOM-1U</td><td>ESP32S3-WROOM-1U</td><td>ESP32S3-WROOM-1U</td></tr>
+      <tr><td>Modul LoRa</td><td>E22-900MM22S</td><td>E22-900MM22S</td><td>E22-900MM22S</td></tr>
+      <tr><td>Frekuensi LoRa</td><td>920 MHz</td><td>Dual: 920 MHz (star), 921 MHz (mesh)</td><td>921 MHz</td></tr>
+      <tr><td>Daya pancar maks</td><td>22 dBm</td><td>22 dBm</td><td>22 dBm</td></tr>
+      <tr><td>Bandwidth</td><td>125 kHz</td><td>125 kHz</td><td>125 kHz</td></tr>
+      <tr><td>Spreading Factor</td><td>7</td><td>7 dan 9</td><td>9</td></tr>
+      <tr><td>Jenis antena</td><td>Omnidirectional</td><td>Fiber omnidirectional</td><td>Fiber omnidirectional</td></tr>
+      <tr><td>Gain antena</td><td>3 dBi</td><td>3 dBi (star), 8 dBi (mesh)</td><td>8 dBi</td></tr>
+      <tr><td>Interface lain</td><td>SPI, LoRa</td><td>LoRa</td><td>LoRa, Ethernet/Wi-Fi</td></tr>
+      <tr><td>Sensor terhubung</td><td>MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135</td><td>&ndash;</td><td>&ndash;</td></tr>
+      <tr><td>Input power</td><td>24 VDC</td><td>5 VDC</td><td>5 VDC</td></tr>
+      <tr><td>Konsumsi daya maks</td><td>7.995 W</td><td>0.73 W</td><td>0.73 W</td></tr>
+      <tr><td>Port/konektor</td><td>USB, sensor, power, fan, antena, buzzer alarm</td><td>USB, power, antena</td><td>Ethernet, USB, power, antena</td></tr>
+      <tr><td>Dimensi</td><td>20 &times; 9 &times; 29 cm</td><td>8 &times; 8 &times; 21 cm</td><td>8 &times; 8 &times; 21 cm</td></tr>
+      <tr><td>Enclosure</td><td>Metal</td><td>Metal</td><td>Metal</td></tr>
+      <tr><td>Mode operasi normal</td><td>sensing &rarr; processing &rarr; transmit</td><td>receive &rarr; process &rarr; transmit</td><td>receive LoRa &rarr; forward server</td></tr>
+    </table>
+
+    <p class="spec-note">
+      <b>Catatan untuk persiapan:</b> konsumsi daya Node Sensor 7.995 W @24VDC perlu dicocokkan dengan rating komponen (terminal, cable gland, trace PCB).
+      Suhu permukaan tertinggi dari heater sensor MQ (8 unit) menentukan kelas temperatur T1&ndash;T6.
+      Enclosure metal mendukung proteksi mekanik, tetapi tetap perlu parameter celah/panjang sambungan jika memakai jenis flameproof (Ex d).
+    </p>
+  </section>
+
+  <section class="block" id="sec4">
+    <div class="block-head">
+      <div class="block-num">04</div>
+      <div class="block-title">Laporan Analisis Kekurangan</div>
+      <div class="block-status"></div>
+    </div>
+    <p class="subtitle" style="margin-bottom:8px;">Perbandingan antara persyaratan <b>IECEx ATEX Certification Information Requirements_Ind.docx</b> dengan dokumen yang sudah tersedia (<b>Dokumen_spesifikasi_input_2.docx</b>, <b>Parameter spesifikasi EMC_lengkap.docx</b>, foto di folder <b>GLD/</b>) untuk mengidentifikasi apa yang masih kurang sebelum berkas diajukan ke lembaga sertifikasi.</p>
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin-bottom:6px;">
+      Legenda status: <span class="status-pill ok">✔ LENGKAP</span> &nbsp;
+      <span class="status-pill warn">⚠ SEBAGIAN</span> &nbsp;
+      <span class="status-pill no">✕ BELUM ADA</span>
+    </p>
+
+    <div class="subhead">4.1 &mdash; Isu Paling Kritis</div>
+    <div class="priority-list">
+      <div class="priority-item"><span class="pnum">1</span><p><b>Sensor gas MQ (MQ-2/3B/4/5/6/7B/8/135) memakai elemen pemanas (heater) internal</b>, biasanya beroperasi di kisaran 300&ndash;400&deg;C. Ini sangat menentukan <b>kelas temperatur (T1&ndash;T6)</b> dan berpotensi membuat desain saat ini gagal syarat suhu permukaan maksimum untuk zona berbahaya. Belum ada perhitungan hot-spot/estimasi titik terpanas (butir 1.6). Kemungkinan <b>blocker teknis utama</b>, bukan sekadar isu dokumentasi.</p></div>
+      <div class="priority-item"><span class="pnum">2</span><p><b>Baterai Li-ion tanpa sertifikasi Ex</b> &mdash; Node Sensor memakai baterai cadangan Li-ion 18650 (4.2V, tertulis "28000 mAh" &mdash; kemungkinan salah ketik) dan Cluster Head memakai baterai Li-ion 12000 mAh + panel surya. Baterai wajib bersertifikat Ex atau dievaluasi tersendiri (thermal runaway, hubung singkat) &mdash; belum ada data produsen/model/sertifikasi maupun rangkaian proteksinya.</p></div>
+      <div class="priority-item"><span class="pnum">3</span><p><b>Kelompok gas (IIC/IIB/IIA), kelas temperatur (T1&ndash;T6), rentang suhu lingkungan, dan klasifikasi zona (0/1/2)</b> &mdash; parameter dasar yang menentukan skema sertifikasi &mdash; <b>sama sekali belum didefinisikan</b> di dokumen manapun.</p></div>
+      <div class="priority-item"><span class="pnum">4</span><p><b>Ingress Protection (IP rating)</b> masih "to be confirmed" di ketiga perangkat, padahal ini persyaratan dasar enclosure untuk area berbahaya.</p></div>
+      <div class="priority-item"><span class="pnum">5</span><p>Enclosure disebut <b>"metal"</b> pada tabel EMC, tetapi gambar teknik struktur enclosure dengan parameter celah (gap)/panjang/volume &mdash; krusial jika desain memakai proteksi flameproof (Ex&nbsp;d) &mdash; <b>belum tersedia sama sekali</b>.</p></div>
+    </div>
+
+    <div class="subhead">4.2 &mdash; Dokumentasi Teknis (ref. checklist &sect;1)</div>
+
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:14px 0 4px;">1.1 Deskripsi Produk</p>
+    <table class="gap">
+      <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
+      <tr><td>Nama produk, model, spesifikasi</td><td><span class="status-pill ok">✔ LENGKAP</span></td><td>Ada di Dokumen_spesifikasi_input_2 &amp; tabel EMC</td></tr>
+      <tr><td>Parameter kelistrikan lengkap</td><td><span class="status-pill warn">⚠ SEBAGIAN</span></td><td>Banyak field "to be confirmed": arus maks, tegangan internal, daya adaptor, dll.</td></tr>
+      <tr><td>Foto produk keseluruhan + komponen utama</td><td><span class="status-pill warn">⚠ SEBAGIAN</span></td><td>6 foto ada di folder GLD/, tapi belum ada foto produk jadi per tipe (Node/Cluster/Gateway) dan foto komponen individual (baterai, gasket, terminal, cable gland)</td></tr>
+      <tr><td>Kelompok gas IIC/IIB/IIA</td><td><span class="status-pill no">✕ BELUM ADA</span></td><td>Belum ditentukan</td></tr>
+      <tr><td>Kelas temperatur T1&ndash;T6</td><td><span class="status-pill no">✕ BELUM ADA</span></td><td>Belum dihitung/ditentukan</td></tr>
+      <tr><td>Rentang temperatur lingkungan</td><td><span class="status-pill warn">⚠ SEBAGIAN</span></td><td>Operating temperature masih "to be confirmed" di ketiga perangkat</td></tr>
+      <tr><td>Klasifikasi area Zona</td><td><span class="status-pill no">✕ BELUM ADA</span></td><td>Belum ditentukan</td></tr>
+    </table>
+
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:18px 0 4px;">1.2 Gambar Teknik</p>
+    <table class="gap">
+      <tr><th>Item</th><th>Status</th></tr>
+      <tr><td>Assembly drawing</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Gambar komponen</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Diagram skematik kelistrikan</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Layout PCB</td><td><span class="status-pill no">✕ BELUM ADA</span> &mdash; foto motherboard ada, bukan layout/gerber resmi</td></tr>
+      <tr><td>Struktur enclosure + parameter proteksi ledakan (celah/panjang/volume)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Gambar junction box</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Gambar terminal</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Gambar sambungan grounding</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+    </table>
+    <p class="spec-note">Semua gambar di atas wajib mencantumkan <b>dimensi, toleransi, dan material</b> &mdash; belum ada satupun draft.</p>
+
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:18px 0 4px;">1.3 Bill of Materials (BOM)</p>
+    <div class="callout risk">
+      <h4>✕ Belum ada BOM formal</h4>
+      <p>Yang tersedia baru sebatas nama komponen tingkat tinggi (ESP32S3-WROOM-1U, modul LoRa E22-900MM22S, sensor MQ). Untuk tiap komponen berikut, checklist mensyaratkan produsen, model, grade material, sertifikasi (UL/ATEX/CCC), dan parameter teknis (CTI, flame retardancy, ketahanan kimia, Tg) &mdash; <b>semuanya belum ada</b>:</p>
+      <ul>
+        <li>Enclosure/casing &middot; Gasket/seal &middot; Terminal &middot; Cable entry device (masih "to be confirmed")</li>
+        <li>Sakelar &middot; Sumber cahaya &middot; Baterai (Li-ion 18650, Li-ion 12000 mAh) &middot; Bahan potting &middot; Komponen plastik &middot; PCB</li>
+      </ul>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:18px 0 4px;">1.4&ndash;1.8 Data Sheet, Proses Manufaktur, Perhitungan, Manual, Label &amp; Sertifikat</p>
+    <table class="gap">
+      <tr><th>Item</th><th>Status</th></tr>
+      <tr><td>Datasheet material non-logam (tahan suhu, anti-aging, antistatik, tahan api, CTI, ketahanan kimia, deklarasi kesesuaian)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Deskripsi proses manufaktur (kontrol presisi enclosure, perlakuan permukaan, pengelasan, potting, die casting, bonding)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Perhitungan proteksi ledakan</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Perhitungan/estimasi titik terpanas (hot-spot heater MQ)</td><td><span class="status-pill no">✕ BELUM ADA</span> &mdash; lihat isu kritis #1</td></tr>
+      <tr><td>Draft manual (keselamatan, kabel, torsi, grounding, pembersihan, operasi, pemeliharaan)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Desain nameplate/label dengan marking ATEX</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Sertifikat Ex untuk komponen bersertifikat (ESP32, modul LoRa E22)</td><td><span class="status-pill no">✕ BELUM ADA</span> &mdash; kebutuhan sudah ditandai di checklist §1.8 tapi dokumen sertifikat belum terlampir</td></tr>
+    </table>
+
+    <div class="subhead">4.3 &mdash; Informasi Sampel (ref. checklist &sect;2)</div>
+    <table class="gap">
+      <tr><th>Item</th><th>Status</th></tr>
+      <tr><td>Model sampel per tipe (Node Sensor / Cluster Head / Gateway)</td><td><span class="status-pill ok">✔ LENGKAP</span></td></tr>
+      <tr><td>Nomor seri</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Kondisi/status sampel (bisa dinyalakan?)</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+      <tr><td>Fixture pengujian</td><td><span class="status-pill no">✕ BELUM ADA</span></td></tr>
+    </table>
+
+    <div class="subhead">4.4 &mdash; Field "To Be Confirmed" yang Masih Terbuka</div>
+    <p class="spec-note" style="margin-top:0;"><b>Node Sensor:</b> tegangan internal (5V/3.3V) &middot; arus &amp; daya maksimum (tidak konsisten dengan tabel EMC 7.995 W) &middot; kapasitas baterai (tertulis "28000 mAh" &mdash; kemungkinan typo) &middot; proteksi elektrikal (ditulis "all" tanpa bukti desain) &middot; environmental sensor &middot; enclosure material, dimensi, berat, mounting, IP rating, cable entry.</p>
+    <p class="spec-note"><b>Cluster Head:</b> kapasitas baterai, daya &amp; tegangan panel surya, jenis charge controller &middot; tegangan/arus/daya internal &middot; proteksi elektrikal (overcharge/over-discharge/short-circuit) &middot; frekuensi &amp; daya RF (tidak konsisten dengan tabel EMC yang sudah menyebut 920/921 MHz, 22 dBm) &middot; jumlah maksimum Sensor Node &middot; enclosure, dimensi, berat, IP rating, cable entry, mounting antena &amp; panel surya.</p>
+    <p class="spec-note"><b>LoRa Gateway:</b> arus &amp; daya maksimum, konektor DC, proteksi elektrikal &middot; frekuensi, daya RF, antena, gain (tidak konsisten dengan tabel EMC) &middot; backhaul (Ethernet/Wi-Fi/4G) &amp; protokol komunikasi &middot; enclosure, dimensi, berat, IP rating, mounting, konektor antena.</p>
+    <div class="callout">
+      <h4>Catatan Konsistensi Dokumen</h4>
+      <p>Dokumen_spesifikasi_input_2.docx dan Parameter spesifikasi EMC_lengkap.docx perlu disatukan &mdash; beberapa nilai (frekuensi, daya pancar, gain antena, konsumsi daya) sudah final di tabel EMC tetapi belum disalin ke dokumen spesifikasi utama, sehingga dokumen resmi yang diserahkan ke lembaga sertifikasi berisiko terlihat belum matang/tidak konsisten.</p>
+    </div>
+
+    <div class="subhead">4.5 &mdash; Rekomendasi Langkah Berikutnya</div>
+    <ol class="reco-list">
+      <li>Tentukan lebih dulu <b>skema sertifikasi target</b>: kelompok gas, kelas temperatur, zona instalasi (Zona 1/2 atau 21/22) &mdash; ini menentukan semua pengujian selanjutnya.</li>
+      <li>Lakukan <b>pengukuran/estimasi suhu permukaan</b> dengan heater sensor MQ menyala terus-menerus pada kondisi terburuk (worst case) untuk menentukan kelas T.</li>
+      <li>Putuskan skema proteksi ledakan (Ex d / Ex e / Ex i / Ex n, dst.) &mdash; menentukan apakah perlu gambar celah/gap flameproof atau cukup jalur proteksi lain (mis. Ex i untuk baterai/sirkuit daya rendah).</li>
+      <li>Kumpulkan datasheet resmi untuk komponen kritikal: baterai (dengan sertifikasi/UN38.3 minimal), modul LoRa E22, cable gland, gasket, konektor.</li>
+      <li>Selesaikan seluruh field "to be confirmed" di Dokumen_spesifikasi_input_2.docx, sinkronkan dengan tabel EMC.</li>
+      <li>Buat gambar teknik resmi (assembly, skematik, PCB layout, enclosure) &mdash; bukan hanya foto.</li>
+      <li>Susun BOM lengkap dan draft manual sesuai format checklist.</li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  <p class="src">Sumber: IECEx ATEX Certification Information Requirements_Ind.docx &middot; Parameter spesifikasi EMC_lengkap.docx &middot; Dokumen_spesifikasi_input_2.docx</p>
+  <p>Progres checklist tersimpan otomatis di browser ini. Gunakan tombol Reset untuk mengosongkan. Bagian 04 (Laporan Analisis Kekurangan) adalah ringkasan statis &mdash; perbarui dokumen sumber saat data berubah.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  var KEY = 'atex-gld-v2-checklist';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox][data-id]'));
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+
+  boxes.forEach(function (b) {
+    if (saved[b.dataset.id]) b.checked = true;
+    b.closest('li').classList.toggle('done', b.checked);
+    b.addEventListener('change', function () {
+      b.closest('li').classList.toggle('done', b.checked);
+      saved[b.dataset.id] = b.checked;
+      localStorage.setItem(KEY, JSON.stringify(saved));
+      refresh();
+      toast(b.checked ? 'Item selesai' : 'Item dibuka lagi');
+    });
+  });
+
+  function groupStats(g) {
+    var all = g.querySelectorAll('input[type=checkbox]');
+    var done = g.querySelectorAll('input[type=checkbox]:checked');
+    return { total: all.length, done: done.length };
+  }
+
+  function refresh() {
+    var totalDone = 0, totalAll = 0;
+    document.querySelectorAll('.group[data-group]').forEach(function (g) {
+      var st = groupStats(g);
+      totalDone += st.done;
+      totalAll += st.total;
+      var p = g.querySelector('[data-gprog]');
+      if (p) p.textContent = st.done + '/' + st.total;
+      g.classList.toggle('all-done', st.done === st.total);
+    });
+    document.getElementById('doneCount').textContent = totalDone;
+    document.getElementById('totalCount').textContent = totalAll;
+    var pct = totalAll ? Math.round(totalDone / totalAll * 100) : 0;
+    document.getElementById('barFill').style.width = pct + '%';
+    document.getElementById('pctLabel').textContent = pct + '%';
+    document.getElementById('remainLabel').textContent = totalAll - totalDone > 0 ? (totalAll - totalDone) + ' item tersisa' : 'semua lengkap';
+
+    document.querySelectorAll('[data-status-for]').forEach(function (el) {
+      var sec = document.getElementById(el.getAttribute('data-status-for'));
+      if (!sec) return;
+      var all = sec.querySelectorAll('input[type=checkbox]').length;
+      var done = sec.querySelectorAll('input[type=checkbox]:checked').length;
+      el.textContent = done + '/' + all;
+      el.classList.toggle('done', done === all && all > 0);
+    });
+  }
+
+  var toastTimer;
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove('show'); }, 1400);
+  }
+
+  var filterMode = 'all';
+  function applyFilter(mode) {
+    filterMode = mode;
+    document.querySelectorAll('button[data-filter]').forEach(function (b) {
+      b.classList.toggle('active-filter', b.dataset.filter === mode);
+    });
+    boxes.forEach(function (b) {
+      var li = b.closest('li');
+      li.classList.toggle('filtered-out', mode === 'todo' && b.checked);
+    });
+  }
+  document.querySelectorAll('button[data-filter]').forEach(function (b) {
+    b.addEventListener('click', function () { applyFilter(b.dataset.filter); });
+  });
+
+  document.getElementById('btnReset').addEventListener('click', function () {
+    if (!confirm('Hapus semua centang?')) return;
+    saved = {};
+    localStorage.removeItem(KEY);
+    boxes.forEach(function (b) {
+      b.checked = false;
+      b.closest('li').classList.remove('done');
+    });
+    refresh();
+    toast('Checklist direset');
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>

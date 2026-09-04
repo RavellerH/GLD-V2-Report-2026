@@ -1,0 +1,478 @@
+<meta charset="utf-8">
+<title>Dashboard Sertifikasi GLD — ATEX/IECEx</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --paper:#F3F3F4; --surface:#FFFFFF; --surface-2:#F7F8F9; --surface-3:#ECEEF1;
+  --ink:#2B2B2B; --ink-2:#676A6C; --ink-soft:#9CA0A3; --line:#E7EAEC; --line-2:#D7DADE;
+  --accent:#1ABB9C; --accent-2:#149174; --accent-soft:#E6F8F4;
+  --good:#1ABB9C; --good-soft:#E6F8F4;
+  --warn:#E5934F; --warn-soft:#FDF1E6;
+  --crit:#E2495A; --crit-soft:#FBE7E9;
+  --info:#1C93C6; --info-soft:#E4F2FA;
+  --charcoal:#2F4050; --charcoal-2:#293846; --charcoal-3:#3A4C5E;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
+  --radius:6px;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"Segoe UI","Open Sans",Roboto,ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+    --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+    --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+    --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+    --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+    --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+    --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#F3F3F4; --surface:#FFFFFF; --surface-2:#F7F8F9; --surface-3:#ECEEF1;
+  --ink:#2B2B2B; --ink-2:#676A6C; --ink-soft:#9CA0A3; --line:#E7EAEC; --line-2:#D7DADE;
+  --accent:#1ABB9C; --accent-2:#149174; --accent-soft:#E6F8F4;
+  --good:#1ABB9C; --good-soft:#E6F8F4; --warn:#E5934F; --warn-soft:#FDF1E6;
+  --crit:#E2495A; --crit-soft:#FBE7E9; --info:#1C93C6; --info-soft:#E4F2FA;
+  --charcoal:#2F4050; --charcoal-2:#293846; --charcoal-3:#3A4C5E;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
+}
+:root[data-theme="dark"]{
+  --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+  --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+  --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+  --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+  --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+  --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.005em;line-height:1.3;text-wrap:balance;color:var(--ink)}
+a{color:var(--accent-2)}
+.mono{font-family:var(--mono)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.topbar{height:4px;background:var(--charcoal)}
+.shell{display:flex;align-items:stretch;min-height:100vh}
+.side{width:264px;flex:none;position:sticky;top:0;align-self:flex-start;height:100vh;overflow-y:auto;
+  background:var(--charcoal);color:#C9D1DB;display:flex;flex-direction:column;gap:18px;padding:20px 0 16px;
+  scrollbar-width:thin}
+.side-brand{display:flex;align-items:center;gap:10px;padding:0 20px}
+.brandmark{width:14px;height:14px;border-radius:3px;flex:none;background:var(--accent)}
+.brandtext b{display:block;font-size:13.5px;letter-spacing:0;color:#fff;font-weight:700}
+.brandtext small{display:block;font-size:10.5px;color:#8A97A6;margin-top:2px;font-weight:500}
+.side-meta{background:var(--charcoal-2);border:1px solid var(--charcoal-3);border-radius:var(--radius);padding:12px 14px;display:flex;flex-direction:column;gap:8px;margin:0 20px}
+.sm-row{display:flex;justify-content:space-between;gap:8px;font-size:12px}
+.sm-row .k{color:#8A97A6;font-weight:500}
+.sm-row .v{color:#fff;font-weight:600;text-align:right}
+.zonenav{display:flex;flex-direction:column;gap:1px;flex:1;padding:6px 0}
+.zonenav a{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;color:#B3BDC9;
+  text-decoration:none;padding:10px 20px;border-left:3px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.zonenav a .zi{font-size:11px;font-weight:700;color:#7C8896;width:16px;flex:none}
+.zonenav a:hover{background:rgba(255,255,255,.05);color:#fff}
+.zonenav a:hover .zi{color:var(--accent)}
+.side-foot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--charcoal-3);padding:14px 20px 0}
+.themebtn{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:0;cursor:pointer;
+  background:var(--charcoal-2);border:1px solid var(--charcoal-3);color:#C9D1DB;padding:8px 11px;border-radius:var(--radius);text-align:left}
+.themebtn:hover{border-color:var(--accent);color:#fff}
+.content{flex:1;min-width:0;max-width:1140px;padding:30px 40px 110px}
+.masthead{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px;display:flex;flex-direction:column;gap:10px}
+.tagrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:0;
+  padding:4px 10px;border-radius:4px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--surface)}
+.chip.accent{background:var(--accent-soft);color:var(--accent-2);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+h1{font-size:26px}
+.subtitle{color:var(--ink-2);font-size:14.5px;max-width:82ch;line-height:1.6}
+.docmeta-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:14px}
+.docmeta-row div{padding:9px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.docmeta-row .k{font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
+.docmeta-row .v{font-size:12.8px;color:var(--ink);font-weight:600}
+.zone{scroll-margin-top:20px}
+.zone + .zone{margin-top:8px;padding-top:32px;border-top:1px solid var(--line)}
+.zone-head{display:flex;align-items:baseline;gap:11px;margin-bottom:15px}
+.zone-head .zn{font-size:12.5px;font-weight:700;color:var(--accent-2)}
+.zone-head h2{font-size:20px}
+.subhead{display:flex;align-items:center;gap:11px;margin:28px 0 13px}
+.subhead:first-of-type{margin-top:4px}
+.subhead h3{font-size:14.5px;color:var(--ink);letter-spacing:0;text-transform:none;font-weight:700}
+.subhead::after{content:"";height:1px;background:var(--line);flex:1}
+.lede{font-size:13.8px;color:var(--ink-2);max-width:86ch;margin:0 0 16px;line-height:1.6}
+.banner{border-radius:var(--radius);padding:13px 16px;font-size:13.3px;line-height:1.6;margin:0 0 18px;
+  display:flex;gap:10px;align-items:flex-start;border:1px solid transparent;border-left-width:3px}
+.banner .ic{flex:none;font-size:16px;line-height:1.35}
+.banner b{color:var(--ink)}
+.banner.crit{background:var(--crit-soft);color:var(--ink-2);border-left-color:var(--crit)}
+.banner.warn{background:var(--warn-soft);color:var(--ink-2);border-left-color:var(--warn)}
+.banner.info{background:var(--info-soft);color:var(--ink-2);border-left-color:var(--info)}
+.banner.good{background:var(--good-soft);color:var(--ink-2);border-left-color:var(--good)}
+.kpirow{display:grid;grid-template-columns:1fr;gap:14px;margin:18px 0}
+@media(min-width:720px){.kpirow{grid-template-columns:repeat(4,1fr)}}
+.kpibig{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px}
+.kpibig .lab{font-size:11px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+.kpibig .val{font-size:28px;font-weight:800;color:var(--ink);line-height:1;display:flex;align-items:baseline;gap:6px}
+.kpibig .val small{font-size:12.5px;font-weight:600;color:var(--ink-soft)}
+.kpibig .sub{font-size:11.8px;color:var(--ink-2);margin-top:8px;line-height:1.5}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin:16px 0}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+.card-head h3{font-size:14.5px}
+.legend-row{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-soft);margin-top:8px}
+.legend-row span{display:inline-flex;align-items:center;gap:6px}
+.legend-row i{width:16px;height:2.5px;border-radius:2px;display:inline-block}
+.legend-row i.dash{background:repeating-linear-gradient(90deg,var(--ink-soft) 0 4px,transparent 4px 7px)}
+.chart-scroll{overflow-x:auto}
+svg{display:block;min-width:640px}
+.rolegrid{display:grid;grid-template-columns:1fr;gap:8px;margin:15px 0}
+@media(min-width:760px){.rolegrid{grid-template-columns:1fr 1fr}}
+.rcard{display:flex;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:11px 13px}
+.rcard .ic{font-size:15px;flex:none}
+.rcard b{font-size:13px;display:block;margin-bottom:3px}
+.rcard span{font-size:12.3px;color:var(--ink-soft);line-height:1.45}
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);margin:13px 0 19px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}
+table th{background:var(--surface-2);font-size:11px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink-soft);
+  text-align:left;padding:10px 13px;border-bottom:1px solid var(--line-2);font-weight:700;white-space:nowrap}
+table td{padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2);line-height:1.55}
+table td b{color:var(--ink)}
+table tr:last-child td{border-bottom:0}
+table tr.hl td{background:var(--accent-soft)}
+.status{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:0;padding:3px 8px;border-radius:3px;white-space:nowrap;display:inline-block}
+.status.ok{background:var(--good-soft);color:var(--good)}
+.status.wip{background:var(--warn-soft);color:var(--warn)}
+.status.gap{background:var(--crit-soft);color:var(--crit)}
+ul.tight{margin:0;padding-left:18px}
+ul.tight li{margin:6px 0;font-size:13.3px;color:var(--ink-2);line-height:1.6}
+ul.tight li b{color:var(--ink)}
+.speclist{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:14px 0}
+.spec{background:var(--surface);padding:10px 13px}
+.spec .k{font-size:10.5px;font-weight:600;color:var(--ink-soft);display:block;margin-bottom:3px}
+.spec .v{font-size:12.8px;color:var(--ink);font-weight:600}
+.kbd{font-family:var(--mono);font-size:11.5px;background:var(--surface-3);border:1px solid var(--line-2);border-radius:3px;padding:2px 6px;color:var(--ink-2)}
+.phasebar{display:flex;flex-direction:column;gap:6px;margin:16px 0 6px}
+.pb-track{height:30px;background:var(--surface-2);border:1px solid var(--line);border-radius:5px;overflow:hidden;display:flex;position:relative}
+.pb-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;padding:0 4px}
+.pb-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-soft)}
+.pb-legend span{display:inline-flex;align-items:center;gap:6px}
+.pb-legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft);line-height:1.85}
+@media print{.side,.themebtn{display:none}.content{max-width:100%}.zone + .zone{page-break-inside:avoid}}
+</style>
+<!-- GLD-NAV-START -->
+<div style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
+<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
+<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Detail Assessment/Field Testing</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Desain_Bracket_L_UBolt_GLD_Mounting.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Desain Bracket U-Bolt</a><span style="opacity:.35;color:#8A97A6">&middot;</span><span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Dashboard Sertifikasi</span>
+</div>
+<!-- GLD-NAV-END -->
+
+
+<div class="topbar"></div>
+<div class="shell">
+  <aside class="side">
+    <div class="side-brand">
+      <div class="brandmark"></div>
+      <div class="brandtext"><b>GLD Tahap 2</b><small>Dashboard Sertifikasi</small></div>
+    </div>
+    <div class="side-meta">
+      <div class="sm-row"><span class="k">STATUS</span><span class="v">Aktif — 4 track paralel</span></div>
+      <div class="sm-row"><span class="k">KICK-OFF</span><span class="v">12 Jun 2026</span></div>
+      <div class="sm-row"><span class="k">TARGET</span><span class="v">5–8 bulan (≈Nov 2026–Feb 2027)</span></div>
+      <div class="sm-row"><span class="k">DIBUAT</span><span class="v">5 Sep 2026 · Rev 1.0</span></div>
+    </div>
+    <nav class="zonenav">
+      <a href="#z1"><span class="zi">01</span>Ringkasan Eksekutif</a>
+      <a href="#z2"><span class="zi">02</span>Kurva-S Sertifikasi</a>
+      <a href="#z3"><span class="zi">03</span>Skema Target Klasifikasi</a>
+      <a href="#z4"><span class="zi">04</span>Cakupan &amp; Scope</a>
+      <a href="#z5"><span class="zi">05</span>Gap Analysis — ATEX</a>
+      <a href="#z6"><span class="zi">06</span>Gap Analysis — IP/EMC/RF</a>
+      <a href="#z7"><span class="zi">07</span>Isu Kritis &amp; Gate</a>
+      <a href="#z8"><span class="zi">08</span>Timeline 5 Fase</a>
+      <a href="#z9"><span class="zi">09</span>Sumber &amp; Metodologi</a>
+    </nav>
+    <div class="side-foot">
+      <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="masthead">
+      <div class="tagrow">
+        <span class="chip accent">GLD · TAHAP 2</span>
+        <span class="chip">Sertifikasi Hazardous Area</span>
+        <span class="chip warn">Estimasi interpretatif — bukan angka audited</span>
+      </div>
+      <h1>Dashboard Sertifikasi GLD — ATEX / IP / EMC / RF</h1>
+      <p class="subtitle">Pelacakan progres proyek sertifikasi kepatuhan area berbahaya untuk <b>GLD (Node Sensor)</b> — mencakup <b>4 track paralel</b>: ATEX (Directive 2014/34/EU, Cat. 2G Zona 1), IP66/67 (IEC 60529), EMC (EN 61000-6-2/-4), dan RF (ETSI/SDPPI) — sesuai lingkup <span class="mono">PROPOSAL SERTIFIKASI GAS LEAK DETECTION SYSTEM [21 Feb 2026]</span>. Dilengkapi rekomendasi skema klasifikasi (gas group/kelas suhu/zona) dan gap analysis dari repo sister <span class="mono">sertifikasi-atex-gld-v2-2026</span>.</p>
+      <div class="docmeta-row">
+        <div><span class="k">Scope perangkat</span><span class="v">GLD (Node Sensor) saja — CH &amp; Gateway asumsi safe area</span></div>
+        <div><span class="k">4 track</span><span class="v">ATEX · IP · EMC · RF</span></div>
+        <div><span class="k">Progres keseluruhan</span><span class="v">≈20% (metodologi 5-fase, bagian 02)</span></div>
+        <div><span class="k">Isu paling kritis</span><span class="v">Suhu permukaan heater sensor MQ (kelas T)</span></div>
+      </div>
+    </header>
+
+    <section class="zone" id="z1">
+      <div class="zone-head"><span class="zn">01</span><h2>Ringkasan Eksekutif</h2></div>
+      <p class="lede">Proyek sertifikasi GLD berjalan <b>paralel dengan jalur pilot/field testing RU IV Cilacap</b> (dilacak terpisah di <span class="mono">Dashboard_GLD_ProjectManagement.html</span>) — keduanya adalah dua jalur berbeda menuju deployment penuh. Proposal formal (21 Feb 2026, aktif sejak Kick-Off 12 Jun 2026) menargetkan <b>ATEX Kategori 2G Zona 1, Grup II, kelas suhu T4 (≤135°C)</b>, plus IP66/67, EMC EN61000-6-2/-4, dan RF ETSI/SDPPI — estimasi total durasi <b>5–8 bulan</b>.</p>
+      <div class="kpirow">
+        <div class="kpibig"><div class="lab">Progres Keseluruhan</div><div class="val">≈20<small>%</small></div><div class="sub">Metodologi bottom-up 5-fase × 4 track (bagian 02) — lebih rendah dari estimasi lama "30–40%" karena fase Uji Lab (bobot terbesar, 41,7%) belum mulai sama sekali.</div></div>
+        <div class="kpibig"><div class="lab">Waktu Berjalan</div><div class="val">≈12<small>minggu</small></div><div class="sub">Dari total estimasi ≈24 minggu (titik tengah 5–8 bulan) — rencana pada titik ini ≈50% (time-elapsed murni), jadi <b>tertinggal ≈30 poin</b> dari waktu, wajar krn fase testing belum dimulai.</div></div>
+        <div class="kpibig"><div class="lab">Track Paling Matang</div><div class="val">EMC</div><div class="sub">Tabel parameter lengkap sudah ada (19 Agu) — MCU, modul radio, TX power, antena. Belum ada pre-scan/uji lab.</div></div>
+        <div class="kpibig"><div class="lab">Track Paling Tertinggal</div><div class="val">ATEX</div><div class="sub">Gambar teknik, BOM per-komponen, datasheet material, dan draft manual — semua ❌ belum ada sama sekali.</div></div>
+      </div>
+      <div class="banner good"><span class="ic">✅</span><span><b>Temuan penting:</b> skema target ATEX <b>sudah lebih matang dari yang tercatat sebelumnya</b> — proposal formal secara eksplisit menargetkan Zona 1/Kategori 2G/T4, bukan "sama sekali belum ditentukan" seperti tercatat di gap-analysis repo sertifikasi (27 Agu) yang belum sempat mensilangkan proposal ini. Detail rekonsiliasi &amp; rekomendasi grup gas → bagian 03.</span></div>
+      <div class="banner crit"><span class="ic">🚧</span><span><b>Blocker teknis terbesar (bukan cuma dokumentasi):</b> 8 sensor MQ memakai heater internal ~300–400°C. Ini menentukan kelas suhu (T-class) dan berpotensi membuat desain saat ini gagal syarat suhu permukaan T4 — <b>belum ada perhitungan/pengukuran hot-spot sama sekali</b>. Produk pembanding sejenis (KELISAIKE, AIYI) mencapai T6, tapi memakai sensor elektrokimia/IR tanpa heater — bukan pembanding apples-to-apples untuk GLD. Detail → bagian 07.</span></div>
+    </section>
+
+    <section class="zone" id="z2">
+      <div class="zone-head"><span class="zn">02</span><h2>Kurva-S Sertifikasi</h2></div>
+      <p class="lede">Baseline rencana memakai breakdown 5-fase dari proposal (bobot durasi titik-tengah: Perencanaan 3mgu/12,5% · Redesign 5mgu/20,8% · Pre-compliance 3,5mgu/14,6% · <b>Uji Lab 10mgu/41,7%</b> · Finalisasi 2,5mgu/10,4% — total ≈24 minggu). Progres aktual dihitung <i>bottom-up</i>: rata-rata persentase selesai per fase, dirata-ratakan di 4 track (ATEX/IP/EMC/RF) — <b>bukan</b> estimasi time-elapsed seperti dipakai sebelumnya di <span class="mono">Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html</span> (lihat rekonsiliasi di bagian 09).</p>
+      <div class="card">
+        <div class="card-head"><h3>Rencana vs Aktual — Progres Kumulatif Sertifikasi</h3></div>
+        <div class="chart-scroll"><svg id="scurve-cert" viewBox="0 0 960 400" role="img" aria-label="Kurva-S sertifikasi GLD"></svg></div>
+        <div class="legend-row">
+          <span><i style="background:var(--ink-soft)" class="dash"></i>Rencana (5-fase, titik tengah 5–8 bulan)</span>
+          <span><i style="background:var(--accent)"></i>Aktual (bottom-up, per 5 Sep 2026)</span>
+        </div>
+      </div>
+      <div class="banner warn"><span class="ic">⚠️</span><span><b>Baru 1 titik data aktual</b> — dashboard ini baru dibuat 5 Sep 2026, jadi kurva aktual belum punya riwayat mingguan seperti Dashboard proyek utama. Titik berikutnya akan menambah histori riil setelah update berikutnya.</span></span></div>
+    </section>
+
+    <section class="zone" id="z3">
+      <div class="zone-head"><span class="zn">03</span><h2>Skema Target Klasifikasi (Rekomendasi)</h2></div>
+      <p class="lede">Parameter berikut menentukan seluruh lingkup pengujian ATEX/IECEx. Proposal formal sudah menetapkan sebagian; sisanya (grup gas spesifik, metode proteksi) direkomendasikan di bawah berdasarkan analisis <b>tim penyusun dokumen ini</b> — <b>bukan keputusan resmi dari notified body/lembaga sertifikasi</b>, wajib dikonfirmasi ke konsultan/lab sebelum dipakai sbg acuan final pengujian.</p>
+      <div class="speclist">
+        <div class="spec"><span class="k">Grup gas</span><span class="v">IIC (rekomendasi)</span></div>
+        <div class="spec"><span class="k">Kelas suhu</span><span class="v">T4 ≤135°C (dari proposal)</span></div>
+        <div class="spec"><span class="k">Klasifikasi zona</span><span class="v">Zona 1, Kategori 2G (dari proposal)</span></div>
+        <div class="spec"><span class="k">Grup peralatan</span><span class="v">II — industri permukaan (dari proposal)</span></div>
+        <div class="spec"><span class="k">Metode proteksi</span><span class="v">Ex i atau Ex d — belum diputuskan</span></div>
+        <div class="spec"><span class="k">IP target</span><span class="v">IP66 atau IP67 (dari proposal)</span></div>
+      </div>
+
+      <div class="subhead"><h3>Kenapa Grup Gas IIC (rekomendasi tim)</h3></div>
+      <ul class="tight">
+        <li><b>H₂ (hidrogen) adalah salah satu dari 4 kelas gas resmi</b> yang dideteksi model AI CNN Dual-Branch (dec:36, memory proyek) — hidrogen memerlukan grup <b>IIC</b> (MESG &lt;0,5mm, paling ketat) krn energi penyalaannya sangat rendah.</li>
+        <li>Sertifikasi <b>IIC otomatis mencakup IIB dan IIA</b> — satu unit tersertifikasi IIC bisa dipasang di seluruh area kilang (LPG/metana/propana yang biasanya IIA, hingga area dgn potensi H₂ yg butuh IIC) tanpa perlu varian terpisah per lokasi.</li>
+        <li>Konsisten dgn niat deployment "dimana saja, termasuk penyimpanan berbahaya" — target IIC adalah pilihan konservatif yg paling sesuai cakupan luas ini.</li>
+        <li>Trade-off: sertifikasi IIC (terutama utk skema Ex d) umumnya lebih mahal &amp; ketat dari IIA/IIB (celah flamepath lebih sempit) — ini konsekuensi yg perlu diterima utk cakupan deployment seluas ini.</li>
+      </ul>
+
+      <div class="subhead"><h3>Kenapa Zona 1 (bukan Zona 0) cukup utk "penyimpanan berbahaya"</h3></div>
+      <ul class="tight">
+        <li><b>Zona 0</b> = atmosfer eksplosif ada terus-menerus/dlm waktu lama (mis. di dalam tangki/vessel) — detektor titik (point detector) seperti GLD biasanya dipasang <b>di luar/sekitar</b> tangki (area tank farm/dike), bukan di dalam ruang uap tangki itu sendiri.</li>
+        <li><b>Zona 1</b> = berpotensi terjadi dlm kondisi operasi normal (dekat flange, valve, pompa, area proses, perimeter tangki penyimpanan) — inilah target yg sudah ditetapkan proposal, dan mencakup skenario "dipasang di banyak lokasi kilang termasuk dekat penyimpanan" dgn baik.</li>
+        <li>Peralatan Kategori 2G (Zona 1) <b>otomatis absah dipakai juga di Zona 2</b> (lebih ringan) — jadi satu sertifikasi Zona 1 sudah mencakup kedua kebutuhan.</li>
+        <li>Zona 0/Kategori 1G hanya relevan bila Pertamina secara eksplisit minta pemasangan <i>di dalam</i> ruang tertutup bervolume gas (jarang utk detektor titik) — <b>perlu dikonfirmasi bukan requirement</b>, jangan diasumsikan otomatis tidak perlu tanpa cek ke tim area classification Pertamina.</li>
+      </ul>
+
+      <div class="subhead"><h3>Kelas Suhu T4 — target masuk akal, tapi belum terverifikasi</h3></div>
+      <ul class="tight">
+        <li>T4 (≤135°C) sudah jadi target resmi di proposal — konsisten dgn baseline umum peralatan kilang.</li>
+        <li>Produk pembanding sejenis (KELISAIKE K500/K800, AIYI — lihat <span class="mono">REFERENSI-KOMPONEN-BOM.md</span>) mencapai <b>T6 (≤85°C)</b>, tapi produk-produk itu memakai sensor elektrokimia/IR <b>tanpa</b> elemen pemanas internal — GLD memakai sensor MQ yg secara struktural <b>butuh heater ~300–400°C utk beroperasi</b>. Ini beda kelas tantangan termal, jangan asumsikan T6 otomatis dicapai GLD.</li>
+        <li>Tetap direkomendasikan pertahankan target T4 (bukan turunkan ke T3/T2) krn ini yg sudah dikomunikasikan di proposal resmi — tapi <b>wajib diverifikasi lewat pengukuran hot-spot aktual</b> sebelum submission ke lab (checklist §1.6, masih ❌ belum ada sama sekali).</li>
+      </ul>
+
+      <div class="subhead"><h3>Ex i vs Ex d — tarik-menarik dgn desain baterai</h3></div>
+      <ul class="tight">
+        <li><b>Ex i (intrinsically safe)</b>: cocok utk device baterai/daya rendah, tapi mensyaratkan pembatasan energi ketat — baterai Li-ion 7P 18650 (kapasitas besar, ≈28 Ah) yg dipakai GLD saat ini <b>kemungkinan terlalu besar energinya</b> utk skema Ex i sederhana tanpa barrier/circuit pembatas tambahan.</li>
+        <li><b>Ex d (flameproof)</b>: enclosure logam dgn celah/flamepath presisi — lebih cocok utk casing metal yg sudah dipilih (Aluminum+SS), tapi butuh gambar teknik &amp; toleransi machining yg <b>sama sekali belum ada</b> (checklist §1.2e).</li>
+        <li>Keputusan ini <b>belum diambil</b> — proposal sengaja menyisakannya sbg keputusan kick-off (§5.1), dan berdasarkan dokumen yg diperiksa, belum ada catatan bahwa keputusan itu sudah difinalisasi.</li>
+      </ul>
+    </section>
+
+    <section class="zone" id="z4">
+      <div class="zone-head"><span class="zn">04</span><h2>Cakupan &amp; Scope Perangkat</h2></div>
+      <p class="lede">Dikonfirmasi dari isi proposal sertifikasi (bab 2, "Deskripsi Produk") — proposal secara konsisten menjelaskan <b>satu perangkat</b>: 8 sensor MQx + processing + LoRa + enclosure. Ini persis cocok dgn <b>GLD (Node Sensor)</b>. Cluster Head dan Gateway <b>tidak pernah disebut</b> di proposal ini.</p>
+      <div class="rolegrid">
+        <div class="rcard"><span class="ic">🎯</span><div><b>GLD (Node Sensor) — DALAM scope ATEX</b><span>8× sensor MQ, heater internal, dipasang di titik potensi kebocoran — perangkat yg jadi target sertifikasi ATEX/IP/EMC/RF penuh di dashboard ini.</span></div></div>
+        <div class="rcard"><span class="ic">📡</span><div><b>Cluster Head &amp; Gateway — asumsi selalu safe area</b><span>Dikonfirmasi user (5 Sep 2026) — CH &amp; Gateway diasumsikan selalu berada di safe area, sehingga <b>tidak perlu sertifikasi ATEX</b> dgn skema saat ini. Ini keputusan/asumsi kerja, <b>bukan hasil kajian klasifikasi area formal</b> dari Pertamina.</span></div></div>
+      </div>
+      <div class="banner warn"><span class="ic">⚠️</span><span><b>Catatan risiko yg tetap perlu diawasi:</b> asumsi "CH/Gateway selalu safe area" belum diverifikasi lewat studi klasifikasi area resmi Pertamina. Notulen kunjungan Cilacap menyebut topologi Gateway di "safe area via LAN" — cukup kuat utk Gateway. Utk Cluster Head, penempatannya lebih fleksibel (bisa satu tiang dgn solar panel, kadang dekat titik GLD) — kalau ke depan ternyata CH ditempatkan di area terklasifikasi, dashboard ini perlu direvisi utk memasukkan track sertifikasi CH juga (skema lebih ringan spt Ex e/Ex n mungkin cukup, tergantung fungsi rangkaiannya).</span></div>
+    </section>
+
+    <section class="zone" id="z5">
+      <div class="zone-head"><span class="zn">05</span><h2>Gap Analysis — Track ATEX</h2></div>
+      <p class="lede">Sumber utama: <span class="mono">IECEx ATEX Certification Information Requirements_EN.pdf</span> — dokumen asli dari lembaga sertifikasi (ExCB) yang membantu proses submission, diberikan langsung oleh user 5 September 2026 (dwi-bahasa Inggris/Mandarin, konsisten dgn lembaga uji di China yg disebut di notulen kunjungan Cilacap). Dokumen ini <b>menggantikan</b> versi terjemahan Indonesia (<span class="mono">..._Ind.docx</span>) sbg acuan utama — struktur &amp; isi keduanya cocok, tapi versi Inggris memastikan tidak ada nuansa istilah teknis yg hilang saat terjemahan. Disilangkan dgn checklist 60-item &amp; gap-analysis repo <span class="mono">sertifikasi-atex-gld-v2-2026</span> (audit terakhir 27 Agustus 2026) &amp; <span class="mono">Dokumen_spesifikasi_input_2.docx</span> (update 27 Agu).</p>
+      <div class="banner warn"><span class="ic">🆕</span><span><b>Temuan baru dari dokumen versi Inggris:</b> ada 1 kategori persyaratan yg <b>belum pernah dilacak sama sekali</b> di checklist/gap-analysis repo sertifikasi sebelumnya — <b>Bagian 1, "Basic Information (Application and Organization)"</b>: formulir aplikasi (template dari ExCB), surat izin usaha/registrasi perusahaan, struktur organisasi &amp; kontak, alamat &amp; profil fasilitas manufaktur, dan (jika berlaku) sertifikat ISO 9001 + manual mutu untuk review QAR/QAN. Ini bukan dokumen teknis produk — tapi tetap wajib dilengkapi sebelum submission. Status: <b>belum dicek sama sekali</b>, ditambahkan sbg gap baru di tabel bawah.</span></div>
+      <div class="subhead"><h3>0. Informasi Dasar — Aplikasi &amp; Organisasi (kategori baru, belum pernah dilacak)</h3></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
+        <tr><td>Formulir aplikasi (template dari ExCB)</td><td><span class="status gap">Belum dicek</span></td><td>Template disediakan lembaga sertifikasi — perlu diminta langsung ke ExCB</td></tr>
+        <tr><td>Surat izin usaha / registrasi perusahaan (LGU)</td><td><span class="status gap">Belum dicek</span></td><td>Dokumen legal korporat, bukan dokumen proyek — kemungkinan sudah ada di LGU tapi belum dikumpulkan utk paket sertifikasi</td></tr>
+        <tr><td>Struktur organisasi &amp; kontak</td><td><span class="status gap">Belum dicek</span></td><td>—</td></tr>
+        <tr><td>Alamat &amp; profil fasilitas manufaktur</td><td><span class="status gap">Belum dicek</span></td><td>Relevan krn prototipe/produksi awal kemungkinan di Lab IoT/Fisika ITB, bukan pabrik — perlu klarifikasi apakah ExCB menerima fasilitas riset sbg tempat produksi awal</td></tr>
+        <tr><td>Sertifikat ISO 9001 + manual mutu (jika berlaku, utk QAR/QAN)</td><td><span class="status gap">Belum dicek</span></td><td>"Jika berlaku" — perlu konfirmasi ke ExCB apakah wajib utk skema sertifikasi yg dipilih</td></tr>
+      </table></div>
+      <div class="subhead"><h3>1.1 Deskripsi Produk</h3></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
+        <tr><td>Nama, model, spesifikasi umum</td><td><span class="status ok">Lengkap</span></td><td>Ada di Dokumen_spesifikasi_input_2 &amp; tabel EMC</td></tr>
+        <tr><td>Parameter kelistrikan</td><td><span class="status wip">Sebagian</span></td><td>~40/56 field terisi (update 26 Agu); sisanya "menunggu konfirmasi" — berat total, cable entry, rentang suhu/kelembapan</td></tr>
+        <tr><td>Foto produk</td><td><span class="status wip">Sebagian</span></td><td>6 foto ada, belum ada foto per-tipe final assembly &amp; komponen individual (baterai, gasket, terminal)</td></tr>
+        <tr class="hl"><td><b>Grup gas / kelas suhu / zona</b></td><td><span class="status ok">Target ditetapkan (proposal)</span></td><td>Zona 1/Cat.2G/T4/Grup II sudah ada di proposal; grup gas spesifik (rekomendasi IIC) &amp; metode proteksi masih perlu difinalisasi — lihat bagian 03</td></tr>
+      </table></div>
+      <div class="subhead"><h3>1.2–1.8 Gambar Teknik, BOM, Material, Proses, Perhitungan, Manual, Label</h3></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
+        <tr><td>Assembly drawing</td><td><span class="status wip">Sebagian</span></td><td>Base Plate Assembled.dwg ada (bracket mounting) — bukan gambar teknik enclosure/PCB lengkap</td></tr>
+        <tr><td>Skematik kelistrikan, layout PCB, gambar enclosure/junction box/terminal/grounding</td><td><span class="status gap">Belum ada</span></td><td>Semua item ❌ — belum satupun gambar berdimensi resmi</td></tr>
+        <tr><td>Bill of Materials (BOM) formal per-komponen</td><td><span class="status gap">Belum ada</span></td><td>Baru nama komponen tingkat tinggi; produsen/grade material/sertifikat Ex per komponen belum ada</td></tr>
+        <tr><td>Datasheet material non-logam (CTI, tahan api, dll)</td><td><span class="status gap">Belum ada</span></td><td>—</td></tr>
+        <tr><td>Deskripsi proses manufaktur</td><td><span class="status gap">Belum ada</span></td><td>Relevan bila casing dilas/di-machining utk Ex d</td></tr>
+        <tr><td>Perhitungan proteksi ledakan &amp; hot-spot suhu</td><td><span class="status gap">Belum ada</span></td><td>Lihat isu kritis bagian 07</td></tr>
+        <tr><td>Draft manual instalasi &amp; pemeliharaan</td><td><span class="status gap">Belum ada</span></td><td>—</td></tr>
+        <tr><td>Nameplate/label ATEX &amp; sertifikat komponen (ESP32, E22)</td><td><span class="status gap">Belum ada</span></td><td>—</td></tr>
+      </table></div>
+      <div class="subhead"><h3>Informasi Sampel</h3></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Item</th><th>Status</th></tr>
+        <tr><td>Model sampel per tipe</td><td><span class="status ok">Lengkap</span></td></tr>
+        <tr><td>Nomor seri, kondisi sampel, fixture pengujian</td><td><span class="status gap">Belum ada</span></td></tr>
+      </table></div>
+    </section>
+
+    <section class="zone" id="z6">
+      <div class="zone-head"><span class="zn">06</span><h2>Gap Analysis — Track IP / EMC / RF</h2></div>
+      <div class="subhead"><h3>IP66/67 (IEC 60529)</h3></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
+        <tr><td>Target rating ditetapkan</td><td><span class="status ok">Ya</span></td><td>IP66 atau IP67, dari proposal</td></tr>
+        <tr><td>IP rating Cluster Head</td><td><span class="status ok">IP66/67 terkonfirmasi</span></td><td>—</td></tr>
+        <tr><td>IP rating GLD (Node Sensor) &amp; Gateway</td><td><span class="status gap">Belum eksplisit</span></td><td>Masih "menunggu konfirmasi"</td></tr>
+        <tr><td>Desain sealing (gasket/O-ring)</td><td><span class="status gap">Belum ada</span></td><td>Bagian dari redesign enclosure yg belum dimulai</td></tr>
+        <tr><td>Pre-scan/simulasi IP internal</td><td><span class="status gap">Belum dimulai</span></td><td>Fase Pre-Compliance Testing (proposal §4.3d) belum berjalan</td></tr>
+      </table></div>
+      <div class="subhead"><h3>EMC (EN 61000-6-2 / -6-4)</h3></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
+        <tr><td>Standar acuan diidentifikasi</td><td><span class="status ok">Ya</span></td><td>EN61000-6-2 (immunity) &amp; -6-4 (emission)</td></tr>
+        <tr><td>Tabel parameter EMC lengkap</td><td><span class="status ok">Ada</span></td><td><span class="mono">Parameter spesifikasi EMC_lengkap.docx</span> (19 Agu) — MCU, modul radio E22-900MM22S, TX power maks 22dBm, antena, dimensi, enclosure</td></tr>
+        <tr><td>Review layout PCB (grounding/shielding/filtering)</td><td><span class="status gap">Belum ada</span></td><td>Bagian dari fase Redesign yg belum berjalan penuh</td></tr>
+        <tr><td>Pre-scan emisi/imunitas internal</td><td><span class="status gap">Belum dimulai</span></td><td>—</td></tr>
+      </table></div>
+      <div class="subhead"><h3>RF (ETSI EN 300 220/301 489 + SDPPI)</h3></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
+        <tr><td>Standar acuan diidentifikasi</td><td><span class="status ok">Ya</span></td><td>ETSI EN300220/EN301489 (Eropa) + SDPPI (Indonesia)</td></tr>
+        <tr><td>Spesifikasi radio diketahui</td><td><span class="status ok">Ya</span></td><td>Modul E22-900MM22S, 920/921MHz, TX maks 22dBm (dikonfigurasi 17dBm di firmware), antena 3/8dBi</td></tr>
+        <tr><td>Modular approval modul LoRa dari produsen</td><td><span class="status gap">Belum dikonfirmasi</span></td><td>Berpotensi mempercepat proses bila modul sudah py approval tersendiri</td></tr>
+        <tr><td>Pre-test RF internal &amp; submission SDPPI</td><td><span class="status gap">Belum dimulai</span></td><td>—</td></tr>
+      </table></div>
+      <div class="banner info"><span class="ic">📌</span><span>EMC dan RF adalah track paling matang dari sisi spesifikasi teknis (data radio &amp; parameter kelistrikan sudah konkret) — tapi <b>keempat track sama-sama nol persen</b> di fase pengujian resmi/pre-compliance. Ini alasan utama progres keseluruhan (bagian 01–02) masih rendah meski dokumentasi terasa "sudah lumayan".</span></div>
+    </section>
+
+    <section class="zone" id="z7">
+      <div class="zone-head"><span class="zn">07</span><h2>Isu Kritis &amp; Gate</h2></div>
+      <div class="rolegrid">
+        <div class="rcard"><span class="ic">🌡️</span><div><b>Suhu permukaan heater sensor MQ — blocker teknis, bukan dokumentasi</b><span>8 sensor MQ dgn heater ~300–400°C. Belum ada perhitungan/pengukuran hot-spot. Berisiko gagal T4 kalau tidak ada isolasi termal memadai antara heater &amp; permukaan luar enclosure. Prioritas #1.</span></div></div>
+        <div class="rcard"><span class="ic">🔋</span><div><b>Baterai Li-ion tanpa sertifikasi Ex</b><span>Node Sensor (7P 18650, ≈28Ah) &amp; Cluster Head (Li-ion + solar) — belum ada dokumen IEC 62133/UN 38.3 dari produsen (LiitoKala). Berinteraksi langsung dgn keputusan Ex i vs Ex d (bagian 03).</span></div></div>
+        <div class="rcard"><span class="ic">📐</span><div><b>Gambar teknik enclosure — nol dari nol</b><span>Assembly drawing, skematik, layout PCB, gambar celah/gap flamepath (jika Ex d) — semua belum ada. Ini prasyarat langsung sebelum BOM &amp; datasheet material bisa disusun.</span></div></div>
+        <div class="rcard"><span class="ic">🧪</span><div><b>Belum ada sampel siap uji</b><span>Nomor seri, status "bisa dinyalakan", dan fixture pengujian belum disiapkan — perlu selesai sebelum booking laboratorium (fase Uji Lab, bobot 41,7% dari timeline).</span></div></div>
+      </div>
+      <div class="subhead"><h3>Gate lain (ringan, tapi tetap terbuka)</h3></div>
+      <ul class="tight">
+        <li><b>Konsistensi dokumen:</b> <span class="mono">Dokumen_spesifikasi_input_2.docx</span> vs <span class="mono">Parameter spesifikasi EMC_lengkap.docx</span> — beberapa nilai (frekuensi, TX power, gain antena) sudah final di satu dokumen tapi belum disalin ke dokumen spesifikasi utama.</li>
+        <li><b>gate:cert-height</b> — instalasi kilang baru dicoba setinggi orang; sertifikasi perlu mencakup skenario ketinggian pemasangan aktual (vendor Pertamina yg eksekusi fisik, per dec:63 memory proyek).</li>
+        <li><b>gate:bracket-tools</b> — ukuran kunci/mur-baut bracket GLD belum ditentukan (dec:40) — tidak menghambat sertifikasi langsung tapi relevan utk manual instalasi (checklist §1.7).</li>
+      </ul>
+    </section>
+
+    <section class="zone" id="z8">
+      <div class="zone-head"><span class="zn">08</span><h2>Timeline 5 Fase (Estimasi Proposal)</h2></div>
+      <div class="phasebar">
+        <div class="pb-track">
+          <div class="pb-seg" style="width:12.5%;background:var(--good)">1. Perencanaan</div>
+          <div class="pb-seg" style="width:20.8%;background:var(--warn)">2. Redesign</div>
+          <div class="pb-seg" style="width:14.6%;background:var(--surface-3);color:var(--ink-soft)">3. Pre-compliance</div>
+          <div class="pb-seg" style="width:41.7%;background:var(--surface-3);color:var(--ink-soft)">4. Uji Lab Terakreditasi</div>
+          <div class="pb-seg" style="width:10.4%;background:var(--surface-3);color:var(--ink-soft)">5. Finalisasi</div>
+        </div>
+        <div class="pb-legend">
+          <span><i style="background:var(--good)"></i>Sebagian besar selesai</span>
+          <span><i style="background:var(--warn)"></i>Baru mulai</span>
+          <span><i style="background:var(--surface-3);border:1px solid var(--line-2)"></i>Belum mulai</span>
+        </div>
+      </div>
+      <div class="tbl-scroll"><table>
+        <tr><th>Fase</th><th>Estimasi durasi</th><th>Status per 5 Sep</th></tr>
+        <tr><td><b>1. Perencanaan &amp; review awal</b></td><td>2–4 minggu</td><td>Target Zona1/Cat.2G/T4 sudah ada (proposal); metode proteksi &amp; grup gas spesifik belum final</td></tr>
+        <tr><td><b>2. Redesign &amp; optimasi teknis</b></td><td>4–6 minggu</td><td>Material enclosure dipilih; gambar teknik/BOM/kalkulasi termal belum dimulai</td></tr>
+        <tr><td><b>3. Pre-compliance testing</b></td><td>3–4 minggu</td><td>Belum mulai — menunggu fase 2 tuntas</td></tr>
+        <tr><td><b>4. Uji lab terakreditasi</b></td><td>8–12 minggu (fase terpanjang)</td><td>Belum mulai — belum ada sampel siap uji &amp; booking lab</td></tr>
+        <tr><td><b>5. Finalisasi dokumentasi &amp; sertifikat</b></td><td>2–3 minggu</td><td>Belum mulai</td></tr>
+      </table></div>
+    </section>
+
+    <section class="zone" id="z9">
+      <div class="zone-head"><span class="zn">09</span><h2>Sumber &amp; Metodologi</h2></div>
+      <ul class="tight">
+        <li><b>Sumber utama:</b> <span class="mono">PROPOSAL SERTIFIKASI GAS LEAK DETECTION SYSTEM...[21 FEB 2026].pdf</span> (lingkup, timeline, target klasifikasi) · <span class="mono">IECEx ATEX Certification Information Requirements_EN.pdf</span> (dari ExCB langsung, diberikan user 5 Sep — menggantikan versi terjemahan Indonesia sbg acuan) · repo <span class="mono">sertifikasi-atex-gld-v2-2026</span> disalin ke <span class="mono">Sumber Dokumen/sertifikasi-atex-gld-v2-2026/</span> (checklist, gap analysis, BOM research, foto, gambar teknik) · <span class="mono">Sumber Dokumen/Technical-Datasheets-Lab-IoT-ITB/</span> dicek — tidak ada data ATEX/zona tambahan di sana.</li>
+        <li><b>Progres ≈20% (bagian 01–02) belum memasukkan kategori "Informasi Dasar — Aplikasi &amp; Organisasi"</b> (bagian 05, ditemukan baru dari dokumen versi Inggris) — item administratif ini di luar model 5-fase teknis proposal, jadi tidak mengubah angka fase, tapi tetap perlu dilengkapi sebelum submission bisa jalan.</li>
+        <li><b>Rekonsiliasi metodologi progres:</b> <span class="mono">Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html</span> (dec:60) memakai estimasi top-down time-elapsed-didiskon ("~30–40%"). Dashboard ini memakai metodologi bottom-up berbasis item checklist per-fase per-track — hasilnya lebih rendah (≈20%) krn memperhitungkan eksplisit bahwa fase Uji Lab (bobot 41,7%) benar-benar nol. <b>Kedua angka sah</b>, beda sudut pandang (kualitatif-fase vs kuantitatif-item) — dashboard ini adalah yg lebih rinci &amp; disarankan jadi acuan baru ke depan utk topik sertifikasi spesifik.</li>
+        <li><b>Skema klasifikasi (bagian 03):</b> rekomendasi tim penyusun dokumen ini berdasarkan requirement H₂ dari model AI resmi (dec:36) &amp; praktik umum area classification kilang — <b>bukan hasil kajian resmi Pertamina/notified body</b>, wajib diverifikasi sebelum dipakai sbg acuan pengujian final.</li>
+        <li><b>Cakupan GLD-only:</b> dikonfirmasi dari isi proposal (deskripsi produk konsisten 1 perangkat) + asumsi CH/Gateway selalu safe area dikonfirmasi user (5 Sep 2026) — bukan hasil kajian klasifikasi area formal, lihat catatan risiko bagian 04.</li>
+        <li><b>Belum diverifikasi:</b> semua item bertanda ❌ di bagian 05–06; hot-spot suhu heater MQ (bagian 07) adalah prioritas tertinggi.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Dokumen internal LAPI Ganesha Utama (LGU) &amp; Lab IoT/Fisika ITB — disusun 5 September 2026, melacak progres sertifikasi hazardous-area (ATEX/IP/EMC/RF) untuk GLD (Node Sensor), terpisah dari &amp; paralel dengan jalur pilot/field testing RU IV Cilacap (<span class="mono">Dashboard_GLD_ProjectManagement.html</span>). Skema klasifikasi &amp; angka progres bersifat estimasi interpretatif tim — wajib direview sebelum dipakai sbg komitmen resmi ke Pertamina atau lembaga sertifikasi. Rev 1.0
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){const b=document.getElementById('themebtn');b.addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const sd=window.matchMedia('(prefers-color-scheme:dark)').matches;const now=cur?cur:(sd?'dark':'light');
+  document.documentElement.setAttribute('data-theme',now==='dark'?'light':'dark');});})();
+</script>
+<script>
+(function(){
+  const START=new Date(2026,5,12), END=new Date(2027,1,28);
+  const KICKOFF=new Date(2026,5,12);
+  const TODAY=new Date(2026,8,5);
+  const svg=document.getElementById('scurve-cert');
+  const W=960,H=380,m={l:46,r:20,t:22,b:46};
+  const pw=W-m.l-m.r, ph=H-m.t-m.b;
+  const x=d=>m.l+((d-START)/(END-START))*pw;
+  const y=v=>m.t+(1-v/100)*ph;
+  const NS='http://www.w3.org/2000/svg';
+  function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  function path(pts){return pts.map((p,i)=>(i?'L':'M')+x(p.d).toFixed(1)+' '+y(p.v).toFixed(1)).join(' ');}
+  const plan=[
+    [new Date(2026,5,12),0],[new Date(2026,6,3),12.5],[new Date(2026,7,7),33.3],
+    [new Date(2026,7,30),47.9],[new Date(2026,10,9),89.6],[new Date(2026,10,27),100]
+  ].map(a=>({d:a[0],v:a[1]}));
+  const act=[[new Date(2026,5,12),0],[new Date(2026,8,5),20]].map(a=>({d:a[0],v:a[1]}));
+  const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt',2026,9],['Nov',2026,10],['Des',2026,11],['Jan',2027,0],['Feb',2027,1]];
+  for(let v=0;v<=100;v+=20){
+    svg.appendChild(el('line',{x1:m.l,y1:y(v),x2:W-m.r,y2:y(v),stroke:'var(--line)','stroke-width':1}));
+    const t=el('text',{x:m.l-10,y:y(v)+4,'text-anchor':'end',fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});t.textContent=v+'%';svg.appendChild(t);
+  }
+  MONTHS.forEach(([lab,yr,mo])=>{const d=new Date(yr,mo,1);if(d<START||d>END)return;
+    svg.appendChild(el('line',{x1:x(d),y1:m.t,x2:x(d),y2:m.t+ph,stroke:'var(--line)','stroke-width':1,'stroke-dasharray':'2 4',opacity:.55}));
+    const t=el('text',{x:x(d),y:H-m.b+20,'text-anchor':'middle',fill:'var(--ink-soft)','font-size':11,'font-family':'var(--mono)'});t.textContent=lab;svg.appendChild(t);
+  });
+  svg.appendChild(el('path',{d:path(plan),fill:'none',stroke:'var(--ink-soft)','stroke-width':2,'stroke-dasharray':'6 5',opacity:.85}));
+  svg.appendChild(el('path',{d:path(act),fill:'none',stroke:'var(--accent)','stroke-width':3,'stroke-linejoin':'round','stroke-linecap':'round'}));
+  svg.appendChild(el('circle',{cx:x(act[0].d),cy:y(act[0].v),r:3.5,fill:'var(--accent)'}));
+  const last=act[act.length-1];
+  svg.appendChild(el('circle',{cx:x(last.d),cy:y(last.v),r:5,fill:'var(--accent)',stroke:'var(--surface)','stroke-width':2}));
+  const lt=el('text',{x:x(last.d)+8,y:y(last.v)-8,'text-anchor':'start',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='≈20%';svg.appendChild(lt);
+  svg.appendChild(el('line',{x1:x(TODAY),y1:m.t-2,x2:x(TODAY),y2:m.t+ph,stroke:'var(--ink)','stroke-width':1.5,'stroke-dasharray':'3 3',opacity:.5}));
+  const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini (5 Sep)';svg.appendChild(tl);
+  function planAt(d){for(let i=0;i<plan.length-1;i++){if(d>=plan[i].d&&d<=plan[i+1].d){const t=(d-plan[i].d)/(plan[i+1].d-plan[i].d);return plan[i].v+t*(plan[i+1].v-plan[i].v);}}return d<plan[0].d?plan[0].v:plan[plan.length-1].v;}
+  const planTodayVal=planAt(TODAY);
+  svg.appendChild(el('circle',{cx:x(TODAY),cy:y(planTodayVal),r:3.5,fill:'var(--ink-soft)'}));
+  const ptl=el('text',{x:x(TODAY)-8,y:y(planTodayVal)+4,'text-anchor':'end',fill:'var(--ink-soft)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});ptl.textContent='rencana '+Math.round(planTodayVal)+'%';svg.appendChild(ptl);
+  const pess=new Date(2027,1,28);
+  svg.appendChild(el('line',{x1:x(pess),y1:m.t,x2:x(pess),y2:m.t+ph,stroke:'var(--crit)','stroke-width':1.5,opacity:.5}));
+  const dt=el('text',{x:x(pess)-5,y:m.t+11,'text-anchor':'end',fill:'var(--crit)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});dt.textContent='Skenario pesimis (8 bln)';svg.appendChild(dt);
+  const opt=new Date(2026,10,27);
+  svg.appendChild(el('line',{x1:x(opt),y1:m.t,x2:x(opt),y2:m.t+ph,stroke:'var(--good)','stroke-width':1.5,'stroke-dasharray':'2 3',opacity:.6}));
+  const ot=el('text',{x:x(opt)+5,y:H-m.b+35,'text-anchor':'start',fill:'var(--good)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});ot.textContent='Titik-tengah (5,5 bln)';svg.appendChild(ot);
+})();
+</script>

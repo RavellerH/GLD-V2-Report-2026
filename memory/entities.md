@@ -10,6 +10,13 @@
 | org:emerson | Emerson | Vendor sistem **Corrosion Monitoring** (protokol **WirelessHART**) yang sudah terpasang & teruji di kilang — jadi rujukan desain mounting/bracket & topologi jaringan GLD (6 Agu). Bukan vendor/bagian dari proyek GLD. |
 | org:samindo | PT Samindo (ekosistem manufaktur Samsung Indonesia) | **Mitra manufaktur/skala** untuk permintaan volume besar (disebut 27 Agu di `Deliverables/GLD_Executive_Presentation.pptx`, instruksi langsung user — belum ada detail kontrak/kapasitas/status kerja sama tertulis di dokumen lain; disebut generik sbg "manufacturing/scale partner"). |
 
+## Kontrak & Proposal (`doc:`)
+| ID | Nama | Isi ringkas |
+|---|---|---|
+| doc:kontrak-payung | Kontrak Payung SP-26015 | Referensi kontrak yg jadi basis perhitungan tarif personil (SBOB/SBOH, Lamp.No.02 KP–Inkindo 2021) di RAB `proposal_GLD_1906M_KONTRAK_PAYUNG_rev2204260830.pdf` (4 Sep, dec:50). Belum ada salinan dokumen kontrak itu sendiri di repo — hanya referensi nomornya di RAB. |
+| doc:proposal-gld | Proposal GLD Tahap 2 (rev 22 Apr 2026) | `Sumber Dokumen/proposal_GLD_1906M_KONTRAK_PAYUNG_rev2204260830.pdf` — proposal formal ke Pertamina Patra Niaga, LGU+Korporasi Kinarya ITB. RAB Rp1.906.638.909. **Mencakup integrasi OGI Thermal Camera sbg scope inti** — bertentangan dgn dec:05 (OGI dihapus dari report), lih. dec:50. |
+| doc:proposal-sertifikasi | Proposal Sertifikasi GLD v4 | `Sumber Dokumen/PROPOSAL_SERTIFIKASI_GAS_LEAK_DETECTION_SYSTEM_v4.pdf` — cakupan ATEX+IP+EMC+RF terpadu, RAB Rp2.099.240.000, estimasi 5–8 bulan. Cover tertulis "Februari 2025" (belum dikonfirmasi typo atau bukan). Lih. dec:50. |
+
 ## Orang (`p:`) — dari notulen/laporan
 | ID | Nama | Peran/konteks |
 |---|---|---|
@@ -46,7 +53,7 @@
 ## Perangkat & hardware (`dev:`)
 | ID | Nama | Detail |
 |---|---|---|
-| dev:node | GLD Gas Point Sensor Unit | ESP32-S3 · 8× MQ · ADS1256/ADS1115/MCP3208 · TFLite Micro · TPL5010 duty-cycle · **catu daya final: 24VDC ≥2A/unit (dec:39)**, kabel+PSU disediakan RU/kilang · mounting L-bracket ref. Emerson (dec:40) · **spek EMC (dec:45)**: modul radio E22-900MM22S (TX maks 22dBm, dikonfigurasi 17dBm), antena omni 3dBi, dimensi 20×9×29cm, enclosure metal Ex-Proof, konsumsi maks 7,995W (versi 24VDC kontinu, beda dari draw ON 5,75W versi baterai duty-cycled), port USB/sensor/power/fan/antena/buzzer |
+| dev:node | GLD Gas Point Sensor Unit | ESP32-S3 · 8× MQ · ADS1256/ADS1115/MCP3208 · TFLite Micro · TPL5010 duty-cycle · **catu daya final: 24VDC ≥1A/unit (dec:39, direvisi dari ≥2A per dec:47)**, kabel+PSU disediakan RU/kilang · mounting L-bracket ref. Emerson (dec:40) · **spek EMC (dec:45)**: modul radio E22-900MM22S (TX maks 22dBm, dikonfigurasi 17dBm), antena omni 3dBi, dimensi 20×9×29cm, enclosure metal Ex-Proof, konsumsi maks 7,995W (versi 24VDC kontinu, beda dari draw ON 5,75W versi baterai duty-cycled), port USB/sensor/power/fan/antena/buzzer |
 | dev:ch | Cluster Head | LoRa dual-channel (E22) · solar + 18650 · failover RSSI · IP66/67 · tiang 6 m · mounting L-bracket ref. Emerson bareng solar panel (dec:40) · gate terbuka: sertifikasi solar hazardous (gate:solar-cert) & keamanan baterai 18650 di kilang (gate:ch-batt-safety) · **spek EMC (dec:45)**: modul radio E22-900MM22S, antena fiber 3dBi(STAR)/8dBi(MESH), dimensi 8×8×21cm, enclosure metal, konsumsi maks 0,73W · ⚠️ spek EMC sebut input power **5VDC** — belum rekonsiliasi dgn solar+18650 lapangan, perlu klarifikasi |
 | dev:gw | Gateway | Aggregator mesh · uplink WiFi/4G · MQTT · **spek EMC (dec:45)**: antena fiber 8dBi, dimensi 8×8×21cm (housing sama dgn CH), enclosure metal, konsumsi maks 0,73W, **port Ethernet tersedia selain Wi-Fi** (belum jelas apakah firmware sudah dukung) |
 | dev:server | PC Server | Node-RED · Operator Hub · backend GraphQL |

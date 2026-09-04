@@ -330,7 +330,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="checklist">
         <div class="citem"><span class="ic">✅</span><div><b>Firmware GLD/CH/Gateway berfungsi</b><span>Rantai komunikasi end-to-end teruji, termasuk mesh 8-CH &amp; push alarm otomatis (bagian 03, 05)</span></div></div>
         <div class="citem"><span class="ic">✅</span><div><b>Model AI on-device</b><span>CNN Dual-Branch berjalan langsung di ESP32-S3 GLD, akurasi 99,20% (bagian 03, 07)</span></div></div>
-        <div class="citem"><span class="ic">✅</span><div><b>Catu daya GLD final</b><span>24VDC ≥2A per unit — desain selesai, siap pasang (bagian 04, 09)</span></div></div>
+        <div class="citem"><span class="ic">✅</span><div><b>Catu daya GLD final</b><span>24VDC ≥1A per unit — desain selesai, siap pasang (bagian 04, 09)</span></div></div>
         <div class="citem"><span class="ic">✅</span><div><b>Desain mounting</b><span>L-bracket referensi Emerson untuk GLD &amp; CH+solar panel (bagian 04, 06, 09)</span></div></div>
         <div class="citem"><span class="ic">✅</span><div><b>Software server siap</b><span>Konfigurasi MQTT broker, backend, frontend — installer satu-paket disiapkan LGU/ITB (bagian 08)</span></div></div>
         <div class="citem"><span class="ic">✅</span><div><b>Rekomendasi spesifikasi server/VM</b><span>CPU/RAM/storage/OS/database diusulkan, tinggal dikonfirmasi Pertamina (bagian 08)</span></div></div>
@@ -349,7 +349,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 
       <p style="font-size:12.8px;color:var(--ink-soft);margin:16px 0 8px;font-weight:600">Instalasi &amp; catu daya</p>
       <div class="checklist">
-        <div class="citem"><span class="ic">☐</span><div><b>Kabel &amp; PSU 24VDC ≥2A</b><span>Pengadaan per titik pasang GLD (bagian 04, 09)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Kabel &amp; PSU 24VDC ≥1A</b><span>Pengadaan per titik pasang GLD (bagian 04, 09)</span></div></div>
         <div class="citem"><span class="ic">☐</span><div><b>Konfirmasi struktur mounting</b><span>Bracket ke konstruksi existing, atau siapkan tiang baru bila perlu (bagian 06, 09)</span></div></div>
         <div class="citem"><span class="ic">☐</span><div><b>Sertifikasi solar panel &amp; baterai CH</b><span>Solar wajib bersertifikasi hazardous area; keamanan baterai 18650 perlu didokumentasikan LGU, tapi butuh akses/persetujuan kilang (bagian 09, 10)</span></div></div>
       </div>
@@ -358,7 +358,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="checklist">
         <div class="citem"><span class="ic">☐</span><div><b>TRA/JSA site survey</b><span>Menahan eksekusi survei fisik RU IV Cilacap sampai disusun (bagian 10)</span></div></div>
         <div class="citem"><span class="ic">☐</span><div><b>Sertifikasi ketinggian pemasangan</b><span>Bila instalasi permanen di atas tinggi manusia (bagian 06, 10)</span></div></div>
-        <div class="citem"><span class="ic">☐</span><div><b>Sampel gas ke lokasi pengujian</b><span>Disiapkan &amp; dibawa tim Pertamina, tidak diambil langsung di kilang (bagian 06)</span></div></div>
+        <div class="citem"><span class="ic">☐</span><div><b>Sampel gas ke lokasi pengujian</b><span>Disiapkan &amp; dibawa tim Pertamina, tidak diambil langsung di kilang (bagian 06) — <b>belum diterima sampai sekarang</b> (H2S/metana/amonia/dll.); LGU sudah coba cari suplier alternatif di Bandung, masih sulit</span></div></div>
         <div class="citem"><span class="ic">☐</span><div><b>Rekonsiliasi requirement gas tambahan</b><span>Benzena/CO/H2S — apakah menambah atau menggantikan sebagian gate 6-kelas (bagian 07, 10)</span></div></div>
       </div>
 
@@ -429,7 +429,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
           <div class="stat"><span class="k">RX window</span><span class="v">2.000 ms</span></div>
           <div class="stat"><span class="k">Model AI</span><span class="v">CNN Dual-Branch, 99,20%</span></div>
           <div class="stat"><span class="k">Alarm trigger</span><span class="v">gasClass≠0 &amp; conf≥30%</span></div>
-          <div class="stat"><span class="k">Sumber daya</span><span class="v">24VDC ≥2A (final) · baterai jalur terpisah</span></div>
+          <div class="stat"><span class="k">Sumber daya</span><span class="v">24VDC ≥1A (final) · baterai jalur terpisah</span></div>
           <div class="stat"><span class="k">Mounting</span><span class="v">L-bracket ref. Emerson, ke struktur existing</span></div>
           <div class="stat"><span class="k">Enkripsi</span><span class="v">AES-128-GCM, frame 39 byte</span></div>
           <div class="stat"><span class="k">Modul radio</span><span class="v">E22-900MM22S</span></div>
@@ -752,12 +752,12 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 
       <div class="subhead"><h3>GLD Node — catu daya <span class="status ok">24VDC final &amp; siap pasang</span></h3></div>
       <div class="statgrid" style="border:1px solid var(--line);border-radius:11px;overflow:hidden">
-        <div class="stat"><span class="k">Sumber daya dipilih</span><span class="v">24VDC ≥2A per unit GLD</span></div>
+        <div class="stat"><span class="k">Sumber daya dipilih</span><span class="v">24VDC ≥1A per unit GLD</span></div>
         <div class="stat"><span class="k">Status</span><span class="v">Selesai, siap pasang</span></div>
         <div class="stat"><span class="k">Kabel &amp; PSU 24V</span><span class="v">Pengadaan oleh pihak RU/kilang</span></div>
         <div class="stat"><span class="k">Jalur baterai</span><span class="v">Dikembangkan terpisah, tidak menahan deployment 24V</span></div>
       </div>
-      <p style="font-size:11.8px;color:var(--ink-soft)">2A adalah kebutuhan <b>per titik GLD</b> — jadi acuan sizing kabel &amp; PSU per titik pasang oleh RU/kilang, bukan kapasitas gabungan yang di-share ke beberapa unit.</p>
+      <p style="font-size:11.8px;color:var(--ink-soft)">1A adalah kebutuhan <b>per titik GLD</b> — jadi acuan sizing kabel &amp; PSU per titik pasang oleh RU/kilang, bukan kapasitas gabungan yang di-share ke beberapa unit. <b>Direvisi dari ≥2A</b> (dec:39, 19 Agu) menjadi ≥1A (dec:47) — konsumsi maks terukur 7,995 W pada 24VDC (≈0,33 A) tetap jauh di bawah kedua angka ini, jadi revisi ini hanya mengubah margin sizing PSU/kabel, bukan konsumsi aktual perangkat.</p>
 
       <div class="subhead"><h3>GLD Node — jalur baterai (dikembangkan terpisah, bukan blocker deployment)</h3></div>
       <div class="barlist">
@@ -805,7 +805,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="rcard"><span class="ic">🟡</span><div><b>DC converter</b><span>Perlu diganti/dimodifikasi</span></div></div>
         <div class="rcard"><span class="ic">🔴</span><div><b>TRA/JSA belum disusun</b><span>Menahan eksekusi site survey fisik</span></div></div>
         <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi ketinggian</b><span>Baru diuji setinggi manusia</span></div></div>
-        <div class="rcard"><span class="ic">🔴</span><div><b>Gas tambahan belum direkonsiliasi</b><span>Benzena/CO/H2S vs gate 6-kelas</span></div></div>
+        <div class="rcard"><span class="ic">🔴</span><div><b>Gas tambahan belum direkonsiliasi</b><span>Benzena/CO/H2S vs gate 6-kelas — sampel dari Pertamina belum ada, suplier Bandung juga sulit</span></div></div>
         <div class="rcard"><span class="ic">🟡</span><div><b>Kapasitas GW/CH</b><span>Belum ada angka resmi vs jumlah sensor</span></div></div>
         <div class="rcard"><span class="ic">🔴</span><div><b>Sertifikasi ATEX</b><span>Belum terbit — target ~3 minggu sejak notulen</span></div></div>
         <div class="rcard"><span class="ic">🟡</span><div><b>Sertifikasi solar panel hazardous</b><span>Belum disourcing — PIC LGU</span></div></div>
@@ -821,7 +821,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <li>Konsistensi dataset → siap dipakai.</li>
         <li>Catu daya CH → teratasi (2 panel solar).</li>
         <li>Push alarm → berhasil diuji di mesh kampus (belum lapangan produksi).</li>
-        <li>Catu daya GLD → <b>24VDC ≥2A final, siap pasang</b> (jalur baterai berjalan terpisah).</li>
+        <li>Catu daya GLD → <b>24VDC ≥1A final, siap pasang</b> (jalur baterai berjalan terpisah).</li>
       </ul>
       <div class="banner info"><span class="ic">📈</span><span>Progres pilot Cilacap ≈ 39% (baseline 19%) — <b>sisi engineering lab saja</b>, bukan kesiapan lapangan/sertifikasi.</span></div>
     </section>
@@ -843,7 +843,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 
     <footer>
       GLD Tahap 2 — LAPI Ganesha Utama · Lab IoT &amp; Lab Fisika ITB · PT Pertamina Patra Niaga (RU IV Cilacap)<br>
-      Disusun 19 Agustus 2026. Rev 0.6 — draft engineering, belum disahkan.
+      Disusun 19 Agustus 2026, direvisi awal September 2026 (catu daya GLD 24VDC ≥2A→≥1A). Rev 0.7 — draft engineering, belum disahkan.
     </footer>
   </main>
 </div>

@@ -10,7 +10,7 @@
 ## Blocker kritis aktif (2)
 | ID | Blocker | Metrik | Dampak |
 |---|---|---|---|
-| blk:power | Autonomi baterai GLD < target 30 hari | draw ON **5,75 W**; 7P(28Ah)=**1,76 hari**; 30 hari butuh ~120 sel | Jalur baterai **terpisah**, tidak menahan deployment — GLD sekarang pakai **24VDC ≥2A/unit (final, siap pasang, dec:39)**, kabel+PSU pengadaan RU/kilang |
+| blk:power | Autonomi baterai GLD < target 30 hari | draw ON **5,75 W**; 7P(28Ah)=**1,76 hari**; 30 hari butuh ~120 sel | Jalur baterai **terpisah**, tidak menahan deployment — GLD sekarang pakai **24VDC ≥1A/unit (final, siap pasang, dec:39, direvisi dari ≥2A per dec:47)**, kabel+PSU pengadaan RU/kilang |
 | blk:tpl | TPL5010 belum memutus daya | board ~**0,4 V** & cuplik data saat "off" | Duty-cycle belum efektif hemat daya |
 | blk:conv | DC converter perlu diganti/dimodifikasi | arahan 20 Jul | Menahan finalisasi catu daya |
 
@@ -29,15 +29,16 @@ Deployment se-kampus ITB: GW ← Layer 1 (CH3/CH5/CH8) ← Layer 2 (CH1/CH4) ←
 |---|---|---|
 | gate:jsa | TRA/JSA | Belum disusun → menahan eksekusi site survey fisik RU IV Cilacap |
 | gate:cert-height | Sertifikasi ketinggian pemasangan | Percobaan di kilang baru setinggi orang; **belum tersertifikasi** utk instalasi permanen (rapat resmi 6 Agu) |
-| gate:gas-extra | Requirement gas tambahan (Benzena/CO/H2S) | Belum direkonsiliasi dgn gate 6-kelas (dec:17/dec:30) — status verifikasi belum ada. Model AI resmi saat ini (**CNN Dual-Branch**, dec:36) sudah cakup H2 (gate lama) tapi **masih TIDAK cakup H2S/Benzena** — gate ini belum tertutup |
+| gate:gas-extra | Requirement gas tambahan (Benzena/CO/H2S) | Belum direkonsiliasi dgn gate 6-kelas (dec:17/dec:30) — status verifikasi belum ada. Model AI resmi saat ini (**CNN Dual-Branch**, dec:36) sudah cakup H2 (gate lama) tapi **masih TIDAK cakup H2S/Benzena** — gate ini belum tertutup. ⚠️ **Blocker konkret (dec:48, ~awal Sep)**: sampel gas (H2S, metana, amonia, dll.) dari Pertamina **belum diterima sampai sekarang**; LGU sudah cari suplier di Bandung (masih aktif, **lebih cepat bila Pertamina sediakan langsung**) tapi **masih sulit dapat sampel gas-gas ini** — tanpa sampel, dataset/model utk gas-gas tambahan ini tidak bisa dikembangkan/divalidasi. **Mitigasi (dec:49)**: gas test chamber **portable sudah dibangun** utk dibawa langsung ke kilang sbg alternatif — ⚠️ berpotensi perlu rekonsiliasi dgn dec:32 (chamber sebelumnya tidak diizinkan masuk kilang) |
 | gate:capacity | Kapasitas GW/CH vs jumlah sensor | **Belum ada angka resmi** — action item terbuka (Tim Komunikasi ITB), lih. dec:28 |
 | gate:solar-cert | Sertifikasi solar panel (CH) utk hazardous area | **Belum disourcing** — PIC LGU (dec:41) |
 | gate:ch-batt-safety | Keamanan baterai Li-ion 18650 CH di kondisi kilang | **Belum didokumentasikan** — perlu verifikasi sertifikasi sel/BMS (mis. IEC 62133/UN38.3) — PIC LGU (dec:41) |
 | gate:bracket-tools | Ukuran kunci/mur-baut bracket GLD & CH | **Belum ditentukan** — PIC LGU/Tim Mekanik (dec:40) |
-| gate:net-registration | Step-by-step registrasi Gateway ke jaringan kilang + kebijakan security jaringan (selain SSID/password) | **Perlu jawaban Pertamina** — belum ada (dec:42) |
-| gate:server-spec | Spesifikasi server/VM aktual (CPU/RAM/storage/OS/DB) RU IV | LGU sudah usulkan rekomendasi minimum (dec:44) — **menunggu konfirmasi Pertamina** |
+| gate:net-registration | Step-by-step registrasi ke jaringan kilang + kebijakan security jaringan (selain SSID/password) | **Perlu jawaban Pertamina** — belum ada (dec:42). ⚠️ **Update dec:46**: kemungkinan yang didaftarkan bukan MAC Gateway langsung, melainkan NIC kedua PC server LGU (dual-homed) — perlu dikonfirmasi mana yang benar |
+| gate:server-spec | Spesifikasi server/VM aktual (CPU/RAM/storage/OS/DB) RU IV, disediakan Pertamina | LGU sudah usulkan rekomendasi minimum (dec:44) — **menunggu konfirmasi Pertamina**. ⚠️ **Update dec:46**: PC dedicated dekat GW (dikelola LGU) adalah TAMBAHAN dari server/VM ini, bukan pengganti — relasi/pembagian fungsi persis antara keduanya **masih perlu diklarifikasi** |
 | gate:ch-power-spec | Input power CH: spek EMC tertulis 5VDC vs notulen daya sebut solar+18650 | **Belum rekonsiliasi** — perlu klarifikasi apakah 5VDC referensi internal board atau beda konfigurasi (dec:45) |
 | gate:gw-ethernet | Gateway punya port Ethernet fisik (spek EMC) selain Wi-Fi | **Belum jelas** apakah firmware Gateway saat ini sudah mendukung jalur Ethernet (dec:45) — berpotensi menyederhanakan isu keamanan Wi-Fi di bagian 08 |
+| gate:dashboard-exposure | Keamanan akses dashboard dari PC server LGU ke LAN kantor kilang | **Direncanakan langsung via NIC kedua, tanpa firewall/VPN tambahan** (dec:46) — belum ada review keamanan/kebijakan akses; berpotensi jadi celah eksposur ke seluruh intranet kantor kilang, perlu diklarifikasi ke Pertamina & tim jaringan |
 
 ## Metrik daya (Update Timeline Juli, 16 Jul 2026)
 **GLD node (baterai 7P = 7×4000 mAh = 28 Ah, ~70,4 Wh usable):**
@@ -102,7 +103,7 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 | Push alarm | **Belum dicoba sama sekali** — perlu masuk rencana pengujian. |
 | Protokol missed-report GLD portable | Kekhawatiran: GLD portable bisa melewatkan gas saat non-aktif (duty-cycle OFF). Perlu mekanisme/protokol: jika GLD tak lapor sesuai jadwal, cek kondisi (baterai, sensor, dll). **Perluasan** dari risiko "data alarm hilang" 24 Jul (retry/heartbeat, PIC Beni) — protokol spesifik ini belum didefinisikan. |
 | Portable GLD versi baterai | Butuh **magnet** untuk mounting — belum disourcing. |
-| Test chamber portable | Dimensi & berat **belum ditentukan** — target harus mudah dimobilisasi. Pertanyaan terbuka dari tim sendiri, belum ada jawaban. |
+| Test chamber portable | **Sudah dibangun** (dikonfirmasi user, ~awal Sep, dec:49) — dibawa ke **kantor kilang** (bukan area proses/hazardous), konsisten dgn dec:32. Training dilakukan di luar kilang. Dimensi/berat/spek teknis **masih belum diberikan**. Salah satu jalur dapat sampel gas dari Pertamina langsung di lokasi, tapi dikonfirmasi user **"itu alternatif saja"** — bukan pengganti pencarian suplier Bandung, keduanya jalan paralel (dec:51). |
 | Gas capability gate (dec:17, min 6 kelas) | Status: baru **3 dari 6 kelas tervalidasi** (Clean Air, LPG, CO2 — sesuai scope `model:cnn1d`). LPG sudah diuji semprot langsung, hasil OK. H₂, Metana, dan validasi CO₂/Clean Air lebih lanjut masih diperlukan. |
 | ⚠️ **Akurasi model dipertanyakan ulang** (dibahas "hari Jumat") | Tim sendiri mengangkat kekhawatiran akurasi CNN 1D/TCN yang terlihat tinggi — **direkomendasikan cek ulang** (potensi data leakage/overfitting, terutama karena dataset lab relatif kecil). Perlu jadi action item verifikasi independen sebelum klaim akurasi dipakai lebih jauh ke client. |
 

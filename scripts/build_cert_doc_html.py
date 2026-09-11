@@ -123,6 +123,33 @@ for fn, title, desc in schematic_sheets:
     schematic_cards.append(f'<figure class="photo">\n<img src="data:image/png;base64,{data}" alt="{title}" loading="lazy">\n<figcaption><b>{title}</b><span>{desc}</span></figcaption>\n</figure>')
 schematics_html = "\n".join(schematic_cards)
 
+pcb_layout_b64 = b64_schematic("10-pcb-layout.png")
+
+import csv
+BOM_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_bom")
+
+def load_bom(fn):
+    with open(os.path.join(BOM_DIR, fn), encoding="utf-8") as f:
+        rows = list(csv.reader(f))
+    return rows[1:]  # skip header: ID,Name,Designator,Footprint,Quantity,Manufacturer Part,Manufacturer,Supplier,Supplier Part,Price
+
+def bom_rows_html(rows):
+    out = []
+    for r in rows:
+        _id, name, designator, footprint, qty, mpn, mfr, supplier, supplier_part, price = (r + [""] * 10)[:10]
+        lcsc = supplier_part if supplier == "LCSC" and supplier_part else "&mdash;"
+        mfr_disp = mfr.split("(")[0].strip() if mfr else "&mdash;"
+        mpn_disp = mpn if mpn else "&mdash;"
+        out.append(f"<tr><td>{designator}</td><td>{name}</td><td>{qty}</td><td>{mfr_disp}</td><td>{mpn_disp}</td><td>{lcsc}</td></tr>")
+    return "\n".join(out)
+
+mb_rows = load_bom("motherboard.csv")
+sb_rows = load_bom("sensorboard.csv")
+mb_bom_rows = bom_rows_html(mb_rows)
+sb_bom_rows = bom_rows_html(sb_rows)
+mb_lines, mb_qty = len(mb_rows), sum(int(r[4]) for r in mb_rows)
+sb_lines, sb_qty = len(sb_rows), sum(int(r[4]) for r in sb_rows)
+
 # ============================================================
 # BODY (English, professional submission document)
 # ============================================================
@@ -305,24 +332,42 @@ body = f'''<meta charset="utf-8">
   <p class="lede">Nine sub-items (a&ndash;i) per the original checklist. Status is reported item by item below; most sub-items are <b>not yet available</b> &mdash; this is reported plainly rather than implied to be complete.</p>
 
   <p class="doclabel">2.6.a &middot; Complete Drawings (Assembly, Component, Electrical Schematic, PCB Layout, Enclosure Structure, Junction Box, Terminal, Grounding)</p>
-  <p class="lede">An electrical schematic capture and a corresponding PCB layout exist for the GLD V2 main board (EDA source design files). From the schematic&rsquo;s traced net list, a supporting block-diagram set (9 sheets, functional/block level, 204 components mapped with documented pin-to-net traceability) has been produced and is reproduced in full below. Field labels in the source diagrams are in Indonesian; English captions are provided under each sheet.</p>
+  <p class="lede">An electrical schematic capture and a corresponding PCB layout exist for the GLD V2 main board as native EasyEDA/JLCPCB source design files (not just a derived summary). From the schematic&rsquo;s traced net list, a supporting block-diagram set (9 sheets, functional/block level, 204 components mapped with documented pin-to-net traceability) has been produced and is reproduced in full below. Field labels in the source diagrams are in Indonesian; English captions are provided under each sheet.</p>
   <div class="photogrid">
 {schematics_html}
   </div>
+  <figure class="photo" style="max-width:420px;margin:0 auto 14px">
+    <img src="data:image/png;base64,{pcb_layout_b64}" alt="Main board PCB copper layout, top view" loading="lazy">
+    <figcaption><b>Main board PCB layout &mdash; top copper layer</b><span>Routed layout exported directly from the EasyEDA/JLCPCB source project (production-intent board, circular outline with six mounting holes). A companion 3D solid model (OBJ/MTL) of the same board also exists.</span></figcaption>
+  </figure>
   <table>
     <tr><th>Drawing type</th><th>Status</th><th>Remarks</th></tr>
     <tr><td>Electrical schematic (component-level) / block diagram</td><td><span class="status wip">Partially available</span></td><td>Schematic capture and a derived 9-sheet block-diagram set exist with traceability evidence (pin-to-net mapping). Not yet issued in a released, revision-controlled drawing format with a formal drawing number.</td></tr>
-    <tr><td>PCB layout</td><td><span class="status wip">Partially available</span></td><td>PCB layout export exists for the same board revision as the schematic above.</td></tr>
+    <tr><td>PCB layout</td><td><span class="status wip">Partially available</span></td><td>Native EasyEDA/JLCPCB layout export (routed copper) and a 3D solid model exist for the same board revision. Not yet issued as a dimensioned, toleranced, released drawing with a formal drawing number.</td></tr>
     <tr><td>Assembly drawing</td><td><span class="status gap">Not yet available</span></td><td>&nbsp;</td></tr>
     <tr><td>Component drawing</td><td><span class="status gap">Not yet available</span></td><td>&nbsp;</td></tr>
-    <tr><td>Enclosure structure drawing (gap, length, volume)</td><td><span class="status gap">Not yet available</span></td><td>Required if a flameproof (Ex d) protection concept is pursued.</td></tr>
+    <tr><td>Enclosure structure drawing (gap, length, volume)</td><td><span class="status gap">Not yet available</span></td><td>Required if a flameproof (Ex d) protection concept is pursued. The BOM below references a placeholder mechanical symbol for the enclosure (designator U50) with no dimensional data attached.</td></tr>
     <tr><td>Junction box / terminal / grounding connection drawings</td><td><span class="status gap">Not yet available</span></td><td>&nbsp;</td></tr>
   </table>
   <div class="banner info"><span class="ic">&#9432;</span><div>The schematic and PCB layout are useful supporting engineering artifacts, but on their own they do not constitute the certified drawing package the checklist requires &mdash; dimensioned, toleranced, material-annotated drawings in a released revision-controlled form have not yet been produced.</div></div>
 
   <p class="doclabel">2.6.b &middot; Bill of Materials (BOM) for Explosion-Safety-Relevant Components</p>
-  <p class="lede">A controlled, Ex-critical BOM (enclosure, gaskets, terminals, cable entry devices, switches, light sources, battery, potting compound, plastic parts, printed circuit boards &mdash; with manufacturer, model, material grade, and certification/technical parameters for each) has <b>not yet been compiled</b>. A component-level pin/net export exists from the schematic (204 components traced) and can serve as a starting reference, but manufacturer part numbers, material grades, and Ex/UL/CCC certification status for the safety-critical items above have not been determined. Comparative research on Ex-rated enclosure products from other manufacturers exists internally as a reference for target specifications only &mdash; it describes third-party products, not this product&rsquo;s actual components, and is not included here.</p>
-  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Not yet available.</b></div></div>
+  <p class="lede">A complete, itemized electronic-component BOM for both the main board and the external sensor board now exists, exported directly from the EasyEDA/JLCPCB source project (manufacturer, manufacturer part number, and LCSC supplier part number for each line item; {mb_lines} line items / {mb_qty} placed components on the main board, {sb_lines} line items / {sb_qty} placed components on the sensor board &mdash; full tables below). This is real, traceable sourcing data and materially improves on the previous status.</p>
+  <p class="lede">It does <b>not</b>, however, satisfy this checklist item as written. The checklist asks specifically for the <b>explosion-safety-relevant</b> BOM &mdash; enclosure, gaskets, terminals, cable entry devices, switches, light sources, battery, potting compound, and plastic parts, each with material grade and Ex/UL/CCC certification status. None of those mechanical/safety items appear in an electronic CAD BOM: the enclosure is present only as a placeholder mechanical symbol (designator <span class="mono">U50</span>, no manufacturer or dimensional data attached), and the gas sensor itself (<span class="mono">MQ2</span>, designator <span class="mono">I1</span>) has no manufacturer or supplier part number recorded &mdash; it is sourced outside the LCSC/JLCPCB supply chain and its Ex status is unverified. Comparative research on Ex-rated enclosure products from other manufacturers exists internally as a reference for target specifications only &mdash; it describes third-party products, not this product&rsquo;s actual components, and is not included here.</p>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Designator</th><th>Value / part</th><th>Qty</th><th>Manufacturer</th><th>Manufacturer part no.</th><th>LCSC #</th></tr>
+{mb_bom_rows}
+  </table>
+  </div>
+  <p class="lede" style="margin-top:14px">External sensor board (gas-sensing front end):</p>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Designator</th><th>Value / part</th><th>Qty</th><th>Manufacturer</th><th>Manufacturer part no.</th><th>LCSC #</th></tr>
+{sb_bom_rows}
+  </table>
+  </div>
+  <div class="banner warn"><span class="ic">&#9888;</span><div><b>Status: Partially available.</b> Full electronic-component BOM with real manufacturer/supplier data now exists (source: EasyEDA/JLCPCB export, 11 Sep 2026). The explosion-safety-relevant subset the checklist actually asks for &mdash; enclosure, gasket, cable entry device, battery, potting compound, and the gas sensor itself, with material grade and Ex/UL/CCC certification for each &mdash; remains not yet compiled, because those mechanical/safety parts are not represented in an electronic design BOM.</div></div>
 
   <p class="doclabel">2.6.c &middot; Material Specification Sheets / Datasheets (Non-Metallic Materials)</p>
   <p class="lede">Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, insulators, potting compounds) &mdash; covering heat/cold resistance, anti-aging, anti-static, flame retardancy, CTI value, and chemical resistance &mdash; have not yet been collected.</p>

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import csv
 from docx import Document
 from docx.shared import Pt, Inches, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -10,7 +11,23 @@ from docx.oxml import OxmlElement
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHOTO_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_photos")
 SCHEMATIC_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_schematics")
+BOM_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_bom")
 OUT_PATH = os.path.join(REPO, "Deliverables", "Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX.docx")
+
+def load_bom(fn):
+    with open(os.path.join(BOM_DIR, fn), encoding="utf-8") as f:
+        rows = list(csv.reader(f))
+    return rows[1:]  # skip header: ID,Name,Designator,Footprint,Quantity,Manufacturer Part,Manufacturer,Supplier,Supplier Part,Price
+
+def bom_table_rows(rows):
+    out = []
+    for r in rows:
+        _id, name, designator, footprint, qty, mpn, mfr, supplier, supplier_part, price = (r + [""] * 10)[:10]
+        lcsc = supplier_part if supplier == "LCSC" and supplier_part else "—"
+        mfr_disp = mfr.split("(")[0].strip() if mfr else "—"
+        mpn_disp = mpn if mpn else "—"
+        out.append([designator, name, qty, mfr_disp, mpn_disp, lcsc])
+    return out
 
 NAVY = RGBColor(0x1A, 0x2B, 0x3D)
 GRAY = RGBColor(0x4A, 0x4A, 0x4A)
@@ -118,7 +135,7 @@ def status_run(cell_para, text, kind):
     run.font.size = Pt(9.5)
     run.font.color.rgb = {"ok": GOOD, "wip": WARN, "gap": GAP}[kind]
 
-def make_table(headers, rows, col_widths=None, status_col=None):
+def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
     """rows: list of lists; status_col: dict {row_idx: (status_text, kind)} applied to last column override"""
     n_cols = len(headers)
     tbl = doc.add_table(rows=1, cols=n_cols)
@@ -140,12 +157,22 @@ def make_table(headers, rows, col_widths=None, status_col=None):
                 status_run(cells[cidx].paragraphs[0], val[1][0], val[1][1])
             else:
                 r = cells[cidx].paragraphs[0].add_run(str(val))
-                r.font.size = Pt(9.5)
+                r.font.size = Pt(font_size)
                 if cidx == 0:
                     r.font.bold = True
     if col_widths:
-        for i, w in enumerate(col_widths):
-            for row in tbl.rows:
+        tbl.autofit = False
+        tblPr = tbl._tbl.tblPr
+        layout = OxmlElement("w:tblLayout")
+        layout.set(qn("w:type"), "fixed")
+        tblPr.append(layout)
+        total_w = sum(col_widths)
+        tblGrid = tbl._tbl.find(qn("w:tblGrid"))
+        for i, gridCol in enumerate(tblGrid.findall(qn("w:gridCol"))):
+            gridCol.set(qn("w:w"), str(int(col_widths[i] * 1440)))
+        for row in tbl.rows:
+            row.width = Inches(total_w)
+            for i, w in enumerate(col_widths):
                 row.cells[i].width = Inches(w)
     doc.add_paragraph().paragraph_format.space_after = Pt(2)
     return tbl
@@ -569,11 +596,11 @@ p("Nine sub-items (a\u2013i) per the original checklist. Status is reported item
 
 doc.add_heading("2.6.a \u00b7 Complete Drawings (Assembly, Component, Electrical Schematic, PCB Layout, "
                  "Enclosure Structure, Junction Box, Terminal, Grounding)", level=3)
-p("An electrical schematic capture and a corresponding PCB layout exist for the GLD V2 main board (EDA "
-  "source design files). From the schematic's traced net list, a supporting block-diagram set (9 sheets, "
-  "functional/block level, 204 components mapped with documented pin-to-net traceability) has been produced "
-  "and is reproduced in full below. Field labels in the source diagrams are in Indonesian; English captions "
-  "are provided under each sheet.")
+p("An electrical schematic capture and a corresponding PCB layout exist for the GLD V2 main board as native "
+  "EasyEDA/JLCPCB source design files (not just a derived summary). From the schematic's traced net list, a "
+  "supporting block-diagram set (9 sheets, functional/block level, 204 components mapped with documented "
+  "pin-to-net traceability) has been produced and is reproduced in full below. Field labels in the source "
+  "diagrams are in Indonesian; English captions are provided under each sheet.")
 schematic_sheets = [
     ("01-diagram.png", "Sheet 1 of 9 \u2014 Overall architecture",
      "Power input, power distribution, analog acquisition, sensor control, main control (ESP32-S3), and "
@@ -611,6 +638,21 @@ for fn, title, desc in schematic_sheets:
     fcr1.font.bold = True; fcr1.font.size = Pt(9.5)
     fcr2 = fig_cap.add_run(desc)
     fcr2.font.size = Pt(8.5); fcr2.font.color.rgb = GRAY
+pcb_fig_para = doc.add_paragraph()
+pcb_fig_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+pcb_fig_run = pcb_fig_para.add_run()
+pcb_fig_run.add_picture(os.path.join(SCHEMATIC_DIR, "10-pcb-layout.png"), width=Inches(3.6))
+pcb_fig_cap = doc.add_paragraph()
+pcb_fig_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+pcb_fig_cap.paragraph_format.space_after = Pt(12)
+pcr1 = pcb_fig_cap.add_run("Main board PCB layout \u2014 top copper layer\n")
+pcr1.font.bold = True; pcr1.font.size = Pt(9.5)
+pcr2 = pcb_fig_cap.add_run(
+    "Routed layout exported directly from the EasyEDA/JLCPCB source project (production-intent board, "
+    "circular outline with six mounting holes). A companion 3D solid model (OBJ/MTL) of the same board also "
+    "exists."
+)
+pcr2.font.size = Pt(8.5); pcr2.font.color.rgb = GRAY
 make_table(
     ["Drawing type", "Status", "Remarks"],
     [
@@ -619,11 +661,14 @@ make_table(
          "(pin-to-net mapping). Not yet issued in a released, revision-controlled drawing format with a "
          "formal drawing number."],
         ["PCB layout", ("__status__", ("Partially available", "wip")),
-         "PCB layout export exists for the same board revision as the schematic above."],
+         "Native EasyEDA/JLCPCB layout export (routed copper) and a 3D solid model exist for the same board "
+         "revision. Not yet issued as a dimensioned, toleranced, released drawing with a formal drawing "
+         "number."],
         ["Assembly drawing", ("__status__", ("Not yet available", "gap")), ""],
         ["Component drawing", ("__status__", ("Not yet available", "gap")), ""],
         ["Enclosure structure drawing (gap, length, volume)", ("__status__", ("Not yet available", "gap")),
-         "Required if a flameproof (Ex d) protection concept is pursued."],
+         "Required if a flameproof (Ex d) protection concept is pursued. The BOM below references a "
+         "placeholder mechanical symbol for the enclosure (designator U50) with no dimensional data attached."],
         ["Junction box / terminal / grounding connection drawings", ("__status__", ("Not yet available", "gap")), ""],
     ],
     col_widths=[2.6, 1.3, 2.8],
@@ -636,15 +681,47 @@ note_box(
 )
 
 doc.add_heading("2.6.b \u00b7 Bill of Materials (BOM) for Explosion-Safety-Relevant Components", level=3)
-p("A controlled, Ex-critical BOM (enclosure, gaskets, terminals, cable entry devices, switches, light "
-  "sources, battery, potting compound, plastic parts, printed circuit boards \u2014 with manufacturer, model, "
-  "material grade, and certification/technical parameters for each) has not yet been compiled. A "
-  "component-level pin/net export exists from the schematic (204 components traced) and can serve as a "
-  "starting reference, but manufacturer part numbers, material grades, and Ex/UL/CCC certification status "
-  "for the safety-critical items above have not been determined. Comparative research on Ex-rated enclosure "
-  "products from other manufacturers exists internally as a reference for target specifications only \u2014 "
-  "it describes third-party products, not this product's actual components, and is not included here.")
-note_box("Status: Not yet available.", shade=INFO_SHADE)
+mb_rows = load_bom("motherboard.csv")
+sb_rows = load_bom("sensorboard.csv")
+mb_lines, mb_qty = len(mb_rows), sum(int(r[4]) for r in mb_rows)
+sb_lines, sb_qty = len(sb_rows), sum(int(r[4]) for r in sb_rows)
+p(f"A complete, itemized electronic-component BOM for both the main board and the external sensor board now "
+  f"exists, exported directly from the EasyEDA/JLCPCB source project (manufacturer, manufacturer part "
+  f"number, and LCSC supplier part number for each line item; {mb_lines} line items / {mb_qty} placed "
+  f"components on the main board, {sb_lines} line items / {sb_qty} placed components on the sensor board "
+  f"\u2014 full tables below). This is real, traceable sourcing data and materially improves on the previous "
+  f"status.")
+p("It does not, however, satisfy this checklist item as written. The checklist asks specifically for the "
+  "explosion-safety-relevant BOM \u2014 enclosure, gaskets, terminals, cable entry devices, switches, light "
+  "sources, battery, potting compound, and plastic parts, each with material grade and Ex/UL/CCC "
+  "certification status. None of those mechanical/safety items appear in an electronic CAD BOM: the "
+  "enclosure is present only as a placeholder mechanical symbol (designator U50, no manufacturer or "
+  "dimensional data attached), and the gas sensor itself (MQ2, designator I1) has no manufacturer or "
+  "supplier part number recorded \u2014 it is sourced outside the LCSC/JLCPCB supply chain and its Ex status "
+  "is unverified. Comparative research on Ex-rated enclosure products from other manufacturers exists "
+  "internally as a reference for target specifications only \u2014 it describes third-party products, not "
+  "this product's actual components, and is not included here.")
+make_table(
+    ["Designator", "Value / part", "Qty", "Manufacturer", "Manufacturer part no.", "LCSC #"],
+    bom_table_rows(mb_rows),
+    col_widths=[1.0, 1.35, 0.4, 1.15, 1.65, 0.85],
+    font_size=7.5,
+)
+p("External sensor board (gas-sensing front end):")
+make_table(
+    ["Designator", "Value / part", "Qty", "Manufacturer", "Manufacturer part no.", "LCSC #"],
+    bom_table_rows(sb_rows),
+    col_widths=[1.0, 1.35, 0.4, 1.15, 1.65, 0.85],
+    font_size=7.5,
+)
+note_box(
+    "Status: Partially available. Full electronic-component BOM with real manufacturer/supplier data now "
+    "exists (source: EasyEDA/JLCPCB export, 11 Sep 2026). The explosion-safety-relevant subset the checklist "
+    "actually asks for \u2014 enclosure, gasket, cable entry device, battery, potting compound, and the gas "
+    "sensor itself, with material grade and Ex/UL/CCC certification for each \u2014 remains not yet compiled, "
+    "because those mechanical/safety parts are not represented in an electronic design BOM.",
+    shade=WARN_SHADE,
+)
 
 doc.add_heading("2.6.c \u00b7 Material Specification Sheets / Datasheets (Non-Metallic Materials)", level=3)
 p("Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, "

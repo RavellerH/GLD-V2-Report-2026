@@ -3,11 +3,16 @@ import base64, os
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHOTO_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_photos")
+SCHEMATIC_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_schematics")
 OUT_PATH = os.path.join(REPO, "Deliverables", "Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX.html")
 STYLE_SOURCE = os.path.join(REPO, "Deliverables", "Dashboard_Sertifikasi_GLD_ATEX_IECEx.html")
 
 def b64(fn):
     with open(os.path.join(PHOTO_DIR, fn), "rb") as f:
+        return base64.b64encode(f.read()).decode("ascii")
+
+def b64_schematic(fn):
+    with open(os.path.join(SCHEMATIC_DIR, fn), "rb") as f:
         return base64.b64encode(f.read()).decode("ascii")
 
 # ---- reuse the visual design system (CSS) already established for this document family ----
@@ -92,7 +97,31 @@ for fn, title, desc in photos:
     photo_cards.append(f'<figure class="photo">\n<img src="data:image/jpeg;base64,{data}" alt="{title}" loading="lazy">\n<figcaption><b>{title}</b><span>{desc}</span></figcaption>\n</figure>')
 photos_html = "\n".join(photo_cards)
 
-schematic_b64 = b64("GLD2-schematic-block-overview.jpg")
+schematic_sheets = [
+    ("01-diagram.png", "Sheet 1 of 9 &mdash; Overall architecture",
+     "Power input, power distribution, analog acquisition, sensor control, main control (ESP32-S3), and external interfaces (alarm, RS-485, LoRa antenna, programming/configuration)."),
+    ("02-diagram.png", "Sheet 2 of 9 &mdash; Main power",
+     "Main power input rails and distribution: +5 V / +5VA analog, 3.3 V, and +24 V for the alarm circuit."),
+    ("03-diagram.png", "Sheet 3 of 9 &mdash; Always-on power",
+     "The always-on power domain that remains active independent of the main control state."),
+    ("04-diagram.png", "Sheet 4 of 9 &mdash; Sensor module",
+     "The external gas sensor module: 8 analog channels with per-channel I2C enable, including the sensor, DAC, and power-switch sub-blocks."),
+    ("05-diagram.png", "Sheet 5 of 9 &mdash; Analog acquisition",
+     "The 8-channel analog acquisition front end: analog inputs, ADC (ADS1256), reference, and VMID biasing."),
+    ("06-diagram.png", "Sheet 6 of 9 &mdash; I2C &amp; sensor control",
+     "I2C channel selection (TCA9548A), per-channel sensor enable (PCF8574), and the temperature/humidity sensor (SHT40)."),
+    ("07-diagram.png", "Sheet 7 of 9 &mdash; ESP32 connections",
+     "Main controller (ESP32-S3) interface map: SPI to the ADC, I2C to sensor/control, UART for USB and RS-485, and GPIO for alarm, power, button, and LED."),
+    ("08-diagram.png", "Sheet 8 of 9 &mdash; Alarm &amp; status",
+     "Alarm output and status-indication circuitry driven from the main controller."),
+    ("09-diagram.png", "Sheet 9 of 9 &mdash; System flow",
+     "Overall signal and data flow across the board, summarizing how the preceding eight sheets connect end to end."),
+]
+schematic_cards = []
+for fn, title, desc in schematic_sheets:
+    data = b64_schematic(fn)
+    schematic_cards.append(f'<figure class="photo">\n<img src="data:image/png;base64,{data}" alt="{title}" loading="lazy">\n<figcaption><b>{title}</b><span>{desc}</span></figcaption>\n</figure>')
+schematics_html = "\n".join(schematic_cards)
 
 # ============================================================
 # BODY (English, professional submission document)
@@ -276,11 +305,10 @@ body = f'''<meta charset="utf-8">
   <p class="lede">Nine sub-items (a&ndash;i) per the original checklist. Status is reported item by item below; most sub-items are <b>not yet available</b> &mdash; this is reported plainly rather than implied to be complete.</p>
 
   <p class="doclabel">2.6.a &middot; Complete Drawings (Assembly, Component, Electrical Schematic, PCB Layout, Enclosure Structure, Junction Box, Terminal, Grounding)</p>
-  <p class="lede">An electrical schematic capture and a corresponding PCB layout exist for the GLD V2 main board (EDA source design files). From the schematic&rsquo;s traced net list, a supporting block-diagram set (9 sheets, functional/block level, 204 components mapped with documented pin-to-net traceability) has been produced and is illustrated below.</p>
-  <figure class="photo" style="max-width:640px;margin:0 auto 14px">
-    <img src="data:image/jpeg;base64,{schematic_b64}" alt="GLD schematic-derived block diagram, sheet 1 of 9: overall architecture" loading="lazy">
-    <figcaption><b>Schematic-derived block diagram &mdash; sheet 1 of 9: overall architecture</b><span>Power input, power distribution, analog acquisition, sensor control, main control (ESP32-S3), and external interfaces (alarm, RS-485, LoRa antenna, programming/configuration). Derived directly from the traced schematic net list; annotated in Indonesian in the source set.</span></figcaption>
-  </figure>
+  <p class="lede">An electrical schematic capture and a corresponding PCB layout exist for the GLD V2 main board (EDA source design files). From the schematic&rsquo;s traced net list, a supporting block-diagram set (9 sheets, functional/block level, 204 components mapped with documented pin-to-net traceability) has been produced and is reproduced in full below. Field labels in the source diagrams are in Indonesian; English captions are provided under each sheet.</p>
+  <div class="photogrid">
+{schematics_html}
+  </div>
   <table>
     <tr><th>Drawing type</th><th>Status</th><th>Remarks</th></tr>
     <tr><td>Electrical schematic (component-level) / block diagram</td><td><span class="status wip">Partially available</span></td><td>Schematic capture and a derived 9-sheet block-diagram set exist with traceability evidence (pin-to-net mapping). Not yet issued in a released, revision-controlled drawing format with a formal drawing number.</td></tr>

@@ -9,6 +9,7 @@ from docx.oxml import OxmlElement
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHOTO_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_photos")
+SCHEMATIC_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_schematics")
 OUT_PATH = os.path.join(REPO, "Deliverables", "Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX.docx")
 
 NAVY = RGBColor(0x1A, 0x2B, 0x3D)
@@ -571,22 +572,45 @@ doc.add_heading("2.6.a \u00b7 Complete Drawings (Assembly, Component, Electrical
 p("An electrical schematic capture and a corresponding PCB layout exist for the GLD V2 main board (EDA "
   "source design files). From the schematic's traced net list, a supporting block-diagram set (9 sheets, "
   "functional/block level, 204 components mapped with documented pin-to-net traceability) has been produced "
-  "and is illustrated below.")
-fig_para = doc.add_paragraph()
-fig_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-fig_run = fig_para.add_run()
-fig_run.add_picture(os.path.join(PHOTO_DIR, "GLD2-schematic-block-overview.jpg"), width=Inches(5.6))
-fig_cap = doc.add_paragraph()
-fig_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-fig_cap.paragraph_format.space_after = Pt(12)
-fcr1 = fig_cap.add_run("Schematic-derived block diagram \u2014 sheet 1 of 9: overall architecture\n")
-fcr1.font.bold = True; fcr1.font.size = Pt(9.5)
-fcr2 = fig_cap.add_run(
-    "Power input, power distribution, analog acquisition, sensor control, main control (ESP32-S3), and "
-    "external interfaces (alarm, RS-485, LoRa antenna, programming/configuration). Derived directly from the "
-    "traced schematic net list; annotated in Indonesian in the source set."
-)
-fcr2.font.size = Pt(8.5); fcr2.font.color.rgb = GRAY
+  "and is reproduced in full below. Field labels in the source diagrams are in Indonesian; English captions "
+  "are provided under each sheet.")
+schematic_sheets = [
+    ("01-diagram.png", "Sheet 1 of 9 \u2014 Overall architecture",
+     "Power input, power distribution, analog acquisition, sensor control, main control (ESP32-S3), and "
+     "external interfaces (alarm, RS-485, LoRa antenna, programming/configuration)."),
+    ("02-diagram.png", "Sheet 2 of 9 \u2014 Main power",
+     "Main power input rails and distribution: +5 V / +5VA analog, 3.3 V, and +24 V for the alarm circuit."),
+    ("03-diagram.png", "Sheet 3 of 9 \u2014 Always-on power",
+     "The always-on power domain that remains active independent of the main control state."),
+    ("04-diagram.png", "Sheet 4 of 9 \u2014 Sensor module",
+     "The external gas sensor module: 8 analog channels with per-channel I2C enable, including the sensor, "
+     "DAC, and power-switch sub-blocks."),
+    ("05-diagram.png", "Sheet 5 of 9 \u2014 Analog acquisition",
+     "The 8-channel analog acquisition front end: analog inputs, ADC (ADS1256), reference, and VMID biasing."),
+    ("06-diagram.png", "Sheet 6 of 9 \u2014 I2C & sensor control",
+     "I2C channel selection (TCA9548A), per-channel sensor enable (PCF8574), and the temperature/humidity "
+     "sensor (SHT40)."),
+    ("07-diagram.png", "Sheet 7 of 9 \u2014 ESP32 connections",
+     "Main controller (ESP32-S3) interface map: SPI to the ADC, I2C to sensor/control, UART for USB and "
+     "RS-485, and GPIO for alarm, power, button, and LED."),
+    ("08-diagram.png", "Sheet 8 of 9 \u2014 Alarm & status",
+     "Alarm output and status-indication circuitry driven from the main controller."),
+    ("09-diagram.png", "Sheet 9 of 9 \u2014 System flow",
+     "Overall signal and data flow across the board, summarizing how the preceding eight sheets connect end "
+     "to end."),
+]
+for fn, title, desc in schematic_sheets:
+    fig_para = doc.add_paragraph()
+    fig_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    fig_run = fig_para.add_run()
+    fig_run.add_picture(os.path.join(SCHEMATIC_DIR, fn), width=Inches(5.6))
+    fig_cap = doc.add_paragraph()
+    fig_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    fig_cap.paragraph_format.space_after = Pt(12)
+    fcr1 = fig_cap.add_run(title + "\n")
+    fcr1.font.bold = True; fcr1.font.size = Pt(9.5)
+    fcr2 = fig_cap.add_run(desc)
+    fcr2.font.size = Pt(8.5); fcr2.font.color.rgb = GRAY
 make_table(
     ["Drawing type", "Status", "Remarks"],
     [

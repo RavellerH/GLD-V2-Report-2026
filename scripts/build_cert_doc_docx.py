@@ -206,16 +206,6 @@ p("This document is a working technical file prepared to satisfy Section \u201c2
   "body (ExCB). The table of contents follows the complete structure of the original checklist (Sections "
   "1\u20133); sections not yet completed are marked as pending and will follow in subsequent revisions.")
 
-note_box(
-    "Current certification scope \u2014 Node Sensor (GLD) only. The Cluster Head and LoRa Gateway units are "
-    "assumed to operate exclusively in non-hazardous (safe) areas and therefore fall outside the scope of this "
-    "IECEx/ATEX certification \u2014 this is a project working assumption, not the outcome of a formal area "
-    "classification study by the end client. Specification tables for the Cluster Head and Gateway are included "
-    "in Sections 2.2\u20132.3 for system context only (the three device types share significant architecture and "
-    "components), not as certification subjects.",
-    shade=INFO_SHADE,
-)
-
 quote = doc.add_paragraph()
 quote.paragraph_format.space_after = Pt(10)
 rich(quote, [
@@ -242,20 +232,19 @@ p("Nine items per the original checklist (1\u20139, with Item 6 comprising sub-i
   "addresses Items 1\u20134; Items 5\u20139 will follow.")
 
 doc.add_heading("2.1 \u00b7 Detailed Product Description", level=2)
-p("The Gas Leak Detector (GLD) Node Sensor is an IoT-based, multi-sensor gas leak detection device designed "
+p("The Gas Leak Detector (GLD) is an IoT-based, multi-sensor gas leak detection device designed "
   "for the early detection of flammable and process gases in oil & gas refinery environments (process units, "
-  "tank farms, pipe racks, and storage/loading-unloading areas). It is one of three device types within the "
-  "broader GLD V2 system \u2014 Node Sensor (GLD), Cluster Head, and LoRa Gateway \u2014 however only the Node "
-  "Sensor is the subject of the current IECEx/ATEX certification (see scope note above).")
-p("Functionally, the Node Sensor integrates eight channels of metal-oxide semiconductor gas sensors (MQ "
-  "series), an edge-AI microcontroller/processor (ESP32-S3), and a LoRa radio module (star topology to the "
-  "nearest Cluster Head) within a single fixed-point unit installed at locations with gas-leak risk. An "
+  "tank farms, pipe racks, and storage/loading-unloading areas). This document addresses the GLD unit itself "
+  "as the subject of the current IECEx/ATEX certification.")
+p("Functionally, the GLD integrates eight channels of metal-oxide semiconductor gas sensors (MQ "
+  "series), an edge-AI microcontroller/processor (ESP32-S3), and a LoRa radio module (star-topology wireless "
+  "transmission) within a single fixed-point unit installed at locations with gas-leak risk. An "
   "on-device AI gas-classification model (CNN Dual-Branch architecture) runs directly on the unit \u2014 "
   "confirmed by the engineering team; written verification within firmware documentation has not yet been "
   "completed \u2014 so that detection decisions do not depend on a continuous connection to a central server. "
   "When gas concentration exceeds a defined threshold, the unit triggers a local alarm (an integrated "
   "visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to "
-  "the Cluster Head, which forwards it to the operator dashboard.")
+  "the operator dashboard.")
 p("The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials "
   "(aluminum alloy and stainless steel \u2014 no plastic or PVC) and mounted via an L-bracket to existing "
   "structures without drilling or welding. Important: this design-intent statement does not constitute a "
@@ -269,10 +258,14 @@ doc.add_heading("2.2 \u00b7 Product Name, Model, and Specification List", level=
 spec_rows = [
     ("Product name", "Gas Leak Detector (GLD) \u2014 Node Sensor"),
     ("Model / version", "GLD V2 (Version 2)"),
-    ("Related system devices", "LoRa Cluster Head, LoRa Gateway (outside certification scope)"),
     ("Manufacturer", "PT LAPI Ganesha Utama"),
     ("Technical development partner", "Institute of Technology Bandung \u2014 IoT Laboratory & Physics Laboratory"),
     ("End client / program owner", "PT Pertamina Patra Niaga (initial deployment site: Refinery Unit IV, Cilacap)"),
+    ("Primary function", "Acquisition of 8-channel gas sensor data and LoRa transmission"),
+    ("Microcontroller", "ESP32-S3-WROOM-1U"),
+    ("LoRa radio module", "E22-900MM22S"),
+    ("Dimensions (L\u00d7W\u00d7H)", "200 \u00d7 90 \u00d7 290 mm"),
+    ("Enclosure material", "Aluminum alloy + stainless steel"),
 ]
 st = doc.add_table(rows=0, cols=2); st.style = "Table Grid"
 for k, v in spec_rows:
@@ -284,37 +277,13 @@ for k, v in spec_rows:
     r2 = row[1].paragraphs[0].add_run(v); r2.font.size = Pt(10)
     row[0].width = Inches(2.2); row[1].width = Inches(4.3)
 doc.add_paragraph().paragraph_format.space_after = Pt(6)
-
-p("The table below summarizes indicative specifications for all three device types within the GLD V2 system, "
-  "provided for system-architecture context. The certification subject is the \u201cNode Sensor (GLD)\u201d "
-  "column only.")
-
-make_table(
-    ["Parameter", "Node Sensor (GLD)", "Cluster Head", "LoRa Gateway"],
-    [
-        ["Primary function", "Acquisition of 8-channel gas sensor data and LoRa transmission",
-         "Aggregates data from multiple Node Sensors and forwards to the Gateway",
-         "Bridges the field LoRa network to the server"],
-        ["Model/version", "V2", "V2", "V2"],
-        ["Microcontroller", "ESP32-S3-WROOM-1U", "ESP32-S3-WROOM-1U", "ESP32-S3-WROOM-1U"],
-        ["LoRa radio module", "E22-900MM22S", "E22-900MM22S", "E22-900MM22S"],
-        ["Power input", "24 VDC, \u22480.33 A", "5 VDC (battery + solar)", "5 VDC, AC/DC adapter"],
-        ["Max. power consumption", "7.995 W", "0.73 W", "0.73 W"],
-        ["Dimensions (L\u00d7W\u00d7H)", "200 \u00d7 90 \u00d7 290 mm", "80 \u00d7 80 \u00d7 210 mm", "80 \u00d7 80 \u00d7 210 mm"],
-        ["Enclosure material", "Aluminum alloy + stainless steel", "Aluminum alloy + stainless steel", "Aluminum alloy + stainless steel"],
-        ["IP rating", ("__status__", ("Pending confirmation", "gap")), ("__status__", ("IP66/67", "ok")),
-         ("__status__", ("Likely equivalent to CH; not yet confirmed", "wip"))],
-        ["Certification subject (ATEX/IECEx)?", "Yes \u2014 subject of this document", "No (assumed safe area)", "No (assumed safe area)"],
-    ],
-    col_widths=[1.7, 1.6, 1.6, 1.6],
-)
 p("Source: internal technical specification documentation (Revision 27 August 2026) and EMC parameter "
   "measurement data (Institute of Technology Bandung, Physics Laboratory).", size=9, italic=True, color=GRAY)
 
 doc.add_heading("2.3 \u00b7 Functional Description and Technical Parameters (Electrical, Mechanical, etc.)", level=2)
 p("Functional workflow (normal operating mode): sense \u2192 process \u2192 transmit. Each of the eight gas "
   "sensors continuously samples ambient conditions \u2192 data is normalized and classified by the on-device "
-  "AI model (ESP32-S3) \u2192 the result is transmitted via LoRa to the Cluster Head (star topology) at a "
+  "AI model (ESP32-S3) \u2192 the result is transmitted over the LoRa network (star-topology transmission) at a "
   "configurable interval (default 10 seconds), or immediately (event-driven) when an alarm condition is "
   "detected. Gas alarms are triggered through two parallel channels: a local visual/audible alarm module on "
   "the unit itself, and a push notification transmitted over the LoRa network to the dashboard \u2014 the "
@@ -361,7 +330,7 @@ make_table(
         ["Communication module", "LoRa, E22-900MM22S module", ("__status__", ("Final", "ok")),
          "Certified under CE, FCC, and RoHS (per Ebyte data) \u2014 RF/EMC certifications, not an \u201cEx component\u201d certification."],
         ["Operating frequency", "920 MHz", ("__status__", ("Final", "ok")),
-         "Star topology to the Cluster Head; within the regional 920\u2013923 MHz ISM band (Indonesia)."],
+         "Star-topology transmission; within the regional 920\u2013923 MHz ISM band (Indonesia)."],
         ["Transmit power (firmware configuration)", "17 dBm", ("__status__", ("Final", "ok")),
          "The radio module supports up to 22 dBm \u2014 17 dBm is an operational configuration, not the module's maximum limit."],
         ["Bandwidth / spreading factor", "125 kHz / SF7", ("__status__", ("Final", "ok")), "Source: EMC parameter table."],
@@ -387,7 +356,7 @@ make_table(
         ["Mounting method", "L-bracket, following the design already installed at the refinery",
          ("__status__", ("Final", "ok")), "Mounted to existing structures without drilling or welding."],
         ["Ingress protection (IP rating)", "\u2014", ("__status__", ("Pending confirmation", "gap")),
-         "Not yet tested/determined for the Node Sensor (the Cluster Head is already rated IP66/67)."],
+         "Not yet tested/determined."],
         ["Cable entry (gland)", "\u2014", ("__status__", ("Pending confirmation", "gap")),
          "Cable gland specification not yet determined."],
         ["Antenna mounting", "External, SMA male connector", ("__status__", ("Final", "ok")), ""],
@@ -471,8 +440,7 @@ note_box(
     "key components (PCB, sensor modules, alarm module, mesh cover), substantively satisfying checklist Item "
     "2.4. Still outstanding: (a) formally labeled photographs of each face (front/back/left/right/top/bottom) "
     "with a scale reference, as is customary in ExCB submission packages; (b) separate photographs of "
-    "individual components such as the battery, gaskets/seals, terminals, and cable glands; (c) photographs "
-    "of the Cluster Head and Gateway (currently outside certification scope; see scope note).",
+    "individual components such as the battery, gaskets/seals, terminals, and cable glands.",
     shade=INFO_SHADE,
 )
 

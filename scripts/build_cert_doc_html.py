@@ -138,10 +138,6 @@ body = f'''<meta charset="utf-8">
   <div class="zone-head"><span class="zn">&#8226;</span><h2>About this document</h2></div>
   <p class="lede">This document is a working technical file prepared to satisfy Section <b>&ldquo;2. Technical Documentation&rdquo;</b> of the official <i>IECEx/ATEX Certification Information Requirements</i> checklist issued by the certification body (ExCB). The table of contents on the left follows the complete structure of the original checklist (Sections 1&ndash;3); sections not yet completed are marked with a pending status and will follow in subsequent revisions.</p>
 
-  <div class="scopebanner">
-    <b>Current certification scope &mdash; Node Sensor (GLD) only.</b> The Cluster Head and LoRa Gateway units are assumed to operate exclusively in non-hazardous (safe) areas and therefore fall <b>outside</b> the scope of this IECEx/ATEX certification &mdash; this is a project working assumption, not the outcome of a formal area classification study by the end client. Specification tables for the Cluster Head and Gateway are included in Sections 2.2&ndash;2.3 for <b>system context only</b> (the three device types share significant architecture and components), not as certification subjects.
-  </div>
-
   <div class="enchecklist">Original excerpt, Section 2, Items 1&ndash;4 &mdash; source: <span class="mono">IECEx ATEX Certification Information Requirements</span> (ExCB):<br>
   &ldquo;1) Detailed product description; 2) Product name, model, and specification list; 3) Complete and clear functional description and technical parameters (electrical parameters, mechanical parameters, etc.); 4) Clear product photos (overall and key components).&rdquo;</div>
 </section>
@@ -157,8 +153,8 @@ body = f'''<meta charset="utf-8">
   <p class="lede">Nine items per the original checklist (1&ndash;9, with Item 6 comprising sub-items a&ndash;i). This revision addresses Items 1&ndash;4; Items 5&ndash;9 will follow.</p>
 
   <div class="subhead" id="s2-1"><h3>2.1 &middot; Detailed Product Description</h3></div>
-  <p class="lede">The Gas Leak Detector (GLD) Node Sensor is an IoT-based, multi-sensor gas leak detection device designed for the early detection of flammable and process gases in oil &amp; gas refinery environments (process units, tank farms, pipe racks, and storage/loading-unloading areas). It is one of three device types within the broader GLD V2 system &mdash; Node Sensor (GLD), Cluster Head, and LoRa Gateway &mdash; however <b>only the Node Sensor is the subject of the current IECEx/ATEX certification</b> (see scope note above).</p>
-  <p class="lede">Functionally, the Node Sensor integrates eight channels of metal-oxide semiconductor gas sensors (MQ series), an edge-AI microcontroller/processor (ESP32-S3), and a LoRa radio module (star topology to the nearest Cluster Head) within a single fixed-point unit installed at locations with gas-leak risk. An on-device AI gas-classification model (CNN Dual-Branch architecture) runs directly on the unit &mdash; <i>confirmed by the engineering team; written verification within firmware documentation has not yet been completed</i> &mdash; so that detection decisions do not depend on a continuous connection to a central server. When gas concentration exceeds a defined threshold, the unit triggers a local alarm (an integrated visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to the Cluster Head, which forwards it to the operator dashboard.</p>
+  <p class="lede">The Gas Leak Detector (GLD) is an IoT-based, multi-sensor gas leak detection device designed for the early detection of flammable and process gases in oil &amp; gas refinery environments (process units, tank farms, pipe racks, and storage/loading-unloading areas). This document addresses the GLD unit itself as the subject of the current IECEx/ATEX certification.</p>
+  <p class="lede">Functionally, the GLD integrates eight channels of metal-oxide semiconductor gas sensors (MQ series), an edge-AI microcontroller/processor (ESP32-S3), and a LoRa radio module (star-topology wireless transmission) within a single fixed-point unit installed at locations with gas-leak risk. An on-device AI gas-classification model (CNN Dual-Branch architecture) runs directly on the unit &mdash; <i>confirmed by the engineering team; written verification within firmware documentation has not yet been completed</i> &mdash; so that detection decisions do not depend on a continuous connection to a central server. When gas concentration exceeds a defined threshold, the unit triggers a local alarm (an integrated visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to the operator dashboard.</p>
   <p class="lede">The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials (aluminum alloy and stainless steel &mdash; no plastic or PVC) and mounted via an L-bracket to existing structures without drilling or welding. <b>Important:</b> this design-intent statement does not constitute a claim that the enclosure has passed testing or has been Ex-certified &mdash; the explosion-protection scheme, gas group, temperature class, and target installation zone will be addressed in Section 2.5 (to follow).</p>
   <p class="lede">The current production power configuration is continuous 24 VDC, supplied via an AC/DC adapter connected to the site electrical supply. A portable battery power path (Li-ion 18650) remains under development (R&amp;D) and has not become a deployed production configuration.</p>
 
@@ -166,31 +162,19 @@ body = f'''<meta charset="utf-8">
   <div class="speclist">
     <div class="spec"><span class="k">Product name</span><span class="v">Gas Leak Detector (GLD) &mdash; Node Sensor</span></div>
     <div class="spec"><span class="k">Model / version</span><span class="v">GLD V2 (Version 2)</span></div>
-    <div class="spec"><span class="k">Related system devices</span><span class="v">LoRa Cluster Head, LoRa Gateway (outside certification scope)</span></div>
     <div class="spec"><span class="k">Manufacturer</span><span class="v">PT LAPI Ganesha Utama</span></div>
     <div class="spec"><span class="k">Technical development partner</span><span class="v">Institute of Technology Bandung &mdash; IoT Laboratory &amp; Physics Laboratory</span></div>
     <div class="spec"><span class="k">End client / program owner</span><span class="v">PT Pertamina Patra Niaga (initial deployment site: Refinery Unit IV, Cilacap)</span></div>
-  </div>
-  <p class="lede">The table below summarizes indicative specifications for all three device types within the GLD V2 system, provided for system-architecture context. <b>The certification subject is the &ldquo;Node Sensor (GLD)&rdquo; column only.</b></p>
-  <div class="tbl-scroll">
-  <table>
-    <tr><th>Parameter</th><th>Node Sensor (GLD)</th><th>Cluster Head</th><th>LoRa Gateway</th></tr>
-    <tr><td><b>Primary function</b></td><td>Acquisition of 8-channel gas sensor data and LoRa transmission</td><td>Aggregates data from multiple Node Sensors and forwards to the Gateway</td><td>Bridges the field LoRa network to the server</td></tr>
-    <tr><td><b>Model/version</b></td><td>V2</td><td>V2</td><td>V2</td></tr>
-    <tr><td><b>Microcontroller</b></td><td>ESP32-S3-WROOM-1U</td><td>ESP32-S3-WROOM-1U</td><td>ESP32-S3-WROOM-1U</td></tr>
-    <tr><td><b>LoRa radio module</b></td><td>E22-900MM22S</td><td>E22-900MM22S</td><td>E22-900MM22S</td></tr>
-    <tr><td><b>Power input</b></td><td>24 VDC, &#8776;0.33 A</td><td>5 VDC (battery + solar)</td><td>5 VDC, AC/DC adapter</td></tr>
-    <tr><td><b>Max. power consumption</b></td><td>7.995 W</td><td>0.73 W</td><td>0.73 W</td></tr>
-    <tr><td><b>Dimensions (L&times;W&times;H)</b></td><td>200 &times; 90 &times; 290 mm</td><td>80 &times; 80 &times; 210 mm</td><td>80 &times; 80 &times; 210 mm</td></tr>
-    <tr><td><b>Enclosure material</b></td><td>Aluminum alloy + stainless steel</td><td>Aluminum alloy + stainless steel</td><td>Aluminum alloy + stainless steel</td></tr>
-    <tr><td><b>IP rating</b></td><td><span class="status wip">Pending confirmation</span></td><td><span class="status ok">IP66/67</span></td><td><span class="status wip">Likely equivalent to the Cluster Head; not yet confirmed separately</span></td></tr>
-    <tr class="hl"><td><b>Certification subject (ATEX/IECEx)?</b></td><td><b>Yes &mdash; the subject of this document</b></td><td>No (assumed safe area)</td><td>No (assumed safe area)</td></tr>
-  </table>
+    <div class="spec"><span class="k">Primary function</span><span class="v">Acquisition of 8-channel gas sensor data and LoRa transmission</span></div>
+    <div class="spec"><span class="k">Microcontroller</span><span class="v">ESP32-S3-WROOM-1U</span></div>
+    <div class="spec"><span class="k">LoRa radio module</span><span class="v">E22-900MM22S</span></div>
+    <div class="spec"><span class="k">Dimensions (L&times;W&times;H)</span><span class="v">200 &times; 90 &times; 290 mm</span></div>
+    <div class="spec"><span class="k">Enclosure material</span><span class="v">Aluminum alloy + stainless steel</span></div>
   </div>
   <p class="lede" style="font-size:12px">Source: internal technical specification documentation (Revision 27 August 2026) and EMC parameter measurement data (Institute of Technology Bandung, Physics Laboratory).</p>
 
   <div class="subhead" id="s2-3"><h3>2.3 &middot; Functional Description and Technical Parameters (Electrical, Mechanical, etc.)</h3></div>
-  <p class="lede"><b>Functional workflow (normal operating mode):</b> sense &rarr; process &rarr; transmit. Each of the eight gas sensors continuously samples ambient conditions &rarr; data is normalized and classified by the on-device AI model (ESP32-S3) &rarr; the result is transmitted via LoRa to the Cluster Head (star topology) at a configurable interval (default 10 seconds), or immediately (event-driven) when an alarm condition is detected. Gas alarms are triggered through two parallel channels: a local visual/audible alarm module on the unit itself, and a push notification transmitted over the LoRa network to the dashboard &mdash; the alarm-push pathway has been successfully tested on a campus mesh network (field validation at a production refinery installation is still pending).</p>
+  <p class="lede"><b>Functional workflow (normal operating mode):</b> sense &rarr; process &rarr; transmit. Each of the eight gas sensors continuously samples ambient conditions &rarr; data is normalized and classified by the on-device AI model (ESP32-S3) &rarr; the result is transmitted over the LoRa network (star-topology transmission) at a configurable interval (default 10 seconds), or immediately (event-driven) when an alarm condition is detected. Gas alarms are triggered through two parallel channels: a local visual/audible alarm module on the unit itself, and a push notification transmitted over the LoRa network to the dashboard &mdash; the alarm-push pathway has been successfully tested on a campus mesh network (field validation at a production refinery installation is still pending).</p>
 
   <p class="doclabel">2.3.a &middot; Electrical Parameters &mdash; Node Sensor (GLD)</p>
   <div class="tbl-scroll">
@@ -216,7 +200,7 @@ body = f'''<meta charset="utf-8">
     <tr><td>Environmental sensor (temperature/humidity)</td><td>Not installed on production units</td><td><span class="status wip">Laboratory test rig only</span></td><td>Used only on the laboratory test rig, not on field units.</td></tr>
     <tr><td>Processing unit</td><td>ESP32-S3-WROOM-1U</td><td><span class="status ok">Final</span></td><td>Certified under FCC (2AC7Z-ESPS3WROOM1U), TELEC, and CE (per manufacturer data, Espressif) &mdash; these are RF/EMC certifications, <b>not</b> an &ldquo;Ex component&rdquo; certification.</td></tr>
     <tr><td>Communication module</td><td>LoRa, E22-900MM22S module</td><td><span class="status ok">Final</span></td><td>Certified under CE, FCC, and RoHS (per manufacturer data, Ebyte) &mdash; RF/EMC certifications, <b>not</b> an &ldquo;Ex component&rdquo; certification.</td></tr>
-    <tr><td>Operating frequency</td><td>920 MHz</td><td><span class="status ok">Final</span></td><td>Star topology to the Cluster Head; within the regional 920&ndash;923 MHz ISM band (Indonesia).</td></tr>
+    <tr><td>Operating frequency</td><td>920 MHz</td><td><span class="status ok">Final</span></td><td>Star-topology transmission; within the regional 920&ndash;923 MHz ISM band (Indonesia).</td></tr>
     <tr><td>Transmit power (firmware configuration)</td><td>17 dBm</td><td><span class="status ok">Final</span></td><td>The radio module supports up to 22 dBm &mdash; 17 dBm is an operational configuration, not the module&rsquo;s maximum limit.</td></tr>
     <tr><td>Bandwidth / spreading factor</td><td>125 kHz / SF7</td><td><span class="status ok">Final</span></td><td>Source: EMC parameter table.</td></tr>
     <tr><td>Antenna</td><td>External, omnidirectional, SMA male connector, 3 dBi gain</td><td><span class="status ok">Final</span></td><td>On some units, the 2.4 GHz Wi-Fi antenna remains inside the enclosure and must be relocated externally for optimal channel configuration.</td></tr>
@@ -233,7 +217,7 @@ body = f'''<meta charset="utf-8">
     <tr><td>Dimensions (L &times; W &times; H)</td><td>200 &times; 90 &times; 290 mm</td><td><span class="status ok">Final</span></td><td>Consistent between the technical specification documentation and the EMC parameter table.</td></tr>
     <tr><td>Total weight</td><td>&mdash;</td><td><span class="status gap">Pending confirmation</span></td><td>Not yet weighed/documented.</td></tr>
     <tr><td>Mounting method</td><td>L-bracket, following the design already installed at the refinery</td><td><span class="status ok">Final</span></td><td>Mounted to existing structures without drilling or welding.</td></tr>
-    <tr><td>Ingress protection (IP rating)</td><td>&mdash;</td><td><span class="status gap">Pending confirmation</span></td><td>Not yet tested/determined for the Node Sensor (the Cluster Head is already rated IP66/67).</td></tr>
+    <tr><td>Ingress protection (IP rating)</td><td>&mdash;</td><td><span class="status gap">Pending confirmation</span></td><td>Not yet tested/determined.</td></tr>
     <tr><td>Cable entry (gland)</td><td>&mdash;</td><td><span class="status gap">Pending confirmation</span></td><td>Cable gland specification not yet determined.</td></tr>
     <tr><td>Antenna mounting</td><td>External, SMA male connector</td><td><span class="status ok">Final</span></td><td>&nbsp;</td></tr>
     <tr><td>Operating temperature</td><td>&mdash;</td><td><span class="status gap">Pending confirmation</span></td><td>Ambient operating temperature range not yet determined &mdash; a key parameter for temperature class (T1&ndash;T6) determination in Section 2.5.</td></tr>
@@ -249,7 +233,7 @@ body = f'''<meta charset="utf-8">
   <div class="photogrid">
 {photos_html}
   </div>
-  <div class="banner info"><span class="ic">&#9432;</span><div><b>Photographic completeness &mdash; status as-is.</b> The seven photographs above cover the complete unit and its key components (PCB, sensor modules, alarm module, mesh cover), substantively satisfying checklist Item 2.4. Still outstanding: (a) formally labeled photographs of each face (front/back/left/right/top/bottom) with a scale reference, as is customary in ExCB submission packages; (b) separate photographs of individual components such as the battery, gaskets/seals, terminals, and cable glands; (c) photographs of the Cluster Head and Gateway (currently outside certification scope; see scope note).</div></div>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Photographic completeness &mdash; status as-is.</b> The seven photographs above cover the complete unit and its key components (PCB, sensor modules, alarm module, mesh cover), substantively satisfying checklist Item 2.4. Still outstanding: (a) formally labeled photographs of each face (front/back/left/right/top/bottom) with a scale reference, as is customary in ExCB submission packages; (b) separate photographs of individual components such as the battery, gaskets/seals, terminals, and cable glands.</div></div>
 
   <div class="subhead" id="s2-5"><h3>2.5 &middot; Description of Intended Use and Installation Environment (Gas Group, Temperature Class, Area Classification)</h3></div>
   <div class="banner info"><span class="ic">&#9675;</span><div><b>Not yet prepared in this revision.</b> The classification scheme (gas group, temperature class, installation zone) will be finalized based on further technical assessment and confirmed together with the certification body (ExCB / notified body).</div></div>

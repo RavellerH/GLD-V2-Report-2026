@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import re, os
 
-BASE = r"c:\Users\Win11\OneDrive\Desktop\Documents\GitHub\GLD-V2-Report-2026\Deliverables"
+BASE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Deliverables")
 
 FILES = [
     ("Dashboard_GLD_ProjectManagement.html", "Dashboard Proyek", False),
@@ -12,6 +12,7 @@ FILES = [
     ("Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html", "Detail Assessment/Field Testing", False),
     ("Desain_Bracket_L_UBolt_GLD_Mounting.html", "Desain Bracket U-Bolt", False),
     ("Dashboard_Sertifikasi_GLD_ATEX_IECEx.html", "Dashboard Sertifikasi", False),
+    ("Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX.html", "Dokumen Teknis Sertifikasi", False),
 ]
 
 # Dikeluarkan dari navigasi atas permintaan user (4 Sep) - tidak perlu ditampilkan/dinavigasikan:

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import csv
+from PIL import Image
 from docx import Document
 from docx.shared import Pt, Inches, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -61,6 +62,18 @@ for i, sz, col in [(1, 16, NAVY), (2, 13, NAVY), (3, 11, NAVY)]:
 sec = doc.sections[0]
 sec.left_margin = sec.right_margin = Cm(2.2)
 sec.top_margin = sec.bottom_margin = Cm(1.8)
+
+def add_picture_fit(run, path, max_w_in, max_h_in):
+    """Insert a picture scaled to fit within a max_w x max_h box, preserving aspect ratio."""
+    with Image.open(path) as im:
+        w_px, h_px = im.size
+    aspect = w_px / h_px
+    w_in = max_w_in
+    h_in = w_in / aspect
+    if h_in > max_h_in:
+        h_in = max_h_in
+        w_in = h_in * aspect
+    run.add_picture(path, width=Inches(w_in), height=Inches(h_in))
 
 def set_cell_shading(cell, hex_color):
     tcPr = cell._tc.get_or_add_tcPr()
@@ -551,7 +564,7 @@ for idx in range(0, len(photos), n_photo_cols):
         cell = row_cells[c]
         cell.paragraphs[0].paragraph_format.space_after = Pt(2)
         run = cell.paragraphs[0].add_run()
-        run.add_picture(os.path.join(PHOTO_DIR, fn), width=Inches(2.75))
+        add_picture_fit(run, os.path.join(PHOTO_DIR, fn), max_w_in=2.75, max_h_in=2.5)
         cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
         cap = cell.add_paragraph()
         cap.paragraph_format.space_after = Pt(10)
@@ -885,9 +898,8 @@ note_box(
 # ============================================================
 # FOOTER NOTE
 # ============================================================
-doc.add_paragraph()
 foot = doc.add_paragraph()
-foot.paragraph_format.space_before = Pt(14)
+foot.paragraph_format.space_before = Pt(10)
 r = foot.add_run(
     "This is a working document, prepared in stages, drafted in direct reference to the IECEx/ATEX "
     "Certification Information Requirements (original English/Mandarin version issued by the certification "

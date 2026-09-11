@@ -92,6 +92,8 @@ for fn, title, desc in photos:
     photo_cards.append(f'<figure class="photo">\n<img src="data:image/jpeg;base64,{data}" alt="{title}" loading="lazy">\n<figcaption><b>{title}</b><span>{desc}</span></figcaption>\n</figure>')
 photos_html = "\n".join(photo_cards)
 
+schematic_b64 = b64("GLD2-schematic-block-overview.jpg")
+
 # ============================================================
 # BODY (English, professional submission document)
 # ============================================================
@@ -121,9 +123,9 @@ body = f'''<meta charset="utf-8">
     <li><a class="sub" href="#s2-2"><span class="st done">&#9679;</span> 2.2 Name, Model &amp; Specification</a></li>
     <li><a class="sub" href="#s2-3"><span class="st done">&#9679;</span> 2.3 Functional &amp; Technical Parameters</a></li>
     <li><a class="sub" href="#s2-4"><span class="st done">&#9679;</span> 2.4 Product Photographs</a></li>
-    <li><a class="sub" href="#s2-5"><span class="st pending">&#9675;</span> 2.5 Installation Environment</a></li>
-    <li><a class="sub" href="#s2-6"><span class="st pending">&#9675;</span> 2.6 Design &amp; Manufacturing (a&ndash;i)</a></li>
-    <li><a href="#s3"><span class="st pending">&#9675;</span> 3. Sample Information</a></li>
+    <li><a class="sub" href="#s2-5"><span class="st done">&#9679;</span> 2.5 Installation Environment</a></li>
+    <li><a class="sub" href="#s2-6"><span class="st done">&#9679;</span> 2.6 Design &amp; Manufacturing (a&ndash;i)</a></li>
+    <li><a href="#s3"><span class="st done">&#9679;</span> 3. Sample Information</a></li>
   </ul>
   <div class="side-foot">
     <button class="themebtn" id="themebtn">&#9788; Toggle light/dark theme</button>
@@ -139,7 +141,7 @@ body = f'''<meta charset="utf-8">
 <div class="masthead">
   <p class="doclabel" style="margin-bottom:10px">Technical Certification Document</p>
   <h1>IECEx/ATEX Certification Document &mdash; Gas Leak Detector (GLD) V2</h1>
-  <p class="subtitle">Prepared in direct reference to the <i>IECEx/ATEX Certification Information Requirements</i> issued by the certification body (ExCB) &mdash; Section <b>2, Technical Documentation</b>, Items 1&ndash;4: product description, product name/model/specification list, functional description and technical parameters, and product photographs. This document is being developed in stages; remaining items will follow in subsequent revisions.</p>
+  <p class="subtitle">Prepared in direct reference to the <i>IECEx/ATEX Certification Information Requirements</i> issued by the certification body (ExCB) &mdash; covering Section <b>2, Technical Documentation</b> (Items 1&ndash;6: product description; name, model, and specification list; functional description and technical parameters; product photographs; intended use and installation environment; and design and manufacturing information) and Section <b>3, Sample Information</b>. Section 1, Basic Information (Application and Organization), remains to be completed in a subsequent revision.</p>
   <div class="doccontrol">
     <div class="row"><div class="k">Document no.</div><div class="v">LGU/GLD/IECEX-TDF/2026-001</div></div>
     <div class="row"><div class="k">Revision</div><div class="v">0.1</div></div>
@@ -156,10 +158,10 @@ body = f'''<meta charset="utf-8">
 
 <section class="zone" id="about">
   <div class="zone-head"><span class="zn">&#8226;</span><h2>About this document</h2></div>
-  <p class="lede">This document is a working technical file prepared to satisfy Section <b>&ldquo;2. Technical Documentation&rdquo;</b> of the official <i>IECEx/ATEX Certification Information Requirements</i> checklist issued by the certification body (ExCB). The table of contents on the left follows the complete structure of the original checklist (Sections 1&ndash;3); sections not yet completed are marked with a pending status and will follow in subsequent revisions.</p>
+  <p class="lede">This document is a working technical file prepared to satisfy Section <b>&ldquo;2. Technical Documentation&rdquo;</b> and Section <b>&ldquo;3. Sample Information&rdquo;</b> of the official <i>IECEx/ATEX Certification Information Requirements</i> checklist issued by the certification body (ExCB). The table of contents on the left follows the complete structure of the original checklist (Sections 1&ndash;3); Section 1 (Basic Information) remains pending and will follow in a subsequent revision.</p>
 
-  <div class="enchecklist">Original excerpt, Section 2, Items 1&ndash;4 &mdash; source: <span class="mono">IECEx ATEX Certification Information Requirements</span> (ExCB):<br>
-  &ldquo;1) Detailed product description; 2) Product name, model, and specification list; 3) Complete and clear functional description and technical parameters (electrical parameters, mechanical parameters, etc.); 4) Clear product photos (overall and key components).&rdquo;</div>
+  <div class="enchecklist">Original excerpt, Section 2 &amp; 3 &mdash; source: <span class="mono">IECEx ATEX Certification Information Requirements</span> (ExCB):<br>
+  &ldquo;1) Detailed product description; 2) Product name, model, and specification list; 3) Complete and clear functional description and technical parameters (electrical parameters, mechanical parameters, etc.); 4) Clear product photos (overall and key components); 5) Description of intended use and installation environment (e.g., gas group IIC/IIB/IIA if applicable, temperature group T1&ndash;T6, ambient temperature range, area classification 0/1/2 or 20/21/22); 6) Design and manufacturing information [a&ndash;i: drawings, BOM, material datasheets, manufacturing process, explosion-protection calculations, temperature group calculation, usage and installation instructions, nameplate information, Ex component certificates]. 3. Sample Information: 1) model, serial number, and status of the sample; 2) necessary test fixtures or auxiliary equipment.&rdquo;</div>
 </section>
 
 <section class="zone" id="s1">
@@ -170,7 +172,7 @@ body = f'''<meta charset="utf-8">
 
 <section class="zone" id="s2">
   <div class="zone-head"><span class="zn">2</span><h2>Technical Documentation</h2></div>
-  <p class="lede">Nine items per the original checklist (1&ndash;9, with Item 6 comprising sub-items a&ndash;i). This revision addresses Items 1&ndash;4; Items 5&ndash;9 will follow.</p>
+  <p class="lede">Six items per the original checklist (1&ndash;6, with Item 6 comprising sub-items a&ndash;i). This revision addresses the complete section: Items 1&ndash;6.</p>
 
   <div class="subhead" id="s2-1"><h3>2.1 &middot; Detailed Product Description</h3></div>
   <p class="lede">The Gas Leak Detector (GLD) is an IoT-based, multi-sensor gas leak detection device designed for the early detection of flammable and process gases in oil &amp; gas refinery environments (process units, tank farms, pipe racks, and storage/loading-unloading areas). This document addresses the GLD unit itself as the subject of the current IECEx/ATEX certification.</p>
@@ -258,16 +260,98 @@ body = f'''<meta charset="utf-8">
   <div class="banner info"><span class="ic">&#9432;</span><div><b>Photographic completeness &mdash; status as-is.</b> The seven photographs above cover the complete unit and its key components (PCB, sensor modules, alarm module, mesh cover), substantively satisfying checklist Item 2.4. Still outstanding: (a) formally labeled photographs of each face (front/back/left/right/top/bottom) with a scale reference, as is customary in ExCB submission packages; (b) separate photographs of individual components such as the battery, gaskets/seals, terminals, and cable glands.</div></div>
 
   <div class="subhead" id="s2-5"><h3>2.5 &middot; Description of Intended Use and Installation Environment (Gas Group, Temperature Class, Area Classification)</h3></div>
-  <div class="banner info"><span class="ic">&#9675;</span><div><b>Not yet prepared in this revision.</b> The classification scheme (gas group, temperature class, installation zone) will be finalized based on further technical assessment and confirmed together with the certification body (ExCB / notified body).</div></div>
+  <p class="lede">The GLD is intended for continuous, fixed-point monitoring of flammable and toxic gas leaks in oil &amp; gas refinery hazardous areas &mdash; process units, tank farms, pipe racks, and loading/unloading areas. The specific Ex classification parameters below reflect the project engineering team&rsquo;s <b>current recommendation</b>, developed from the intended deployment envelope and the gases the device is designed to detect; <b>none of these parameters has yet been confirmed with the certification body (ExCB) or a notified body</b>, and none should be treated as final.</p>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Parameter</th><th>Recommended value</th><th>Status</th><th>Rationale / remarks</th></tr>
+    <tr><td>Gas group</td><td>IIC</td><td><span class="status wip">Team recommendation &mdash; pending ExCB confirmation</span></td><td>Hydrogen (H&#8322;) is one of the three gases the classifier is designed to detect (Section 2.3.b); IIC is required for hydrogen and inherently covers IIB and IIA.</td></tr>
+    <tr><td>Temperature class</td><td>T4 (&#8804;135&#176;C)</td><td><span class="status wip">Team recommendation &mdash; pending verification</span></td><td>Not yet substantiated by measurement. The MQ-series metal-oxide sensors used in this product rely on an internal heating element as their normal operating principle; a hot-spot temperature measurement specific to the sensor models and enclosure configuration used here has not yet been performed. This is the top-priority open verification item before the temperature class can be confirmed (see 2.6.f).</td></tr>
+    <tr><td>Ambient temperature range</td><td>&mdash;</td><td><span class="status gap">Pending confirmation</span></td><td>Not yet measured or specified.</td></tr>
+    <tr><td>Area classification (zone)</td><td>Zone 1</td><td><span class="status wip">Team recommendation &mdash; pending ExCB confirmation</span></td><td>Assessed as sufficient for the general refinery deployment envelope, including areas near storage. Zone 0 would only apply if the detector were installed directly inside a tank vapor space, which is not the intended use case.</td></tr>
+  </table>
+  </div>
+  <div class="banner warn"><span class="ic">&#9888;</span><div><b>These are engineering recommendations, not a certification decision.</b> An independent readiness assessment of the same checklist item, prepared separately from the underlying firmware/hardware repository, reached the same conclusion &mdash; gas group, temperature class, ambient range, and zone are not yet formally established. Final classification requires explicit agreement with the ExCB.</div></div>
 
-  <div class="subhead" id="s2-6"><h3>2.6 &middot; Design and Manufacturing Information (Items a&ndash;i: Technical Drawings, Bill of Materials, Material Datasheets, Manufacturing Process, Calculations, Draft Manual, Nameplate, Ex Component Certificates)</h3></div>
-  <div class="banner info"><span class="ic">&#9675;</span><div><b>Not yet prepared in this revision.</b> To be completed in a subsequent revision, covering technical drawings, the bill of materials, material datasheets, a manufacturing process description, explosion-protection calculations, a draft operating/installation manual, nameplate information, and Ex component certificates.</div></div>
+  <div class="subhead" id="s2-6"><h3>2.6 &middot; Design and Manufacturing Information</h3></div>
+  <p class="lede">Nine sub-items (a&ndash;i) per the original checklist. Status is reported item by item below; most sub-items are <b>not yet available</b> &mdash; this is reported plainly rather than implied to be complete.</p>
+
+  <p class="doclabel">2.6.a &middot; Complete Drawings (Assembly, Component, Electrical Schematic, PCB Layout, Enclosure Structure, Junction Box, Terminal, Grounding)</p>
+  <p class="lede">An electrical schematic capture and a corresponding PCB layout exist for the GLD V2 main board (EDA source design files). From the schematic&rsquo;s traced net list, a supporting block-diagram set (9 sheets, functional/block level, 204 components mapped with documented pin-to-net traceability) has been produced and is illustrated below.</p>
+  <figure class="photo" style="max-width:640px;margin:0 auto 14px">
+    <img src="data:image/jpeg;base64,{schematic_b64}" alt="GLD schematic-derived block diagram, sheet 1 of 9: overall architecture" loading="lazy">
+    <figcaption><b>Schematic-derived block diagram &mdash; sheet 1 of 9: overall architecture</b><span>Power input, power distribution, analog acquisition, sensor control, main control (ESP32-S3), and external interfaces (alarm, RS-485, LoRa antenna, programming/configuration). Derived directly from the traced schematic net list; annotated in Indonesian in the source set.</span></figcaption>
+  </figure>
+  <table>
+    <tr><th>Drawing type</th><th>Status</th><th>Remarks</th></tr>
+    <tr><td>Electrical schematic (component-level) / block diagram</td><td><span class="status wip">Partially available</span></td><td>Schematic capture and a derived 9-sheet block-diagram set exist with traceability evidence (pin-to-net mapping). Not yet issued in a released, revision-controlled drawing format with a formal drawing number.</td></tr>
+    <tr><td>PCB layout</td><td><span class="status wip">Partially available</span></td><td>PCB layout export exists for the same board revision as the schematic above.</td></tr>
+    <tr><td>Assembly drawing</td><td><span class="status gap">Not yet available</span></td><td>&nbsp;</td></tr>
+    <tr><td>Component drawing</td><td><span class="status gap">Not yet available</span></td><td>&nbsp;</td></tr>
+    <tr><td>Enclosure structure drawing (gap, length, volume)</td><td><span class="status gap">Not yet available</span></td><td>Required if a flameproof (Ex d) protection concept is pursued.</td></tr>
+    <tr><td>Junction box / terminal / grounding connection drawings</td><td><span class="status gap">Not yet available</span></td><td>&nbsp;</td></tr>
+  </table>
+  <div class="banner info"><span class="ic">&#9432;</span><div>The schematic and PCB layout are useful supporting engineering artifacts, but on their own they do not constitute the certified drawing package the checklist requires &mdash; dimensioned, toleranced, material-annotated drawings in a released revision-controlled form have not yet been produced.</div></div>
+
+  <p class="doclabel">2.6.b &middot; Bill of Materials (BOM) for Explosion-Safety-Relevant Components</p>
+  <p class="lede">A controlled, Ex-critical BOM (enclosure, gaskets, terminals, cable entry devices, switches, light sources, battery, potting compound, plastic parts, printed circuit boards &mdash; with manufacturer, model, material grade, and certification/technical parameters for each) has <b>not yet been compiled</b>. A component-level pin/net export exists from the schematic (204 components traced) and can serve as a starting reference, but manufacturer part numbers, material grades, and Ex/UL/CCC certification status for the safety-critical items above have not been determined. Comparative research on Ex-rated enclosure products from other manufacturers exists internally as a reference for target specifications only &mdash; it describes third-party products, not this product&rsquo;s actual components, and is not included here.</p>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Not yet available.</b></div></div>
+
+  <p class="doclabel">2.6.c &middot; Material Specification Sheets / Datasheets (Non-Metallic Materials)</p>
+  <p class="lede">Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, insulators, potting compounds) &mdash; covering heat/cold resistance, anti-aging, anti-static, flame retardancy, CTI value, and chemical resistance &mdash; have not yet been collected.</p>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Not yet available.</b></div></div>
+
+  <p class="doclabel">2.6.d &middot; Manufacturing Process Description</p>
+  <p class="lede">A description of manufacturing processes relevant to explosion-protection safety (enclosure machining accuracy control, explosion-proof surface treatment, welding, potting, die-casting, bonding) has not yet been documented.</p>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Not yet available.</b></div></div>
+
+  <p class="doclabel">2.6.e &middot; Explosion-Protection Calculations and Explanations (if applicable)</p>
+  <p class="lede">Calculations depend on the explosion-protection concept selected (e.g., Ex d, Ex e, Ex i), which has not yet been confirmed with the ExCB. No calculations have been performed.</p>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Not yet available &mdash; pending protection-concept confirmation.</b></div></div>
+
+  <p class="doclabel">2.6.f &middot; Temperature Group Calculation (Hottest-Point Temperature Estimation)</p>
+  <p class="lede">No hottest-point temperature calculation or measurement has been performed for this product. As general context: MQ-series metal-oxide gas sensors operate using an internal heating element, a class of sensor commonly associated with published operating temperatures in the approximate 200&ndash;400&#176;C range &mdash; however, this is a general characteristic of the sensor class, <b>not</b> a measured value for the specific sensor models, drive circuitry, and enclosure configuration used in this product. A worst-case hot-spot measurement is identified as the top-priority action required to substantiate the recommended T4 classification in Section 2.5.</p>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Not yet available.</b></div></div>
+
+  <p class="doclabel">2.6.g &middot; Usage and Installation Instructions (Draft)</p>
+  <table>
+    <tr><th>Sub-item</th><th>Status</th><th>Remarks</th></tr>
+    <tr><td>a) Safety warnings</td><td><span class="status gap">Not yet available</span></td><td>No Ex-specific safety warnings have been drafted.</td></tr>
+    <tr><td>b) Installation requirements (cable entry, torque, grounding, cleaning)</td><td><span class="status wip">Partially available</span></td><td>A mechanical mounting method exists separately (L-bracket, installed to existing structures without drilling or welding &mdash; see Section 2.3.c), but cable-entry method, torque values, grounding requirements, and cleaning requirements have not yet been formally specified.</td></tr>
+    <tr><td>c) Operating instructions and maintenance requirements</td><td><span class="status wip">Partially available</span></td><td>A firmware command/operation reference exists (Serial, MQTT, and LoRa command protocol for engineering use), but it covers software operation and commissioning &mdash; not Ex-specific maintenance or inspection requirements (frequency, content, precautions).</td></tr>
+  </table>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Partially available &mdash; not yet consolidated into an Ex-specific installation and operation manual for ExCB review.</b></div></div>
+
+  <p class="doclabel">2.6.h &middot; Nameplate Information</p>
+  <p class="lede">Nameplate artwork cannot yet be finalized: it depends on the certificate number, protection marking, temperature class, ambient range, IP rating, and serialization scheme &mdash; none of which has been assigned yet.</p>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Not yet available.</b></div></div>
+
+  <p class="doclabel">2.6.i &middot; Ex Component Certificates</p>
+  <p class="lede">No components in this design currently hold an Ex component certificate. As noted in Section 2.3.b, the processing unit (ESP32-S3-WROOM-1U-N16R8) and the communication module (E22-900MM22S) hold RF/EMC certifications (FCC, TELEC, CE, RoHS) &mdash; these are <b>not</b> Ex component certificates and do not satisfy this item.</p>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Not yet available.</b></div></div>
 </section>
 
 <section class="zone" id="s3">
   <div class="zone-head"><span class="zn">3</span><h2>Sample Information</h2></div>
   <p class="lede">Model, serial number, and sample status (whether the unit can be powered on and operated), together with any required test fixtures or auxiliary equipment.</p>
-  <div class="banner info"><span class="ic">&#9675;</span><div><b>Not yet prepared in this revision.</b></div></div>
+
+  <p class="doclabel">3.1 &middot; Model, Serial Number, and Status</p>
+  <p class="lede">No formal sample register or dossier for ExCB submission has been established. Internal engineering and bench testing reference the &ldquo;GLD V2&rdquo; board configuration under firmware environment <span class="mono">gld_v2</span>; a discrete unit serial-numbering scheme for certification samples has not yet been implemented.</p>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Not yet available.</b></div></div>
+
+  <p class="doclabel">3.2 &middot; Test Fixtures and Auxiliary Equipment</p>
+  <p class="lede">A draft internal functional test plan identifies the minimum equipment anticipated for bench-level verification (this plan has not yet been executed and is not evidence of lab readiness):</p>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Test group</th><th>Minimum equipment</th></tr>
+    <tr><td>Firmware / serial</td><td>Engineering commissioning tool or serial terminal; firmware package with recorded version</td></tr>
+    <tr><td>I2C / ADC / DAC</td><td>No additional equipment for protocol-level acknowledgement/readback; multimeter or oscilloscope where physical voltage must be substantiated</td></tr>
+    <tr><td>Power / watchdog timer</td><td>Controlled 24&nbsp;V supply, an applicable battery source, multimeter, and oscilloscope/logic analyzer</td></tr>
+    <tr><td>Alarm</td><td>The actual alarm load, multimeter/oscilloscope, and hearing protection if an audible buzzer is fitted</td></tr>
+    <tr><td>LoRa</td><td>At least one counterpart Cluster Head/Gateway device with recorded configuration</td></tr>
+    <tr><td>RS-485 / Modbus</td><td>An RS-485/USB-RS485 master with proper termination and the agreed register map</td></tr>
+  </table>
+  </div>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Status: Draft plan only &mdash; not yet executed, and not evidence of ExCB/laboratory test readiness.</b></div></div>
 </section>
 
 <footer>

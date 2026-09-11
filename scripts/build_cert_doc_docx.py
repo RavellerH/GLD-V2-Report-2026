@@ -179,9 +179,11 @@ tr2 = title2.add_run("Gas Leak Detector (GLD) V2")
 tr2.font.size = Pt(16); tr2.font.bold = True; tr2.font.color.rgb = GRAY
 
 p("Prepared in direct reference to the IECEx/ATEX Certification Information Requirements issued by the "
-  "certification body (ExCB) \u2014 Section 2, Technical Documentation, Items 1\u20134: product description, "
-  "product name/model/specification list, functional description and technical parameters, and product "
-  "photographs. This document is being developed in stages; remaining items will follow in subsequent revisions.",
+  "certification body (ExCB) \u2014 covering Section 2, Technical Documentation (Items 1\u20136: product "
+  "description; name, model, and specification list; functional description and technical parameters; "
+  "product photographs; intended use and installation environment; and design and manufacturing "
+  "information) and Section 3, Sample Information. Section 1, Basic Information (Application and "
+  "Organization), remains to be completed in a subsequent revision.",
   size=10.5)
 
 p("Document Control", size=11.5, bold=True, color=NAVY, space_after=4)
@@ -223,8 +225,10 @@ for i, h in enumerate(["Revision", "Date", "Description"]):
     r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = GRAY
 rrow = rt.add_row().cells
 for i, v in enumerate([REVISION, DOC_DATE,
-                       "Initial issue \u2014 Section 2, Items 1\u20134 (product description; name, model, and "
-                       "specification list; functional and technical parameters; product photographs)."]):
+                       "Initial issue \u2014 Section 2, Items 1\u20136 (product description; name, model, and "
+                       "specification list; functional and technical parameters; product photographs; "
+                       "intended use and installation environment; design and manufacturing information) "
+                       "and Section 3 (sample information)."]):
     rrow[i].paragraphs[0].paragraph_format.space_after = Pt(2)
     r = rrow[i].paragraphs[0].add_run(v)
     r.font.size = Pt(9.5)
@@ -269,18 +273,25 @@ add_field(fp, "NUMPAGES", fallback_text="1")
 # ============================================================
 doc.add_heading("About This Document", level=1)
 p("This document is a working technical file prepared to satisfy Section \u201c2. Technical Documentation\u201d "
-  "of the official IECEx/ATEX Certification Information Requirements checklist issued by the certification "
-  "body (ExCB). The table of contents follows the complete structure of the original checklist (Sections "
-  "1\u20133); sections not yet completed are marked as pending and will follow in subsequent revisions.")
+  "and Section \u201c3. Sample Information\u201d of the official IECEx/ATEX Certification Information "
+  "Requirements checklist issued by the certification body (ExCB). The table of contents follows the "
+  "complete structure of the original checklist (Sections 1\u20133); Section 1 (Basic Information) remains "
+  "pending and will follow in a subsequent revision.")
 
 quote = doc.add_paragraph()
 quote.paragraph_format.space_after = Pt(10)
 rich(quote, [
-    ("Original excerpt, Section 2, Items 1\u20134 \u2014 source: IECEx ATEX Certification Information "
+    ("Original excerpt, Section 2 & 3 \u2014 source: IECEx ATEX Certification Information "
      "Requirements (ExCB):\n", False, True),
     ("\u201c1) Detailed product description; 2) Product name, model, and specification list; 3) Complete and "
      "clear functional description and technical parameters (electrical parameters, mechanical parameters, "
-     "etc.); 4) Clear product photos (overall and key components).\u201d", False, True),
+     "etc.); 4) Clear product photos (overall and key components); 5) Description of intended use and "
+     "installation environment (e.g., gas group IIC/IIB/IIA if applicable, temperature group T1\u2013T6, "
+     "ambient temperature range, area classification 0/1/2 or 20/21/22); 6) Design and manufacturing "
+     "information [a\u2013i: drawings, BOM, material datasheets, manufacturing process, explosion-protection "
+     "calculations, temperature group calculation, usage and installation instructions, nameplate "
+     "information, Ex component certificates]. 3. Sample Information: 1) model, serial number, and status of "
+     "the sample; 2) necessary test fixtures or auxiliary equipment.\u201d", False, True),
 ], size=9.5)
 
 # ============================================================
@@ -295,8 +306,8 @@ note_box("Not yet prepared in this revision. To be completed in a subsequent rev
 # SECTION 2
 # ============================================================
 doc.add_heading("2. Technical Documentation", level=1)
-p("Nine items per the original checklist (1\u20139, with Item 6 comprising sub-items a\u2013i). This revision "
-  "addresses Items 1\u20134; Items 5\u20139 will follow.")
+p("Six items per the original checklist (1\u20136, with Item 6 comprising sub-items a\u2013i). This revision "
+  "addresses the complete section: Items 1\u20136.")
 
 doc.add_heading("2.1 \u00b7 Detailed Product Description", level=2)
 p("The Gas Leak Detector (GLD) is an IoT-based, multi-sensor gas leak detection device designed "
@@ -519,23 +530,161 @@ note_box(
 
 doc.add_heading("2.5 \u00b7 Description of Intended Use and Installation Environment "
                  "(Gas Group, Temperature Class, Area Classification)", level=2)
+p("The GLD is intended for continuous, fixed-point monitoring of flammable and toxic gas leaks in oil & gas "
+  "refinery hazardous areas \u2014 process units, tank farms, pipe racks, and loading/unloading areas. The "
+  "specific Ex classification parameters below reflect the project engineering team's current "
+  "recommendation, developed from the intended deployment envelope and the gases the device is designed to "
+  "detect; none of these parameters has yet been confirmed with the certification body (ExCB) or a notified "
+  "body, and none should be treated as final.")
+make_table(
+    ["Parameter", "Recommended value", "Status", "Rationale / remarks"],
+    [
+        ["Gas group", "IIC", ("__status__", ("Team recommendation \u2014 pending ExCB confirmation", "wip")),
+         "Hydrogen (H\u2082) is one of the three gases the classifier is designed to detect (Section 2.3.b); "
+         "IIC is required for hydrogen and inherently covers IIB and IIA."],
+        ["Temperature class", "T4 (\u2264135\u00b0C)", ("__status__", ("Team recommendation \u2014 pending verification", "wip")),
+         "Not yet substantiated by measurement. MQ-series metal-oxide sensors rely on an internal heating "
+         "element as their normal operating principle; a hot-spot measurement specific to the sensor models "
+         "and enclosure configuration used here has not yet been performed (see 2.6.f)."],
+        ["Ambient temperature range", "\u2014", ("__status__", ("Pending confirmation", "gap")),
+         "Not yet measured or specified."],
+        ["Area classification (zone)", "Zone 1", ("__status__", ("Team recommendation \u2014 pending ExCB confirmation", "wip")),
+         "Assessed as sufficient for the general refinery deployment envelope, including areas near storage. "
+         "Zone 0 would only apply if the detector were installed directly inside a tank vapor space."],
+    ],
+    col_widths=[1.3, 1.1, 1.9, 2.4],
+)
 note_box(
-    "Not yet prepared in this revision. The classification scheme (gas group, temperature class, installation "
-    "zone) will be finalized based on further technical assessment and confirmed together with the "
-    "certification body (ExCB / notified body).",
+    "These are engineering recommendations, not a certification decision. An independent readiness "
+    "assessment of the same checklist item, prepared separately from the underlying firmware/hardware "
+    "repository, reached the same conclusion \u2014 gas group, temperature class, ambient range, and zone "
+    "are not yet formally established. Final classification requires explicit agreement with the ExCB.",
+    shade=WARN_SHADE,
+)
+
+doc.add_heading("2.6 \u00b7 Design and Manufacturing Information", level=2)
+p("Nine sub-items (a\u2013i) per the original checklist. Status is reported item by item below; most "
+  "sub-items are not yet available \u2014 this is reported plainly rather than implied to be complete.")
+
+doc.add_heading("2.6.a \u00b7 Complete Drawings (Assembly, Component, Electrical Schematic, PCB Layout, "
+                 "Enclosure Structure, Junction Box, Terminal, Grounding)", level=3)
+p("An electrical schematic capture and a corresponding PCB layout exist for the GLD V2 main board (EDA "
+  "source design files). From the schematic's traced net list, a supporting block-diagram set (9 sheets, "
+  "functional/block level, 204 components mapped with documented pin-to-net traceability) has been produced "
+  "and is illustrated below.")
+fig_para = doc.add_paragraph()
+fig_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+fig_run = fig_para.add_run()
+fig_run.add_picture(os.path.join(PHOTO_DIR, "GLD2-schematic-block-overview.jpg"), width=Inches(5.6))
+fig_cap = doc.add_paragraph()
+fig_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+fig_cap.paragraph_format.space_after = Pt(12)
+fcr1 = fig_cap.add_run("Schematic-derived block diagram \u2014 sheet 1 of 9: overall architecture\n")
+fcr1.font.bold = True; fcr1.font.size = Pt(9.5)
+fcr2 = fig_cap.add_run(
+    "Power input, power distribution, analog acquisition, sensor control, main control (ESP32-S3), and "
+    "external interfaces (alarm, RS-485, LoRa antenna, programming/configuration). Derived directly from the "
+    "traced schematic net list; annotated in Indonesian in the source set."
+)
+fcr2.font.size = Pt(8.5); fcr2.font.color.rgb = GRAY
+make_table(
+    ["Drawing type", "Status", "Remarks"],
+    [
+        ["Electrical schematic (component-level) / block diagram", ("__status__", ("Partially available", "wip")),
+         "Schematic capture and a derived 9-sheet block-diagram set exist with traceability evidence "
+         "(pin-to-net mapping). Not yet issued in a released, revision-controlled drawing format with a "
+         "formal drawing number."],
+        ["PCB layout", ("__status__", ("Partially available", "wip")),
+         "PCB layout export exists for the same board revision as the schematic above."],
+        ["Assembly drawing", ("__status__", ("Not yet available", "gap")), ""],
+        ["Component drawing", ("__status__", ("Not yet available", "gap")), ""],
+        ["Enclosure structure drawing (gap, length, volume)", ("__status__", ("Not yet available", "gap")),
+         "Required if a flameproof (Ex d) protection concept is pursued."],
+        ["Junction box / terminal / grounding connection drawings", ("__status__", ("Not yet available", "gap")), ""],
+    ],
+    col_widths=[2.6, 1.3, 2.8],
+)
+note_box(
+    "The schematic and PCB layout are useful supporting engineering artifacts, but on their own they do not "
+    "constitute the certified drawing package the checklist requires \u2014 dimensioned, toleranced, "
+    "material-annotated drawings in a released revision-controlled form have not yet been produced.",
     shade=INFO_SHADE,
 )
 
-doc.add_heading("2.6 \u00b7 Design and Manufacturing Information (Items a\u2013i: Technical Drawings, Bill of "
-                 "Materials, Material Datasheets, Manufacturing Process, Calculations, Draft Manual, "
-                 "Nameplate, Ex Component Certificates)", level=2)
+doc.add_heading("2.6.b \u00b7 Bill of Materials (BOM) for Explosion-Safety-Relevant Components", level=3)
+p("A controlled, Ex-critical BOM (enclosure, gaskets, terminals, cable entry devices, switches, light "
+  "sources, battery, potting compound, plastic parts, printed circuit boards \u2014 with manufacturer, model, "
+  "material grade, and certification/technical parameters for each) has not yet been compiled. A "
+  "component-level pin/net export exists from the schematic (204 components traced) and can serve as a "
+  "starting reference, but manufacturer part numbers, material grades, and Ex/UL/CCC certification status "
+  "for the safety-critical items above have not been determined. Comparative research on Ex-rated enclosure "
+  "products from other manufacturers exists internally as a reference for target specifications only \u2014 "
+  "it describes third-party products, not this product's actual components, and is not included here.")
+note_box("Status: Not yet available.", shade=INFO_SHADE)
+
+doc.add_heading("2.6.c \u00b7 Material Specification Sheets / Datasheets (Non-Metallic Materials)", level=3)
+p("Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, "
+  "insulators, potting compounds) \u2014 covering heat/cold resistance, anti-aging, anti-static, flame "
+  "retardancy, CTI value, and chemical resistance \u2014 have not yet been collected.")
+note_box("Status: Not yet available.", shade=INFO_SHADE)
+
+doc.add_heading("2.6.d \u00b7 Manufacturing Process Description", level=3)
+p("A description of manufacturing processes relevant to explosion-protection safety (enclosure machining "
+  "accuracy control, explosion-proof surface treatment, welding, potting, die-casting, bonding) has not yet "
+  "been documented.")
+note_box("Status: Not yet available.", shade=INFO_SHADE)
+
+doc.add_heading("2.6.e \u00b7 Explosion-Protection Calculations and Explanations (if applicable)", level=3)
+p("Calculations depend on the explosion-protection concept selected (e.g., Ex d, Ex e, Ex i), which has not "
+  "yet been confirmed with the ExCB. No calculations have been performed.")
+note_box("Status: Not yet available \u2014 pending protection-concept confirmation.", shade=INFO_SHADE)
+
+doc.add_heading("2.6.f \u00b7 Temperature Group Calculation (Hottest-Point Temperature Estimation)", level=3)
+p("No hottest-point temperature calculation or measurement has been performed for this product. As general "
+  "context: MQ-series metal-oxide gas sensors operate using an internal heating element, a class of sensor "
+  "commonly associated with published operating temperatures in the approximate 200\u2013400\u00b0C range \u2014 "
+  "however, this is a general characteristic of the sensor class, not a measured value for the specific "
+  "sensor models, drive circuitry, and enclosure configuration used in this product. A worst-case hot-spot "
+  "measurement is identified as the top-priority action required to substantiate the recommended T4 "
+  "classification in Section 2.5.")
+note_box("Status: Not yet available.", shade=INFO_SHADE)
+
+doc.add_heading("2.6.g \u00b7 Usage and Installation Instructions (Draft)", level=3)
+make_table(
+    ["Sub-item", "Status", "Remarks"],
+    [
+        ["a) Safety warnings", ("__status__", ("Not yet available", "gap")),
+         "No Ex-specific safety warnings have been drafted."],
+        ["b) Installation requirements (cable entry, torque, grounding, cleaning)",
+         ("__status__", ("Partially available", "wip")),
+         "A mechanical mounting method exists separately (L-bracket, installed to existing structures without "
+         "drilling or welding \u2014 see Section 2.3.c), but cable-entry method, torque values, grounding "
+         "requirements, and cleaning requirements have not yet been formally specified."],
+        ["c) Operating instructions and maintenance requirements", ("__status__", ("Partially available", "wip")),
+         "A firmware command/operation reference exists (Serial, MQTT, and LoRa command protocol for "
+         "engineering use), but it covers software operation and commissioning \u2014 not Ex-specific "
+         "maintenance or inspection requirements (frequency, content, precautions)."],
+    ],
+    col_widths=[2.4, 1.3, 3.0],
+)
 note_box(
-    "Not yet prepared in this revision. To be completed in a subsequent revision, covering technical "
-    "drawings, the bill of materials, material datasheets, a manufacturing process description, "
-    "explosion-protection calculations, a draft operating/installation manual, nameplate information, and "
-    "Ex component certificates.",
+    "Status: Partially available \u2014 not yet consolidated into an Ex-specific installation and operation "
+    "manual for ExCB review.",
     shade=INFO_SHADE,
 )
+
+doc.add_heading("2.6.h \u00b7 Nameplate Information", level=3)
+p("Nameplate artwork cannot yet be finalized: it depends on the certificate number, protection marking, "
+  "temperature class, ambient range, IP rating, and serialization scheme \u2014 none of which has been "
+  "assigned yet.")
+note_box("Status: Not yet available.", shade=INFO_SHADE)
+
+doc.add_heading("2.6.i \u00b7 Ex Component Certificates", level=3)
+p("No components in this design currently hold an Ex component certificate. As noted in Section 2.3.b, the "
+  "processing unit (ESP32-S3-WROOM-1U-N16R8) and the communication module (E22-900MM22S) hold RF/EMC "
+  "certifications (FCC, TELEC, CE, RoHS) \u2014 these are not Ex component certificates and do not satisfy "
+  "this item.")
+note_box("Status: Not yet available.", shade=INFO_SHADE)
 
 # ============================================================
 # SECTION 3
@@ -543,7 +692,32 @@ note_box(
 doc.add_heading("3. Sample Information", level=1)
 p("Model, serial number, and sample status (whether the unit can be powered on and operated), together with "
   "any required test fixtures or auxiliary equipment.")
-note_box("Not yet prepared in this revision.", shade=INFO_SHADE)
+
+doc.add_heading("3.1 \u00b7 Model, Serial Number, and Status", level=2)
+p("No formal sample register or dossier for ExCB submission has been established. Internal engineering and "
+  "bench testing reference the \u201cGLD V2\u201d board configuration under firmware environment gld_v2; a "
+  "discrete unit serial-numbering scheme for certification samples has not yet been implemented.")
+note_box("Status: Not yet available.", shade=INFO_SHADE)
+
+doc.add_heading("3.2 \u00b7 Test Fixtures and Auxiliary Equipment", level=2)
+p("A draft internal functional test plan identifies the minimum equipment anticipated for bench-level "
+  "verification (this plan has not yet been executed and is not evidence of lab readiness):")
+make_table(
+    ["Test group", "Minimum equipment"],
+    [
+        ["Firmware / serial", "Engineering commissioning tool or serial terminal; firmware package with recorded version"],
+        ["I2C / ADC / DAC", "No additional equipment for protocol-level acknowledgement/readback; multimeter or oscilloscope where physical voltage must be substantiated"],
+        ["Power / watchdog timer", "Controlled 24 V supply, an applicable battery source, multimeter, and oscilloscope/logic analyzer"],
+        ["Alarm", "The actual alarm load, multimeter/oscilloscope, and hearing protection if an audible buzzer is fitted"],
+        ["LoRa", "At least one counterpart Cluster Head/Gateway device with recorded configuration"],
+        ["RS-485 / Modbus", "An RS-485/USB-RS485 master with proper termination and the agreed register map"],
+    ],
+    col_widths=[1.8, 4.9],
+)
+note_box(
+    "Status: Draft plan only \u2014 not yet executed, and not evidence of ExCB/laboratory test readiness.",
+    shade=INFO_SHADE,
+)
 
 # ============================================================
 # FOOTER NOTE

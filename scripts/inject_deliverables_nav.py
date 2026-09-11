@@ -12,11 +12,14 @@ FILES = [
     ("Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html", "Detail Assessment/Field Testing", False),
     ("Desain_Bracket_L_UBolt_GLD_Mounting.html", "Desain Bracket U-Bolt", False),
     ("Dashboard_Sertifikasi_GLD_ATEX_IECEx.html", "Dashboard Sertifikasi", False),
-    ("Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX.html", "Dokumen Teknis Sertifikasi", False),
 ]
 
 # Dikeluarkan dari navigasi atas permintaan user (4 Sep) - tidak perlu ditampilkan/dinavigasikan:
 # Datasheet_Sistem_GLD_Slides_source.html, Notulen_Meeting_GLD_24Jul2026.html, Notulen_Meeting_GLD_30Jul2026.html
+#
+# Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX.html dikeluarkan (11 Sep) - ini dokumen resmi
+# berbahasa Inggris untuk disampaikan ke lembaga sertifikasi eksternal (ExCB); tidak boleh
+# memuat nav bar internal berbahasa Indonesia yang menautkan ke dashboard proyek internal.
 
 NAV_START = "<!-- GLD-NAV-START -->"
 NAV_END = "<!-- GLD-NAV-END -->"
@@ -40,7 +43,8 @@ def build_nav(current_file):
     items_html = '<span style="opacity:.35;color:#8A97A6">&middot;</span>'.join(items)
     nav = (
         f'{NAV_START}\n'
-        f'<div style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;'
+        f'<style>@media print{{#gld-cross-nav{{display:none !important}}}}</style>\n'
+        f'<div id="gld-cross-nav" style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;'
         f'display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;'
         f'font-family:-apple-system,\'Segoe UI\',Roboto,Arial,sans-serif;font-size:13px;'
         f'position:relative;z-index:99999;">\n'

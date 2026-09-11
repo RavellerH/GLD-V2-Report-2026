@@ -124,6 +124,7 @@ for fn, title, desc in schematic_sheets:
 schematics_html = "\n".join(schematic_cards)
 
 pcb_layout_b64 = b64_schematic("10-pcb-layout.png")
+pcb_3d_b64 = b64_schematic("11-pcb-3d-render.png")
 
 DRAWING_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_drawings")
 def b64_drawing(fn):
@@ -342,10 +343,16 @@ body = f'''<meta charset="utf-8">
   <div class="photogrid">
 {schematics_html}
   </div>
-  <figure class="photo" style="max-width:420px;margin:0 auto 14px">
+  <div class="photogrid">
+  <figure class="photo">
     <img src="data:image/png;base64,{pcb_layout_b64}" alt="Main board PCB copper layout, top view" loading="lazy">
-    <figcaption><b>Main board PCB layout &mdash; top copper layer</b><span>Routed layout exported directly from the EasyEDA/JLCPCB source project (production-intent board, circular outline with six mounting holes). A companion 3D solid model (OBJ/MTL) of the same board also exists.</span></figcaption>
+    <figcaption><b>Main board PCB layout &mdash; top copper layer</b><span>Routed layout exported directly from the EasyEDA/JLCPCB source project (production-intent board, circular outline with six mounting holes).</span></figcaption>
   </figure>
+  <figure class="photo">
+    <img src="data:image/png;base64,{pcb_3d_b64}" alt="3D rendered view of the main board, populated, from the EasyEDA/JLCPCB solid model" loading="lazy">
+    <figcaption><b>Main board &mdash; 3D populated render</b><span>Rendered directly from the same EasyEDA/JLCPCB 3D solid model (OBJ/MTL) as the layout above &mdash; ESP32-S3-WROOM module, micro-USB connector, power inductors, and 8-channel I2C header block visible in their real placed positions. Illustrative render, not a dimensioned drawing.</span></figcaption>
+  </figure>
+  </div>
   <p class="lede">A dimensioned mechanical drawing sheet also exists for the enclosure&rsquo;s external envelope and its mounting hardware, drafted from a solid CAD model (STEP format, millimeter units) with a formal title block, orthographic and isometric views, and a parts table &mdash; reproduced below.</p>
   <figure class="photo" style="max-width:820px;margin:0 auto 14px">
     <img src="data:image/png;base64,{bracket_drawing_b64}" alt="Dimensioned CAD drawing sheet of the enclosure external envelope and mounting bracket" loading="lazy">

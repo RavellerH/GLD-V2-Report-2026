@@ -641,16 +641,19 @@ for fn, title, desc in schematic_sheets:
 pcb_fig_para = doc.add_paragraph()
 pcb_fig_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
 pcb_fig_run = pcb_fig_para.add_run()
-pcb_fig_run.add_picture(os.path.join(SCHEMATIC_DIR, "10-pcb-layout.png"), width=Inches(3.6))
+pcb_fig_run.add_picture(os.path.join(SCHEMATIC_DIR, "10-pcb-layout.png"), width=Inches(2.7))
+pcb_fig_run2 = pcb_fig_para.add_run("   ")
+pcb_fig_run2.add_picture(os.path.join(SCHEMATIC_DIR, "11-pcb-3d-render.png"), width=Inches(2.7))
 pcb_fig_cap = doc.add_paragraph()
 pcb_fig_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
 pcb_fig_cap.paragraph_format.space_after = Pt(12)
-pcr1 = pcb_fig_cap.add_run("Main board PCB layout \u2014 top copper layer\n")
+pcr1 = pcb_fig_cap.add_run("Main board PCB layout (top copper) and 3D populated render\n")
 pcr1.font.bold = True; pcr1.font.size = Pt(9.5)
 pcr2 = pcb_fig_cap.add_run(
-    "Routed layout exported directly from the EasyEDA/JLCPCB source project (production-intent board, "
-    "circular outline with six mounting holes). A companion 3D solid model (OBJ/MTL) of the same board also "
-    "exists."
+    "Both exported directly from the EasyEDA/JLCPCB source project (production-intent board, circular "
+    "outline with six mounting holes). The 3D render shows the ESP32-S3-WROOM module, micro-USB connector, "
+    "power inductors, and 8-channel I2C header block in their real placed positions; it is an illustrative "
+    "render, not a dimensioned drawing."
 )
 pcr2.font.size = Pt(8.5); pcr2.font.color.rgb = GRAY
 p("A dimensioned mechanical drawing sheet also exists for the enclosure's external envelope and its "

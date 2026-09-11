@@ -305,6 +305,18 @@ p("This document is a working technical file prepared to satisfy Section \u201c2
   "Requirements checklist issued by the certification body (ExCB). The table of contents follows the "
   "complete structure of the original checklist (Sections 1\u20133); Section 1 (Basic Information) remains "
   "pending and will follow in a subsequent revision.")
+note_box(
+    "Scope of this document. This is a compilation of design evidence and an honest readiness assessment "
+    "against the ExCB checklist, prepared in support of a future submission — it is not itself a "
+    "certificate and does not constitute self-certification. The final enclosure/casing (material selection, "
+    "manufacture, gasket, and cable entry) is being developed by an external mechanical/casing partner and is "
+    "not yet in the authors' possession; items that depend on that design (material datasheets, manufacturing "
+    "process description, explosion-protection calculations) are reported as not yet available for that "
+    "reason, not because the work has stalled. The product is still at from-scratch development/prototype "
+    "stage — no finalized, serialized units exist yet, which is why a formal sample register (Section "
+    "3.1) is not yet available either.",
+    shade=INFO_SHADE,
+)
 
 quote = doc.add_paragraph()
 quote.paragraph_format.space_after = Pt(10)
@@ -748,8 +760,10 @@ note_box(
     "Status: Partially available. Full electronic-component BOM with real manufacturer/supplier data now "
     "exists (source: EasyEDA/JLCPCB export, 11 Sep 2026). The explosion-safety-relevant subset the checklist "
     "actually asks for \u2014 enclosure, gasket, cable entry device, battery, potting compound, and the gas "
-    "sensor itself, with material grade and Ex/UL/CCC certification for each \u2014 remains not yet compiled, "
-    "because those mechanical/safety parts are not represented in an electronic design BOM.",
+    "sensor itself, with material grade and Ex/UL/CCC certification for each \u2014 remains not yet compiled. "
+    "These are mechanical/safety parts, not electronic components: the enclosure itself is under design by an "
+    "external mechanical/casing development partner and its bill of materials has not yet been provided to "
+    "the authors.",
     shade=WARN_SHADE,
 )
 
@@ -757,18 +771,31 @@ doc.add_heading("2.6.c \u00b7 Material Specification Sheets / Datasheets (Non-Me
 p("Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, "
   "insulators, potting compounds) \u2014 covering heat/cold resistance, anti-aging, anti-static, flame "
   "retardancy, CTI value, and chemical resistance \u2014 have not yet been collected.")
-note_box("Status: Not yet available.", shade=INFO_SHADE)
+note_box(
+    "Status: Not yet available. Dependent on the enclosure design and material selection, which sits with "
+    "the external casing development partner rather than the authors.",
+    shade=INFO_SHADE,
+)
 
 doc.add_heading("2.6.d \u00b7 Manufacturing Process Description", level=3)
 p("A description of manufacturing processes relevant to explosion-protection safety (enclosure machining "
   "accuracy control, explosion-proof surface treatment, welding, potting, die-casting, bonding) has not yet "
   "been documented.")
-note_box("Status: Not yet available.", shade=INFO_SHADE)
+note_box(
+    "Status: Not yet available. This describes the casing partner's manufacturing process, not an internal "
+    "electronics process \u2014 it will need to be obtained from that partner once their process is "
+    "finalized.",
+    shade=INFO_SHADE,
+)
 
 doc.add_heading("2.6.e \u00b7 Explosion-Protection Calculations and Explanations (if applicable)", level=3)
 p("Calculations depend on the explosion-protection concept selected (e.g., Ex d, Ex e, Ex i), which has not "
-  "yet been confirmed with the ExCB. No calculations have been performed.")
-note_box("Status: Not yet available \u2014 pending protection-concept confirmation.", shade=INFO_SHADE)
+  "yet been confirmed with the ExCB, and on final enclosure geometry from the casing development partner. No "
+  "calculations have been performed.")
+note_box(
+    "Status: Not yet available \u2014 pending protection-concept confirmation and final enclosure design.",
+    shade=INFO_SHADE,
+)
 
 doc.add_heading("2.6.f \u00b7 Temperature Group Calculation (Hottest-Point Temperature Estimation)", level=3)
 p("No hottest-point temperature calculation or measurement has been performed for this product. As general "
@@ -828,7 +855,12 @@ doc.add_heading("3.1 \u00b7 Model, Serial Number, and Status", level=2)
 p("No formal sample register or dossier for ExCB submission has been established. Internal engineering and "
   "bench testing reference the \u201cGLD V2\u201d board configuration under firmware environment gld_v2; a "
   "discrete unit serial-numbering scheme for certification samples has not yet been implemented.")
-note_box("Status: Not yet available.", shade=INFO_SHADE)
+note_box(
+    "Status: Not yet available. The product is still being built from scratch at prototype/development "
+    "stage; no finalized, serialized unit yet exists to register as a submission sample. This item becomes "
+    "actionable once a build reaches a stable, submission-ready configuration.",
+    shade=INFO_SHADE,
+)
 
 doc.add_heading("3.2 \u00b7 Test Fixtures and Auxiliary Equipment", level=2)
 p("A draft internal functional test plan identifies the minimum equipment anticipated for bench-level "

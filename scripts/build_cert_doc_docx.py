@@ -63,12 +63,12 @@ def set_cell_border(cell, color=LINE_GRAY, sz=4):
         borders.append(el)
     tcPr.append(borders)
 
-def add_field(paragraph, field_code):
+def add_field(paragraph, field_code, fallback_text="Right-click and choose Update Field."):
     run = paragraph.add_run()
     fld_begin = OxmlElement("w:fldChar"); fld_begin.set(qn("w:fldCharType"), "begin")
     instr = OxmlElement("w:instrText"); instr.set(qn("xml:space"), "preserve"); instr.text = field_code
     fld_sep = OxmlElement("w:fldChar"); fld_sep.set(qn("w:fldCharType"), "separate")
-    fld_text = OxmlElement("w:t"); fld_text.text = "Right-click and choose Update Field to generate the table of contents."
+    fld_text = OxmlElement("w:t"); fld_text.text = fallback_text
     fld_end = OxmlElement("w:fldChar"); fld_end.set(qn("w:fldCharType"), "end")
     r_el = run._r
     r_el.append(fld_begin); r_el.append(instr)
@@ -150,12 +150,28 @@ def make_table(headers, rows, col_widths=None, status_col=None):
     return tbl
 
 # ============================================================
-# COVER
+# COVER / LETTERHEAD
 # ============================================================
-p("Working document", size=9, bold=True, color=GOOD, space_after=2)
+DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
+REVISION = "0.1"
+DOC_DATE = "11 September 2026"
+
+letterhead = doc.add_table(rows=1, cols=1)
+lc = letterhead.rows[0].cells[0]
+set_cell_shading(lc, "1A2B3D")
+lc.paragraphs[0].paragraph_format.space_after = Pt(2)
+lr = lc.paragraphs[0].add_run("PT LAPI GANESHA UTAMA")
+lr.font.bold = True; lr.font.size = Pt(14); lr.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+lp2 = lc.add_paragraph()
+lp2.paragraph_format.space_after = Pt(3)
+lr2 = lp2.add_run("In technical partnership with the Institute of Technology Bandung")
+lr2.font.size = Pt(9.5); lr2.font.color.rgb = RGBColor(0xC7, 0xD2, 0xE0)
+doc.add_paragraph().paragraph_format.space_after = Pt(14)
+
+p("TECHNICAL CERTIFICATION DOCUMENT", size=10, bold=True, color=GRAY, space_after=4)
 title = doc.add_heading(level=0)
 title.paragraph_format.space_after = Pt(4)
-tr = title.add_run("IECEx/ATEX Technical Certification Document")
+tr = title.add_run("IECEx/ATEX Certification Document")
 tr.font.size = Pt(22); tr.font.bold = True; tr.font.color.rgb = NAVY
 title2 = doc.add_paragraph()
 title2.paragraph_format.space_after = Pt(10)
@@ -168,13 +184,18 @@ p("Prepared in direct reference to the IECEx/ATEX Certification Information Requ
   "photographs. This document is being developed in stages; remaining items will follow in subsequent revisions.",
   size=10.5)
 
+p("Document Control", size=11.5, bold=True, color=NAVY, space_after=4)
 meta_rows = [
+    ("Document title", "IECEx/ATEX Certification Document \u2014 Gas Leak Detector (GLD) V2"),
+    ("Document no.", DOC_NO),
+    ("Revision", REVISION),
+    ("Date", DOC_DATE),
+    ("Status", "Working Document \u2014 Draft for Internal Review"),
+    ("Classification", "Confidential \u2014 prepared for ATEX/IECEx certification body (ExCB) submission"),
     ("Certification subject", "Node Sensor (GLD) \u2014 V2"),
     ("Manufacturer", "PT LAPI Ganesha Utama"),
     ("Technical partner", "Institute of Technology Bandung"),
     ("Reference checklist", "IECEx/ATEX Certification Information Requirements"),
-    ("Revision", "Draft 0.1"),
-    ("Date", "11 September 2026"),
 ]
 mt = doc.add_table(rows=0, cols=2)
 mt.style = "Table Grid"
@@ -189,13 +210,59 @@ for k, v in meta_rows:
     r2.font.size = Pt(10)
     row[0].width = Inches(2.0); row[1].width = Inches(4.5)
 
-doc.add_paragraph().paragraph_format.space_after = Pt(6)
+doc.add_paragraph().paragraph_format.space_after = Pt(10)
+
+p("Revision History", size=11.5, bold=True, color=NAVY, space_after=4)
+rt = doc.add_table(rows=1, cols=3)
+rt.style = "Table Grid"
+rhdr = rt.rows[0].cells
+for i, h in enumerate(["Revision", "Date", "Description"]):
+    set_cell_shading(rhdr[i], HEAD_SHADE)
+    rhdr[i].paragraphs[0].paragraph_format.space_after = Pt(2)
+    r = rhdr[i].paragraphs[0].add_run(h.upper())
+    r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = GRAY
+rrow = rt.add_row().cells
+for i, v in enumerate([REVISION, DOC_DATE,
+                       "Initial issue \u2014 Section 2, Items 1\u20134 (product description; name, model, and "
+                       "specification list; functional and technical parameters; product photographs)."]):
+    rrow[i].paragraphs[0].paragraph_format.space_after = Pt(2)
+    r = rrow[i].paragraphs[0].add_run(v)
+    r.font.size = Pt(9.5)
+rt.rows[0].cells[0].width = rt.rows[1].cells[0].width = Inches(0.9)
+rt.rows[0].cells[1].width = rt.rows[1].cells[1].width = Inches(1.3)
+rt.rows[0].cells[2].width = rt.rows[1].cells[2].width = Inches(4.3)
+
+doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
 p("Table of Contents", size=12, bold=True, color=NAVY, space_after=4)
 toc_para = doc.add_paragraph()
-add_field(toc_para, 'TOC \\o "1-3" \\h \\z \\u')
+add_field(toc_para, 'TOC \\o "1-3" \\h \\z \\u',
+          fallback_text="Right-click and choose Update Field to generate the table of contents.")
 
 doc.add_page_break()
+
+# ---------- header / footer ----------
+header = sec.header
+header.is_linked_to_previous = False
+hp = header.paragraphs[0]
+hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+hr = hp.add_run("IECEx/ATEX Certification Document \u2014 Gas Leak Detector (GLD) V2  |  Confidential")
+hr.font.size = Pt(8); hr.font.color.rgb = GRAY; hr.font.italic = True
+
+footer = sec.footer
+footer.is_linked_to_previous = False
+fp = footer.paragraphs[0]
+fr1 = fp.add_run(f"{DOC_NO}  \u00b7  Rev. {REVISION}")
+fr1.font.size = Pt(8); fr1.font.color.rgb = GRAY
+tab_stops = fp.paragraph_format.tab_stops
+tab_stops.add_tab_stop(Inches(6.5), alignment=2)  # right-aligned tab
+fp.add_run("\t")
+fr2 = fp.add_run("Page ")
+fr2.font.size = Pt(8); fr2.font.color.rgb = GRAY
+add_field(fp, "PAGE", fallback_text="1")
+fr3 = fp.add_run(" of ")
+fr3.font.size = Pt(8); fr3.font.color.rgb = GRAY
+add_field(fp, "NUMPAGES", fallback_text="1")
 
 # ============================================================
 # ABOUT
@@ -239,9 +306,8 @@ p("The Gas Leak Detector (GLD) is an IoT-based, multi-sensor gas leak detection 
 p("Functionally, the GLD integrates eight channels of metal-oxide semiconductor gas sensors (MQ "
   "series), an edge-AI microcontroller/processor (ESP32-S3), and a LoRa radio module (star-topology wireless "
   "transmission) within a single fixed-point unit installed at locations with gas-leak risk. An "
-  "on-device AI gas-classification model (CNN Dual-Branch architecture) runs directly on the unit \u2014 "
-  "confirmed by the engineering team; written verification within firmware documentation has not yet been "
-  "completed \u2014 so that detection decisions do not depend on a continuous connection to a central server. "
+  "on-device AI gas-classification model runs directly on the unit so that detection decisions do not "
+  "depend on a continuous connection to a central server. "
   "When gas concentration exceeds a defined threshold, the unit triggers a local alarm (an integrated "
   "visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to "
   "the operator dashboard.")
@@ -262,7 +328,7 @@ spec_rows = [
     ("Technical development partner", "Institute of Technology Bandung \u2014 IoT Laboratory & Physics Laboratory"),
     ("End client / program owner", "PT Pertamina Patra Niaga (initial deployment site: Refinery Unit IV, Cilacap)"),
     ("Primary function", "Acquisition of 8-channel gas sensor data and LoRa transmission"),
-    ("Microcontroller", "ESP32-S3-WROOM-1U"),
+    ("Microcontroller", "ESP32-S3-WROOM-1U-N16R8"),
     ("LoRa radio module", "E22-900MM22S"),
     ("Dimensions (L\u00d7W\u00d7H)", "200 \u00d7 90 \u00d7 290 mm"),
     ("Enclosure material", "Aluminum alloy + stainless steel"),
@@ -277,8 +343,9 @@ for k, v in spec_rows:
     r2 = row[1].paragraphs[0].add_run(v); r2.font.size = Pt(10)
     row[0].width = Inches(2.2); row[1].width = Inches(4.3)
 doc.add_paragraph().paragraph_format.space_after = Pt(6)
-p("Source: internal technical specification documentation (Revision 27 August 2026) and EMC parameter "
-  "measurement data (Institute of Technology Bandung, Physics Laboratory).", size=9, italic=True, color=GRAY)
+p("Source: official product technical datasheet (Institute of Technology Bandung, Revision 4.0), "
+  "cross-referenced with internal technical specification documentation and EMC parameter measurement data.",
+  size=9, italic=True, color=GRAY)
 
 doc.add_heading("2.3 \u00b7 Functional Description and Technical Parameters (Electrical, Mechanical, etc.)", level=2)
 p("Functional workflow (normal operating mode): sense \u2192 process \u2192 transmit. Each of the eight gas "
@@ -307,7 +374,7 @@ make_table(
          "Applies to the continuous-power configuration. The battery (R&D) configuration is recorded separately at 5.75 W \u2014 a different operating mode, not a data conflict."],
         ["Backup battery path (R&D, not in production)", "Li-ion 18650 cells, 7 in parallel, 4.2 V/cell, \u224828,000 mAh total",
          ("__status__", ("Development pathway", "wip")),
-         "Not yet a deployed production configuration. Cell/BMS safety certification (e.g., UN 38.3, IEC 62133) not yet obtained."],
+         "Not yet a deployed production configuration. Cell/BMS safety certification (e.g., UN 38.3, IEC 62133) not yet obtained. Firmware-reported diagnostic thresholds: low battery at 3.50 V, critical at 3.30 V (status/flag only, not an active power cutoff)."],
         ["Electrical protection (fuse, reverse polarity, overvoltage, overcurrent)", "\u2014",
          ("__status__", ("Pending confirmation", "gap")), "Scope of electrical protection not yet defined/documented."],
     ],
@@ -320,12 +387,14 @@ make_table(
     [
         ["Gas sensors", "MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135 (8 channels)",
          ("__status__", ("Final", "ok")), "Metal-oxide semiconductor sensors; sensing element directly exposed to ambient air."],
-        ["AI gas-classification model", "CNN Dual-Branch \u2014 4 classes: LPG, CO\u2082, Clean Air, H\u2082",
-         ("__status__", ("Confirmed by team; written verification pending", "wip")),
-         "On-chip accuracy 99.20% (int8, ESP32-S3, 9.14 KB model size). Does not yet cover Benzene, CO, or H\u2082S (additional client requirement, still open)."],
-        ["Environmental sensor (temperature/humidity)", "Not installed on production units",
-         ("__status__", ("Laboratory test rig only", "wip")), "Used only on the laboratory test rig, not on field units."],
-        ["Processing unit", "ESP32-S3-WROOM-1U", ("__status__", ("Final", "ok")),
+        ["AI gas-classification model", "On-device classifier \u2014 3 classes: Clean Air, LPG, H\u2082",
+         ("__status__", ("Final", "ok")),
+         "Runs locally on the ESP32-S3 (Running/Inference mode); outputs a class label and a confidence value. Does not yet cover CO\u2082, Benzene, CO, or H\u2082S."],
+        ["Environmental sensor (temperature/humidity)", "SHT40-AD1B-R2 (I2C)",
+         ("__status__", ("Final", "ok")), "Auxiliary temperature/humidity input included in the primary hardware design; values are available for status/telemetry."],
+        ["Analog-to-digital converter", "ADS1256IDBR", ("__status__", ("Final", "ok")),
+         "24-bit multi-channel analog acquisition for the 8 sensor channels; 30,000 SPS, firmware SPI clock 1.92 MHz."],
+        ["Processing unit", "ESP32-S3-WROOM-1U-N16R8", ("__status__", ("Final", "ok")),
          "Certified under FCC (2AC7Z-ESPS3WROOM1U), TELEC, and CE (per Espressif data) \u2014 RF/EMC certifications, not an \u201cEx component\u201d certification."],
         ["Communication module", "LoRa, E22-900MM22S module", ("__status__", ("Final", "ok")),
          "Certified under CE, FCC, and RoHS (per Ebyte data) \u2014 RF/EMC certifications, not an \u201cEx component\u201d certification."],
@@ -333,13 +402,16 @@ make_table(
          "Star-topology transmission; within the regional 920\u2013923 MHz ISM band (Indonesia)."],
         ["Transmit power (firmware configuration)", "17 dBm", ("__status__", ("Final", "ok")),
          "The radio module supports up to 22 dBm \u2014 17 dBm is an operational configuration, not the module's maximum limit."],
-        ["Bandwidth / spreading factor", "125 kHz / SF7", ("__status__", ("Final", "ok")), "Source: EMC parameter table."],
+        ["Bandwidth / spreading factor / coding rate", "125 kHz / SF7 / CR 4/5", ("__status__", ("Final", "ok")), "Source: EMC parameter table and official product technical datasheet."],
         ["Antenna", "External, omnidirectional, SMA male connector, 3 dBi gain", ("__status__", ("Final", "ok")),
          "On some units, the 2.4 GHz Wi-Fi antenna remains inside the enclosure and must be relocated externally."],
         ["Data transmission interval", "Configurable, default 10 seconds", ("__status__", ("Final", "ok")),
          "Alarm events are transmitted immediately, independent of the periodic interval."],
         ["Other interfaces", "SPI, LoRa", ("__status__", ("Final", "ok")),
          "External ports/connectors: USB, sensor, power, fan, antenna, alarm buzzer."],
+        ["RS-485 / Modbus interface", "Read-only Modbus RTU slave, 9600 bit/s 8N1, Unit ID 1 (THVD1410DR transceiver)",
+         ("__status__", ("Final", "ok")),
+         "Provides 8 read-only registers (device status word, classification result, confidence, battery voltage, power source, external power, LoRa transmission counter, node ID); not used for product control."],
     ],
     col_widths=[1.5, 1.7, 1.1, 2.2],
 )
@@ -367,7 +439,8 @@ make_table(
     col_widths=[1.5, 1.9, 1.1, 2.0],
 )
 p("Source: internal technical specification documentation, Sections 1.1\u20131.3 (Node Sensor), cross-referenced "
-  "with EMC parameter data and component certification verification (ESP32-S3-WROOM-1U, E22-900MM22S).",
+  "with the official product technical datasheet (Revision 4.0) and component certification verification "
+  "(ESP32-S3-WROOM-1U, E22-900MM22S).",
   size=9, italic=True, color=GRAY)
 
 note_box(
@@ -481,10 +554,10 @@ foot.paragraph_format.space_before = Pt(14)
 r = foot.add_run(
     "This is a working document, prepared in stages, drafted in direct reference to the IECEx/ATEX "
     "Certification Information Requirements (original English/Mandarin version issued by the certification "
-    "body). Data sources: internal technical specification documentation (Revision 27 August 2026), EMC "
-    "parameter measurement data (Institute of Technology Bandung, Physics Laboratory), and product "
-    "photography. Fields marked \u201cPending confirmation\u201d are not yet final and must not be relied upon "
-    "for procurement or certification purposes without further verification."
+    "body). Data sources: the official product technical datasheet (Institute of Technology Bandung, "
+    "Revision 4.0), internal technical specification documentation, EMC parameter measurement data, and "
+    "product photography. Fields marked \u201cPending confirmation\u201d are not yet final and must not be "
+    "relied upon for procurement or certification purposes without further verification."
 )
 r.font.size = Pt(8.5)
 r.font.italic = True

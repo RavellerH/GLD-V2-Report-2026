@@ -35,6 +35,15 @@ figure.photo figcaption span{display:block;font-size:11.8px;color:var(--ink-soft
 .enchecklist{background:var(--surface-2);border:1px dashed var(--line-2);border-radius:var(--radius);padding:9px 12px;margin:10px 0;font-size:12px;color:var(--ink-soft);font-style:italic}
 .scopebanner{background:var(--info-soft);border-left:3px solid var(--info);border-radius:var(--radius);padding:13px 16px;font-size:13.3px;line-height:1.65;color:var(--ink-2);margin:0 0 20px}
 .scopebanner b{color:var(--ink)}
+.letterhead{background:#1A2B3D;color:#fff;padding:14px 20px;margin:-30px -40px 26px;display:flex;flex-direction:column;gap:2px}
+.letterhead b{font-size:16px;letter-spacing:.02em}
+.letterhead span{font-size:11.5px;color:#C7D2E0}
+.doccontrol{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:14px 0 0}
+.doccontrol .row{display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid var(--line)}
+.doccontrol .row:last-child{border-bottom:none}
+.doccontrol .row .k{background:var(--surface-2);padding:8px 12px;font-size:11px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.02em}
+.doccontrol .row .v{padding:8px 12px;font-size:12.5px;color:var(--ink);background:var(--surface)}
+.print-footer{display:none}
 @media print{
   .tbl-scroll{overflow-x:visible !important;border:none !important}
   table{min-width:0 !important;table-layout:fixed !important;width:100% !important}
@@ -44,6 +53,10 @@ figure.photo figcaption span{display:block;font-size:11.8px;color:var(--ink-soft
   figure.photo{break-inside:avoid}
   .zone{break-inside:auto}
   .subhead{break-after:avoid}
+  .tagrow{display:none !important}
+  .letterhead{margin:0 0 22px}
+  .print-footer{display:block;position:fixed;bottom:0;left:0;right:0;font-size:8.5px;color:#8A97A6;
+    border-top:1px solid #D7DADE;padding:6px 40px;background:#fff}
 }
 """
 
@@ -118,21 +131,28 @@ body = f'''<meta charset="utf-8">
 </nav>
 <main class="content">
 
+<div class="letterhead">
+  <b>PT LAPI GANESHA UTAMA</b>
+  <span>In technical partnership with the Institute of Technology Bandung</span>
+</div>
+
 <div class="masthead">
-  <div class="tagrow">
-    <span class="chip accent">Working document</span>
-    <span class="chip">Items 1&ndash;4 of 6 (Section 2)</span>
-    <span class="chip warn">Selected parameters pending confirmation</span>
-  </div>
-  <h1>IECEx/ATEX Technical Certification Document &mdash; Gas Leak Detector (GLD) V2</h1>
+  <p class="doclabel" style="margin-bottom:10px">Technical Certification Document</p>
+  <h1>IECEx/ATEX Certification Document &mdash; Gas Leak Detector (GLD) V2</h1>
   <p class="subtitle">Prepared in direct reference to the <i>IECEx/ATEX Certification Information Requirements</i> issued by the certification body (ExCB) &mdash; Section <b>2, Technical Documentation</b>, Items 1&ndash;4: product description, product name/model/specification list, functional description and technical parameters, and product photographs. This document is being developed in stages; remaining items will follow in subsequent revisions.</p>
-  <div class="docmeta-row">
-    <div><span class="k">Certification subject</span><span class="v">Node Sensor (GLD) &mdash; V2</span></div>
-    <div><span class="k">Manufacturer</span><span class="v">PT LAPI Ganesha Utama</span></div>
-    <div><span class="k">Technical partner</span><span class="v">Institute of Technology Bandung</span></div>
-    <div><span class="k">Reference checklist</span><span class="v">IECEx/ATEX Certification Info. Requirements</span></div>
+  <div class="doccontrol">
+    <div class="row"><div class="k">Document no.</div><div class="v">LGU/GLD/IECEX-TDF/2026-001</div></div>
+    <div class="row"><div class="k">Revision</div><div class="v">0.1</div></div>
+    <div class="row"><div class="k">Date</div><div class="v">11 September 2026</div></div>
+    <div class="row"><div class="k">Status</div><div class="v">Working Document &mdash; Draft for Internal Review</div></div>
+    <div class="row"><div class="k">Classification</div><div class="v">Confidential &mdash; prepared for ATEX/IECEx certification body (ExCB) submission</div></div>
+    <div class="row"><div class="k">Certification subject</div><div class="v">Node Sensor (GLD) &mdash; V2</div></div>
+    <div class="row"><div class="k">Manufacturer</div><div class="v">PT LAPI Ganesha Utama</div></div>
+    <div class="row"><div class="k">Technical partner</div><div class="v">Institute of Technology Bandung</div></div>
+    <div class="row"><div class="k">Reference checklist</div><div class="v">IECEx/ATEX Certification Information Requirements</div></div>
   </div>
 </div>
+<div class="print-footer">LGU/GLD/IECEX-TDF/2026-001 &middot; Rev. 0.1 &mdash; IECEx/ATEX Certification Document, Gas Leak Detector (GLD) V2 &mdash; Confidential</div>
 
 <section class="zone" id="about">
   <div class="zone-head"><span class="zn">&#8226;</span><h2>About this document</h2></div>
@@ -154,7 +174,7 @@ body = f'''<meta charset="utf-8">
 
   <div class="subhead" id="s2-1"><h3>2.1 &middot; Detailed Product Description</h3></div>
   <p class="lede">The Gas Leak Detector (GLD) is an IoT-based, multi-sensor gas leak detection device designed for the early detection of flammable and process gases in oil &amp; gas refinery environments (process units, tank farms, pipe racks, and storage/loading-unloading areas). This document addresses the GLD unit itself as the subject of the current IECEx/ATEX certification.</p>
-  <p class="lede">Functionally, the GLD integrates eight channels of metal-oxide semiconductor gas sensors (MQ series), an edge-AI microcontroller/processor (ESP32-S3), and a LoRa radio module (star-topology wireless transmission) within a single fixed-point unit installed at locations with gas-leak risk. An on-device AI gas-classification model (CNN Dual-Branch architecture) runs directly on the unit &mdash; <i>confirmed by the engineering team; written verification within firmware documentation has not yet been completed</i> &mdash; so that detection decisions do not depend on a continuous connection to a central server. When gas concentration exceeds a defined threshold, the unit triggers a local alarm (an integrated visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to the operator dashboard.</p>
+  <p class="lede">Functionally, the GLD integrates eight channels of metal-oxide semiconductor gas sensors (MQ series), an edge-AI microcontroller/processor (ESP32-S3), and a LoRa radio module (star-topology wireless transmission) within a single fixed-point unit installed at locations with gas-leak risk. An on-device AI gas-classification model runs directly on the unit so that detection decisions do not depend on a continuous connection to a central server. When gas concentration exceeds a defined threshold, the unit triggers a local alarm (an integrated visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to the operator dashboard.</p>
   <p class="lede">The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials (aluminum alloy and stainless steel &mdash; no plastic or PVC) and mounted via an L-bracket to existing structures without drilling or welding. <b>Important:</b> this design-intent statement does not constitute a claim that the enclosure has passed testing or has been Ex-certified &mdash; the explosion-protection scheme, gas group, temperature class, and target installation zone will be addressed in Section 2.5 (to follow).</p>
   <p class="lede">The current production power configuration is continuous 24 VDC, supplied via an AC/DC adapter connected to the site electrical supply. A portable battery power path (Li-ion 18650) remains under development (R&amp;D) and has not become a deployed production configuration.</p>
 
@@ -166,12 +186,12 @@ body = f'''<meta charset="utf-8">
     <div class="spec"><span class="k">Technical development partner</span><span class="v">Institute of Technology Bandung &mdash; IoT Laboratory &amp; Physics Laboratory</span></div>
     <div class="spec"><span class="k">End client / program owner</span><span class="v">PT Pertamina Patra Niaga (initial deployment site: Refinery Unit IV, Cilacap)</span></div>
     <div class="spec"><span class="k">Primary function</span><span class="v">Acquisition of 8-channel gas sensor data and LoRa transmission</span></div>
-    <div class="spec"><span class="k">Microcontroller</span><span class="v">ESP32-S3-WROOM-1U</span></div>
+    <div class="spec"><span class="k">Microcontroller</span><span class="v">ESP32-S3-WROOM-1U-N16R8</span></div>
     <div class="spec"><span class="k">LoRa radio module</span><span class="v">E22-900MM22S</span></div>
     <div class="spec"><span class="k">Dimensions (L&times;W&times;H)</span><span class="v">200 &times; 90 &times; 290 mm</span></div>
     <div class="spec"><span class="k">Enclosure material</span><span class="v">Aluminum alloy + stainless steel</span></div>
   </div>
-  <p class="lede" style="font-size:12px">Source: internal technical specification documentation (Revision 27 August 2026) and EMC parameter measurement data (Institute of Technology Bandung, Physics Laboratory).</p>
+  <p class="lede" style="font-size:12px">Source: official product technical datasheet (Institute of Technology Bandung, Revision 4.0), cross-referenced with internal technical specification documentation and EMC parameter measurement data.</p>
 
   <div class="subhead" id="s2-3"><h3>2.3 &middot; Functional Description and Technical Parameters (Electrical, Mechanical, etc.)</h3></div>
   <p class="lede"><b>Functional workflow (normal operating mode):</b> sense &rarr; process &rarr; transmit. Each of the eight gas sensors continuously samples ambient conditions &rarr; data is normalized and classified by the on-device AI model (ESP32-S3) &rarr; the result is transmitted over the LoRa network (star-topology transmission) at a configurable interval (default 10 seconds), or immediately (event-driven) when an alarm condition is detected. Gas alarms are triggered through two parallel channels: a local visual/audible alarm module on the unit itself, and a push notification transmitted over the LoRa network to the dashboard &mdash; the alarm-push pathway has been successfully tested on a campus mesh network (field validation at a production refinery installation is still pending).</p>
@@ -186,7 +206,7 @@ body = f'''<meta charset="utf-8">
     <tr><td>Internal operating voltage</td><td>5 VDC &amp; 3.3 VDC</td><td><span class="status ok">Final</span></td><td>5 VDC for the MQ sensor/heater circuitry; 3.3 VDC for ESP32-S3 logic. Per-rail current has not yet been documented separately.</td></tr>
     <tr><td>Maximum input current</td><td>&#8776;0.33 A @ 24 VDC</td><td><span class="status ok">Calculated</span></td><td>Calculated from measured maximum power consumption (7.995 W) divided by 24 VDC.</td></tr>
     <tr><td>Maximum power consumption</td><td>7.995 W @ 24 VDC</td><td><span class="status ok">Measured &mdash; production configuration</span></td><td>Applies to the continuous-power configuration. The battery (R&amp;D) configuration is recorded separately at 5.75 W &mdash; a different operating mode, not a data conflict.</td></tr>
-    <tr><td>Backup battery path (R&amp;D, not yet in production)</td><td>Li-ion 18650 cells, 7 cells in parallel, 4.2 V/cell, &#8776;28,000 mAh total</td><td><span class="status wip">Development pathway</span></td><td>Not yet a deployed production configuration. Cell/BMS safety certification (e.g., UN 38.3, IEC 62133) has not yet been obtained.</td></tr>
+    <tr><td>Backup battery path (R&amp;D, not yet in production)</td><td>Li-ion 18650 cells, 7 cells in parallel, 4.2 V/cell, &#8776;28,000 mAh total</td><td><span class="status wip">Development pathway</span></td><td>Not yet a deployed production configuration. Cell/BMS safety certification (e.g., UN 38.3, IEC 62133) has not yet been obtained. Firmware-reported diagnostic thresholds: low battery at 3.50 V, critical at 3.30 V (status/flag only, not an active power cutoff).</td></tr>
     <tr><td>Electrical protection (fuse, reverse polarity, overvoltage, overcurrent)</td><td>&mdash;</td><td><span class="status gap">Pending confirmation</span></td><td>Scope of electrical protection has not yet been defined/documented.</td></tr>
   </table>
   </div>
@@ -196,16 +216,18 @@ body = f'''<meta charset="utf-8">
   <table>
     <tr><th>Parameter</th><th>Specification</th><th>Status</th><th>Remarks</th></tr>
     <tr><td>Gas sensors</td><td>MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135 (8 channels)</td><td><span class="status ok">Final</span></td><td>Metal-oxide semiconductor sensors; the sensing element is directly exposed to ambient air (not enclosed).</td></tr>
-    <tr><td>AI gas-classification model</td><td>CNN Dual-Branch &mdash; 4 classes: LPG, CO&#8322;, Clean Air, H&#8322;</td><td><span class="status wip">Confirmed by the engineering team; written verification in firmware documentation pending</span></td><td>On-chip accuracy 99.20% (int8, ESP32-S3, model size 9.14 KB). Does not yet cover Benzene, CO, or H&#8322;S (an additional client requirement, still open).</td></tr>
-    <tr><td>Environmental sensor (temperature/humidity)</td><td>Not installed on production units</td><td><span class="status wip">Laboratory test rig only</span></td><td>Used only on the laboratory test rig, not on field units.</td></tr>
-    <tr><td>Processing unit</td><td>ESP32-S3-WROOM-1U</td><td><span class="status ok">Final</span></td><td>Certified under FCC (2AC7Z-ESPS3WROOM1U), TELEC, and CE (per manufacturer data, Espressif) &mdash; these are RF/EMC certifications, <b>not</b> an &ldquo;Ex component&rdquo; certification.</td></tr>
+    <tr><td>AI gas-classification model</td><td>On-device classifier &mdash; 3 classes: Clean Air, LPG, H&#8322;</td><td><span class="status ok">Final</span></td><td>Runs locally on the ESP32-S3 (Running/Inference mode); outputs a class label and a confidence value. Does not yet cover CO&#8322;, Benzene, CO, or H&#8322;S.</td></tr>
+    <tr><td>Environmental sensor (temperature/humidity)</td><td>SHT40-AD1B-R2 (I2C)</td><td><span class="status ok">Final</span></td><td>Auxiliary temperature/humidity input included in the primary hardware design; values are available for status/telemetry.</td></tr>
+    <tr><td>Analog-to-digital converter</td><td>ADS1256IDBR</td><td><span class="status ok">Final</span></td><td>24-bit multi-channel analog acquisition for the 8 sensor channels; 30,000 SPS, firmware SPI clock 1.92 MHz.</td></tr>
+    <tr><td>Processing unit</td><td>ESP32-S3-WROOM-1U-N16R8</td><td><span class="status ok">Final</span></td><td>Certified under FCC (2AC7Z-ESPS3WROOM1U), TELEC, and CE (per manufacturer data, Espressif) &mdash; these are RF/EMC certifications, <b>not</b> an &ldquo;Ex component&rdquo; certification.</td></tr>
     <tr><td>Communication module</td><td>LoRa, E22-900MM22S module</td><td><span class="status ok">Final</span></td><td>Certified under CE, FCC, and RoHS (per manufacturer data, Ebyte) &mdash; RF/EMC certifications, <b>not</b> an &ldquo;Ex component&rdquo; certification.</td></tr>
     <tr><td>Operating frequency</td><td>920 MHz</td><td><span class="status ok">Final</span></td><td>Star-topology transmission; within the regional 920&ndash;923 MHz ISM band (Indonesia).</td></tr>
     <tr><td>Transmit power (firmware configuration)</td><td>17 dBm</td><td><span class="status ok">Final</span></td><td>The radio module supports up to 22 dBm &mdash; 17 dBm is an operational configuration, not the module&rsquo;s maximum limit.</td></tr>
-    <tr><td>Bandwidth / spreading factor</td><td>125 kHz / SF7</td><td><span class="status ok">Final</span></td><td>Source: EMC parameter table.</td></tr>
+    <tr><td>Bandwidth / spreading factor / coding rate</td><td>125 kHz / SF7 / CR 4&#8260;5</td><td><span class="status ok">Final</span></td><td>Source: EMC parameter table and official product technical datasheet.</td></tr>
     <tr><td>Antenna</td><td>External, omnidirectional, SMA male connector, 3 dBi gain</td><td><span class="status ok">Final</span></td><td>On some units, the 2.4 GHz Wi-Fi antenna remains inside the enclosure and must be relocated externally for optimal channel configuration.</td></tr>
     <tr><td>Data transmission interval</td><td>Configurable, default 10 seconds</td><td><span class="status ok">Final</span></td><td>Alarm events are transmitted immediately, independent of the periodic interval.</td></tr>
     <tr><td>Other interfaces</td><td>SPI, LoRa</td><td><span class="status ok">Final</span></td><td>External ports/connectors: USB, sensor, power, fan, antenna, alarm buzzer.</td></tr>
+    <tr><td>RS-485 / Modbus interface</td><td>Read-only Modbus RTU slave, 9600 bit/s 8N1, Unit ID 1 (THVD1410DR transceiver)</td><td><span class="status ok">Final</span></td><td>Provides 8 read-only registers (device status word, classification result, confidence, battery voltage, power source, external power, LoRa transmission counter, node ID) for integration with an external controller or acquisition system; not used for product control.</td></tr>
   </table>
   </div>
 
@@ -224,7 +246,7 @@ body = f'''<meta charset="utf-8">
     <tr><td>Operating humidity</td><td>&mdash;</td><td><span class="status gap">Pending confirmation</span></td><td>&nbsp;</td></tr>
   </table>
   </div>
-  <p class="lede" style="font-size:12px">Source: internal technical specification documentation, Sections 1.1&ndash;1.3 (Node Sensor), cross-referenced with EMC parameter data and component certification verification (ESP32-S3-WROOM-1U, E22-900MM22S).</p>
+  <p class="lede" style="font-size:12px">Source: internal technical specification documentation, Sections 1.1&ndash;1.3 (Node Sensor), cross-referenced with the official product technical datasheet (Revision 4.0) and component certification verification (ESP32-S3-WROOM-1U, E22-900MM22S).</p>
 
   <div class="banner warn"><span class="ic">&#9888;</span><div><b>Rows marked &ldquo;Pending confirmation&rdquo; above do not reflect a documentation oversight &mdash; this is an honest status indicator.</b> These fields are intentionally left blank because no official data yet exists (not yet measured, tested, or decided). They must not be filled with estimates in future revisions without a clear supporting data source.</div></div>
 
@@ -249,7 +271,7 @@ body = f'''<meta charset="utf-8">
 </section>
 
 <footer>
-  This is a working document, prepared in stages, drafted in direct reference to the <i>IECEx/ATEX Certification Information Requirements</i> (original English/Mandarin version issued by the certification body). Data sources: internal technical specification documentation (Revision 27 August 2026), EMC parameter measurement data (Institute of Technology Bandung, Physics Laboratory), and product photography. Fields marked &ldquo;Pending confirmation&rdquo; are not yet final and must not be relied upon for procurement or certification purposes without further verification.
+  This is a working document, prepared in stages, drafted in direct reference to the <i>IECEx/ATEX Certification Information Requirements</i> (original English/Mandarin version issued by the certification body). Data sources: the official product technical datasheet (Institute of Technology Bandung, Revision 4.0), internal technical specification documentation, EMC parameter measurement data, and product photography. Fields marked &ldquo;Pending confirmation&rdquo; are not yet final and must not be relied upon for procurement or certification purposes without further verification.
 </footer>
 
 </main>

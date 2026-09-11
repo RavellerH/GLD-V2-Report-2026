@@ -436,11 +436,17 @@ make_table(
          "Calculated from measured maximum power consumption (7.995 W) divided by 24 VDC."],
         ["Maximum power consumption", "7.995 W @ 24 VDC", ("__status__", ("Measured \u2014 production config.", "ok")),
          "Applies to the continuous-power configuration. The battery (R&D) configuration is recorded separately at 5.75 W \u2014 a different operating mode, not a data conflict."],
-        ["Backup battery path (R&D, not in production)", "Li-ion 18650 cells, 7 in parallel, 4.2 V/cell, \u224828,000 mAh total",
-         ("__status__", ("Development pathway", "wip")),
-         "Not yet a deployed production configuration. Cell/BMS safety certification (e.g., UN 38.3, IEC 62133) not yet obtained. Firmware-reported diagnostic thresholds: low battery at 3.50 V, critical at 3.30 V (status/flag only, not an active power cutoff)."],
-        ["Electrical protection (fuse, reverse polarity, overvoltage, overcurrent)", "\u2014",
-         ("__status__", ("Pending confirmation", "gap")), "Scope of electrical protection not yet defined/documented."],
+        ["Electrical protection (fuse, reverse polarity, overvoltage, overcurrent)",
+         "2\u00d7 resettable PPTC fuse (F1/F2); TVS/ESD suppression diodes (D1, D4/D5/D11, D6); Schottky diodes (D7/D13, D8/D9, D12)",
+         ("__status__", ("Partially available \u2014 component-level evidence", "wip")),
+         "Real components exist per the EasyEDA/JLCPCB bill of materials (Section 2.6.b): 2\u00d7 Littelfuse "
+         "MINISMDC260F/16 resettable fuses (F1, F2, overcurrent), a Ruilong SMBJ33A TVS diode (D1) and 3\u00d7 "
+         "UMW LESD5D5.0CT1G / 1\u00d7 DOWO SM712 ESD-protection arrays (D4, D5, D11, D6), and multiple Schottky "
+         "diodes \u2014 MDD SS54 (D7, D13), MDD SS14 (D8, D9), GOOD-ARK SK36 (D12). This is genuine evidence "
+         "that overcurrent and transient/ESD protection circuitry exists on the board; which specific rail "
+         "each component protects and its exact circuit role (e.g., reverse-polarity blocking vs. flyback) "
+         "has not yet been cross-checked against the schematic net list, and no consolidated protection-scheme "
+         "write-up has been produced for ExCB review."],
     ],
     col_widths=[1.6, 1.5, 1.1, 2.3],
 )
@@ -484,8 +490,20 @@ doc.add_heading("2.3.c \u00b7 Mechanical Parameters \u2014 Node Sensor (GLD)", l
 make_table(
     ["Parameter", "Specification", "Status", "Remarks"],
     [
-        ["Enclosure material", "Aluminum alloy + stainless steel", ("__status__", ("Specific grade pending", "wip")),
-         "PVC is not used in any housing or bracket component. Specific grade still under determination."],
+        ["Enclosure material", "Aluminum alloy + stainless steel",
+         ("__status__", ("Partially available — specific grade pending", "wip")),
+         "Per project confirmation, the production enclosure is sourced from a commercially available "
+         "CE/ATEX-marketed explosion-proof gas-detector housing product line (referenced supplier listing: "
+         "Alibaba.com, “CE ATEX Explosion Proof H2 Sensor”), consistent with the cast-metal housing, "
+         "threaded “Ex”-marked cable entry, and sensor mesh cover shown in the product photography "
+         "(Section 2.4). This is corroborated by an internal case CAD drawing (“GLD ATEX CASE v3,” "
+         "dated 8 September 2026) specifying a cylindrical sensor-case body (Ø102 mm outer housing ring, "
+         "Ø90/Ø80 mm internal bores) that incorporates a stainless-steel filter mesh disc, a small DC "
+         "cooling fan, and a transparent viewing window. The specific alloy/grade of the aluminum body and the "
+         "supplier listing's own certification claims have not been independently verified — the "
+         "listing's specification text could not be retrieved for cross-check, so this should be treated as "
+         "project-confirmed sourcing context, not a verified datasheet citation. PVC is not used in any "
+         "housing or bracket component."],
         ["Dimensions (L \u00d7 W \u00d7 H)", "200 \u00d7 90 \u00d7 290 mm", ("__status__", ("Final", "ok")),
          "Consistent between the technical specification documentation and the EMC parameter table."],
         ["Total weight", "\u2014", ("__status__", ("Pending confirmation", "gap")), "Not yet weighed/documented."],

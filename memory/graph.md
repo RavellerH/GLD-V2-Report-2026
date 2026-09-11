@@ -127,3 +127,12 @@ Detail & alasan → `decisions.md` dec:18.
 - `ms:pushalarm` (8 Agu) — push alarm berhasil diuji di mesh kampus, menyelesaikan risiko yg dicatat di weekly meeting 30 Jul. Terhubung ke `sub:integ`.
 
 Detail lengkap → `decisions.md` dec:27–34, `blockers_metrics.md` § Meeting 6 Agustus.
+
+## 7. Update 11 September — Termin 1 field testing 20%
+
+- `ms:meeting0806` kini juga dicatat sebagai **witness Pertamina untuk tahap FAT/FIT**, berdasarkan konfirmasi PIC bahwa kunjungan lab tersebut dilakukan sebelum visit Cilacap untuk menyaksikan perkembangan dan integrasi sistem.
+- `ms:pushalarm` dan rangkaian integrasi lab menjadi bukti teknis bagi `deliv:termin1-field`.
+- `deliv:termin1-field` membuktikan substantial completion `sub:integ` dan direkomendasikan untuk penerimaan/pembayaran 20%, dengan pengesahan laporan/BAST sebagai penutupan administratif.
+- Relasi ini tidak menyatakan `ms:install`, SAT RU IV, as-built lokasi, atau sertifikasi sudah selesai.
+- `deliv:termin1-package` mengemas `deliv:termin1-field` bersama bukti kontraktual, witness/FAT, engineering, uji teknis, dan dokumen tahap berikutnya dalam satu folder siap-zip; dataset/CAD/foto lengkap tetap lampiran opsional.
+- `deliv:termin1-bast` ditambahkan sebagai draft BAST generik. Dokumen ini baru memformalkan penerimaan setelah data SPK, nominal, identitas, dan tanda tangan dilengkapi; paket siap-zip menyertakannya sebagai dokumen administrasi.

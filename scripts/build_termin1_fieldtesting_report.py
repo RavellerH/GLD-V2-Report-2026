@@ -253,10 +253,10 @@ def configure_styles(doc):
 def add_document_control(doc):
     rows = [
         ("Nomor dokumen", "LGU-GLD-T1-FIT-2026-001"),
-        ("Revisi", "0.1"),
-        ("Tanggal", "10 September 2026"),
+        ("Revisi", "0.2"),
+        ("Tanggal", "11 September 2026"),
         ("Status", "Untuk review dan pengesahan Termin 1"),
-        ("Disiapkan oleh", "LAPI Ganesha Utama bersama Lab IoT dan Lab Fisika ITB"),
+        ("Disiapkan oleh", "LAPI Ganesha Utama bersama Lab IoT/Instrumentation and Computation ITB"),
         ("Ditujukan kepada", "PT Pertamina Patra Niaga"),
     ]
     table = doc.add_table(rows=len(rows), cols=2)
@@ -285,8 +285,9 @@ def build_document():
     doc = Document()
     configure_styles(doc)
     section = doc.sections[0]
-    section.page_width = Inches(8.5)
-    section.page_height = Inches(11)
+    # A4 is the standard business-paper size for formal project reports in Indonesia.
+    section.page_width = Inches(8.2677)
+    section.page_height = Inches(11.6929)
     section.top_margin = Inches(0.7)
     section.bottom_margin = Inches(0.65)
     section.left_margin = Inches(0.75)
@@ -340,7 +341,7 @@ def build_document():
     add_heading(doc, "1 Ringkasan Eksekutif", 1)
     add_paragraph(
         doc,
-        "Kesimpulan. Berdasarkan bukti teknis dan dokumentasi yang tersedia sampai 10 September 2026, "
+        "Kesimpulan. Berdasarkan bukti teknis dan dokumentasi yang tersedia sampai 11 September 2026, "
         "pekerjaan Termin 1 telah mencapai penyelesaian substansial pada tahap rekayasa dan integrasi "
         "laboratorium. Paket ini layak diajukan kepada PT Pertamina Patra Niaga untuk evaluasi, penerimaan, "
         "dan pembayaran Termin 1 sebesar 20 persen.",
@@ -350,8 +351,9 @@ def build_document():
         doc,
         "Pemenuhan tersebut ditopang oleh dokumen detail engineering dan arsitektur, kesiapan perangkat, "
         "konfigurasi firmware, pengujian end-to-end GLD-Cluster Head-Gateway-Server, pengujian mesh dan "
-        "alarm push, serta peninjauan perkembangan sistem oleh tim Pertamina di Labtek XV ITB sebelum "
-        "kunjungan RU IV Cilacap. Berdasarkan konfirmasi PIC proyek pada 10 September 2026, kunjungan "
+        "alarm push, serta peninjauan perkembangan sistem oleh PT Pertamina Patra Niaga di Lab IoT, "
+        "Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung, sebelum "
+        "kunjungan RU IV Cilacap. Berdasarkan konfirmasi PIC proyek pada 11 September 2026, kunjungan "
         "Pertamina tersebut merupakan witness terhadap perkembangan dan integrasi sistem untuk tahap FAT/FIT."
     )
     add_paragraph(
@@ -367,7 +369,7 @@ def build_document():
         ("1", "Detail engineering dan desain", "MEMENUHI", "Arsitektur, datasheet sistem, TDS R4, desain mounting, serta dokumen HSE dan instalasi tersedia."),
         ("2", "Persiapan komponen", "MEMENUHI", "Empat unit GLD dan enam belas unit Cluster Head telah dilaporkan tersedia untuk pengembangan dan integrasi."),
         ("3", "Konfigurasi firmware", "MEMENUHI", "Akuisisi delapan sensor, inferensi lokal, komunikasi LoRa STAR/MESH, alarm, downlink, dan integrasi gateway-server terdokumentasi."),
-        ("4", "Factory integration test", "MEMENUHI DENGAN PENGESAHAN", "Rangkaian integrasi lab dan alarm push telah diuji; Pertamina meninjau sistem di Labtek XV sebelum kunjungan Cilacap. Tanda tangan pengesahan disediakan pada laporan ini."),
+        ("4", "Factory integration test", "MEMENUHI DENGAN PENGESAHAN", "Rangkaian integrasi lab dan alarm push telah diuji; PT Pertamina Patra Niaga meninjau sistem di Lab IoT/Instrumentation and Computation ITB sebelum kunjungan Cilacap. Tanda tangan pengesahan disediakan pada laporan ini."),
         ("5", "Dokumen instalasi dan as-built", "MEMENUHI SESUAI TAHAP", "Dokumen instalasi dan konfigurasi as-built prototipe/laboratorium tersedia. As-built site final diterbitkan setelah instalasi lapangan."),
     ]
     add_table(doc, ["No", "Deliverable", "Status", "Dasar penilaian"], rows, [0.35, 1.65, 1.35, 3.15], font_size=8.8, status_col=2)
@@ -421,6 +423,7 @@ def build_document():
         p.add_run().add_picture(str(BRACKET_IMAGE), width=Inches(6.3))
         add_caption(doc, "Gambar 2 Basis desain bracket L dan U-bolt untuk pemasangan GLD")
 
+    doc.add_page_break()
     add_heading(doc, "4 Kesiapan Komponen dan Perangkat", 1)
     add_paragraph(
         doc,
@@ -474,21 +477,26 @@ def build_document():
     add_paragraph(
         doc,
         "Factory Integration Test dilaksanakan sebagai rangkaian pengujian di lingkungan ITB sebelum "
-        "kunjungan lapangan RU IV Cilacap. Pada 6 Agustus 2026, perwakilan Pertamina hadir di Labtek XV ITB "
-        "bersama tim LGU dan ITB untuk meninjau perkembangan perangkat, desain mekanik, jaringan komunikasi, "
+        "kunjungan lapangan RU IV Cilacap. Pada 6 Agustus 2026, perwakilan PT Pertamina Patra Niaga hadir di "
+        "Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung, "
+        "bersama LAPI Ganesha Utama dan Lab IoT/Instrumentation and Computation untuk meninjau perkembangan perangkat, desain mekanik, jaringan komunikasi, "
         "strategi instalasi, serta kesiapan implementasi. Pengujian lanjutan pada rentang 6 sampai 8 Agustus "
         "membuktikan alarm push melalui konfigurasi mesh kampus."
     )
     add_paragraph(
         doc,
-        "Kehadiran dan witness. Notulen 6 Agustus mencatat peserta Tim ITB, PT Pertamina, dan PT LAPI Ganesha "
-        "Utama di Labtek XV. Konfirmasi PIC proyek pada 10 September 2026 menegaskan bahwa kunjungan tersebut "
+        "Kehadiran dan witness. Pihak yang terlibat adalah LAPI Ganesha Utama, Lab IoT/Instrumentation and "
+        "Computation ITB, dan PT Pertamina Patra Niaga. Konfirmasi PIC proyek pada 11 September 2026 menegaskan bahwa kunjungan tersebut "
         "merupakan witness perkembangan dan integrasi sistem sebelum visit Cilacap. Lembar pengesahan pada "
         "bagian akhir laporan disediakan untuk mengubah bukti witness tersebut menjadi acceptance formal Termin 1.",
         bold_lead="Kehadiran dan witness. ",
     )
 
     doc.add_page_break()
+    # Keep the continuation table clear of the running header in LibreOffice/PDF.
+    spacer = doc.add_paragraph()
+    spacer.paragraph_format.space_after = Pt(2)
+    spacer.paragraph_format.line_spacing = Pt(4)
     rows = [
         ("FAT-01", "Akuisisi sensor dan telemetri GLD", "TERVERIFIKASI DI LAB", "Data delapan sensor dapat dibaca dan direkam; dataset konsisten tersedia."),
         ("FAT-02", "Inferensi AI lokal", "TERVERIFIKASI DI LAB", "Inferensi on-device pada ESP32-S3 telah dikonfirmasi dan didukung secara generik oleh TDS R4."),
@@ -530,7 +538,7 @@ def build_document():
     add_heading(doc, "8 Register Bukti", 1)
     rows = [
         ("E-01", "Notulensi Kick Off Meeting 12 Juni 2026", "Scope, desain end-to-end, casing, mode operasi, tanggung jawab, dan target implementasi."),
-        ("E-02", "Notulen Meeting GLD 6 Agustus 2026", "Witness Pertamina di Labtek XV, desain mekanik, arsitektur jaringan, status perangkat, dan tindak lanjut."),
+        ("E-02", "Notulen Meeting GLD 6 Agustus 2026", "Witness PT Pertamina Patra Niaga di Lab IoT/Instrumentation and Computation ITB, desain mekanik, arsitektur jaringan, status perangkat, dan tindak lanjut."),
         ("E-03", "Technical Datasheet Revision 4.0", "Kontrak teknis GLD, CH, Gateway, Server, radio, keamanan, cache, alarm, dan downlink."),
         ("E-04", "Datasheet Sistem GLD Arsitektur Server dan Jaringan", "Dokumen detail engineering konsolidasi untuk perangkat, jaringan, server, daya, dan instalasi."),
         ("E-05", "Laporan Progres By Date GLD", "Kronologi pengujian, penyelesaian integrasi, dan perkembangan perangkat."),
@@ -538,7 +546,7 @@ def build_document():
         ("E-07", "Dataset sensor gas", "Data akuisisi delapan kanal untuk LPG, CO2, udara bersih, dan sesi baseline."),
         ("E-08", "Desain Bracket L U-Bolt GLD Mounting", "Basis desain instalasi mekanik pada struktur existing."),
         ("E-09", "JSA HSE dan Checklist Kesiapan Instalasi RU IV", "Prasyarat HSE, mobilisasi, commissioning, dan acceptance test."),
-        ("E-10", "Konfirmasi PIC proyek 10 September 2026", "Pertamina telah hadir di Lab untuk menyaksikan perkembangan/integrasi sebelum visit Cilacap."),
+        ("E-10", "Konfirmasi PIC proyek 11 September 2026", "PT Pertamina Patra Niaga telah hadir di Lab IoT/Instrumentation and Computation ITB untuk menyaksikan perkembangan/integrasi sebelum visit Cilacap."),
     ]
     add_table(doc, ["ID", "Bukti", "Relevansi"], rows, [0.55, 2.55, 3.65], font_size=8.7)
 
@@ -566,7 +574,8 @@ def build_document():
         doc,
         "Pekerjaan detail engineering, persiapan komponen, konfigurasi firmware, dan factory integration test "
         "telah dilaksanakan secara substansial. Sistem inti telah diuji end-to-end di lingkungan laboratorium, "
-        "dan Pertamina telah melakukan peninjauan langsung di Labtek XV sebelum kunjungan RU IV Cilacap. "
+        "dan PT Pertamina Patra Niaga telah melakukan peninjauan langsung di Lab IoT, Instrumentation and Computations, "
+        "Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung, sebelum kunjungan RU IV Cilacap. "
         "Dokumen instalasi serta baseline as-built prototipe/laboratorium juga telah tersedia."
     )
     add_paragraph(
@@ -587,7 +596,7 @@ def build_document():
     )
     rows = [
         ("Disiapkan oleh", "LAPI Ganesha Utama", "Nama dan jabatan\n\n\nTanda tangan dan tanggal"),
-        ("Diverifikasi oleh", "Tim IoT dan Fisika ITB", "Nama dan jabatan\n\n\nTanda tangan dan tanggal"),
+        ("Diverifikasi oleh", "Lab IoT/Instrumentation and Computation ITB", "Nama dan jabatan\n\n\nTanda tangan dan tanggal"),
         ("Diterima oleh", "PT Pertamina Patra Niaga", "Nama dan jabatan\n\n\nTanda tangan dan tanggal"),
     ]
     add_table(doc, ["Peran", "Pihak", "Pengesahan"], rows, [1.25, 2.25, 3.25], font_size=9.3)
@@ -609,20 +618,20 @@ def build_document():
     refs = [
         "Ketentuan Cara Pembayaran pada SPK pekerjaan field testing GLD Tahap 2.",
         "Notulensi Kick Off Meeting Pertamina, 12 Juni 2026.",
-        "Notulen Meeting GLD, 6 Agustus 2026, Labtek XV ITB.",
+        "Notulen Meeting GLD, 6 Agustus 2026, Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung.",
         "Technical Datasheets Lab IoT ITB Revision 4.0, 4 September 2026.",
         "Datasheet Sistem GLD Arsitektur Server dan Jaringan.",
         "Laporan Progres By Date GLD sampai 31 Agustus 2026.",
         "Desain Bracket L U-Bolt GLD Mounting.",
         "JSA HSE RU IV Cilacap GLD dan Checklist Kesiapan Instalasi RU IV Cilacap.",
-        "Konfirmasi PIC proyek, 10 September 2026, mengenai witness Pertamina di laboratorium sebelum visit Cilacap.",
+        "Konfirmasi PIC proyek, 11 September 2026, mengenai witness PT Pertamina Patra Niaga di Lab IoT/Instrumentation and Computation ITB sebelum visit Cilacap.",
     ]
     for i, ref in enumerate(refs, 1):
         add_paragraph(doc, f"{i}. {ref}", size=9.4)
 
     doc.core_properties.title = "Laporan Pemenuhan Deliverable Termin 1 Field Testing GLD"
     doc.core_properties.subject = "Pengajuan pembayaran Termin 1 sebesar 20 persen"
-    doc.core_properties.author = "LAPI Ganesha Utama bersama Lab IoT dan Lab Fisika ITB"
+    doc.core_properties.author = "LAPI Ganesha Utama bersama Lab IoT/Instrumentation and Computation ITB"
     doc.core_properties.keywords = "GLD, Termin 1, FAT, Factory Integration Test, Pertamina"
     doc.save(OUT_DOCX)
     print(OUT_DOCX)

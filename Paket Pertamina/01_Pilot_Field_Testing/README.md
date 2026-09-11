@@ -8,6 +8,8 @@ Dokumen progres rekayasa & kesiapan lapangan untuk program pilot/field testing G
 
 | File | Isi | Catatan |
 |---|---|---|
+| `Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev02.{docx,pdf}` | Laporan formal pemenuhan Termin 1 field testing 20%: matriks klausul, detail engineering, kesiapan komponen, firmware, FAT/FIT, register bukti, outstanding, rekomendasi, dan lembar pengesahan | **Versi terkini, revisi 0.2.** Lokasi witness dan pihak yang terlibat sudah dikoreksi; lengkapi tanda tangan pengesahan dan BAST |
+| `Draft_BAST_Termin_1_FieldTesting_20Persen.{docx,pdf}` | Draft berita acara serah terima generik untuk administrasi Termin 1 sebesar 20 persen | Lengkapi nomor/tanggal/nilai SPK, nominal pembayaran, identitas penandatangan, catatan pemeriksaan, dan tanda tangan sebelum digunakan |
 | `Dashboard_GLD_ProjectManagement.{html,pdf}` | Dashboard manajemen proyek — Kurva-S, Gantt 12 aktivitas, status gate/blocker, action items, arsitektur sistem | Dokumen utama untuk melihat status proyek secara keseluruhan |
 | `Laporan_Progres_ByDate_GLD.{html,pdf}` | Laporan progres kronologis (20 Apr–31 Agustus 2026), berisi heatmap navigasi tanggal | PDF 12 halaman |
 | `Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.{html,pdf}` | Rincian breakdown progres Assessment (sertifikasi, estimasi) vs Field Testing (pilot RU IV, angka resmi), termasuk bukti pendukung desain bracket | — |

@@ -84,6 +84,9 @@
     { "id": "deliv:progres", "type": "deliverable", "label": "Laporan progres per tanggal" },
     { "id": "deliv:jsa", "type": "deliverable", "label": "Draft JSA/HSE Cilacap" },
     { "id": "deliv:chamber", "type": "deliverable", "label": "Laporan progress chamber gas (Jul 2026)" },
+    { "id": "deliv:termin1-field", "type": "deliverable", "label": "Laporan Pemenuhan Deliverable Termin 1 Field Testing 20%" },
+    { "id": "deliv:termin1-package", "type": "deliverable", "label": "Paket siap-zip Termin 1 Field Testing 20% Rev02" },
+    { "id": "deliv:termin1-bast", "type": "deliverable", "label": "Draft BAST Termin 1 Field Testing 20%" },
 
     { "id": "p:raihan", "type": "person", "label": "Raihan — PIC RU VII Kasim/Sorong" }
   ],
@@ -148,6 +151,12 @@
     { "s": "sub:chamber", "t": "dev:bts7960", "r": "pakai" },
 
     { "s": "deliv:chamber", "t": "sub:chamber", "r": "melaporkan" },
+    { "s": "deliv:termin1-field", "t": "sub:integ", "r": "membuktikan-substantial-completion" },
+    { "s": "ms:meeting0806", "t": "deliv:termin1-field", "r": "witness-Pertamina-FAT-FIT" },
+    { "s": "ms:pushalarm", "t": "deliv:termin1-field", "r": "bukti-uji-integrasi" },
+    { "s": "deliv:termin1-package", "t": "deliv:termin1-field", "r": "mengemas-dengan-bukti-pendukung" },
+    { "s": "deliv:termin1-package", "t": "deliv:termin1-bast", "r": "menyertakan-draft-administratif" },
+    { "s": "deliv:termin1-bast", "t": "deliv:termin1-field", "r": "formalisasi-penerimaan-setelah-ditandatangani" },
 
     { "s": "ms:meeting0724", "t": "proj:GLD", "r": "update-status" },
     { "s": "ms:meeting0730", "t": "proj:GLD", "r": "update-status" },

@@ -9,6 +9,7 @@
 - **Update 19 Agu:** inferensi AI (CNN Dual-Branch) **sudah on-device di ESP32-S3 GLD**, dikonfirmasi user — bukan lagi "PC + emulator" seperti tercatat di notulen 24/30 Jul. **Dataset konsisten & siap pakai** (isu konsistensi resolved). **Jangkauan LoRa disiasati mesh** (bukan blocker keras).
 - Detail lengkap reassessment 4 Sep → `decisions.md` dec:62.
 - **Update 10 Sep (konfirmasi user):** status RU IV tetap **survey selesai, belum instalasi/commissioning**; sertifikasi masih **persiapan dokumen**. Thermal camera tidak lagi scope aktif. Pekerjaan lanjutan chamber yang sebelumnya terbuka kini dikonfirmasi **selesai**, dengan caveat belum ada bukti tertulis pasca-laporan Week 2 September.
+- **Update 11 Sep — Termin 1 field testing 20%:** konfirmasi user menetapkan kunjungan PT Pertamina Patra Niaga ke **Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung**, sebelum visit Cilacap sebagai witness tahap FAT/FIT. Pihak yang terlibat: LAPI Ganesha Utama, Lab IoT/Instrumentation and Computation ITB, dan PT Pertamina Patra Niaga. Dengan bukti detail engineering, kesiapan perangkat, firmware, integrasi end-to-end, mesh/failover, dan alarm push, paket dinilai layak diajukan sebagai substantial completion. Sisa administratif: tanda tangan pengesahan FAT/laporan dan BAST. Status ini **tidak** menutup gate instalasi/SAT RU IV dan **tidak** mengubah audit Termin 1 sertifikasi 40% pada dec:80.
 
 ## Blocker kritis aktif (0 — lih. "Diminimalkan/resolved" utk 3 item dideprioritaskan)
 Tidak ada blocker kritis aktif per 4 Sep 2026. blk:power/blk:tpl/blk:conv dideprioritaskan (bukan diselesaikan teknis) — lihat entri di bawah.
@@ -139,7 +140,7 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 - Disebutkan rencana proyek berikutnya pasca-GLD, kemungkinan "susi-sensor proposal" — **nama tidak jelas/kemungkinan salah transkrip**, perlu klarifikasi bila relevan untuk dicatat lebih lanjut.
 
 ## Rapat resmi 6 Agustus 2026 — instalasi, mounting & requirement tambahan
-> Sumber: `Sumber Dokumen/Notulensi_Rapat_5Agustus2026_GLD.pdf` (Labtek XV ITB; Tim ITB + PT Pertamina + PT LAPI Ganesha Utama), diverifikasi 9 Agu terhadap catatan informal sebelumnya.
+> Sumber: `Sumber Dokumen/Notulensi_Rapat_5Agustus2026_GLD.pdf`; lokasi dan pihak dikoreksi melalui konfirmasi user 11 Sep 2026: **Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung**; pihak yang terlibat adalah **LAPI Ganesha Utama, Lab IoT/Instrumentation and Computation ITB, dan PT Pertamina Patra Niaga**.
 >
 > ⚠️ **Catatan tanggal:** badan teks notulensi resmi tertulis "Tanggal: 5 Agustus 2026" — namun ini **typo pada dokumen**; tanggal rapat yang benar dikonfirmasi **6 Agustus 2026 (Kamis)**, sesuai nama file sumber (`NOTULENSI_RAPAT_060826` = 06-08-26) dan konfirmasi user. Beberapa detail konten di bawah tetap direvisi (ditandai ⚠️) karena versi notulensi resmi lebih presisi/berbeda dari catatan informal awal — itu terlepas dari isu tanggal.
 

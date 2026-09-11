@@ -125,6 +125,12 @@ schematics_html = "\n".join(schematic_cards)
 
 pcb_layout_b64 = b64_schematic("10-pcb-layout.png")
 
+DRAWING_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_drawings")
+def b64_drawing(fn):
+    with open(os.path.join(DRAWING_DIR, fn), "rb") as f:
+        return base64.b64encode(f.read()).decode("ascii")
+bracket_drawing_b64 = b64_drawing("bracket-mounting-drawing.png")
+
 import csv
 BOM_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_bom")
 
@@ -340,16 +346,21 @@ body = f'''<meta charset="utf-8">
     <img src="data:image/png;base64,{pcb_layout_b64}" alt="Main board PCB copper layout, top view" loading="lazy">
     <figcaption><b>Main board PCB layout &mdash; top copper layer</b><span>Routed layout exported directly from the EasyEDA/JLCPCB source project (production-intent board, circular outline with six mounting holes). A companion 3D solid model (OBJ/MTL) of the same board also exists.</span></figcaption>
   </figure>
+  <p class="lede">A dimensioned mechanical drawing sheet also exists for the enclosure&rsquo;s external envelope and its mounting hardware, drafted from a solid CAD model (STEP format, millimeter units) with a formal title block, orthographic and isometric views, and a parts table &mdash; reproduced below.</p>
+  <figure class="photo" style="max-width:820px;margin:0 auto 14px">
+    <img src="data:image/png;base64,{bracket_drawing_b64}" alt="Dimensioned CAD drawing sheet of the enclosure external envelope and mounting bracket" loading="lazy">
+    <figcaption><b>Enclosure envelope &amp; mounting bracket &mdash; dimensioned drawing sheet</b><span>Orthographic and isometric views with real dimensions (enclosure neck &Oslash;75&nbsp;mm, overall probe height 191.51&nbsp;mm, mounting plate 250&times;250&nbsp;mm with toleranced hole pattern), a U-bolt parameter table (2&Prime;/DN50, M10 thread), and a title block (drafted 31 Aug 2026). Source: dimensioned CAD drawing derived from a STEP solid model of the enclosure and bracket assembly.</span></figcaption>
+  </figure>
   <table>
     <tr><th>Drawing type</th><th>Status</th><th>Remarks</th></tr>
     <tr><td>Electrical schematic (component-level) / block diagram</td><td><span class="status wip">Partially available</span></td><td>Schematic capture and a derived 9-sheet block-diagram set exist with traceability evidence (pin-to-net mapping). Not yet issued in a released, revision-controlled drawing format with a formal drawing number.</td></tr>
     <tr><td>PCB layout</td><td><span class="status wip">Partially available</span></td><td>Native EasyEDA/JLCPCB layout export (routed copper) and a 3D solid model exist for the same board revision. Not yet issued as a dimensioned, toleranced, released drawing with a formal drawing number.</td></tr>
-    <tr><td>Assembly drawing</td><td><span class="status gap">Not yet available</span></td><td>&nbsp;</td></tr>
+    <tr><td>Assembly drawing</td><td><span class="status wip">Partially available</span></td><td>A dimensioned drawing sheet exists for the enclosure/bracket mounting assembly (title block, orthographic + isometric views, parts table). It covers the external envelope and mounting hardware, not the internal PCB/component assembly sequence.</td></tr>
     <tr><td>Component drawing</td><td><span class="status gap">Not yet available</span></td><td>&nbsp;</td></tr>
-    <tr><td>Enclosure structure drawing (gap, length, volume)</td><td><span class="status gap">Not yet available</span></td><td>Required if a flameproof (Ex d) protection concept is pursued. The BOM below references a placeholder mechanical symbol for the enclosure (designator U50) with no dimensional data attached.</td></tr>
+    <tr><td>Enclosure structure drawing (gap, length, volume)</td><td><span class="status wip">Partially available</span></td><td>External envelope is dimensioned (from a real STEP solid model, millimeter units) in the drawing above. The Ex-d-specific flame-path parameters &mdash; joint gap, length, and free internal volume &mdash; are <b>not</b> called out; that dimensioning has to be added deliberately once a protection concept is confirmed (Section 2.5), not derived automatically from the CAD export.</td></tr>
     <tr><td>Junction box / terminal / grounding connection drawings</td><td><span class="status gap">Not yet available</span></td><td>&nbsp;</td></tr>
   </table>
-  <div class="banner info"><span class="ic">&#9432;</span><div>The schematic and PCB layout are useful supporting engineering artifacts, but on their own they do not constitute the certified drawing package the checklist requires &mdash; dimensioned, toleranced, material-annotated drawings in a released revision-controlled form have not yet been produced.</div></div>
+  <div class="banner info"><span class="ic">&#9432;</span><div>Real dimensioned CAD drawings now exist for the enclosure&rsquo;s external envelope and mounting hardware, and native PCB layout/schematic source files exist for the electronics. What is still missing for a certifiable drawing package: internal component/assembly drawings, junction box and grounding-connection drawings, and &mdash; specific to explosion protection &mdash; flame-path gap/length/volume dimensioning, which requires a confirmed protection concept before it can be drawn.</div></div>
 
   <p class="doclabel">2.6.b &middot; Bill of Materials (BOM) for Explosion-Safety-Relevant Components</p>
   <p class="lede">A complete, itemized electronic-component BOM for both the main board and the external sensor board now exists, exported directly from the EasyEDA/JLCPCB source project (manufacturer, manufacturer part number, and LCSC supplier part number for each line item; {mb_lines} line items / {mb_qty} placed components on the main board, {sb_lines} line items / {sb_qty} placed components on the sensor board &mdash; full tables below). This is real, traceable sourcing data and materially improves on the previous status.</p>

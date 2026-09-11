@@ -653,6 +653,26 @@ pcr2 = pcb_fig_cap.add_run(
     "exists."
 )
 pcr2.font.size = Pt(8.5); pcr2.font.color.rgb = GRAY
+p("A dimensioned mechanical drawing sheet also exists for the enclosure's external envelope and its "
+  "mounting hardware, drafted from a solid CAD model (STEP format, millimeter units) with a formal title "
+  "block, orthographic and isometric views, and a parts table \u2014 reproduced below.")
+DRAWING_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_drawings")
+bd_fig_para = doc.add_paragraph()
+bd_fig_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+bd_fig_run = bd_fig_para.add_run()
+bd_fig_run.add_picture(os.path.join(DRAWING_DIR, "bracket-mounting-drawing.png"), width=Inches(6.2))
+bd_fig_cap = doc.add_paragraph()
+bd_fig_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+bd_fig_cap.paragraph_format.space_after = Pt(12)
+bdr1 = bd_fig_cap.add_run("Enclosure envelope & mounting bracket \u2014 dimensioned drawing sheet\n")
+bdr1.font.bold = True; bdr1.font.size = Pt(9.5)
+bdr2 = bd_fig_cap.add_run(
+    "Orthographic and isometric views with real dimensions (enclosure neck \u00d875 mm, overall probe height "
+    "191.51 mm, mounting plate 250\u00d7250 mm with toleranced hole pattern), a U-bolt parameter table "
+    "(2\u2033/DN50, M10 thread), and a title block (drafted 31 Aug 2026). Source: dimensioned CAD drawing "
+    "derived from a STEP solid model of the enclosure and bracket assembly."
+)
+bdr2.font.size = Pt(8.5); bdr2.font.color.rgb = GRAY
 make_table(
     ["Drawing type", "Status", "Remarks"],
     [
@@ -664,19 +684,26 @@ make_table(
          "Native EasyEDA/JLCPCB layout export (routed copper) and a 3D solid model exist for the same board "
          "revision. Not yet issued as a dimensioned, toleranced, released drawing with a formal drawing "
          "number."],
-        ["Assembly drawing", ("__status__", ("Not yet available", "gap")), ""],
+        ["Assembly drawing", ("__status__", ("Partially available", "wip")),
+         "A dimensioned drawing sheet exists for the enclosure/bracket mounting assembly (title block, "
+         "orthographic + isometric views, parts table). It covers the external envelope and mounting "
+         "hardware, not the internal PCB/component assembly sequence."],
         ["Component drawing", ("__status__", ("Not yet available", "gap")), ""],
-        ["Enclosure structure drawing (gap, length, volume)", ("__status__", ("Not yet available", "gap")),
-         "Required if a flameproof (Ex d) protection concept is pursued. The BOM below references a "
-         "placeholder mechanical symbol for the enclosure (designator U50) with no dimensional data attached."],
+        ["Enclosure structure drawing (gap, length, volume)", ("__status__", ("Partially available", "wip")),
+         "External envelope is dimensioned (from a real STEP solid model, millimeter units) in the drawing "
+         "above. The Ex-d-specific flame-path parameters \u2014 joint gap, length, and free internal volume "
+         "\u2014 are not called out; that dimensioning has to be added deliberately once a protection concept "
+         "is confirmed (Section 2.5), not derived automatically from the CAD export."],
         ["Junction box / terminal / grounding connection drawings", ("__status__", ("Not yet available", "gap")), ""],
     ],
     col_widths=[2.6, 1.3, 2.8],
 )
 note_box(
-    "The schematic and PCB layout are useful supporting engineering artifacts, but on their own they do not "
-    "constitute the certified drawing package the checklist requires \u2014 dimensioned, toleranced, "
-    "material-annotated drawings in a released revision-controlled form have not yet been produced.",
+    "Real dimensioned CAD drawings now exist for the enclosure's external envelope and mounting hardware, "
+    "and native PCB layout/schematic source files exist for the electronics. What is still missing for a "
+    "certifiable drawing package: internal component/assembly drawings, junction box and "
+    "grounding-connection drawings, and \u2014 specific to explosion protection \u2014 flame-path gap/length/"
+    "volume dimensioning, which requires a confirmed protection concept before it can be drawn.",
     shade=INFO_SHADE,
 )
 

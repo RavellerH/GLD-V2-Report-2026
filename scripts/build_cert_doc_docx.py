@@ -277,7 +277,7 @@ rt.rows[0].cells[0].width = rt.rows[1].cells[0].width = Inches(0.9)
 rt.rows[0].cells[1].width = rt.rows[1].cells[1].width = Inches(1.3)
 rt.rows[0].cells[2].width = rt.rows[1].cells[2].width = Inches(4.3)
 
-doc.add_paragraph().paragraph_format.space_after = Pt(10)
+doc.add_page_break()
 
 p("Table of Contents", size=12, bold=True, color=NAVY, space_after=4)
 toc_para = doc.add_paragraph()

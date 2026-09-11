@@ -82,9 +82,21 @@ Dibuat atas permintaan user ("tolong buatkan desain lengkapnya, dalam bentuk htm
 
 Desain HTML mengikuti sistem visual Datasheet Sistem (dec:58) — charcoal/teal, sidebar zonenav 9 bagian. PDF (14 halaman) di-render via Chrome headless `--print-to-pdf`; viewer 3D disembunyikan di media cetak (`@media print`) dan digantikan catatan bahwa versi interaktif ada di HTML — galeri gambar 2D statis (bagian 06) tetap tampil penuh di PDF. Nav bar disuntik ke file baru ini + 6 file lain via `scripts/inject_deliverables_nav.py` (FILES list ditambah 1 entri, kini 7 file).
 
+## `Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html` (10 Sep 2026)
+
+Checklist pra-instalasi yang dapat dicetak dan diisi bersama RU IV, HSE, vendor Pertamina, serta LGU. Isi dibagi menurut tiga jalur yang tidak boleh dicampur: chamber di kantor HQ kilang, uji lapangan terkendali, dan instalasi permanen area berbahaya. Setiap baris memuat pemilik utama dan status awal, dilanjutkan urutan mobilisasi/commissioning serta acceptance test dan kolom paraf.
+
+Dokumen memakai Datasheet Sistem lengkap dan Draft JSA/HSE sebagai acuan, bukan menggantikannya. Secara sengaja ia menampilkan batas `BELUM GO` untuk instalasi permanen di area berbahaya: sertifikasi masih persiapan dokumen dan izin/HSE spesifik lokasi belum terkonfirmasi. Thermal camera dikecualikan dari scope aktif. Detail keputusan → `decisions.md` dec:78.
+
+## `Petunjuk_Penyerahan_Desain_Bracket_ke_Vendor_RU-IV.md` (10 Sep 2026)
+
+Cover sheet handoff desain bracket untuk vendor Pertamina: daftar file PDF/HTML/CAD STEP/OBJ/MTL serta referensi gambar; basis desain 2× U-bolt DN50/M10; daftar verifikasi vendor sebelum fabrikasi; dan pembagian tanggung jawab LGU, vendor, serta RU IV. Tujuannya menjaga agar basis CAD yang sudah tersedia dipakai vendor tanpa mengasumsikan ukuran struktur, orientasi, material, fastener, izin, atau kelayakan area yang belum disetujui. Detail keputusan → `decisions.md` dec:79.
+
 ## `Paket Pertamina/` (5 Sep 2026)
 
 Folder baru (root repo, sejajar `Deliverables/`/`Sumber Dokumen/`) berisi **2 sub-folder siap-zip** untuk dikirim ke Pertamina (dec:70): `01_Pilot_Field_Testing/` (7 file: Dashboard Proyek, Laporan Progres ByDate, Laporan Detail Assessment/Field Testing, Datasheet Sistem, Draft JSA/HSE, Knowledge Graph, Desain Bracket U-Bolt) dan `02_Sertifikasi_ATEX_IECEx/` (1 file: Dashboard Sertifikasi). Setiap file HTML disalin dari `Deliverables/` lalu **nav bar-nya disuntik ulang scoped ke isi paket masing-masing** (bukan pakai nav 8-file dari `Deliverables/` yg akan berisi link mati ke file di paket sebelah) — `01_.../` dapat nav 7-file berlabel "Paket Pilot/Field Testing", `02_.../` nav-nya dihapus total (cuma 1 file). Semua file PDF di-generate ulang dari versi HTML paket (bukan disalin dari `Deliverables/`) supaya HTML & PDF di dalam paket konsisten. **Knowledge Graph hanya tersedia HTML** — kanvas force-directed graph-nya tidak tercetak statis ke PDF (dicoba `--virtual-time-budget=6000` sbg fix, tetap gagal — sama seperti isu WebGL viewer sebelumnya, print-to-pdf headless tidak mengeksekusi animation-frame loop dgn benar). 3 file `README.md` ditulis (1 top-level ringkasan 2 jalur proyek + cara pakai, 1 per sub-folder daftar isi & catatan status). ⚠️ **Bug ditemukan saat proses**: percobaan pertama regenerasi PDF pakai path POSIX-style (`/c/Users/...`) di URL `file://` menghasilkan 6 PDF gagal senyap (1 halaman error "ERR_FILE_NOT_FOUND" @ 23KB, sangat mirip ukuran file valid sehingga nyaris tidak ketahuan) — diperbaiki pakai path Windows-style (`C:/Users/...`), semua PDF diverifikasi ulang render dgn benar via PyMuPDF sebelum dianggap selesai.
+
+**Update 10 Sep — persiapan Termin 1 sertifikasi (dec:80):** subfolder `02_Sertifikasi_ATEX_IECEx/` ditambah `Persiapan_Termin_1.md` (audit bukti kontraktual, matriks kepatuhan, kriteria keluar, urutan kerja), `Template_Log_Uji_dan_Iterasi_Enclosure.md`, `Template_Berita_Acara_Validasi_Prototipe.md`, dan `Template_Laporan_Pekerjaan_Termin_1.md`. Kesimpulan audit: **belum siap diajukan**; foto prototipe dan dokumen desain tersedia, tetapi bukti uji enclosure, iterasi traceable, witness/validasi Pertamina, berita acara, dan laporan pekerjaan belum ada. Template sengaja tetap berstatus draft dan tidak mengandung klaim acceptance/sertifikasi.
 
 ## `Dashboard_Sertifikasi_GLD_ATEX_IECEx.{html,pdf}` (5 Sep 2026)
 

@@ -59,6 +59,7 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 - **~Sep** User tanya ketersediaan dokumen Proposal Project & Sertifikasi di repo — dikonfirmasi **belum ada** dokumen formal terpisah untuk keduanya (hanya catatan tersebar).
 - **4 Sep** Klarifikasi chamber portable: dibawa ke **kantor kilang** (bukan area proses), konsisten dgn dec:32.
 - **4 Sep** ⚠️⚠️ **Dua proposal formal ditemukan** (Proposal GLD Point Sensor + Proposal Sertifikasi) — RAB Rp1,9M & Rp2,1M, ref. Kontrak Payung SP-26015. 6 temuan besar dicatat & 5 sudah direkonsiliasi via klarifikasi user (dec:51–53): OGI Thermal Camera bukan konflik dec:05 (scope terpisah), timeline sertifikasi aktif sejak Kick-Off (bukan cover Feb 2025), chamber portable = alternatif sampel paralel, deployment RU IV 3 GLD akurat, jadwal Bulan-5 = target awal (eksekusi menyesuaikan). Spek baterai node masih terbuka (sudah berubah, nilai baru belum ada).
+- **10 Sep** 🔵 Klarifikasi strategi dataset: masalah sampel gas tambahan masih terbuka. Portable chamber yang telah selesai akan dibawa ke **kantor HQ kilang** (mis. Cilacap; bukan area proses) untuk pengambilan data dan training/validasi model di lokasi ketika sampel tersedia. Ini jalur alternatif, sehingga pencarian suplier dan/atau penyediaan sampel Pertamina tetap berjalan paralel (dec:77).
 - **4 Sep** ⚠️ Ditemukan proposal **ketiga, terpisah**: `[KONTRAK PAYUNG]...Thermal Camera...(5340M).pdf` (44 hlm) di `main`, di luar sesi — proposal **khusus OGI Thermal Camera** (bukan revisi proposal GLD), RAB sendiri Rp5.341.943.700. Kamera HJK-MWIR MC11H, model AI YOLOv8-seg, jarak deteksi ±100m, mounting ±10m. Tabel RAB internal tak konsisten dgn narasi jadwal 9 bulan (belum diklarifikasi). File duplikat proposal sertifikasi dikonsolidasi (nama asli "...[21 FEB 2026].pdf" dipertahankan, mengonfirmasi tanggal). Lih. dec:53.
 - **~Sep** 🔧 **Revisi spek PSU/kabel GLD**: 24VDC **≥1A**/unit (turun dari ≥2A, dec:39→dec:47) — margin sizing saja, konsumsi aktual tak berubah (maks 7,995W@24VDC≈0,33A). Diterapkan ke Datasheet Sistem (rev 0.6→0.7).
 - **~Sep** 🔵 **Arsitektur server RU IV diperjelas** (dec:46) — PC fisik dedicated dikelola LGU dekat Gateway, MQTT broker sendiri via router LGU di lokasi, dual-homed ke intranet kantor kilang utk akses dashboard langsung. Tambahan (bukan pengganti) dari rencana server/VM Pertamina (dec:42/44). Keputusan/diskusi baru, **terpisah** dari kunjungan 9–10 Agu. Gate baru `gate:dashboard-exposure` (keamanan akses langsung ke LAN kantor, belum direview).
@@ -67,3 +68,9 @@ Legenda: ✅ selesai · 🔵 milestone · ⚠️ temuan/blocker · 🔧 engineer
 
 ## Rencana ke depan (baseline resmi)
 Integration test (Sep) · HSE/permit (Nov) · **Field installation = target implementasi (Des)** · Field trial (Des–Jan) · Evaluation (Jan) · Industrialization roadmap (Feb 2027).
+
+## Update 10 September 2026 — konfirmasi status
+- **RU IV Cilacap:** survey lokasi sudah selesai; instalasi fisik, commissioning, dan validasi lapangan belum dilakukan. Jadwal instalasi tetap menyesuaikan.
+- **Sertifikasi:** masih tahap persiapan dokumen; tidak ada klaim pengajuan, pengujian, atau sertifikat terbit.
+- **Chamber:** user mengonfirmasi pekerjaan lanjutan laporan Week 2 September (PCB/port Type-C, kipas, perapihan wiring, mounting) sudah selesai; bukti tertulis pasca-laporan belum tersedia.
+- **Thermal camera:** dihapus dari scope aktif; proposal terkait tetap menjadi arsip, bukan workstream progres.

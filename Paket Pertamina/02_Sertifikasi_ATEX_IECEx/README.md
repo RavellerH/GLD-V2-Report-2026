@@ -14,10 +14,12 @@ Dokumen pelacakan progres proyek sertifikasi kepatuhan area berbahaya untuk pera
 | `Template_Berita_Acara_Validasi_Prototipe.md` | Draft berita acara witness dan validasi prototipe oleh para pihak |
 | `Template_Laporan_Pekerjaan_Termin_1.md` | Kerangka laporan pekerjaan Termin 1 beserta daftar lampiran wajib |
 
-## Ringkasan status (per 5 September 2026)
+## Ringkasan status (per 12 September 2026)
 
-- **Progres keseluruhan proyek (5-fase, termasuk uji lab): ≈20%** — angka paling konservatif, memperhitungkan bahwa fase Uji Lab Terakreditasi (bobot terbesar timeline, 41,7%) belum dimulai sama sekali.
-- **Kesiapan dokumen ATEX (checklist teknis saja): ≈43%** — dekat dengan estimasi internal tim (~40%). Angka ini murni dokumentasi/checklist, tidak termasuk pengujian.
+- **Progres keseluruhan proyek (5-fase, termasuk uji lab): ≈23%** (naik dari ≈20% per 5 Sep) — angka paling konservatif, memperhitungkan bahwa fase Uji Lab Terakreditasi (bobot terbesar timeline, 41,7%) belum dimulai sama sekali.
+- **Kesiapan internal pra-submission: ≈48%** (naik dari ≈42% per 5 Sep). Pendorong utama kenaikan: enclosure **GLD ATEX Case v3** memperoleh gambar teknik berdimensi (8 Sep) dan unit fisiknya sudah terakit (10 Sep), serta dokumen teknis submission Bagian 2–3 dilengkapi. Angka ini murni bagian yang ada di tangan tim, tidak termasuk pengujian di lab akreditasi.
+- ⚠️ **Termin 1 SPK sertifikasi (40%) belum dapat diajukan** — prototipe enclosure kini tersedia, tetapi protokol & hasil uji enclosure, witness/validasi Pertamina atas uji tersebut, berita acara, dan laporan pekerjaan belum ada. Angka kesiapan ≈48% **bukan** pengganti acceptance milestone pembayaran. Rincian → bagian 09 pada `Dashboard_Sertifikasi_GLD_ATEX_IECEx.html` dan `Persiapan_Termin_1.md`.
+- ⚠️ **Tiga isu Ex baru dari desain v3**: DC fan di ruang sensor (sumber nyala potensial, tanpa sertifikat Ex), jendela kaca transparan (wajib uji impact & thermal shock IEC 60079-0), dan mounting lug cor yang berbeda dari basis desain bracket U-bolt yang sudah diserahkan ke vendor.
 - Skema target yang sudah ditetapkan proposal: **Zona 1, Kategori 2G, Grup II, kelas suhu T4 (≤135°C)**.
 - Yang masih terbuka: grup gas spesifik (rekomendasi tim: **IIC**, karena H₂ termasuk gas target), metode proteksi (Ex i vs Ex d), gambar teknik enclosure, BOM per-komponen, dan verifikasi suhu elemen sensing sensor gas — lihat dashboard untuk detail lengkap per item.
 

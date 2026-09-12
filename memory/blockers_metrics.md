@@ -2,17 +2,38 @@
 
 > Ini **satu sumber kebenaran** untuk angka kunci. File lain merujuk ke sini.
 
-## Status progres (di-reassess 4 Sep 2026 — sebelumnya per 24 Jul 2026)
-- **Progres pilot Cilacap: 44%** vs baseline resmi **43%** (per 4 Sep) → **+1 poin** (murni sisi engineering lab, BUKAN kesiapan lapangan; jangan over-claim). **Turun signifikan dari +20 poin** yang tercatat 24 Jul (39% vs 19%) — bukan krn progres melambat, tapi krn sisa pekerjaan makin bergantung gate eksternal (scoping ATEX, TRA/JSA, sampel gas) yg tak bisa dipercepat murni lewat rekayasa.
+## Status progres (di-reassess 12 Sep 2026 — sebelumnya 4 Sep 2026, sebelumnya lagi 24 Jul 2026)
+- **Progres pilot Cilacap: 47%** vs baseline resmi **49%** (per 12 Sep) → **−2 poin**, **pertama kalinya aktual berada di bawah baseline** (murni sisi engineering lab, BUKAN kesiapan lapangan; jangan over-claim). Riwayat posisi: +20 poin (24 Jul, 39% vs 19%) → +1 poin (4 Sep, 44% vs 43%) → **−2 poin** (12 Sep, 47% vs 49%).
+- **Sebabnya bentuk baseline, bukan perlambatan kerja.** Kurva rencana menanjak tajam sepanjang September (31 Agu 40% → 30 Sep 62%) karena Project Timeline 9 bulan menempatkan instalasi lapangan di bulan ini. Eksekusi fisik RU IV **belum dimulai sama sekali** dan memang bukan pekerjaan LGU (vendor Pertamina, dec:63), masih menunggu gate TRA/JSA. Sementara itu rekayasa tetap maju: enclosure ATEX Case v3, dokumen teknis sertifikasi, dan paket Termin 1 semuanya selesai dalam periode 8–11 Sep.
+- **Progres sertifikasi (jalur terpisah, metodologi bottom-up 5-fase × 4-track): ≈48% kesiapan internal pra-submission / ≈23% total s/d sertifikat** per 12 Sep (naik dari ≈42%/≈20% per 5 Sep). Baseline proposal di tanggal yang sama ≈56% — jarak lebar karena baseline mengasumsikan sampel sudah di lab akreditasi sejak akhir Agustus, sedangkan fase Pre-Compliance masih 0%. Detail → `Deliverables/Dashboard_Sertifikasi_GLD_ATEX_IECEx.html` rev 1.1, dec:99.
+
+### Breakdown per-aktivitas reassessment 12 Sep (rata-rata 12 aktivitas Gantt = 47,0%)
+| # | Aktivitas | 4 Sep | 12 Sep | Dasar perubahan |
+|---|---|---|---|---|
+| 1 | Kick-off & requirement confirmation | 100 | 100 | — |
+| 2 | Site survey & data collection plan | 65 | 68 | Checklist Kesiapan Instalasi RU IV (3 jalur) mendokumentasikan prasyarat lokasi |
+| 3 | Detailed design | 90 | 93 | Gambar kerja **GLD ATEX Case v3** berdimensi (8 Sep) + basis desain bracket utk handoff vendor |
+| 4 | Prototype build | 62 | 70 | **Enclosure v3 terakit fisik** (foto 10 Sep) + 124 foto prototipe per-komponen |
+| 5 | Lab test | 55 | 60 | FAT terdokumentasi formal dgn witness (laporan Termin 1) — masih belum ada uji enclosure |
+| 6 | AI model training / validation | 75 | 78 | Datasheet Rev 4.0 jadi bukti tertulis inferensi on-device (dec:85) |
+| 7 | Integration test | 75 | 78 | Register bukti end-to-end dikonsolidasi di laporan Termin 1 |
+| 8 | HSE review & permit preparation | 5 | 12 | JSA direvisi utk pembagian vendor/LGU, checklist instalasi 3 jalur, instruksi handoff bracket |
+| 9–11 | Field installation / trial / evaluation | 0 | 0 | **Tidak berubah** — belum ada eksekusi fisik RU |
+| 12 | Industrialization roadmap | 5 | 5 | — |
 - **Metodologi reassessment** (rata-rata 12 aktivitas Gantt baseline Kick-Off, tidak berubah dari sebelumnya): bump signifikan di "AI model training/validation" (52%→75%, CNN Dual-Branch on-device 9 Agu), "Integration test" (58%→75%, adapter MQTT selesai 4 Sep), "Lab test" (38%→55%, push alarm end-to-end teruji 6-8 Agu), "Site survey" (55%→65%, survey RU IV Cilacap selesai 9-10 Agu), "Detailed design" (85%→90%, CAD bracket U-Bolt v2). Aktivitas lapangan (HSE review, field install/trial/evaluation) **tidak berubah** — masih 0-5%, krn belum ada eksekusi fisik RU.
 - Action items: **41** (7 berjalan, 31 terbuka, 1 selesai, 2 lainnya — dihitung otomatis dari array di Dashboard). Isu & risiko: **17** (4 prioritas tinggi).
 - **Update 19 Agu:** inferensi AI (CNN Dual-Branch) **sudah on-device di ESP32-S3 GLD**, dikonfirmasi user — bukan lagi "PC + emulator" seperti tercatat di notulen 24/30 Jul. **Dataset konsisten & siap pakai** (isu konsistensi resolved). **Jangkauan LoRa disiasati mesh** (bukan blocker keras).
-- Detail lengkap reassessment 4 Sep → `decisions.md` dec:62.
+- Detail lengkap reassessment 4 Sep → `decisions.md` dec:62; reassessment 12 Sep → dec:99.
 - **Update 10 Sep (konfirmasi user):** status RU IV tetap **survey selesai, belum instalasi/commissioning**; sertifikasi masih **persiapan dokumen**. Thermal camera tidak lagi scope aktif. Pekerjaan lanjutan chamber yang sebelumnya terbuka kini dikonfirmasi **selesai**, dengan caveat belum ada bukti tertulis pasca-laporan Week 2 September.
 - **Update 11 Sep — Termin 1 field testing 20%:** konfirmasi user menetapkan kunjungan PT Pertamina Patra Niaga ke **Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung**, sebelum visit Cilacap sebagai witness tahap FAT/FIT. Pihak yang terlibat: LAPI Ganesha Utama, Lab IoT/Instrumentation and Computation ITB, dan PT Pertamina Patra Niaga. Dengan bukti detail engineering, kesiapan perangkat, firmware, integrasi end-to-end, mesh/failover, dan alarm push, paket dinilai layak diajukan sebagai substantial completion. Sisa administratif: tanda tangan pengesahan FAT/laporan dan BAST. Status ini **tidak** menutup gate instalasi/SAT RU IV dan **tidak** mengubah audit Termin 1 sertifikasi 40% pada dec:80.
 
+## Gate baru dari enclosure ATEX Case v3 (12 Sep 2026, dec:98)
+- **`gate:fan-ignition`** — DC fan brushless (3×3×1) terpasang di dalam sensor case, ruang yang kontak langsung dgn atmosfer berbahaya. Komponen bermotor/bergerak = sumber nyala potensial (bunga api komutasi, suhu permukaan, listrik statis impeller). Part komoditas tanpa sertifikat Ex. **Butuh kajian sumber nyala sebelum metode proteksi Ex difinalkan.** PIC: LGU + mitra casing.
+- **`gate:glass-window`** — jendela "TRANSPARENT GLASS" pada bukaan ⌀62mm. IEC 60079-0 mensyaratkan uji **impact** & **thermal shock** untuk bagian transparan, plus metode pengikatan yang menahan tekanan ledakan internal. Grade kaca & metode pengikatan belum ditentukan. PIC: mitra casing.
+- **`gate:mount-v3-reconcile`** — enclosure v3 memakai **lug cor terintegrasi**, berbeda dari pelat 250×250 + U-bolt (ATEX Casing v2) yang sudah diserahkan sbg basis desain ke vendor Pertamina (dec:77/79). Perlu rekonsiliasi sebelum vendor memfabrikasi bracket. Ini juga membuat `gate:bracket-orientation` (dec:67) perlu ditinjau ulang thd geometri v3, bukan v2.
+
 ## Blocker kritis aktif (0 — lih. "Diminimalkan/resolved" utk 3 item dideprioritaskan)
-Tidak ada blocker kritis aktif per 4 Sep 2026. blk:power/blk:tpl/blk:conv dideprioritaskan (bukan diselesaikan teknis) — lihat entri di bawah.
+Tidak ada blocker kritis aktif per 12 Sep 2026. blk:power/blk:tpl/blk:conv dideprioritaskan (bukan diselesaikan teknis) — lihat entri di bawah. Tiga gate v3 di atas adalah **gate rekayasa sertifikasi**, bukan blocker deployment 24VDC jalur pilot.
 
 ## Diminimalkan / resolved
 - ~~blk:lora~~ → jangkauan LoRa ~100 m/hop **disiasati mesh multi-hop** (uji 8-CH se-kampus, Layer 3). Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH). Risiko, bukan blocker.

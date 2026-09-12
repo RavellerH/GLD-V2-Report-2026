@@ -136,3 +136,12 @@ Detail lengkap → `decisions.md` dec:27–34, `blockers_metrics.md` § Meeting 
 - Relasi ini tidak menyatakan `ms:install`, SAT RU IV, as-built lokasi, atau sertifikasi sudah selesai.
 - `deliv:termin1-package` mengemas `deliv:termin1-field` bersama bukti kontraktual, witness/FAT, engineering, uji teknis, dan dokumen tahap berikutnya dalam satu folder siap-zip; dataset/CAD/foto lengkap tetap lampiran opsional.
 - `deliv:termin1-bast` ditambahkan sebagai draft BAST generik. Dokumen ini baru memformalkan penerimaan setelah data SPK, nominal, identitas, dan tanda tangan dilengkapi; paket siap-zip menyertakannya sebagai dokumen administrasi.
+
+## 8. Update 12 September — enclosure ATEX Case v3, reassessment, dua Termin 1
+
+- Node baru `hw:atex-case-v3` — enclosure generasi ke-3 (gambar kerja 8 Sep, unit fisik terakit 10 Sep). Menggantikan konsep "ATEX Casing v2" sbg geometri produk, tetapi **belum** dipropagasi ke `deliv:bracket` maupun dokumen sertifikasi yang sudah terbit.
+- `hw:atex-case-v3` **memunculkan** tiga gate baru sekaligus: `gate:fan-ignition` (DC fan brushless di ruang sensor, bagian bergerak/bermotor di area berbahaya tanpa sertifikat Ex), `gate:glass-window` (jendela kaca wajib uji impact & thermal shock IEC 60079-0), `gate:mount-v3-reconcile` (lug cor terintegrasi ≠ pelat 250×250 + U-bolt v2 yang sudah diserahkan ke vendor Pertamina). Ini penting dicatat sbg relasi **dua arah**: v3 memajukan dokumentasi desain, sekaligus menambah beban pembuktian Ex.
+- `gate:mount-v3-reconcile` membuat `gate:bracket-orientation` (dec:67) perlu ditinjau ulang terhadap geometri v3, bukan v2.
+- Node milestone baru `ms:termin1-field` (paket 20% siap, tersisa tanda tangan & data SPK) dan `ms:termin1-cert` (40% belum dapat diajukan). `hw:atex-case-v3` **menutup syarat prototipe** pada `ms:termin1-cert`; `gate:atex-scoping` dan ketiadaan protokol/hasil uji enclosure **menahan**-nya.
+- `ms:meeting0806` (witness FAT 6 Agustus) hanya terhubung ke `ms:termin1-field` — **tidak** ke `ms:termin1-cert`. Dua termin berdiri di atas SPK & rangkaian bukti berbeda dan tidak boleh saling meminjam.
+- Progres `sub:chamber` dinaikkan 35 → 48 (enclosure v3 digambar & terakit).

@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "Gas Leak Detection (GLD) Tahap 2",
-    "as_of": "2026-09-04",
+    "as_of": "2026-09-12",
     "scope_active": "Pilot RU IV Cilacap",
     "note": "Machine-readable knowledge graph. Update bersama memory/graph.md."
   },
@@ -16,7 +16,7 @@
     { "id": "sub:net", "type": "subsystem", "label": "Jaringan LoRa & CH", "progress": 65 },
     { "id": "sub:ai", "type": "subsystem", "label": "AI & Sensor MQ", "progress": 55 },
     { "id": "sub:power", "type": "subsystem", "label": "Catu Daya & Energi", "progress": 50 },
-    { "id": "sub:chamber", "type": "subsystem", "label": "Chamber/HW/QC", "progress": 35 },
+    { "id": "sub:chamber", "type": "subsystem", "label": "Chamber/HW/QC", "progress": 48 },
     { "id": "sub:sw", "type": "subsystem", "label": "Software/Server/Dashboard", "progress": 58 },
     { "id": "sub:integ", "type": "subsystem", "label": "Integrasi Sistem", "progress": 68 },
     { "id": "sub:ruprep", "type": "subsystem", "label": "Survei RU / HSE", "progress": 40 },
@@ -88,7 +88,13 @@
     { "id": "deliv:termin1-package", "type": "deliverable", "label": "Paket siap-zip Termin 1 Field Testing 20% Rev02" },
     { "id": "deliv:termin1-bast", "type": "deliverable", "label": "Draft BAST Termin 1 Field Testing 20%" },
 
-    { "id": "p:raihan", "type": "person", "label": "Raihan — PIC RU VII Kasim/Sorong" }
+    { "id": "p:raihan", "type": "person", "label": "Raihan — PIC RU VII Kasim/Sorong" },
+    { "id": "hw:atex-case-v3", "type": "device", "label": "Enclosure GLD ATEX Case v3 — housing 102mm, sensor case 80/90x80mm, tutup berulir, DC fan, filter mesh stainless, jendela kaca (gambar 8 Sep, terakit fisik 10 Sep)" },
+    { "id": "gate:fan-ignition", "type": "gate", "label": "DC fan brushless di ruang sensor = sumber nyala potensial di area berbahaya; tanpa sertifikat Ex, butuh kajian ignition & suhu permukaan" },
+    { "id": "gate:glass-window", "type": "gate", "label": "Jendela kaca transparan wajib uji impact & thermal shock IEC 60079-0; grade kaca & metode pengikatan belum ditentukan" },
+    { "id": "gate:mount-v3-reconcile", "type": "gate", "label": "Lug cor terintegrasi v3 berbeda dari pelat 250x250 + U-bolt v2 yang sudah diserahkan ke vendor Pertamina — perlu rekonsiliasi sebelum fabrikasi" },
+    { "id": "ms:termin1-field", "type": "milestone", "label": "Paket pengajuan Termin 1 field testing 20% siap — tersisa tanda tangan pengesahan & data SPK/BAST (11 Sep)" },
+    { "id": "ms:termin1-cert", "type": "milestone", "label": "Termin 1 sertifikasi 40% belum dapat diajukan — protokol/hasil uji enclosure, witness Pertamina, berita acara & laporan pekerjaan belum ada" }
   ],
   "edges": [
     { "s": "org:LGU", "t": "proj:GLD", "r": "pelaksana" },
@@ -175,6 +181,11 @@
     { "s": "gate:dashboard-exposure", "t": "sub:sw", "r": "risiko-keamanan" },
     { "s": "gate:gw-ethernet", "t": "dev:gw", "r": "konflik-spek" },
     { "s": "gate:solar-cert", "t": "sub:power", "r": "menahan" },
-    { "s": "gate:ch-batt-safety", "t": "sub:power", "r": "menahan" }
+    { "s": "gate:ch-batt-safety", "t": "sub:power", "r": "menahan" },
+    { "s": "hw:atex-case-v3", "t": "gate:fan-ignition", "r": "memunculkan" },
+    { "s": "hw:atex-case-v3", "t": "gate:glass-window", "r": "memunculkan" },
+    { "s": "hw:atex-case-v3", "t": "gate:mount-v3-reconcile", "r": "memunculkan" },
+    { "s": "hw:atex-case-v3", "t": "ms:termin1-cert", "r": "menutup syarat prototipe" },
+    { "s": "gate:atex-scoping", "t": "ms:termin1-cert", "r": "menahan" }
   ]
 }

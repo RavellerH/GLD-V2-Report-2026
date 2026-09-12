@@ -181,7 +181,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="sm-row"><span class="k">STATUS</span><span class="v">Aktif — 4 track paralel</span></div>
       <div class="sm-row"><span class="k">KICK-OFF</span><span class="v">12 Jun 2026</span></div>
       <div class="sm-row"><span class="k">TARGET</span><span class="v">5–8 bulan (≈Nov 2026–Feb 2027)</span></div>
-      <div class="sm-row"><span class="k">DIBUAT</span><span class="v">5 Sep 2026 · Rev 1.0</span></div>
+      <div class="sm-row"><span class="k">DIPERBARUI</span><span class="v">12 Sep 2026 · Rev 1.1</span></div>
     </div>
     <nav class="zonenav">
       <a href="#z1"><span class="zi">01</span>Ringkasan Eksekutif</a>
@@ -192,7 +192,8 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <a href="#z6"><span class="zi">06</span>Gap Analysis — IP/EMC/RF</a>
       <a href="#z7"><span class="zi">07</span>Isu Kritis &amp; Gate</a>
       <a href="#z8"><span class="zi">08</span>Timeline 5 Fase</a>
-      <a href="#z9"><span class="zi">09</span>Sumber &amp; Metodologi</a>
+      <a href="#z9"><span class="zi">09</span>Kesiapan Termin 1 (40%)</a>
+      <a href="#z10"><span class="zi">10</span>Sumber &amp; Metodologi</a>
     </nav>
     <div class="side-foot">
       <button class="themebtn" id="themebtn" type="button">◐ Ganti tema</button>
@@ -211,8 +212,8 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="docmeta-row">
         <div><span class="k">Scope perangkat</span><span class="v">GLD (Node Sensor) saja — CH &amp; Gateway asumsi safe area</span></div>
         <div><span class="k">4 track</span><span class="v">ATEX · IP · EMC · RF</span></div>
-        <div><span class="k">Kesiapan internal pra-submission</span><span class="v">≈42% (≈20% keseluruhan s/d sertifikat — bagian 02)</span></div>
-        <div><span class="k">Fokus rekayasa berikutnya</span><span class="v">Verifikasi kelas suhu (T-class) elemen sensing</span></div>
+        <div><span class="k">Kesiapan internal pra-submission</span><span class="v">≈48% (≈23% keseluruhan s/d sertifikat — bagian 02)</span></div>
+        <div><span class="k">Fokus rekayasa berikutnya</span><span class="v">Keputusan metode proteksi Ex + kajian sumber nyala DC fan &amp; jendela kaca v3</span></div>
       </div>
     </header>
 
@@ -220,14 +221,14 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="zone-head"><span class="zn">01</span><h2>Ringkasan Eksekutif</h2></div>
       <p class="lede">Proyek sertifikasi GLD berjalan <b>paralel dengan jalur pilot/field testing RU IV Cilacap</b> (dilacak terpisah di <span class="mono">Dashboard_GLD_ProjectManagement.html</span>) — keduanya adalah dua jalur berbeda menuju deployment penuh. Proposal formal (21 Feb 2026, aktif sejak Kick-Off 12 Jun 2026) menargetkan <b>ATEX Kategori 2G Zona 1, Grup II, kelas suhu T4 (≤135°C)</b>, plus IP66/67, EMC EN61000-6-2/-4, dan RF ETSI/SDPPI — estimasi total durasi <b>5–8 bulan</b>.</p>
       <div class="kpirow">
-        <div class="kpibig"><div class="lab">Kesiapan Internal Pra-Submission</div><div class="val">≈42<small>%</small></div><div class="sub">Bagian yang sepenuhnya dalam kendali tim (Perencanaan+Redesign+Pre-Compliance, 4 track) — <b>tidak termasuk</b> durasi antrian/pengujian di lab akreditasi eksternal yang tidak bisa dipercepat tim. Konvergen dgn estimasi Pak Maman "~40%". Lihat bagian 02.</div></div>
-        <div class="kpibig"><div class="lab">Progres Keseluruhan s/d Sertifikat</div><div class="val">≈20<small>%</small></div><div class="sub">Metodologi bottom-up 5-fase × 4 track, termasuk fase Uji Lab (bobot terbesar, 41,7%) yg durasinya bergantung jadwal lab eksternal — angka paling konservatif, utk proyeksi end-to-end.</div></div>
+        <div class="kpibig"><div class="lab">Kesiapan Internal Pra-Submission</div><div class="val">≈48<small>%</small></div><div class="sub">Naik dari ≈42% (5 Sep) — pendorong utama: <b>enclosure ATEX Case v3</b> (gambar teknik berdimensi 8 Sep, unit fisik terakit 10 Sep) &amp; dokumen teknis submission Bagian 2–3 genap. Bagian yang sepenuhnya dalam kendali tim (Perencanaan+Redesign+Pre-Compliance, 4 track) — <b>tidak termasuk</b> antrian/pengujian di lab akreditasi eksternal. Lihat bagian 02.</div></div>
+        <div class="kpibig"><div class="lab">Progres Keseluruhan s/d Sertifikat</div><div class="val">≈23<small>%</small></div><div class="sub">Naik dari ≈20% (5 Sep). Metodologi bottom-up 5-fase × 4 track, termasuk fase Uji Lab (bobot terbesar, 41,7%) yg durasinya bergantung jadwal lab eksternal — angka paling konservatif, utk proyeksi end-to-end. Baseline proposal di tanggal yang sama ≈56%.</div></div>
         <div class="kpibig"><div class="lab">Track Paling Matang</div><div class="val">EMC</div><div class="sub">Tabel parameter lengkap sudah ada (19 Agu) — MCU, modul radio, TX power, antena. Belum ada pre-scan/uji lab.</div></div>
-        <div class="kpibig"><div class="lab">Track Paling Tertinggal</div><div class="val">ATEX</div><div class="sub">Gambar teknik, BOM per-komponen, datasheet material, dan draft manual — semua masih perlu disusun.</div></div>
+        <div class="kpibig"><div class="lab">Track Paling Tertinggal</div><div class="val">ATEX</div><div class="sub">Naik 15%→35% berkat enclosure v3, tapi tetap paling tertinggal: <b>metode proteksi Ex belum diputuskan</b>, kalkulasi flame-path/hot-spot, BOM Ex-critical, datasheet material, &amp; sertifikat komponen Ex belum ada.</div></div>
       </div>
-      <div class="banner info"><span class="ic">🔢</span><span><b>Dua angka progres, dua definisi berbeda — bukan kontradiksi.</b> "≈42%" (kesiapan internal) mengukur pekerjaan yang murni ada di tangan tim — scoping, redesign 4 track, dan pengujian pre-compliance internal — <b>sebelum</b> sampel dikirim ke lab akreditasi. "≈20%" (progres keseluruhan) menghitung <i>seluruh</i> perjalanan sampai sertifikat terbit, termasuk Uji Lab Terakreditasi (41,7% bobot) yang durasinya (8–12 minggu) ditentukan jadwal &amp; antrean lab eksternal, bukan kecepatan kerja tim. Rekomendasi: pakai "≈42%" saat bicara soal seberapa jauh persiapan tim sudah berjalan, pakai "≈20%" saat bicara soal proyeksi total sampai sertifikat terbit — jangan dicampur tanpa menyebut definisinya.</span></div>
+      <div class="banner info"><span class="ic">🔢</span><span><b>Dua angka progres, dua definisi berbeda — bukan kontradiksi.</b> "≈48%" (kesiapan internal) mengukur pekerjaan yang murni ada di tangan tim — scoping, redesign 4 track, dan pengujian pre-compliance internal — <b>sebelum</b> sampel dikirim ke lab akreditasi. "≈23%" (progres keseluruhan) menghitung <i>seluruh</i> perjalanan sampai sertifikat terbit, termasuk Uji Lab Terakreditasi (41,7% bobot) yang durasinya (8–12 minggu) ditentukan jadwal &amp; antrean lab eksternal, bukan kecepatan kerja tim. Rekomendasi: pakai "≈48%" saat bicara soal seberapa jauh persiapan tim sudah berjalan, pakai "≈23%" saat bicara soal proyeksi total sampai sertifikat terbit — jangan dicampur tanpa menyebut definisinya.</span></div>
       <div class="banner good"><span class="ic">✅</span><span><b>Temuan penting:</b> skema target ATEX <b>sudah lebih matang dari yang tercatat sebelumnya</b> — proposal formal secara eksplisit menargetkan Zona 1/Kategori 2G/T4, bukan "sama sekali belum ditentukan" seperti tercatat di gap-analysis repo sertifikasi (27 Agu) yang belum sempat mensilangkan proposal ini. Detail rekonsiliasi &amp; rekomendasi grup gas → bagian 03.</span></div>
-      <div class="banner info"><span class="ic">🔧</span><span><b>Hubungan dengan jalur pilot/field testing:</b> sertifikasi baru bisa mulai secara penuh setelah desain hardware cukup matang — kematangan itu banyak terbentuk lewat proses trial-and-error di jalur pilot/field testing RU IV Cilacap (44% progres, lihat <span class="mono">Dashboard_GLD_ProjectManagement.html</span>): karakterisasi RF/jangkauan, profil daya, keandalan mesh, validasi model AI, dan pengujian chamber gas. Pekerjaan ini <b>menurunkan risiko rekayasa</b> untuk tahap redesign sertifikasi (desain sudah teruji secara fungsional) — tapi belum otomatis mengisi dokumen formal yang diminta checklist ATEX (BOM, gambar teknik, kalkulasi termal tetap perlu disusun terpisah, krn formatnya spesifik utk submission sertifikasi). Kedua jalur saling menopang, bukan berjalan independen.</span></div>
+      <div class="banner info"><span class="ic">🔧</span><span><b>Hubungan dengan jalur pilot/field testing:</b> sertifikasi baru bisa mulai secara penuh setelah desain hardware cukup matang — kematangan itu banyak terbentuk lewat proses trial-and-error di jalur pilot/field testing RU IV Cilacap (47% progres per 12 Sep, lihat <span class="mono">Dashboard_GLD_ProjectManagement.html</span>): karakterisasi RF/jangkauan, profil daya, keandalan mesh, validasi model AI, dan pengujian chamber gas. Pekerjaan ini <b>menurunkan risiko rekayasa</b> untuk tahap redesign sertifikasi (desain sudah teruji secara fungsional) — tapi belum otomatis mengisi dokumen formal yang diminta checklist ATEX (BOM, gambar teknik, kalkulasi termal tetap perlu disusun terpisah, krn formatnya spesifik utk submission sertifikasi). Kedua jalur saling menopang, bukan berjalan independen.</span></div>
     </section>
 
     <section class="zone" id="z2">
@@ -241,12 +242,12 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
           <span><i style="background:var(--accent)"></i>Aktual (bottom-up, per 5 Sep 2026)</span>
         </div>
       </div>
-      <div class="banner warn"><span class="ic">⚠️</span><span><b>Baru 1 titik data aktual</b> — dashboard ini baru dibuat 5 Sep 2026, jadi kurva aktual belum punya riwayat mingguan seperti Dashboard proyek utama. Titik berikutnya akan menambah histori riil setelah update berikutnya.</span></div>
+      <div class="banner info"><span class="ic">📈</span><span><b>Dua titik data aktual (5 Sep → 12 Sep).</b> Kenaikan ≈20% → ≈23% dalam sepekan berasal dari kemajuan nyata pada fase Redesign, bukan kalibrasi ulang metodologi: enclosure <b>GLD ATEX Case v3</b> memperoleh gambar teknik berdimensi (8 Sep) dan unit fisiknya sudah terakit (foto 10 Sep), serta dokumen teknis submission Bagian 2–3 dilengkapi (11 Sep). Baseline proposal di tanggal yang sama ≈56% — <b>jarak ke rencana tetap lebar</b> karena baseline mengasumsikan sampel sudah berada di lab akreditasi sejak akhir Agustus.</span></div>
 
-      <div class="subhead"><h3>Artinya konkret 20% / 40% / 60% — supaya angka tidak abstrak</h3></div>
+      <div class="subhead"><h3>Artinya konkret 23% / 40% / 60% — supaya angka tidak abstrak</h3></div>
       <div class="tbl-scroll"><table>
         <tr><th>Progres</th><th>Fase yang harus SELESAI</th><th>Fase yang sedang berjalan</th><th>Artinya konkret</th></tr>
-        <tr class="hl"><td><b>≈20% (sekarang)</b></td><td>Perencanaan</td><td>Redesign (~35% jalan)</td><td>Target klasifikasi sudah ada, material dipilih — tapi BOM, gambar teknik, kalkulasi hot-spot <b>belum selesai</b></td></tr>
+        <tr class="hl"><td><b>≈23% (sekarang)</b></td><td>Perencanaan</td><td>Redesign (~53% jalan)</td><td>Target klasifikasi ada, material dipilih, <b>gambar teknik enclosure v3 berdimensi sudah ada &amp; unitnya terakit fisik</b> — tapi metode proteksi Ex belum diputuskan, BOM Ex-critical, datasheet material bersertifikat, dan kalkulasi hot-spot/flame-path <b>belum ada</b></td></tr>
         <tr><td><b>≈40%</b></td><td>Perencanaan + Redesign penuh</td><td>Pre-Compliance (~45% jalan)</td><td>Semua BOM/gambar/kalkulasi termal <b>rampung</b>, DAN pengukuran suhu aktual + pre-scan EMC + pre-test RF <b>sudah dijalankan internal</b></td></tr>
         <tr><td><b>≈60%</b></td><td>Perencanaan + Redesign + Pre-Compliance</td><td>Uji Lab Terakreditasi (~30% jalan)</td><td>Sample <b>sudah dikirim ke lab akreditasi</b>, sebagian pengujian resmi ATEX/IP/EMC/RF sudah lolos</td></tr>
       </table></div>
@@ -323,6 +324,21 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="zone-head"><span class="zn">05</span><h2>Gap Analysis — Track ATEX</h2></div>
       <p class="lede">Sumber utama: <span class="mono">IECEx ATEX Certification Information Requirements_EN.pdf</span> — dokumen asli dari lembaga sertifikasi (ExCB) yang membantu proses submission, diberikan langsung oleh user 5 September 2026 (dwi-bahasa Inggris/Mandarin, konsisten dgn lembaga uji di China yg disebut di notulen kunjungan Cilacap). Dokumen ini <b>menggantikan</b> versi terjemahan Indonesia (<span class="mono">..._Ind.docx</span>) sbg acuan utama — struktur &amp; isi keduanya cocok, tapi versi Inggris memastikan tidak ada nuansa istilah teknis yg hilang saat terjemahan. Disilangkan dgn checklist 60-item &amp; gap-analysis repo <span class="mono">sertifikasi-atex-gld-v2-2026</span> (audit terakhir 27 Agustus 2026) &amp; <span class="mono">Dokumen_spesifikasi_input_2.docx</span> (update 27 Agu).</p>
       <div class="banner warn"><span class="ic">🆕</span><span><b>Temuan baru dari dokumen versi Inggris:</b> ada 1 kategori persyaratan yg <b>belum pernah dilacak sama sekali</b> di checklist/gap-analysis repo sertifikasi sebelumnya — <b>Bagian 1, "Basic Information (Application and Organization)"</b>: formulir aplikasi (template dari ExCB), surat izin usaha/registrasi perusahaan, struktur organisasi &amp; kontak, alamat &amp; profil fasilitas manufaktur, dan (jika berlaku) sertifikat ISO 9001 + manual mutu untuk review QAR/QAN. Ini bukan dokumen teknis produk — tapi tetap wajib dilengkapi sebelum submission. Status: <b>belum dicek sama sekali</b>, ditambahkan sbg gap baru di tabel bawah.</span></div>
+      <div class="banner good"><span class="ic">🆕</span><span><b>Perkembangan terbesar sejak snapshot 5 September: enclosure <span class="mono">GLD ATEX Case v3</span>.</b> Gambar kerja berdimensi (judul "GLD ATEX CASE v3", digambar Farhan Budiman, <b>8 Sep 2026</b>, sheet 1/1) kini tersedia, dan unit fisiknya <b>sudah terakit</b> (foto 10 Sep 2026). Ini menggeser track ATEX &amp; IP dari "gambar teknik belum ada" ke "envelope &amp; struktur sudah terdefinisi". Detail di bawah — termasuk <b>tiga isu Ex baru</b> yang justru muncul <i>karena</i> desain ini.</span></div>
+
+      <div class="subhead"><h3>0a. Enclosure GLD ATEX Case v3 — apa yang berubah (8–10 Sep 2026)</h3></div>
+      <p class="lede">Desain v3 adalah lompatan dari konsep "probe + pelat mounting" (ATEX Casing v2, 31 Agu/4 Sep) ke <b>housing silinder bergaya detektor gas industri</b>: badan utama berulir dengan tutup sekrup di kedua sisi, lug cor terintegrasi untuk mounting, cable entry berulir, beacon alarm eksternal, antena eksternal, dan <b>ruang sensor terpisah</b> di bawah.</p>
+      <div class="tbl-scroll"><table>
+        <tr><th>Elemen v3</th><th>Data dari gambar kerja</th><th>Arti untuk sertifikasi</th></tr>
+        <tr><td>Housing utama</td><td>⌀102 mm luar · ⌀62 mm bukaan · tinggi badan 40 mm · lug mounting cor terintegrasi</td><td>✅ Envelope eksterior kini berdimensi — memenuhi sebagian item "Enclosure structure drawing"</td></tr>
+        <tr><td>Sensor case</td><td>⌀80 mm badan · ⌀90 mm cover · tinggi 80 mm · dinding 2,5 mm · sambungan berulir</td><td>✅ Geometri ruang sensor terdefinisi. ⚠️ Ulir berpotensi jadi <b>flame path Ex d</b>, tapi parameter gap/panjang/jumlah ulir <b>belum ditandai</b> di gambar</td></tr>
+        <tr><td>Filter mesh disc</td><td>Stainless steel, ⌀80 mm</td><td>✅ Material logam disebut eksplisit. ⚠️ Bila difungsikan sbg pembatas nyala, butuh evaluasi khusus (flame arrestor / restricted breathing), bukan sekadar filter debu</td></tr>
+        <tr><td><b>DC fan (3×3×1)</b></td><td>Fan brushless DC, terpasang di dalam sensor case (terlihat terpasang di foto 10 Sep)</td><td>🔴 <b>Isu Ex baru</b> — komponen bermotor/bergerak di dalam ruang yang kontak langsung dgn atmosfer berbahaya: sumber nyala potensial (bunga api sikat/komutasi, suhu permukaan, listrik statis dari impeller plastik). Tidak ada sertifikat Ex untuk part komoditas ini</td></tr>
+        <tr><td><b>Jendela kaca transparan</b></td><td>Ditandai "TRANSPARENT GLASS" pada bukaan ⌀62 mm</td><td>🔴 <b>Isu Ex baru</b> — IEC 60079-0 mensyaratkan uji <b>impact</b> &amp; <b>thermal shock</b> untuk bagian transparan, plus metode pengikatan yang menahan tekanan ledakan internal. Grade kaca &amp; metode pengikatan belum ditentukan</td></tr>
+        <tr><td>Mounting</td><td>Lug cor terintegrasi pada badan housing</td><td>🟡 <b>Berbeda dari basis desain bracket</b> pelat 250×250 + U-bolt (v2) yang sudah diserahkan sbg basis desain ke vendor Pertamina — perlu rekonsiliasi sebelum fabrikasi bracket</td></tr>
+      </table></div>
+      <div class="banner warn"><span class="ic">⚖️</span><span><b>Baca ini dengan jujur: v3 memajukan dokumentasi desain, tapi menambah beban pembuktian Ex.</b> Kenaikan progres Redesign ATEX (15%→35%) dan IP (30%→45%) berasal dari adanya geometri &amp; material yang terdefinisi. Namun DC fan dan jendela kaca adalah dua fitur yang <b>secara spesifik memicu persyaratan uji tambahan</b> di IEC 60079-0/-1. Keduanya perlu masuk daftar keputusan rekayasa <i>sebelum</i> metode proteksi Ex difinalkan — bukan sesudahnya.</span></div>
+
       <div class="subhead"><h3>0. Informasi Dasar — Aplikasi &amp; Organisasi (kategori baru, belum pernah dilacak)</h3></div>
       <div class="tbl-scroll"><table>
         <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
@@ -337,17 +353,17 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
         <tr><td>Nama, model, spesifikasi umum</td><td><span class="status ok">Lengkap</span></td><td>Ada di Dokumen_spesifikasi_input_2 &amp; tabel EMC</td></tr>
         <tr><td>Parameter kelistrikan</td><td><span class="status wip">Sebagian</span></td><td>~40/56 field terisi (update 26 Agu); sisanya "menunggu konfirmasi" — berat total, cable entry, rentang suhu/kelembapan</td></tr>
-        <tr><td>Foto produk</td><td><span class="status wip">Sebagian</span></td><td>6 foto ada, belum ada foto per-tipe final assembly &amp; komponen individual (baterai, gasket, terminal)</td></tr>
+        <tr><td>Foto produk</td><td><span class="status ok">Sebagian besar lengkap</span></td><td>✅ Naik signifikan — <b>124 foto per-komponen</b> tersedia (folder <span class="mono">GLD_1</span>, 26 Agu: CASING 70, ALARM 10, PCB_SENSOR 10, CASING_BAT 10, CASING_SENSOR 8, PCB_KOMPONEN 5, ANTENA 3, PCB_KOSONG 3, CASING_KOMPONEN 3, SOKET_SENSOR 2) + 5 foto DC fan (10 Sep). Belum ada: foto nameplate &amp; foto unit v3 final ber-nomor-seri</td></tr>
         <tr class="hl"><td><b>Grup gas / kelas suhu / zona</b></td><td><span class="status ok">Target ditetapkan (proposal)</span></td><td>Zona 1/Cat.2G/T4/Grup II sudah ada di proposal; grup gas spesifik (rekomendasi IIC) &amp; metode proteksi masih perlu difinalisasi — lihat bagian 03</td></tr>
       </table></div>
       <div class="subhead"><h3>1.2–1.8 Gambar Teknik, BOM, Material, Proses, Perhitungan, Manual, Label</h3></div>
       <div class="tbl-scroll"><table>
         <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
-        <tr><td>Assembly drawing</td><td><span class="status wip">Sebagian</span></td><td>Base Plate Assembled.dwg ada (bracket mounting) — bukan gambar teknik enclosure/PCB lengkap</td></tr>
-        <tr><td>Skematik kelistrikan, layout PCB, gambar enclosure/junction box/terminal/grounding</td><td><span class="status gap">Belum ada</span></td><td>Semua item ❌ — belum satupun gambar berdimensi resmi</td></tr>
-        <tr><td>Bill of Materials (BOM) formal per-komponen</td><td><span class="status gap">Belum ada</span></td><td>Baru nama komponen tingkat tinggi; produsen/grade material/sertifikat Ex per komponen belum ada</td></tr>
-        <tr><td>Datasheet material non-logam (CTI, tahan api, dll)</td><td><span class="status gap">Belum ada</span></td><td>—</td></tr>
-        <tr><td>Deskripsi proses manufaktur</td><td><span class="status gap">Belum ada</span></td><td>Relevan bila casing dilas/di-machining utk Ex d</td></tr>
+        <tr><td>Assembly drawing</td><td><span class="status wip">Sebagian</span></td><td>✅ Naik — <b>GLD ATEX CASE v3</b> (8 Sep) memuat 3 pandangan ortografik berdimensi + exploded view berlabel (Sensor Case / DC Fan / Filter Mesh / Case Cover / Transparent Glass), ditambah Base Plate Assembled.dwg. Belum mencakup assembly PCB internal &amp; urutan pemasangan gasket</td></tr>
+        <tr><td>Skematik kelistrikan, layout PCB, gambar enclosure/junction box/terminal/grounding</td><td><span class="status wip">Sebagian</span></td><td>✅ Naik dari "belum ada": skematik tersedia sbg <b>9 lembar diagram blok</b> hasil trace skematik EasyEDA asli, <b>layout PCB copper riil</b> (ekspor EasyEDA/JLCPCB), dan <b>gambar enclosure v3 berdimensi</b>. ❌ Masih belum ada: gambar terminal &amp; grounding, serta penandaan parameter flame-path pada gambar enclosure</td></tr>
+        <tr><td>Bill of Materials (BOM) formal per-komponen</td><td><span class="status wip">Sebagian</span></td><td>✅ <b>BOM elektronik nyata</b> tersedia (motherboard 89 baris/214 komponen + sensor board 14 baris/24 komponen, dgn manufacturer + part number + LCSC# per baris, ekspor EasyEDA/JLCPCB 9 Sep). ❌ Tetap <b>bukan BOM explosion-safety-relevant</b> yg diminta checklist: enclosure, gasket, cable gland, kaca, DC fan, baterai, dan potting tidak muncul di BOM elektronik — dan sensor MQ2 sendiri tercatat tanpa manufacturer/part number</td></tr>
+        <tr><td>Datasheet material non-logam (CTI, tahan api, dll)</td><td><span class="status gap">Belum ada</span></td><td>Kini lebih mendesak: v3 memperkenalkan <b>jendela kaca</b> dan <b>impeller DC fan</b> — keduanya bagian non-logam yang datasheet material &amp; sifat elektrostatiknya wajib ada. Menunggu mitra casing eksternal</td></tr>
+        <tr><td>Deskripsi proses manufaktur</td><td><span class="status gap">Belum ada</span></td><td>Makin relevan: v3 memakai <b>sambungan berulir</b> di dua tempat — bila dipakai sbg flame path Ex d, toleransi pemesinan &amp; jumlah ulir engagement jadi parameter bersertifikat. Dikerjakan mitra casing eksternal</td></tr>
         <tr><td>Perhitungan proteksi ledakan &amp; hot-spot suhu</td><td><span class="status gap">Belum ada</span></td><td>Lihat isu kritis bagian 07</td></tr>
         <tr><td>Draft manual instalasi &amp; pemeliharaan</td><td><span class="status gap">Belum ada</span></td><td>—</td></tr>
         <tr><td>Nameplate/label ATEX &amp; sertifikat <b>Ex</b> komponen (ESP32, E22)</td><td><span class="status gap">Belum ada</span></td><td>⚠️ ESP32-S3-WROOM-1U (FCC 2AC7Z-ESPS3WROOM1U, TELEC, CE) &amp; E22-900MM22S (CE/FCC/RoHS) <b>sudah bersertifikat RF/EMC umum</b> (dikonfirmasi 5 Sep) — tapi ini <b>bukan</b> sertifikat "Ex Component" yg diminta item checklist ini (domain berbeda: RF/EMC vs hazardous-area). Belum ada satupun komponen dgn sertifikat Ex spesifik</td></tr>
@@ -424,30 +440,49 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         </div>
       </div>
       <div class="tbl-scroll"><table>
-        <tr><th>Fase</th><th>Estimasi durasi</th><th>Status per 5 Sep</th></tr>
-        <tr><td><b>1. Perencanaan &amp; review awal</b></td><td>2–4 minggu</td><td>Target Zona1/Cat.2G/T4 sudah ada (proposal); metode proteksi &amp; grup gas spesifik belum final</td></tr>
-        <tr><td><b>2. Redesign &amp; optimasi teknis</b></td><td>4–6 minggu</td><td>Material enclosure dipilih; gambar teknik/BOM/kalkulasi termal belum dimulai</td></tr>
-        <tr><td><b>3. Pre-compliance testing</b></td><td>3–4 minggu</td><td>Belum mulai — menunggu fase 2 tuntas</td></tr>
+        <tr><th>Fase</th><th>Estimasi durasi</th><th>Status per 12 Sep</th></tr>
+        <tr><td><b>1. Perencanaan &amp; review awal</b></td><td>2–4 minggu</td><td><b>≈95%</b> — target Zona1/Cat.2G/T4 ada (proposal), struktur dossier submission sudah dipetakan penuh ke checklist ExCB; metode proteksi Ex &amp; grup gas spesifik <b>belum final</b></td></tr>
+        <tr><td><b>2. Redesign &amp; optimasi teknis</b></td><td>4–6 minggu</td><td><b>≈53%</b> (ATEX 35 · IP 45 · EMC 63 · RF 68) — <b>enclosure ATEX Case v3</b> punya gambar teknik berdimensi (8 Sep) &amp; unit fisik terakit (10 Sep); BOM elektronik &amp; PCB layout riil tersedia. Belum ada: BOM Ex-critical (enclosure/gasket/gland), datasheet material bersertifikat, kalkulasi flame-path &amp; hot-spot</td></tr>
+        <tr><td><b>3. Pre-compliance testing</b></td><td>3–4 minggu</td><td><b>0%</b> — belum mulai. Ini juga penahan utama Termin 1 SPK sertifikasi: belum ada protokol uji, hasil uji, maupun witness Pertamina (lihat bagian 07)</td></tr>
         <tr><td><b>4. Uji lab terakreditasi</b></td><td>8–12 minggu (fase terpanjang)</td><td>Belum mulai — belum ada sampel siap uji &amp; booking lab</td></tr>
         <tr><td><b>5. Finalisasi dokumentasi &amp; sertifikat</b></td><td>2–3 minggu</td><td>Belum mulai</td></tr>
       </table></div>
     </section>
 
     <section class="zone" id="z9">
-      <div class="zone-head"><span class="zn">09</span><h2>Sumber &amp; Metodologi</h2></div>
+      <div class="zone-head"><span class="zn">09</span><h2>Kesiapan Termin 1 SPK Sertifikasi (40%)</h2></div>
+      <p class="lede">SPK sertifikasi memakai skema <b>dua termin</b>. Termin 1 (40%) <b>bukan</b> milestone berbasis persentase progres rekayasa — ia berbasis <b>peristiwa yang dapat dibuktikan</b>: prototipe enclosure diuji, hasil uji menutup iterasi desain, dan keduanya disaksikan serta divalidasi Pertamina, lalu dituangkan dalam berita acara &amp; laporan pekerjaan.</p>
+      <div class="banner crit"><span class="ic">⛔</span><span><b>Status per 12 September 2026: BELUM DAPAT DIAJUKAN.</b> Angka "kesiapan internal ≈48%" di bagian 01 adalah metrik kemajuan rekayasa dan <b>tidak boleh dipakai sebagai pengganti acceptance milestone pembayaran</b>. Yang menahan bukan lagi ketersediaan prototipe — itu sudah terpenuhi lewat enclosure v3 — melainkan <b>rantai bukti pengujian, witness, dan administrasi</b> yang belum ada sama sekali.</span></div>
+      <div class="tbl-scroll"><table>
+        <tr><th>#</th><th>Syarat Termin 1</th><th>Status 12 Sep</th><th>Perubahan sejak audit 10 Sep</th><th>Yang harus ditutup</th></tr>
+        <tr><td>1</td><td>Prototipe enclosure GLD tersedia</td><td><span class="status ok">Terpenuhi</span></td><td>⬆️ Naik dari "Sebagian" — <b>enclosure v3 sudah terakit fisik</b> (foto 10 Sep) dgn gambar kerja berdimensi 8 Sep, ditambah 124 foto per-komponen</td><td>Tetapkan ID sampel &amp; nomor seri, kunci konfigurasi (revisi mekanik/PCB/firmware), buat lembar identifikasi sampel bertanda tangan</td></tr>
+        <tr><td>2</td><td>Prototipe enclosure telah diuji</td><td><span class="status gap">Belum terbukti</span></td><td>Tidak berubah — bukti uji yang ada (fungsi sistem, LoRa, dataset gas, chamber) adalah uji <b>sistem</b>, bukan uji <b>enclosure</b></td><td>Protokol uji pra-sertifikasi disetujui <i>sebelum</i> pelaksanaan: inspeksi mekanik &amp; dimensi, uji suhu/hot-spot kondisi terburuk, sealing/IP pre-compliance, fault condition, fungsi sebelum–sesudah</td></tr>
+        <tr><td>3</td><td>Ada iterasi perbaikan desain</td><td><span class="status wip">Sebagian</span></td><td>⬆️ Naik dari "Belum terbukti" — <b>iterasi v2 → v3 kini nyata &amp; bertanggal</b> (v2 4 Sep → v3 8 Sep), perubahan geometri &amp; konsep mounting terlihat jelas</td><td>Iterasi ini <b>belum dipicu hasil uji</b>. Butuh change log Rev-ke-Rev yang menautkan temuan uji → tindakan koreksi → bukti implementasi → hasil retest</td></tr>
+        <tr><td>4</td><td>Disaksikan &amp; divalidasi Pertamina</td><td><span class="status gap">Belum terbukti</span></td><td>Tidak berubah. ⚠️ Witness FAT 6 Agustus di Lab IoT ITB adalah witness untuk <b>Termin 1 jalur field testing (20%)</b> — bukan witness uji enclosure untuk termin sertifikasi ini; jangan dipakai ganda</td><td>Tentukan perwakilan Pertamina yg berwenang, daftar hadir + witness sheet per pengujian, catat komentar &amp; penutupannya, nyatakan hasil eksplisit (diterima / diterima dgn catatan / belum diterima)</td></tr>
+        <tr><td>5</td><td>Dilakukan sebelum uji lab terakreditasi</td><td><span class="status ok">Urutan masih aman</span></td><td>Tetap aman — fase Uji Lab masih 0%, belum ada booking maupun pengiriman sampel</td><td>Jadwalkan sesi pre-compliance &amp; witness, lalu catat tanggal booking/pengiriman sampel sebagai batas waktu</td></tr>
+        <tr><td>6</td><td>Berita acara</td><td><span class="status gap">Belum ada</span></td><td>Tidak berubah — notulen rapat ≠ berita acara validasi hasil uji</td><td>Terbitkan Berita Acara Validasi Prototipe &amp; Hasil Pra-Uji dgn lampiran dan tanda tangan para pihak (template sudah tersedia di paket)</td></tr>
+        <tr><td>7</td><td>Laporan pekerjaan</td><td><span class="status gap">Belum ada</span></td><td>Tidak berubah — dashboard &amp; gap analysis bukan laporan pelaksanaan pengujian</td><td>Susun Laporan Pekerjaan Termin 1 berisi pelaksanaan uji + log iterasi, merujuk lampiran bukti yang sama (template sudah tersedia)</td></tr>
+      </table></div>
+      <div class="banner info"><span class="ic">🧭</span><span><b>Jalur tercepat menuju Termin 1 yang layak diajukan:</b> tiga syarat administratif (2, 4, 6–7) semuanya bergantung pada <b>satu sesi uji enclosure yang disaksikan Pertamina</b>. Prototipe v3 sudah ada, jadi penahannya kini murni perencanaan: (a) kunci identitas sampel &amp; konfigurasi, (b) susun &amp; setujui protokol uji, (c) dry-run internal, (d) undang witness Pertamina, (e) terbitkan berita acara + laporan pekerjaan. Urutan &amp; template kerja lengkap ada di <span class="mono">Paket Pertamina/02_Sertifikasi_ATEX_IECEx/</span>.</span></div>
+      <div class="banner warn"><span class="ic">🔀</span><span><b>Jangan tertukar: ada dua "Termin 1" berbeda di proyek ini.</b> <b>(1) Termin 1 field testing 20%</b> — paket pengajuannya sudah tersusun (laporan pemenuhan deliverable, register bukti, draft BAST, witness FAT 6 Agu), tinggal tanda tangan pengesahan &amp; pengisian data SPK. <b>(2) Termin 1 sertifikasi 40%</b> — yang dinilai di bagian ini, <b>belum dapat diajukan</b>. Keduanya berdiri di atas SPK &amp; rangkaian bukti yang berbeda dan tidak boleh saling dipinjam.</span></div>
+    </section>
+
+    <section class="zone" id="z10">
+      <div class="zone-head"><span class="zn">10</span><h2>Sumber &amp; Metodologi</h2></div>
       <ul class="tight">
         <li><b>Sumber utama:</b> <span class="mono">PROPOSAL SERTIFIKASI GAS LEAK DETECTION SYSTEM...[21 FEB 2026].pdf</span> (lingkup, timeline, target klasifikasi) · <span class="mono">IECEx ATEX Certification Information Requirements_EN.pdf</span> (dari ExCB langsung, diberikan user 5 Sep — menggantikan versi terjemahan Indonesia sbg acuan) · repo <span class="mono">sertifikasi-atex-gld-v2-2026</span> disalin ke <span class="mono">Sumber Dokumen/sertifikasi-atex-gld-v2-2026/</span> (checklist, gap analysis, BOM research, foto, gambar teknik).</li>
         <li><b><span class="mono">Sumber Dokumen/Technical-Datasheets-Lab-IoT-ITB/</span> dicek ulang menyeluruh (5 Sep, termasuk render visual tiap halaman, bukan cuma cari kata kunci):</b> paket ini <b>memang berisi diagram</b> — diagram blok fungsional (mis. jalur Sensor MQ→ADC→ESP32-S3→LoRa→Alarm) &amp; diagram sequence (boot, commissioning) — plus 1 foto produk GasleakDetector. Ini dokumentasi arsitektur firmware/sistem yg sangat baik &amp; detail (register Modbus, parameter RF, mode operasi). <b>Tapi bukan jenis gambar yg diminta checklist ATEX §1.2</b>: tidak ada gambar perakitan mekanis berdimensi, skematik kelistrikan level-komponen, layout PCB (copper trace), atau gambar struktur enclosure dgn parameter gap/panjang/volume — dan tidak satu pun dari 5 dokumen menyebut IP rating, material grade, dimensi mm, atau suhu operasi. Kesimpulan tidak berubah dari sebelumnya, tapi kini lebih presisi: <b>kuat di dokumentasi fungsional, kosong di dokumentasi mekanis/elektrikal yg dibutuhkan submission ATEX</b>.</li>
-        <li><b>Progres ≈20% (bagian 01–02) belum memasukkan kategori "Informasi Dasar — Aplikasi &amp; Organisasi"</b> (bagian 05, ditemukan baru dari dokumen versi Inggris) — item administratif ini di luar model 5-fase teknis proposal, jadi tidak mengubah angka fase, tapi tetap perlu dilengkapi sebelum submission bisa jalan.</li>
-        <li><b>Rekonsiliasi metodologi progres:</b> <span class="mono">Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html</span> (dec:60) memakai estimasi top-down time-elapsed-didiskon ("~30–40%"). Dashboard ini memakai metodologi bottom-up berbasis item checklist per-fase per-track, dilaporkan sbg <b>dua angka dgn definisi berbeda</b>: "Kesiapan Internal Pra-Submission" (≈42%, hanya fase yg dikendalikan tim) dan "Progres Keseluruhan s/d Sertifikat" (≈20%, termasuk fase Uji Lab yg durasinya bergantung jadwal eksternal). <b>Ketiga angka (30-40%, 42%, 20%) sah</b>, beda sudut pandang &amp; cakupan — bukan versi yg saling menggantikan. Pemisahan "kendali internal vs eksternal" ditambahkan (5 Sep) supaya progres persiapan tim tidak tenggelam oleh bobot besar fase pengujian yg memang di luar kendali kecepatan kerja tim.</li>
+        <li><b>Progres ≈23% (bagian 01–02) belum memasukkan kategori "Informasi Dasar — Aplikasi &amp; Organisasi"</b> (bagian 05, ditemukan baru dari dokumen versi Inggris) — item administratif ini di luar model 5-fase teknis proposal, jadi tidak mengubah angka fase, tapi tetap perlu dilengkapi sebelum submission bisa jalan.</li>
+        <li><b>Rekonsiliasi metodologi progres:</b> <span class="mono">Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html</span> (dec:60) memakai estimasi top-down time-elapsed-didiskon ("~30–40%"). Dashboard ini memakai metodologi bottom-up berbasis item checklist per-fase per-track, dilaporkan sbg <b>dua angka dgn definisi berbeda</b>: "Kesiapan Internal Pra-Submission" (≈48% per 12 Sep, naik dari ≈42% per 5 Sep) dan "Progres Keseluruhan s/d Sertifikat" (≈23%, naik dari ≈20%, termasuk fase Uji Lab yg durasinya bergantung jadwal eksternal). <b>Ketiga angka (30-40%, 48%, 23%) sah</b>, beda sudut pandang &amp; cakupan — bukan versi yg saling menggantikan. Pemisahan "kendali internal vs eksternal" ditambahkan (5 Sep) supaya progres persiapan tim tidak tenggelam oleh bobot besar fase pengujian yg memang di luar kendali kecepatan kerja tim.</li>
         <li><b>Skema klasifikasi (bagian 03):</b> rekomendasi tim penyusun dokumen ini berdasarkan requirement H₂ dari model AI resmi (dec:36) &amp; praktik umum area classification kilang — <b>bukan hasil kajian resmi Pertamina/notified body</b>, wajib diverifikasi sebelum dipakai sbg acuan pengujian final.</li>
         <li><b>Cakupan GLD-only:</b> dikonfirmasi dari isi proposal (deskripsi produk konsisten 1 perangkat) + asumsi CH/Gateway selalu safe area dikonfirmasi user (5 Sep 2026) — bukan hasil kajian klasifikasi area formal, lihat catatan risiko bagian 04.</li>
-        <li><b>Belum diverifikasi:</b> semua item bertanda ❌ di bagian 05–06; hot-spot suhu heater MQ (bagian 07) adalah prioritas tertinggi.</li>
+        <li><b>Sumber baru pada Rev 1.1 (12 Sep):</b> <span class="mono">Sumber Dokumen/GLD CASE ATEX V3.pdf</span> — gambar kerja 7 halaman "GLD ATEX CASE v3" (Farhan Budiman, 8 Sep 2026), memuat pandangan ortografik &amp; isometrik berdimensi, exploded view berlabel, dan tabel dimensi sensor case · <span class="mono">Sumber Dokumen/GLD_1-.../GLD_1/</span> — 124 foto prototipe per-komponen (26 Agu) · <span class="mono">Sumber Dokumen/DCFan-.../DCFan/</span> — 5 foto DC fan terpasang pada cover sensor case (10 Sep). Ketiganya masuk repo lewat push langsung di luar sesi kerja dokumentasi, jadi <b>belum ada notulen/keputusan tertulis yang menyertainya</b> — pembacaan desain di bagian 05 diturunkan dari gambar &amp; foto itu sendiri, bukan dari dokumen keputusan.</li>
+        <li><b>Belum diverifikasi:</b> semua item bertanda ❌ di bagian 05–06; hot-spot suhu heater MQ (bagian 07) tetap prioritas tertinggi, kini ditambah kajian sumber nyala DC fan &amp; kelayakan jendela kaca (bagian 05, sub-bagian 0a).</li>
       </ul>
     </section>
 
     <footer>
-      Dokumen internal LAPI Ganesha Utama (LGU) &amp; Lab IoT/Fisika ITB — disusun 5 September 2026, melacak progres sertifikasi hazardous-area (ATEX/IP/EMC/RF) untuk GLD (Node Sensor), terpisah dari &amp; paralel dengan jalur pilot/field testing RU IV Cilacap (<span class="mono">Dashboard_GLD_ProjectManagement.html</span>). Skema klasifikasi &amp; angka progres bersifat estimasi interpretatif tim — wajib direview sebelum dipakai sbg komitmen resmi ke Pertamina atau lembaga sertifikasi. Rev 1.0
+      Dokumen internal LAPI Ganesha Utama (LGU) &amp; Lab IoT/Fisika ITB — disusun 5 September 2026 &amp; diperbarui 12 September 2026, melacak progres sertifikasi hazardous-area (ATEX/IP/EMC/RF) untuk GLD (Node Sensor), terpisah dari &amp; paralel dengan jalur pilot/field testing RU IV Cilacap (<span class="mono">Dashboard_GLD_ProjectManagement.html</span>). Skema klasifikasi &amp; angka progres bersifat estimasi interpretatif tim — wajib direview sebelum dipakai sbg komitmen resmi ke Pertamina atau lembaga sertifikasi. Rev 1.1
     </footer>
   </main>
 </div>
@@ -462,7 +497,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 (function(){
   const START=new Date(2026,5,12), END=new Date(2027,1,28);
   const KICKOFF=new Date(2026,5,12);
-  const TODAY=new Date(2026,8,5);
+  const TODAY=new Date(2026,8,12);
   const svg=document.getElementById('scurve-cert');
   const W=960,H=380,m={l:46,r:20,t:22,b:46};
   const pw=W-m.l-m.r, ph=H-m.t-m.b;
@@ -475,7 +510,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
     [new Date(2026,5,12),0],[new Date(2026,6,3),12.5],[new Date(2026,7,7),33.3],
     [new Date(2026,7,30),47.9],[new Date(2026,10,9),89.6],[new Date(2026,10,27),100]
   ].map(a=>({d:a[0],v:a[1]}));
-  const act=[[new Date(2026,5,12),0],[new Date(2026,8,5),20]].map(a=>({d:a[0],v:a[1]}));
+  const act=[[new Date(2026,5,12),0],[new Date(2026,8,5),20],[new Date(2026,8,12),23]].map(a=>({d:a[0],v:a[1]}));
   const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt',2026,9],['Nov',2026,10],['Des',2026,11],['Jan',2027,0],['Feb',2027,1]];
   svg.appendChild(el('rect',{x:m.l,y:y(47.9),width:pw,height:y(0)-y(47.9),fill:'var(--good)',opacity:.06}));
   svg.appendChild(el('line',{x1:m.l,y1:y(47.9),x2:W-m.r,y2:y(47.9),stroke:'var(--good)','stroke-width':1,'stroke-dasharray':'2 3',opacity:.7}));
@@ -494,9 +529,9 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
   svg.appendChild(el('circle',{cx:x(act[0].d),cy:y(act[0].v),r:3.5,fill:'var(--accent)'}));
   const last=act[act.length-1];
   svg.appendChild(el('circle',{cx:x(last.d),cy:y(last.v),r:5,fill:'var(--accent)',stroke:'var(--surface)','stroke-width':2}));
-  const lt=el('text',{x:x(last.d)+8,y:y(last.v)-8,'text-anchor':'start',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='≈20%';svg.appendChild(lt);
+  const lt=el('text',{x:x(last.d)+8,y:y(last.v)-8,'text-anchor':'start',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='≈23%';svg.appendChild(lt);
   svg.appendChild(el('line',{x1:x(TODAY),y1:m.t-2,x2:x(TODAY),y2:m.t+ph,stroke:'var(--ink)','stroke-width':1.5,'stroke-dasharray':'3 3',opacity:.5}));
-  const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini (5 Sep)';svg.appendChild(tl);
+  const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini (12 Sep)';svg.appendChild(tl);
   function planAt(d){for(let i=0;i<plan.length-1;i++){if(d>=plan[i].d&&d<=plan[i+1].d){const t=(d-plan[i].d)/(plan[i+1].d-plan[i].d);return plan[i].v+t*(plan[i+1].v-plan[i].v);}}return d<plan[0].d?plan[0].v:plan[plan.length-1].v;}
   const planTodayVal=planAt(TODAY);
   svg.appendChild(el('circle',{cx:x(TODAY),cy:y(planTodayVal),r:3.5,fill:'var(--ink-soft)'}));
@@ -512,14 +547,14 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 <script>
 (function(){
   const START=new Date(2026,5,12), END=new Date(2026,10,27);
-  const TODAY=new Date(2026,8,5);
+  const TODAY=new Date(2026,8,12);
   function D(a){return new Date(a[0],a[1],a[2]);}
   const ACT=[
-    {id:1,name:'Perencanaan & Scoping',s:[2026,5,12],e:[2026,6,3],act:90,plan:100,st:'good'},
-    {id:2,name:'Redesign — ATEX',s:[2026,6,3],e:[2026,7,7],act:15,plan:100,st:'warn'},
-    {id:3,name:'Redesign — IP',s:[2026,6,3],e:[2026,7,7],act:30,plan:100,st:'warn'},
-    {id:4,name:'Redesign — EMC',s:[2026,6,3],e:[2026,7,7],act:60,plan:100,st:'warn'},
-    {id:5,name:'Redesign — RF',s:[2026,6,3],e:[2026,7,7],act:65,plan:100,st:'accent'},
+    {id:1,name:'Perencanaan & Scoping',s:[2026,5,12],e:[2026,6,3],act:95,plan:100,st:'good'},
+    {id:2,name:'Redesign — ATEX',s:[2026,6,3],e:[2026,7,7],act:35,plan:100,st:'warn'},
+    {id:3,name:'Redesign — IP',s:[2026,6,3],e:[2026,7,7],act:45,plan:100,st:'warn'},
+    {id:4,name:'Redesign — EMC',s:[2026,6,3],e:[2026,7,7],act:63,plan:100,st:'warn'},
+    {id:5,name:'Redesign — RF',s:[2026,6,3],e:[2026,7,7],act:68,plan:100,st:'accent'},
     {id:6,name:'Pre-Compliance Testing',s:[2026,7,7],e:[2026,7,30],act:0,plan:100,st:'neutral'},
     {id:7,name:'Uji Lab Terakreditasi',s:[2026,7,30],e:[2026,10,9],act:0,plan:9,st:'neutral'},
     {id:8,name:'Finalisasi & Sertifikat',s:[2026,10,9],e:[2026,10,27],act:0,plan:0,st:'neutral'}

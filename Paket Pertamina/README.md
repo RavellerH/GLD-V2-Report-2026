@@ -1,13 +1,13 @@
 # Paket Dokumen GLD Tahap 2 — untuk PT Pertamina Patra Niaga
 
-Paket ini berisi dokumen laporan & dashboard proyek **Gas Leak Detection (GLD) Tahap 2**, disusun oleh LAPI Ganesha Utama (LGU) bersama Lab IoT & Lab Fisika ITB, per **5 September 2026**.
+Paket ini berisi dokumen laporan & dashboard proyek **Gas Leak Detection (GLD) Tahap 2**, disusun oleh LAPI Ganesha Utama (LGU) bersama Lab IoT & Lab Fisika ITB, per **12 September 2026**.
 
 Isinya dikelompokkan menjadi **2 folder terpisah** karena proyek ini punya **2 jalur paralel** yang berbeda tujuan dan metrik progresnya:
 
 | Folder | Isi | Progres resmi per 5 Sep |
 |---|---|---|
-| **`01_Pilot_Field_Testing/`** | Progres rekayasa & kesiapan lapangan program pilot/field testing — dashboard proyek, laporan progres kronologis, arsitektur sistem, draft JSA/HSE, desain mounting bracket | **44%** (vs baseline rencana 43%) |
-| **`02_Sertifikasi_ATEX_IECEx/`** | Progres proyek sertifikasi kepatuhan area berbahaya (ATEX/IP/EMC/RF) untuk perangkat GLD | **≈20–43%** tergantung definisi — lihat catatan di folder tsb |
+| **`01_Pilot_Field_Testing/`** | Progres rekayasa & kesiapan lapangan program pilot/field testing — dashboard proyek, laporan progres kronologis, arsitektur sistem, draft JSA/HSE, desain mounting bracket | **47%** (vs baseline rencana 49% — **−2 poin**) |
+| **`02_Sertifikasi_ATEX_IECEx/`** | Progres proyek sertifikasi kepatuhan area berbahaya (ATEX/IP/EMC/RF) untuk perangkat GLD | **≈48% kesiapan internal / ≈23% total s/d sertifikat** — dua angka, dua definisi; lihat catatan di folder tsb |
 
 Setiap folder punya `README.md` sendiri yang merinci isi filenya.
 

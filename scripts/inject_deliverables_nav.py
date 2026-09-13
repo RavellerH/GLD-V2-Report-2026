@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import re, os
 
-BASE = r"c:\Users\Win11\OneDrive\Desktop\Documents\GitHub\GLD-V2-Report-2026\Deliverables"
+BASE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Deliverables")
 
 FILES = [
     ("Dashboard_GLD_ProjectManagement.html", "Dashboard Proyek", False),
@@ -16,6 +16,10 @@ FILES = [
 
 # Dikeluarkan dari navigasi atas permintaan user (4 Sep) - tidak perlu ditampilkan/dinavigasikan:
 # Datasheet_Sistem_GLD_Slides_source.html, Notulen_Meeting_GLD_24Jul2026.html, Notulen_Meeting_GLD_30Jul2026.html
+#
+# Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX.html dikeluarkan (11 Sep) - ini dokumen resmi
+# berbahasa Inggris untuk disampaikan ke lembaga sertifikasi eksternal (ExCB); tidak boleh
+# memuat nav bar internal berbahasa Indonesia yang menautkan ke dashboard proyek internal.
 
 NAV_START = "<!-- GLD-NAV-START -->"
 NAV_END = "<!-- GLD-NAV-END -->"
@@ -39,7 +43,8 @@ def build_nav(current_file):
     items_html = '<span style="opacity:.35;color:#8A97A6">&middot;</span>'.join(items)
     nav = (
         f'{NAV_START}\n'
-        f'<div style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;'
+        f'<style>@media print{{#gld-cross-nav{{display:none !important}}}}</style>\n'
+        f'<div id="gld-cross-nav" style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;'
         f'display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;'
         f'font-family:-apple-system,\'Segoe UI\',Roboto,Arial,sans-serif;font-size:13px;'
         f'position:relative;z-index:99999;">\n'

@@ -2,12 +2,14 @@
 
 Paket ini berisi dokumen laporan & dashboard proyek **Gas Leak Detection (GLD) Tahap 2**, disusun oleh LAPI Ganesha Utama (LGU) bersama Lab IoT & Lab Fisika ITB, per **5 September 2026**.
 
-Isinya dikelompokkan menjadi **2 folder terpisah** karena proyek ini punya **2 jalur paralel** yang berbeda tujuan dan metrik progresnya:
+Isinya dikelompokkan menjadi **4 folder**: satu presentasi ringkas untuk manajemen, 2 folder dokumentasi teknis lengkap untuk **2 jalur paralel** proyek yang berbeda tujuan dan metrik progresnya, dan 1 folder datasheet perangkat resmi:
 
 | Folder | Isi | Progres resmi per 5 Sep |
 |---|---|---|
+| **`00_Presentasi_VP/`** | Slide deck ringkas (8 slide) untuk VP — rangkuman sertifikasi + field testing dalam satu presentasi | Ringkasan dari 2 baris di bawah |
 | **`01_Pilot_Field_Testing/`** | Progres rekayasa & kesiapan lapangan program pilot/field testing — dashboard proyek, laporan progres kronologis, arsitektur sistem, draft JSA/HSE, desain mounting bracket | **44%** (vs baseline rencana 43%) |
 | **`02_Sertifikasi_ATEX_IECEx/`** | Progres proyek sertifikasi kepatuhan area berbahaya (ATEX/IP/EMC/RF) untuk perangkat GLD | **≈20–43%** tergantung definisi — lihat catatan di folder tsb |
+| **`03_Technical_Datasheets_LabIoTITB/`** | Datasheet teknis resmi Lab IoT ITB (Rev 4.0) per perangkat — Whole System, GasleakDetector, CH, Gateway, Server — ID &amp; EN | Dokumen sumber, bukan progres |
 
 Setiap folder punya `README.md` sendiri yang merinci isi filenya.
 
@@ -17,6 +19,7 @@ Proyek GLD Tahap 2 mencakup **6 Refinery Unit (RU II–VII)** sesuai proposal fo
 
 ## Cara pakai
 
+- File `.pptx` (`00_Presentasi_VP/`) — buka dengan Microsoft PowerPoint, LibreOffice Impress, atau Google Slides.
 - File `.html` — buka langsung di browser mana pun (Chrome/Edge/Firefox), **tidak perlu internet** (semua self-contained, termasuk gambar & — untuk beberapa file — model 3D interaktif). Ini versi paling lengkap/interaktif.
 - File `.pdf` — versi cetak/statis dari file HTML yang sama, untuk dibaca offline atau dicetak. Beberapa elemen interaktif (model 3D, grafik kanvas) **tidak muncul** di versi PDF — dicatat per file di README masing-masing folder.
 

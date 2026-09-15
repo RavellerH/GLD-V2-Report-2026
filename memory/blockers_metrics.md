@@ -2,7 +2,31 @@
 
 > Ini **satu sumber kebenaran** untuk angka kunci. File lain merujuk ke sini.
 
-## Status progres (di-reassess 4 Sep 2026 — sebelumnya per 24 Jul 2026)
+## Status progres (di-reassess 15 Sep 2026 — sebelumnya 4 Sep 2026)
+- **Progres pilot Cilacap: 47%** vs baseline resmi **51%** (per 15 Sep) → **−4 poin**. **Titik silang terjadi**: 24 Jul +20 poin (39% vs 19%) → 4 Sep +1 poin (44% vs 43%) → 15 Sep **−4 poin**, pertama kalinya aktual di bawah baseline. Penyebabnya **bukan** berhentinya pekerjaan, melainkan bentuk baseline: ramp September pada Project Timeline mengasumsikan **Lab test, validasi AI, dan Integration test tuntas sebelum 21 Sep** lalu masuk jalur lapangan, sementara aktualnya 62–78% dan jalur lapangan (HSE/permit, instalasi) belum dibuka menunggu gate eksternal (TRA/JSA, scoping ATEX, sampel gas).
+- **Metodologi tidak berubah** (rata-rata 12 aktivitas Gantt baseline Kick-Off). Breakdown per aktivitas 4 Sep → 15 Sep:
+
+| # | Aktivitas | 4 Sep | 15 Sep | Rencana@15Sep | Dasar perubahan |
+|---|---|---|---|---|---|
+| 1 | Kick-off & requirement confirmation | 100 | 100 | 100 | — |
+| 2 | Site survey & data collection plan | 65 | **70** | 100 | Chamber gas portable selesai (dec:76, 10 Sep) = sarana akuisisi data siap; sisi survey lokasi tidak berubah |
+| 3 | Detailed design | 90 | **93** | 100 | GLD CASE ATEX V3 (11 Sep) + set board **GLD v3** BOM/PCB/skematik (14 Sep) |
+| 4 | Prototype build | 62 | **68** | 100 | Dokumentasi perakitan lengkap (GLD_1: casing/PCB/sensor/alarm/antena, DCFan) + kesiapan 4 GLD/16 CH pada paket Termin 1. Board v3 **belum difabrikasi** → bukan kenaikan penuh |
+| 5 | Lab test | 55 | **62** | 84 | Witness Pertamina di Lab IoT ITB diperlakukan sbg tahap FAT/FIT + paket bukti uji Termin 1 (dec:95). Pengesahan FAT belum ditandatangani |
+| 6 | AI model training / validation | 75 | 75 | 84 | **Tidak berubah** — sampel gas tambahan belum diterima; konflik profil 3-kelas vs 4-kelas (`gate:tds-ai-profile`) belum ditutup |
+| 7 | Integration test (fungsional) | 75 | **78** | 78 | Bukti integrasi end-to-end, mesh/failover, alarm push dikonsolidasikan jadi paket bukti (11 Sep) |
+| 8 | HSE review & permit preparation | 5 | **8** | 0 | Checklist Kesiapan Instalasi RU IV + basis desain bracket utk vendor (dec:78/79, 10 Sep). TRA/JSA tetap belum disahkan |
+| 9 | Field installation | 0 | 0 | 0 | Belum ada eksekusi fisik RU |
+| 10 | Field trial | 0 | 0 | 0 | — |
+| 11 | Evaluation & final report | 0 | 0 | 0 | Laporan Termin 1 adalah pelaporan kontraktual, **bukan** evaluasi akhir proyek — sengaja tidak dihitung di sini |
+| 12 | Industrialization roadmap | 5 | 5 | 0 | — |
+| | **Rata-rata** | **44** | **47** | **51** | |
+
+- **Baseline 51%** = interpolasi polyline Kurva-S resmi (31 Agu 40% → 30 Sep 62%).
+- **Progres sertifikasi (jalur terpisah, per 15 Sep):** **≈21%** keseluruhan s/d sertifikat (dari ≈20% per 5 Sep) dan **≈44%** kesiapan internal pra-submission (dari ≈42%). Metodologi bottom-up 5-fase × 4-track tidak berubah; perubahan berasal dari Perencanaan & Scoping 90→95, Redesign ATEX 15→22, Redesign IP 30→33 (Bagian 2 & 3 dokumen teknis submission tersusun 11 Sep: 9 lembar diagram blok skematik, layout PCB riil, gambar CAD bertoleransi, BOM elektronik 2 papan). Redesign EMC (60) & RF (65) **tidak dinaikkan** — belum ada review/pre-scan baru, dan set board v3 (14 Sep) justru membuat basis layout yg direview perlu dicek ulang. Pre-Compliance & Uji Lab tetap 0%.
+- ⚠️ **Board GLD v3 (14 Sep) = desain, bukan kesiapan perangkat**: BOM+PCB+skematik untuk MotherBoardAdapter/SensorBoardAdapter/daughter-MQ Adapter ada di `Sumber Dokumen/GLD v3/`, tapi **belum ada bukti fabrikasi atau uji unit v3**, dan dampaknya thd review EMC yg sudah berjalan belum dinilai. Jangan klaim sbg perangkat siap.
+
+## Status progres (reassessment sebelumnya — 4 Sep 2026)
 - **Progres pilot Cilacap: 44%** vs baseline resmi **43%** (per 4 Sep) → **+1 poin** (murni sisi engineering lab, BUKAN kesiapan lapangan; jangan over-claim). **Turun signifikan dari +20 poin** yang tercatat 24 Jul (39% vs 19%) — bukan krn progres melambat, tapi krn sisa pekerjaan makin bergantung gate eksternal (scoping ATEX, TRA/JSA, sampel gas) yg tak bisa dipercepat murni lewat rekayasa.
 - **Metodologi reassessment** (rata-rata 12 aktivitas Gantt baseline Kick-Off, tidak berubah dari sebelumnya): bump signifikan di "AI model training/validation" (52%→75%, CNN Dual-Branch on-device 9 Agu), "Integration test" (58%→75%, adapter MQTT selesai 4 Sep), "Lab test" (38%→55%, push alarm end-to-end teruji 6-8 Agu), "Site survey" (55%→65%, survey RU IV Cilacap selesai 9-10 Agu), "Detailed design" (85%→90%, CAD bracket U-Bolt v2). Aktivitas lapangan (HSE review, field install/trial/evaluation) **tidak berubah** — masih 0-5%, krn belum ada eksekusi fisik RU.
 - Action items: **41** (7 berjalan, 31 terbuka, 1 selesai, 2 lainnya — dihitung otomatis dari array di Dashboard). Isu & risiko: **17** (4 prioritas tinggi).

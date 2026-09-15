@@ -67,6 +67,7 @@ h1{font-size:25px;margin-bottom:8px}
 .scell{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .scell::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
 .scell.good::before{background:var(--good)}.scell.crit::before{background:var(--crit)}
+.scell.warn::before{background:var(--warn)}
 .scell .v{font-family:var(--mono);font-size:23px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
 .scell .l{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
 .scell .l b{color:var(--ink)}
@@ -208,9 +209,9 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-si
   </div>
 
   <section class="summary">
-    <div class="scell good"><div class="v">44%</div><div class="l">Progres pilot · rencana <b>43%</b> <b>(di-reassess 4 Sep, dari 39%/24 Jul)</b></div></div>
+    <div class="scell warn"><div class="v">47%</div><div class="l">Progres pilot · rencana <b>51%</b> <b>(di-reassess 15 Sep, dari 44%/4 Sep — kini −4 poin di bawah baseline)</b></div></div>
     <div class="scell good"><div class="v">0</div><div class="l">Blocker kritis <b>(baterai/TPL5010/konverter dideprioritaskan)</b></div></div>
-    <div class="scell crit"><div class="v">10</div><div class="l">Gate menuju field <b>(per 4 Sep, turun dari 11)</b></div></div>
+    <div class="scell crit"><div class="v">10</div><div class="l">Gate menuju field <b>(per 15 Sep, tak berubah sejak 4 Sep)</b></div></div>
     <div class="scell"><div class="v">41</div><div class="l">Action items</div></div>
     <div class="scell"><div class="v">14.477</div><div class="l">Sampel dataset</div></div>
     <div class="scell"><div class="v">≥92%</div><div class="l">Akurasi TCN <b>(8 model, prediksi leak)</b></div></div>

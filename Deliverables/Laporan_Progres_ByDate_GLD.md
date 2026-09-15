@@ -11,7 +11,7 @@
 
 | Indikator | Nilai |
 |---|---|
-| Progres pilot Cilacap (vs baseline resmi 9 bulan) | **39%** (rencana 19% · **+20 poin**, murni sisi lab — angka terakhir dari asesmen 24 Jul, **belum di-reassess** meski ada deliverable baru s.d. 31 Agu, lih. catatan transparansi di bawah) |
+| Progres pilot Cilacap (vs baseline resmi 9 bulan) | **39%** (rencana 19% · +20 poin, murni sisi lab) — **angka periode laporan ini (s.d. 31 Agu), sengaja dipertahankan apa adanya**. Angka berjalan terbaru: **47% vs rencana 51% (−4 poin) per 15 Sep 2026** — lihat `Dashboard_GLD_ProjectManagement.html` & `memory/blockers_metrics.md`. |
 | Blocker kritis aktif | 3 (catu daya · DC converter · jangkauan LoRa) |
 | Gate menuju field | **11** (4 gate awal + 7 gate baru sejak 19 Agu: solar-cert, keamanan baterai CH, tools bracket, registrasi jaringan, spek server, spek daya CH, port Ethernet GW) |
 | Action items | 24 (5 berjalan · 15 terbuka) |

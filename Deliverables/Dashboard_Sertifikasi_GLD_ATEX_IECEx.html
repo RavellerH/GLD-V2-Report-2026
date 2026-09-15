@@ -181,7 +181,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="sm-row"><span class="k">STATUS</span><span class="v">Aktif — 4 track paralel</span></div>
       <div class="sm-row"><span class="k">KICK-OFF</span><span class="v">12 Jun 2026</span></div>
       <div class="sm-row"><span class="k">TARGET</span><span class="v">5–8 bulan (≈Nov 2026–Feb 2027)</span></div>
-      <div class="sm-row"><span class="k">DIBUAT</span><span class="v">5 Sep 2026 · Rev 1.0</span></div>
+      <div class="sm-row"><span class="k">DIBUAT</span><span class="v">5 Sep 2026 · diperbarui 15 Sep · Rev 1.1</span></div>
     </div>
     <nav class="zonenav">
       <a href="#z1"><span class="zi">01</span>Ringkasan Eksekutif</a>
@@ -211,7 +211,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="docmeta-row">
         <div><span class="k">Scope perangkat</span><span class="v">GLD (Node Sensor) saja — CH &amp; Gateway asumsi safe area</span></div>
         <div><span class="k">4 track</span><span class="v">ATEX · IP · EMC · RF</span></div>
-        <div><span class="k">Kesiapan internal pra-submission</span><span class="v">≈42% (≈20% keseluruhan s/d sertifikat — bagian 02)</span></div>
+        <div><span class="k">Kesiapan internal pra-submission</span><span class="v">≈44% (≈21% keseluruhan s/d sertifikat — bagian 02)</span></div>
         <div><span class="k">Fokus rekayasa berikutnya</span><span class="v">Verifikasi kelas suhu (T-class) elemen sensing</span></div>
       </div>
     </header>
@@ -225,28 +225,28 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="kpibig"><div class="lab">Track Paling Matang</div><div class="val">EMC</div><div class="sub">Tabel parameter lengkap sudah ada (19 Agu) — MCU, modul radio, TX power, antena. Belum ada pre-scan/uji lab.</div></div>
         <div class="kpibig"><div class="lab">Track Paling Tertinggal</div><div class="val">ATEX</div><div class="sub">Gambar teknik, BOM per-komponen, datasheet material, dan draft manual — semua masih perlu disusun.</div></div>
       </div>
-      <div class="banner info"><span class="ic">🔢</span><span><b>Dua angka progres, dua definisi berbeda — bukan kontradiksi.</b> "≈42%" (kesiapan internal) mengukur pekerjaan yang murni ada di tangan tim — scoping, redesign 4 track, dan pengujian pre-compliance internal — <b>sebelum</b> sampel dikirim ke lab akreditasi. "≈20%" (progres keseluruhan) menghitung <i>seluruh</i> perjalanan sampai sertifikat terbit, termasuk Uji Lab Terakreditasi (41,7% bobot) yang durasinya (8–12 minggu) ditentukan jadwal &amp; antrean lab eksternal, bukan kecepatan kerja tim. Rekomendasi: pakai "≈42%" saat bicara soal seberapa jauh persiapan tim sudah berjalan, pakai "≈20%" saat bicara soal proyeksi total sampai sertifikat terbit — jangan dicampur tanpa menyebut definisinya.</span></div>
+      <div class="banner info"><span class="ic">🔢</span><span><b>Dua angka progres, dua definisi berbeda — bukan kontradiksi.</b> "≈44%" (kesiapan internal) mengukur pekerjaan yang murni ada di tangan tim — scoping, redesign 4 track, dan pengujian pre-compliance internal — <b>sebelum</b> sampel dikirim ke lab akreditasi. "≈21%" (progres keseluruhan) menghitung <i>seluruh</i> perjalanan sampai sertifikat terbit, termasuk Uji Lab Terakreditasi (41,7% bobot) yang durasinya (8–12 minggu) ditentukan jadwal &amp; antrean lab eksternal, bukan kecepatan kerja tim. Rekomendasi: pakai "≈44%" saat bicara soal seberapa jauh persiapan tim sudah berjalan, pakai "≈21%" saat bicara soal proyeksi total sampai sertifikat terbit — jangan dicampur tanpa menyebut definisinya.</span></div>
       <div class="banner good"><span class="ic">✅</span><span><b>Temuan penting:</b> skema target ATEX <b>sudah lebih matang dari yang tercatat sebelumnya</b> — proposal formal secara eksplisit menargetkan Zona 1/Kategori 2G/T4, bukan "sama sekali belum ditentukan" seperti tercatat di gap-analysis repo sertifikasi (27 Agu) yang belum sempat mensilangkan proposal ini. Detail rekonsiliasi &amp; rekomendasi grup gas → bagian 03.</span></div>
       <div class="banner info"><span class="ic">🔧</span><span><b>Hubungan dengan jalur pilot/field testing:</b> sertifikasi baru bisa mulai secara penuh setelah desain hardware cukup matang — kematangan itu banyak terbentuk lewat proses trial-and-error di jalur pilot/field testing RU IV Cilacap (44% progres, lihat <span class="mono">Dashboard_GLD_ProjectManagement.html</span>): karakterisasi RF/jangkauan, profil daya, keandalan mesh, validasi model AI, dan pengujian chamber gas. Pekerjaan ini <b>menurunkan risiko rekayasa</b> untuk tahap redesign sertifikasi (desain sudah teruji secara fungsional) — tapi belum otomatis mengisi dokumen formal yang diminta checklist ATEX (BOM, gambar teknik, kalkulasi termal tetap perlu disusun terpisah, krn formatnya spesifik utk submission sertifikasi). Kedua jalur saling menopang, bukan berjalan independen.</span></div>
     </section>
 
     <section class="zone" id="z2">
       <div class="zone-head"><span class="zn">02</span><h2>Kurva-S Sertifikasi</h2></div>
-      <p class="lede">Baseline rencana memakai breakdown 5-fase dari proposal (bobot durasi titik-tengah: Perencanaan 3mgu/12,5% · Redesign 5mgu/20,8% · Pre-compliance 3,5mgu/14,6% · <b>Uji Lab 10mgu/41,7%</b> · Finalisasi 2,5mgu/10,4% — total ≈24 minggu). Kurva di bawah memplot <b>"Progres Keseluruhan s/d Sertifikat"</b> (≈20%, bagian 01) — mencakup seluruh perjalanan termasuk Uji Lab Terakreditasi, fase yang durasinya ditentukan jadwal lab eksternal, bukan kecepatan kerja tim. Angka <b>"Kesiapan Internal Pra-Submission"</b> (≈42%, dekat estimasi Pak Maman ~40%) mengukur murni bagian yang ada di tangan tim (3 fase pertama) — lihat banner biru di bagian 01 utk penjelasan kapan pakai yg mana. Progres aktual dihitung <i>bottom-up</i>: rata-rata persentase selesai per fase, dirata-ratakan di 4 track (ATEX/IP/EMC/RF) — <b>bukan</b> estimasi time-elapsed seperti dipakai sebelumnya di <span class="mono">Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html</span> (lihat rekonsiliasi di bagian 09).</p>
+      <p class="lede">Baseline rencana memakai breakdown 5-fase dari proposal (bobot durasi titik-tengah: Perencanaan 3mgu/12,5% · Redesign 5mgu/20,8% · Pre-compliance 3,5mgu/14,6% · <b>Uji Lab 10mgu/41,7%</b> · Finalisasi 2,5mgu/10,4% — total ≈24 minggu). Kurva di bawah memplot <b>"Progres Keseluruhan s/d Sertifikat"</b> (≈20%, bagian 01) — mencakup seluruh perjalanan termasuk Uji Lab Terakreditasi, fase yang durasinya ditentukan jadwal lab eksternal, bukan kecepatan kerja tim. Angka <b>"Kesiapan Internal Pra-Submission"</b> (≈44%, dekat estimasi Pak Maman ~40%) mengukur murni bagian yang ada di tangan tim (3 fase pertama) — lihat banner biru di bagian 01 utk penjelasan kapan pakai yg mana. Progres aktual dihitung <i>bottom-up</i>: rata-rata persentase selesai per fase, dirata-ratakan di 4 track (ATEX/IP/EMC/RF) — <b>bukan</b> estimasi time-elapsed seperti dipakai sebelumnya di <span class="mono">Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html</span> (lihat rekonsiliasi di bagian 09).</p>
       <div class="card">
         <div class="card-head"><h3>Rencana vs Aktual — Progres Kumulatif Sertifikasi</h3></div>
         <div class="chart-scroll"><svg id="scurve-cert" viewBox="0 0 960 400" role="img" aria-label="Kurva-S sertifikasi GLD"></svg></div>
         <div class="legend-row">
           <span><i style="background:var(--ink-soft)" class="dash"></i>Rencana (5-fase, titik tengah 5–8 bulan)</span>
-          <span><i style="background:var(--accent)"></i>Aktual (bottom-up, per 5 Sep 2026)</span>
+          <span><i style="background:var(--accent)"></i>Aktual (bottom-up, per 15 Sep 2026)</span>
         </div>
       </div>
-      <div class="banner warn"><span class="ic">⚠️</span><span><b>Baru 1 titik data aktual</b> — dashboard ini baru dibuat 5 Sep 2026, jadi kurva aktual belum punya riwayat mingguan seperti Dashboard proyek utama. Titik berikutnya akan menambah histori riil setelah update berikutnya.</span></div>
+      <div class="banner info"><span class="ic">📈</span><span><b>Titik data aktual kedua (15 Sep): ≈20% → ≈21%.</b> Kenaikan kecil ini <b>bukan</b> berarti sedikit yang dikerjakan — pada 11 Sep seluruh Bagian 2 &amp; 3 dokumen teknis submission tersusun (9 lembar diagram blok skematik, layout PCB riil, gambar CAD bertoleransi selubung/bracket, BOM elektronik 2 papan). Yang membatasi kenaikan adalah <b>bobot fase</b>: seluruh pekerjaan itu jatuh di fase Perencanaan + Redesign (gabungan 33,3% bobot), sementara Pre-Compliance (14,6%) dan Uji Lab Terakreditasi (41,7%) masih 0% — dan item Ex-critical di dalam Redesign (BOM Ex, datasheet material, kalkulasi proteksi ledakan/hot-spot) masih menunggu mitra casing eksternal. Dalam ukuran yang lebih mewakili kerja tim, kesiapan internal pra-submission naik ≈42% → ≈44%.</span></div>
 
       <div class="subhead"><h3>Artinya konkret 20% / 40% / 60% — supaya angka tidak abstrak</h3></div>
       <div class="tbl-scroll"><table>
         <tr><th>Progres</th><th>Fase yang harus SELESAI</th><th>Fase yang sedang berjalan</th><th>Artinya konkret</th></tr>
-        <tr class="hl"><td><b>≈20% (sekarang)</b></td><td>Perencanaan</td><td>Redesign (~35% jalan)</td><td>Target klasifikasi sudah ada, material dipilih — tapi BOM, gambar teknik, kalkulasi hot-spot <b>belum selesai</b></td></tr>
+        <tr class="hl"><td><b>≈21% (sekarang)</b></td><td>Perencanaan</td><td>Redesign (~45% jalan)</td><td>Target klasifikasi sudah ada, material dipilih, dan sejak 11 Sep <b>skematik/PCB/gambar CAD/BOM elektronik sudah tersusun</b> di dokumen submission — tapi <b>BOM Ex-critical, datasheet material, dan kalkulasi hot-spot masih belum ada</b> (menunggu mitra casing eksternal)</td></tr>
         <tr><td><b>≈40%</b></td><td>Perencanaan + Redesign penuh</td><td>Pre-Compliance (~45% jalan)</td><td>Semua BOM/gambar/kalkulasi termal <b>rampung</b>, DAN pengukuran suhu aktual + pre-scan EMC + pre-test RF <b>sudah dijalankan internal</b></td></tr>
         <tr><td><b>≈60%</b></td><td>Perencanaan + Redesign + Pre-Compliance</td><td>Uji Lab Terakreditasi (~30% jalan)</td><td>Sample <b>sudah dikirim ke lab akreditasi</b>, sebagian pengujian resmi ATEX/IP/EMC/RF sudah lolos</td></tr>
       </table></div>
@@ -343,9 +343,9 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="subhead"><h3>1.2–1.8 Gambar Teknik, BOM, Material, Proses, Perhitungan, Manual, Label</h3></div>
       <div class="tbl-scroll"><table>
         <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>
-        <tr><td>Assembly drawing</td><td><span class="status wip">Sebagian</span></td><td>Base Plate Assembled.dwg ada (bracket mounting) — bukan gambar teknik enclosure/PCB lengkap</td></tr>
-        <tr><td>Skematik kelistrikan, layout PCB, gambar enclosure/junction box/terminal/grounding</td><td><span class="status gap">Belum ada</span></td><td>Semua item ❌ — belum satupun gambar berdimensi resmi</td></tr>
-        <tr><td>Bill of Materials (BOM) formal per-komponen</td><td><span class="status gap">Belum ada</span></td><td>Baru nama komponen tingkat tinggi; produsen/grade material/sertifikat Ex per komponen belum ada</td></tr>
+        <tr><td>Assembly drawing</td><td><span class="status wip">Sebagian</span></td><td>⬆️ <b>Naik (11 Sep):</b> gambar CAD bertoleransi selubung + bracket (STEP, mm — leher ⌀75mm, tinggi probe 191,51mm, pelat 250×250mm) di-embed ke dokumen teknis sertifikasi. Yang belum: parameter flame-path Ex d (gap/panjang/volume) — menunggu keputusan protection concept</td></tr>
+        <tr><td>Skematik kelistrikan, layout PCB, gambar enclosure/junction box/terminal/grounding</td><td><span class="status wip">Sebagian</span></td><td>⬆️ <b>Naik (11 Sep):</b> 9 lembar diagram blok hasil trace skematik asli (204 komponen, evidence pin-to-net) + layout PCB copper riil sudah masuk dokumen teknis sertifikasi. Yang belum: gambar junction box/terminal/grounding — TIDAK tercakup. Catatan tambahan (14 Sep): set board <b>GLD v3</b> terbit, sehingga skematik/PCB yg dikutip perlu dicek ulang apakah merujuk revisi final. Sebelumnya: belum satupun gambar berdimensi resmi</td></tr>
+        <tr><td>Bill of Materials (BOM) formal per-komponen</td><td><span class="status wip">Sebagian</span></td><td>⬆️ <b>Naik (11 Sep):</b> BOM elektronik lengkap 2 papan dari EasyEDA/JLCPCB (motherboard 89 baris/214 komponen, sensor board 14 baris/24 komponen) dgn manufacturer + part number + LCSC# per baris. ⚠️ Ini <b>BOM elektronik CAD</b>, bukan BOM explosion-safety-relevant yg diminta checklist — enclosure/gasket/cable gland/baterai/potting tidak muncul sama sekali, dan sensor MQ2 sendiri tanpa manufacturer/LCSC part. Sebelumnya: baru nama komponen tingkat tinggi; produsen/grade material/sertifikat Ex per komponen belum ada</td></tr>
         <tr><td>Datasheet material non-logam (CTI, tahan api, dll)</td><td><span class="status gap">Belum ada</span></td><td>—</td></tr>
         <tr><td>Deskripsi proses manufaktur</td><td><span class="status gap">Belum ada</span></td><td>Relevan bila casing dilas/di-machining utk Ex d</td></tr>
         <tr><td>Perhitungan proteksi ledakan &amp; hot-spot suhu</td><td><span class="status gap">Belum ada</span></td><td>Lihat isu kritis bagian 07</td></tr>
@@ -424,7 +424,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         </div>
       </div>
       <div class="tbl-scroll"><table>
-        <tr><th>Fase</th><th>Estimasi durasi</th><th>Status per 5 Sep</th></tr>
+        <tr><th>Fase</th><th>Estimasi durasi</th><th>Status per 15 Sep</th></tr>
         <tr><td><b>1. Perencanaan &amp; review awal</b></td><td>2–4 minggu</td><td>Target Zona1/Cat.2G/T4 sudah ada (proposal); metode proteksi &amp; grup gas spesifik belum final</td></tr>
         <tr><td><b>2. Redesign &amp; optimasi teknis</b></td><td>4–6 minggu</td><td>Material enclosure dipilih; gambar teknik/BOM/kalkulasi termal belum dimulai</td></tr>
         <tr><td><b>3. Pre-compliance testing</b></td><td>3–4 minggu</td><td>Belum mulai — menunggu fase 2 tuntas</td></tr>
@@ -439,7 +439,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <li><b>Sumber utama:</b> <span class="mono">PROPOSAL SERTIFIKASI GAS LEAK DETECTION SYSTEM...[21 FEB 2026].pdf</span> (lingkup, timeline, target klasifikasi) · <span class="mono">IECEx ATEX Certification Information Requirements_EN.pdf</span> (dari ExCB langsung, diberikan user 5 Sep — menggantikan versi terjemahan Indonesia sbg acuan) · repo <span class="mono">sertifikasi-atex-gld-v2-2026</span> disalin ke <span class="mono">Sumber Dokumen/sertifikasi-atex-gld-v2-2026/</span> (checklist, gap analysis, BOM research, foto, gambar teknik).</li>
         <li><b><span class="mono">Sumber Dokumen/Technical-Datasheets-Lab-IoT-ITB/</span> dicek ulang menyeluruh (5 Sep, termasuk render visual tiap halaman, bukan cuma cari kata kunci):</b> paket ini <b>memang berisi diagram</b> — diagram blok fungsional (mis. jalur Sensor MQ→ADC→ESP32-S3→LoRa→Alarm) &amp; diagram sequence (boot, commissioning) — plus 1 foto produk GasleakDetector. Ini dokumentasi arsitektur firmware/sistem yg sangat baik &amp; detail (register Modbus, parameter RF, mode operasi). <b>Tapi bukan jenis gambar yg diminta checklist ATEX §1.2</b>: tidak ada gambar perakitan mekanis berdimensi, skematik kelistrikan level-komponen, layout PCB (copper trace), atau gambar struktur enclosure dgn parameter gap/panjang/volume — dan tidak satu pun dari 5 dokumen menyebut IP rating, material grade, dimensi mm, atau suhu operasi. Kesimpulan tidak berubah dari sebelumnya, tapi kini lebih presisi: <b>kuat di dokumentasi fungsional, kosong di dokumentasi mekanis/elektrikal yg dibutuhkan submission ATEX</b>.</li>
         <li><b>Progres ≈20% (bagian 01–02) belum memasukkan kategori "Informasi Dasar — Aplikasi &amp; Organisasi"</b> (bagian 05, ditemukan baru dari dokumen versi Inggris) — item administratif ini di luar model 5-fase teknis proposal, jadi tidak mengubah angka fase, tapi tetap perlu dilengkapi sebelum submission bisa jalan.</li>
-        <li><b>Rekonsiliasi metodologi progres:</b> <span class="mono">Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html</span> (dec:60) memakai estimasi top-down time-elapsed-didiskon ("~30–40%"). Dashboard ini memakai metodologi bottom-up berbasis item checklist per-fase per-track, dilaporkan sbg <b>dua angka dgn definisi berbeda</b>: "Kesiapan Internal Pra-Submission" (≈42%, hanya fase yg dikendalikan tim) dan "Progres Keseluruhan s/d Sertifikat" (≈20%, termasuk fase Uji Lab yg durasinya bergantung jadwal eksternal). <b>Ketiga angka (30-40%, 42%, 20%) sah</b>, beda sudut pandang &amp; cakupan — bukan versi yg saling menggantikan. Pemisahan "kendali internal vs eksternal" ditambahkan (5 Sep) supaya progres persiapan tim tidak tenggelam oleh bobot besar fase pengujian yg memang di luar kendali kecepatan kerja tim.</li>
+        <li><b>Rekonsiliasi metodologi progres:</b> <span class="mono">Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html</span> (dec:60) memakai estimasi top-down time-elapsed-didiskon ("~30–40%"). Dashboard ini memakai metodologi bottom-up berbasis item checklist per-fase per-track, dilaporkan sbg <b>dua angka dgn definisi berbeda</b>: "Kesiapan Internal Pra-Submission" (≈44%, hanya fase yg dikendalikan tim) dan "Progres Keseluruhan s/d Sertifikat" (≈21%, termasuk fase Uji Lab yg durasinya bergantung jadwal eksternal). <b>Ketiga angka (30-40%, 42%, 20%) sah</b>, beda sudut pandang &amp; cakupan — bukan versi yg saling menggantikan. Pemisahan "kendali internal vs eksternal" ditambahkan (5 Sep) supaya progres persiapan tim tidak tenggelam oleh bobot besar fase pengujian yg memang di luar kendali kecepatan kerja tim.</li>
         <li><b>Skema klasifikasi (bagian 03):</b> rekomendasi tim penyusun dokumen ini berdasarkan requirement H₂ dari model AI resmi (dec:36) &amp; praktik umum area classification kilang — <b>bukan hasil kajian resmi Pertamina/notified body</b>, wajib diverifikasi sebelum dipakai sbg acuan pengujian final.</li>
         <li><b>Cakupan GLD-only:</b> dikonfirmasi dari isi proposal (deskripsi produk konsisten 1 perangkat) + asumsi CH/Gateway selalu safe area dikonfirmasi user (5 Sep 2026) — bukan hasil kajian klasifikasi area formal, lihat catatan risiko bagian 04.</li>
         <li><b>Belum diverifikasi:</b> semua item bertanda ❌ di bagian 05–06; hot-spot suhu heater MQ (bagian 07) adalah prioritas tertinggi.</li>
@@ -447,7 +447,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
     </section>
 
     <footer>
-      Dokumen internal LAPI Ganesha Utama (LGU) &amp; Lab IoT/Fisika ITB — disusun 5 September 2026, melacak progres sertifikasi hazardous-area (ATEX/IP/EMC/RF) untuk GLD (Node Sensor), terpisah dari &amp; paralel dengan jalur pilot/field testing RU IV Cilacap (<span class="mono">Dashboard_GLD_ProjectManagement.html</span>). Skema klasifikasi &amp; angka progres bersifat estimasi interpretatif tim — wajib direview sebelum dipakai sbg komitmen resmi ke Pertamina atau lembaga sertifikasi. Rev 1.0
+      Dokumen internal LAPI Ganesha Utama (LGU) &amp; Lab IoT/Fisika ITB — disusun 5 September 2026 (diperbarui 15 September 2026), melacak progres sertifikasi hazardous-area (ATEX/IP/EMC/RF) untuk GLD (Node Sensor), terpisah dari &amp; paralel dengan jalur pilot/field testing RU IV Cilacap (<span class="mono">Dashboard_GLD_ProjectManagement.html</span>). Skema klasifikasi &amp; angka progres bersifat estimasi interpretatif tim — wajib direview sebelum dipakai sbg komitmen resmi ke Pertamina atau lembaga sertifikasi. Rev 1.1
     </footer>
   </main>
 </div>
@@ -462,7 +462,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 (function(){
   const START=new Date(2026,5,12), END=new Date(2027,1,28);
   const KICKOFF=new Date(2026,5,12);
-  const TODAY=new Date(2026,8,5);
+  const TODAY=new Date(2026,8,15);
   const svg=document.getElementById('scurve-cert');
   const W=960,H=380,m={l:46,r:20,t:22,b:46};
   const pw=W-m.l-m.r, ph=H-m.t-m.b;
@@ -475,7 +475,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
     [new Date(2026,5,12),0],[new Date(2026,6,3),12.5],[new Date(2026,7,7),33.3],
     [new Date(2026,7,30),47.9],[new Date(2026,10,9),89.6],[new Date(2026,10,27),100]
   ].map(a=>({d:a[0],v:a[1]}));
-  const act=[[new Date(2026,5,12),0],[new Date(2026,8,5),20]].map(a=>({d:a[0],v:a[1]}));
+  const act=[[new Date(2026,5,12),0],[new Date(2026,8,5),20],[new Date(2026,8,15),21]].map(a=>({d:a[0],v:a[1]}));
   const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt',2026,9],['Nov',2026,10],['Des',2026,11],['Jan',2027,0],['Feb',2027,1]];
   svg.appendChild(el('rect',{x:m.l,y:y(47.9),width:pw,height:y(0)-y(47.9),fill:'var(--good)',opacity:.06}));
   svg.appendChild(el('line',{x1:m.l,y1:y(47.9),x2:W-m.r,y2:y(47.9),stroke:'var(--good)','stroke-width':1,'stroke-dasharray':'2 3',opacity:.7}));
@@ -492,11 +492,14 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
   svg.appendChild(el('path',{d:path(plan),fill:'none',stroke:'var(--ink-soft)','stroke-width':2,'stroke-dasharray':'6 5',opacity:.85}));
   svg.appendChild(el('path',{d:path(act),fill:'none',stroke:'var(--accent)','stroke-width':3,'stroke-linejoin':'round','stroke-linecap':'round'}));
   svg.appendChild(el('circle',{cx:x(act[0].d),cy:y(act[0].v),r:3.5,fill:'var(--accent)'}));
+  const prev=act[act.length-2];
+  svg.appendChild(el('circle',{cx:x(prev.d),cy:y(prev.v),r:3.5,fill:'var(--accent)',opacity:.5}));
+  const pvt=el('text',{x:x(prev.d)-6,y:y(prev.v)+14,'text-anchor':'end',fill:'var(--ink-soft)','font-size':10,'font-family':'var(--mono)'});pvt.textContent='20% (5 Sep)';svg.appendChild(pvt);
   const last=act[act.length-1];
   svg.appendChild(el('circle',{cx:x(last.d),cy:y(last.v),r:5,fill:'var(--accent)',stroke:'var(--surface)','stroke-width':2}));
-  const lt=el('text',{x:x(last.d)+8,y:y(last.v)-8,'text-anchor':'start',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='≈20%';svg.appendChild(lt);
+  const lt=el('text',{x:x(last.d)+8,y:y(last.v)-8,'text-anchor':'start',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='≈21%';svg.appendChild(lt);
   svg.appendChild(el('line',{x1:x(TODAY),y1:m.t-2,x2:x(TODAY),y2:m.t+ph,stroke:'var(--ink)','stroke-width':1.5,'stroke-dasharray':'3 3',opacity:.5}));
-  const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini (5 Sep)';svg.appendChild(tl);
+  const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini (15 Sep)';svg.appendChild(tl);
   function planAt(d){for(let i=0;i<plan.length-1;i++){if(d>=plan[i].d&&d<=plan[i+1].d){const t=(d-plan[i].d)/(plan[i+1].d-plan[i].d);return plan[i].v+t*(plan[i+1].v-plan[i].v);}}return d<plan[0].d?plan[0].v:plan[plan.length-1].v;}
   const planTodayVal=planAt(TODAY);
   svg.appendChild(el('circle',{cx:x(TODAY),cy:y(planTodayVal),r:3.5,fill:'var(--ink-soft)'}));
@@ -512,12 +515,12 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 <script>
 (function(){
   const START=new Date(2026,5,12), END=new Date(2026,10,27);
-  const TODAY=new Date(2026,8,5);
+  const TODAY=new Date(2026,8,15);
   function D(a){return new Date(a[0],a[1],a[2]);}
   const ACT=[
-    {id:1,name:'Perencanaan & Scoping',s:[2026,5,12],e:[2026,6,3],act:90,plan:100,st:'good'},
-    {id:2,name:'Redesign — ATEX',s:[2026,6,3],e:[2026,7,7],act:15,plan:100,st:'warn'},
-    {id:3,name:'Redesign — IP',s:[2026,6,3],e:[2026,7,7],act:30,plan:100,st:'warn'},
+    {id:1,name:'Perencanaan & Scoping',s:[2026,5,12],e:[2026,6,3],act:95,plan:100,st:'good'},
+    {id:2,name:'Redesign — ATEX',s:[2026,6,3],e:[2026,7,7],act:22,plan:100,st:'warn'},
+    {id:3,name:'Redesign — IP',s:[2026,6,3],e:[2026,7,7],act:33,plan:100,st:'warn'},
     {id:4,name:'Redesign — EMC',s:[2026,6,3],e:[2026,7,7],act:60,plan:100,st:'warn'},
     {id:5,name:'Redesign — RF',s:[2026,6,3],e:[2026,7,7],act:65,plan:100,st:'accent'},
     {id:6,name:'Pre-Compliance Testing',s:[2026,7,7],e:[2026,7,30],act:0,plan:100,st:'neutral'},

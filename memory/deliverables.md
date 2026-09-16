@@ -151,5 +151,8 @@ Identity band · doc-meta · **Executive Summary** · KPI · **Progres vs Outsta
 - Branch: `claude/project-management-tracking-5l8ypx`. **PR aktif: #1**. Push = update PR.
 - Repo scope sesi: `ravellerh/gld-v2-report-2026` (+ 3 repo kode dibaca via web).
 
+## Laporan Termin 1 Sertifikasi 40% (15 Sep, dec:98)
+`Paket Pertamina/02_Sertifikasi_ATEX_IECEx/Laporan_Pemenuhan_Deliverable_Termin_1_Sertifikasi_GLD.{docx,pdf}` (9 hlm, script `scripts/build_termin1_certification_report.py`, PDF via Word COM automation). Melaporkan pemenuhan 7 syarat kontraktual Termin 1 skema sertifikasi dua termin (basis: `Persiapan_Termin_1.md`, 10 Sep) dgn status faktual per syarat (Tersedia/Sebagian/Belum Tersedia) + bukti + kekurangan, TANPA kesimpulan "layak/tidak layak diajukan" — keputusan diserahkan ke evaluasi Pertamina (prinsip baru, berlaku juga retroaktif sbg pedoman utk laporan Termin 1 field testing 20%, meski laporan field testing itu sendiri tidak direvisi ulang). Belum ada berita acara/log uji terisi krn bukti uji enclosure & witness Pertamina utk syarat itu memang belum ada di repo.
+
 ## Riwayat commit besar (branch)
 Dashboard awal → rebuild baseline 9 bulan + 6 RU + arsitektur → hapus OGI + reframe Cilacap → progress report + JSA → uji fungsional selesai → redesign navy + exec/outstanding + repo updates → PDF Juli + power/mesh/downlink → memory system.

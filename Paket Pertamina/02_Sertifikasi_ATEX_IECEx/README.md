@@ -9,7 +9,8 @@ Dokumen pelacakan progres proyek sertifikasi kepatuhan area berbahaya untuk pera
 | File | Isi |
 |---|---|
 | `Dashboard_Sertifikasi_GLD_ATEX_IECEx.{html,pdf}` | Kurva-S sertifikasi (4 track), rekomendasi skema klasifikasi (grup gas/kelas suhu/zona), gap analysis dokumentasi teknis per track, isu kritis & gate terbuka |
-| `Persiapan_Termin_1.md` | Audit kesiapan bukti kontraktual Termin 1 skema sertifikasi dua termin, matriks gap, kriteria keluar, dan urutan kerja |
+| `Laporan_Pemenuhan_Deliverable_Termin_1_Sertifikasi_GLD.{docx,pdf}` | **Laporan formal Termin 1 sertifikasi (40%)**, 15 September 2026: matriks bukti per syarat kontraktual (status Tersedia/Sebagian/Belum Tersedia dilaporkan apa adanya), register bukti, dokumen yang masih perlu disusun, dan lembar evaluasi — **tidak menyimpulkan sendiri layak/tidak diajukan, keputusan diserahkan ke evaluasi Pertamina** |
+| `Persiapan_Termin_1.md` | Audit kesiapan bukti kontraktual Termin 1 skema sertifikasi dua termin (10 September 2026), matriks gap, kriteria keluar, dan urutan kerja — jadi basis matriks bukti di laporan formal di atas |
 | `Template_Log_Uji_dan_Iterasi_Enclosure.md` | Form kerja untuk identitas sampel, hasil pengujian, temuan, perubahan desain, retest, dan witness |
 | `Template_Berita_Acara_Validasi_Prototipe.md` | Draft berita acara witness dan validasi prototipe oleh para pihak |
 | `Template_Laporan_Pekerjaan_Termin_1.md` | Kerangka laporan pekerjaan Termin 1 beserta daftar lampiran wajib |
@@ -25,4 +26,4 @@ Dokumen pelacakan progres proyek sertifikasi kepatuhan area berbahaya untuk pera
 
 ⚠️ **Skema klasifikasi (grup gas/kelas suhu/zona) yang direkomendasikan dalam dashboard ini adalah hasil analisis tim penyusun dokumen — bukan keputusan resmi dari notified body atau lembaga sertifikasi (ExCB).** Wajib dikonfirmasi lebih lanjut sebelum dipakai sebagai acuan pengujian final. Seluruh angka progres bersifat estimasi interpretatif, bukan hasil audit resmi — dijelaskan metodologinya secara terbuka di bagian akhir dashboard.
 
-⚠️ **Status Termin 1 per 10 September 2026: belum siap diajukan.** Bukti keberadaan prototipe sudah ada, tetapi bukti uji enclosure, iterasi berbasis hasil uji, witness/validasi Pertamina, berita acara, dan laporan pekerjaan khusus Termin 1 belum ditemukan di repo. Lihat `Persiapan_Termin_1.md`.
+⚠️ **Status bukti Termin 1 per 15 September 2026 (lihat laporan formal di atas):** bukti keberadaan prototipe sudah ada (sebagian), tetapi bukti uji enclosure, iterasi desain berbasis hasil uji, witness/validasi Pertamina, dan berita acara khusus masih belum ditemukan di repo. Atas permintaan user, laporan formal **tetap dibuat dan menampilkan seluruh bukti+kekurangan apa adanya**, tanpa kesimpulan "siap/tidak siap" dari tim — penilaian pemenuhan sepenuhnya diserahkan ke evaluasi PT Pertamina Patra Niaga (prinsip yang sama berlaku untuk laporan Termin 1 field testing 20%).

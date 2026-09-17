@@ -172,6 +172,7 @@ figure.photo figcaption span{display:block;font-size:11.8px;color:var(--ink-soft
 .checklist-toc .st{font-size:10px;flex:none}
 .checklist-toc .st.done{color:var(--good)}
 .checklist-toc .st.pending{color:#7C8896}
+.checklist-toc .st.partial{color:#B07A1E}
 .doclabel{font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 4px}
 .enchecklist{background:var(--surface-2);border:1px dashed var(--line-2);border-radius:var(--radius);padding:9px 12px;margin:10px 0;font-size:12px;color:var(--ink-soft);font-style:italic}
 .scopebanner{background:var(--info-soft);border-left:3px solid var(--info);border-radius:var(--radius);padding:13px 16px;font-size:13.3px;line-height:1.65;color:var(--ink-2);margin:0 0 20px}
@@ -208,14 +209,19 @@ figure.photo figcaption span{display:block;font-size:11.8px;color:var(--ink-soft
     <div class="brandtext"><b>Technical Certification Document</b><small>IECEx/ATEX &middot; GLD V2</small></div>
   </div>
   <div class="side-meta">
-    <div class="sm-row"><span class="k">Revision</span><span class="v">Draft 0.1</span></div>
-    <div class="sm-row"><span class="k">Date</span><span class="v">11 Sep 2026</span></div>
+    <div class="sm-row"><span class="k">Revision</span><span class="v">Draft 0.2</span></div>
+    <div class="sm-row"><span class="k">Date</span><span class="v">17 Sep 2026</span></div>
     <div class="sm-row"><span class="k">Status</span><span class="v">Working document</span></div>
     <div class="sm-row"><span class="k">Scope</span><span class="v">Node Sensor (GLD)</span></div>
   </div>
   <ul class="checklist-toc">
     <li><a href="#about"><span class="st done">&#9679;</span> About this document</a></li>
-    <li><a href="#s1"><span class="st pending">&#9675;</span> 1. Basic Information</a></li>
+    <li><a href="#s1"><span class="st partial">&#9681;</span> 1. Basic Information</a></li>
+    <li><a class="sub" href="#s1-1"><span class="st partial">&#9681;</span> 1.1 Application Form</a></li>
+    <li><a class="sub" href="#s1-2"><span class="st pending">&#9675;</span> 1.2 Business License</a></li>
+    <li><a class="sub" href="#s1-3"><span class="st pending">&#9675;</span> 1.3 Organization &amp; Contacts</a></li>
+    <li><a class="sub" href="#s1-4"><span class="st partial">&#9681;</span> 1.4 Manufacturing Facilities</a></li>
+    <li><a class="sub" href="#s1-5"><span class="st pending">&#9675;</span> 1.5 Quality System</a></li>
     <li><a href="#s2"><span class="st done">&#9679;</span> 2. Technical Documentation</a></li>
     <li><a class="sub" href="#s2-1"><span class="st done">&#9679;</span> 2.1 Product Description</a></li>
     <li><a class="sub" href="#s2-2"><span class="st done">&#9679;</span> 2.2 Name, Model &amp; Specification</a></li>
@@ -239,11 +245,11 @@ figure.photo figcaption span{display:block;font-size:11.8px;color:var(--ink-soft
 <div class="masthead">
   <p class="doclabel" style="margin-bottom:10px">Technical Certification Document</p>
   <h1>IECEx/ATEX Certification Document &mdash; Gas Leak Detector (GLD) V2</h1>
-  <p class="subtitle">Prepared in direct reference to the <i>IECEx/ATEX Certification Information Requirements</i> issued by the certification body (ExCB) &mdash; covering Section <b>2, Technical Documentation</b> (Items 1&ndash;6: product description; name, model, and specification list; functional description and technical parameters; product photographs; intended use and installation environment; and design and manufacturing information) and Section <b>3, Sample Information</b>. Section 1, Basic Information (Application and Organization), remains to be completed in a subsequent revision.</p>
+  <p class="subtitle">Prepared in direct reference to the <i>IECEx/ATEX Certification Information Requirements</i> issued by the certification body (ExCB) &mdash; covering all three sections of that checklist: Section <b>1, Basic Information (Application and Organization)</b>; Section <b>2, Technical Documentation</b> (Items 1&ndash;6: product description; name, model, and specification list; functional description and technical parameters; product photographs; intended use and installation environment; and design and manufacturing information); and Section <b>3, Sample Information</b>.</p>
   <div class="doccontrol">
     <div class="row"><div class="k">Document no.</div><div class="v">LGU/GLD/IECEX-TDF/2026-001</div></div>
-    <div class="row"><div class="k">Revision</div><div class="v">0.1</div></div>
-    <div class="row"><div class="k">Date</div><div class="v">11 September 2026</div></div>
+    <div class="row"><div class="k">Revision</div><div class="v">0.2</div></div>
+    <div class="row"><div class="k">Date</div><div class="v">17 September 2026</div></div>
     <div class="row"><div class="k">Status</div><div class="v">Working Document &mdash; Draft for Internal Review</div></div>
     <div class="row"><div class="k">Classification</div><div class="v">Confidential &mdash; prepared for ATEX/IECEx certification body (ExCB) submission</div></div>
     <div class="row"><div class="k">Certification subject</div><div class="v">Node Sensor (GLD) &mdash; V2</div></div>
@@ -252,11 +258,11 @@ figure.photo figcaption span{display:block;font-size:11.8px;color:var(--ink-soft
     <div class="row"><div class="k">Reference checklist</div><div class="v">IECEx/ATEX Certification Information Requirements</div></div>
   </div>
 </div>
-<div class="print-footer">LGU/GLD/IECEX-TDF/2026-001 &middot; Rev. 0.1 &mdash; IECEx/ATEX Certification Document, Gas Leak Detector (GLD) V2 &mdash; Confidential</div>
+<div class="print-footer">LGU/GLD/IECEX-TDF/2026-001 &middot; Rev. 0.2 &mdash; IECEx/ATEX Certification Document, Gas Leak Detector (GLD) V2 &mdash; Confidential</div>
 
 <section class="zone" id="about">
   <div class="zone-head"><span class="zn">&#8226;</span><h2>About this document</h2></div>
-  <p class="lede">This document is a working technical file prepared to satisfy Section <b>&ldquo;2. Technical Documentation&rdquo;</b> and Section <b>&ldquo;3. Sample Information&rdquo;</b> of the official <i>IECEx/ATEX Certification Information Requirements</i> checklist issued by the certification body (ExCB). The table of contents on the left follows the complete structure of the original checklist (Sections 1&ndash;3); Section 1 (Basic Information) remains pending and will follow in a subsequent revision.</p>
+  <p class="lede">This document is a working technical file prepared against the official <i>IECEx/ATEX Certification Information Requirements</i> checklist issued by the certification body (ExCB). It follows that checklist section by section: <b>&ldquo;1. Basic Information (Application and Organization)&rdquo;</b>, <b>&ldquo;2. Technical Documentation&rdquo;</b>, and <b>&ldquo;3. Sample Information&rdquo;</b>. Section 1 is administrative: it sets out every particular the ExCB requires and states which are already confirmed and which remain to be supplied from corporate records, without entering assumed values.</p>
   <div class="banner info"><span class="ic">&#9432;</span><div><b>Scope of this document.</b> This is a compilation of design evidence and an honest readiness assessment against the ExCB checklist, prepared in support of a future submission &mdash; it is not itself a certificate and does not constitute self-certification. The final enclosure/casing (material selection, manufacture, gasket, and cable entry) is being developed by an external mechanical/casing partner and is not yet in the authors&rsquo; possession; items that depend on that design (material datasheets, manufacturing process description, explosion-protection calculations) are reported as not yet available for that reason, not because the work has stalled. The product is still at from-scratch development/prototype stage &mdash; no finalized, serialized units exist yet, which is why a formal sample register (Section 3.1) is not yet available either.</div></div>
 
   <div class="enchecklist">Original excerpt, Section 2 &amp; 3 &mdash; source: <span class="mono">IECEx ATEX Certification Information Requirements</span> (ExCB):<br>
@@ -265,8 +271,102 @@ figure.photo figcaption span{display:block;font-size:11.8px;color:var(--ink-soft
 
 <section class="zone" id="s1">
   <div class="zone-head"><span class="zn">1</span><h2>Basic Information (Application and Organization)</h2></div>
-  <p class="lede">Covers the application form, business license/company registration, organizational chart and contact information, manufacturing facility address and profile, and (where applicable) ISO 9001 certification.</p>
-  <div class="banner info"><span class="ic">&#9675;</span><div><b>Not yet prepared in this revision.</b> To be completed in a subsequent revision.</div></div>
+  <p class="lede">Five items per the original checklist: the application form, the business license/company registration certificate, the organizational chart and contact information, the manufacturing plant address and production-facility profile, and &mdash; where applicable &mdash; the ISO 9001 certificate together with the quality manual and procedure index.</p>
+
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>How this section is presented.</b> The items below are administrative rather than technical: they are satisfied by corporate records held by the manufacturer&rsquo;s legal and administrative functions, not by engineering output. Every required field is therefore set out in full so that it can be collected in a single pass, with its current status stated plainly. <b>No field has been filled with an assumed or placeholder value.</b></div></div>
+
+  <div class="enchecklist">Original excerpt, Section 1 &mdash; source: <span class="mono">IECEx ATEX Certification Information Requirements</span> (ExCB):<br>
+  &ldquo;1. Basic Information (Application and Organization): 1) Application form (provided by ExCB as a template). 2) Manufacturer&rsquo;s business license/company registration certificate. 3) Manufacturer&rsquo;s organizational chart and contact information. 4) Address of manufacturing plant and brief introduction of production facilities. 5) (If applicable) ISO 9001 certificate, quality manual, and directory of procedure documents (for QAR/QAN review).&rdquo;</div>
+
+  <p class="doclabel">1.0 &middot; Status Summary &mdash; Section 1</p>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Item</th><th>Status</th><th>Held by</th></tr>
+    <tr><td>1.1 Application form (ExCB template)</td><td><span class="status gap">Template not yet received</span></td><td>Issued by the ExCB</td></tr>
+    <tr><td>1.2 Business license / company registration certificate</td><td><span class="status gap">To be provided</span></td><td>Manufacturer &mdash; legal/administration</td></tr>
+    <tr><td>1.3 Organizational chart and contact information</td><td><span class="status gap">To be provided</span></td><td>Manufacturer &mdash; management</td></tr>
+    <tr><td>1.4 Manufacturing plant address and facility profile</td><td><span class="status wip">Partially available</span></td><td>Manufacturer + external casing partner</td></tr>
+    <tr><td>1.5 ISO 9001 certificate, quality manual, procedure index</td><td><span class="status gap">To be confirmed</span></td><td>Manufacturer &mdash; quality function</td></tr>
+  </table>
+  </div>
+
+  <div class="subhead" id="s1-1"><h3>1.1 &middot; Application Form</h3></div>
+  <p class="lede">The application form is issued by the certification body as a template and has not yet been received; it is therefore not reproduced here. The information needed to complete it, however, is already consolidated in this document, and is restated below in the order an application form normally requests it so that transcription is a single step once the template arrives.</p>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Application field</th><th>Value</th><th>Status</th><th>Reference</th></tr>
+    <tr><td>Applicant / manufacturer</td><td>PT LAPI Ganesha Utama</td><td><span class="status ok">Confirmed</span></td><td>&nbsp;</td></tr>
+    <tr><td>Technical development partner</td><td>Institute of Technology Bandung &mdash; IoT Laboratory &amp; Physics Laboratory</td><td><span class="status ok">Confirmed</span></td><td>&nbsp;</td></tr>
+    <tr><td>Product name</td><td>Gas Leak Detector (GLD) &mdash; Node Sensor</td><td><span class="status ok">Confirmed</span></td><td>Section 2.2</td></tr>
+    <tr><td>Model / version</td><td>GLD V2</td><td><span class="status ok">Confirmed</span></td><td>Section 2.2</td></tr>
+    <tr><td>Scope of certification</td><td>Node Sensor (GLD) only</td><td><span class="status ok">Confirmed</span></td><td>Section 2.1</td></tr>
+    <tr><td>Requested area classification</td><td>Zone 1, Equipment Category 2G, Group II</td><td><span class="status wip">Requested &mdash; subject to ExCB assessment</span></td><td>Section 2.5</td></tr>
+    <tr><td>Requested temperature class</td><td>T4 (&le;135 &deg;C)</td><td><span class="status wip">Target &mdash; verification outstanding</span></td><td>Sections 2.5, 2.6.f</td></tr>
+    <tr><td>Requested gas group</td><td>IIC</td><td><span class="status wip">Internal recommendation, not an ExCB decision</span></td><td>Section 2.5</td></tr>
+    <tr><td>Type of protection</td><td>Not yet selected &mdash; Ex d, Ex e, and Ex i under evaluation</td><td><span class="status gap">Open</span></td><td>Section 2.6.e</td></tr>
+    <tr><td>Standards to be applied</td><td>IEC 60079-0, together with the standard corresponding to the type of protection once selected</td><td><span class="status gap">Dependent on the item above</span></td><td>Section 2.6.e</td></tr>
+    <tr><td>Certification route requested</td><td>IECEx Certificate of Conformity and/or ATEX EU-type examination</td><td><span class="status gap">To be confirmed with the ExCB</span></td><td>&nbsp;</td></tr>
+    <tr><td>Intended markets</td><td>To be provided</td><td><span class="status gap">To be provided</span></td><td>&nbsp;</td></tr>
+  </table>
+  </div>
+  <p class="lede" style="font-size:12px">The three requested classification parameters above are the applicant&rsquo;s proposal. They are recorded here as a request, not as an agreed or granted classification.</p>
+
+  <div class="subhead" id="s1-2"><h3>1.2 &middot; Business License / Company Registration Certificate</h3></div>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Required particular</th><th>Status</th><th>Remarks</th></tr>
+    <tr><td>Registered legal name</td><td><span class="status ok">Available</span></td><td>PT LAPI Ganesha Utama.</td></tr>
+    <tr><td>Legal form and shareholding status</td><td><span class="status gap">To be provided</span></td><td>As stated in the deed of establishment.</td></tr>
+    <tr><td>Business registration number</td><td><span class="status gap">To be provided</span></td><td>Business identification number issued under Indonesian company registration.</td></tr>
+    <tr><td>Taxpayer identification number</td><td><span class="status gap">To be provided</span></td><td>&nbsp;</td></tr>
+    <tr><td>Deed of establishment and latest amendment</td><td><span class="status gap">To be provided</span></td><td>Including the ministerial approval/registration record.</td></tr>
+    <tr><td>Registered (domicile) address</td><td><span class="status gap">To be provided</span></td><td>Registered address as it appears on the certificate; required even where it differs from the manufacturing address in 1.4.</td></tr>
+    <tr><td>Scope of business activity relevant to this product</td><td><span class="status gap">To be provided</span></td><td>The registered activity classification should be consistent with manufacture of the equipment being certified.</td></tr>
+    <tr><td>Scanned certificate, with English translation where requested</td><td><span class="status gap">To be provided</span></td><td>Certification bodies commonly accept a scanned copy; some require a translation or a notarized copy. To be confirmed with the ExCB.</td></tr>
+  </table>
+  </div>
+
+  <div class="subhead" id="s1-3"><h3>1.3 &middot; Organizational Chart and Contact Information</h3></div>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Required particular</th><th>Status</th><th>Remarks</th></tr>
+    <tr><td>Organizational chart</td><td><span class="status gap">To be provided</span></td><td>Should show the units responsible for design, production, and quality, and the reporting line between them.</td></tr>
+    <tr><td>Authorized signatory for the application</td><td><span class="status gap">To be provided</span></td><td>Name and position of the officer empowered to sign on behalf of the manufacturer.</td></tr>
+    <tr><td>Certification project contact</td><td><span class="status gap">To be provided</span></td><td>Name, position, e-mail, and telephone &mdash; the single point of contact for ExCB correspondence.</td></tr>
+    <tr><td>Technical contact for the product</td><td><span class="status gap">To be provided</span></td><td>The engineer who will answer technical queries on the technical file.</td></tr>
+    <tr><td>Quality contact</td><td><span class="status gap">To be provided</span></td><td>Counterpart for the quality assessment referred to in 1.5.</td></tr>
+    <tr><td>Technical partner contact</td><td><span class="status wip">Organization identified; named contact to be confirmed</span></td><td>Institute of Technology Bandung &mdash; IoT Laboratory / Physics Laboratory.</td></tr>
+    <tr><td>Correspondence address and working language</td><td><span class="status gap">To be provided</span></td><td>English is assumed for correspondence with the ExCB unless stated otherwise.</td></tr>
+  </table>
+  </div>
+
+  <div class="subhead" id="s1-4"><h3>1.4 &middot; Manufacturing Plant Address and Introduction of Production Facilities</h3></div>
+  <p class="lede">The structure of the supply chain is known and is stated below; the addresses and the facility profile itself are not yet documented. The product is at prototype stage, and the location for serial production has not been fixed &mdash; this is stated as a fact of the current development phase, not as an omission from the file.</p>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Production element</th><th>Status</th><th>Remarks</th></tr>
+    <tr><td>Printed circuit board fabrication and assembly</td><td><span class="status wip">Partially available</span></td><td>The electronic design is maintained as a native EasyEDA/JLCPCB project and the component supply chain is referenced to LCSC supplier part numbers throughout the bill of materials (Section 2.6.b). The fabrication and assembly provider, and its address, remain to be confirmed in writing.</td></tr>
+    <tr><td>Enclosure / casing manufacture</td><td><span class="status gap">To be provided</span></td><td>Developed and manufactured by an external mechanical partner (see &ldquo;About this document&rdquo;). That partner&rsquo;s identity, plant address, and process capability are to be supplied by the partner and are prerequisites for Sections 2.6.c and 2.6.d.</td></tr>
+    <tr><td>Final assembly, configuration, and functional test</td><td><span class="status wip">Prototype stage</span></td><td>Currently carried out in the development laboratory environment. The production location for serial units has not been fixed.</td></tr>
+    <tr><td>Production facility profile</td><td><span class="status gap">To be provided</span></td><td>Floor area, principal equipment, staffing, and nominal throughput &mdash; the &ldquo;brief introduction&rdquo; requested by the checklist.</td></tr>
+    <tr><td>Incoming inspection and final quality control</td><td><span class="status gap">To be provided</span></td><td>Arrangements for verifying purchased components and finished units.</td></tr>
+    <tr><td>Ex-specific routine verification</td><td><span class="status gap">To be provided</span></td><td>Routine tests and verifications required of production units once a type of protection is selected.</td></tr>
+  </table>
+  </div>
+  <p class="lede" style="font-size:12px">Where any stage of serial manufacture is subcontracted, certification bodies normally expect each manufacturing location covered by the quality assessment to be identified by name and address. The final list of locations therefore depends on the production arrangement adopted after the prototype stage.</p>
+
+  <div class="subhead" id="s1-5"><h3>1.5 &middot; ISO 9001 Certificate, Quality Manual, and Procedure Index</h3></div>
+  <div class="tbl-scroll">
+  <table>
+    <tr><th>Required particular</th><th>Status</th><th>Remarks</th></tr>
+    <tr><td>ISO 9001 certificate</td><td><span class="status gap">To be confirmed</span></td><td>Whether the manufacturer currently holds certification and, if so, the certificate number, scope, issuing body, and validity period.</td></tr>
+    <tr><td>Quality manual</td><td><span class="status gap">To be provided</span></td><td>&nbsp;</td></tr>
+    <tr><td>Index of procedure documents</td><td><span class="status gap">To be provided</span></td><td>A directory is sufficient at this stage; individual procedures are normally requested during the assessment itself.</td></tr>
+    <tr><td>Documented control of Ex-relevant characteristics</td><td><span class="status gap">To be provided</span></td><td>How drawings, changes, and the characteristics that secure the type of protection are controlled in production.</td></tr>
+    <tr><td>Records of routine verification</td><td><span class="status gap">To be provided</span></td><td>Record format for the routine tests referred to in 1.4.</td></tr>
+  </table>
+  </div>
+  <div class="banner info"><span class="ic">&#9432;</span><div><b>Note on the quality requirement.</b> The checklist marks this item &ldquo;if applicable&rdquo; and links it to quality assessment review. Under both schemes a manufacturer is expected to demonstrate a quality system covering Ex production before certificates are issued &mdash; through an IECEx Quality Assessment Report, or through the corresponding production-quality or product-verification arrangement under ATEX &mdash; whether or not ISO 9001 certification is held. The route that applies to this application is to be confirmed with the ExCB; ISO 9001 certification, where held, generally shortens that assessment rather than replacing it.</div></div>
 </section>
 
 <section class="zone" id="s2">
@@ -276,7 +376,7 @@ figure.photo figcaption span{display:block;font-size:11.8px;color:var(--ink-soft
   <div class="subhead" id="s2-1"><h3>2.1 &middot; Detailed Product Description</h3></div>
   <p class="lede">The Gas Leak Detector (GLD) is an IoT-based, multi-sensor gas leak detection device designed for the early detection of flammable and process gases in oil &amp; gas refinery environments (process units, tank farms, pipe racks, and storage/loading-unloading areas). This document addresses the GLD unit itself as the subject of the current IECEx/ATEX certification.</p>
   <p class="lede">Functionally, the GLD integrates eight channels of metal-oxide semiconductor gas sensors (MQ series), an edge-AI microcontroller/processor (ESP32-S3), and a LoRa radio module (star-topology wireless transmission) within a single fixed-point unit installed at locations with gas-leak risk. An on-device AI gas-classification model runs directly on the unit so that detection decisions do not depend on a continuous connection to a central server. When gas concentration exceeds a defined threshold, the unit triggers a local alarm (an integrated visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to the operator dashboard.</p>
-  <p class="lede">The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials (aluminum alloy and stainless steel &mdash; no plastic or PVC) and mounted via an L-bracket to existing structures without drilling or welding. <b>Important:</b> this design-intent statement does not constitute a claim that the enclosure has passed testing or has been Ex-certified &mdash; the explosion-protection scheme, gas group, temperature class, and target installation zone will be addressed in Section 2.5 (to follow).</p>
+  <p class="lede">The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials (aluminum alloy and stainless steel &mdash; no plastic or PVC) and mounted via an L-bracket to existing structures without drilling or welding. <b>Important:</b> this design-intent statement does not constitute a claim that the enclosure has passed testing or has been Ex-certified &mdash; the explosion-protection scheme, gas group, temperature class, and target installation zone will be addressed in Section 2.5.</p>
   <p class="lede">The current production power configuration is continuous 24 VDC, supplied via an AC/DC adapter connected to the site electrical supply. A portable battery power path (Li-ion 18650) remains under development (R&amp;D) and has not become a deployed production configuration.</p>
 
   <div class="subhead" id="s2-2"><h3>2.2 &middot; Product Name, Model, and Specification List</h3></div>

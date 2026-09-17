@@ -81,6 +81,10 @@ Alur: (1) sampul dengan verdict **BELUM SIAP DIAJUKAN**, (2) posisi hari ini —
 
 QA: `validate.py` PASS, QA visual 11 slide via render LibreOffice→PyMuPDF dalam 2 putaran (temuan yang diperbaiki: judul dua baris menabrak kicker pada slide 3/6/7/9, sumbu chart mulai dari -1, pemenggalan kata “ber-witness”, ruang kosong berlebih slide 2). Versi PDF ikut disimpan untuk dibagikan.
 
+## `Formulir_Isian_Data_Dasar_Sertifikasi_ATEX_GLD.{docx,pdf}` (17 Sep 2026)
+
+Formulir isian **internal** (4 halaman, Bahasa Indonesia) untuk mengumpulkan data Bagian 1 checklist ExCB yang belum tersedia: formulir aplikasi (4 field), legalitas perusahaan (8), organisasi & kontak (7), fasilitas produksi (7 — sebagian diisi mitra casing), sistem mutu (5), plus daftar 10 lampiran dan blok pengesahan. Diisi oleh fungsi legal/administrasi & mutu LGU; hasilnya ditranskrip ke Bagian 1 dokumen submission berbahasa Inggris. Instruksi tegas di dalamnya: **kosongkan bila belum ada, jangan diisi perkiraan**. Bukan berkas yang dikirim ke ExCB. Generator: `scripts/build_form_data_dasar_atex.py` (dec:102).
+
 ## `Desain_Bracket_L_UBolt_GLD_Mounting.{html,pdf}` (4 Sep 2026)
 
 Dibuat atas permintaan user ("tolong buatkan desain lengkapnya, dalam bentuk html dan pdf, saya berikan juga file 3D-nya") setelah audit folder `Sumber Dokumen/GLD U Bolt Bracket/` (dec:66) menemukan file 3D CAD (`ATEX CASING v2.obj/.mtl/.step`) yang belum tercatat sebelumnya. Menggabungkan dua hal: (1) **referensi standar industri umum** bracket L + U-bolt (BS 3974 Part 2, DIN 3570/3567, ASME B18.31.2/ASTM A193 Gr. B7, MSS SP-58/SP-69, referensi produk Det-Tronics/Crowcon) yang ditempel user dari diskusi eksternal — ditandai eksplisit sbg pengetahuan umum, bukan dokumen resmi Pertamina/ITB; (2) **spesifikasi desain aktual "ATEX Casing v2"** (CAD Farhan Budiman, 31 Agustus 2026) yang sudah tercatat di `files_catalog.md`.

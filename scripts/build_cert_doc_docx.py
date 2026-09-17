@@ -6,6 +6,7 @@ from docx import Document
 from docx.shared import Pt, Inches, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.style import WD_STYLE_TYPE
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -154,6 +155,11 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
     tbl = doc.add_table(rows=1, cols=n_cols)
     tbl.style = "Table Grid"
     tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
+    # ulangi baris header di tiap halaman supaya tabel yang terpotong tetap terbaca
+    trPr = tbl.rows[0]._tr.get_or_add_trPr()
+    tblHeader = OxmlElement("w:tblHeader")
+    tblHeader.set(qn("w:val"), "true")
+    trPr.append(tblHeader)
     hdr = tbl.rows[0].cells
     for i, h in enumerate(headers):
         set_cell_shading(hdr[i], HEAD_SHADE)
@@ -163,7 +169,10 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
         r.font.size = Pt(9)
         r.font.color.rgb = GRAY
     for ridx, row in enumerate(rows):
-        cells = tbl.add_row().cells
+        _row = tbl.add_row()
+        _cantsplit = OxmlElement("w:cantSplit")
+        _row._tr.get_or_add_trPr().append(_cantsplit)
+        cells = _row.cells
         for cidx, val in enumerate(row):
             cells[cidx].paragraphs[0].paragraph_format.space_after = Pt(2)
             if isinstance(val, tuple) and len(val) == 2 and val[0] == "__status__":
@@ -194,8 +203,8 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "0.1"
-DOC_DATE = "11 September 2026"
+REVISION = "0.2"
+DOC_DATE = "17 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -220,11 +229,11 @@ tr2 = title2.add_run("Gas Leak Detector (GLD) V2")
 tr2.font.size = Pt(16); tr2.font.bold = True; tr2.font.color.rgb = GRAY
 
 p("Prepared in direct reference to the IECEx/ATEX Certification Information Requirements issued by the "
-  "certification body (ExCB) \u2014 covering Section 2, Technical Documentation (Items 1\u20136: product "
+  "certification body (ExCB) \u2014 covering all three sections of that checklist: Section 1, Basic "
+  "Information (Application and Organization); Section 2, Technical Documentation (Items 1\u20136: product "
   "description; name, model, and specification list; functional description and technical parameters; "
   "product photographs; intended use and installation environment; and design and manufacturing "
-  "information) and Section 3, Sample Information. Section 1, Basic Information (Application and "
-  "Organization), remains to be completed in a subsequent revision.",
+  "information); and Section 3, Sample Information.",
   size=10.5)
 
 p("Document Control", size=11.5, bold=True, color=NAVY, space_after=4)
@@ -264,20 +273,37 @@ for i, h in enumerate(["Revision", "Date", "Description"]):
     rhdr[i].paragraphs[0].paragraph_format.space_after = Pt(2)
     r = rhdr[i].paragraphs[0].add_run(h.upper())
     r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = GRAY
-rrow = rt.add_row().cells
-for i, v in enumerate([REVISION, DOC_DATE,
-                       "Initial issue \u2014 Section 2, Items 1\u20136 (product description; name, model, and "
-                       "specification list; functional and technical parameters; product photographs; "
-                       "intended use and installation environment; design and manufacturing information) "
-                       "and Section 3 (sample information)."]):
-    rrow[i].paragraphs[0].paragraph_format.space_after = Pt(2)
-    r = rrow[i].paragraphs[0].add_run(v)
-    r.font.size = Pt(9.5)
-rt.rows[0].cells[0].width = rt.rows[1].cells[0].width = Inches(0.9)
-rt.rows[0].cells[1].width = rt.rows[1].cells[1].width = Inches(1.3)
-rt.rows[0].cells[2].width = rt.rows[1].cells[2].width = Inches(4.3)
+for rev, rev_date, rev_desc in [
+    ("0.1", "11 September 2026",
+     "Initial issue \u2014 Section 2 (Items 1\u20136) and Section 3."),
+    (REVISION, DOC_DATE,
+     "Section 1, Basic Information (Application and Organization), added \u2014 Items 1.1\u20131.5. "
+     "Document now covers all three sections of the checklist."),
+]:
+    rrow = rt.add_row().cells
+    for i, v in enumerate([rev, rev_date, rev_desc]):
+        rrow[i].paragraphs[0].paragraph_format.space_after = Pt(2)
+        r = rrow[i].paragraphs[0].add_run(v)
+        r.font.size = Pt(9.5)
+for _row in rt.rows:
+    _row.cells[0].width = Inches(0.9)
+    _row.cells[1].width = Inches(1.3)
+    _row.cells[2].width = Inches(4.3)
 
 doc.add_page_break()
+
+# Rapatkan gaya entri daftar isi supaya TOC muat dalam satu halaman
+# (dokumen ini punya banyak subjudul level-3: 2.3.a-c, 2.6.a-i).
+for _toc_style, _toc_size in (("TOC 1", 9.5), ("TOC 2", 9.0), ("TOC 3", 8.5)):
+    try:
+        _st = doc.styles[_toc_style]
+    except KeyError:
+        _st = doc.styles.add_style(_toc_style, WD_STYLE_TYPE.PARAGRAPH)
+    _st.font.size = Pt(_toc_size)
+    _st.font.name = "Calibri"
+    _st.paragraph_format.space_before = Pt(0)
+    _st.paragraph_format.space_after = Pt(0)
+    _st.paragraph_format.line_spacing = 1.0
 
 p("Table of Contents", size=12, bold=True, color=NAVY, space_after=4)
 toc_para = doc.add_paragraph()
@@ -313,11 +339,12 @@ add_field(fp, "NUMPAGES", fallback_text="1")
 # ABOUT
 # ============================================================
 doc.add_heading("About This Document", level=1)
-p("This document is a working technical file prepared to satisfy Section \u201c2. Technical Documentation\u201d "
-  "and Section \u201c3. Sample Information\u201d of the official IECEx/ATEX Certification Information "
-  "Requirements checklist issued by the certification body (ExCB). The table of contents follows the "
-  "complete structure of the original checklist (Sections 1\u20133); Section 1 (Basic Information) remains "
-  "pending and will follow in a subsequent revision.")
+p("This document is a working technical file prepared against the official IECEx/ATEX Certification "
+  "Information Requirements checklist issued by the certification body (ExCB). It follows that checklist "
+  "section by section: \u201c1. Basic Information (Application and Organization)\u201d, \u201c2. Technical "
+  "Documentation\u201d, and \u201c3. Sample Information\u201d. Section 1 is administrative: it sets out "
+  "every particular the ExCB requires and states which are already confirmed and which remain to be supplied "
+  "from corporate records, without entering assumed values.")
 note_box(
     "Scope of this document. This is a compilation of design evidence and an honest readiness assessment "
     "against the ExCB checklist, prepared in support of a future submission — it is not itself a "
@@ -351,9 +378,188 @@ rich(quote, [
 # SECTION 1
 # ============================================================
 doc.add_heading("1. Basic Information (Application and Organization)", level=1)
-p("Covers the application form, business license/company registration, organizational chart and contact "
-  "information, manufacturing facility address and profile, and (where applicable) ISO 9001 certification.")
-note_box("Not yet prepared in this revision. To be completed in a subsequent revision.", shade=INFO_SHADE)
+p("Five items per the original checklist: the application form, the business license/company registration "
+  "certificate, the organizational chart and contact information, the manufacturing plant address and "
+  "production-facility profile, and — where applicable — the ISO 9001 certificate together with the "
+  "quality manual and procedure index.")
+note_box("How this section is presented. The items below are administrative rather than technical: they are "
+         "satisfied by corporate records held by the manufacturer's legal and administrative functions, not by "
+         "engineering output. Every required field is therefore set out in full so that it can be collected in a "
+         "single pass, with its current status stated plainly. No field has been filled with an assumed or "
+         "placeholder value.", shade=INFO_SHADE)
+
+p("Original excerpt, Section 1 — source: IECEx ATEX Certification Information Requirements (ExCB):",
+  size=9.5, bold=True, color=NAVY, space_after=2)
+p("“1. Basic Information (Application and Organization): 1) Application form (provided by ExCB as a "
+  "template). 2) Manufacturer's business license/company registration certificate. 3) Manufacturer's "
+  "organizational chart and contact information. 4) Address of manufacturing plant and brief introduction of "
+  "production facilities. 5) (If applicable) ISO 9001 certificate, quality manual, and directory of procedure "
+  "documents (for QAR/QAN review).”", size=9.5, italic=True)
+
+doc.add_heading("1.0 · Status Summary — Section 1", level=2)
+make_table(
+    ["Item", "Status", "Held by"],
+    [
+        ["1.1 Application form (ExCB template)", ("__status__", ("Template not yet received", "gap")),
+         "Issued by the ExCB"],
+        ["1.2 Business license / company registration", ("__status__", ("To be provided", "gap")),
+         "Manufacturer — legal/administration"],
+        ["1.3 Organizational chart and contact information", ("__status__", ("To be provided", "gap")),
+         "Manufacturer — management"],
+        ["1.4 Manufacturing plant address and facility profile", ("__status__", ("Partially available", "wip")),
+         "Manufacturer + external casing partner"],
+        ["1.5 ISO 9001 certificate, quality manual, procedure index", ("__status__", ("To be confirmed", "gap")),
+         "Manufacturer — quality function"],
+    ],
+    col_widths=[2.9, 1.6, 2.0],
+)
+
+doc.add_heading("1.1 · Application Form", level=2)
+p("The application form is issued by the certification body as a template and has not yet been received; it is "
+  "therefore not reproduced here. The information needed to complete it, however, is already consolidated in "
+  "this document, and is restated below in the order an application form normally requests it so that "
+  "transcription is a single step once the template arrives.")
+make_table(
+    ["Application field", "Value", "Status", "Reference"],
+    [
+        ["Applicant / manufacturer", "PT LAPI Ganesha Utama", ("__status__", ("Confirmed", "ok")), ""],
+        ["Technical development partner",
+         "Institute of Technology Bandung — IoT Laboratory & Physics Laboratory",
+         ("__status__", ("Confirmed", "ok")), ""],
+        ["Product name", "Gas Leak Detector (GLD) — Node Sensor", ("__status__", ("Confirmed", "ok")),
+         "Section 2.2"],
+        ["Model / version", "GLD V2", ("__status__", ("Confirmed", "ok")), "Section 2.2"],
+        ["Scope of certification", "Node Sensor (GLD) only", ("__status__", ("Confirmed", "ok")), "Section 2.1"],
+        ["Requested area classification", "Zone 1, Equipment Category 2G, Group II",
+         ("__status__", ("Requested — subject to ExCB assessment", "wip")), "Section 2.5"],
+        ["Requested temperature class", "T4 (≤135 °C)",
+         ("__status__", ("Target — verification outstanding", "wip")), "Sections 2.5, 2.6.f"],
+        ["Requested gas group", "IIC",
+         ("__status__", ("Internal recommendation, not an ExCB decision", "wip")), "Section 2.5"],
+        ["Type of protection", "Not yet selected — Ex d, Ex e, and Ex i under evaluation",
+         ("__status__", ("Open", "gap")), "Section 2.6.e"],
+        ["Standards to be applied",
+         "IEC 60079-0, together with the standard corresponding to the type of protection once selected",
+         ("__status__", ("Dependent on the item above", "gap")), "Section 2.6.e"],
+        ["Certification route requested",
+         "IECEx Certificate of Conformity and/or ATEX EU-type examination",
+         ("__status__", ("To be confirmed with the ExCB", "gap")), ""],
+        ["Intended markets", "To be provided", ("__status__", ("To be provided", "gap")), ""],
+    ],
+    col_widths=[1.5, 1.9, 1.5, 1.6],
+)
+p("The three requested classification parameters above are the applicant's proposal. They are recorded here as "
+  "a request, not as an agreed or granted classification.", size=9.5, italic=True)
+
+doc.add_heading("1.2 · Business License / Company Registration Certificate", level=2)
+make_table(
+    ["Required particular", "Status", "Remarks"],
+    [
+        ["Registered legal name", ("__status__", ("Available", "ok")), "PT LAPI Ganesha Utama."],
+        ["Legal form and shareholding status", ("__status__", ("To be provided", "gap")),
+         "As stated in the deed of establishment."],
+        ["Business registration number", ("__status__", ("To be provided", "gap")),
+         "Business identification number issued under Indonesian company registration."],
+        ["Taxpayer identification number", ("__status__", ("To be provided", "gap")), ""],
+        ["Deed of establishment and latest amendment", ("__status__", ("To be provided", "gap")),
+         "Including the ministerial approval/registration record."],
+        ["Registered (domicile) address", ("__status__", ("To be provided", "gap")),
+         "Registered address as it appears on the certificate; required even where it differs from the "
+         "manufacturing address in 1.4."],
+        ["Scope of business activity relevant to this product", ("__status__", ("To be provided", "gap")),
+         "The registered activity classification should be consistent with manufacture of the equipment being "
+         "certified."],
+        ["Scanned certificate, with English translation where requested", ("__status__", ("To be provided", "gap")),
+         "Certification bodies commonly accept a scanned copy; some require a translation or a notarized copy. "
+         "To be confirmed with the ExCB."],
+    ],
+    col_widths=[2.1, 1.3, 3.1],
+)
+
+doc.add_heading("1.3 · Organizational Chart and Contact Information", level=2)
+make_table(
+    ["Required particular", "Status", "Remarks"],
+    [
+        ["Organizational chart", ("__status__", ("To be provided", "gap")),
+         "Should show the units responsible for design, production, and quality, and the reporting line between "
+         "them."],
+        ["Authorized signatory for the application", ("__status__", ("To be provided", "gap")),
+         "Name and position of the officer empowered to sign on behalf of the manufacturer."],
+        ["Certification project contact", ("__status__", ("To be provided", "gap")),
+         "Name, position, e-mail, and telephone — the single point of contact for ExCB correspondence."],
+        ["Technical contact for the product", ("__status__", ("To be provided", "gap")),
+         "The engineer who will answer technical queries on the technical file."],
+        ["Quality contact", ("__status__", ("To be provided", "gap")),
+         "Counterpart for the quality assessment referred to in 1.5."],
+        ["Technical partner contact",
+         ("__status__", ("Organization identified; contact to be confirmed", "wip")),
+         "Institute of Technology Bandung — IoT Laboratory / Physics Laboratory."],
+        ["Correspondence address and working language", ("__status__", ("To be provided", "gap")),
+         "English is assumed for correspondence with the ExCB unless stated otherwise."],
+    ],
+    col_widths=[2.1, 1.3, 3.1],
+)
+
+doc.add_heading("1.4 · Manufacturing Plant Address and Introduction of Production Facilities", level=2)
+p("The structure of the supply chain is known and is stated below; the addresses and the facility profile "
+  "itself are not yet documented. The product is at prototype stage, and the location for serial production has "
+  "not been fixed — this is stated as a fact of the current development phase, not as an omission from the "
+  "file.")
+make_table(
+    ["Production element", "Status", "Remarks"],
+    [
+        ["Printed circuit board fabrication and assembly", ("__status__", ("Partially available", "wip")),
+         "The electronic design is maintained as a native EasyEDA/JLCPCB project and the component supply chain "
+         "is referenced to LCSC supplier part numbers throughout the bill of materials (Section 2.6.b). The "
+         "fabrication and assembly provider, and its address, remain to be confirmed in writing."],
+        ["Enclosure / casing manufacture", ("__status__", ("To be provided", "gap")),
+         "Developed and manufactured by an external mechanical partner (see “About this document”). "
+         "That partner's identity, plant address, and process capability are to be supplied by the partner and "
+         "are prerequisites for Sections 2.6.c and 2.6.d."],
+        ["Final assembly, configuration, and functional test", ("__status__", ("Prototype stage", "wip")),
+         "Currently carried out in the development laboratory environment. The production location for serial "
+         "units has not been fixed."],
+        ["Production facility profile", ("__status__", ("To be provided", "gap")),
+         "Floor area, principal equipment, staffing, and nominal throughput — the “brief "
+         "introduction” requested by the checklist."],
+        ["Incoming inspection and final quality control", ("__status__", ("To be provided", "gap")),
+         "Arrangements for verifying purchased components and finished units."],
+        ["Ex-specific routine verification", ("__status__", ("To be provided", "gap")),
+         "Routine tests and verifications required of production units once a type of protection is selected."],
+    ],
+    col_widths=[2.1, 1.3, 3.1],
+)
+p("Where any stage of serial manufacture is subcontracted, certification bodies normally expect each "
+  "manufacturing location covered by the quality assessment to be identified by name and address. The final "
+  "list of locations therefore depends on the production arrangement adopted after the prototype stage.",
+  size=9.5, italic=True)
+
+doc.add_heading("1.5 · ISO 9001 Certificate, Quality Manual, and Procedure Index", level=2)
+make_table(
+    ["Required particular", "Status", "Remarks"],
+    [
+        ["ISO 9001 certificate", ("__status__", ("To be confirmed", "gap")),
+         "Whether the manufacturer currently holds certification and, if so, the certificate number, scope, "
+         "issuing body, and validity period."],
+        ["Quality manual", ("__status__", ("To be provided", "gap")), ""],
+        ["Index of procedure documents", ("__status__", ("To be provided", "gap")),
+         "A directory is sufficient at this stage; individual procedures are normally requested during the "
+         "assessment itself."],
+        ["Documented control of Ex-relevant characteristics", ("__status__", ("To be provided", "gap")),
+         "How drawings, changes, and the characteristics that secure the type of protection are controlled in "
+         "production."],
+        ["Records of routine verification", ("__status__", ("To be provided", "gap")),
+         "Record format for the routine tests referred to in 1.4."],
+    ],
+    col_widths=[2.1, 1.3, 3.1],
+)
+note_box("Note on the quality requirement. The checklist marks this item “if applicable” and links it "
+         "to quality assessment review. Under both schemes a manufacturer is expected to demonstrate a quality "
+         "system covering Ex production before certificates are issued — through an IECEx Quality "
+         "Assessment Report, or through the corresponding production-quality or product-verification arrangement "
+         "under ATEX — whether or not ISO 9001 certification is held. The route that applies to this "
+         "application is to be confirmed with the ExCB; ISO 9001 certification, where held, generally shortens "
+         "that assessment rather than replacing it.", shade=INFO_SHADE)
 
 # ============================================================
 # SECTION 2
@@ -379,7 +585,7 @@ p("The enclosure is designed for hazardous-area deployment at refinery sites, us
   "(aluminum alloy and stainless steel \u2014 no plastic or PVC) and mounted via an L-bracket to existing "
   "structures without drilling or welding. Important: this design-intent statement does not constitute a "
   "claim that the enclosure has passed testing or has been Ex-certified \u2014 the explosion-protection scheme, "
-  "gas group, temperature class, and target installation zone will be addressed in Section 2.5 (to follow).")
+  "gas group, temperature class, and target installation zone will be addressed in Section 2.5.")
 p("The current production power configuration is continuous 24 VDC, supplied via an AC/DC adapter connected "
   "to the site electrical supply. A portable battery power path (Li-ion 18650) remains under development "
   "(R&D) and has not become a deployed production configuration.")

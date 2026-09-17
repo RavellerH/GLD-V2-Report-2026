@@ -1,0 +1,666 @@
+                                                                                                                                    LAB IoT ITB
+
+
+
+
+                                             Whole System
+Technical Datasheet Revision 4.0
+
+End-to-end GasleakDetector - CH - optional CH - Gateway - broker - Server
+architecture.
+
+
+       GasleakDetector                  CH                          Optional CH                      Gateway                     Server
+
+
+
+
+                           STAR                         MESH                           MESH                           MQTT
+
+
+
+
+        Sensing + alarm            STAR to MESH                        Multi-hop                   MESH to MQTT               Data + command
+
+
+
+
+    TOPOLOGY                        CARRIER                                  UPLINK                               DOWNLINK
+
+    Dynamic multi-hop               920-923 MHz                              Normal pull + alarm push             Command via broker
+
+Key features
+●     Primary operational path: GasleakDetector to serving CH,           ●    Commands return through the broker, Gateway, CH route,
+      optional transit CH, Gateway, broker, then Server.                      and endpoint receive window.
+●     Normal telemetry and alarms use different delivery behavior.       ●    The engineering dataset path is separate from the
+                                                                              operational alarm path.
+Technical overview
+The Whole System connects sensing endpoints, the field radio network, an IP bridge, a broker, and the Server application.
+Functional profile
+    Endpoint                             GasleakDetector
+    Field network                        CH STAR/MESH
+    IP bridge                            Gateway
+    Application                          Server
+
+Operational interfaces
+    GasleakDetector - CH                 LoRa STAR | Uplink + receive window | Telemetry, alarm, and limited downlink
+    CH - CH/Gateway                      LoRa MESH | Bidirectional | Multi-hop routing and relay
+    Gateway - network                    Wi-Fi STA | Bidirectional | IP connectivity
+    Gateway - broker                     MQTT / TLS option | Bidirectional | Publish uplink; subscribe command
+
+
+
+
+Lab IoT ITB
+Whole System                                                                                                                     IOTITB-TDS-WHOLE-SYSTEM-EN-R4.0
+
+
+
+
+Contents
+
+1 Product identification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      1.1 Abbreviations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 System overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 System scope . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 Operational and dataset architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.3 Subsystem responsibility matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      2.4 Inter-subsystem interface summary      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+
+
+3 Operational flows . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 Normal telemetry sequence      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+
+      3.2 Alarm and return-to-clear sequence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      3.3 Command downlink sequence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+
+4 Routing and RF . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+      4.1 Discovery and route formation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.2 Multi-hop and failover . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.3 Two-domain RF plan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+5 Networking and security . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+      5.1 IP network, broker, and TLS profile . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.2 Layered security boundaries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.3 Availability, cache, and buffering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+
+6 Power, variants, and deployment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+      6.1 Subsystem power domains . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.2 Hardware variants and firmware compatibility . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.3 Deployment topology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.4 Commissioning sequence       . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .8
+
+
+7 Integration contract and system limits               . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .8
+      7.1 System interface contract . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      7.2 Subsystem capacity limits    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .8
+
+      7.3 Failure behavior . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+      7.4 Security boundaries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+
+
+
+Lab IoT ITB                                                                                                                                                        2/9
+Whole System                                                                                                                        IOTITB-TDS-WHOLE-SYSTEM-EN-R4.0
+
+
+
+
+1 Product identification
+    Product                                 Whole System
+
+    Document revision                       4.0
+
+    Issuer                                  Lab IoT ITB
+
+
+
+1.1 Abbreviations
+    Abbreviation         Meaning                                                         Abbreviation          Meaning
+
+    AES-GCM              Authenticated encryption on field payloads                      MQTT                  Broker-based messaging transport
+
+    CH                   Serving/transit communication node                              STAR                  GasleakDetector-to-serving-CH radio link
+
+    E2E                  End-to-end                                                      TLS                   Transport security on two separate broker sessions
+
+    MESH                 CH and Gateway radio backbone                                   VM                    Customer virtual machine for Server
+
+
+
+2 System overview
+2.1 System scope
+The Whole System connects sensing endpoints, the field radio network, an IP bridge, a broker, and the Server application.
+
+    Endpoint                     GasleakDetector                                         Field network                CH STAR/MESH
+
+    IP bridge                    Gateway                                                 Application                  Server
+
+●     Primary operational path: GasleakDetector to serving CH, optional transit CH, Gateway, broker, then Server.
+●     Normal telemetry and alarms use different delivery behavior.
+●     Commands return through the broker, Gateway, CH route, and endpoint receive window.
+●     The engineering dataset path is separate from the operational alarm path.
+
+
+2.2 Operational and dataset architecture
+The operational path and dataset path have different purposes and processing rules.
+
+    GasleakDetector                 Serving CH                     Transit CH                    Gateway                       Broker                     Server
+
+
+                          STAR                       MESH                            MESH                         MQTT                      MQTT
+
+
+
+
+          Sensing                   STAR/MESH                          0..n                     Wi-Fi/MQTT                 Trust boundary               Application
+
+
+                                                                      Figure 1. Primary operational path.
+
+
+              Dataset mode                                 Wi-Fi/MQTT                               Dataset recorder                               Storage
+
+
+                                        direct                                       record                                     write
+
+
+
+
+              GasleakDetector                             Engineering link                               Validation                            MySQL / CSV
+
+
+                                                                Figure 2. Separate engineering dataset path.
+
+    Note: Dataset mode is not the production alarm path and does not replace the operational LoRa path.
+
+
+
+
+Lab IoT ITB                                                                                                                                                           3/9
+Whole System                                                                                                                                IOTITB-TDS-WHOLE-SYSTEM-EN-R4.0
+
+
+
+
+2.3 Subsystem responsibility matrix
+Each subsystem has a distinct functional boundary across sensing, transport, routing, security, and application.
+
+ Subsystem                        Primary role                                                                     Not responsible for
+
+ GasleakDetector                  8-channel sensing, local inference, alarm output, LoRa STAR                      MESH routing or broker TLS
+
+ Serving CH                       STAR ingress, cache, MESH forwarding                                             Payload decryption or Server application
+
+ Transit CH                       MESH relay and route continuity                                                  Endpoint sensing
+
+ Gateway                          MESH-to-Wi-Fi/MQTT bridge                                                        Persistent storage or guaranteed delivery
+
+ Broker                           MQTT session/transport boundary                                                  Field sensing/inference
+
+ Server                           Validation, decode, alarm routing, topology, command                             Physical alarm output
+
+ Note: The broker is a logical deployment dependency and must be included in the network design even though it is not a field device.
+
+
+2.4 Inter-subsystem interface summary
+The following table summarizes transport, communication direction, and public function at each subsystem boundary.
+
+ Link                                    Transport                                   Direction                         Function
+
+ GasleakDetector - CH                    LoRa STAR                                   Uplink + receive window           Telemetry, alarm, and limited downlink
+
+ CH - CH/Gateway                         LoRa MESH                                   Bidirectional                     Multi-hop routing and relay
+
+ Gateway - network                       Wi-Fi STA                                   Bidirectional                     IP connectivity
+
+ Gateway - broker                        MQTT / TLS option                           Bidirectional                     Publish uplink; subscribe command
+
+ Server - broker                         MQTT / TLS                                  Bidirectional                     Ingestion and command
+
+ GasleakDetector - local                 RS-485 Modbus                               Read-only                         Local data/status integration
+
+ Note: An external Wi-Fi-to-Ethernet converter is not a native Gateway interface and is not included in the product matrix.
+
+
+
+3 Operational flows
+3.1 Normal telemetry sequence
+Normal telemetry uses a cache at the serving CH and is sent in response to a server pull.
+
+          GasleakDetector                     Serving CH                         Transit/Gateway                          Broker                               Server
+
+                        LoRa STAR telemetry
+
+                                          Update node cache
+
+                                                                                                                                         Server pull request
+
+                                                                                                   Gateway downlink
+
+                                                           Pull reaches serving CH
+
+                                                              Cluster response
+
+                                                                                                     Gateway publish
+
+                                                                                                                                          Server ingestion
+
+
+
+
+                                                                   Figure 3. Cache/pull normal telemetry.
+
+ Note: Normal telemetry delivery is pull-based and follows the data available in the serving-CH cache.
+
+
+
+
+Lab IoT ITB                                                                                                                                                             4/9
+Whole System                                                                                                                                 IOTITB-TDS-WHOLE-SYSTEM-EN-R4.0
+
+
+
+
+3.2 Alarm and return-to-clear sequence
+Alarm/clear uses a push path and becomes a Server alarm only after the payload passes the integrity gate.
+
+           GasleakDetector                         Serving CH                            MESH route                         Gateway                                   Server
+
+                              STAR alarm/clear
+
+                                                                 Enter alarm push path
+
+                                                                                                        Relay to root
+
+                                                                                                                                             MQTT publish
+
+                                                                                                                                                            Validate + authenticate
+
+                                                                                                                                                                   Alarm routing
+
+
+
+
+                                                                   Figure 4. Alarm push and Server integrity gate.
+
+    Local alarm                                       Steady 24 V output in GasleakDetector AUTO mode.
+
+    Network alarm                                     Authenticated event routed by the Server.
+
+
+3.3 Command downlink sequence
+A high-level mode command moves from the Server through the broker and field route to the GasleakDetector receive window.
+
+                Server                               Broker                               Gateway                       Transit/Serving CH                    GasleakDetector
+
+        Authorize + authenticate
+
+                                   MQTT publish
+
+                                                                     MQTT deliver
+
+                                                                                                        MESH route
+
+                                                                                                                                       Deliver in receive window
+
+                                                                                                                                                              Validate and apply
+
+
+
+
+                                                                   Figure 5. Command downlink to the endpoint.
+
+    Note: Command delivery to battery endpoints occurs during the endpoint post-transmission receive window.
+
+
+
+4 Routing and RF
+4.1 Discovery and route formation
+CH forms routes dynamically from candidates with lineage toward the Gateway root.
+
+      CH without parent                           Candidates                              Guard                             Scoring                                     Install
+
+
+                                     probe                              filter                             rank                                  commit
+
+
+
+
+         Discovery start                          CH / Gateway                      Root + loop check                    Health + route                            Parent + alternate
+
+
+                                                                   Figure 6. Discovery through parent installation.
+
+●     Gateway is the root destination, not every CH's static parent.
+●     The lineage guard prevents routing loops.
+●     The actual parent is not fixed to a specific identity.
+
+
+
+
+Lab IoT ITB                                                                                                                                                                             5/9
+Whole System                                                                                                                        IOTITB-TDS-WHOLE-SYSTEM-EN-R4.0
+
+
+
+
+4.2 Multi-hop and failover
+An alternate parent and rediscovery maintain continuity when the active parent is no longer healthy.
+
+    Stage                                     Description
+
+    Healthy route                             Serving CH -> transit(s) -> Gateway
+
+    Health failure                            Timeout/HELLO ACK/alarm ACK failure
+
+    Alternate parent                          Used when valid
+
+    Rediscovery                               Builds new candidates
+
+    Recovered route                           New parent follows discovery
+                                                                         Figure 7. CH route failover.
+
+    Note: Multi-hop and failover have been validated at the ITB IoT Lab. The replacement parent follows discovery and is not fixed to a specific
+    identity.
+
+
+4.3 Two-domain RF plan
+STAR and MESH share the 920-923 MHz accepted carrier range but use different defaults and antennas.
+
+    Domain                 Default                           BW / SF / CR                                         TX setting                 Antenna
+
+    STAR                   920.0 MHz                         125 kHz / SF7 / 4/5                                  17 dBm                     3 dBi
+
+    MESH                   921.0 MHz                         125 kHz / SF9 / 4/5                                  17 dBm                     8 dBi
+
+    Accepted carrier                         920-923 MHz inclusive
+
+    Active configuration                     Verified through device readback.
+
+    Note: Nominal calculation before loss: STAR 20 dBm and MESH 25 dBm.
+
+
+
+5 Networking and security
+5.1 IP network, broker, and TLS profile
+When the TLS Gateway profile is selected, the Gateway and Server each establish their own TLS session to the broker; the broker
+is the termination/trust boundary.
+
+            Gateway                   TLS session A                           MQTT broker                          TLS session B                         Server
+
+
+                           encrypt                           terminate                              new session                         decrypt
+
+
+
+
+            TLS client A                CA verified                           Terminates both                         CA verified                      TLS client B
+
+
+                                                      Figure 8. Two TLS sessions in the TLS deployment profile.
+
+●      The TLS Gateway profile requires a Root CA and a system epoch that meets the trusted-time threshold.
+●      The Server flow supports credentials and CA-verified TLS to the broker.
+●      In the TLS profile, the Gateway and Server use two separate TLS sessions, each terminating at the broker.
+
+
+5.2 Layered security boundaries
+Payload security and transport security protect different layers and segments.
+
+    Layer                            Coverage                                           Function                                         Termination
+
+    AES-128-GCM                      GasleakDetector payload                            Confidentiality + authentication                 Server decoder
+
+    Gateway TLS                      Gateway - broker                                   MQTT transport protection                        Broker
+
+    Server TLS                       Server - broker                                    MQTT transport protection                        Broker
+
+    Command auth                     High-level downlink                                Authorization + payload authentication           Target application
+
+    Note: CH and Gateway forward the encrypted field payload; it is decrypted/authenticated at the Server.
+
+
+
+
+Lab IoT ITB                                                                                                                                                           6/9
+Whole System                                                                                                             IOTITB-TDS-WHOLE-SYSTEM-EN-R4.0
+
+
+
+
+5.3 Availability, cache, and buffering
+Temporary data resides in the CH cache or Gateway RAM queue; field retention follows each mechanism's capacity and memory
+type.
+
+ Location                  Mechanism                                                    Persistence                        Boundary
+
+ CH                        Node cache for normal telemetry                              Runtime memory/state               Sent on server pull
+
+ Gateway                   8-item MQTT queue, 1-1023 B payload                          Volatile RAM                       New item rejected when full
+
+ Server                    Anti-replay state                                            Persistent storage required in     Reloaded after service restart
+                                                                                        deployment
+
+ Dataset                   MySQL / CSV                                                  Engineering persistence            Dataset records only
+
+
+
+6 Power, variants, and deployment
+6.1 Subsystem power domains
+Each device has a different power boundary; one PCB's capability is not generalized to another subsystem.
+
+ Subsystem                       Configuration                                                                 Monitoring behavior
+
+ GasleakDetector                 24 VDC supply or 4.2 VDC battery-operating variant                            Diagnostic voltage monitoring
+
+ CH                              1-3 x parallel 18650; 2 x parallel 6 W panels                                 VBAT read-only
+
+ Note: CH firmware reports VBAT read-only without active low-voltage cutoff. GasleakDetector also monitors voltage without active undervoltage
+ cutoff.
+
+
+6.2 Hardware variants and firmware compatibility
+CH and Gateway have Rectangle/Circle boards; Gateway also has TLS/non-TLS choices.
+
+ Device                       Board                          Transport option                                  Firmware target
+
+ GasleakDetector              Product board                  LoRa STAR + RS-485                                GasleakDetector firmware
+
+ CH                           Rectangle                      STAR + MESH                                       CH Rectangle
+
+ CH                           Circle                         STAR + MESH                                       CH Circle
+
+ Gateway                      Rectangle                      MQTT non-TLS / TLS                                Gateway Rectangle - standard / TLS
+
+ Gateway                      Circle                         MQTT non-TLS / TLS                                Gateway Circle - standard / TLS
+
+ Server                       Customer VM                    MQTT client/application                           Deployment-specific
+
+ Note: After upload, device readback verifies the active board and transport variant.
+
+
+6.3 Deployment topology
+Deployment requires field devices, Wi-Fi, a broker, a Server VM, optional dataset database, and operational ownership.
+
+ Stage                                     Description
+
+ Field layer                               GasleakDetector, serving/transit CH, Gateway
+
+ Site network                              Wi-Fi, DNS, NTP, VLAN/NAC, firewall
+
+ Messaging                                 MQTT broker, CA chain, ACL, credentials
+
+ Application                               Node-RED Server on customer VM
+
+ Engineering data                          Dataset recorder and MySQL/CSV when used
+                                                          Figure 9. System deployment layers.
+
+ Note: OS image, VM sizing, broker, database, backup, HA, RBAC, and SSO are specified for each customer deployment.
+
+
+
+
+Lab IoT ITB                                                                                                                                              7/9
+Whole System                                                                                                        IOTITB-TDS-WHOLE-SYSTEM-EN-R4.0
+
+
+
+
+6.4 Commissioning sequence
+Commissioning must sequentially verify firmware, identity, radio, network, security, and the application path.
+
+ Stage                                  Description
+
+ 1. Firmware                            Select exact device/board/transport target
+
+ 2. Device readback                     Version, identity, board variant, RF configuration
+
+ 3. Field link                          STAR, MESH, discovery, parent, route
+
+ 4. IP/TLS                              Wi-Fi, DNS/NTP, CA, broker connection
+
+ 5. Application                         Decode, alarm route, topology, command
+
+ 6. Record                              Logs, unit IDs, versions, and pass criteria
+                                                  Figure 10. Engineering commissioning sequence.
+
+ Note: Each commissioning stage is completed in sequence and recorded in the deployment acceptance result.
+
+
+
+7 Integration contract and system limits
+7.1 System interface contract
+Each subsystem boundary uses a fixed communication profile so that the GasleakDetector, CH, Gateway, and Server can be
+integrated consistently.
+
+ Boundary                             Interface                            Profile
+
+ GasleakDetector - CH                 LoRa STAR                            920.0 MHz; SF7; BW 125 kHz; CR 4/5; TX power setting 17 dBm; antenna
+                                                                           3 dBi
+
+ CH - CH / Gateway                    LoRa MESH                            921.0 MHz; SF9; BW 125 kHz; CR 4/5; TX power setting 17 dBm; antenna
+                                                                           8 dBi
+
+ Gateway - MQTT broker                Wi-Fi STA / MQTT                     MQTT over TLS on the TLS profile; certificate verification and time
+                                                                           synchronization are mandatory.
+
+ Server - MQTT broker                 MQTT                                 A separate Server-to-broker TLS session uses customer-deployment
+                                                                           authentication.
+
+ Server - Database                    MySQL                                Engineering-dataset storage with idempotency checks.
+
+ GasleakDetector - controller         RS-485 / Modbus RTU                  Unit 1; 9600 bit/s; 8N1; FC03/FC04; addresses 0-7; eight read-only 16-bit
+                                                                           registers. See the GasleakDetector datasheet for the map and frame
+                                                                           examples.
+
+ Note: The product operating band is limited to 920-923 MHz. The nominal STAR and MESH frequencies are within this band.
+
+
+7.2 Subsystem capacity limits
+The following capacities are implementation limits to consider when designing node counts, downlink flows, and connection
+recovery.
+
+ Subsystem                            Resource                                                                      Limit
+
+ GasleakDetector                      Sensor channels                                                               8
+
+ GasleakDetector                      Modbus registers                                                              Eight read-only 16-bit registers,
+                                                                                                                    addresses 0-7
+
+ CH                                   Parent candidates                                                             8
+
+ CH                                   Node cache                                                                    32 entries
+
+ CH                                   Alarm / transmission queue                                                    8 / 8 entries
+
+ CH                                   Pending downlink                                                              16 entries
+
+ Gateway                              MQTT publication queue                                                        8 volatile messages
+
+ Gateway                              Deferred-publication payload                                                  1023 bytes maximum
+
+ Server                               Sensor values per dataset record                                              8
+
+
+
+
+Lab IoT ITB                                                                                                                                             8/9
+Whole System                                                                                                          IOTITB-TDS-WHOLE-SYSTEM-EN-R4.0
+
+
+
+
+7.3 Failure behavior
+Each subsystem response to a disturbance is explicit so that recovery and data-retention limitations can be considered in
+deployment design.
+
+ Disturbance                           System response                                                             Limitation
+
+ CH parent no longer eligible          The CH performs discovery and selects a parent candidate that satisfies     The replacement parent is not
+                                       the current rules.                                                          statically assigned.
+
+ Wi-Fi or broker unavailable           The Gateway retries publication and uses the local queue when an item       The queue is volatile and holds at
+                                       can be admitted.                                                            most eight items.
+
+ TLS prerequisite incomplete           The Gateway blocks the MQTT connection.                                     There is no fallback to a TLS
+                                                                                                                   transport without verification.
+
+ MySQL storage unavailable             The active dataset-recording path fails and must be restored according to   CSV is not treated as an automatic
+                                       the deployment configuration.                                               MySQL replacement; status must be
+                                                                                                                   monitored and reconciled by the
+                                                                                                                   Server operator.
+
+ Invalid dataset record                The Server rejects the record before storage.                               The record must satisfy every
+                                                                                                                   admission rule.
+
+ Low battery voltage                   The GasleakDetector and CH report the monitoring result.                    Firmware does not automatically
+                                                                                                                   disconnect power or enter low-power
+                                                                                                                   mode based on this threshold.
+
+
+7.4 Security boundaries
+End-to-end security is formed by radio controls, application-message validation, Gateway-to-Server transport, and Server
+infrastructure controls.
+
+ Boundary                       Control                                                                 Operational responsibility
+
+ Field radio hop                Node identity, message sequence, length, and CRC are checked by         Device identities and radio configuration are
+                                the radio application protocol.                                         managed during provisioning.
+
+ Server application             The Server performs AES-GCM authentication and replay rejection;        Security material and anti-replay storage are
+                                persistent state is required in deployment.                             managed in the Server deployment.
+
+ Gateway / Server - broker      In a configured TLS-profile deployment, the Gateway and Server can      The customer supplies the CA, time endpoint,
+                                use two separate MQTT-over-TLS sessions with certificate validation.    broker, and authentication policy.
+
+ Server services                Credentials reside in the runtime environment or a secret store;        The customer manages network access, service
+                                persistent anti-replay storage must be configured.                      accounts, backup, patching, and VM monitoring.
+
+ Storage                        A unique record identifier prevents dataset duplication in primary      Retention, backup, and reconciliation are defined
+                                storage.                                                                in customer operating procedures.
+
+
+
+
+Lab IoT ITB                                                                                                                                             9/9
+

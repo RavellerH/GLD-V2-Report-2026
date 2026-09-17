@@ -1,0 +1,798 @@
+                                                                                                LAB IoT ITB
+
+
+
+
+                            GasleakDetector
+Technical Datasheet Revision 4.0
+
+Perangkat sensing delapan channel dengan pemrosesan lokal, alarm 24 V, LoRa
+STAR, dan RS-485.
+
+
+
+
+ CHANNEL SENSOR           CATU DAYA                RF                         ALARM
+
+ 8 channel                24 VDC / 4.2 VDC         920-923 MHz                AUTO, keluaran 24 V
+
+
+
+
+Lab IoT ITB
+GasleakDetector                                                                                                              IOTITB-TDS-GASLEAKDETECTOR-ID-R4.0
+
+
+
+
+Daftar isi
+
+1 Identifikasi produk        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+      1.1 Singkatan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 Ikhtisar dan arsitektur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 Ikhtisar produk . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 Arsitektur fungsional . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.3 Komponen perangkat keras utama . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+3 Sensor channel dan jalur sinyal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 Pemetaan delapan channel sensor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.2 Kontrol daya channel dan nulling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.3 Jalur akuisisi analog . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.4 Konfigurasi ADC dan sampling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.5 Penyaringan dan perilaku batch valid     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+
+      3.6 Gerbang validitas inferensi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+
+4 Inferensi dan mode operasi             . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+      4.1 Keluaran klasifikasi yang dikonfigurasi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.2 Pemantauan suhu dan kelembapan tambahan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.3 Mode operasi firmware . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.4 Urutan boot dan sesi normal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+5 Alarm dan catu daya . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+      5.1 Arsitektur alarm lokal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.2 Arsitektur catu daya . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.3 Konsumsi arus pada input 24 V      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .7
+
+      5.4 Varian catu baterai . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.5 Pemantauan tegangan baterai . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+
+6 Antarmuka komunikasi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+      6.1 Antarmuka LoRa STAR . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.2 Antarmuka RS-485 / Modbus . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.3 Keamanan data dan frame . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+
+7 Komisioning dan diagnostik . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+      7.1 Komisioning melalui Operator Hub . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      7.2 Status dan diagnostik . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+
+8 Parameter operasional dan antarmuka . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+      8.1 Waktu operasional . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+      8.2 Antarmuka Modbus RTU . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+      8.3 Logika keluaran alarm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+      8.4 Word status Modbus      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+      8.5 Panduan pembacaan Modbus          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+
+
+
+Lab IoT ITB                                                                                                                                                       2 / 10
+GasleakDetector                                                                                                                   IOTITB-TDS-GASLEAKDETECTOR-ID-R4.0
+
+
+
+
+1 Identifikasi produk
+    Produk                                 GasleakDetector
+
+    Revisi dokumen                         4.0
+
+    Penerbit                               Lab IoT ITB
+
+
+
+1.1 Singkatan
+    Singkatan            Arti                                                         Singkatan             Arti
+
+    ADC                  Analog-to-Digital Converter                                  RTU                   Remote Terminal Unit pada Modbus
+
+    DAC                  Digital-to-Analog Converter                                  STAR                  Domain radio endpoint-ke-CH
+
+    NVM                  Memori non-volatile                                          TLS                   Transport Layer Security
+
+    RF                   Radio frequency
+
+
+
+2 Ikhtisar dan arsitektur
+2.1 Ikhtisar produk
+GasleakDetector menggabungkan sensing multi-channel, pemrosesan lokal, alarm fisik, dan dua antarmuka komunikasi dalam
+satu endpoint lapangan.
+
+    Arsitektur                  8 channel analog                                      Kontrol                       ESP32-S3
+
+    Jalur utama                 LoRa STAR ke CH                                       Jalur lokal                   RS-485 Modbus
+
+●        Akuisisi delapan channel sensor dengan pengaktifan daya per channel.
+●        Menjalankan pemrosesan lokal pada mode Running/Inference.
+●        Mengirim telemetri dan event alarm ke CH melalui LoRa STAR.
+●        Menyediakan keluaran steady 24 V untuk perangkat alarm eksternal.
+
+
+2.2 Arsitektur fungsional
+Jalur utama bergerak dari sensor menuju akuisisi, pemrosesan, komunikasi, lalu alarm atau telemetri.
+
+            Sensor MQ                            ADS1256                      ESP32-S3                             LoRa STAR                         Alarm
+
+
+                                analog                            SPI                               frame                               event
+
+
+
+
+             8 channel                         ADC 24-bit                  Kontrol + inferensi                     Uplink ke CH                    Output 24 V
+
+
+                                                            Gambar 1. Jalur fungsi utama GasleakDetector.
+
+    Pemrosesan lokal                              Scanning, validasi input, inferensi, status, dan pembentukan frame.
+
+    Komunikasi                                    LoRa STAR sebagai jalur field utama; RS-485 sebagai antarmuka lokal read-only.
+
+    Alarm                                         Mode AUTO mengikuti hasil inferensi alarm valid; MANUAL hanya sesi pengujian.
+
+
+2.3 Komponen perangkat keras utama
+Tabel ini mengidentifikasi komponen yang terlihat pada desain; rating komponen tidak otomatis menjadi rating produk rakitan.
+
+    Fungsi                           Komponen                                       Peran pada produk
+
+    MCU                              ESP32-S3-WROOM-1U-N16R8                        Kontrol, komunikasi, dan pemrosesan lokal
+
+    ADC                              ADS1256IDBR                                    Akuisisi analog multi-channel 24-bit
+
+    Lingkungan                       SHT40-AD1B-R2                                  Pemantauan suhu dan kelembapan tambahan
+
+    Radio                            E22-900MM22S                                   Antarmuka LoRa STAR
+
+    RS-485                           THVD1410DR                                     Physical layer Modbus RTU
+
+    Ekspander                        PCF8574T                                       Kontrol enable channel sensor
+
+
+
+
+Lab IoT ITB                                                                                                                                                      3 / 10
+GasleakDetector                                                                                                            IOTITB-TDS-GASLEAKDETECTOR-ID-R4.0
+
+
+
+
+3 Sensor channel dan jalur sinyal
+3.1 Pemetaan delapan channel sensor
+Urutan channel adalah bagian dari kontrak akuisisi dan pemrosesan; nilai performa gas tidak disimpulkan dari nama sensor.
+
+    Channel                Sensor                            Identifikasi
+
+    1                      MQ-8                              Seri MQ Winsen
+
+    2                      MQ-135                            Seri MQ Winsen
+
+    3                      MQ-3                              Seri MQ Winsen
+
+    4                      MQ-5                              Seri MQ Winsen
+
+    5                      MQ-4                              Seri MQ Winsen
+
+    6                      MQ-7                              Seri MQ Winsen
+
+    7                      MQ-6                              Seri MQ Winsen
+
+    8                      MQ-2                              Seri MQ Winsen
+
+
+3.2 Kontrol daya channel dan nulling
+Setiap channel memiliki jalur kontrol yang memungkinkan pengaktifan sensor dan proses nulling secara terarah.
+
+    Tahap                                   Deskripsi
+
+    Lapisan kontrol                         ESP32-S3 mengatur enable dan urutan layanan
+
+    Ekspansi I/O                            PCF8574T memetakan delapan sinyal enable
+
+    Switch daya                             TPS22919 mengendalikan suplai per channel
+
+    Nulling analog                          DAC dan multiplexer mengatur koreksi channel
+                                                          Gambar 2. Lapisan kontrol daya dan nulling.
+
+●       Mode Nulling adalah fungsi engineering terpisah dari mode operasi normal.
+●       Status channel dan hasil nulling tersedia untuk readback engineering.
+
+    Catatan: Prosedur nulling mencakup delapan channel, penyimpanan profile, reboot, dan penerapan kembali profile yang valid.
+
+
+3.3 Jalur akuisisi analog
+Akuisisi menggunakan ADC eksternal 24-bit dan dikendalikan secara terurut oleh firmware.
+
+        Keluaran sensor                Conditioning                         ADS1256                               SPI                        ESP32-S3
+
+
+                            tegangan                           mux                             digital                           sample
+
+
+
+
+          8 input analog               Jalur analog PCB                     24-bit ADC                          1.92 MHz                    Filter + status
+
+
+                                                 Gambar 3. Rantai akuisisi analog yang diimplementasikan.
+
+    ADC                                    Texas Instruments ADS1256IDBR, resolusi komponen 24-bit.
+
+    Clock SPI firmware                     1,920,000 Hz
+
+    Output pemrosesan                      Nilai channel, validitas, fault status, dan input untuk inferensi.
+
+
+3.4 Konfigurasi ADC dan sampling
+Firmware mengendalikan multiplexer, gain, kalibrasi, dan penerimaan sampel secara eksplisit.
+
+    Parameter                             Nilai implementasi                         Makna
+
+    ADS1256 data rate                     30,000 SPS                                 Konfigurasi ADC component
+
+    VREF firmware                         2.497 V                                    Nilai conversion source
+
+    PGA                                   1x - 64x adaptive                          Gain dipilih sesuai input
+
+    Calibration                           Self-calibration                           Dilakukan pada initialization path
+
+    Setelah mux switch                    Konversi pertama dibuang                   Mengurangi carry-over setelah pergantian channel
+
+    Scan cadence default                  500 ms                                     Interval siklus akuisisi firmware
+
+
+Lab IoT ITB                                                                                                                                                   4 / 10
+GasleakDetector                                                                                                IOTITB-TDS-GASLEAKDETECTOR-ID-R4.0
+
+
+
+
+3.5 Penyaringan dan perilaku batch valid
+Pemrosesan hanya mengkomit batch bila seluruh delapan channel memenuhi validitas dan saturation checks.
+
+    Tahap                                  Deskripsi
+
+    Scan 8 channel                         Multiplexed sequential acquisition
+
+    Per-channel checks                     Read success, validity, saturation
+
+    Batch gate                             Harus 8/8 valid dan non-saturated
+
+    Moving average                         10 sampel per channel
+
+    Commit                                 Data baru menjadi input pemrosesan/inferensi
+                                                       Gambar 4. Gate penerimaan satu batch sensor.
+
+    Catatan: Satu channel invalid membuat keseluruhan batch invalid.
+
+
+3.6 Gerbang validitas inferensi
+Hasil classifier hanya dianggap valid bila acquisition, model, nulling, dan DAC state semuanya siap.
+
+    Tahap                                  Deskripsi
+
+    Sensor gate                            8/8 channel valid dan non-saturated
+
+    Filter gate                            Moving average telah primed
+
+    Model gate                             ML runtime dan model metadata siap
+
+    Nulling gate                           Profile diterapkan dan terikat ke model
+
+    DAC gate                               Output nulling terverifikasi
+
+    Valid inference                        Baru dapat mempengaruhi AUTO alarm
+                                              Gambar 5. Gate berlapis sebelum inference dinyatakan valid.
+
+
+
+4 Inferensi dan mode operasi
+4.1 Keluaran klasifikasi yang dikonfigurasi
+Model inferensi menyediakan tiga label klasifikasi dan satu nilai confidence.
+
+    Class 0                Clean Air                                            Class 1                LPG
+
+    Class 2                H2
+
+    Output                                 Arti
+
+    Class label                            Hasil klasifikasi model yang dikonfigurasi
+
+    Confidence                             Nilai confidence classifier
+
+
+4.2 Pemantauan suhu dan kelembapan tambahan
+SHT40 menyediakan data suhu dan kelembapan tambahan untuk status dan pemrosesan.
+
+    Komponen               SHT40-AD1B-R2                                        Antarmuka              I2C
+
+    Besaran                Suhu + RH                                            Peran                  Masukan tambahan
+
+●      Firmware mengonversi raw temperature dan humidity dari sensor digital.
+●      Nilai dapat disertakan pada status/telemetri sesuai jalur firmware.
+
+    Catatan: Referensi resmi komponen: Sensirion SHT40 product page dan SHT4x datasheet.
+
+
+
+
+Lab IoT ITB                                                                                                                                 5 / 10
+GasleakDetector                                                                                                                  IOTITB-TDS-GASLEAKDETECTOR-ID-R4.0
+
+
+
+
+4.3 Mode operasi firmware
+Mode dipisahkan berdasarkan tujuan operasi, pengumpulan data, dan commissioning.
+
+    Mode                                Tujuan                                                               Batas penggunaan
+
+    Running / Inference                 Scanning dan inferensi lokal                                         Mode operasi normal setelah boot
+
+    Dataset                             Pengumpulan data engineering                                         Tidak menjadi alarm produksi
+
+    Nulling                             Koreksi baseline per channel                                         Memerlukan alur engineering
+
+    Battery session                     Siklus operasi saat sumber baterai dipilih                           Perilaku daya bergantung hardware
+
+    Alarm MANUAL                        Uji beban alarm                                                      Session-only; AUTO kembali pada boot
+
+    Catatan: Mode AUTO adalah default produk setiap boot. Mode MANUAL tidak disimpan sebagai pilihan boot permanen.
+
+
+4.4 Urutan boot dan sesi normal
+Urutan ini menunjukkan dependency utama sebelum perangkat dapat menghasilkan data operasi.
+
+                    Daya                         Firmware                               Sensor                          Radio                           CH
+
+                           Power-up / reset
+
+                                                              Init + enable channel
+
+                                                                Sample + validasi
+
+                                                                                      Bangun frame
+
+                                                                                                                                   LoRa STAR TX
+
+
+
+
+                                                             Gambar 6. Urutan boot sampai pengiriman telemetri.
+
+●      Kegagalan inisialisasi atau validasi ditampilkan melalui status diagnostik.
+●      Konfigurasi runtime dapat berasal dari default firmware atau NVM yang tervalidasi.
+●      Konfigurasi RF aktual harus diperiksa melalui readback perangkat.
+
+
+
+5 Alarm dan catu daya
+5.1 Arsitektur alarm lokal
+Firmware mengendalikan satu keluaran alarm 24 V; pola bunyi/lampu dihasilkan oleh perangkat alarm eksternal.
+
+        Inferensi valid                       Mode AUTO                             Kontrol alarm                 Boost/output                       Buzzer + LED
+
+
+                             trigger                               enable                            drive                           di unit alarm
+
+
+
+
+            Alarm state                       Default boot                      Keluaran ON/OFF                    Steady 24 V                       1 s ON / 1 s OFF
+
+
+                                                      Gambar 7. Batas tanggung jawab firmware dan perangkat alarm.
+
+    Perilaku firmware                              Keluaran steady ON/OFF pada 24 V.
+
+    Perilaku beban                                 Buzzer dan LED berkedip otomatis 1 detik ON, 1 detik OFF saat diberi 24 V steady.
+
+    Mode uji                                       MANUAL session-only, dapat dipilih melalui Operator Hub.
+
+    Catatan: Keluaran 24 V telah diuji dengan perangkat alarm eksternal berupa buzzer dan LED.
+
+
+5.2 Arsitektur catu daya
+Produk tersedia dalam varian catu 24 VDC atau varian operasi baterai 4.2 VDC.
+
+    Tahap                                           Deskripsi
+
+    Varian 24 VDC                                   Catu nominal 24 VDC
+
+    Varian baterai                                  Catu nominal 4.2 VDC
+
+    Rail internal                                   Konversi untuk MCU, analog, radio, dan sensor
+
+    Output alarm                                    24 V steady saat aktif
+                                                                    Gambar 8. Domain daya utama produk.
+
+
+Lab IoT ITB                                                                                                                                                             6 / 10
+GasleakDetector                                                                                                       IOTITB-TDS-GASLEAKDETECTOR-ID-R4.0
+
+
+
+
+ Parameter elektrik                                      Nilai
+
+ Varian catu utama                                       24 VDC nominal
+
+ Varian baterai                                          4.2 VDC nominal
+
+ Arus terukur                                            Hingga 300 mA steady pada delapan sensor aktif
+
+
+5.3 Konsumsi arus pada input 24 V
+Nilai adalah pengukuran steady-state ketika jumlah sensor aktif dinaikkan dari nol sampai delapan.
+mA
+     330
+                                                                                                                                             300
+                                                                                                                                 270
+                                                                                                                240
+     248
+                                                                                                  210
+
+                                                                                160
+     165
+                                                                 130
+                                          100
+      82                    60
+
+
+                 2.56
+      0
+                    0       1                 2                   3              4                 5             6                7              8
+
+
+                                                  Gambar 9. Arus steady-state terhadap jumlah sensor aktif.
+
+ Sensor aktif                0            1                 2             3              4              5             6           7          8
+
+ Arus (mA)                   2.56         60                100           130            160            210           240         270        300
+
+ Catatan: Pengukuran dilakukan dengan alat ukur diseri pada jalur 24 V+ dari PSU ke board. Nilai 300 mA adalah steady-state, bukan peak atau
+ rating PSU.
+
+
+5.4 Varian catu baterai
+Varian operasi baterai menggunakan catu nominal 4.2 VDC. Konfigurasi pack ditentukan sesuai varian unit.
+
+ Catu nominal                          4.2 VDC
+
+ Penerapan                             Hanya varian operasi baterai
+
+ Konfigurasi pack                      Bergantung varian unit
+
+
+5.5 Pemantauan tegangan baterai
+Firmware melaporkan battery voltage dan diagnostic flags, tetapi tidak memakai flag tersebut sebagai active cutoff.
+
+ Diagnostic                             Threshold source                               Perilaku
+
+ Battery low                            3.50 V                                         Status/flag; tidak menghentikan operasi
+
+ Battery critical                       3.30 V                                         Status/flag; bukan physical cutoff
+
+ Tahap                                  Deskripsi
+
+ Voltage read                           Battery monitor acquisition
+
+ Diagnostic compare                     Low / critical flags
+
+ Status output                          Nilai dan flag tersedia untuk readback
+
+ Protection boundary                    Tidak memutus pack atau rail secara aktif
+                                                   Gambar 11. Monitoring diagnostik versus proteksi aktif.
+
+
+
+
+Lab IoT ITB                                                                                                                                          7 / 10
+GasleakDetector                                                                                                                       IOTITB-TDS-GASLEAKDETECTOR-ID-R4.0
+
+
+
+
+6 Antarmuka komunikasi
+6.1 Antarmuka LoRa STAR
+LoRa STAR menghubungkan GasleakDetector ke radio STAR pada CH.
+
+    Parameter                                 Default firmware                             Catatan
+
+    Carrier                                   920.0 MHz                                    Input konfigurasi dibatasi 920-923 MHz inclusive
+
+    Bandwidth                                 125 kHz                                      Harus sama pada GasleakDetector dan CH STAR
+
+    Spreading factor                          SF7                                          Default domain STAR
+
+    Coding rate                               4/5                                          Nilai konfigurasi firmware CR=5
+
+    TX power                                  0-22 dBm; default 17 dBm                     Kemampuan konfigurasi; bukan output/EIRP terukur
+
+    Preamble                                  8                                            Default firmware
+
+    Antena                                    3 dBi                                        Konfigurasi produk
+
+    Catatan: Konfigurasi aktif diverifikasi melalui device readback setelah komisioning.
+
+
+6.2 Antarmuka RS-485 / Modbus
+Antarmuka lokal disediakan sebagai Modbus RTU slave read-only untuk pembacaan data/status yang diekspos produk.
+
+    Physical layer             RS-485                                                      Protocol                           Modbus RTU
+
+    Mode                       Slave read-only                                             Unit ID                            1
+
+    Serial format                                   9600 bit/s, 8N1
+
+    Transceiver                                     THVD1410DR
+
+    Akses customer                                  Pembacaan delapan register publik yang didukung; tidak digunakan untuk menulis kontrol produk.
+
+    Catatan: Interface menggunakan function code 03/04 dan register read-only yang ditetapkan pada peta register produk.
+
+
+6.3 Keamanan data dan frame
+Payload field menggunakan autentikasi aplikasi agar penerima dapat memverifikasi keaslian frame dan menolak frame yang tidak
+valid sebelum pemrosesan lebih lanjut.
+
+    Tahap                                           Deskripsi
+
+    Data sensor                                     Nilai, status, dan event
+
+    Frame aplikasi                                  Identitas, sequence, dan payload
+
+    AES-128-GCM                                     Confidentiality + authentication
+
+    Transport LoRa                                  STAR menuju CH
+                                                                Gambar 12. Lapisan perlindungan payload field.
+
+●      CH meneruskan frame field dan tidak menjadi titik terminasi TLS.
+●      TLS, bila dipilih, berada pada segmen Gateway-ke-broker.
+●      Penerima menolak payload yang gagal autentikasi atau pemeriksaan anti-replay.
+
+
+
+7 Komisioning dan diagnostik
+7.1 Komisioning melalui Operator Hub
+Operator Hub menjadi antarmuka pemilihan varian firmware, upload, konfigurasi, dan readback engineering.
+
+                    Engineer                                Operator Hub                                      Firmware                             Perangkat
+
+                                 Pilih GasleakDetector
+
+                                                                               Validasi varian/versi
+
+                                                                                                        Upload firmware terpilih
+
+                                                                                                       Status + version readback
+
+                                 Konfigurasi / uji alarm
+
+
+
+
+                                                            Gambar 13. Alur commissioning terkontrol operator.
+
+
+
+
+Lab IoT ITB                                                                                                                                                        8 / 10
+GasleakDetector                                                                                                            IOTITB-TDS-GASLEAKDETECTOR-ID-R4.0
+
+
+
+ Verifikasi komisioning                     Kriteria
+
+ Versi dan hardware                         Versi aktif dan profil hardware diverifikasi melalui readback perangkat setelah upload.
+
+ Mode alarm                                 Mode MANUAL memerlukan langkah eksplisit dan kembali AUTO saat boot.
+
+ Batas RF                                   Konfigurasi frekuensi di luar 920-923 MHz ditolak.
+
+
+7.2 Status dan diagnostik
+Status machine-readable digunakan untuk membedakan konfigurasi, kesiapan subsistem, fault, dan hasil operasi.
+
+ Kelompok status                                 Contoh isi engineering
+
+ Identitas                                       Firmware version, protocol version, device identity
+
+ Sensor                                          Channel aktif, validitas, dan fault state
+
+ Nulling                                         Profile/status dan hasil per channel
+
+ Radio                                           Frequency, bandwidth, SF, CR, power, preamble
+
+ Alarm                                           AUTO/MANUAL, commanded output, session-only flag
+
+ Daya                                            Sumber terdeteksi dan state power path
+
+ Catatan: Pembacaan kembali perangkat digunakan untuk memverifikasi konfigurasi unit aktif.
+
+
+
+8 Parameter operasional dan antarmuka
+8.1 Waktu operasional
+Firmware menjalankan akuisisi, pelaporan radio, dan jendela penerimaan dengan interval tetap berikut.
+
+ Fungsi                                           Nilai                     Keterangan
+
+ Siklus pemindaian sensor                         500 ms                    Interval pemrosesan pengukuran delapan channel.
+
+ Pelaporan radio periodik                         10 s                      Interval nominal pengiriman data operasional melalui LoRa STAR.
+
+ Jendela penerimaan setelah transmisi             2s                        Waktu perangkat mempertahankan jalur penerimaan setelah pengiriman.
+
+ Pemanasan sensor pada sesi baterai               30 s                      Delapan channel sensor dipanaskan sebelum siklus inferensi pada sesi baterai.
+
+
+8.2 Antarmuka Modbus RTU
+RS-485 menyediakan delapan register 16-bit hanya-baca untuk integrasi dengan pengendali atau sistem akuisisi eksternal.
+
+ Parameter                                                Spesifikasi
+
+ Mode                                                     Modbus RTU / RS-485
+
+ Alamat unit                                              1
+
+ Format serial                                            9600 bit/s, 8 data bits, no parity, 1 stop bit (8N1)
+
+ Fungsi baca                                              03 (Holding Registers), 04 (Input Registers)
+
+ Akses                                                    Hanya-baca
+
+ Alamat protokol             Register                                          Nilai yang dibaca
+
+ 0 (0x0000)                  Status perangkat                                  Word status 16-bit; definisi bit tersedia di bawah.
+
+ 1 (0x0001)                  Hasil klasifikasi                                 Kode hasil klasifikasi produk dalam uint16.
+
+ 2 (0x0002)                  Confidence                                        0-100; satuan persen.
+
+ 3 (0x0003)                  Tegangan baterai                                  mV; 0xFFFF berarti nilai tidak tersedia/tidak valid.
+
+ 4 (0x0004)                  Sumber ST_P                                       1 = 24 V; 0 = baterai.
+
+ 5 (0x0005)                  Daya eksternal                                    1 = terdeteksi; 0 = tidak terdeteksi.
+
+ 6 (0x0006)                  Pencacah transmisi LoRa                           16 bit bawah dari pencacah transmisi.
+
+ 7 (0x0007)                  ID node                                           Identitas node dalam uint16.
+
+ Catatan: Alamat di tabel adalah address yang dikirim pada field start-address Modbus, mulai dari 0. Perangkat lunak master yang menampilkan
+ nomor register 1-based harus dipetakan ke address protokol ini; gunakan FC03 atau FC04 dan jangan menulis register.
+
+
+
+
+Lab IoT ITB                                                                                                                                             9 / 10
+GasleakDetector                                                                                                         IOTITB-TDS-GASLEAKDETECTOR-ID-R4.0
+
+
+
+
+8.3 Logika keluaran alarm
+Keluaran alarm 24 V memiliki mode AUTO untuk operasi normal dan mode MANUAL untuk pengujian terkontrol.
+
+ Mode                     Kondisi pengendali                                                                  Keluaran alarm 24 V
+
+ AUTO                     Inferensi menetapkan alarm                                                          Aktif
+
+ AUTO                     Inferensi tidak menetapkan alarm; penyimpanan status clear berhasil                 Tidak aktif
+
+ AUTO fail-safe           Penyimpanan status clear gagal                                                      Tetap aktif hingga clear valid dapat disimpan
+
+ MANUAL                   Perintah uji ON                                                                     Aktif
+
+ MANUAL                   Perintah uji OFF                                                                    Tidak aktif
+
+ Catatan: Mode MANUAL tidak disimpan sebagai mode operasi permanen. Setelah perangkat dimulai ulang, mode awal adalah AUTO. Kegagalan
+ menyimpan status clear mempertahankan alarm ON secara fail-safe. Ketika keluaran 24 V aktif, pola bunyi dan kedip satu detik ON/satu detik
+ OFF dibentuk oleh perangkat alarm yang diberi catu.
+
+
+8.4 Word status Modbus
+Register 0 memadatkan kesiapan subsistem, validitas inferensi, alarm, dan sumber daya ke dalam satu word status 16-bit.
+
+ Bit register 0                              Makna bila bernilai 1
+
+ 0                                           ADS1256 ready
+
+ 1                                           DAC ready
+
+ 2                                           LoRa ready
+
+ 3                                           ML runtime ready
+
+ 4                                           Hasil inferensi valid
+
+ 5                                           Alarm aktif
+
+ 6                                           Sumber ST_P = 24 V
+
+ 7                                           Daya eksternal terdeteksi
+
+ Perilaku protocol                              Ketentuan
+
+ Format nilai                                   Seluruh register bernilai unsigned 16-bit; byte paling signifikan dikirim lebih dahulu.
+
+ Jumlah pembacaan                               1-8 register berurutan dari address awal yang valid.
+
+ Fungsi tulis                                   Tidak didukung; respons exception Modbus 01 (illegal function).
+
+ Address tidak valid                            Respons exception Modbus 02 (illegal data address).
+
+ Jumlah tidak valid                             Respons exception Modbus 03 (illegal data value).
+
+
+8.5 Panduan pembacaan Modbus
+Gunakan langkah berikut untuk menghubungkan PLC, HMI, SCADA, atau aplikasi master ke GasleakDetector tanpa menulis
+konfigurasi perangkat.
+
+ Langkah           Instruksi
+
+ 1                 Atur port RS-485 master ke 9600 bit/s, 8N1, tanpa parity; gunakan Unit ID 1.
+
+ 2                 Pilih FC03 atau FC04, lalu kirim start-address 0-7 dan quantity 1-8 yang seluruhnya berada pada rentang tersebut.
+
+ 3                 Baca setiap word sebagai unsigned 16-bit big-endian. Untuk register 3, satuannya mV; untuk register 2, satuannya persen.
+
+ 4                 Periksa CRC RTU dan respons exception sebelum memakai nilai pada aplikasi pengendali.
+
+ Contoh                         Frame RTU lengkap                                      Keterangan
+
+ Baca confidence                01 04 00 02 00 01 90 0A                                Request FC04 untuk satu word pada address 2.
+
+ Respons confidence             01 04 02 00 52 38 CD                                   Contoh ilustratif: 0x0052 = 82%, bukan hasil pembacaan unit
+                                                                                       tertentu.
+
+ Baca seluruh map               01 04 00 00 00 08 F1 CC                                Request FC04 untuk address 0 sampai 7; respons membawa 16 byte
+                                                                                       data register.
+
+ Catatan: CRC mengikuti urutan Modbus RTU: low byte lalu high byte. Respons sukses pembacaan seluruh map dimulai `01 04 10`, diikuti 16 byte
+ data dan CRC.
+
+
+
+
+Lab IoT ITB                                                                                                                                             10 / 10
+

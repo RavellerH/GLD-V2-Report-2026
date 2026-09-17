@@ -1,0 +1,677 @@
+                                                                                                                                           LAB IoT ITB
+
+
+
+
+                                                                     CH
+Technical Datasheet Revision 4.0
+
+Dual-radio node for LoRa STAR aggregation, dynamic routing, and multi-hop LoRa
+MESH forwarding.
+
+
+      GasleakDetector                STAR radio                           CH                           MESH radio                    CH / Gateway
+
+
+
+
+                         920 MHz                         ingress                          egress                           921 MHz
+
+
+
+
+             Endpoint                3 dBi antenna                 Discovery + routing                 8 dBi antenna                   Next hop
+
+
+
+
+    PCB VARIANTS                     RADIOS                                   ENERGY                                   ROUTING
+
+    Rectangle / Circle               2 x E22-900MM22S                         Battery + 2 panels                       Dynamic multi-hop
+
+Key features
+●     Receives GasleakDetector traffic through Radio A/STAR.              ●    Forwards uplink and downlink through Radio B/MESH.
+●     Selects a parent based on discovery, root reachability, and         ●    Supports additional transit CH nodes when a direct Gateway
+      health.                                                                  route is not selected.
+Technical overview
+CH bridges the LoRa STAR endpoint domain and LoRa MESH backbone without permanently fixing a parent.
+Functional profile
+    Ingress                               LoRa STAR
+    Egress                                LoRa MESH
+    Radios                                2
+    Variants                              2 PCB forms
+
+Operational interfaces
+    Serving CH                            Receives STAR frames from its served GasleakDetector.
+    Transit CH                            Forwards MESH frames without becoming the endpoint data source.
+    Gateway root                          Final route destination; not a static parent for every CH.
+
+
+
+
+Lab IoT ITB
+CH                                                                                                                                             IOTITB-TDS-CH-EN-R4.0
+
+
+
+
+Contents
+
+1 Product identification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      1.1 Abbreviations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 Overview and hardware . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 Product overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 CH role in the network . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.3 PCB variants and firmware compatibility . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.4 Primary hardware components . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      2.5 Dual-radio architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+
+3 Radio interfaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 LoRa STAR characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.2 LoRa MESH characteristics      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+
+      3.3 Defaults, NVS, and device readback . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      3.4 Nominal EIRP calculation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+
+4 Routing and transport           . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+      4.1 Discovery and parent candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.2 Active parent, alternate, and loop prevention . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.3 Multi-hop forwarding . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.4 Normal telemetry: cache and server pull . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.5 Alarm push and return-to-clear . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.6 Parent failover   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .6
+
+
+5 Power system . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+      5.1 CH energy architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.2 CH battery configuration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.3 Solar panels and charging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.4 Battery telemetry and protection boundary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+
+6 Routing and operational capacities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+      6.1 Firmware resource capacities     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .8
+
+      6.2 CH operating states . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.3 Parent-selection constraints . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.4 Routing and transport retention . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+
+7 Commissioning and Operator Hub . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+
+
+
+Lab IoT ITB                                                                                                                                                        2/9
+CH                                                                                                                                               IOTITB-TDS-CH-EN-R4.0
+
+
+
+
+1 Product identification
+    Product                                  CH
+
+    Document revision                        4.0
+
+    Issuer                                   Lab IoT ITB
+
+
+
+1.1 Abbreviations
+    Abbreviation            Meaning                                                      Abbreviation           Meaning
+
+    CH                      Communication Hub / field communication node                 RF                     Radio frequency
+
+    EIRP                    Equivalent Isotropically Radiated Power                      STAR                   GasleakDetector-to-CH radio domain
+
+    MESH                    Backbone radio domain between CH and Gateway                 TX                     Transmit
+
+    NVM/NVS                 Non-volatile configuration storage                           VBAT                   Battery voltage read by the device
+
+
+
+2 Overview and hardware
+2.1 Product overview
+CH bridges the LoRa STAR endpoint domain and LoRa MESH backbone without permanently fixing a parent.
+
+    Ingress                       LoRa STAR                                              Egress                       LoRa MESH
+
+    Radios                        2                                                      Variants                     2 PCB forms
+
+●      Receives GasleakDetector traffic through Radio A/STAR.
+●      Selects a parent based on discovery, root reachability, and health.
+●      Forwards uplink and downlink through Radio B/MESH.
+●      Supports additional transit CH nodes when a direct Gateway route is not selected.
+
+
+2.2 CH role in the network
+A CH can act as the serving CH for local endpoints and as a transit CH for other nodes.
+
+         GasleakDetector                      Serving CH                          Transit CH                          Next parent                      Gateway
+
+
+                                  STAR                             MESH                                 MESH                              root
+
+
+
+
+           Local endpoint                    STAR to MESH                           Optional                          CH / Gateway                   Root destination
+
+
+                                                             Figure 1. Serving and transit roles in the field path.
+
+    Serving CH                                     Receives STAR frames from its served GasleakDetector.
+
+    Transit CH                                     Forwards MESH frames without becoming the endpoint data source.
+
+    Gateway root                                   Final route destination; not a static parent for every CH.
+
+
+2.3 PCB variants and firmware compatibility
+Rectangle/small and Circle/large use different hardware mappings, so the firmware target must be selected explicitly.
+
+    Product variant                          Design basis                                  Operator Hub selection           Description
+
+    CH Rectangle                             Rectangle hardware profile                    CH Rectangle                     Rectangle-board-specific mapping
+
+    CH Circle                                Circle hardware profile                       CH Circle                        Circle-board-specific mapping
+
+    Stage                                          Description
+
+    Select board form                              Rectangle or Circle
+
+    Select firmware variant                        Target must match the hardware profile
+
+    Upload                                         Operator Hub rejects hardware fallback
+
+    Readback                                       Version, identity, and board variant are checked
+                                                              Figure 2. Board and firmware compatibility gate.
+
+    Note: The two firmware variants are not interchangeable without selecting the correct hardware target.
+
+
+Lab IoT ITB                                                                                                                                                             3/9
+CH                                                                                                                                     IOTITB-TDS-CH-EN-R4.0
+
+
+
+
+2.4 Primary hardware components
+Both boards share the same functional architecture even though layout and pin mapping differ.
+
+    Function                      Design component                                       Role
+
+    MCU                           ESP32-S3-WROOM-1U-N16R8                                Runtime, routing, configuration, and status
+
+    Radio A                       EBYTE E22-900MM22S                                     LoRa STAR domain
+
+    Radio B                       EBYTE E22-900MM22S                                     LoRa MESH domain
+
+    Charger                       TI BQ25185DLHR                                         PCB charging/solar interface
+
+    Watchdog                      TI TPL5010DDCR                                         Hardware watchdog/timing
+
+    Note: Component temperature, safety, and compliance ratings do not become CH product ratings.
+
+
+2.5 Dual-radio architecture
+STAR and MESH domains are physically and logically separated with different radios and defaults.
+
+              Endpoint                  Radio A                         CH runtime                            Radio B                      Backbone
+
+
+                           STAR                           ingress                               forward                         MESH
+
+
+
+
+        GasleakDetector                STAR / 3 dBi                    Cache + routing                      MESH / 8 dBi                  CH / Gateway
+
+
+                                                      Figure 3. Separation of the two CH radio domains.
+
+●      Radio A and Radio B use the SX1262 driver.
+●      Normal operation requires successful STAR and MESH initialization.
+●      STAR and MESH use separate antennas for their respective radio domains.
+
+
+
+3 Radio interfaces
+3.1 LoRa STAR characteristics
+STAR is the local link from GasleakDetector to its serving CH.
+
+    Parameter                               Default                                  Status
+
+    Carrier                                 920.0 MHz                                Configuration accepted from 920-923 MHz
+
+    Bandwidth                               125 kHz                                  Firmware default
+
+    Spreading factor                        SF7                                      Firmware default
+
+    Coding rate                             4/5                                      Firmware default
+
+    TX setting                              17 dBm                                   Setting, not measured output
+
+    CH antenna                              3 dBi                                    Product configuration
+
+    Note: Actual configuration may come from NVS. Device readback, not the default table, is the deployment reference.
+
+
+3.2 LoRa MESH characteristics
+MESH is the CH-to-CH and CH-to-Gateway backbone.
+
+    Parameter                               Default                                  Status
+
+    Carrier                                 921.0 MHz                                Configuration accepted from 920-923 MHz
+
+    Bandwidth                               125 kHz                                  Firmware default
+
+    Spreading factor                        SF9                                      Firmware default
+
+    Coding rate                             4/5                                      Firmware default
+
+    TX setting                              17 dBm                                   Setting, not measured output
+
+    CH antenna                              8 dBi                                    Product configuration
+
+
+
+
+Lab IoT ITB                                                                                                                                              4/9
+CH                                                                                                                                           IOTITB-TDS-CH-EN-R4.0
+
+
+
+
+3.3 Defaults, NVS, and device readback
+Firmware distinguishes defaults, stored values, and actual values read back after a write.
+
+    Stage                                       Description
+
+    Build default                               STAR 920.0 MHz; MESH 921.0 MHz
+
+    Input validation                            Carrier must be within 920-923 MHz inclusive
+
+    Storage                                     STAR/MESH configuration is stored in NVS
+
+    Readback                                    Write is verified before success ACK
+
+    Next boot                                   Valid configuration is reloaded
+                                                              Figure 4. Controlled RF-configuration cycle.
+
+    Note: Engineers must record unit readback after commissioning.
+
+
+3.4 Nominal EIRP calculation
+The values below are arithmetic TX setting plus antenna gain before losses; they are not RF measurements.
+
+    Domain                           TX setting                            Antenna gain                              Nominal before loss
+
+    STAR                             17 dBm                                3 dBi                                     20 dBm
+
+    MESH                             17 dBm                                8 dBi                                     25 dBm
+
+●      Cable/connector loss is not included in the nominal calculation.
+
+    Note: If regulatory documentation requires EIRP, use accredited-laboratory results and the final antenna configuration.
+
+
+
+4 Routing and transport
+4.1 Discovery and parent candidates
+CH builds parent candidates through discovery and does not use a fixed parent identity.
+
+            Local CH                      Discovery                         Lineage check                        Scoring                       Active parent
+
+
+                             probe                               filter                            rank                            install
+
+
+
+
+            Needs route                Nearby candidates                      Toward root                     Health + quality                 CH / Gateway
+
+
+                                                                Figure 5. Active-parent selection flow.
+
+●      A candidate must have lineage that reaches the Gateway root.
+●      Loops and invalid lineage are rejected.
+●      Parent and alternate can be stored after stabilization.
+
+
+4.2 Active parent, alternate, and loop prevention
+Routing maintains a path toward the Gateway while preventing the parent chain from looping back to the origin node.
+
+    Control                          Function                                                         Outcome
+
+    Root reachability                Ensures candidate has a path to Gateway                          Candidate without root is rejected
+
+    Lineage guard                    Checks parent chain                                              Looping candidate is rejected
+
+    Parent health                    Monitors active-parent response                                  Can trigger replacement
+
+    Alternate parent                 Keeps a backup candidate                                         Can be used before rediscovery
+
+    Note: The actual route depends on field discovery; the datasheet does not name any parent as a permanent pair.
+
+
+
+
+Lab IoT ITB                                                                                                                                                    5/9
+CH                                                                                                                                                           IOTITB-TDS-CH-EN-R4.0
+
+
+
+
+4.3 Multi-hop forwarding
+A frame can pass through zero or more transit CH nodes before reaching the Gateway.
+
+                    Serving CH                               Transit CH 1                               Transit CH n                                        Gateway
+
+                                      Forward MESH
+
+                                                                                  Relay by route
+
+                                                                                                                                 Deliver to root
+
+                                                                                                                              Downlink reverse path
+
+                                                          Relay to serving CH
+
+
+
+
+                                                             Figure 6. Multi-hop uplink and downlink forwarding.
+
+
+
+4.4 Normal telemetry: cache and server pull
+Normal telemetry does not use the same push pattern as alarms; data is cached at CH and sent in response to a pull.
+
+                        GasleakDetector                                            Serving CH                                                      Gateway/Server
+
+                                                     STAR telemetry
+
+
+                                                                                Store/refresh cache
+
+
+                                                                                                                Server pull
+
+
+                                                                                                              Cluster response
+
+
+
+
+                                                                Figure 7. Cache/pull path for normal telemetry.
+
+●      Cache separates endpoint reception from the server request cycle.
+●      Delivery to the Server occurs when a pull request reaches the serving CH.
+
+
+4.5 Alarm push and return-to-clear
+Alarm and return-to-clear events use a push path so they do not wait for the normal telemetry cycle.
+
+                GasleakDetector                              Serving CH                                   Parent                                            Gateway
+
+                                     Alarm/clear frame
+
+                                                                                Forward over MESH
+
+                                                                                                                                Relay toward root
+
+                                                                                                                                   ACK path
+
+                                                                                ACK to serving CH
+
+
+
+
+                                                              Figure 8. Push path for alarm and return-to-clear.
+
+
+
+4.6 Parent failover
+Failover can use an alternate parent or return to discovery when active-parent health degrades.
+
+    Stage                                           Description
+
+    Active parent                                   HELLO/ACK and health are monitored
+
+    Failure trigger                                 Timeout, HELLO ACK failure, or alarm ACK failure
+
+    Alternate                                       Used when still valid
+
+    Rediscovery                                     Finds new candidates when needed
+
+    New route                                       Parent is determined by discovery
+                                                                      Figure 9. Parent-failover state flow.
+
+    Note: Multi-hop and failover have been validated at the ITB IoT Lab. The replacement parent is selected dynamically through discovery.
+
+
+
+
+Lab IoT ITB                                                                                                                                                                   6/9
+CH                                                                                                                                  IOTITB-TDS-CH-EN-R4.0
+
+
+
+
+5 Power system
+5.1 CH energy architecture
+The product configuration combines parallel batteries and two parallel solar panels through on-board charging hardware.
+
+          2 x panels                 SOLAR input                          BQ25185                          1-3 cells                       CH
+
+
+                        combine                            charge                             store                        supply
+
+
+
+
+           6 W each                        Parallel                   Charge/power path                 Parallel 18650                Dual-radio load
+
+
+                                                             Figure 10. CH energy topology.
+
+ Note: The product configuration uses 1-3 parallel 18650 cells and two parallel 6 W panels through the on-board charging path.
+
+
+5.2 CH battery configuration
+CH uses one to three LiitoKala 18650 cells connected in parallel.
+
+ Parameter                           Configuration                                  Note
+
+ Type                                LiitoKala Lii-King4000 18650                   Cell-label identification
+
+ Quantity                            1-3                                            Deployment-dependent
+
+ Capacity label                      4000 mAh / cell                                Not a usable-capacity test
+
+ Topology                            Parallel                                       Maintains the single-cell voltage domain
+
+ Note: The 4000 mAh value is the nameplate capacity of each cell.
+
+
+5.3 Solar panels and charging
+Two 6 W panels are connected in parallel to the CH solar interface.
+
+ Panel count             2                                                    Nameplate                   6 W each
+
+ Topology                Parallel                                             Combined                    12 W nameplate
+
+ Board interface                           One SOLAR input into the power/charge path.
+
+ Controller                                TI BQ25185DLHR
+
+ Note: 12 W is the sum of two panel nameplates, not measured field output.
+
+
+5.4 Battery telemetry and protection boundary
+Firmware reads and reports battery voltage but does not use low voltage to block product operation.
+
+ Stage                                      Description
+
+ VBAT sensing                               Voltage is read by CH
+
+ Status                                     Value is reported read-only
+
+ Boot/TX                                    Not blocked by VBAT threshold
+
+ Low-power                                  Not automatically triggered by undervoltage
+                                                       Figure 11. VBAT read-only function boundary.
+
+ Note: VBAT is used for diagnostic telemetry; firmware does not disconnect power or enter low-power mode automatically from that reading.
+
+
+
+
+Lab IoT ITB                                                                                                                                             7/9
+CH                                                                                                                                           IOTITB-TDS-CH-EN-R4.0
+
+
+
+
+6 Routing and operational capacities
+6.1 Firmware resource capacities
+The following table states the number of entries that can be retained concurrently by the CH routing and transport services.
+
+    Resource                                  Capacity                  Use
+
+    Parent candidates                         8                         Discovery candidates evaluated for parent selection.
+
+    Node cache                                32                        Information about nodes known to the CH.
+
+    Alarm queue                               8                         Alarms awaiting transport processing.
+
+    Transmission queue                        8                         Items awaiting radio transmission.
+
+    Pending downlink                          16                        Downlink commands or responses awaiting completion.
+
+
+6.2 CH operating states
+The state machine separates initialization, route establishment, connected operation, failover, and recovery.
+
+    State                     Function                                                                             Product profile
+
+    Startup                   Starts services and base configuration.                                              Active
+
+    Battery-wait state        Entered briefly at boot; the read-only profile bypasses the readiness                Proceeds directly to radio initialization
+                              threshold.
+
+    Radio initialization      Initializes the STAR and MESH radios.                                                Active
+
+    Network discovery         Performs discovery and selects a parent.                                             Active
+
+    Connected                 Forwards traffic using the selected route.                                           Active
+
+    Low-power state           State available for low-power operation.                                             Not triggered automatically by the battery
+                                                                                                                   reading
+
+    Parent failover           Searches for a replacement when the parent is no longer eligible.                    Active
+
+    Recovery                  Restores radio and routing services after a disturbance.                             Active
+
+    Note: The product profile reads battery voltage for telemetry. The value is not used to prevent boot, stop transmission, or activate the low-power
+    state automatically.
+
+
+6.3 Parent-selection constraints
+Parent selection is dynamic and discovery-driven, with stability constraints that prevent excessively rapid route changes.
+
+    Parameter                                      Value                       Operational effect
+
+    Candidate capacity                             8                           Limits the number of candidates evaluated at one time.
+
+    Parent health timeout                          16 min                      A parent not seen within this interval triggers failover evaluation in the normal
+                                                                               product profile.
+
+    Minimum parent dwell                           5 min                       Prevents routine switching before the minimum time has elapsed.
+
+    Switch margin                                  15 dB                       A replacement candidate must provide sufficient improvement for a routine
+                                                                               switch.
+
+    Stable discoveries                             4                           Applies to routine background switching and parent/alternate persistence; it is
+                                                                               not an initial-join or failover gate.
+
+    Note: The replacement parent is not static; failover selects an eligible discovery candidate.
+
+
+6.4 Routing and transport retention
+Routing and downlink data have bounded retention periods so that old information is not used indefinitely.
+
+    Data                                                            Retention                                 Entry limit
+
+    Parent without refresh                                          16 min                                    1 active parent
+
+    Pending downlink                                                Default 30 min; command TTL               16
+                                                                    overrides
+
+    Node cache                                                      60 min                                    32
+
+●      Queues and caches have fixed capacities; the number of retained entries does not exceed the tabulated limits.
+●      Failover uses the available discovery results, not a programmed fixed replacement-parent list.
+●      The STAR and MESH radios are handled as separate interfaces so that node reception and MESH forwarding can be managed
+       independently.
+
+
+
+Lab IoT ITB                                                                                                                                                     8/9
+CH                                                                                                                     IOTITB-TDS-CH-EN-R4.0
+
+
+
+
+7 Commissioning and Operator Hub
+Commissioning locks board form, firmware variant, identity, and configuration readback before unit acceptance.
+
+              Engineer                              Operator Hub                                   Firmware             CH
+
+                         Select Rectangle/Circle
+
+                                                                   Select CH Rectangle/CH Circle
+
+                                                                                                    Upload
+
+                                                                                             Version + board variant
+
+                              RF readback
+
+
+
+
+                                                            Figure 12. CH commissioning gates.
+
+ Interface                                         Scope
+
+ Simple Operator Hub                               Board/firmware selection and simplified configuration controls.
+
+ CH Expert Operator                                More complete STAR and MESH configuration/readback.
+
+
+
+
+Lab IoT ITB                                                                                                                             9/9
+

@@ -1,0 +1,667 @@
+                                                                                                                                   LAB IoT ITB
+
+
+
+
+                                            Whole System
+Technical Datasheet Revision 4.0
+
+Arsitektur end-to-end GasleakDetector - CH - CH opsional - Gateway - broker -
+Server.
+
+
+       GasleakDetector                 CH                         CH opsional                     Gateway                       Server
+
+
+
+
+                           STAR                       MESH                           MESH                          MQTT
+
+
+
+
+         Sensor + alarm            STAR ke MESH                     Multi-hop                  MESH ke MQTT                  Data + perintah
+
+
+
+
+    TOPOLOGI                        CARRIER                                UPLINK                             DOWNLINK
+
+    Multi-hop dinamis               920-923 MHz                            Normal pull + alarm push           Perintah melalui broker
+
+Fitur utama
+●      Jalur operasional utama: GasleakDetector ke serving CH,         ●    Perintah kembali melalui broker, Gateway, rute CH, dan
+       transit CH opsional, Gateway, broker, lalu Server.                   jendela penerimaan endpoint.
+●      Jalur telemetri normal dan alarm menggunakan perilaku           ●    Jalur dataset engineering dipisahkan dari jalur alarm
+       pengiriman yang berbeda.                                             operasional.
+Ikhtisar teknis
+Whole System menghubungkan endpoint sensor, jaringan radio field, bridge IP, broker, dan aplikasi Server.
+Profil fungsi
+    Endpoint                            GasleakDetector
+    Jaringan field                      CH STAR/MESH
+    Bridge IP                           Gateway
+    Aplikasi                            Server
+
+Antarmuka operasional
+    GasleakDetector - CH                LoRa STAR | Uplink + receive window | Telemetry, alarm, dan limited downlink
+    CH - CH/Gateway                     LoRa MESH | Dua arah | Multi-hop routing dan relay
+    Gateway - network                   Wi-Fi STA | Dua arah | IP connectivity
+    Gateway - broker                    MQTT / TLS option | Dua arah | Publish uplink; subscribe command
+
+
+
+
+Lab IoT ITB
+Whole System                                                                                                                     IOTITB-TDS-WHOLE-SYSTEM-ID-R4.0
+
+
+
+
+Daftar isi
+
+1 Identifikasi produk        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+      1.1 Singkatan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 Ikhtisar sistem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 Ruang lingkup sistem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 Arsitektur operasional dan dataset . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.3 Matriks peran subsistem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      2.4 Ringkasan antarmuka antar-subsistem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+
+3 Alur operasional . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 Urutan telemetri normal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.2 Urutan alarm dan kembali-normal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      3.3 Urutan perintah downlink . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+
+4 Routing dan RF . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+      4.1 Discovery dan pembentukan rute . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.2 Multi-hop dan failover . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.3 Rencana RF dua domain . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+5 Jaringan dan keamanan             . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .6
+      5.1 Jaringan IP, broker, dan profil TLS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.2 Batas keamanan berlapis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.3 Ketersediaan, cache, dan buffering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+
+6 Daya, varian, dan penerapan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+      6.1 Domain daya subsistem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.2 Varian perangkat keras dan kompatibilitas firmware . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.3 Topologi penerapan     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .7
+
+      6.4 Urutan komisioning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+
+7 Kontrak integrasi dan batas sistem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+      7.1 Kontrak antarmuka sistem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      7.2 Batas kapasitas subsistem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      7.3 Perilaku saat gangguan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+      7.4 Batas keamanan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+
+
+
+Lab IoT ITB                                                                                                                                                        2/9
+Whole System                                                                                                                         IOTITB-TDS-WHOLE-SYSTEM-ID-R4.0
+
+
+
+
+1 Identifikasi produk
+    Produk                                Whole System
+
+    Revisi dokumen                        4.0
+
+    Penerbit                              Lab IoT ITB
+
+
+
+1.1 Singkatan
+    Singkatan           Arti                                                        Singkatan             Arti
+
+    AES-GCM             Authenticated encryption pada payload field                 MQTT                  Messaging transport melalui broker
+
+    CH                  Node komunikasi serving/transit                             STAR                  Radio link GasleakDetector ke serving CH
+
+    E2E                 End-to-end                                                  TLS                   Transport security pada dua sesi broker terpisah
+
+    MESH                Backbone radio CH dan Gateway                               VM                    Virtual machine customer untuk Server
+
+
+
+2 Ikhtisar sistem
+2.1 Ruang lingkup sistem
+Whole System menghubungkan endpoint sensor, jaringan radio field, bridge IP, broker, dan aplikasi Server.
+
+    Endpoint                    GasleakDetector                                     Jaringan field                CH STAR/MESH
+
+    Bridge IP                   Gateway                                             Aplikasi                      Server
+
+●     Jalur operasional utama: GasleakDetector ke serving CH, transit CH opsional, Gateway, broker, lalu Server.
+●     Jalur telemetri normal dan alarm menggunakan perilaku pengiriman yang berbeda.
+●     Perintah kembali melalui broker, Gateway, rute CH, dan jendela penerimaan endpoint.
+●     Jalur dataset engineering dipisahkan dari jalur alarm operasional.
+
+
+2.2 Arsitektur operasional dan dataset
+Jalur operasional dan jalur dataset mempunyai tujuan serta aturan pemrosesan yang berbeda.
+
+    GasleakDetector                Serving CH                   Transit CH                  Gateway                        Broker                      Server
+
+
+                         STAR                      MESH                          MESH                         MQTT                          MQTT
+
+
+
+
+          Sensor                   STAR/MESH                        0..n                   Wi-Fi/MQTT                 Batas kepercayaan                Aplikasi
+
+
+                                                                  Gambar 1. Jalur operasional utama.
+
+
+               Mode dataset                               Wi-Fi/MQTT                             Perekam dataset                              Penyimpanan
+
+
+                                      langsung                                     rekam                                     tulis
+
+
+
+
+             GasleakDetector                            Tautan engineering                             Validasi                                MySQL / CSV
+
+
+                                                             Gambar 2. Jalur dataset engineering terpisah.
+
+    Catatan: Mode dataset bukan jalur alarm produksi dan tidak menggantikan jalur LoRa operasional.
+
+
+
+
+Lab IoT ITB                                                                                                                                                       3/9
+Whole System                                                                                                                                IOTITB-TDS-WHOLE-SYSTEM-ID-R4.0
+
+
+
+
+2.3 Matriks peran subsistem
+Setiap subsistem mempunyai batas fungsional yang berbeda pada sensor, transport, routing, keamanan, dan aplikasi.
+
+ Subsistem                        Peran utama                                                                     Tidak menjadi tanggung jawab
+
+ GasleakDetector                  Sensor 8 channel, inferensi lokal, keluaran alarm, LoRa STAR                    Routing MESH atau TLS broker
+
+ Serving CH                       STAR ingress, cache, MESH forwarding                                            Payload decryption atau Server application
+
+ Transit CH                       MESH relay dan route continuity                                                 Endpoint sensing
+
+ Gateway                          MESH-to-Wi-Fi/MQTT bridge                                                       Persistent storage atau guaranteed delivery
+
+ Broker                           MQTT session/transport boundary                                                 Field sensing/inference
+
+ Server                           Validasi, dekode, routing alarm, topologi, perintah                             Keluaran alarm fisik
+
+ Catatan: Broker adalah dependensi logis deployment dan harus dimasukkan pada desain jaringan walaupun bukan perangkat field.
+
+
+2.4 Ringkasan antarmuka antar-subsistem
+Tabel berikut merangkum transport, arah komunikasi, dan fungsi publik pada setiap batas subsistem.
+
+ Link                                    Transport                                    Arah                             Fungsi
+
+ GasleakDetector - CH                    LoRa STAR                                    Uplink + receive window          Telemetry, alarm, dan limited downlink
+
+ CH - CH/Gateway                         LoRa MESH                                    Dua arah                         Multi-hop routing dan relay
+
+ Gateway - network                       Wi-Fi STA                                    Dua arah                         IP connectivity
+
+ Gateway - broker                        MQTT / TLS option                            Dua arah                         Publish uplink; subscribe command
+
+ Server - broker                         MQTT / TLS                                   Dua arah                         Ingestion dan command
+
+ GasleakDetector - local                 RS-485 Modbus                                Read-only                        Local data/status integration
+
+ Catatan: Konverter Wi-Fi-to-Ethernet eksternal bukan interface native Gateway dan tidak termasuk pada matrix produk.
+
+
+
+3 Alur operasional
+3.1 Urutan telemetri normal
+Telemetri normal menggunakan cache pada serving CH dan dikirim sebagai respons permintaan server.
+
+          GasleakDetector                     Serving CH                         Transit/Gateway                          Broker                             Server
+
+                        Telemetri LoRa STAR
+
+                                         Perbarui cache node
+
+                                                                                                                                    Permintaan pull Server
+
+                                                                                                   Gateway downlink
+
+                                                           Pull mencapai serving CH
+
+                                                               Respons cluster
+
+                                                                                                   Publikasi Gateway
+
+                                                                                                                                         Ingestion Server
+
+
+
+
+                                                           Gambar 3. Telemetry normal berbasis cache dan pull.
+
+ Catatan: Pengiriman telemetri normal bersifat pull-based dan mengikuti data yang tersedia pada cache serving CH.
+
+
+
+
+Lab IoT ITB                                                                                                                                                            4/9
+Whole System                                                                                                                                       IOTITB-TDS-WHOLE-SYSTEM-ID-R4.0
+
+
+
+
+3.2 Urutan alarm dan kembali-normal
+Alarm/clear memakai jalur push dan baru menjadi alarm Server setelah payload lolos gerbang integritas.
+
+           GasleakDetector                            Serving CH                            MESH route                          Gateway                                  Server
+
+                               STAR alarm/clear
+
+                                                                   Masuk jalur push alarm
+
+                                                                                                            Relay ke root
+
+                                                                                                                                                 Publikasi MQTT
+
+                                                                                                                                                                  Validasi + autentikasi
+
+                                                                                                                                                                     Routing alarm
+
+
+
+
+                                                                    Gambar 4. Alarm push dan integrity gate Server.
+
+    Alarm lokal                                          Keluaran steady 24 V pada mode AUTO GasleakDetector.
+
+    Alarm jaringan                                       Event terautentikasi yang dirutekan Server.
+
+
+3.3 Urutan perintah downlink
+Perintah mode tingkat tinggi bergerak dari Server melalui broker dan rute field menuju jendela penerimaan GasleakDetector.
+
+                Server                                  Broker                               Gateway                        Transit/Serving CH                     GasleakDetector
+
+         Otorisasi + autentikasi
+
+                                   Publikasi MQTT
+
+                                                                     Pengiriman MQTT
+
+                                                                                                            Rute MESH
+
+                                                                                                                                        Kirim dalam jendela penerimaan
+
+                                                                                                                                                                  Validasi dan terapkan
+
+
+
+
+                                                                    Gambar 5. Downlink command menuju endpoint.
+
+    Catatan: Pengiriman perintah ke endpoint baterai dilakukan pada jendela penerimaan setelah transmisi endpoint.
+
+
+
+4 Routing dan RF
+4.1 Discovery dan pembentukan rute
+CH membentuk rute secara dinamis berdasarkan kandidat yang mempunyai lineage menuju Gateway root.
+
+       CH tanpa parent                               Kandidat                               Guard                               Penilaian                                  Pasang
+
+
+                                     probe                               filter                              peringkat                                commit
+
+
+
+
+        Mulai discovery                             CH / Gateway                  Pemeriksaan root + loop                      Health + rute                          Parent + alternatif
+
+
+                                                                   Gambar 6. Discovery sampai pemasangan parent.
+
+●     Gateway adalah root destination, bukan parent statis semua CH.
+●     Lineage guard mencegah routing loop.
+●     Parent aktual tidak dipatok pada identity tertentu.
+
+
+
+
+Lab IoT ITB                                                                                                                                                                                 5/9
+Whole System                                                                                                                        IOTITB-TDS-WHOLE-SYSTEM-ID-R4.0
+
+
+
+
+4.2 Multi-hop dan failover
+Parent alternatif dan rediscovery menjaga kontinuitas ketika parent aktif tidak lagi sehat.
+
+    Tahap                                        Deskripsi
+
+    Rute sehat                                   Serving CH -> transit -> Gateway
+
+    Kegagalan health                             Timeout/HELLO ACK/alarm ACK gagal
+
+    Parent alternatif                            Dipakai bila valid
+
+    Rediscovery                                  Membangun kandidat baru
+
+    Rute pulih                                   Parent baru mengikuti discovery
+                                                                        Gambar 7. Failover route CH.
+
+    Catatan: Multi-hop dan failover telah divalidasi di Lab IoT ITB. Parent pengganti mengikuti hasil discovery dan tidak ditetapkan ke identity tertentu.
+
+
+4.3 Rencana RF dua domain
+STAR dan MESH berbagi rentang carrier yang diterima 920-923 MHz, tetapi memakai nilai default dan antena berbeda.
+
+    Domain                  Default                              BW / SF / CR                                  TX setting                    Antena
+
+    STAR                    920.0 MHz                            125 kHz / SF7 / 4/5                           17 dBm                        3 dBi
+
+    MESH                    921.0 MHz                            125 kHz / SF9 / 4/5                           17 dBm                        8 dBi
+
+    Carrier yang diterima                       920-923 MHz inklusif
+
+    Konfigurasi aktif                           Diverifikasi melalui pembacaan kembali perangkat.
+
+    Catatan: Perhitungan nominal sebelum loss: STAR 20 dBm dan MESH 25 dBm.
+
+
+
+5 Jaringan dan keamanan
+5.1 Jaringan IP, broker, dan profil TLS
+Ketika profil Gateway TLS dipilih, Gateway dan Server masing-masing membentuk sesi TLS sendiri ke broker; broker menjadi
+batas terminasi/kepercayaan.
+
+            Gateway                       Sesi TLS A                            Broker MQTT                        Sesi TLS B                          Server
+
+
+                            enkripsi                             terminasi                         sesi baru                           dekripsi
+
+
+
+
+           Klien TLS A                   CA terverifikasi                    Terminasi keduanya                  CA terverifikasi                     Klien TLS B
+
+
+                                                            Gambar 8. Dua sesi TLS pada profil deployment TLS.
+
+●      Profil Gateway TLS membutuhkan Root CA dan waktu sistem yang memenuhi ambang tepercaya.
+●      Flow Server mendukung credential dan TLS terverifikasi CA ke broker.
+●      Pada profil TLS, Gateway dan Server menggunakan dua sesi TLS terpisah yang masing-masing berakhir pada broker.
+
+
+5.2 Batas keamanan berlapis
+Keamanan payload dan keamanan transport melindungi lapisan serta segmen yang berbeda.
+
+    Lapisan                            Cakupan                                         Fungsi                                            Terminasi
+
+    AES-128-GCM                        Payload GasleakDetector                         Kerahasiaan + autentikasi                         Decoder Server
+
+    Gateway TLS                        Gateway - broker                                Perlindungan transport MQTT                       Broker
+
+    Server TLS                         Server - broker                                 Perlindungan transport MQTT                       Broker
+
+    Autentikasi perintah               Downlink tingkat tinggi                         Otorisasi + autentikasi payload                   Aplikasi target
+
+    Catatan: CH dan Gateway meneruskan payload field terenkripsi; payload didekripsi dan diautentikasi di Server.
+
+
+
+
+Lab IoT ITB                                                                                                                                                         6/9
+Whole System                                                                                                      IOTITB-TDS-WHOLE-SYSTEM-ID-R4.0
+
+
+
+
+5.3 Ketersediaan, cache, dan buffering
+Data sementara berada pada cache CH atau antrean RAM Gateway; retensi field mengikuti kapasitas dan sifat memori
+masing-masing.
+
+ Lokasi                   Mekanisme                                                 Persistensi                    Batas
+
+ CH                       Cache node untuk telemetri normal                         Memori/keadaan runtime         Dikirim saat permintaan server
+
+ Gateway                  Antrean MQTT 8 item, payload 1-1023 B                     RAM volatil                    Item baru ditolak saat penuh
+
+ Server                   Status anti-replay                                        Penyimpanan persisten wajib    Dimuat kembali setelah
+                                                                                    pada deployment                layanan restart
+
+ Dataset                  MySQL / CSV                                               Persistensi engineering        Hanya record dataset
+
+
+
+6 Daya, varian, dan penerapan
+6.1 Domain daya subsistem
+Setiap perangkat mempunyai batas daya berbeda; kemampuan salah satu PCB tidak digeneralisasi ke subsistem lain.
+
+ Subsistem                      Konfigurasi                                                               Perilaku monitoring
+
+ GasleakDetector                Varian catu 24 VDC atau operasi baterai 4.2 VDC                           Monitoring tegangan diagnostik
+
+ CH                             1-3 x 18650 paralel; 2 x panel 6 W paralel                                VBAT read-only
+
+ Catatan: Firmware CH melaporkan VBAT secara read-only tanpa pemutusan aktif saat tegangan rendah. GasleakDetector juga memantau
+ tegangan tanpa active undervoltage cutoff.
+
+
+6.2 Varian perangkat keras dan kompatibilitas firmware
+CH dan Gateway mempunyai board Rectangle/Circle; Gateway juga mempunyai pilihan TLS/non-TLS.
+
+ Perangkat                   Board                          Opsi transport                                Target firmware
+
+ GasleakDetector             Board produk                   LoRa STAR + RS-485                            Firmware GasleakDetector
+
+ CH                          Rectangle                      STAR + MESH                                   CH Rectangle
+
+ CH                          Circle                         STAR + MESH                                   CH Circle
+
+ Gateway                     Rectangle                      MQTT non-TLS / TLS                            Gateway Rectangle - standard / TLS
+
+ Gateway                     Circle                         MQTT non-TLS / TLS                            Gateway Circle - standard / TLS
+
+ Server                      VM customer                    Klien/aplikasi MQTT                           Spesifik deployment
+
+ Catatan: Setelah upload, readback perangkat memverifikasi varian board dan transport yang aktif.
+
+
+6.3 Topologi penerapan
+Deployment membutuhkan perangkat field, Wi-Fi, broker, VM Server, database dataset opsional, dan kepemilikan operasi.
+
+ Tahap                                   Deskripsi
+
+ Lapisan field                           GasleakDetector, serving/transit CH, Gateway
+
+ Jaringan site                           Wi-Fi, DNS, NTP, VLAN/NAC, firewall
+
+ Pesan                                   Broker MQTT, rantai CA, ACL, credential
+
+ Aplikasi                                Server Node-RED pada VM customer
+
+ Data engineering                        Perekam dataset dan MySQL/CSV bila digunakan
+                                                       Gambar 9. Lapisan deployment sistem.
+
+ Catatan: OS image, VM sizing, broker, database, backup, HA, RBAC, dan SSO ditetapkan sesuai deployment customer.
+
+
+
+
+Lab IoT ITB                                                                                                                                       7/9
+Whole System                                                                                                          IOTITB-TDS-WHOLE-SYSTEM-ID-R4.0
+
+
+
+
+6.4 Urutan komisioning
+Komisioning harus memverifikasi firmware, identitas, radio, jaringan, keamanan, dan jalur aplikasi secara berurutan.
+
+ Tahap                                  Deskripsi
+
+ 1. Firmware                            Pilih target perangkat/board/transport yang tepat
+
+ 2. Pembacaan perangkat                 Versi, identitas, varian board, konfigurasi RF
+
+ 3. Tautan field                        STAR, MESH, discovery, parent, rute
+
+ 4. IP/TLS                              Wi-Fi, DNS/NTP, CA, koneksi broker
+
+ 5. Aplikasi                            Dekode, rute alarm, topologi, perintah
+
+ 6. Hasil                               Log, ID unit, versi, dan kriteria lulus
+                                                    Gambar 10. Urutan komisioning engineering.
+
+ Catatan: Setiap tahap komisioning diselesaikan berurutan dan dicatat pada hasil penerimaan deployment.
+
+
+
+7 Kontrak integrasi dan batas sistem
+7.1 Kontrak antarmuka sistem
+Setiap batas antarsubsistem menggunakan profil komunikasi yang tetap agar GasleakDetector, CH, Gateway, dan Server dapat
+diintegrasikan secara konsisten.
+
+ Batas                                Antarmuka                              Profil
+
+ GasleakDetector - CH                 LoRa STAR                              920.0 MHz; SF7; BW 125 kHz; CR 4/5; TX power setting 17 dBm; antenna
+                                                                             3 dBi
+
+ CH - CH / Gateway                    LoRa MESH                              921.0 MHz; SF9; BW 125 kHz; CR 4/5; TX power setting 17 dBm; antenna
+                                                                             8 dBi
+
+ Gateway - MQTT broker                Wi-Fi STA / MQTT                       MQTT over TLS pada profil TLS; verifikasi sertifikat dan sinkronisasi waktu
+                                                                             wajib.
+
+ Server - MQTT broker                 MQTT                                   Sesi TLS Server-ke-broker terpisah menggunakan autentikasi deployment
+                                                                             customer.
+
+ Server - Database                    MySQL                                  Penyimpanan dataset engineering dengan pemeriksaan idempotensi.
+
+ GasleakDetector - controller         RS-485 / Modbus RTU                    Unit 1; 9600 bit/s; 8N1; FC03/FC04; address 0-7; 8 register 16-bit
+                                                                             hanya-baca. Lihat datasheet GasleakDetector untuk map dan contoh
+                                                                             frame.
+
+ Catatan: Band operasi produk dibatasi pada 920-923 MHz. Nilai frekuensi nominal STAR dan MESH berada di dalam band tersebut.
+
+
+7.2 Batas kapasitas subsistem
+Kapasitas berikut adalah batas implementasi yang perlu diperhitungkan saat merancang jumlah node, aliran downlink, dan
+pemulihan koneksi.
+
+ Subsistem                            Sumber daya                                                                    Batas
+
+ GasleakDetector                      Channel sensor                                                                 8
+
+ GasleakDetector                      Register Modbus                                                                8 register 16-bit hanya-baca,
+                                                                                                                     address 0-7
+
+ CH                                   Kandidat parent                                                                8
+
+ CH                                   Cache node                                                                     32 entries
+
+ CH                                   Antrean alarm / transmisi                                                      8 / 8 entries
+
+ CH                                   Downlink tertunda                                                              16 entries
+
+ Gateway                              Antrean publikasi MQTT                                                         8 volatile messages
+
+ Gateway                              Payload publikasi tertunda                                                     1023 bytes maximum
+
+ Server                               Nilai sensor per rekaman dataset                                               8
+
+
+
+
+Lab IoT ITB                                                                                                                                           8/9
+Whole System                                                                                                         IOTITB-TDS-WHOLE-SYSTEM-ID-R4.0
+
+
+
+
+7.3 Perilaku saat gangguan
+Respons setiap subsistem terhadap gangguan dibuat eksplisit agar keterbatasan pemulihan dan retensi data dapat diperhitungkan
+pada desain penerapan.
+
+ Gangguan                              Respons sistem                                                           Batas
+
+ Parent CH tidak lagi layak            CH menjalankan discovery dan memilih kandidat parent yang memenuhi       Parent pengganti tidak ditetapkan
+                                       aturan saat itu.                                                         secara statis.
+
+ Wi-Fi atau broker tidak tersedia      Gateway mencoba mempublikasikan kembali dan menggunakan antrean          Antrean bersifat volatil, maksimum
+                                       lokal bila item dapat diterima.                                          delapan item.
+
+ Prasyarat TLS tidak lengkap           Gateway memblokir koneksi MQTT.                                          Tidak ada fallback ke transport TLS
+                                                                                                                tanpa verifikasi.
+
+ Penyimpanan MySQL tidak tersedia      Jalur perekaman dataset yang aktif gagal dan harus dipulihkan sesuai     CSV tidak diperlakukan sebagai
+                                       konfigurasi deployment.                                                  pengganti otomatis MySQL; status
+                                                                                                                perlu dimonitor dan direkonsiliasi oleh
+                                                                                                                operator Server.
+
+ Rekaman dataset tidak valid           Server menolak rekaman sebelum penyimpanan.                              Rekaman harus memenuhi semua
+                                                                                                                aturan penerimaan.
+
+ Tegangan baterai rendah               GasleakDetector dan CH melaporkan hasil pemantauan.                      Firmware tidak melakukan
+                                                                                                                pemutusan atau low-power otomatis
+                                                                                                                berdasarkan ambang ini.
+
+
+7.4 Batas keamanan
+Keamanan end-to-end dibentuk oleh kontrol radio, validasi pesan aplikasi, transport Gateway-Server, dan kontrol infrastruktur
+Server.
+
+ Batas                          Kontrol                                                               Tanggung jawab operasi
+
+ Hop radio field                Identitas node, urutan pesan, panjang, dan CRC diperiksa pada         Identitas perangkat dan konfigurasi radio
+                                protokol radio aplikasi.                                              dikelola saat provisioning.
+
+ Aplikasi Server                Server melakukan autentikasi AES-GCM dan penolakan replay; status     Material keamanan dan penyimpanan anti-replay
+                                persisten wajib pada deployment.                                      dikelola pada deployment Server.
+
+ Gateway / Server - broker      Pada deployment profil TLS yang dikonfigurasi, Gateway dan Server     Customer menyediakan CA, endpoint waktu,
+                                dapat memakai dua sesi MQTT over TLS terpisah dengan validasi         broker, dan kebijakan autentikasi.
+                                sertifikat.
+
+ Layanan Server                 Kredensial berada pada environment runtime atau secret store;         Customer mengelola akses jaringan, akun
+                                penyimpanan anti-replay persisten wajib dikonfigurasi.                layanan, pencadangan, patching, dan monitoring
+                                                                                                      VM.
+
+ Penyimpanan                    Pengenal rekaman unik mencegah duplikasi dataset pada                 Retensi, backup, dan rekonsiliasi ditetapkan
+                                penyimpanan utama.                                                    dalam prosedur operasi customer.
+
+
+
+
+Lab IoT ITB                                                                                                                                          9/9
+

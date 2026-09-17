@@ -1,0 +1,618 @@
+                                                                                                                                    LAB IoT ITB
+
+
+
+
+                                                         Gateway
+Technical Datasheet Revision 4.0
+
+LoRa MESH to IP-network bridge over Wi-Fi STA and MQTT, with separate TLS and
+non-TLS firmware.
+
+
+         CH network                       Radio B                       Gateway                      Wi-Fi STA                 Broker/Server
+
+
+
+
+                           921 MHz                           frame                        IP                         publish
+
+
+
+
+          LoRa MESH                     8 dBi antenna                   ESP32-S3                      IP uplink                 MQTT / TLS
+
+
+
+
+    BOARDS                            ACTIVE RADIO                           NETWORK                              TRANSPORT
+
+    Rectangle / Circle                MESH / Radio B                         Wi-Fi STA                            MQTT TLS / non-TLS
+
+Key features
+●      Receives frames from CH through Radio B/MESH.                     ●    Receives supported downlink commands for a Gateway
+●      Functionally publishes uplink, status, and topology over               target and forwards them as MESH downlink.
+       MQTT.                                                             ●    Provides separate TLS and non-TLS firmware targets.
+Technical overview
+Gateway connects the LoRa MESH backbone to an MQTT broker over Wi-Fi while maintaining a downlink path to the field.
+Functional profile
+    Ingress                                LoRa MESH
+    IP uplink                              Wi-Fi STA
+    Messaging                              MQTT
+    Security option                        CA-verified TLS
+
+Operational interfaces
+    Uplink                                 MESH frame is received, processed, then published over MQTT.
+    Downlink                               Supported MQTT commands for a Gateway target are translated into the MESH path toward CH.
+    Gateway identity                       Default 0x0001; configurable over 0x0001-0x000F and stored in NVS.
+    Trust boundary                         TLS, when selected, terminates at the broker; it does not span LoRa.
+
+
+
+
+Lab IoT ITB
+Gateway                                                                                                                               IOTITB-TDS-GATEWAY-EN-R4.0
+
+
+
+
+Contents
+
+1 Product identification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      1.1 Abbreviations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 Overview and hardware . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 Product overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 Role in the system architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.3 PCB variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.4 Hardware and radio usage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      2.5 Firmware target matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+
+3 LoRa MESH interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 LoRa MESH interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.2 MESH configuration and readback . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+
+4 IP networking and MQTT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+      4.1 Wi-Fi network interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.2 MQTT functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.3 MQTT over TLS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.4 Non-TLS firmware     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+
+      4.5 MQTT queue and offline behavior . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.6 Command downlink path . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+5 Configuration and commissioning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+      5.1 Transactional configuration storage    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .6
+
+      5.2 Provisioning through Operator Hub . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.3 Network deployment prerequisites . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.4 Status and diagnostics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+
+6 Networking, TLS, and configuration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+      6.1 Network configuration limits   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .7
+
+      6.2 TLS readiness gates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.3 MQTT publication queue . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.4 Transactional configuration update . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.5 Gateway product variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+
+
+
+Lab IoT ITB                                                                                                                                                       2/8
+Gateway                                                                                                                                 IOTITB-TDS-GATEWAY-EN-R4.0
+
+
+
+
+1 Product identification
+    Product                                 Gateway
+
+    Document revision                       4.0
+
+    Issuer                                  Lab IoT ITB
+
+
+
+1.1 Abbreviations
+    Abbreviation          Meaning                                                     Abbreviation          Meaning
+
+    CA                    Certificate Authority                                       NVS                   Non-volatile configuration storage
+
+    MESH                  CH-to-Gateway backbone radio domain                         STA                   Wi-Fi station mode
+
+    MQTT                  Message Queuing Telemetry Transport                         TLS                   Transport Layer Security
+
+    NTP                   Network Time Protocol                                       WAN/LAN               Deployment IP-network segment
+
+
+
+2 Overview and hardware
+2.1 Product overview
+Gateway connects the LoRa MESH backbone to an MQTT broker over Wi-Fi while maintaining a downlink path to the field.
+
+    Ingress                     LoRa MESH                                             IP uplink                   Wi-Fi STA
+
+    Messaging                   MQTT                                                  Security option             CA-verified TLS
+
+●     Receives frames from CH through Radio B/MESH.
+●     Functionally publishes uplink, status, and topology over MQTT.
+●     Receives supported downlink commands for a Gateway target and forwards them as MESH downlink.
+●     Provides separate TLS and non-TLS firmware targets.
+
+
+2.2 Role in the system architecture
+Gateway is the boundary between the field radio network and the customer IP network.
+
+             CH MESH                              Radio B                       Gateway                           Wi-Fi STA                      MQTT broker
+
+
+                               MESH                                frame                          network                              MQTT
+
+
+
+
+          Field network                           SX1262                     Decode + queue                      Customer IP                     Server boundary
+
+
+                                                                  Figure 1. Gateway radio-to-IP boundary.
+
+    Uplink                                          MESH frame is received, processed, then published over MQTT.
+
+    Downlink                                        Supported MQTT commands for a Gateway target are translated into the MESH path toward CH.
+
+    Gateway identity                                Default 0x0001; configurable over 0x0001-0x000F and stored in NVS.
+
+    Trust boundary                                  TLS, when selected, terminates at the broker; it does not span LoRa.
+
+
+2.3 PCB variants
+Gateway uses the same PCB basis as CH but activates a different functional profile in firmware.
+
+    Product variant                       Design basis                                    Standard selection                     TLS selection
+
+    Gateway Rectangle                     Rectangle hardware profile                      Gateway Rectangle - standard           Gateway Rectangle - TLS
+
+    Gateway Circle                        Circle hardware profile                         Gateway Circle - standard              Gateway Circle - TLS
+
+●     Rectangle and Circle pin profiles differ.
+●     Radio A/STAR is disabled in Gateway firmware.
+●     Radio B/MESH is the active radio for both variants.
+●     Operator Hub requires board-form selection before upload.
+
+
+
+
+Lab IoT ITB                                                                                                                                                        3/8
+Gateway                                                                                                                   IOTITB-TDS-GATEWAY-EN-R4.0
+
+
+
+
+2.4 Hardware and radio usage
+Gateway uses an ESP32-S3 MCU and one active MESH radio path on a dual-radio PCB.
+
+ Function                     Component / path                                              Firmware status
+
+ MCU                          ESP32-S3-WROOM-1U-N16R8                                       Active
+
+ Radio A                      E22-900MM22S                                                  Disabled / unused
+
+ Radio B                      E22-900MM22S                                                  Active as LoRa MESH
+
+ Wi-Fi                        ESP32-S3 station interface                                    Active as native IP uplink
+
+ Status LED                   Board-specific mapping                                        Firmware-controlled
+
+
+2.5 Firmware target matrix
+Four targets keep board-form and MQTT-transport choices explicit.
+
+ Board                         Transport                                      Operator Hub selection                     Security profile
+
+ Rectangle                     MQTT without TLS                               Gateway Rectangle - standard               No
+
+ Circle                        MQTT without TLS                               Gateway Circle - standard                  No
+
+ Rectangle                     MQTT over TLS                                  Gateway Rectangle - TLS                    Yes
+
+ Circle                        MQTT over TLS                                  Gateway Circle - TLS                       Yes
+
+ Stage                                  Description
+
+ Board selection                        Rectangle or Circle
+
+ Transport selection                    TLS or non-TLS
+
+ Firmware variant                       Must match the board and transport
+
+ Device verification                    Board variant, transport profile, and TLS capability are read
+                                                 Figure 2. Two-dimensional Gateway target selection.
+
+
+
+3 LoRa MESH interface
+3.1 LoRa MESH interface
+Gateway shares MESH defaults with CH and rejects carriers outside 920-923 MHz.
+
+ Parameter                              Firmware default                           Status
+
+ Carrier                                921.0 MHz                                  Accepted 920-923 MHz inclusive
+
+ Bandwidth                              125 kHz                                    Must match CH MESH
+
+ Spreading factor                       SF9                                        MESH default
+
+ Coding rate                            4/5                                        MESH default
+
+ TX setting                             17 dBm                                     Not measured output
+
+ Antenna                                8 dBi                                      Product configuration
+
+ Note: The nominal 17 dBm + 8 dBi calculation yields 25 dBm before cable and connector losses.
+
+
+3.2 MESH configuration and readback
+Radio configuration is stored in NVS, verified, and reloaded at boot.
+
+ Stage                                  Description
+
+ Engineer input                         MESH parameters
+
+ Validation                             Carrier 920-923 MHz and other fields valid
+
+ NVS write                              Configuration stored
+
+ Readback                               Values are read and compared
+
+ Runtime                                Valid configuration is used
+                                                    Figure 3. Gateway MESH configuration cycle.
+
+ Note: Device readback must be recorded after commissioning because NVS can override firmware defaults.
+
+
+
+
+Lab IoT ITB                                                                                                                                     4/8
+Gateway                                                                                                                                   IOTITB-TDS-GATEWAY-EN-R4.0
+
+
+
+
+4 IP networking and MQTT
+4.1 Wi-Fi network interface
+The Gateway native network interface is Wi-Fi station.
+
+    Mode                     Wi-Fi STA                                              Uplink                      IP network
+
+    Protocol                 MQTT                                                   Native Ethernet             No
+
+    Provisioning                                 SSID and network credentials are configured on the device.
+
+    Site dependency                              DHCP/static policy, VLAN, NAC, DNS, NTP, and firewall are customer-defined.
+
+    Wired option                                 An external Wi-Fi-to-Ethernet converter may be considered as a deployment accessory; it is not a native
+                                                 product interface.
+
+
+4.2 MQTT functions
+MQTT carries uplink/status/topology information to the broker and commands back to the Gateway.
+
+                     CH                                    Gateway                                  Broker                                      Server
+
+                                   MESH uplink
+
+                                                                             MQTT publish
+
+                                                                                                                         MQTT deliver
+
+                                                                                                                        Command publish
+
+                                                                           Command deliver
+
+                                  MESH downlink
+
+
+
+
+                                                                 Figure 4. MQTT uplink and downlink.
+
+    Note: Uplink publication and command reception operate after the broker session is established.
+
+
+4.3 MQTT over TLS
+The TLS profile uses a TLS client, Root CA, and trusted time before broker connection.
+
+    Stage                                        Description
+
+    TLS-capable firmware                         Gateway Rectangle - TLS or Gateway Circle - TLS
+
+    Root CA                                      PEM must be provisioned and pass validation
+
+    Trusted time                                 Connection is blocked until the NTP host is valid and system time is ready
+
+    Secure client                                Supports CA verification; no insecure mode is provided
+
+    Broker session                               Supports MQTT over TLS after all gates are valid
+                                                               Figure 5. MQTT/TLS connection gates.
+
+●      Firmware blocks TLS when Root CA or trusted time is invalid.
+●      TLS protects the Gateway-to-broker segment, not the entire radio path.
+●      Broker connection, CA validity, and trusted-time readiness are available through device readback.
+
+
+4.4 Non-TLS firmware
+The non-TLS target is retained as separate firmware and is not replaced by the TLS variant.
+
+    Area                                            Non-TLS                                                  TLS
+
+    Board support                                   Rectangle + Circle                                       Rectangle + Circle
+
+    MQTT transport                                  TCP without TLS                                          CA-verified TLS
+
+    Root CA                                         Not used                                                 Required
+
+    Trusted time                                    Not a TLS gate                                           Required for TLS
+
+    Operator selection                              Explicit                                                 Explicit
+
+    Note: Select the TLS profile for deployments requiring encrypted broker transport and certificate verification.
+
+
+
+
+Lab IoT ITB                                                                                                                                                     5/8
+Gateway                                                                                                                                            IOTITB-TDS-GATEWAY-EN-R4.0
+
+
+
+
+4.5 MQTT queue and offline behavior
+Gateway provides a bounded RAM queue for publications when MQTT is unavailable.
+
+    Capacity                      8 publications                                             Payload                     1-1023 bytes
+
+    Medium                        RAM                                                        Persistence                 Volatile
+
+    Stage                                              Description
+
+    Publish attempt                                    Send directly when broker is available
+
+    Broker unavailable                                 Queue when space is available
+
+    Queue full                                         New item is rejected
+
+    Restart/power loss                                 Queue contents are lost
+                                                                         Figure 6. MQTT buffering behavior.
+
+
+
+4.6 Command downlink path
+The Gateway receives supported downlink commands for a Gateway target, validates the target, then forwards them over MESH.
+
+                  Server                             Broker                            Gateway                           CH route                             GasleakDetector
+
+                            Authenticated command
+
+                                                                     MQTT deliver
+
+                                                                                                     MESH downlink
+
+                                                                                                                                        Serving-CH delivery
+
+                                                                                                                                    Device response if available
+
+
+
+
+                                                                   Figure 7. Command path through the Gateway.
+
+
+
+5 Configuration and commissioning
+5.1 Transactional configuration storage
+Wi-Fi/MQTT configuration uses a two-slot NVS journal with readback before committing the final selector.
+
+                 Operator                           Active slot                      Inactive slot                       Readback                                  Selector
+
+                                                Write new config
+
+
+                                                                                                     Read + validate
+
+
+                                                                                                                                      Commit active selector
+
+
+                                                                                                     Use selected slot
+
+
+
+
+                                                                       Figure 8. Two-slot configuration journal.
+
+●      Firmware provides fallback/recovery when a slot is invalid.
+
+
+5.2 Provisioning through Operator Hub
+Operator Hub locks board, transport, firmware variant, and TLS material before upload/configuration is accepted.
+
+    Gate                                             Check
+
+    Board                                            Rectangle or Circle must be selected.
+
+    Transport                                        TLS or non-TLS must be selected.
+
+    Firmware                                         Firmware version and variant compatibility are checked.
+
+    TLS material                                     Root CA PEM and NTP host are required for TLS targets.
+
+    Device verification                              Board variant, transport profile, and TLS capability are read back.
+
+    Note: TLS material is rejected on non-TLS firmware so the operator cannot mistake the active transport for a secure one.
+
+
+
+
+Lab IoT ITB                                                                                                                                                                     6/8
+Gateway                                                                                                                      IOTITB-TDS-GATEWAY-EN-R4.0
+
+
+
+
+5.3 Network deployment prerequisites
+Customer deployment requires network and broker decisions outside Gateway firmware.
+
+ Area                              Required deployment input
+
+ Wi-Fi                             SSID, authentication, address policy, VLAN/NAC, and coverage.
+
+ Name/time                         DNS and NTP reachable by the TLS target.
+
+ Broker                            FQDN/IP, port, credentials, CA chain, ACL, and topic policy.
+
+ Firewall                          Egress/return traffic for Wi-Fi, DNS, NTP, and MQTT/TLS.
+
+ Commissioning record              CONNACK, publish/subscribe, reconnect, logs, and certificate-validation results.
+
+ Note: Deployment acceptance covers CONNACK, publish/subscribe, reconnect, and certificate validation.
+
+
+5.4 Status and diagnostics
+Readback separates firmware identity, board, transport, radio, Wi-Fi, MQTT, and TLS.
+
+ Group                                 Engineering readback examples
+
+ Identity                              Firmware/protocol version and Gateway identity
+
+ Hardware                              Board variant and active-radio role
+
+ RF                                    Carrier, BW, SF, CR, TX setting, preamble
+
+ Network                               Wi-Fi connection state and address information
+
+ MQTT                                  Transport mode, broker state, and reconnect
+
+ TLS                                   TLS capability and CA/time readiness on TLS targets
+
+ Note: Device status and readback expose MQTT/TLS connection results relevant to commissioning.
+
+
+
+6 Networking, TLS, and configuration
+6.1 Network configuration limits
+The Gateway validates the length of each configuration field before storing and activating it.
+
+ Field                                  Limit                            Requirement
+
+ Wi-Fi SSID                             1-32 bytes                       Required for Wi-Fi connectivity.
+
+ Wi-Fi password                         0-64 bytes                       An empty value is allowed for a network that intentionally has no password.
+
+ MQTT host                              1-64 bytes                       The host must be set when MQTT is enabled.
+
+ MQTT user                              0-32 bytes                       Used according to the broker authentication policy.
+
+ MQTT password                          0-64 bytes                       Used according to the broker authentication policy.
+
+ MQTT port                              1-65535                          Zero is rejected.
+
+ NTP host                               1-64 bytes                       Required for the TLS variant and must not contain whitespace.
+
+ CA certificate (PEM)                   256-3900 bytes                   Required for certificate verification on the TLS variant.
+
+
+6.2 TLS readiness gates
+The TLS variant opens the MQTT connection only after all trust and time prerequisites have been satisfied.
+
+ Check                         Acceptance condition                                                                     On failure
+
+ CA certificate                A 256-3900-byte PEM value with certificate begin/end markers and no trailing data        MQTT connection is blocked.
+                               after the end marker.
+
+ NTP host                      Non-empty, no more than 64 bytes, without whitespace.                                    Time synchronization is not
+                                                                                                                        started and MQTT is blocked.
+
+ Trusted time                  The system epoch meets the firmware threshold: 1,577,836,800 or greater.                 Certificate verification and MQTT
+                                                                                                                        remain blocked.
+
+ Transport                     The server certificate is verified using the supplied CA.                                No verification-disabled mode is
+                                                                                                                        used.
+
+
+
+
+Lab IoT ITB                                                                                                                                            7/8
+Gateway                                                                                                                             IOTITB-TDS-GATEWAY-EN-R4.0
+
+
+
+
+6.3 MQTT publication queue
+When immediate publication is not possible, the Gateway can retain a small number of messages in a volatile queue.
+
+ Characteristic                                    Value                            Behavior
+
+ Queue capacity                                    8 messages                       Up to eight deferred publications.
+
+ Item size                                         1024 bytes storage               Accepted payload length is less than 1024 bytes; maximum 1023 bytes.
+
+ Retention                                         Volatile                         Queue contents are not retained across a device restart.
+
+ Full queue                                        New item rejected                Existing items are not overwritten by a new item.
+
+ Queue draining                                    One slot per service iteration   Delivery order is not guaranteed after slots are reused.
+
+
+6.4 Transactional configuration update
+A network change does not immediately replace the active configuration. The Gateway completes candidate storage and
+verification before activation.
+
+ Stage            Action                                                                        Result
+
+ 1                Validate all candidate fields.                                                An invalid candidate is rejected before storage.
+
+ 2                Write the candidate to the inactive configuration area.                       The active configuration remains available during the write.
+
+ 3                Read back and compare the stored result.                                      Activation continues only if the result is identical.
+
+ 4                Activate the candidate as the latest configuration.                           The active-configuration indicator is updated last.
+
+ 5                Discard the candidate if any stage fails.                                     The previous active configuration is retained.
+
+
+6.5 Gateway product variants
+Gateway functionality is available on two PCB forms. Each form supports standard and TLS transport profiles.
+
+ Device form                                       Standard profile                    TLS profile                              Active radio
+
+ Rectangle (small)                                 MQTT without TLS                    MQTT over TLS                            LoRa MESH
+
+ Circle (large)                                    MQTT without TLS                    MQTT over TLS                            LoRa MESH
+
+ Note: PCB form and transport profile are selected during firmware preparation. The LoRa STAR radio is not used in the Gateway role.
+
+
+
+
+Lab IoT ITB                                                                                                                                                8/8
+

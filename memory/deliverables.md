@@ -163,3 +163,13 @@ Identity band · doc-meta · **Executive Summary** · KPI · **Progres vs Outsta
 
 ## Riwayat commit besar (branch)
 Dashboard awal → rebuild baseline 9 bulan + 6 RU + arsitektur → hapus OGI + reframe Cilacap → progress report + JSA → uji fungsional selesai → redesign navy + exec/outstanding + repo updates → PDF Juli + power/mesh/downlink → memory system.
+
+## `Laporan_Harian_GLD_17September2026.{html,pdf}` (17 Sep 2026)
+
+Laporan status harian konsolidasi (dec:100), dibuat atas permintaan user untuk laporan hari ini yang mencakup persiapan instalasi Cilacap, sertifikasi, dan field testing sekaligus — tiga topik yang sebelumnya tersebar di deliverable terpisah (Checklist Kesiapan Instalasi 10 Sep, Dashboard Sertifikasi 5 Sep, deck internal kesiapan sertifikasi 17 Sep, laporan Termin 1 field testing 11 Sep). Dokumen ini **merangkum, bukan menggantikan** deliverable-deliverable tersebut — setiap angka/klaim ditelusuri balik ke sumbernya dan ditautkan.
+
+**Struktur (6 halaman PDF):** hero + 5 KPI tile (44% progres pilot keseluruhan, 20% Termin 1 field testing, ≈42% kesiapan internal sertifikasi, ≈20% progres sertifikasi keseluruhan, 40% Termin 1 sertifikasi) → 3 kartu ringkas (baru hari ini / penghambat / larangan klaim) → (1) Persiapan Instalasi RU IV Cilacap (3 jalur A/B/C, item outstanding, status handoff bracket ke vendor) → (2) Laporan Sertifikasi ATEX/IECEx (peta checklist ExCB, tabel Bagian 2.6.a–i, 5 penghambat, matriks 7 syarat Termin 1, 4 keputusan yang diminta) → (3) Laporan Field Testing (status Termin 1 20%, outstanding BAST/instalasi) → (4) Rekomendasi & langkah berikutnya + banner "jangan diklaim".
+
+Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (CSS disalin dari `Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html`, konsisten dgn standar dec:58). PDF di-render via headless Chrome (`/opt/pw-browsers/chromium-1194`), diverifikasi visual per halaman (PyMuPDF) — 2 iterasi perbaikan: (1) print CSS `.section{break-inside:avoid}` awalnya membuang 3 halaman jadi nyaris kosong (9→6 halaman setelah diganti jadi avoid pada `.head`/`.table tr`/`.kpi`/`.card` saja), (2) path file panjang di daftar tautan terpotong di tepi kanan — diperbaiki dgn `word-break:break-word` pada `code`/`.linklist li`.
+
+**Efek samping:** `Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html` (sebelumnya punya nav mini terpisah, hanya 3 link, tidak ikut sistem navigasi bersama) kini disatukan ke nav standar — nav mini lamanya dihapus, `scripts/inject_deliverables_nav.py` `FILES` diperluas dari 8 jadi 10 entri (+Checklist, +Laporan Harian ini) dan dijalankan ulang utk semua file agar tautan tetap konsisten di seluruh `Deliverables/*.html`.

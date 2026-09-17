@@ -10,6 +10,7 @@ Isinya dikelompokkan menjadi **4 folder**: satu presentasi ringkas untuk manajem
 | **`01_Pilot_Field_Testing/`** | Progres rekayasa & kesiapan lapangan program pilot/field testing — dashboard proyek, laporan progres kronologis, arsitektur sistem, draft JSA/HSE, desain mounting bracket | **44%** (vs baseline rencana 43%) |
 | **`02_Sertifikasi_ATEX_IECEx/`** | Progres proyek sertifikasi kepatuhan area berbahaya (ATEX/IP/EMC/RF) untuk perangkat GLD | **≈20–43%** tergantung definisi — lihat catatan di folder tsb |
 | **`03_Technical_Datasheets_LabIoTITB/`** | Datasheet teknis resmi Lab IoT ITB (Rev 4.0) per perangkat — Whole System, GasleakDetector, CH, Gateway, Server — ID &amp; EN | Dokumen sumber, bukan progres |
+| **`04_Laporan_Termin_1/`** | Kedua laporan pemenuhan Termin 1 dikumpulkan di satu tempat: field testing (20%) dan sertifikasi (40%), plus draft BAST field testing | Lihat catatan kesiapan di masing-masing laporan |
 
 Setiap folder punya `README.md` sendiri yang merinci isi filenya.
 

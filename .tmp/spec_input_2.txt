@@ -1,0 +1,68 @@
+Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+    print(' | '.join(c.text.strip() for c in row.cells))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\WIN10\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2248' in position 31: character maps to <undefined>
+SPESIFIKASI TEKNIS SISTEM GLD V2
+Node Sensor (GLD) · Cluster Head · LoRa Gateway
+Dokumen internal — versi 27 Agustus 2026
+Dokumen ini merangkum spesifikasi teknis terkini untuk ketiga perangkat sistem GLD V2. Kolom “Keterangan” memuat sumber data atau catatan penting terkait nilai tersebut. Baris bertanda “Menunggu konfirmasi” berarti data belum tersedia — bukan kesalahan, melainkan item yang masih dalam proses finalisasi.
+1. Node Sensor (GLD)
+1.1 Parameter Kelistrikan
+1.2 Parameter Sensor & Komunikasi
+1.3 Parameter Mekanik
+2. Cluster Head
+2.1 Parameter Kelistrikan
+2.2 Parameter Komunikasi
+2.3 Parameter Mekanik
+3. LoRa Gateway
+3.1 Parameter Kelistrikan
+3.2 Parameter Komunikasi
+3.3 Parameter Mekanik
+Dokumen ini bersifat working document dan akan diperbarui seiring finalisasi desain. Data ditandai “Menunggu konfirmasi” belum final dan tidak untuk dijadikan acuan pengadaan atau sertifikasi tanpa verifikasi lebih lanjut.
+=== TABLES ===
+--- table 0 ---
+Parameter | Spesifikasi | Keterangan
+Input daya utama | 24 VDC | 
+Sumber daya alternatif | Baterai | Jalur pengembangan cadangan (belum menjadi versi produksi). Catu daya utama saat ini adalah 24 VDC, minimum 2 A per unit.
+Input adaptor AC/DC | 220 VAC, 50 Hz | Mengikuti standar jaringan listrik PLN Indonesia.
+Output adaptor AC/DC | 24 VDC | 
+Tegangan operasi internal | 5 VDC & 3,3 VDC | 5 VDC untuk rangkaian sensor/pemanas MQ, 3,3 VDC untuk logika ESP32-S3. Rincian arus tiap jalur masih perlu didokumentasikan.
+Arus input maksimum | ±0,33 A @ 24 VDC | Dihitung dari konsumsi daya maksimum 7,995 W dibagi 24 VDC.
+Konsumsi daya maksimum | 7,995 W @ 24 VDC | Berlaku untuk versi catu daya kontinu (produksi). Versi baterai hemat-daya tercatat terpisah sebesar 5,75 W — beda mode operasi, bukan kontradiksi data.
+Tipe baterai | Li-ion 18650 (LiitoKala), konfigurasi 7 sel paralel | Jalur pengembangan cadangan; tidak menghambat rencana deployment versi 24 VDC.
+Tegangan nominal baterai | 4,2 V | Ini adalah tegangan penuh (full-charge) per sel. Tegangan nominal Li-ion pada umumnya 3,7 V — perlu klarifikasi istilah pada dokumen sumber.
+Kapasitas baterai | 28.000 mAh (28 Ah total) | Hasil konfigurasi 7 sel paralel × 4.000 mAh, setara ±70,4 Wh kapasitas terpakai.
+Proteksi kelistrikan | Menunggu konfirmasi | Cakupan proteksi (sekring, polaritas terbalik, tegangan lebih, arus lebih) belum ditentukan.
+--- table 1 ---
+Parameter | Spesifikasi | Keterangan
+Sensor gas | MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135 | 8 kanal sensor gas.
+Sensor lingkungan | Belum terpasang pada unit produksi | Sensor suhu/kelembapan saat ini hanya digunakan pada rig pengujian laboratorium, bukan unit lapangan.
+Unit pemroses | ESP32-S3-WROOM-1U | 
+Komunikasi nirkabel | LoRa | 
+Frekuensi operasi | 920 MHz | Konfigurasi topologi STAR ke Cluster Head, berada dalam pita ISM regional 920–923 MHz.
+Daya pancar | 17 dBm | Nilai yang dikonfigurasi pada firmware. Modul radio yang digunakan mampu hingga 22 dBm — bukan kontradiksi, hanya konfigurasi operasional yang lebih rendah dari batas maksimum modul.
+Antena | Eksternal, omnidirectional, konektor SMA Male, gain 3 dBi | 
+Interval pengiriman data | Dapat dikonfigurasi, default 10 detik | 
+--- table 2 ---
+Parameter | Spesifikasi | Keterangan
+Material enclosure | Aluminum alloy + Stainless steel | Grade spesifik logam masih dalam proses penentuan. Material PVC tidak digunakan untuk seluruh housing maupun bracket.
+Dimensi (P × L × T) | 200 × 90 × 290 mm | 
+Berat total | Menunggu konfirmasi | 
+Metode pemasangan | L-bracket, mengacu desain yang sudah terpasang di kilang | Dipasang ke struktur existing tanpa pengeboran atau pengelasan.
+Tingkat proteksi (IP Rating) | Menunggu konfirmasi | 
+Cable entry | Menunggu konfirmasi | 
+Pemasangan antena | Eksternal (konektor SMA Male) | Pada beberapa unit, antena Wi-Fi 2,4 GHz masih berada di dalam casing dan perlu dikeluarkan agar konfigurasi kanal berfungsi optimal.
+Suhu operasi | Menunggu konfirmasi | 
+Kelembapan operasi | Menunggu konfirmasi | 
+--- table 3 ---
+Parameter | Spesifikasi | Keterangan
+Sumber daya utama | Baterai isi ulang | 
+Sumber pengisian | Panel surya (solar photovoltaic) | 
+Jenis baterai | Li-ion 18650 (LiitoKala) | Sel yang sama dengan Node Sensor. Sertifikasi keamanan sel/BMS untuk kondisi lingkungan kilang belum didokumentasikan.
+Tegangan nominal baterai | 4,2 V | Tegangan penuh/full-charge; tegangan nominal Li-ion pada umumnya 3,7 V — perlu klarifikasi istilah.
+Kapasitas baterai | Menunggu konfirmasi | Draf awal menyebut 12.000 mAh, belum diverifikasi.
+Daya panel surya | 10–12 Wp per panel | Sertifikasi untuk penggunaan di area berbahaya/mudah terbakar masih dalam proses.

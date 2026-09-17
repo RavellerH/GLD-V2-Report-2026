@@ -1,0 +1,584 @@
+                                                                                                                                          LAB IoT ITB
+
+
+
+
+                                                                Server
+Technical Datasheet Revision 4.0
+
+Node-RED application for MQTT ingestion, integrity validation, alarm routing,
+topology, datasets, and commands.
+
+
+              Broker                   Validation                    Security                     Application                          Outputs
+
+
+
+
+                          subscribe                      gate                          route                          store/send
+
+
+
+
+         MQTT ingress                 CRC + schema                 AES-128-GCM                   Alarm + topology                  Dataset + command
+
+
+
+
+    TARGET HOST                       RUNTIME                               DATA SECURITY                           ENGINEERING DATA
+
+    Customer VM                       Node-RED                              AES-128-GCM                             MySQL / CSV
+
+Key features
+●      Receives and separates uplink, status, topology, and             ●    Routes authenticated alarm events and separates
+       integrity-path data.                                                  manual/test input.
+●      Validates frames before data enters the normal application       ●    Builds authenticated high-level mode commands.
+       path.
+Technical overview
+The Server provides an application-side data and command pipeline targeted for deployment on a customer VM.
+Functional profile
+    Runtime                               Node-RED
+    Ingress                               MQTT
+    Integrity                             CRC + AES-GCM
+    Target                                Customer VM
+
+Operational interfaces
+    Transport                             MQTT through the broker selected for deployment.
+    Integrity                             Frame structure, length, CRC, authentication, semantic checks, and replay policy.
+    Application                           Decoded data, alarm routing, topology, engineering UI, and commands.
+
+
+
+
+Lab IoT ITB
+Server                                                                                                                                  IOTITB-TDS-SERVER-EN-R4.0
+
+
+
+
+Contents
+
+1 Product identification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      1.1 Abbreviations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 Overview and architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 Application overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 Server logical architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.3 MQTT input categories . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+3 Frame validation and security . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 Frame validation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.2 AES-128-GCM authentication . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.3 Replay, nonce reuse, and quarantine      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+
+
+4 Alarm, topology, and commands                 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+      4.1 Alarm and event handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      4.2 Engineering topology view . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.3 High-level mode command . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+
+5 Broker, storage, and deployment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+      5.1 Server-to-broker TLS connection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      5.2 Dataset persistence: MySQL and CSV . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.3 Customer VM deployment model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.4 Node-RED engineering topology view . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.5 Deployment and operational responsibilities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+6 Data model, storage, and security . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+      6.1 Application data model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.2 Dataset record schema . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.3 Dataset admission rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.4 Storage and service resilience . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.5 Deployment security requirements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+
+
+
+Lab IoT ITB                                                                                                                                                       2/8
+Server                                                                                                                                         IOTITB-TDS-SERVER-EN-R4.0
+
+
+
+
+1 Product identification
+    Product                                 Server
+
+    Document revision                       4.0
+
+    Issuer                                  Lab IoT ITB
+
+
+
+1.1 Abbreviations
+    Abbreviation          Meaning                                                      Abbreviation              Meaning
+
+    AES-GCM               Authenticated encryption using Galois/Counter Mode           NVM                       Non-volatile memory/state
+
+    CA                    Certificate Authority                                        TLS                       Transport Layer Security
+
+    CRC                   Cyclic Redundancy Check                                      VM                        Virtual machine on customer infrastructure
+
+    MQTT                  Message Queuing Telemetry Transport                          UI                        User interface
+
+
+
+2 Overview and architecture
+2.1 Application overview
+The Server provides an application-side data and command pipeline targeted for deployment on a customer VM.
+
+    Runtime                     Node-RED                                               Ingress                         MQTT
+
+    Integrity                   CRC + AES-GCM                                          Target                          Customer VM
+
+●      Receives and separates uplink, status, topology, and integrity-path data.
+●      Validates frames before data enters the normal application path.
+●      Routes authenticated alarm events and separates manual/test input.
+●      Builds authenticated high-level mode commands.
+
+
+2.2 Server logical architecture
+The pipeline separates transport, integrity, application routing, storage, and command downlink.
+
+         MQTT ingress                        Frame gate                        Security gate                           Application                      Outputs
+
+
+                               receive                           validate                            authorize                              route
+
+
+
+
+           Broker input                     Length + CRC                     AES-GCM + replay                         Alarm + topology              Dataset / command
+
+
+                                                               Figure 1. Server application logical pipeline.
+
+    Transport                                     MQTT through the broker selected for deployment.
+
+    Integrity                                     Frame structure, length, CRC, authentication, semantic checks, and replay policy.
+
+    Application                                   Decoded data, alarm routing, topology, engineering UI, and commands.
+
+
+2.3 MQTT input categories
+Inputs are functionally separated so status, topology, payload, and integrity events are not treated as the same data.
+
+    Category                                Purpose                                                          Downstream path
+
+    Device uplink                           Carries frames/data from the field                               Validation and decode
+
+    Gateway status                          Gateway communication state                                      Monitoring/status
+
+    Topology                                Parent, discovery, and route information                         Engineering topology view
+
+    Integrity/raw                           Validation failures or observability                             Quarantine/integrity path
+
+    Note: Each input category is mapped to a separate processing path.
+
+
+
+
+Lab IoT ITB                                                                                                                                                             3/8
+Server                                                                                                                                        IOTITB-TDS-SERVER-EN-R4.0
+
+
+
+
+3 Frame validation and security
+3.1 Frame validation
+A frame must pass structural checks before authentication and semantic processing.
+
+    Stage                                     Description
+
+    Receive                                   Message received from MQTT
+
+    Structure                                 Format and mandatory fields
+
+    Length                                    Frame/payload size is checked
+
+    CRC                                       Transport integrity is checked
+
+    Security/semantic                         Enters the authentication gate
+                                                            Figure 2. Frame-validation gate sequence.
+
+●      Frames failing structure/length/CRC do not become decoded production data.
+●      Validation errors can still be routed to an integrity/diagnostic path.
+
+
+3.2 AES-128-GCM authentication
+GasleakDetector payloads are authenticated and decrypted with a required runtime key.
+
+    Stage                                     Description
+
+    Encrypted payload                         Received after the frame gate
+
+    Runtime key                               Required and mapped to key ID
+
+    AES-128-GCM                               Decrypt + authentication-tag check
+
+    Semantic validation                       Identity/role and value constraints
+
+    Valid output                              Only then enters application routing
+                                                               Figure 3. Field-payload security gate.
+
+    Note: A runtime key is required; a payload is rejected when authentication cannot be completed.
+
+
+3.3 Replay, nonce reuse, and quarantine
+Authenticated but repeated data can still be rejected so old events are not reprocessed as new data.
+
+    Condition                                    Decision                                    Path
+
+    Authentication failure                       Reject                                      Integrity/quarantine
+
+    Replay detected                              Reject                                      Integrity/quarantine
+
+    Nonce reuse                                  Reject                                      Integrity/quarantine
+
+    Semantic invalid                             Reject                                      Integrity/quarantine
+
+    Valid and fresh                              Accept                                      Decoded/application
+
+    Anti-replay state                        The Server deployment must configure persistent storage.
+
+    Service recovery                         With that configuration, anti-replay state is reloaded after a service restart.
+
+
+
+4 Alarm, topology, and commands
+4.1 Alarm and event handling
+The Server routes alarms only after a frame passes integrity and authentication gates.
+
+                MQTT                         Decoder                             Integrity gate                       Alarm route                   Engineering UI
+
+                             Receive frame
+
+
+                                                       Validate + authenticate
+
+
+                                                                                                  Valid alarm event
+
+
+                                                                                                                                    Route/display
+
+
+
+
+                                                                   Figure 4. Server alarm routing.
+
+
+
+Lab IoT ITB                                                                                                                                                          4/8
+Server                                                                                                                                                 IOTITB-TDS-SERVER-EN-R4.0
+
+
+
+
+    Input                                                                         Production alarm path
+
+    Authenticated field alarm                                                     May be routed
+
+    Manual/test input                                                             Separated
+
+    Failed authentication/replay                                                  Quarantined; not a production alarm
+
+    Note: The Server produces application alarm events; external notification integration uses customer-deployment interfaces.
+
+
+4.2 Engineering topology view
+The Server provides a view of Gateway, CH, GasleakDetector, active parent, discovery candidates, and routes.
+
+                  Gateway                                         CH parent                                  CH child                                     GasleakDetector
+
+
+                                            parent                                         child                                        serves
+
+
+
+
+                    Root                                          Active route                                Multi-hop                                    Served endpoint
+
+
+                                                                  Figure 5. Information available in the topology view.
+
+●      The view can show installed parent, discovery candidates, and route lineage.
+●      The topology flow is part of the Node-RED-based Server application.
+●      Gateway and network configuration is adapted for each customer deployment.
+
+
+4.3 High-level mode command
+The Server can build an authenticated operational-mode command for forwarding toward GasleakDetector.
+
+             Authorized user                           Server                             Broker                          Gateway/CH                          GasleakDetector
+
+                           Mode request + auth token
+
+                                               Validate + authenticate
+
+                                                                     Publish command
+
+                                                                                                      Deliver downlink
+
+                                                                                                                                       Deliver in receive window
+
+
+
+
+                                                                         Figure 6. Server-to-field command path.
+
+●      External commands require an authorization token.
+●      Command payload is authenticated at the application layer.
+●      Current scope is high-level mode change, not general remote control.
+
+
+
+5 Broker, storage, and deployment
+5.1 Server-to-broker TLS connection
+The flow generator supports a Node-RED-to-broker profile using credentials and CA-verified TLS. The selected deployment profile
+determines whether TLS is enabled.
+
+    Stage                                               Description
+
+    Node-RED                                            MQTT client
+
+    Credentials                                         Deployment-provided
+
+    CA trust                                            Broker certificate verification
+
+    TLS session                                         Server/Node-RED to broker
+
+    Broker                                              Trust boundary
+                                                                         Figure 7. Server-to-broker TLS session.
+
+    Note: This is separate from the Gateway-to-broker TLS session. It must not be described as end-to-end TLS from GasleakDetector to Server.
+
+
+
+
+Lab IoT ITB                                                                                                                                                                     5/8
+Server                                                                                                                                       IOTITB-TDS-SERVER-EN-R4.0
+
+
+
+
+5.2 Dataset persistence: MySQL and CSV
+The engineering dataset recorder validates records and uses the configured storage path. MySQL is used only when its driver and
+connection are available; CSV is a dataset-recorder output, not an automatic replacement for MySQL.
+
+           Dataset mode                          MQTT input                          Validation                        Recorder                        Storage
+
+
+                              publish                                 parse                           accept                             write
+
+
+
+
+           Engineering only                      Dataset record                 Schema + values                      Python service                  MySQL / CSV
+
+
+                                                                      Figure 8. Engineering dataset path.
+
+    Storage                             Status                                                                 Boundary
+
+    MySQL                               Supported when the driver and connection are available                 Dataset records only
+
+    CSV                                 Dataset-recorder output after the applicable recording path            Engineering dataset
+                                        succeeds
+
+    Note: MySQL is not generalized as storage for all telemetry, alarms, topology, or operational events.
+
+
+5.3 Customer VM deployment model
+The application is targeted for installation on a customer-provided virtual machine.
+
+    Area                                              Deployment specification
+
+    Host                                              VM on customer infrastructure
+
+    OS                                                Linux or Windows, selected for the deployment
+
+    Security                                          Runtime secrets and broker trust are required
+
+    Note: VM, network, broker, and secret configuration is established for each customer deployment.
+
+
+5.4 Node-RED engineering topology view
+The Server provides a Node-RED-based engineering topology view for inspecting network information processed by the flow.
+
+    UI layer                                            Implementation                                            Scope
+
+    Node-RED engineering view                           Part of the Server runtime                                Topology, parent, discovery, route, engineering
+                                                                                                                  status
+
+●      The topology view displays parent, discovery, route, and engineering status.
+
+
+5.5 Deployment and operational responsibilities
+Server readiness depends on the boundary between the Lab IoT ITB application and customer infrastructure.
+
+    Area                                      Required input/ownership
+
+    VM                                        Provisioning, OS image, patching, backup, resource monitoring
+
+    Broker                                    FQDN/IP, port, credentials, CA, ACL, retention policy
+
+    Database                                  MySQL endpoint/credentials/schema ownership for datasets
+
+    Secrets                                   Runtime AES key, command authorization token, MQTT credentials
+
+    Operations                                Log collection, restart policy, incident response, and log retention
+
+    Note: VM, broker, database, secret, and log operations are managed under customer infrastructure policy.
+
+
+
+
+Lab IoT ITB                                                                                                                                                         6/8
+Server                                                                                                                            IOTITB-TDS-SERVER-EN-R4.0
+
+
+
+
+6 Data model, storage, and security
+6.1 Application data model
+The Server converts device data into application fields used by storage, topology display, and alarms.
+
+ Field                             Meaning                                                               Use
+
+ node ID                           Source-node identifier.                                               Device and topology correlation.
+
+ gas class / gas name              Classification result and its display name.                           Detection status in the application.
+
+ confidence                        Inference-result confidence value.                                    Context for result interpretation.
+
+ battery mV                        Battery voltage reported by the device.                               Power monitoring.
+
+ alarm                             Device alarm state.                                                   Alarm indication in the application interface.
+
+ external power                    External power-source state.                                          Power-supply diagnostics.
+
+ sequence                          Source message sequence number.                                       Ordering and repetition detection.
+
+ gateway                           Gateway that received the data.                                       Communication-path correlation.
+
+ last seen                         Time at which data was last received.                                 Connectivity state in the application.
+
+
+6.2 Dataset record schema
+The dataset recorder stores identity, acquisition context, eight sensor values, gain, sensor status, and an idempotency key in each
+record.
+
+ Group                            Fields                                                           Description
+
+ Identity                         Device, node, and unique-record identity                         Source identity and unique record key.
+
+ Context                          Mode, sequence, time, label, and nulling profile                 Acquisition context for each record.
+
+ Sensor voltages                  Eight validated sensor values                                    One value for each channel.
+
+ Gain                             Per-channel gain                                                 Acquisition gain for each channel.
+
+ Sensor health                    Eight-channel validity state                                     Validity state for each sensor channel.
+
+ Feature order                    Canonical sensor order                                           Preserves dataset-structure consistency.
+
+ Note: Each record has a unique 64-character identifier so that resubmission of the same record does not create a duplicate in primary storage.
+
+
+6.3 Dataset admission rules
+A record is accepted only when all data-integrity requirements are satisfied before storage.
+
+ Check                                         Requirement
+
+ Mode                                          The record must use engineering dataset mode.
+
+ Source identity                               The device identity must be valid, consistent with the ingress path, and match the record node identity.
+
+ Sequence and time                             Sequence and timestamp must be within the unsigned 32-bit integer range.
+
+ Nulling profile                               The profile identifier is within the 1-255 range.
+
+ Label                                         Required, limited to safe characters, and no more than 31 characters.
+
+ Sensor-value count                            Exactly eight voltage values, all finite.
+
+ Gain                                          Each gain is one of 1, 2, 4, 8, 16, 32, or 64.
+
+ Sensor status                                 All sensor status values indicate valid.
+
+ Feature order                                 Must match the canonical MQ8, MQ135, MQ3, MQ5, MQ4, MQ7, MQ6, MQ2 order.
+
+ Idempotency                                   The record key is checked before writing so that the same record is not duplicated.
+
+
+
+
+Lab IoT ITB                                                                                                                                               7/8
+Server                                                                                                                       IOTITB-TDS-SERVER-EN-R4.0
+
+
+
+
+6.4 Storage and service resilience
+The engineering dataset recorder uses the configured storage path. MySQL is used only when its driver and connection are
+available; CSV is a dataset-recorder output, not an automatic MySQL fallback path.
+
+    Component                        Role                                      Behavior
+
+    MySQL Server                     Dataset storage when configured           Enforces unique record identifiers on the active MySQL path.
+
+    CSV                              Dataset-recorder output                   Generated after the applicable recording path succeeds; not treated as an
+                                                                               automatic MySQL replacement.
+
+    Topology view                    Node-RED engineering view                 Shows topology, parent, discovery, route, and engineering-status
+                                                                               information processed by the flow.
+
+
+6.5 Deployment security requirements
+The Server is installed on customer infrastructure. The following controls apply when services are not restricted to a loopback
+interface.
+●      Broker connections use TLS and authentication consistent with customer policy.
+●      Credentials and cryptographic material are supplied through the runtime environment or a secret store, not embedded in application
+       files.
+●      The deployment must configure persistent anti-replay storage so protection can be restored after a service restart.
+●      Database, broker, and web-application access is restricted by customer network controls and service accounts.
+●      Backup, retention, operating-system patching, and VM monitoring form part of customer infrastructure operations.
+
+    Area                    Server application behavior                                   Deployment responsibility
+
+    VM runtime              Runs the Node-RED services and application interface.         The customer provides the VM and selects Linux or Windows.
+
+    MQTT broker             Establishes an authenticated session with TLS verification.   The customer provides the broker endpoint, CA, credentials,
+                                                                                          and access policy.
+
+    Storage                 Validates records and uses the configured dataset-storage     The customer manages the database service, access, backup,
+                            path.                                                         and retention.
+
+    Anti-replay             Loads and updates the configured persistent replay state.     The customer provides persistent storage at deployment.
+
+    Topology view           Provides a Node-RED engineering view for topology and         The customer restricts network access and runtime exposure
+                            status processed by the flow.                                 under infrastructure policy.
+
+
+
+
+Lab IoT ITB                                                                                                                                             8/8
+

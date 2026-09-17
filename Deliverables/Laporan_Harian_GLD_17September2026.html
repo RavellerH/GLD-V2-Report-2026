@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laporan Status Harian — 17 September 2026</title>
+<style>
+:root{--ink:#2F4050;--teal:#1ABB9C;--paper:#F3F3F4;--line:#D9E0E5;--muted:#667585;--warn:#F39C12;--danger:#E74C3C;--ok:#1E9B76;--surface:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.nav{background:var(--ink);border-bottom:3px solid var(--teal);padding:10px 18px;color:#dce6ed;font-size:13px}.nav b{color:#8ee8d3;margin-right:13px}.nav a{color:#dce6ed;text-decoration:none;margin:0 8px}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 22px 48px}
+.hero{background:var(--ink);color:#fff;border-radius:7px;padding:30px 32px;border-left:7px solid var(--teal)}
+h1{font-size:28px;line-height:1.17;margin:0 0 9px}.sub{color:#c8d5df;margin:0;max-width:820px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.pill{font-size:12px;font-weight:700;border:1px solid #597081;padding:4px 8px;border-radius:20px}
+.pill.teal{background:var(--teal);border-color:var(--teal);color:#fff}
+.pill.red{background:#8f3d3d;border-color:#a85757}
+.pill.amber{background:#8a5a12;border-color:#a8721c}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:15px;box-shadow:0 1px 2px #2f40500b}
+.kpi .n{font-size:22px;font-weight:800;color:var(--teal)}
+.kpi .lbl{font-size:11.5px;color:var(--muted);margin-top:2px}
+.kpi .sub2{font-size:11px;color:var(--muted);margin-top:6px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+.card,.section{background:var(--surface);border:1px solid var(--line);border-radius:7px;box-shadow:0 1px 2px #2f40500b}
+.card{padding:17px}.card h3{font-size:14px;margin:0 0 5px}.card p{margin:0;color:var(--muted);font-size:13px}
+.section{margin-top:20px;overflow:hidden}
+.head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px}
+.head .n{width:27px;height:27px;border-radius:50%;background:var(--teal);color:#fff;text-align:center;line-height:27px;font-weight:800;flex:none}
+.head h2{font-size:17px;margin:0}
+.head .tag{margin-left:auto;font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px}
+.tag.ok{background:#ddf4ec;color:#147356}.tag.warn{background:#fff0d2;color:#946000}.tag.block{background:#ffe0de;color:#ae3029}
+.body{padding:0 18px 16px}
+.banner{margin:17px 0;padding:12px 14px;border-radius:5px;border-left:4px solid var(--warn);background:#fff8e9}
+.banner.danger{border-color:var(--danger);background:#fff1f0}
+.banner.ok{border-color:var(--ok);background:#eefaf6}
+.banner b{display:block;margin-bottom:2px}
+.table{width:100%;border-collapse:collapse;margin-top:13px;font-size:13px}
+.table th{background:#edf2f5;text-align:left;font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:#566777;padding:9px}
+.table td{padding:10px 9px;vertical-align:top;border-bottom:1px solid var(--line)}
+.table tr:last-child td{border-bottom:0}
+.status{display:inline-block;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:700;white-space:nowrap}
+.ready{background:#ddf4ec;color:#147356}.open{background:#fff0d2;color:#946000}.block{background:#ffe0de;color:#ae3029}.partial{background:#f6f1dc;color:#7a6a18}
+.role{color:var(--muted);font-size:12px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:16px 0}
+.step{border:1px solid var(--line);border-radius:5px;padding:12px;background:#fbfcfc;position:relative}
+.step b{display:block;font-size:13px}.step span{font-size:12px;color:var(--muted)}
+.step .num{position:absolute;top:-9px;left:10px;background:var(--teal);color:#fff;font-size:11px;font-weight:800;width:18px;height:18px;border-radius:50%;text-align:center;line-height:18px}
+ul.plain{margin:8px 0 0;padding-left:20px}ul.plain li{margin-bottom:5px}
+.linklist{margin:8px 0 0;padding-left:20px;font-size:13px}.linklist li{margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+code{overflow-wrap:break-word;word-break:break-word}
+.notclaim{background:#3A2A1C;color:#E2D6C9;border-radius:7px;padding:14px 16px;font-size:13px;margin-top:14px}
+.notclaim b{color:#F0B07A}
+footer{margin-top:24px;color:var(--muted);font-size:11px}
+@media print{body{background:#fff}.wrap{max-width:none;padding:12mm}.nav{display:none}.hero{break-inside:avoid}.head{break-inside:avoid}.table tr{break-inside:avoid}.kpi,.card{break-inside:avoid}}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.grid3,.flow{grid-template-columns:1fr}.wrap{padding:15px}.hero{padding:23px}h1{font-size:23px}.table{font-size:12px}}
+</style>
+</head>
+<body>
+<!-- GLD-NAV-START -->
+<style>@media print{#gld-cross-nav{display:none !important}}</style>
+<div id="gld-cross-nav" style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
+<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
+<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Detail Assessment/Field Testing</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Desain_Bracket_L_UBolt_GLD_Mounting.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Desain Bracket U-Bolt</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Sertifikasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Checklist Instalasi Cilacap</a><span style="opacity:.35;color:#8A97A6">&middot;</span><span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Laporan Harian 17 Sep</span><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Persiapan Vendor Instalasi</a>
+</div>
+<!-- GLD-NAV-END -->
+
+
+<main class="wrap">
+
+<section class="hero">
+<h1>Laporan Status Harian GLD Tahap 2<br>17 September 2026</h1>
+<p class="sub">Ringkasan gabungan hari ini untuk tiga jalur kerja yang berjalan paralel: persiapan instalasi RU IV Cilacap, sertifikasi ATEX/IECEx, dan field testing. Disusun untuk internal LGU — memuat progres dan outstanding secara apa adanya.</p>
+<div class="meta">
+<span class="pill teal">REV 1.0 · 17 SEPTEMBER 2026</span>
+<span class="pill">INTERNAL — LAPI GANESHA UTAMA</span>
+<span class="pill amber">CILACAP: SURVEY SELESAI, INSTALASI BELUM MULAI</span>
+<span class="pill red">SERTIFIKASI: BELUM SIAP SUBMISSION / TERMIN 1</span>
+</div>
+</section>
+
+<div class="kpis">
+<div class="kpi"><div class="n">44%</div><div class="lbl">Progres pilot/field testing keseluruhan</div><div class="sub2">vs baseline 43% (+1 poin, reassessment 4 Sep)</div></div>
+<div class="kpi"><div class="n">20%</div><div class="lbl">Termin 1 field testing</div><div class="sub2">Status: layak diajukan (substantial completion lab)</div></div>
+<div class="kpi"><div class="n">≈42%</div><div class="lbl">Kesiapan internal sertifikasi</div><div class="sub2">pra-submission ExCB, bukan acceptance milestone</div></div>
+<div class="kpi"><div class="n">≈20%</div><div class="lbl">Progres sertifikasi s/d sertifikat</div><div class="sub2">bottom-up 5 fase × 4 track (ATEX/IP/EMC/RF)</div></div>
+<div class="kpi"><div class="n">40%</div><div class="lbl">Termin 1 sertifikasi</div><div class="sub2">Status: belum layak diajukan (1/7 syarat aman)</div></div>
+</div>
+
+<div class="grid3">
+<div class="card"><h3>Yang baru hari ini</h3><p>Audit kesiapan sertifikasi ATEX selesai (verdict: belum siap) + deck presentasi internal 11 slide dibuat untuk rapat tim. Bug file <code>Presentasi_Progres...Sep2026.pptx</code> (rusak sejak 4 Sep) ditemukan &amp; diperbaiki di 2 salinan.</p></div>
+<div class="card"><h3>Yang menahan progres</h3><p>Metode proteksi Ex (d/e/i) belum diputuskan (menahan 4 pekerjaan sertifikasi); kelas suhu T4 belum diverifikasi (0 pengukuran hot-spot); izin/HSE &amp; PC dedicated Cilacap belum dikonfirmasi RU IV.</p></div>
+<div class="card"><h3>Yang tidak boleh diklaim</h3><p>Perangkat sudah tersertifikasi; sudah lulus lab terakreditasi; Termin 1 sertifikasi sudah dipenuhi; grup gas IIC sudah disetujui ExCB; instalasi RU IV sudah berjalan.</p></div>
+</div>
+
+<!-- ================= CILACAP ================= -->
+<section class="section">
+<div class="head"><span class="n">1</span><h2>Persiapan Instalasi RU IV Cilacap</h2><span class="tag warn">PRA-INSTALASI</span></div>
+<div class="body">
+<p>Survey lokasi RU IV Cilacap (9–10 Agustus) sudah selesai. <b>Instalasi fisik dan commissioning belum dimulai.</b> Checklist kesiapan (10 Sep) membagi jalur kerja menjadi tiga, dengan syarat izin yang berbeda:</p>
+<table class="table">
+<thead><tr><th>Jalur</th><th>Syarat utama</th><th>Status hari ini</th></tr></thead>
+<tbody>
+<tr><td><b>A. Chamber di kantor HQ kilang</b><br><span class="role">Bukan area proses</span></td><td>PIC kantor, prosedur keselamatan chamber, sampel gas</td><td><span class="status ready">CHAMBER SIAP</span><br><span class="role">sampel gas tambahan masih dicari</span></td></tr>
+<tr><td><b>B. Uji lapangan terkendali</b><br><span class="role">Non-permanen</span></td><td>TRA/JSA &amp; izin kerja disahkan, area disetujui RU/HSE, vendor siap</td><td><span class="status open">PERLU KEPUTUSAN RU/HSE</span></td></tr>
+<tr><td><b>C. Instalasi permanen area berbahaya</b></td><td>Seluruh syarat Jalur B + bukti kesesuaian area berbahaya</td><td><span class="status block">BELUM GO</span><br><span class="role">sertifikasi masih tahap persiapan dokumen</span></td></tr>
+</tbody>
+</table>
+
+<div class="banner ok"><b>Pembagian kerja instalasi fisik (dikonfirmasi user, 4 Sep).</b> Vendor Pertamina mengeksekusi fisik instalasi (bracket, CH, sensor node) termasuk sertifikasi HSE ketinggian. LGU berperan supervisi teknis/QA + elektrikal spesifik-GLD (terminasi PSU, energize, commissioning) — LGU tidak perlu sertifikasi ketinggian sendiri.</div>
+
+<p><b>Item yang masih perlu ditutup sebelum mobilisasi</b> (ringkasan dari checklist lengkap — lihat tautan di bawah):</p>
+<ul class="plain">
+<li>TRA/JSA spesifik titik pasang, izin kerja, dan surat masuk barang — belum terkonfirmasi RU IV.</li>
+<li>Klasifikasi area (safe/hazardous) per titik pasang GLD/CH/Gateway — wajib untuk Jalur B/C, belum dikonfirmasi HSE/Engineering RU IV.</li>
+<li>PC dedicated dekat Gateway — menunggu pengadaan/konfirmasi Pertamina RU IV.</li>
+<li>Penugasan resmi vendor Pertamina sebagai eksekutor pemasangan fisik, termasuk kompetensi kerja di ketinggian.</li>
+<li>Detail fastener bracket (grade, material anti-korosi) dan konfirmasi orientasi pemasangan (tiang vertikal vs handrail horizontal — desain CAD saat ini belum diverifikasi tertulis untuk keduanya).</li>
+</ul>
+
+<div class="banner"><b>Basis desain bracket sudah diserahkan ke vendor (10 Sep).</b> Paket berisi gambar CAD (STEP/OBJ), spesifikasi mounting L-bracket + U-bolt 2"/DN50 non-invasive (tanpa bor/las), dan daftar konfirmasi wajib sebelum fabrikasi. LGU menyediakan basis desain &amp; supervisi QA; vendor Pertamina bertanggung jawab atas verifikasi lapangan, shop drawing, fabrikasi, dan pemasangan fisik.</div>
+
+<ul class="linklist">
+<li>Checklist lengkap (izin, HSE, mekanik, daya, commissioning): <a href="Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html">Checklist Kesiapan Instalasi RU IV Cilacap</a></li>
+<li>Cover sheet penyerahan desain ke vendor: <a href="Petunjuk_Penyerahan_Desain_Bracket_ke_Vendor_RU-IV.md">Petunjuk Penyerahan Desain Bracket</a></li>
+<li>Desain &amp; viewer 3D bracket: <a href="Desain_Bracket_L_UBolt_GLD_Mounting.html">Desain_Bracket_L_UBolt_GLD_Mounting</a></li>
+<li>Draft JSA/HSE (belum disahkan): <a href="JSA_HSE_RU-IV_Cilacap_GLD.html">JSA_HSE_RU-IV_Cilacap_GLD</a></li>
+</ul>
+</div>
+</section>
+
+<!-- ================= SERTIFIKASI ================= -->
+<section class="section">
+<div class="head"><span class="n">2</span><h2>Laporan Sertifikasi ATEX/IECEx</h2><span class="tag block">BELUM SIAP</span></div>
+<div class="body">
+<p>Audit kesiapan menyeluruh (17 Sep) menyimpulkan: <b>belum siap</b>, baik untuk submission dokumen ke ExCB maupun untuk pengajuan Termin 1 SPK sertifikasi (40%). Dua angka progres dipakai untuk dua pertanyaan berbeda — jangan dicampur:</p>
+<ul class="plain">
+<li><b>≈42% kesiapan internal (pra-submission)</b> — dari 39 butir checklist ExCB: 21 final/tersedia, 8 sebagian, 10 belum tersedia. Bagian 1 (legalitas &amp; organisasi) belum disusun sama sekali.</li>
+<li><b>≈20% progres keseluruhan s/d sertifikat terbit</b> — metodologi bottom-up 5 fase × 4 track (ATEX/IP/EMC/RF), fase Uji Lab Terakreditasi (bobot terbesar, 41,7%) masih dihitung 0%.</li>
+</ul>
+
+<h3 style="font-size:14px;margin:16px 0 4px">Bagian 2.6 (desain &amp; manufaktur) — status per butir</h3>
+<table class="table">
+<thead><tr><th>Butir</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>a) Gambar lengkap</td><td><span class="status partial">SEBAGIAN</span></td></tr>
+<tr><td>b) BOM komponen Ex-critical</td><td><span class="status partial">SEBAGIAN</span></td></tr>
+<tr><td>c) Datasheet material non-logam</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>d) Deskripsi proses manufaktur</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>e) Kalkulasi proteksi ledakan</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>f) Kalkulasi kelas suhu</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>g) Instruksi pakai &amp; instalasi</td><td><span class="status partial">SEBAGIAN</span></td></tr>
+<tr><td>h) Informasi nameplate</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>i) Sertifikat komponen Ex</td><td><span class="status block">BELUM</span></td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:14px;margin:16px 0 4px">Lima penghambat utama</h3>
+<table class="table">
+<thead><tr><th>Penghambat</th><th>Kondisi saat ini</th><th>Dampak</th></tr></thead>
+<tbody>
+<tr><td><b>Metode proteksi belum diputuskan</b></td><td>Ex d, Ex e, atau Ex i belum dipilih/dikonfirmasi ke ExCB.</td><td>Menahan kalkulasi proteksi ledakan (2.6.e), gambar flame-path, dan arah desain ke mitra casing.</td></tr>
+<tr><td><b>Kelas suhu T4 belum diverifikasi</b></td><td>Nol pengukuran hot-spot; heater sensor MQ lazim ~200–400°C, sedangkan T4 = ≤135°C.</td><td>Risiko teknis terbesar — bila gagal, desain sensing head harus diubah, bukan sekadar revisi dokumen.</td></tr>
+<tr><td><b>Bagian 1 belum disusun</b></td><td>Formulir aplikasi, izin usaha, struktur organisasi, ISO 9001.</td><td>Submission tidak bisa dibuka meski berkas teknis lengkap — satu-satunya item yang tidak bergantung pihak lain.</td></tr>
+<tr><td><b>Belum ada komponen bersertifikat Ex</b></td><td>Flame arrestor sinter-metal belum masuk BOM; baterai Li-ion 18650 node belum diverifikasi Ex.</td><td>Butir 2.6.i kosong; sertifikat FCC/TELEC/CE pada ESP32-S3/LoRa tidak memenuhi syarat ini.</td></tr>
+<tr><td><b>Item menunggu mitra casing</b></td><td>Datasheet material, proses manufaktur, BOM Ex-critical (gasket/cable gland/potting), nameplate.</td><td>Bukan kerja terhenti, tapi jadwal di luar kendali kita — perlu komitmen tanggal dari mitra.</td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:14px;margin:16px 0 4px">Termin 1 sertifikasi (40%) — 7 syarat kontraktual</h3>
+<table class="table">
+<thead><tr><th>#</th><th>Syarat</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Prototipe enclosure tersedia</td><td><span class="status partial">SEBAGIAN</span></td></tr>
+<tr><td>2</td><td>Prototipe telah diuji (mekanik/termal/sealing/fault)</td><td><span class="status block">BELUM TERBUKTI</span></td></tr>
+<tr><td>3</td><td>Ada iterasi perbaikan desain berbasis hasil uji</td><td><span class="status block">BELUM TERBUKTI</span></td></tr>
+<tr><td>4</td><td>Disaksikan &amp; divalidasi Pertamina</td><td><span class="status block">BELUM TERBUKTI</span></td></tr>
+<tr><td>5</td><td>Sebelum uji lab terakreditasi</td><td><span class="status ready">URUTAN AMAN</span></td></tr>
+<tr><td>6</td><td>Berita acara</td><td><span class="status block">BELUM ADA</span></td></tr>
+<tr><td>7</td><td>Laporan pekerjaan Termin 1</td><td><span class="status block">BELUM ADA</span></td></tr>
+</tbody>
+</table>
+<p class="role">Kuncinya satu: sesi uji enclosure yang disaksikan Pertamina. Begitu sesi itu terjadi, 5 dari 7 baris tertutup sekaligus. Tiga template kerja (log uji &amp; iterasi, berita acara validasi, laporan pekerjaan) sudah tersedia di <code>Paket Pertamina/02_Sertifikasi_ATEX_IECEx/</code> — tinggal diisi.</p>
+
+<h3 style="font-size:14px;margin:16px 0 4px">Empat keputusan yang diminta dari rapat internal</h3>
+<div class="flow">
+<div class="step"><span class="num">1</span><b>Metode proteksi Ex</b><span>Pilih Ex d atau Ex i untuk dikonfirmasi ke ExCB — PIC + tanggal.</span></div>
+<div class="step"><span class="num">2</span><b>Uji hot-spot sensor</b><span>Tetapkan PIC, alat ukur, dan tanggal pengukuran suhu titik terpanas.</span></div>
+<div class="step"><span class="num">3</span><b>Sesi uji ber-witness</b><span>Usulkan tanggal sesi uji enclosure bersama Pertamina.</span></div>
+<div class="step"><span class="num">4</span><b>Berkas Bagian 1</b><span>Tunjuk PIC legalitas, struktur organisasi, ISO 9001 — bisa mulai minggu ini.</span></div>
+</div>
+
+<ul class="linklist">
+<li>Dashboard &amp; Kurva-S sertifikasi: <a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html">Dashboard_Sertifikasi_GLD_ATEX_IECEx</a></li>
+<li>Dokumen teknis submission (Inggris, untuk ExCB): <a href="Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX.html">Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX</a></li>
+<li>Deck rapat internal (11 slide, catatan pembicara): <code>Deliverables/Presentasi_Internal_Kesiapan_Sertifikasi_ATEX_Sep2026.pptx</code></li>
+<li>Paket siap-zip Termin 1 sertifikasi: <code>Paket Pertamina/02_Sertifikasi_ATEX_IECEx/</code></li>
+</ul>
+</div>
+</section>
+
+<!-- ================= FIELD TESTING ================= -->
+<section class="section">
+<div class="head"><span class="n">3</span><h2>Laporan Field Testing</h2><span class="tag ok">TERMIN 1 LAYAK DIAJUKAN</span></div>
+<div class="body">
+<div class="banner ok"><b>Termin 1 field testing (20%) dinilai substantial completion untuk tahap engineering/lab</b> dan layak diajukan untuk evaluasi &amp; pembayaran. PT Pertamina Patra Niaga telah datang ke Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu ITB — sebelum visit Cilacap — untuk menyaksikan perkembangan &amp; integrasi sistem (diperlakukan sebagai witness tahap FAT/FIT, 6 Agustus, diperkuat notulen &amp; bukti uji lanjutan 6–8 Agustus).</div>
+
+<p>Dasar penilaian: detail engineering lengkap, kesiapan 4 GLD + 16 CH, konfigurasi firmware, integrasi GLD–CH–Gateway–Server, mesh/failover, dan alarm push yang sudah berfungsi. Laporan formal <b>sengaja tidak mengklaim</b> instalasi, commissioning, SAT, as-built lokasi, atau sertifikasi selesai — baseline yang diakui pada Termin 1 adalah konfigurasi prototipe/laboratorium.</p>
+
+<table class="table">
+<thead><tr><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Laporan pemenuhan deliverable Termin 1 (Rev 02, 11 hlm)</td><td><span class="status ready">SELESAI</span></td></tr>
+<tr><td>Draft BAST (3 halaman)</td><td><span class="status open">MENUNGGU DATA ADMINISTRASI</span><br><span class="role">nomor/tanggal/nilai SPK, nominal 20%, identitas penandatangan &amp; tanda tangan</span></td></tr>
+<tr><td>Paket pengajuan siap-zip (26 file, ±28,8 MB)</td><td><span class="status ready">FINAL</span></td></tr>
+<tr><td>Instalasi, commissioning, SAT, as-built RU IV</td><td><span class="status block">TAHAP BERIKUTNYA</span><br><span class="role">tidak diklaim selesai — lihat bagian Cilacap di atas</span></td></tr>
+</tbody>
+</table>
+
+<p class="role">Catatan: notulen witness 6 Agustus versi awal memuat lokasi/pihak yang salah — sudah dikoreksi langsung ke lokasi &amp; pihak yang benar (LAPI Ganesha Utama, Lab IoT/Instrumentation and Computation ITB, PT Pertamina Patra Niaga) di paket final.</p>
+
+<ul class="linklist">
+<li>Laporan Termin 1 field testing: <code>Paket Pertamina/01_Pilot_Field_Testing/Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev02.pdf</code></li>
+<li>Draft BAST Termin 1 (20%): <code>Paket Pertamina/01_Pilot_Field_Testing/Draft_BAST_Termin_1_FieldTesting_20Persen.pdf</code></li>
+<li>Paket pengajuan siap-zip: <code>Paket Pertamina/03_Pengajuan_Termin_1_FieldTesting_20Persen_Rev02/</code></li>
+<li>Detail breakdown Assessment vs Field Testing: <a href="Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html">Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026</a></li>
+</ul>
+</div>
+</section>
+
+<!-- ================= NEXT STEPS ================= -->
+<section class="section">
+<div class="head"><span class="n">4</span><h2>Rekomendasi &amp; langkah berikutnya</h2></div>
+<div class="body">
+<ul class="plain">
+<li><b>Cilacap:</b> minta RU IV mengonfirmasi jalur B/C, klasifikasi area per titik pasang, penugasan vendor, dan ketersediaan PC dedicated — tanpa ini, mobilisasi belum bisa dijadwalkan.</li>
+<li><b>Sertifikasi:</b> tutup 4 keputusan rapat internal minggu ini (metode proteksi, PIC uji hot-spot, tanggal usulan sesi witness, PIC Bagian 1) — langkah 1 membuka 4 pekerjaan sekaligus.</li>
+<li><b>Field testing:</b> lengkapi data administratif BAST Termin 1 (nomor/tanggal/nilai SPK) agar paket pengajuan 20% dapat dikirim resmi.</li>
+<li><b>Cross-check:</b> pastikan penerima presentasi VP (dikirim 4 Sep) sudah menerima salinan file yang telah diperbaiki — versi asli sempat rusak/tidak bisa dibuka.</li>
+</ul>
+
+<div class="notclaim"><b>Jangan diklaim:</b> perangkat sudah tersertifikasi · sudah lulus lab terakreditasi · Termin 1 sertifikasi sudah dipenuhi · grup gas IIC sudah disetujui ExCB · instalasi RU IV Cilacap sudah berjalan.</div>
+</div>
+</section>
+
+<footer><b>Sumber utama:</b> <a href="Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html">Checklist Kesiapan Instalasi RU IV Cilacap</a> (10 Sep) · <a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html">Dashboard Sertifikasi ATEX/IECEx</a> (5 Sep) · deck internal kesiapan sertifikasi (17 Sep) · laporan Termin 1 field testing (11 Sep). Laporan ini merangkum status yang sudah dicatat di deliverable-deliverable tersebut untuk kebutuhan hari ini — bukan menggantikannya. Thermal camera tidak termasuk scope progres aktif.</footer>
+</main></body></html>

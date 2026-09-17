@@ -1,0 +1,24 @@
+Node sensor
+Cluster Head dan/atau Gateway
+=== TABLES ===
+--- table 0 ---
+Parameter spesifikasi | Node Sensor | Cluster Head | LoRa Gateway
+Nama perangkat | Node Sensor | LoRa Cluster Head | LoRa Gateway
+Fungsi utama | Akuisisi data sensor dan transmisi LoRa | Menerima/mengumpulkan data beberapa node dan meneruskan data | Gateway jaringan LoRa ke server/cloud
+Model/versi prototipe | Versi 2 | Versi 2 | Versi 2
+Mikrokontroler/prosesor | ESP32S3-WROOM-1U | ESP32S3-WROOM-1U | ESP32S3-WROOM-1U
+Modul LoRa | E22-900MM22S | E22-900MM22S | E22-900MM22S
+Frekuensi operasi LoRa | 920 MHz | Dual frequensi 920 MHz (star), dan 921 MHz (mesh) | 921 MHz
+Daya pancar maksimum | 22 dBm | 22 dBm | 22 dBm
+Bandwidth | 125 KHz | 125 KHz | 125 KHz
+Spreading Factor | 7 | 7 dan 9 | 9
+Jenis antena | omnidirectional | Fiber omnidirectional | Fiber omnidirectional
+Gain antena | 3 dBi | 3 dBi (star) dan 8 dBi (mesh) | 8 dBi
+Interface komunikasi lain | SPI dan LoRa | LoRa | LoRa dan Ethernet/Wi-Fi
+Sensor yang terhubung | MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135 | – | –
+Input power | 24 VDC | 5 VDC | 5 VDC
+Konsumsi daya maksimum | 7.995 W | 0.73 W | 0.73 W
+Port/konektor eksternal | USB, sensor, power, fan, antena, buzzer alarm | USB, power, antena | Ethernet, USB, power, antena
+Dimensi | 20 cm × 9 cm × 29 cm | 8 cm × 8 cm × 21 cm | 8 cm × 8 cm × 21 cm
+Enclosure | metal | metal | metal
+Mode operasi normal | sensing → processing → transmit | receive → process → transmit | receive LoRa → forward server

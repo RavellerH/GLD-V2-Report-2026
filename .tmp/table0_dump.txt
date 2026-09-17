@@ -1,0 +1,20 @@
+Parameter | Specification
+Main operating input | 24 VDC
+Alternative power source | Battery
+Catatan: Jalur pengembangan terpisah/R&D — tidak menghambat deployment; catu daya utama produksi = 24 VDC ≥2A/unit (dec:39)
+AC/DC adapter input | 220 VAC, 50 Hz
+Catatan: Standar jaringan listrik PLN Indonesia
+AC/DC adapter output | 24 VDC
+Internal operating voltages | 5 VDC & 3,3 VDC
+Catatan: 5 VDC untuk rail sensor/heater MQ, 3,3 VDC untuk logic ESP32-S3 — rincian arus tiap rail internal masih perlu didokumentasikan
+Maximum input current | ±0,33 A @ 24 VDC
+Catatan: Dihitung dari konsumsi daya maks 7,995 W ÷ 24 VDC, sesuai Parameter spesifikasi EMC_lengkap.docx
+Maximum power consumption | 7,995 W @ 24 VDC
+Catatan: Versi catu daya kontinu final, sesuai Parameter spesifikasi EMC_lengkap.docx & dec:39. Draw ON versi baterai duty-cycled terukur terpisah 5,75 W (5V×1,15A) — beda mode operasi, bukan kontradiksi
+Battery type | Li-ion 18650 (merek LiitoKala), konfigurasi 7P (7 sel paralel)
+Catatan: Merek baterai dikonfirmasi user (26 Agu 2026): LiitoKala. Jalur pengembangan terpisah (R&D) — tidak menghambat deployment versi 24 VDC (dec:39)
+Battery nominal voltage | 4,2 V
+Catatan: Tegangan penuh/full-charge per sel; tegangan nominal Li-ion pada umumnya 3,7 V — perlu klarifikasi istilah pada dokumen asal
+Battery capacity | 28.000 mAh / 28 Ah total
+Catatan: Konfigurasi 7P × 4.000 mAh, ≈70,4 Wh usable — BUKAN salah ketik, sesuai data pengujian daya (Timeline Update Juli 2026)
+Protection | [Fuse / reverse polarity / overvoltage / overcurrent – to be confirmed] all

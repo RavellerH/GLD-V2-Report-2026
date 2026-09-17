@@ -1,0 +1,623 @@
+                                                                                                                                    LAB IoT ITB
+
+
+
+
+                                                      Gateway
+Technical Datasheet Revision 4.0
+
+Bridge LoRa MESH ke jaringan IP melalui Wi-Fi STA dan MQTT, dengan firmware
+TLS dan non-TLS terpisah.
+
+
+         Jaringan CH                   Radio B                       Gateway                     Wi-Fi STA                  Broker/Server
+
+
+
+
+                         921 MHz                          frame                        IP                         publish
+
+
+
+
+          LoRa MESH                   Antena 8 dBi                   ESP32-S3                      IP uplink                    MQTT / TLS
+
+
+
+
+    BOARD                           RADIO AKTIF                           JARINGAN                             TRANSPORT
+
+    Rectangle / Circle              MESH / Radio B                        Wi-Fi STA                            MQTT TLS / non-TLS
+
+Fitur utama
+●     Menerima frame dari CH melalui Radio B/MESH.                    ●    Menerima perintah downlink yang didukung untuk target
+●     Mempublikasikan uplink, status, dan topologi secara                  Gateway dan meneruskannya sebagai downlink MESH.
+      fungsional ke MQTT.                                             ●    Menyediakan target firmware TLS dan non-TLS secara
+                                                                           terpisah.
+Ikhtisar teknis
+Gateway menghubungkan backbone LoRa MESH ke broker MQTT melalui Wi-Fi dan mempertahankan jalur downlink menuju field.
+Profil fungsi
+    Ingress                             LoRa MESH
+    Uplink IP                           Wi-Fi STA
+    Messaging                           MQTT
+    Security option                     CA-verified TLS
+
+Antarmuka operasional
+    Uplink                              MESH frame diterima, diproses, lalu diterbitkan melalui MQTT.
+    Downlink                            Perintah MQTT yang didukung untuk target Gateway diterjemahkan ke jalur MESH menuju CH.
+    Identitas Gateway                   Default 0x0001; dapat dikonfigurasi pada rentang 0x0001-0x000F dan disimpan pada NVS.
+    Trust boundary                      TLS, bila dipilih, berhenti pada broker; bukan TLS sepanjang LoRa.
+
+
+
+
+Lab IoT ITB
+Gateway                                                                                                                                IOTITB-TDS-GATEWAY-ID-R4.0
+
+
+
+
+Daftar isi
+
+1 Identifikasi produk        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+      1.1 Singkatan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 Ikhtisar dan perangkat keras . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 Ikhtisar produk . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 Peran dalam arsitektur sistem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.3 Varian PCB . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.4 Perangkat keras dan penggunaan radio . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      2.5 Matriks target firmware . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+
+3 Antarmuka LoRa MESH . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 Antarmuka LoRa MESH . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.2 Konfigurasi MESH dan pembacaan kembali . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+
+4 Jaringan IP dan MQTT            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+      4.1 Antarmuka jaringan Wi-Fi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.2 Fungsi MQTT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.3 MQTT over TLS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.4 Firmware non-TLS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.5 Antrean MQTT dan perilaku offline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.6 Jalur perintah downlink . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+5 Konfigurasi dan komisioning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+      5.1 Penyimpanan konfigurasi transaksional . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.2 Penyediaan melalui Operator Hub . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.3 Prasyarat penerapan jaringan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.4 Status dan diagnostik . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+
+6 Jaringan, TLS, dan konfigurasi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+      6.1 Batas konfigurasi jaringan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.2 Gerbang kesiapan TLS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.3 Antrean publikasi MQTT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.4 Pembaruan konfigurasi transaksional      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .8
+
+      6.5 Varian produk Gateway . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+
+
+
+Lab IoT ITB                                                                                                                                                       2/8
+Gateway                                                                                                                                  IOTITB-TDS-GATEWAY-ID-R4.0
+
+
+
+
+1 Identifikasi produk
+    Produk                                  Gateway
+
+    Revisi dokumen                          4.0
+
+    Penerbit                                Lab IoT ITB
+
+
+
+1.1 Singkatan
+    Singkatan             Arti                                                        Singkatan             Arti
+
+    CA                    Certificate Authority                                       NVS                   Penyimpanan konfigurasi non-volatile
+
+    MESH                  Domain radio backbone CH-ke-Gateway                         STA                   Mode Wi-Fi station
+
+    MQTT                  Message Queuing Telemetry Transport                         TLS                   Transport Layer Security
+
+    NTP                   Network Time Protocol                                       WAN/LAN               Segmen jaringan IP deployment
+
+
+
+2 Ikhtisar dan perangkat keras
+2.1 Ikhtisar produk
+Gateway menghubungkan backbone LoRa MESH ke broker MQTT melalui Wi-Fi dan mempertahankan jalur downlink menuju field.
+
+    Ingress                      LoRa MESH                                            Uplink IP                    Wi-Fi STA
+
+    Messaging                    MQTT                                                 Security option              CA-verified TLS
+
+●     Menerima frame dari CH melalui Radio B/MESH.
+●     Mempublikasikan uplink, status, dan topologi secara fungsional ke MQTT.
+●     Menerima perintah downlink yang didukung untuk target Gateway dan meneruskannya sebagai downlink MESH.
+●     Menyediakan target firmware TLS dan non-TLS secara terpisah.
+
+
+2.2 Peran dalam arsitektur sistem
+Gateway merupakan batas antara jaringan radio field dan jaringan IP customer.
+
+             CH MESH                              Radio B                       Gateway                            Wi-Fi STA                     MQTT broker
+
+
+                                 MESH                              frame                          network                              MQTT
+
+
+
+
+          Field network                           SX1262                     Decode + queue                        Customer IP                  Server boundary
+
+
+                                                                Gambar 1. Batas radio-to-IP pada Gateway.
+
+    Uplink                                          MESH frame diterima, diproses, lalu diterbitkan melalui MQTT.
+
+    Downlink                                        Perintah MQTT yang didukung untuk target Gateway diterjemahkan ke jalur MESH menuju CH.
+
+    Identitas Gateway                               Default 0x0001; dapat dikonfigurasi pada rentang 0x0001-0x000F dan disimpan pada NVS.
+
+    Trust boundary                                  TLS, bila dipilih, berhenti pada broker; bukan TLS sepanjang LoRa.
+
+
+2.3 Varian PCB
+Gateway memakai basis PCB yang sama dengan CH namun firmware mengaktifkan fungsi yang berbeda.
+
+    Varian produk                         Basis desain                                    Pilihan standar                        Pilihan TLS
+
+    Gateway Rectangle                     Profil hardware Rectangle                       Gateway Rectangle - standard           Gateway Rectangle - TLS
+
+    Gateway Circle                        Profil hardware Circle                          Gateway Circle - standard              Gateway Circle - TLS
+
+●     Profil pin Rectangle dan Circle berbeda.
+●     Radio A/STAR dinonaktifkan pada firmware Gateway.
+●     Radio B/MESH adalah radio aktif untuk kedua varian.
+●     Operator Hub mewajibkan pilihan bentuk board sebelum upload.
+
+
+
+
+Lab IoT ITB                                                                                                                                                       3/8
+Gateway                                                                                                                        IOTITB-TDS-GATEWAY-ID-R4.0
+
+
+
+
+2.4 Perangkat keras dan penggunaan radio
+Gateway menggunakan MCU ESP32-S3 dan satu jalur radio MESH aktif pada PCB dual-radio.
+
+ Fungsi                       Komponen / jalur                                              Status firmware
+
+ MCU                          ESP32-S3-WROOM-1U-N16R8                                       Aktif
+
+ Radio A                      E22-900MM22S                                                  Dinonaktifkan / tidak digunakan
+
+ Radio B                      E22-900MM22S                                                  Aktif sebagai LoRa MESH
+
+ Wi-Fi                        ESP32-S3 station interface                                    Aktif sebagai uplink IP native
+
+ Status LED                   Board-specific mapping                                        Dikendalikan firmware
+
+
+2.5 Matriks target firmware
+Empat target menjaga pilihan bentuk board dan transport MQTT tetap eksplisit.
+
+ Board                         Transport                                      Pilihan Operator Hub                           Profil keamanan
+
+ Rectangle                     MQTT tanpa TLS                                 Gateway Rectangle - standard                   Tidak
+
+ Circle                        MQTT tanpa TLS                                 Gateway Circle - standard                      Tidak
+
+ Rectangle                     MQTT over TLS                                  Gateway Rectangle - TLS                        Ya
+
+ Circle                        MQTT over TLS                                  Gateway Circle - TLS                           Ya
+
+ Tahap                                  Deskripsi
+
+ Pilihan board                          Rectangle atau Circle
+
+ Pilihan transport                      TLS atau non-TLS
+
+ Varian firmware                        Harus cocok dengan board dan transport
+
+ Verifikasi perangkat                   Varian board, profil transport, dan kapabilitas TLS dibaca
+                                                    Gambar 2. Seleksi target Gateway dua dimensi.
+
+
+
+3 Antarmuka LoRa MESH
+3.1 Antarmuka LoRa MESH
+Gateway berbagi default MESH dengan CH dan menolak carrier di luar 920-923 MHz.
+
+ Parameter                              Default firmware                           Status
+
+ Carrier                                921.0 MHz                                  Accepted 920-923 MHz inclusive
+
+ Bandwidth                              125 kHz                                    Harus cocok dengan CH MESH
+
+ Spreading factor                       SF9                                        Default MESH
+
+ Coding rate                            4/5                                        Default MESH
+
+ TX setting                             17 dBm                                     Bukan output terukur
+
+ Antena                                 8 dBi                                      Konfigurasi produk
+
+ Catatan: Perhitungan nominal 17 dBm + 8 dBi menghasilkan 25 dBm sebelum rugi kabel dan konektor.
+
+
+3.2 Konfigurasi MESH dan pembacaan kembali
+Konfigurasi radio disimpan ke NVS, diverifikasi, dan dimuat kembali pada boot.
+
+ Tahap                                  Deskripsi
+
+ Input engineer                         Parameter MESH
+
+ Validation                             Carrier 920-923 MHz dan field lain valid
+
+ NVS write                              Konfigurasi tersimpan
+
+ Readback                               Nilai dibaca dan dibandingkan
+
+ Runtime                                Konfigurasi valid digunakan
+                                                    Gambar 3. Siklus konfigurasi MESH Gateway.
+
+ Catatan: Device readback harus dicatat setelah commissioning karena NVS dapat mengganti default firmware.
+
+
+
+
+Lab IoT ITB                                                                                                                                          4/8
+Gateway                                                                                                                              IOTITB-TDS-GATEWAY-ID-R4.0
+
+
+
+
+4 Jaringan IP dan MQTT
+4.1 Antarmuka jaringan Wi-Fi
+Interface jaringan native Gateway adalah Wi-Fi station.
+
+    Mode                    Wi-Fi STA                                              Uplink                    Jaringan IP
+
+    Protocol                MQTT                                                   Ethernet native           Tidak
+
+    Provisioning                                SSID dan network credential dikonfigurasi pada perangkat.
+
+    Site dependency                             DHCP/static policy, VLAN, NAC, DNS, NTP, dan firewall ditentukan customer.
+
+    Opsi kabel                                  Konverter Wi-Fi-to-Ethernet eksternal dapat dipertimbangkan sebagai aksesori deployment; bukan interface
+                                                native produk.
+
+
+4.2 Fungsi MQTT
+MQTT membawa informasi uplink/status/topologi ke broker dan command kembali ke Gateway.
+
+                     CH                                   Gateway                                Broker                                    Server
+
+                                  MESH uplink
+
+                                                                            MQTT publish
+
+                                                                                                                      MQTT deliver
+
+                                                                                                                  Command publish
+
+                                                                          Command deliver
+
+                                 MESH downlink
+
+
+
+
+                                                            Gambar 4. Uplink dan downlink melalui MQTT.
+
+    Catatan: Publikasi uplink dan penerimaan perintah berjalan setelah sesi broker aktif.
+
+
+4.3 MQTT over TLS
+Profil TLS menggunakan klien TLS, Root CA, dan trusted time sebelum koneksi broker.
+
+    Tahap                                       Deskripsi
+
+    TLS-capable firmware                        Gateway Rectangle - TLS atau Gateway Circle - TLS
+
+    Root CA                                     PEM wajib diprovisioning dan lulus validasi
+
+    Waktu tepercaya                             Koneksi diblokir sampai host NTP valid dan waktu sistem siap
+
+    Klien aman                                  Mendukung verifikasi CA; tidak menyediakan mode tidak aman
+
+    Sesi broker                                 Mendukung MQTT over TLS setelah seluruh gate valid
+                                                                Gambar 5. Gate koneksi MQTT/TLS.
+
+●     Firmware memblokir TLS bila Root CA atau trusted time belum valid.
+●     TLS melindungi segmen Gateway-ke-broker, bukan seluruh jalur radio.
+●     Status koneksi broker, validitas CA, dan kesiapan waktu tersedia melalui readback perangkat.
+
+
+4.4 Firmware non-TLS
+Target non-TLS dipertahankan sebagai firmware terpisah dan tidak digantikan oleh varian TLS.
+
+    Area                                           Non-TLS                                                TLS
+
+    Dukungan board                                 Rectangle + Circle                                     Rectangle + Circle
+
+    Transport MQTT                                 TCP tanpa TLS                                          TLS terverifikasi CA
+
+    Root CA                                        Tidak digunakan                                        Wajib
+
+    Waktu tepercaya                                Bukan gate TLS                                         Wajib untuk TLS
+
+    Pemilihan operator                             Eksplisit                                              Eksplisit
+
+    Catatan: Pilih profil TLS untuk deployment yang membutuhkan transport broker terenkripsi dan verifikasi sertifikat.
+
+
+
+
+Lab IoT ITB                                                                                                                                                5/8
+Gateway                                                                                                                                          IOTITB-TDS-GATEWAY-ID-R4.0
+
+
+
+
+4.5 Antrean MQTT dan perilaku offline
+Gateway menyediakan queue RAM terbatas untuk publikasi ketika koneksi MQTT belum tersedia.
+
+    Kapasitas                    8 publikasi                                               Payload                    1-1023 bytes
+
+    Media                        RAM                                                       Persistence                Volatile
+
+    Tahap                                             Deskripsi
+
+    Percobaan publikasi                               Jika broker tersedia, kirim langsung
+
+    Broker tidak tersedia                             Simpan pada antrean bila ada ruang
+
+    Antrean penuh                                     Item baru ditolak
+
+    Restart/kehilangan daya                           Isi antrean hilang
+                                                                      Gambar 6. Perilaku buffering MQTT.
+
+
+
+4.6 Jalur perintah downlink
+Gateway menerima perintah downlink yang didukung untuk target Gateway, memvalidasi targetnya, lalu meneruskannya melalui
+MESH.
+
+                 Server                             Broker                         Gateway                            CH route                             GasleakDetector
+
+                           Authenticated command
+
+                                                                  MQTT deliver
+
+                                                                                                  MESH downlink
+
+                                                                                                                                     Serving-CH delivery
+
+                                                                                                                                 Device response if available
+
+
+
+
+                                                                  Gambar 7. Jalur command melalui Gateway.
+
+
+
+5 Konfigurasi dan komisioning
+5.1 Penyimpanan konfigurasi transaksional
+Wi-Fi/MQTT configuration menggunakan journal NVS dua slot dengan readback sebelum selector terakhir di-commit.
+
+                Operator                           Active slot                    Inactive slot                       Readback                                  Selector
+
+                                               Write new config
+
+
+                                                                                                  Read + validate
+
+
+                                                                                                                                   Commit active selector
+
+
+                                                                                                  Use selected slot
+
+
+
+
+                                                                    Gambar 8. Journal konfigurasi dua slot.
+
+●      Firmware menyediakan fallback/recovery apabila slot tidak valid.
+
+
+5.2 Penyediaan melalui Operator Hub
+Operator Hub mengunci board, transport, varian firmware, dan material TLS sebelum upload/configuration diterima.
+
+    Gate                                            Pemeriksaan
+
+    Board                                           Rectangle atau Circle harus dipilih.
+
+    Transport                                       TLS atau non-TLS harus dipilih.
+
+    Firmware                                        Versi dan kecocokan varian firmware diperiksa.
+
+    TLS material                                    Root CA PEM dan NTP host diwajibkan pada target TLS.
+
+    Verifikasi perangkat                            Varian board, profil transport, dan kapabilitas TLS dibaca kembali.
+
+    Catatan: Material TLS ditolak pada firmware non-TLS agar operator tidak salah mengira transport aman sedang aktif.
+
+
+
+
+Lab IoT ITB                                                                                                                                                                  6/8
+Gateway                                                                                                                     IOTITB-TDS-GATEWAY-ID-R4.0
+
+
+
+
+5.3 Prasyarat penerapan jaringan
+Deployment customer membutuhkan keputusan jaringan dan broker di luar firmware Gateway.
+
+ Area                              Input deployment yang harus tersedia
+
+ Wi-Fi                             SSID, authentication, address policy, VLAN/NAC, dan coverage.
+
+ Name/time                         DNS dan NTP yang dapat dijangkau target TLS.
+
+ Broker                            FQDN/IP, port, credential, CA chain, ACL, dan topic policy.
+
+ Firewall                          Egress/return traffic untuk Wi-Fi, DNS, NTP, dan MQTT/TLS.
+
+ Catatan komisioning               CONNACK, publish/subscribe, reconnect, log, dan hasil validasi sertifikat.
+
+ Catatan: Penerimaan deployment mencakup CONNACK, publish/subscribe, reconnect, dan validasi sertifikat.
+
+
+5.4 Status dan diagnostik
+Readback membedakan identitas firmware, board, transport, radio, Wi-Fi, MQTT, dan TLS.
+
+ Kelompok                             Contoh readback engineering
+
+ Identity                             Firmware/protocol version dan Gateway identity
+
+ Hardware                             Varian board dan peran radio aktif
+
+ RF                                   Carrier, BW, SF, CR, TX setting, preamble
+
+ Network                              Wi-Fi connection state dan address information
+
+ MQTT                                 Mode transport, status broker, dan reconnect
+
+ TLS                                  Kapabilitas TLS serta kesiapan CA/waktu pada target TLS
+
+ Catatan: Status dan readback perangkat menampilkan hasil koneksi MQTT/TLS yang relevan untuk komisioning.
+
+
+
+6 Jaringan, TLS, dan konfigurasi
+6.1 Batas konfigurasi jaringan
+Gateway memvalidasi panjang setiap bidang konfigurasi sebelum menyimpan dan mengaktifkannya.
+
+ Bidang                                 Batas                          Ketentuan
+
+ Wi-Fi SSID                             1-32 bytes                     Wajib untuk koneksi Wi-Fi.
+
+ Kata sandi Wi-Fi                       0-64 bytes                     Nilai kosong diperbolehkan untuk jaringan yang memang tidak memakai kata
+                                                                       sandi.
+
+ MQTT host                              1-64 bytes                     Host harus terisi ketika MQTT diaktifkan.
+
+ MQTT user                              0-32 bytes                     Digunakan sesuai kebijakan autentikasi broker.
+
+ MQTT password                          0-64 bytes                     Digunakan sesuai kebijakan autentikasi broker.
+
+ Port MQTT                              1-65535                        Nilai nol ditolak.
+
+ NTP host                               1-64 bytes                     Wajib untuk varian TLS dan tidak boleh mengandung spasi.
+
+ CA certificate (PEM)                   256-3900 bytes                 Wajib untuk verifikasi sertifikat pada varian TLS.
+
+
+6.2 Gerbang kesiapan TLS
+Varian TLS hanya membuka koneksi MQTT setelah seluruh prasyarat kepercayaan dan waktu terpenuhi.
+
+ Pemeriksaan                   Syarat diterima                                                                        Jika gagal
+
+ Sertifikat CA                 PEM 256-3900 byte, memiliki penanda awal dan akhir sertifikat, tanpa data              Koneksi MQTT diblokir.
+                               tambahan setelah penanda akhir.
+
+ NTP host                      Tidak kosong, maksimum 64 byte, tanpa whitespace.                                      Sinkronisasi waktu tidak dimulai
+                                                                                                                      dan MQTT diblokir.
+
+ Waktu tepercaya               Epoch sistem memenuhi ambang firmware: 1.577.836.800 atau lebih besar.                 Verifikasi sertifikat dan MQTT
+                                                                                                                      tetap diblokir.
+
+ Transport                     Sertifikat server diverifikasi menggunakan CA yang disediakan.                         Tidak ada mode
+                                                                                                                      verifikasi-dinonaktifkan.
+
+
+
+
+Lab IoT ITB                                                                                                                                            7/8
+Gateway                                                                                                                       IOTITB-TDS-GATEWAY-ID-R4.0
+
+
+
+
+6.3 Antrean publikasi MQTT
+Ketika publikasi langsung belum dapat dilakukan, Gateway dapat menahan sejumlah kecil pesan pada antrean volatil.
+
+ Karakteristik                                 Nilai                           Perilaku
+
+ Kapasitas antrean                             8 messages                      Maksimum delapan publikasi tertunda.
+
+ Ukuran item                                   1024 bytes storage              Panjang payload yang diterima kurang dari 1024 byte; maksimum 1023
+                                                                               byte.
+
+ Retensi                                       Volatil                         Isi antrean tidak dipertahankan setelah perangkat dimulai ulang.
+
+ Antrean penuh                                 Item baru ditolak               Item yang sudah ada tidak ditimpa oleh item baru.
+
+ Pengosongan antrean                           Satu slot per iterasi layanan   Urutan pengiriman tidak dijamin setelah slot digunakan kembali.
+
+
+6.4 Pembaruan konfigurasi transaksional
+Perubahan jaringan tidak langsung mengganti konfigurasi aktif. Gateway menyelesaikan penyimpanan dan verifikasi kandidat
+sebelum mengaktifkannya.
+
+ Tahap            Tindakan                                                                 Hasil
+
+ 1                Validasi seluruh bidang kandidat.                                        Kandidat tidak valid ditolak sebelum penyimpanan.
+
+ 2                Tulis kandidat ke area konfigurasi yang tidak aktif.                     Konfigurasi aktif tetap tersedia selama penulisan.
+
+ 3                Baca kembali dan bandingkan hasil penyimpanan.                           Aktivasi hanya dilanjutkan jika hasil identik.
+
+ 4                Aktifkan kandidat sebagai konfigurasi terbaru.                           Penanda konfigurasi aktif diperbarui terakhir.
+
+ 5                Batalkan kandidat jika salah satu tahap gagal.                           Konfigurasi aktif sebelumnya dipertahankan.
+
+
+6.5 Varian produk Gateway
+Fungsi Gateway tersedia pada dua bentuk PCB. Masing-masing bentuk mendukung profil transport standar dan TLS.
+
+ Bentuk perangkat                              Profil standar                     Profil TLS                              Radio aktif
+
+ Rectangle (kecil)                             MQTT tanpa TLS                     MQTT over TLS                           LoRa MESH
+
+ Circle (besar)                                MQTT tanpa TLS                     MQTT over TLS                           LoRa MESH
+
+ Catatan: Pemilihan bentuk PCB dan profil transport dilakukan pada saat penyiapan firmware. Radio LoRa STAR tidak digunakan pada peran
+ Gateway.
+
+
+
+
+Lab IoT ITB                                                                                                                                         8/8
+

@@ -1,0 +1,682 @@
+                                                                                                                                     LAB IoT ITB
+
+
+
+
+                                                                    CH
+Technical Datasheet Revision 4.0
+
+Node dual-radio untuk agregasi LoRa STAR, routing dinamis, dan penerusan
+multi-hop LoRa MESH.
+
+
+      GasleakDetector               Radio STAR                           CH                       Radio MESH                   CH / Gateway
+
+
+
+
+                         920 MHz                        ingress                         egress                       921 MHz
+
+
+
+
+             Endpoint                Antena 3 dBi                 Discovery + routing             Antena 8 dBi                   Next hop
+
+
+
+
+    VARIAN PCB                      RADIO                                    ENERGI                              ROUTING
+
+    Rectangle / Circle              2 x E22-900MM22S                         Baterai + 2 panel                   Dynamic multi-hop
+
+Fitur utama
+●     Menerima trafik GasleakDetector melalui Radio A/STAR.              ●    Meneruskan uplink dan downlink melalui Radio B/MESH.
+●     Memilih parent berdasarkan discovery, root reachability, dan       ●    Mendukung CH transit tambahan ketika rute langsung ke
+      health.                                                                 Gateway tidak dipilih.
+Ikhtisar teknis
+CH menjembatani domain endpoint LoRa STAR dan backbone LoRa MESH tanpa menetapkan parent secara permanen.
+Profil fungsi
+    Ingress                              LoRa STAR
+    Egress                               LoRa MESH
+    Radio                                2
+    Varian                               2 bentuk PCB
+
+Antarmuka operasional
+    Serving CH                           Menerima frame STAR dari GasleakDetector yang dilayani.
+    Transit CH                           Meneruskan frame MESH tanpa menjadi sumber data endpoint.
+    Gateway root                         Tujuan akhir rute; bukan parent statis untuk semua CH.
+
+
+
+
+Lab IoT ITB
+CH                                                                                                                                                IOTITB-TDS-CH-ID-R4.0
+
+
+
+
+Daftar isi
+
+1 Identifikasi produk         . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+      1.1 Singkatan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 Ikhtisar dan perangkat keras . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 Ikhtisar produk . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 Peran CH dalam jaringan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.3 Varian PCB dan kompatibilitas firmware . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.4 Komponen perangkat keras utama . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      2.5 Arsitektur dual-radio    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+
+
+3 Antarmuka radio . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 Karakteristik LoRa STAR . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.2 Karakteristik LoRa MESH . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.3 Nilai default, NVS, dan pembacaan kembali perangkat . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      3.4 Perhitungan EIRP nominal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+
+4 Routing dan transport             . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+      4.1 Discovery dan kandidat parent . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.2 Parent aktif, parent alternatif, dan pencegahan loop . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.3 Penerusan multi-hop . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.4 Telemetri normal: cache dan permintaan server . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.5 Push alarm dan kembali-normal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.6 Peralihan parent . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+5 Sistem energi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+      5.1 Arsitektur energi CH     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .7
+
+      5.2 Konfigurasi baterai CH . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.3 Panel surya dan pengisian . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.4 Telemetri baterai dan batas proteksi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+
+6 Routing dan kapasitas operasional . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+      6.1 Kapasitas sumber daya firmware . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.2 Status operasi CH       . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .8
+
+      6.3 Batas pemilihan parent . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.4 Retensi routing dan transport . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+
+7 Komisioning dan Operator Hub . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+
+
+
+Lab IoT ITB                                                                                                                                                          2/9
+CH                                                                                                                                             IOTITB-TDS-CH-ID-R4.0
+
+
+
+
+1 Identifikasi produk
+    Produk                                   CH
+
+    Revisi dokumen                           4.0
+
+    Penerbit                                 Lab IoT ITB
+
+
+
+1.1 Singkatan
+    Singkatan               Arti                                                       Singkatan             Arti
+
+    CH                      Communication Hub / node komunikasi lapangan               RF                    Radio frequency
+
+    EIRP                    Equivalent Isotropically Radiated Power                    STAR                  Domain radio GasleakDetector-ke-CH
+
+    MESH                    Domain radio backbone antar-CH dan Gateway                 TX                    Transmit
+
+    NVM/NVS                 Penyimpanan konfigurasi non-volatile                       VBAT                  Tegangan baterai yang dibaca perangkat
+
+
+
+2 Ikhtisar dan perangkat keras
+2.1 Ikhtisar produk
+CH menjembatani domain endpoint LoRa STAR dan backbone LoRa MESH tanpa menetapkan parent secara permanen.
+
+    Ingress                        LoRa STAR                                           Egress                        LoRa MESH
+
+    Radio                          2                                                   Varian                        2 bentuk PCB
+
+●      Menerima trafik GasleakDetector melalui Radio A/STAR.
+●      Memilih parent berdasarkan discovery, root reachability, dan health.
+●      Meneruskan uplink dan downlink melalui Radio B/MESH.
+●      Mendukung CH transit tambahan ketika rute langsung ke Gateway tidak dipilih.
+
+
+2.2 Peran CH dalam jaringan
+Satu CH dapat berperan sebagai serving CH untuk endpoint lokal dan sebagai transit CH untuk node lain.
+
+         GasleakDetector                       Serving CH                        Transit CH                         Parent berikut                Gateway
+
+
+                                   STAR                            MESH                               MESH                              root
+
+
+
+
+           Endpoint lokal                    STAR ke MESH                          Opsional                          CH / Gateway                 Root tujuan
+
+
+                                                            Gambar 1. Peran serving dan transit pada jalur field.
+
+    Serving CH                                     Menerima frame STAR dari GasleakDetector yang dilayani.
+
+    Transit CH                                     Meneruskan frame MESH tanpa menjadi sumber data endpoint.
+
+    Gateway root                                   Tujuan akhir rute; bukan parent statis untuk semua CH.
+
+
+2.3 Varian PCB dan kompatibilitas firmware
+Rectangle/kecil dan Circle/besar menggunakan pemetaan hardware berbeda sehingga target firmware harus dipilih secara
+eksplisit.
+
+    Varian produk                           Basis desain                                 Pilihan Operator Hub              Keterangan
+
+    CH Rectangle                            Profil hardware Rectangle                    CH Rectangle                      Pemetaan khusus board Rectangle
+
+    CH Circle                               Profil hardware Circle                       CH Circle                         Pemetaan khusus board Circle
+
+    Tahap                                          Deskripsi
+
+    Pilih bentuk board                             Rectangle atau Circle
+
+    Pilih varian firmware                          Target harus cocok dengan profil hardware
+
+    Upload                                         Operator Hub menolak fallback hardware
+
+    Readback                                       Versi, identitas, dan varian board diperiksa
+                                                            Gambar 2. Gate kompatibilitas board dan firmware.
+
+
+
+
+Lab IoT ITB                                                                                                                                                     3/9
+CH                                                                                                                                   IOTITB-TDS-CH-ID-R4.0
+
+
+
+    Catatan: Firmware kedua varian tidak boleh dipertukarkan tanpa pemilihan target hardware yang benar.
+
+
+2.4 Komponen perangkat keras utama
+Kedua board berbagi arsitektur fungsional yang sama walaupun layout dan pin mapping berbeda.
+
+    Fungsi                        Komponen desain                                      Peran
+
+    MCU                           ESP32-S3-WROOM-1U-N16R8                              Runtime, routing, konfigurasi, dan status
+
+    Radio A                       EBYTE E22-900MM22S                                   Domain LoRa STAR
+
+    Radio B                       EBYTE E22-900MM22S                                   Domain LoRa MESH
+
+    Charger                       TI BQ25185DLHR                                       Interface pengisian/solar pada PCB
+
+    Watchdog                      TI TPL5010DDCR                                       Watchdog/timing hardware
+
+    Catatan: Rating temperatur, keselamatan, dan compliance komponen tidak menjadi rating produk CH.
+
+
+2.5 Arsitektur dual-radio
+Domain STAR dan MESH dipisahkan secara fisik dan logis dengan radio serta parameter default berbeda.
+
+              Endpoint                  Radio A                       Runtime CH                            Radio B                     Backbone
+
+
+                           STAR                           ingress                            forward                          MESH
+
+
+
+
+        GasleakDetector                STAR / 3 dBi                  Cache + routing                      MESH / 8 dBi                 CH / Gateway
+
+
+                                                      Gambar 3. Pemisahan dua domain radio pada CH.
+
+●      Radio A dan Radio B menggunakan driver SX1262.
+●      Operasi normal membutuhkan inisialisasi STAR dan MESH yang berhasil.
+●      STAR dan MESH menggunakan antena terpisah sesuai domain radio masing-masing.
+
+
+
+3 Antarmuka radio
+3.1 Karakteristik LoRa STAR
+STAR adalah link lokal dari GasleakDetector menuju serving CH.
+
+    Parameter                               Default                                Status
+
+    Carrier                                 920.0 MHz                              Konfigurasi diterima 920-923 MHz
+
+    Bandwidth                               125 kHz                                Default firmware
+
+    Spreading factor                        SF7                                    Default firmware
+
+    Coding rate                             4/5                                    Default firmware
+
+    TX setting                              17 dBm                                 Setting, bukan output terukur
+
+    Antena CH                               3 dBi                                  Konfigurasi produk
+
+    Catatan: Konfigurasi aktual dapat berasal dari NVS. Device readback adalah rujukan deployment, bukan tabel default.
+
+
+3.2 Karakteristik LoRa MESH
+MESH adalah backbone CH-ke-CH dan CH-ke-Gateway.
+
+    Parameter                               Default                                Status
+
+    Carrier                                 921.0 MHz                              Konfigurasi diterima 920-923 MHz
+
+    Bandwidth                               125 kHz                                Default firmware
+
+    Spreading factor                        SF9                                    Default firmware
+
+    Coding rate                             4/5                                    Default firmware
+
+    TX setting                              17 dBm                                 Setting, bukan output terukur
+
+    Antena CH                               8 dBi                                  Konfigurasi produk
+
+
+
+
+Lab IoT ITB                                                                                                                                           4/9
+CH                                                                                                                                       IOTITB-TDS-CH-ID-R4.0
+
+
+
+
+3.3 Nilai default, NVS, dan pembacaan kembali perangkat
+Firmware membedakan nilai default, nilai tersimpan, dan nilai aktual yang dibaca kembali setelah write.
+
+    Tahap                                    Deskripsi
+
+    Default build                            STAR 920.0 MHz; MESH 921.0 MHz
+
+    Validasi input                           Carrier harus 920-923 MHz inclusive
+
+    Penyimpanan                              Konfigurasi STAR/MESH disimpan ke NVS
+
+    Readback                                 Write diverifikasi sebelum ACK sukses
+
+    Boot berikut                             Konfigurasi valid dimuat kembali
+                                                          Gambar 4. Siklus konfigurasi RF terkontrol.
+
+    Catatan: Engineer harus mencatat hasil readback unit setelah commissioning.
+
+
+3.4 Perhitungan EIRP nominal
+Nilai berikut adalah arithmetic TX setting + gain antena sebelum loss; bukan hasil pengukuran RF.
+
+    Domain                          TX setting                         Gain antena                              Nominal sebelum loss
+
+    STAR                            17 dBm                             3 dBi                                    20 dBm
+
+    MESH                            17 dBm                             8 dBi                                    25 dBm
+
+●      Rugi kabel/konektor tidak termasuk dalam perhitungan nominal.
+
+    Catatan: Jika dokumen regulasi membutuhkan EIRP, gunakan hasil laboratorium terakreditasi dan konfigurasi antena final.
+
+
+
+4 Routing dan transport
+4.1 Discovery dan kandidat parent
+CH membentuk kandidat parent dari discovery dan tidak memakai identitas parent yang dipatok.
+
+              CH lokal                   Discovery                     Lineage check                        Scoring                        Parent aktif
+
+
+                            probe                            filter                           rank                             install
+
+
+
+
+              Butuh rute               Kandidat sekitar                   Menuju root                    Health + kualitas                 CH / Gateway
+
+
+                                                          Gambar 5. Alur pembentukan parent aktif.
+
+●      Kandidat harus mempunyai lineage yang mencapai root Gateway.
+●      Loop dan lineage yang tidak valid ditolak.
+●      Parent dan alternate dapat disimpan setelah stabil.
+
+
+4.2 Parent aktif, parent alternatif, dan pencegahan loop
+Routing menjaga jalur menuju Gateway serta mencegah parent chain berputar kembali ke node asal.
+
+    Kontrol                         Fungsi                                                       Hasil
+
+    Root reachability               Memastikan kandidat mempunyai jalur ke Gateway               Kandidat tanpa root ditolak
+
+    Lineage guard                   Mengecek rantai parent                                       Loop candidate ditolak
+
+    Parent health                   Memantau respons parent aktif                                Dapat memicu pergantian
+
+    Alternate parent                Menjaga kandidat cadangan                                    Dapat dipakai sebelum rediscovery
+
+    Catatan: Rute aktual bergantung hasil discovery lapangan; datasheet tidak menamai parent tertentu sebagai pasangan permanen.
+
+
+
+
+Lab IoT ITB                                                                                                                                               5/9
+CH                                                                                                                                                           IOTITB-TDS-CH-ID-R4.0
+
+
+
+
+4.3 Penerusan multi-hop
+Frame dapat melewati nol atau lebih transit CH sebelum mencapai Gateway.
+
+                   Serving CH                               Transit CH 1                               Transit CH n                                        Gateway
+
+                                     Forward MESH
+
+                                                                                 Relay sesuai route
+
+                                                                                                                                Deliver ke root
+
+                                                                                                                             Downlink reverse path
+
+                                                         Relay ke serving CH
+
+
+
+
+                                                           Gambar 6. Penerusan uplink dan downlink multi-hop.
+
+
+
+4.4 Telemetri normal: cache dan permintaan server
+Telemetry normal tidak memakai pola push yang sama dengan alarm; data disimpan pada cache CH dan dikirim sebagai respons
+pull.
+
+                       GasleakDetector                                              Serving CH                                                    Gateway/Server
+
+                                                    Telemetry STAR
+
+
+                                                                                Simpan/refresh cache
+
+
+                                                                                                               Server pull
+
+
+                                                                                                            Cluster response
+
+
+
+
+                                                           Gambar 7. Jalur telemetry normal berbasis cache/pull.
+
+●      Cache memisahkan penerimaan endpoint dari siklus permintaan server.
+●      Pengiriman ke Server berlangsung saat permintaan pull mencapai serving CH.
+
+
+4.5 Push alarm dan kembali-normal
+Alarm dan event kembali-clear menggunakan jalur push agar tidak menunggu siklus telemetry normal.
+
+                GasleakDetector                             Serving CH                                    Parent                                           Gateway
+
+                                    Alarm/clear frame
+
+                                                                               Teruskan melalui MESH
+
+                                                                                                                               Relay toward root
+
+                                                                                                                                  ACK path
+
+                                                                                 ACK to serving CH
+
+
+
+
+                                                           Gambar 8. Jalur push untuk alarm dan return-to-clear.
+
+
+
+4.6 Peralihan parent
+Failover dapat memakai alternate parent atau kembali ke discovery ketika health parent aktif menurun.
+
+    Tahap                                          Deskripsi
+
+    Parent aktif                                   HELLO/ACK dan health dipantau
+
+    Failure trigger                                Timeout, HELLO ACK gagal, atau alarm ACK gagal
+
+    Alternate                                      Dipakai bila masih valid
+
+    Rediscovery                                    Mencari kandidat baru bila perlu
+
+    Rute baru                                      Parent ditentukan hasil discovery
+                                                                       Gambar 9. State failover parent.
+
+    Catatan: Multi-hop dan failover telah divalidasi di Lab IoT ITB. Parent pengganti dipilih dinamis melalui discovery.
+
+
+
+
+Lab IoT ITB                                                                                                                                                                   6/9
+CH                                                                                                                                      IOTITB-TDS-CH-ID-R4.0
+
+
+
+
+5 Sistem energi
+5.1 Arsitektur energi CH
+Konfigurasi produk menggabungkan baterai paralel dan dua panel surya paralel melalui hardware charging pada board.
+
+          2 x panel                 Input SOLAR                            BQ25185                               1-3 sel                       CH
+
+
+                         gabung                           charge                               store                           supply
+
+
+
+
+     6 W masing-masing                  Paralel                         Charge/power path                   18650 paralel                 Dual-radio load
+
+
+                                                            Gambar 10. Topologi energi CH.
+
+ Catatan: Konfigurasi produk menggunakan 1-3 sel 18650 paralel dan dua panel 6 W paralel melalui jalur charging pada board.
+
+
+5.2 Konfigurasi baterai CH
+CH menggunakan satu sampai tiga sel LiitoKala 18650 yang disusun paralel.
+
+ Parameter                           Konfigurasi                                       Catatan
+
+ Jenis                               LiitoKala Lii-King4000 18650                      Identifikasi label sel
+
+ Jumlah                              1-3                                               Bergantung deployment
+
+ Label kapasitas                     4000 mAh / sel                                    Bukan hasil uji kapasitas pakai
+
+ Topologi                            Paralel                                           Mempertahankan domain tegangan satu sel
+
+ Catatan: Nilai 4000 mAh adalah kapasitas pada label tiap sel.
+
+
+5.3 Panel surya dan pengisian
+Dua panel 6 W disusun paralel menuju interface solar CH.
+
+ Jumlah panel            2                                                      Daya nominal                    6 W masing-masing
+
+ Topologi                Paralel                                                Gabungan                        12 W nominal
+
+ Interface board                           Satu input SOLAR menuju power/charge path.
+
+ Controller                                TI BQ25185DLHR
+
+ Catatan: 12 W adalah penjumlahan nameplate dua panel, bukan output lapangan terukur.
+
+
+5.4 Telemetri baterai dan batas proteksi
+Firmware membaca serta melaporkan tegangan baterai, tetapi tidak menggunakan low voltage untuk memblokir operasi produk.
+
+ Tahap                                     Deskripsi
+
+ VBAT sensing                              Tegangan dibaca oleh CH
+
+ Status                                    Nilai dilaporkan read-only
+
+ Boot/TX                                   Tidak diblokir oleh threshold VBAT
+
+ Low-power                                 Tidak dipicu otomatis oleh undervoltage
+                                                        Gambar 11. Batas fungsi VBAT read-only.
+
+ Catatan: VBAT digunakan untuk telemetri diagnostik; firmware tidak memutus daya atau memasuki low-power secara otomatis berdasarkan
+ pembacaan tersebut.
+
+
+
+
+Lab IoT ITB                                                                                                                                                 7/9
+CH                                                                                                                                       IOTITB-TDS-CH-ID-R4.0
+
+
+
+
+6 Routing dan kapasitas operasional
+6.1 Kapasitas sumber daya firmware
+Tabel berikut menyatakan batas jumlah entri yang dapat dipertahankan secara bersamaan oleh layanan routing dan transport CH.
+
+    Sumber daya                             Kapasitas               Penggunaan
+
+    Kandidat parent                         8                       Kandidat hasil discovery yang dinilai untuk pemilihan parent.
+
+    Cache node                              32                      Informasi node yang dikenal oleh CH.
+
+    Antrean alarm                           8                       Alarm yang menunggu pemrosesan transport.
+
+    Antrean transmisi                       8                       Item yang menunggu pengiriman radio.
+
+    Downlink tertunda                       16                      Perintah atau respons downlink yang masih menunggu penyelesaian.
+
+
+6.2 Status operasi CH
+State machine memisahkan inisialisasi, pembentukan rute, operasi terhubung, failover, dan pemulihan.
+
+    Status                   Fungsi                                                                            Profil produk
+
+    Startup                  Memulai layanan dan konfigurasi dasar.                                            Aktif
+
+    Menunggu baterai         Dimasuki singkat saat boot; profil baca-saja melewati ambang kesiapan.            Lanjut langsung ke inisialisasi radio
+
+    Inisialisasi radio       Menginisialisasi radio STAR dan MESH.                                             Aktif
+
+    Discovery jaringan       Melakukan discovery dan memilih parent.                                           Aktif
+
+    Terhubung                Meneruskan trafik dengan rute yang telah dipilih.                                 Aktif
+
+    Daya rendah              Status tersedia untuk operasi daya-rendah.                                        Tidak dipicu otomatis oleh pembacaan
+                                                                                                               baterai
+
+    Failover parent          Mencari pengganti ketika parent tidak lagi layak.                                 Aktif
+
+    Pemulihan                Memulihkan layanan radio dan routing setelah gangguan.                            Aktif
+
+    Catatan: Profil produk membaca tegangan baterai untuk telemetri. Nilai tersebut tidak digunakan untuk mencegah boot, menghentikan transmisi,
+    atau mengaktifkan status daya-rendah secara otomatis.
+
+
+6.3 Batas pemilihan parent
+Pemilihan parent bersifat dinamis berdasarkan hasil discovery dan menerapkan pembatas stabilitas untuk menghindari
+perpindahan rute yang terlalu cepat.
+
+    Parameter                                    Nilai                      Dampak operasional
+
+    Kapasitas kandidat                           8                          Membatasi jumlah kandidat yang dinilai pada satu waktu.
+
+    Batas kesehatan parent                       16 min                     Parent yang tidak terlihat selama interval ini memicu evaluasi failover pada
+                                                                            profil produk normal.
+
+    Waktu minimum pada parent                    5 min                      Menahan perpindahan rutin sebelum waktu minimum terpenuhi.
+
+    Margin perpindahan                           15 dB                      Kandidat pengganti harus memberikan perbaikan yang cukup untuk
+                                                                            perpindahan rutin.
+
+    Discovery stabil                             4                          Berlaku untuk perpindahan rutin di background dan persistensi
+                                                                            parent/alternatif; bukan gate initial join atau failover.
+
+    Catatan: Parent pengganti tidak statis; saat failover, CH memilih kandidat yang memenuhi discovery dan kelayakan aktif.
+
+
+6.4 Retensi routing dan transport
+Data routing dan downlink dibatasi oleh masa simpan agar informasi lama tidak dipakai tanpa batas waktu.
+
+    Data                                                           Masa simpan                            Batas jumlah
+
+    Parent tanpa pembaruan                                         16 min                                 1 active parent
+
+    Downlink tertunda                                              Default 30 min; TTL perintah dapat     16
+                                                                   mengganti
+
+    Cache node                                                     60 min                                 32
+
+●      Antrean dan cache memiliki kapasitas tetap; jumlah entri yang disimpan tidak melampaui batas tabel.
+●      Failover menggunakan hasil discovery yang tersedia, bukan daftar parent pengganti yang diprogram tetap.
+●      Radio STAR dan MESH diproses sebagai antarmuka terpisah agar penerimaan node dan forwarding MESH dapat dikelola
+       independen.
+
+
+
+Lab IoT ITB                                                                                                                                                8/9
+CH                                                                                                                      IOTITB-TDS-CH-ID-R4.0
+
+
+
+
+7 Komisioning dan Operator Hub
+Commissioning mengunci bentuk board, varian firmware, identitas, serta readback konfigurasi sebelum unit diterima.
+
+              Engineer                             Operator Hub                                      Firmware            CH
+
+                         Pilih Rectangle/Circle
+
+                                                                  Pilih CH Rectangle/CH Circle
+
+                                                                                                       Upload
+
+                                                                                                 Versi + varian board
+
+                             RF readback
+
+
+
+
+                                                          Gambar 12. Gate commissioning CH.
+
+ Interface                                        Cakupan
+
+ Simple Operator Hub                              Pemilihan board/firmware dan kontrol konfigurasi sederhana.
+
+ CH Expert Operator                               Konfigurasi/readback STAR dan MESH lebih lengkap.
+
+
+
+
+Lab IoT ITB                                                                                                                              9/9
+

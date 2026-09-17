@@ -1,0 +1,797 @@
+                                                                                                    LAB IoT ITB
+
+
+
+
+                             GasleakDetector
+Technical Datasheet Revision 4.0
+
+Eight-channel sensing device with local processing, 24 V alarm output, LoRa STAR,
+and RS-485.
+
+
+
+
+ SENSOR CHANNELS           POWER SUPPLY               RF                        ALARM
+
+ 8 channels                24 VDC / 4.2 VDC           920-923 MHz               AUTO, 24 V output
+
+
+
+
+Lab IoT ITB
+GasleakDetector                                                                                                             IOTITB-TDS-GASLEAKDETECTOR-EN-R4.0
+
+
+
+
+Contents
+
+1 Product identification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      1.1 Abbreviations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 Overview and architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 Product overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 Functional architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.3 Primary hardware components . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+3 Sensor channels and signal path . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 Eight-channel sensor map . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.2 Channel power control and nulling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.3 Analog acquisition path . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.4 ADC and sampling configuration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.5 Filtering and valid-batch behavior   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+
+      3.6 Inference-validity gates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+
+4 Inference and operating modes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+      4.1 Configured classification outputs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.2 Auxiliary temperature and humidity sensing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.3 Firmware operating modes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      4.4 Boot and normal-session sequence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+5 Alarm and power . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+      5.1 Local alarm architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.2 Power architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.3 Current consumption at the 24 V input . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.4 Battery-supply variant . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      5.5 Battery-voltage monitoring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+
+6 Communication interfaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+      6.1 LoRa STAR interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.2 RS-485 / Modbus interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.3 Data and frame security    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .8
+
+
+7 Commissioning and diagnostics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+      7.1 Commissioning through Operator Hub . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      7.2 Status and diagnostics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+
+8 Operational parameters and interfaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+      8.1 Operational timing   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .9
+
+      8.2 Modbus RTU interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+      8.3 Alarm-output logic . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+      8.4 Modbus status word . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+      8.5 Modbus reading guide . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+
+
+
+Lab IoT ITB                                                                                                                                                       2 / 10
+GasleakDetector                                                                                                                 IOTITB-TDS-GASLEAKDETECTOR-EN-R4.0
+
+
+
+
+1 Product identification
+    Product                                 GasleakDetector
+
+    Document revision                       4.0
+
+    Issuer                                  Lab IoT ITB
+
+
+
+1.1 Abbreviations
+    Abbreviation          Meaning                                                      Abbreviation         Meaning
+
+    ADC                   Analog-to-Digital Converter                                  RTU                  Remote Terminal Unit in Modbus
+
+    DAC                   Digital-to-Analog Converter                                  STAR                 Endpoint-to-CH radio domain
+
+    NVM                   Non-volatile memory                                          TLS                  Transport Layer Security
+
+    RF                    Radio frequency
+
+
+
+2 Overview and architecture
+2.1 Product overview
+GasleakDetector combines multi-channel sensing, local processing, a physical alarm output, and two communication interfaces in
+one field endpoint.
+
+    Architecture                8 analog channels                                      Control                    ESP32-S3
+
+    Primary link                LoRa STAR to CH                                        Local link                 RS-485 Modbus
+
+●        Acquires eight sensor channels with per-channel power control.
+●        Runs local processing in Running/Inference mode.
+●        Sends telemetry and alarm events to CH over LoRa STAR.
+●        Provides a steady 24 V output for an external alarm device.
+
+
+2.2 Functional architecture
+The primary path runs from sensors through acquisition and processing to communication, alarm, or telemetry.
+
+            MQ sensors                            ADS1256                       ESP32-S3                         LoRa STAR                          Alarm
+
+
+                                analog                              SPI                             frame                              event
+
+
+
+
+             8 channels                       24-bit ADC                    Control + inference                  Uplink to CH                     24 V output
+
+
+                                                            Figure 1. Primary GasleakDetector functional path.
+
+    Local processing                               Scanning, input validation, inference, status, and frame construction.
+
+    Communication                                  LoRa STAR as the primary field path; RS-485 as a local read-only interface.
+
+    Alarm                                          AUTO follows a valid alarm inference; MANUAL is restricted to a test session.
+
+
+2.3 Primary hardware components
+This table identifies components present in the design; component ratings do not automatically become assembled-product ratings.
+
+    Function                         Component                                       Product role
+
+    MCU                              ESP32-S3-WROOM-1U-N16R8                         Control, communication, and local processing
+
+    ADC                              ADS1256IDBR                                     24-bit multi-channel analog acquisition
+
+    Environment                      SHT40-AD1B-R2                                   Auxiliary temperature and humidity sensing
+
+    Radio                            E22-900MM22S                                    LoRa STAR interface
+
+    RS-485                           THVD1410DR                                      Modbus RTU physical layer
+
+    Expander                         PCF8574T                                        Sensor-channel enable control
+
+
+
+
+Lab IoT ITB                                                                                                                                                     3 / 10
+GasleakDetector                                                                                                                  IOTITB-TDS-GASLEAKDETECTOR-EN-R4.0
+
+
+
+
+3 Sensor channels and signal path
+3.1 Eight-channel sensor map
+Channel order is part of the acquisition and processing contract; gas performance is not inferred from sensor names.
+
+    Channel                 Sensor                              Identification
+
+    1                       MQ-8                                Winsen MQ series
+
+    2                       MQ-135                              Winsen MQ series
+
+    3                       MQ-3                                Winsen MQ series
+
+    4                       MQ-5                                Winsen MQ series
+
+    5                       MQ-4                                Winsen MQ series
+
+    6                       MQ-7                                Winsen MQ series
+
+    7                       MQ-6                                Winsen MQ series
+
+    8                       MQ-2                                Winsen MQ series
+
+
+3.2 Channel power control and nulling
+Each channel has a control path that enables directed sensor activation and nulling.
+
+    Stage                                     Description
+
+    Control layer                             ESP32-S3 controls enables and service sequence
+
+    I/O expansion                             PCF8574T maps eight enable signals
+
+    Power switch                              TPS22919 controls supply per channel
+
+    Analog nulling                            DAC and multiplexer apply channel correction
+                                                             Figure 2. Power-control and nulling layers.
+
+●       Nulling mode is an engineering function separate from normal operation.
+●       Channel status and nulling results are available for engineering readback.
+
+    Note: The nulling procedure covers all eight channels, profile storage, reboot, and re-application of a valid profile.
+
+
+3.3 Analog acquisition path
+Acquisition uses an external 24-bit ADC under sequenced firmware control.
+
+          Sensor output                  Conditioning                            ADS1256                                SPI                        ESP32-S3
+
+
+                              voltage                            mux                                    digital                        sample
+
+
+
+
+          8 analog inputs                PCB analog path                         24-bit ADC                           1.92 MHz                    Filter + status
+
+
+                                                           Figure 3. Implemented analog acquisition chain.
+
+    ADC                                       Texas Instruments ADS1256IDBR, 24-bit component resolution.
+
+    Firmware SPI clock                        1,920,000 Hz
+
+    Processing output                         Channel values, validity, fault status, and inference input.
+
+
+3.4 ADC and sampling configuration
+Firmware explicitly controls multiplexing, gain, calibration, and sample acceptance.
+
+    Parameter                                Implemented value                                Meaning
+
+    ADS1256 data rate                        30,000 SPS                                       ADC component configuration
+
+    Firmware VREF                            2.497 V                                          Source conversion value
+
+    PGA                                      1x - 64x adaptive                                Gain selected according to input
+
+    Calibration                              Self-calibration                                 Performed in the initialization path
+
+    After mux switch                         First conversion discarded                       Reduces carry-over after channel switching
+
+    Default scan cadence                     500 ms                                           Firmware acquisition-cycle interval
+
+
+Lab IoT ITB                                                                                                                                                         4 / 10
+GasleakDetector                                                                                                     IOTITB-TDS-GASLEAKDETECTOR-EN-R4.0
+
+
+
+
+3.5 Filtering and valid-batch behavior
+Processing commits a batch only when all eight channels pass validity and saturation checks.
+
+    Stage                                  Description
+
+    Scan 8 channels                        Multiplexed sequential acquisition
+
+    Per-channel checks                     Read success, validity, saturation
+
+    Batch gate                             Must be 8/8 valid and non-saturated
+
+    Moving average                         10 samples per channel
+
+    Commit                                 Data becomes processing/inference input
+                                                         Figure 4. Sensor-batch acceptance gates.
+
+    Note: One invalid channel makes the complete batch invalid.
+
+
+3.6 Inference-validity gates
+A classifier result is valid only when acquisition, model, nulling, and DAC state are all ready.
+
+    Stage                                  Description
+
+    Sensor gate                            8/8 channels valid and non-saturated
+
+    Filter gate                            Moving average is primed
+
+    Model gate                             ML runtime and model metadata are ready
+
+    Nulling gate                           Profile is applied and bound to the model
+
+    DAC gate                               Nulling output is verified
+
+    Valid inference                        Only then may affect AUTO alarm
+                                                Figure 5. Layered gates before inference is declared valid.
+
+
+
+4 Inference and operating modes
+4.1 Configured classification outputs
+The inference model provides three classification labels and a confidence value.
+
+    Class 0                Clean Air                                            Class 1                   LPG
+
+    Class 2                H2
+
+    Output                                 Meaning
+
+    Class label                            Configured model classification result
+
+    Confidence                             Classifier confidence value
+
+
+4.2 Auxiliary temperature and humidity sensing
+SHT40 provides auxiliary temperature and humidity data for status and processing.
+
+    Component              SHT40-AD1B-R2                                        Interface                 I2C
+
+    Quantities             Temperature + RH                                     Role                      Auxiliary input
+
+●      Firmware converts raw digital temperature and humidity values.
+●      Values can be included in status/telemetry according to the firmware path.
+
+    Note: Official component reference: Sensirion SHT40 product page and SHT4x datasheet.
+
+
+
+
+Lab IoT ITB                                                                                                                                      5 / 10
+GasleakDetector                                                                                                                IOTITB-TDS-GASLEAKDETECTOR-EN-R4.0
+
+
+
+
+4.3 Firmware operating modes
+Modes are separated by operational, data-collection, and commissioning purpose.
+
+    Mode                               Purpose                                                             Use boundary
+
+    Running / Inference                Scanning and local inference                                        Normal operating mode after boot
+
+    Dataset                            Engineering data collection                                         Not a production-alarm path
+
+    Nulling                            Per-channel baseline correction                                     Requires engineering workflow
+
+    Battery session                    Operating cycle when battery source is selected                     Power behavior depends on hardware
+
+    MANUAL alarm                       Alarm-load test                                                     Session-only; AUTO returns at boot
+
+    Note: AUTO is the product default at every boot. MANUAL is not stored as a permanent boot selection.
+
+
+4.4 Boot and normal-session sequence
+This sequence shows the primary dependencies before the device can produce operational data.
+
+                 Power                          Firmware                              Sensors                         Radio                            CH
+
+                          Power-up / reset
+
+                                                            Init + enable channels
+
+                                                             Sample + validation
+
+                                                                                     Build frame
+
+                                                                                                                                 LoRa STAR TX
+
+
+
+
+                                                                   Figure 6. Boot-to-telemetry sequence.
+
+●      Initialization or validation failures are exposed through diagnostic status.
+●      Runtime configuration may come from firmware defaults or validated NVM.
+●      Actual RF configuration must be checked through device readback.
+
+
+
+5 Alarm and power
+5.1 Local alarm architecture
+Firmware controls one 24 V alarm output; audible/visual cadence is generated by the external alarm device.
+
+        Valid inference                      AUTO mode                          Alarm control                   Boost/output                        Buzzer + LED
+
+
+                            trigger                              enable                            drive                            in alarm unit
+
+
+
+
+            Alarm state                      Boot default                       ON/OFF output                    Steady 24 V                        1 s ON / 1 s OFF
+
+
+                                                      Figure 7. Firmware and external-alarm responsibility boundary.
+
+    Firmware behavior                             Steady 24 V ON/OFF output.
+
+    Load behavior                                 Buzzer and LED automatically cycle 1 second ON, 1 second OFF from steady 24 V.
+
+    Test mode                                     Session-only MANUAL mode selectable through Operator Hub.
+
+    Note: The 24 V output has been tested with an external buzzer-and-LED alarm device.
+
+
+5.2 Power architecture
+The product is available in a 24 VDC supply variant or a 4.2 VDC battery-operating variant.
+
+    Stage                                          Description
+
+    24 VDC variant                                 Nominal 24 VDC supply
+
+    Battery variant                                Nominal 4.2 VDC supply
+
+    Internal rails                                 Conversion for MCU, analog, radio, and sensors
+
+    Alarm output                                   Steady 24 V when active
+                                                                 Figure 8. Primary product power domains.
+
+
+Lab IoT ITB                                                                                                                                                            6 / 10
+GasleakDetector                                                                                                         IOTITB-TDS-GASLEAKDETECTOR-EN-R4.0
+
+
+
+
+ Electrical parameter                                    Value
+
+ Main-supply variant                                     24 VDC nominal
+
+ Battery variant                                         4.2 VDC nominal
+
+ Measured current                                        Up to 300 mA steady with eight sensors active
+
+
+5.3 Current consumption at the 24 V input
+Values are steady-state measurements as the number of active sensors increases from zero to eight.
+mA
+     330
+                                                                                                                                               300
+                                                                                                                                  270
+                                                                                                                  240
+     248
+                                                                                                 210
+
+                                                                                 160
+     165
+                                                                 130
+                                           100
+      82                    60
+
+
+                 2.56
+      0
+                    0        1                2                   3               4                5               6               7               8
+
+
+                                                  Figure 9. Steady-state current versus active sensor count.
+
+ Active sensors              0            1                 2              3             4              5               6          7           8
+
+ Current (mA)                2.56         60                100            130           160            210             240        270         300
+
+ Note: The meter was placed in series in the 24 V+ path from PSU to board. The 300 mA value is steady-state, not peak current or PSU rating.
+
+
+5.4 Battery-supply variant
+The battery-operating variant uses a nominal 4.2 VDC supply. Pack configuration is determined per unit variant.
+
+ Nominal supply                         4.2 VDC
+
+ Applicability                          Battery-operating variant only
+
+ Pack configuration                     Depends on unit variant
+
+
+5.5 Battery-voltage monitoring
+Firmware reports battery voltage and diagnostic flags but does not use those flags as an active cutoff.
+
+ Diagnostic                              Source threshold                               Behavior
+
+ Battery low                             3.50 V                                         Status/flag; does not stop operation
+
+ Battery critical                        3.30 V                                         Status/flag; not a physical cutoff
+
+ Stage                                   Description
+
+ Voltage read                            Battery-monitor acquisition
+
+ Diagnostic compare                      Low / critical flags
+
+ Status output                           Value and flags available for readback
+
+ Protection boundary                     Does not actively disconnect pack or rail
+                                                  Figure 11. Diagnostic monitoring versus active protection.
+
+
+
+
+Lab IoT ITB                                                                                                                                            7 / 10
+GasleakDetector                                                                                                                     IOTITB-TDS-GASLEAKDETECTOR-EN-R4.0
+
+
+
+
+6 Communication interfaces
+6.1 LoRa STAR interface
+LoRa STAR connects GasleakDetector to the STAR radio on CH.
+
+    Parameter                                Firmware default                            Note
+
+    Carrier                                  920.0 MHz                                   Configuration input constrained to 920-923 MHz inclusive
+
+    Bandwidth                                125 kHz                                     Must match GasleakDetector and CH STAR
+
+    Spreading factor                         SF7                                         STAR-domain default
+
+    Coding rate                              4/5                                         Firmware configuration value CR=5
+
+    TX power                                 0-22 dBm; default 17 dBm                    Configuration capability; not measured output/EIRP
+
+    Preamble                                 8                                           Firmware default
+
+    Antenna                                  3 dBi                                       Product configuration
+
+    Note: The active configuration is verified through device readback after commissioning.
+
+
+6.2 RS-485 / Modbus interface
+The local interface is provided as a read-only Modbus RTU slave for product-exposed data/status.
+
+    Physical layer             RS-485                                                    Protocol                            Modbus RTU
+
+    Mode                       Read-only slave                                           Unit ID                             1
+
+    Serial format                                  9600 bit/s, 8N1
+
+    Transceiver                                    THVD1410DR
+
+    Customer access                                Reads the eight supported public registers; not used to write product control.
+
+    Note: The interface uses function codes 03/04 and the read-only registers defined in the product register map.
+
+
+6.3 Data and frame security
+Field payloads use application authentication so the receiver can verify frame authenticity and reject invalid frames before further
+processing.
+
+    Stage                                          Description
+
+    Sensor data                                    Values, status, and events
+
+    Application frame                              Identity, sequence, and payload
+
+    AES-128-GCM                                    Confidentiality + authentication
+
+    LoRa transport                                 STAR toward CH
+                                                                 Figure 12. Field-payload protection layers.
+
+●      CH forwards field frames and is not a TLS termination point.
+●      TLS, when selected, is on the Gateway-to-broker segment.
+●      The receiver rejects payloads that fail authentication or anti-replay checks.
+
+
+
+7 Commissioning and diagnostics
+7.1 Commissioning through Operator Hub
+Operator Hub is the engineering interface for firmware-variant selection, upload, configuration, and readback.
+
+                    Engineer                               Operator Hub                                       Firmware                            Device
+
+                                Select GasleakDetector
+
+                                                                            Validate variant/version
+
+                                                                                                       Upload selected firmware
+
+                                                                                                       Status + version readback
+
+                                 Configure / alarm test
+
+
+
+
+                                                            Figure 13. Operator-controlled commissioning flow.
+
+
+
+
+Lab IoT ITB                                                                                                                                                      8 / 10
+GasleakDetector                                                                                                           IOTITB-TDS-GASLEAKDETECTOR-EN-R4.0
+
+
+
+ Commissioning verification                   Criterion
+
+ Version and hardware                         The active version and hardware profile are verified through device readback after upload.
+
+ Alarm mode                                   MANUAL mode requires an explicit step and returns to AUTO on boot.
+
+ RF boundary                                  Frequency configuration outside 920-923 MHz is rejected.
+
+
+7.2 Status and diagnostics
+Machine-readable status separates configuration, subsystem readiness, faults, and operational results.
+
+ Status group                                    Engineering content examples
+
+ Identity                                        Firmware version, protocol version, device identity
+
+ Sensors                                         Active channels, validity, and fault state
+
+ Nulling                                         Profile/status and per-channel result
+
+ Radio                                           Frequency, bandwidth, SF, CR, power, preamble
+
+ Alarm                                           AUTO/MANUAL, commanded output, session-only flag
+
+ Power                                           Detected source and power-path state
+
+ Note: Device readback verifies the active unit configuration.
+
+
+
+8 Operational parameters and interfaces
+8.1 Operational timing
+The firmware runs acquisition, radio reporting, and the receive window at the following fixed intervals.
+
+ Function                                         Value                     Description
+
+ Sensor scan cycle                                500 ms                    Processing interval for the eight-channel measurement.
+
+ Periodic radio report                            10 s                      Nominal interval for operational data transmission over LoRa STAR.
+
+ Post-transmission receive window                 2s                        Time during which the device keeps the receive path available after transmission.
+
+ Sensor warm-up in battery session                30 s                      The eight sensor channels warm up before the battery-session inference cycle.
+
+
+8.2 Modbus RTU interface
+RS-485 provides eight read-only 16-bit registers for integration with an external controller or acquisition system.
+
+ Parameter                                                Specification
+
+ Mode                                                     Modbus RTU / RS-485
+
+ Unit address                                             1
+
+ Serial format                                            9600 bit/s, 8 data bits, no parity, 1 stop bit (8N1)
+
+ Read functions                                           03 (Holding Registers), 04 (Input Registers)
+
+ Access                                                   Read-only
+
+ Protocol address             Register                                         Read value
+
+ 0 (0x0000)                   Device status                                    16-bit status word; bit definitions are provided below.
+
+ 1 (0x0001)                   Classification result                            Product classification-result code in uint16.
+
+ 2 (0x0002)                   Confidence                                       0-100; percent unit.
+
+ 3 (0x0003)                   Battery voltage                                  mV; 0xFFFF means unavailable/invalid.
+
+ 4 (0x0004)                   ST_P source                                      1 = 24 V; 0 = battery.
+
+ 5 (0x0005)                   External power                                   1 = asserted; 0 = not asserted.
+
+ 6 (0x0006)                   LoRa transmission counter                        Low 16 bits of the transmission counter.
+
+ 7 (0x0007)                   Node ID                                          Node identity in uint16.
+
+ Note: The table addresses are the values sent in the Modbus start-address field, beginning at 0. Master software that displays one-based register
+ numbers must be mapped to these protocol addresses; use FC03 or FC04 and do not write registers.
+
+
+
+
+Lab IoT ITB                                                                                                                                                 9 / 10
+GasleakDetector                                                                                                             IOTITB-TDS-GASLEAKDETECTOR-EN-R4.0
+
+
+
+
+8.3 Alarm-output logic
+The 24 V alarm output provides AUTO mode for normal operation and MANUAL mode for controlled testing.
+
+ Mode                      Control condition                                                                     24 V alarm output
+
+ AUTO                      Inference asserts alarm                                                               Active
+
+ AUTO                      Inference does not assert alarm; clear-state persistence succeeds                     Inactive
+
+ AUTO fail-safe            Clear-state persistence fails                                                         Remains active until a valid clear can be
+                                                                                                                 persisted
+
+ MANUAL                    Test command ON                                                                       Active
+
+ MANUAL                    Test command OFF                                                                      Inactive
+
+ Note: MANUAL mode is not stored as a permanent operating mode. After a device restart, the initial mode is AUTO. Failure to persist the clear
+ state retains the alarm ON as a fail-safe. When the 24 V output is active, the one-second ON/one-second OFF audible and visual pattern is
+ generated by the powered alarm device.
+
+
+8.4 Modbus status word
+Register 0 condenses subsystem readiness, inference validity, alarm state, and power source into one 16-bit status word.
+
+ Register 0 bit                                Meaning when set
+
+ 0                                             ADS1256 ready
+
+ 1                                             DAC ready
+
+ 2                                             LoRa ready
+
+ 3                                             ML runtime ready
+
+ 4                                             Inference result valid
+
+ 5                                             Alarm active
+
+ 6                                             ST_P source = 24 V
+
+ 7                                             External power detected
+
+ Protocol behavior                                Condition
+
+ Value format                                     All register values are unsigned 16-bit; the most significant byte is sent first.
+
+ Read quantity                                    1-8 consecutive registers from a valid start address.
+
+ Write functions                                  Not supported; Modbus exception response 01 (illegal function).
+
+ Invalid address                                  Modbus exception response 02 (illegal data address).
+
+ Invalid quantity                                 Modbus exception response 03 (illegal data value).
+
+
+8.5 Modbus reading guide
+Use the following steps to connect a PLC, HMI, SCADA, or master application to GasleakDetector without writing device
+configuration.
+
+ Step               Instruction
+
+ 1                  Set the master RS-485 port to 9600 bit/s, 8N1, no parity; use Unit ID 1.
+
+ 2                  Select FC03 or FC04, then send a start address 0-7 and quantity 1-8 that stays entirely within that range.
+
+ 3                  Read each word as unsigned 16-bit big-endian. Register 3 is in mV; register 2 is in percent.
+
+ 4                  Check the RTU CRC and any exception response before using values in the supervisory application.
+
+ Example                          Complete RTU frame                                      Description
+
+ Read confidence                  01 04 00 02 00 01 90 0A                                 FC04 request for one word at address 2.
+
+ Confidence response              01 04 02 00 52 38 CD                                    Illustrative example: 0x0052 = 82%, not a reading from a specific
+                                                                                          unit.
+
+ Read complete map                01 04 00 00 00 08 F1 CC                                 FC04 request for addresses 0 through 7; the response carries 16
+                                                                                          data bytes.
+
+ Note: CRC uses Modbus RTU order: low byte then high byte. A successful full-map read begins `01 04 10`, followed by 16 data bytes and CRC.
+
+
+
+
+Lab IoT ITB                                                                                                                                                  10 / 10
+

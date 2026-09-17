@@ -1,0 +1,587 @@
+                                                                                                                                            LAB IoT ITB
+
+
+
+
+                                                           Server
+Technical Datasheet Revision 4.0
+
+Aplikasi Node-RED untuk masuknya data MQTT, validasi integritas, routing alarm,
+topologi, dataset, dan perintah.
+
+
+             Broker                   Validasi                      Keamanan                       Aplikasi                             Keluaran
+
+
+
+
+                        langganan                     gerbang                          rute                           simpan/kirim
+
+
+
+
+         MQTT ingress               CRC + skema                    AES-128-GCM                  Alarm + topologi                     Dataset + perintah
+
+
+
+
+    TARGET HOST                     RUNTIME                                DATA SECURITY                            DATA ENGINEERING
+
+    VM customer                     Node-RED                               AES-128-GCM                              MySQL / CSV
+
+Fitur utama
+●      Menerima dan memisahkan data uplink, status, topologi,          ●    Merutekan event alarm terautentikasi dan memisahkan
+       serta jalur integritas.                                              masukan manual/uji.
+●      Memvalidasi frame sebelum data masuk jalur aplikasi             ●    Membentuk perintah mode tingkat tinggi yang diautentikasi.
+       normal.
+Ikhtisar teknis
+Server menyediakan pipeline pemrosesan data dan perintah pada sisi aplikasi, dengan target penerapan di VM customer.
+Profil fungsi
+    Runtime                             Node-RED
+    Ingress                             MQTT
+    Integrity                           CRC + AES-GCM
+    Target                              VM customer
+
+Antarmuka operasional
+    Transport                           MQTT melalui broker yang dipilih untuk deployment.
+    Integritas                          Struktur frame, panjang, CRC, autentikasi, pemeriksaan semantik, dan kebijakan replay.
+    Aplikasi                            Data hasil dekode, routing alarm, topologi, UI engineering, dan perintah.
+
+
+
+
+Lab IoT ITB
+Server                                                                                                                                     IOTITB-TDS-SERVER-ID-R4.0
+
+
+
+
+Daftar isi
+
+1 Identifikasi produk         . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+      1.1 Singkatan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+2 Ikhtisar dan arsitektur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+      2.1 Ikhtisar aplikasi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+      2.2 Arsitektur logis Server   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+
+      2.3 Kategori input MQTT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+
+3 Validasi dan keamanan frame . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+      3.1 Validasi frame . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.2 Autentikasi AES-128-GCM . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+      3.3 Pemutaran ulang, penggunaan ulang nonce, dan karantina . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+
+4 Alarm, topologi, dan perintah             . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+      4.1 Penanganan alarm dan event        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+
+      4.2 Tampilan topologi engineering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      4.3 Perintah mode tingkat tinggi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+
+5 Broker, penyimpanan, dan penerapan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+      5.1 Koneksi Server ke broker dengan TLS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+      5.2 Persistensi dataset: MySQL dan CSV . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.3 Model penerapan pada VM customer          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .6
+
+      5.4 Tampilan topologi engineering Node-RED . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+      5.5 Tanggung jawab penerapan dan operasi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+6 Model data, penyimpanan, dan keamanan                     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .7
+      6.1 Model data aplikasi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.2 Skema rekaman dataset . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.3 Aturan penerimaan dataset . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+      6.4 Penyimpanan dan ketahanan layanan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+      6.5 Persyaratan keamanan penerapan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+
+
+
+Lab IoT ITB                                                                                                                                                         2/8
+Server                                                                                                                                         IOTITB-TDS-SERVER-ID-R4.0
+
+
+
+
+1 Identifikasi produk
+    Produk                                   Server
+
+    Revisi dokumen                           4.0
+
+    Penerbit                                 Lab IoT ITB
+
+
+
+1.1 Singkatan
+    Singkatan              Arti                                                       Singkatan                 Arti
+
+    AES-GCM                Authenticated encryption dengan Galois/Counter Mode        NVM                       Non-volatile memory/state
+
+    CA                     Certificate Authority                                      TLS                       Transport Layer Security
+
+    CRC                    Cyclic Redundancy Check                                    VM                        Virtual machine pada infrastruktur customer
+
+    MQTT                   Message Queuing Telemetry Transport                        UI                        User interface
+
+
+
+2 Ikhtisar dan arsitektur
+2.1 Ikhtisar aplikasi
+Server menyediakan pipeline pemrosesan data dan perintah pada sisi aplikasi, dengan target penerapan di VM customer.
+
+    Runtime                       Node-RED                                            Ingress                          MQTT
+
+    Integrity                     CRC + AES-GCM                                       Target                           VM customer
+
+●      Menerima dan memisahkan data uplink, status, topologi, serta jalur integritas.
+●      Memvalidasi frame sebelum data masuk jalur aplikasi normal.
+●      Merutekan event alarm terautentikasi dan memisahkan masukan manual/uji.
+●      Membentuk perintah mode tingkat tinggi yang diautentikasi.
+
+
+2.2 Arsitektur logis Server
+Pipeline memisahkan transport, integritas, routing aplikasi, penyimpanan, dan perintah downlink.
+
+          Masuk MQTT                        Gerbang frame                    Gerbang keamanan                             Aplikasi                     Keluaran
+
+
+                                  terima                          validasi                          otorisasi                               rute
+
+
+
+
+          Masukan broker                     Panjang + CRC                    AES-GCM + replay                         Alarm + topologi             Dataset / perintah
+
+
+                                                                 Gambar 1. Pipeline logis aplikasi Server.
+
+    Transport                                      MQTT melalui broker yang dipilih untuk deployment.
+
+    Integritas                                     Struktur frame, panjang, CRC, autentikasi, pemeriksaan semantik, dan kebijakan replay.
+
+    Aplikasi                                       Data hasil dekode, routing alarm, topologi, UI engineering, dan perintah.
+
+
+2.3 Kategori input MQTT
+Masukan dipisahkan secara fungsional agar status, topologi, payload, dan event integritas tidak diperlakukan sebagai data yang
+sama.
+
+    Kategori                                 Tujuan                                                          Jalur lanjutan
+
+    Uplink perangkat                         Membawa frame/data dari field                                   Validasi dan dekode
+
+    Status Gateway                           Keadaan komunikasi Gateway                                      Pemantauan/status
+
+    Topologi                                 Informasi parent, discovery, dan rute                           Tampilan topologi engineering
+
+    Integritas/mentah                        Kegagalan validasi atau observability                           Jalur karantina/integritas
+
+    Catatan: Setiap kategori input dipetakan ke jalur pemrosesan yang terpisah.
+
+
+
+
+Lab IoT ITB                                                                                                                                                              3/8
+Server                                                                                                                                         IOTITB-TDS-SERVER-ID-R4.0
+
+
+
+
+3 Validasi dan keamanan frame
+3.1 Validasi frame
+Frame harus lolos pemeriksaan struktur sebelum autentikasi dan pemrosesan semantik.
+
+    Tahap                                    Deskripsi
+
+    Terima                                   Pesan diterima dari MQTT
+
+    Struktur                                 Format dan field wajib
+
+    Panjang                                  Ukuran frame/payload diperiksa
+
+    CRC                                      Integritas transport diperiksa
+
+    Keamanan/semantik                        Masuk ke gerbang autentikasi
+                                                                Gambar 2. Urutan gate validasi frame.
+
+●      Frame yang gagal struktur/panjang/CRC tidak menjadi data produksi hasil dekode.
+●      Kesalahan validasi tetap dapat diarahkan ke jalur integritas/diagnostik.
+
+
+3.2 Autentikasi AES-128-GCM
+Payload GasleakDetector diautentikasi dan didekripsi dengan runtime key yang wajib tersedia.
+
+    Tahap                                    Deskripsi
+
+    Payload terenkripsi                      Diterima setelah gerbang frame
+
+    Kunci runtime                            Wajib dan dipetakan ke ID kunci
+
+    AES-128-GCM                              Dekripsi + pemeriksaan tag autentikasi
+
+    Validasi semantik                        Batasan identitas/peran dan nilai
+
+    Keluaran valid                           Baru masuk routing aplikasi
+                                                                Gambar 3. Security gate payload field.
+
+    Catatan: Kunci runtime wajib tersedia; payload ditolak jika autentikasi tidak dapat diselesaikan.
+
+
+3.3 Pemutaran ulang, penggunaan ulang nonce, dan karantina
+Data autentik tetapi berulang tetap dapat ditolak agar event lama tidak diproses ulang sebagai data baru.
+
+    Kondisi                                      Keputusan                                 Jalur
+
+    Autentikasi gagal                            Tolak                                     Integritas/karantina
+
+    Replay terdeteksi                            Tolak                                     Integritas/karantina
+
+    Nonce digunakan ulang                        Tolak                                     Integritas/karantina
+
+    Semantik tidak valid                         Tolak                                     Integritas/karantina
+
+    Valid dan baru                               Terima                                    Hasil dekode/aplikasi
+
+    Keadaan anti-replay                      Deployment Server wajib mengonfigurasi penyimpanan persisten.
+
+    Pemulihan layanan                        Dengan konfigurasi tersebut, status anti-replay dimuat kembali setelah layanan dimulai ulang.
+
+
+
+4 Alarm, topologi, dan perintah
+4.1 Penanganan alarm dan event
+Server hanya merutekan alarm setelah frame lolos gerbang integritas dan autentikasi.
+
+               MQTT                         Decoder                           Gerbang integritas                       Rute alarm                    UI engineering
+
+                            Terima frame
+
+
+                                                         Validasi + autentikasi
+
+
+                                                                                                   Event alarm valid
+
+
+                                                                                                                                    Rute/tampilkan
+
+
+
+
+                                                                Gambar 4. Alarm routing pada Server.
+
+
+
+Lab IoT ITB                                                                                                                                                           4/8
+Server                                                                                                                                             IOTITB-TDS-SERVER-ID-R4.0
+
+
+
+
+    Masukan                                                                        Jalur alarm produksi
+
+    Alarm field terautentikasi                                                     Dapat dirutekan
+
+    Masukan manual/uji                                                             Dipisahkan
+
+    Autentikasi/replay gagal                                                       Dikarantina; bukan alarm produksi
+
+    Catatan: Server menghasilkan event alarm aplikasi; integrasi notifikasi eksternal menggunakan antarmuka deployment customer.
+
+
+4.2 Tampilan topologi engineering
+Server menyediakan tampilan hubungan Gateway, CH, GasleakDetector, parent aktif, kandidat discovery, dan rute.
+
+                 Gateway                                         CH parent                                  CH child                                 GasleakDetector
+
+
+                                          parent                                           child                                      serves
+
+
+
+
+                  Root                                            Rute aktif                                 Multi-hop                             Endpoint yang dilayani
+
+
+                                                              Gambar 5. Informasi yang tersedia pada tampilan topologi.
+
+●      Tampilan dapat menunjukkan parent terpasang, kandidat discovery, dan lineage rute.
+●      Flow topologi merupakan bagian dari aplikasi Server berbasis Node-RED.
+●      Konfigurasi Gateway dan jaringan disesuaikan untuk setiap deployment customer.
+
+
+4.3 Perintah mode tingkat tinggi
+Server dapat membentuk perintah pergantian mode operasional yang diautentikasi untuk diteruskan menuju GasleakDetector.
+
+         Pengguna berwenang                          Server                               Broker                         Gateway/CH                      GasleakDetector
+
+                    Permintaan mode + token autentikasi
+
+                                              Validasi + autentikasi
+
+                                                                  Publikasikan perintah
+
+                                                                                                      Kirim downlink
+
+                                                                                                                                Kirim dalam jendela penerimaan
+
+
+
+
+                                                                       Gambar 6. Command path dari Server ke field.
+
+●      Perintah eksternal membutuhkan token otorisasi.
+●      Payload perintah diautentikasi pada lapisan aplikasi.
+●      Cakupan saat ini adalah perubahan mode tingkat tinggi, bukan kendali jarak jauh umum.
+
+
+
+5 Broker, penyimpanan, dan penerapan
+5.1 Koneksi Server ke broker dengan TLS
+Generator flow mendukung profil koneksi Node-RED ke broker menggunakan credential dan TLS terverifikasi CA. Profil
+deployment yang dipilih menentukan apakah TLS diaktifkan.
+
+    Tahap                                             Deskripsi
+
+    Node-RED                                          Klien MQTT
+
+    Credential                                        Disediakan saat deployment
+
+    Kepercayaan CA                                    Verifikasi sertifikat broker
+
+    Sesi TLS                                          Server/Node-RED ke broker
+
+    Broker                                            Batas kepercayaan
+                                                                          Gambar 7. Sesi TLS Server-ke-broker.
+
+    Catatan: Ini adalah sesi TLS terpisah dari Gateway-ke-broker. Tidak boleh disebut TLS end-to-end dari GasleakDetector ke Server.
+
+
+
+
+Lab IoT ITB                                                                                                                                                                 5/8
+Server                                                                                                                                       IOTITB-TDS-SERVER-ID-R4.0
+
+
+
+
+5.2 Persistensi dataset: MySQL dan CSV
+Perekam dataset engineering memvalidasi rekaman dan menggunakan jalur penyimpanan yang dikonfigurasi. MySQL hanya
+digunakan apabila driver dan koneksi tersedia; CSV adalah keluaran perekam dataset, bukan pengganti otomatis untuk MySQL.
+
+           Mode dataset                       Masukan MQTT                       Validasi                            Perekam                       Penyimpanan
+
+
+                              publikasi                            urai                           terima                             tulis
+
+
+
+
+         Khusus engineering                    Record dataset                Skema + nilai                         Layanan Python                   MySQL / CSV
+
+
+                                                                 Gambar 8. Jalur dataset engineering.
+
+    Penyimpanan                      Status                                                                Batas
+
+    MySQL                            Didukung bila driver dan koneksi tersedia                             Hanya record dataset
+
+    CSV                              Keluaran perekam dataset setelah jalur perekaman yang                 Dataset engineering
+                                     berlaku berhasil
+
+    Catatan: MySQL tidak digeneralisasi sebagai penyimpanan seluruh telemetri, alarm, topologi, atau event operasional.
+
+
+5.3 Model penerapan pada VM customer
+Aplikasi ditargetkan untuk dipasang pada virtual machine yang disediakan customer.
+
+    Area                                          Spesifikasi penerapan
+
+    Host                                          VM pada infrastruktur customer
+
+    OS                                            Linux atau Windows, dipilih untuk deployment
+
+    Keamanan                                      Secret runtime dan kepercayaan broker wajib tersedia
+
+    Catatan: Konfigurasi VM, jaringan, broker, dan secret ditetapkan untuk setiap deployment customer.
+
+
+5.4 Tampilan topologi engineering Node-RED
+Server menyediakan tampilan topologi engineering berbasis Node-RED untuk melihat informasi jaringan yang diproses oleh flow.
+
+    Lapisan UI                                      Implementasi                                             Cakupan
+
+    Tampilan engineering Node-RED                   Bagian dari runtime Server                               Topologi, parent, discovery, rute, status engineering
+
+●     Tampilan topologi menampilkan parent, discovery, rute, dan status engineering.
+
+
+5.5 Tanggung jawab penerapan dan operasi
+Kesiapan Server bergantung pada boundary antara aplikasi Lab IoT ITB dan infrastruktur customer.
+
+    Area                                   Input/ownership yang diperlukan
+
+    VM                                     Penyediaan, image OS, patching, backup, pemantauan sumber daya
+
+    Broker                                 FQDN/IP, port, credential, CA, ACL, retention policy
+
+    Database                               MySQL endpoint/credential/schema ownership untuk dataset
+
+    Secret                                 Kunci AES runtime, token otorisasi perintah, credential MQTT
+
+    Operasi                                Pengumpulan log, kebijakan restart, respons insiden, dan retensi log
+
+    Catatan: Operasi VM, broker, database, secret, dan log dikelola sesuai kebijakan infrastruktur customer.
+
+
+
+
+Lab IoT ITB                                                                                                                                                       6/8
+Server                                                                                                                       IOTITB-TDS-SERVER-ID-R4.0
+
+
+
+
+6 Model data, penyimpanan, dan keamanan
+6.1 Model data aplikasi
+Server mengubah data perangkat menjadi bidang aplikasi yang dapat digunakan oleh penyimpanan, tampilan topologi, dan alarm.
+
+ Bidang                          Arti                                                               Penggunaan
+
+ node ID                         Pengenal node sumber.                                              Korelasi perangkat dan topologi.
+
+ gas class / gas name            Hasil klasifikasi dan nama tampilannya.                            Status deteksi pada aplikasi.
+
+ confidence                      Nilai kepercayaan hasil inferensi.                                 Konteks untuk interpretasi hasil.
+
+ battery mV                      Tegangan baterai yang dilaporkan perangkat.                        Pemantauan daya.
+
+ alarm                           Status alarm perangkat.                                            Indikasi alarm pada antarmuka aplikasi.
+
+ external power                  Status sumber daya eksternal.                                      Diagnostik catu daya.
+
+ sequence                        Nomor urut pesan sumber.                                           Pengurutan dan deteksi pengulangan.
+
+ gateway                         Gateway yang menerima data.                                        Korelasi jalur komunikasi.
+
+ last seen                       Waktu terakhir data diterima.                                      Status keterhubungan pada aplikasi.
+
+
+6.2 Skema rekaman dataset
+Perekam dataset menyimpan identitas, konteks akuisisi, delapan nilai sensor, gain, status sensor, dan kunci idempotensi dalam
+satu rekaman.
+
+ Kelompok                       Bidang                                                        Keterangan
+
+ Identitas                      Identitas perangkat, node, dan rekaman unik                   Identitas sumber dan kunci unik rekaman.
+
+ Konteks                        Mode, urutan, waktu, label, dan profil nulling                Konteks akuisisi untuk tiap rekaman.
+
+ Tegangan sensor                Delapan nilai sensor tervalidasi                              Satu nilai untuk setiap channel.
+
+ Gain                           Gain per channel                                              Gain akuisisi untuk setiap channel.
+
+ Kesehatan sensor               Status validitas delapan channel                              Status validitas setiap channel sensor.
+
+ Urutan fitur                   Urutan sensor kanonik                                         Menjaga konsistensi struktur dataset.
+
+ Catatan: Setiap rekaman memiliki pengenal unik 64 karakter sehingga pengiriman ulang rekaman yang sama tidak menghasilkan duplikasi pada
+ penyimpanan utama.
+
+
+6.3 Aturan penerimaan dataset
+Rekaman hanya diterima jika seluruh syarat integritas data terpenuhi sebelum penulisan ke penyimpanan.
+
+ Pemeriksaan                                Syarat
+
+ Mode                                       Rekaman harus menggunakan mode dataset engineering.
+
+ Identitas sumber                           Identitas perangkat harus valid, konsisten dengan jalur masuk, dan cocok dengan identitas node
+                                            rekaman.
+
+ Urutan dan waktu                           Nomor urut dan timestamp harus berada pada rentang bilangan bulat 32-bit tanpa tanda.
+
+ Profil nulling                             Pengenal profil berada pada rentang 1-255.
+
+ Label                                      Wajib terisi, menggunakan karakter aman, dan maksimum 31 karakter.
+
+ Jumlah nilai sensor                        Tepat delapan nilai tegangan yang semuanya finite.
+
+ Gain                                       Setiap gain adalah salah satu dari 1, 2, 4, 8, 16, 32, atau 64.
+
+ Status sensor                              Seluruh status sensor bernilai valid.
+
+ Urutan fitur                               Harus sama dengan urutan kanonik MQ8, MQ135, MQ3, MQ5, MQ4, MQ7, MQ6, MQ2.
+
+ Idempotensi                                Kunci rekaman diperiksa sebelum penulisan agar rekaman yang sama tidak digandakan.
+
+
+
+
+Lab IoT ITB                                                                                                                                       7/8
+Server                                                                                                                       IOTITB-TDS-SERVER-ID-R4.0
+
+
+
+
+6.4 Penyimpanan dan ketahanan layanan
+Perekam dataset engineering menggunakan jalur penyimpanan yang dikonfigurasi. MySQL digunakan hanya apabila driver dan
+koneksi tersedia; CSV adalah keluaran perekam dataset, bukan jalur fallback otomatis untuk MySQL.
+
+    Komponen                         Peran                                    Perilaku
+
+    MySQL Server                     Penyimpanan dataset bila dikonfigurasi   Menegakkan keunikan pengenal rekaman pada jalur MySQL yang aktif.
+
+    CSV                              Keluaran perekam dataset                 Dihasilkan setelah jalur perekaman yang berlaku berhasil; tidak
+                                                                              diperlakukan sebagai pengganti otomatis MySQL.
+
+    Tampilan topologi                Tampilan engineering Node-RED            Menampilkan informasi topologi, parent, discovery, rute, dan status
+                                                                              engineering yang diproses flow.
+
+
+6.5 Persyaratan keamanan penerapan
+Server dipasang pada infrastruktur customer. Kontrol berikut berlaku saat layanan tidak dibatasi hanya pada antarmuka loopback.
+●      Koneksi broker menggunakan TLS dan autentikasi yang sesuai dengan kebijakan customer.
+●      Kredensial dan material kriptografi disediakan melalui environment runtime atau secret store, bukan ditanamkan pada berkas aplikasi.
+●      Deployment wajib mengonfigurasi penyimpanan persisten untuk status anti-replay agar perlindungan dapat dipulihkan setelah
+       layanan dimulai ulang.
+●      Akses database, broker, dan aplikasi web dibatasi oleh kontrol jaringan serta akun layanan customer.
+●      Pencadangan, retensi, patching sistem operasi, dan pemantauan VM menjadi bagian dari operasi infrastruktur customer.
+
+    Area                    Perilaku aplikasi Server                                     Tanggung jawab penerapan
+
+    Runtime VM              Menjalankan layanan Node-RED dan antarmuka aplikasi.         Customer menyediakan VM serta memilih Linux atau
+                                                                                         Windows.
+
+    Broker MQTT             Membentuk sesi terautentikasi dengan verifikasi TLS.         Customer menyediakan endpoint broker, CA, credential, dan
+                                                                                         kebijakan akses.
+
+    Penyimpanan             Memvalidasi rekaman dan menggunakan jalur                    Customer mengelola layanan database, akses, backup, dan
+                            penyimpanan dataset yang dikonfigurasi.                      retensi.
+
+    Anti-replay             Memuat dan memperbarui status replay persisten yang          Customer menyediakan lokasi penyimpanan persisten saat
+                            dikonfigurasi.                                               deployment.
+
+    Tampilan topologi       Menyediakan tampilan engineering Node-RED untuk              Customer membatasi jaringan dan paparan runtime sesuai
+                            topologi dan status yang diproses flow.                      kebijakan infrastruktur.
+
+
+
+
+Lab IoT ITB                                                                                                                                         8/8
+

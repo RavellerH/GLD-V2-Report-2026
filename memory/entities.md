@@ -20,23 +20,23 @@
 ## Orang (`p:`) — dari notulen/laporan
 | ID | Nama | Peran/konteks |
 |---|---|---|
-| p:maman | Drs. Maman Budiman, M.Eng., Ph.D. (dulu "Pak Maman") | Pemaparan GLD, arahan teknis, penataan lab, WDT eksternal; **Ketua Proyek & Hardware Lead** (Surat Tugas SP-001/SP-002, 17 Sep) |
-| p:fahmi | Fahmi Budiman (dulu "Fahmi") | Tim Elektronik — ruang lingkup, DC converter, simulasi daya; **Hardware & Firmware Engineer** (Surat Tugas, 17 Sep) |
-| p:farhan | Farhan Budiman | Repositori kode & collaborator; user sesi ini; **Software Frontend Developer — Desain Presentasi, CAD 3D Design, Pelaporan, dan Machine Learning/AI** (Surat Tugas, 17 Sep — diperluas cakup AI/ML setelah user konfirmasi turut aktif di track itu juga) |
-| p:fahdzi | Dr. Fahdzi Muttaqien, S.Si., M.Si., M.Sc., M.Eng., Ph.D. (dulu "Pak Fahdzi") | Model TCNN/TCN; **Machine Learning & AI Lead** (Surat Tugas, 17 Sep) |
-| p:ryan | Ryan (Lab IoT) | Pengumpulan data solar; **Hardware & PCB Design Engineer** (Surat Tugas, 17 Sep) |
-| p:ilmania | Ilmania Syakira (disebut "Ilma"/"Ilmania") | Titik pengecasan; notulis; PIC verifikasi gas capability (dec 24 Jul); penulis/editor terakhir presentasi model **CNN Dual-Branch** (6 Agu) — kemungkinan lintas Lab Fisika & Lab IoT, belum dikonfirmasi; **Machine Learning Engineer** (Surat Tugas, 17 Sep) |
+| p:maman | Drs. Maman Budiman, M.Eng., Ph.D. (dulu "Pak Maman") | Pemaparan GLD, arahan teknis, penataan lab, WDT eksternal. **Fungsi Surat Tugas (17 Sep, dibedakan per SPK, dec:101):** SP-001 (Sertifikasi) = Ketua Proyek merangkap Penanggung Jawab ATEX & Redesain Enclosure (bersama Farhan); SP-002 (Field Testing) = Ketua Proyek merangkap Penanggung Jawab Hardware Lapangan |
+| p:fahmi | Fahmi Budiman (dulu "Fahmi") | Tim Elektronik — ruang lingkup, DC converter, simulasi daya. **Fungsi Surat Tugas:** sama di kedua SPK = Teknisi Hardware & Firmware; dikonfirmasi user **tidak terlibat** redesain enclosure (dec:101) |
+| p:farhan | Farhan Budiman | Repositori kode & collaborator; user sesi ini. **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Anggota Tim Sertifikasi (EMC, RF, dll.) di bawah Nina Siti Aminah, + turut redesain enclosure bersama Maman; SP-002 = Penanggung Jawab Pengembangan Perangkat Lunak, Desain, dan Pelaporan, turut mendukung Machine Learning/AI |
+| p:fahdzi | Dr. Fahdzi Muttaqien, S.Si., M.Si., M.Sc., M.Eng., Ph.D. (dulu "Pak Fahdzi") | Model TCNN/TCN. **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Penanggung Jawab Kajian Teknis (Engineering Review) & Gap Analysis; SP-002 = Penanggung Jawab Machine Learning & AI |
+| p:ryan | Ryan (Lab IoT) | Pengumpulan data solar. **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Anggota Tim Sertifikasi (EMC, RF, dll.) di bawah Nina Siti Aminah; SP-002 = Teknisi Hardware & Desain PCB |
+| p:ilmania | Ilmania Syakira (disebut "Ilma"/"Ilmania") | Titik pengecasan; notulis; PIC verifikasi gas capability (dec 24 Jul); penulis/editor terakhir presentasi model **CNN Dual-Branch** (6 Agu) — kemungkinan lintas Lab Fisika & Lab IoT, belum dikonfirmasi. **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Anggota Tim Sertifikasi (EMC, RF, dll.) di bawah Nina Siti Aminah; SP-002 = Anggota Tim Machine Learning |
 | p:tresnandi | Pak Tresnandi | Dokumen JSA/TRA; ditanya soal sisa anggaran proyek (sudah didistribusikan) — pertanyaan terbuka dari weekly meeting 30 Jul |
 | p:senna | Pak Senna | Pertamina — lokasi, mode, gateway |
-| p:nina | Dr. Nina Siti Aminah, S.T., S.Si., M.Si. (dulu "Bu Nina", ITB Fisika) | Hazardous / standar pemasangan; penulis `Parameter spesifikasi EMC_lengkap.docx` (19 Agu); **Project Lead – Administrasi Sertifikasi** (Surat Tugas, 17 Sep) |
-| p:beny | Beny Agustirandi (dulu "Kak Beny") | Overall system architecture, AI; **Jaringan LoRa, Konektivitas, dan Sistem** (Surat Tugas, 17 Sep) |
-| p:anggi | Anggi | Tim proyek GLD — **Asisten Machine Learning, mendukung p:ilmania** (Surat Tugas, 17 Sep) |
-| p:syifa | Syifa | Tim proyek GLD — **Asisten Jaringan & Konektivitas, mendukung p:beny** (Surat Tugas, 17 Sep) |
-| p:aldi | Aldi | Tim proyek GLD — **Hardware & PCB Design Engineer, mendukung p:ryan** (Surat Tugas, 17 Sep) |
-| p:erick | Erick R Koncara | **Komunikator (Communicator)** tim proyek GLD (Surat Tugas, 17 Sep) — belum ada konteks lain |
+| p:nina | Dr. Nina Siti Aminah, S.T., S.Si., M.Si. (dulu "Bu Nina", ITB Fisika) | Hazardous / standar pemasangan; penulis `Parameter spesifikasi EMC_lengkap.docx` (19 Agu). **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Penanggung Jawab Administrasi Sertifikasi, memimpin Tim Sertifikasi EMC/RF/dll (anggota: Beny, Farhan, Ilmania, Ryan, Syifa, Aldi, Dede); SP-002 = Pendukung Dokumentasi Teknis & Pelaporan (peran lebih kecil) |
+| p:beny | Beny Agustirandi (dulu "Kak Beny") | Overall system architecture, AI. **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Anggota Tim Sertifikasi (EMC, RF, dll.) di bawah Nina Siti Aminah; SP-002 = Penanggung Jawab Jaringan, Konektivitas, dan Sistem |
+| p:anggi | Anggi | Tim proyek GLD. **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Anggota Tim Sertifikasi (EMC, RF, dll.), membantu Ilmania Syakira, di bawah Nina Siti Aminah; SP-002 = Pendukung Machine Learning (membantu p:ilmania) |
+| p:syifa | Syifa | Tim proyek GLD. **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Anggota Tim Sertifikasi (EMC, RF, dll.) di bawah Nina Siti Aminah; SP-002 = Pendukung Jaringan & Konektivitas (membantu p:beny) |
+| p:aldi | Aldi | Tim proyek GLD. **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Anggota Tim Sertifikasi (EMC, RF, dll.), membantu Ryan, di bawah Nina Siti Aminah; SP-002 = Teknisi Hardware & Desain PCB (membantu p:ryan) |
+| p:erick | Erick R Koncara | Komunikator tim proyek GLD — belum ada konteks lain. **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Penanggung Jawab Komunikasi (koordinasi dgn lembaga sertifikasi); SP-002 = Penanggung Jawab Komunikasi (koordinasi dgn Unit Kilang) |
 | p:harry | Ir. Harry Fardiman | **Direktur Utama PT LAPI Ganesha Utama** — penandatangan Surat Tugas SP-001/SP-002 (17 Sep) |
-| p:nashwan | Nashwan Iqbal Ramdhani | Tim proyek GLD — membantu track Hardware, dikonfirmasi user (17 Sep) **kurang aktif** (catatan internal, tidak dicantumkan di dokumen resmi); **masuk tabel personel Surat Tugas SP-001/SP-002 sbg "Hardware Engineer (Pendukung)"** |
-| p:dede | Dede | Tim proyek GLD — membantu Dr. Nina Siti Aminah (track Administrasi Sertifikasi); **masuk tabel personel Surat Tugas SP-001/SP-002 sbg "Asisten Administrasi Sertifikasi (mendukung Nina Siti Aminah)"** |
+| p:nashwan | Nashwan Iqbal Ramdhani | Tim proyek GLD — membantu track Hardware, dikonfirmasi user (17 Sep) **kurang aktif** (catatan internal, tidak dicantumkan di dokumen resmi). **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Pendukung Hardware (mendukung redesain enclosure bersama Maman & Farhan); SP-002 = Pendukung Hardware |
+| p:dede | Dede | Tim proyek GLD — membantu Dr. Nina Siti Aminah (track Administrasi Sertifikasi). **Fungsi Surat Tugas (dibedakan per SPK, dec:101):** SP-001 = Pendukung Administrasi Sertifikasi (membantu Nina Siti Aminah); SP-002 = Pendukung Dokumentasi Teknis |
 | p:totong | Pak Totong | Diskusi peletakan tiang/rooftop |
 | p:adit | Pak Adit | Pertamina — meeting 24 Jul |
 | p:roni | Mas Roni | Pertamina — meeting 24 Jul |

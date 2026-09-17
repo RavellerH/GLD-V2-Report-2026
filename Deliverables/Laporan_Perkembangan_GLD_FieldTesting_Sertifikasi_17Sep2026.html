@@ -86,7 +86,7 @@ footer{margin-top:22px;color:var(--muted);font-size:11px;padding:0 4px}
 <p class="sub">Ringkasan perkembangan per hari ini, mencakup dua jalur kerja paralel: (1) field testing/pilot rekayasa dan kesiapan lapangan RU IV Cilacap, dan (2) sertifikasi kepatuhan area berbahaya (ATEX/IP/EMC/RF). Disusun secara transparan — memuat capaian maupun pekerjaan yang masih terbuka.</p>
 <div class="meta">
 <span class="pill teal">17 SEPTEMBER 2026</span>
-<span class="pill">Rev 1.1</span>
+<span class="pill">Rev 1.2</span>
 <span class="pill info">Field Testing + Sertifikasi</span>
 </div>
 </section>
@@ -136,7 +136,7 @@ footer{margin-top:22px;color:var(--muted);font-size:11px;padding:0 4px}
 <thead><tr><th>Jalur</th><th>Deskripsi</th><th>Status hari ini</th></tr></thead>
 <tbody>
 <tr><td><b>A. Chamber gas di kantor kilang</b><br><span class="role">Bukan area proses</span></td><td>Chamber uji gas portable dibawa &amp; dioperasikan di kantor kilang Cilacap untuk pengambilan dataset dan pelatihan model AI langsung di lokasi.</td><td><span class="status ready">DIPILIH — CHAMBER SIAP</span></td></tr>
-<tr><td><b>C. Instalasi permanen di lokasi non-ATEX</b><br><span class="role">Bukan area berbahaya</span></td><td>GLD/Cluster Head dipasang permanen, dibatasi hanya pada titik yang secara klasifikasi <b>bukan area berbahaya</b> — sehingga tidak perlu menunggu sertifikasi ATEX selesai.</td><td><span class="status open">DIPILIH — MENUNGGU KONFIRMASI TERTULIS KLASIFIKASI AREA</span></td></tr>
+<tr><td><b>C. Instalasi permanen di lokasi non-ATEX</b><br><span class="role">Bukan area berbahaya</span></td><td>GLD/Cluster Head dipasang permanen, dibatasi hanya pada titik yang secara klasifikasi <b>bukan area berbahaya</b> — sehingga tidak perlu menunggu sertifikasi ATEX selesai. <b>Lokasi dikonfirmasi Pertamina: area aman di sekitar/perimeter Sulfur Recovery Unit (SRU)</b> — bukan di dalam unit proses SRU itu sendiri.</td><td><span class="status ready">DIPILIH — LOKASI DIKONFIRMASI PERTAMINA (PERIMETER SRU)</span></td></tr>
 </tbody>
 </table>
 
@@ -166,7 +166,7 @@ footer{margin-top:22px;color:var(--muted);font-size:11px;padding:0 4px}
 
 <h3>Yang perlu ditindaklanjuti bersama Pertamina</h3>
 <ul class="plain">
-<li>Konfirmasi tertulis klasifikasi area (bukan area berbahaya) untuk titik pasang permanen Jalur C, dari HSE/Engineering RU IV.</li>
+<li>Dokumen klasifikasi area tertulis resmi (formal area classification document) untuk titik pasang permanen di perimeter SRU — lokasi sudah dikonfirmasi Pertamina, dokumen pendukung dari HSE/Engineering RU IV masih diperlukan.</li>
 <li>Ketersediaan PC dedicated di dekat Gateway (disiapkan RU IV, dipasang &amp; dikonfigurasi LGU).</li>
 <li>Penugasan resmi vendor pelaksana pemasangan fisik, termasuk kompetensi kerja di ketinggian.</li>
 <li>Data administrasi SPK untuk penyelesaian BAST Termin 1 (nomor, tanggal, nilai, penandatangan).</li>
@@ -233,7 +233,7 @@ footer{margin-top:22px;color:var(--muted);font-size:11px;padding:0 4px}
 <h3>Yang membutuhkan keputusan/dukungan Pertamina</h3>
 <ul class="plain">
 <li>Penjadwalan sesi pengujian enclosure yang disaksikan langsung oleh perwakilan Pertamina (witness test).</li>
-<li>Konfirmasi klasifikasi area berbahaya (zona, kelompok gas) yang berlaku di titik pasang RU IV — menjadi dasar penetapan skema klasifikasi ATEX akhir, sekaligus dasar penentuan titik pasang permanen Jalur C di atas.</li>
+<li>Konfirmasi klasifikasi area berbahaya (zona, kelompok gas) yang berlaku di RU IV secara umum — menjadi dasar penetapan skema klasifikasi ATEX akhir. Untuk titik pasang permanen Jalur C, lokasi (perimeter SRU) sudah dikonfirmasi Pertamina; dokumen klasifikasi area tertulis untuk titik tsb masih menyusul.</li>
 <li>Dukungan sampel gas tambahan (H₂S, Benzena, dll.) untuk pengembangan &amp; verifikasi kapabilitas deteksi sesuai kebutuhan lapangan.</li>
 <li>Kesepakatan format &amp; jadwal berita acara/validasi untuk setiap milestone pengujian, agar tercatat resmi.</li>
 </ul>
@@ -252,6 +252,7 @@ footer{margin-top:22px;color:var(--muted);font-size:11px;padding:0 4px}
 <li>Hardware &amp; firmware GLD–CH–Gateway–Server, AI on-device, dataset gas</li>
 <li>Uji ketahanan RF terhadap interferensi (berjalan, hasil awal positif)</li>
 <li>Basis desain mounting bracket, sudah diserahkan ke vendor</li>
+<li>Perencanaan titik pasang permanen Jalur C di lokasi yang sudah dikonfirmasi (perimeter SRU)</li>
 <li>Draft JSA/HSE, checklist kesiapan instalasi</li>
 <li>Berkas teknis sertifikasi (checklist ExCB, dokumen desain yang tersedia)</li>
 <li>Chamber uji gas portable, siap dioperasikan di kantor kilang</li>
@@ -260,7 +261,7 @@ footer{margin-top:22px;color:var(--muted);font-size:11px;padding:0 4px}
 <div class="colcard pertamina">
 <h4>Perlu dari Pertamina / RU IV</h4>
 <ul class="plain">
-<li>Konfirmasi tertulis klasifikasi area untuk titik pasang permanen (Jalur C)</li>
+<li>Dokumen klasifikasi area tertulis resmi untuk titik pasang permanen di perimeter SRU (lokasi sudah dikonfirmasi)</li>
 <li>Penyediaan PC dedicated dekat Gateway</li>
 <li>Penugasan &amp; jadwal vendor pelaksana instalasi fisik</li>
 <li>Jadwal sesi witness pengujian enclosure</li>
@@ -275,7 +276,7 @@ footer{margin-top:22px;color:var(--muted);font-size:11px;padding:0 4px}
 <footer>
 <p><b>Dokumen pendukung terkait:</b> laporan pemenuhan deliverable Termin 1 field testing &amp; sertifikasi, checklist kesiapan instalasi RU IV Cilacap, dashboard sertifikasi ATEX/IECEx, dan datasheet teknis perangkat — tersedia dalam paket dokumen lengkap yang dapat diserahkan terpisah.</p>
 <p>Sebagian angka pada laporan ini adalah estimasi interpretatif tim penyusun berdasarkan data teknis internal, bukan hasil audit pihak ketiga. Skema klasifikasi sertifikasi (grup gas/kelas suhu/zona) yang disebut adalah rekomendasi tim, menunggu konfirmasi lembaga sertifikasi (ExCB) dan Pertamina.</p>
-<p>LAPI Ganesha Utama (LGU) bersama Lab IoT &amp; Lab Fisika ITB — Jl. Dederuk No.30, Bandung 40133. Dokumen disusun 17 September 2026, revisi 1.1.</p>
+<p>LAPI Ganesha Utama (LGU) bersama Lab IoT &amp; Lab Fisika ITB — Jl. Dederuk No.30, Bandung 40133. Dokumen disusun 17 September 2026, revisi 1.2.</p>
 </footer>
 
 </main></body></html>

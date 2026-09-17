@@ -12,6 +12,9 @@ FILES = [
     ("Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html", "Detail Assessment/Field Testing", False),
     ("Desain_Bracket_L_UBolt_GLD_Mounting.html", "Desain Bracket U-Bolt", False),
     ("Dashboard_Sertifikasi_GLD_ATEX_IECEx.html", "Dashboard Sertifikasi", False),
+    ("Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html", "Checklist Instalasi Cilacap", False),
+    ("Laporan_Harian_GLD_17September2026.html", "Laporan Harian 17 Sep", False),
+    ("Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html", "Persiapan Vendor Instalasi", False),
 ]
 
 # Dikeluarkan dari navigasi atas permintaan user (4 Sep) - tidak perlu ditampilkan/dinavigasikan:

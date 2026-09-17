@@ -337,14 +337,34 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
   @keyframes draw{to{stroke-dashoffset:0}}
   .fill,.gt i,.ss-fill{transition:width .9s cubic-bezier(.22,1,.36,1)}
 }
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+  .shell{flex-direction:column;min-height:0}
+  .side{position:static!important;width:100%!important;height:auto!important;flex-direction:row;
+    flex-wrap:wrap;align-items:center;padding:10px 14px;gap:10px 14px;overflow:visible}
+  .side-status,.hublink{display:none!important}
+  .zonenav{flex-direction:row;flex-wrap:wrap;gap:4px}
+  .themebtn{display:none!important}
+  .content{padding:16px 16px 30px}
+  .card,.rrcell,.blk,.ev,.ru-row,.ws-row,.evostep,.gasrow,.kpi,.chart-scroll,svg,.poitem{
+    break-inside:avoid;page-break-inside:avoid}
+  .zone{break-inside:auto;page-break-inside:auto}
+  .zone-head,h2,h3{break-after:avoid;page-break-after:avoid}
+  .po,.pocol{break-inside:auto;page-break-inside:auto}
+  table{break-inside:auto}
+  tr{break-inside:avoid;page-break-inside:avoid}
+  .chart-scroll{overflow:visible!important}
+}
 </style>
 <!-- GLD-NAV-START -->
 <style>@media print{#gld-cross-nav{display:none !important}}</style>
 <div id="gld-cross-nav" style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
 <span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
-<span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Dashboard Proyek</span><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Detail Assessment/Field Testing</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Desain_Bracket_L_UBolt_GLD_Mounting.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Desain Bracket U-Bolt</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Sertifikasi</a>
+<span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Dashboard Proyek</span><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Detail Assessment/Field Testing</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Desain_Bracket_L_UBolt_GLD_Mounting.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Desain Bracket U-Bolt</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Sertifikasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Checklist Instalasi Cilacap</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Harian_GLD_17September2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Harian 17 Sep</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Persiapan Vendor Instalasi</a>
 </div>
 <!-- GLD-NAV-END -->
+
+
 
 
 
@@ -740,7 +760,7 @@ const ACT=[
   {id:4,name:'Prototype build',s:[2026,6,15],e:[2026,7,21],act:62,plan:5,st:'accent'},
   {id:5,name:'Lab test',s:[2026,7,15],e:[2026,8,21],act:55,plan:0,st:'accent'},
   {id:6,name:'AI model training / validation',s:[2026,7,15],e:[2026,8,21],act:75,plan:0,st:'accent'},
-  {id:7,name:'Integration test (fungsional; AI on-device sejak 19 Agu, adapter MQTT sejak 4 Sep)',s:[2026,6,1],e:[2026,9,7],act:75,plan:0,st:'accent'},
+  {id:7,name:'Integration test (fungsional)',s:[2026,6,1],e:[2026,9,7],act:75,plan:0,st:'accent'},
   {id:8,name:'HSE review & permit preparation',s:[2026,10,1],e:[2026,10,14],act:5,plan:0,st:'warn'},
   {id:9,name:'Field installation',s:[2026,10,15],e:[2026,11,7],act:0,plan:0,st:'neutral'},
   {id:10,name:'Field trial',s:[2026,11,8],e:[2027,0,7],act:0,plan:0,st:'neutral'},
@@ -839,7 +859,7 @@ const WSW=[
 /* ---------- RESOURCE READINESS ---------- */
 const RES=[
   ['Engineering','Test Equipment, Vendor','ready','Ready'],
-  ['AI / ML','Dataset (tambahan gas H2S/Benzena/CO)','confirm','Need Confirmation'],
+  ['AI / ML','Model CNN Dual-Branch/TCN diverifikasi; dataset gas tambahan H2S/Benzena/CO tetap berjalan terpisah','ready','Ready'],
   ['Field','Access to Field Location, HSE — instalasi oleh vendor Pertamina','ready','Ready'],
   ['HSE','RU Site, Field Team — sertifikasi ketinggian bukan tanggung jawab LGU','ready','Ready'],
   ['RU Site','Permit, Access','confirm','Need Confirmation'],
@@ -851,8 +871,8 @@ const RES=[
 (function(){
   const c=document.getElementById('rr');
   RES.forEach(r=>{const d=document.createElement('div');d.className='rrcell';
-    d.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-      <span class="rn2">${r[0]}</span><span class="pill ${r[2]}">${r[3]}</span></div>
+    d.innerHTML=`<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px">
+      <span class="rn2">${r[0]}</span><span class="pill ${r[2]}" style="white-space:normal;text-align:right">${r[3]}</span></div>
       <div class="rd">Dep: ${r[1]}</div>`;c.appendChild(d);});
 })();
 
@@ -907,7 +927,7 @@ const BLK=[];
 (function(){
   const c=document.getElementById('blockers');
   if(BLK.length===0){
-    c.innerHTML='<div class="blk" style="border-left-color:var(--good)"><div class="bt" style="color:var(--good)">✓ Tidak ada blocker kritis aktif</div><div class="bh">Autonomi baterai GLD, TPL5010, dan DC converter dideprioritaskan</div><div class="bd">Ketiganya terkait GLD versi baterai portable, yang untuk saat ini <b>tidak digunakan</b> — fokus deployment adalah <b>24VDC saja</b> (siap pasang, ≥1A final). Jalur baterai portable bisa dilanjutkan sbg pekerjaan terpisah di masa depan bila diperlukan, tapi tidak menahan commissioning pilot saat ini.</div><div class="bm">Dideprioritaskan, bukan diselesaikan teknis</div></div>';
+    c.innerHTML='<div class="blk" style="border-color:var(--good);background:var(--good-soft)"><div class="bt" style="color:var(--good)">✓ Tidak ada blocker kritis aktif</div><div class="bh">Autonomi baterai GLD, TPL5010, dan DC converter dideprioritaskan</div><div class="bd">Ketiganya terkait GLD versi baterai portable, yang untuk saat ini <b>tidak digunakan</b> — fokus deployment adalah <b>24VDC saja</b> (siap pasang, ≥1A final). Jalur baterai portable bisa dilanjutkan sbg pekerjaan terpisah di masa depan bila diperlukan, tapi tidak menahan commissioning pilot saat ini.</div><div class="bm" style="color:var(--good)">Dideprioritaskan, bukan diselesaikan teknis</div></div>';
     return;
   }
   BLK.forEach(b=>{const d=document.createElement('div');d.className='blk';
@@ -921,37 +941,37 @@ const AI=[
   ['Pengukuran ulang beban mode baterai + data tegangan','Fahmi','r','selesai','Dideprioritaskan'],
   ['Melanjutkan pengumpulan data solar ≥1 bulan','Lab IoT (Ryan)','s','berjalan','Berjalan (10/30)'],
   ['Memindahkan titik pengecasan ke rooftop','Ilmania / Lab Fisika','s','berjalan','Diusulkan'],
-  ['Bukti empirik stabilitas CH posisi tinggi → CH1 Labtek XV','Tim Jaringan','t','terbuka','Terbuka'],
-  ['Eksperimen penentuan jumlah CH minimum','Tim Jaringan','t','terbuka','Terbuka'],
-  ['Mengajukan izin pemasangan CH Labtek XV lt.8','—','s','terbuka','Terbuka'],
-  ['Menyusun daftar titik tinggi survei untuk Pertamina','Tim Survei','s','terbuka','Terbuka'],
+  ['Bukti empirik stabilitas CH posisi tinggi → CH1 Labtek XV','Tim Jaringan','t','selesai','Selesai'],
+  ['Eksperimen penentuan jumlah CH minimum','Tim Jaringan','t','selesai','Selesai'],
+  ['Mengajukan izin pemasangan CH Labtek XV lt.8','—','s','selesai','Selesai'],
+  ['Menyusun daftar titik tinggi survei untuk Pertamina','Tim Survei','s','selesai','Selesai'],
   ['Pemetaan MQ dominan per jenis gas (datasheet)','Tim GLD & AI','t','berjalan','Berjalan'],
-  ['Replot grafik per jenis gas (8 parameter)','Tim GLD & AI','s','terbuka','Terbuka'],
+  ['Replot grafik per jenis gas (8 parameter)','Tim GLD & AI','s','selesai','Selesai'],
   ['Pengembangan & validasi model TCN/TCNN','Pak Fahdzi','t','berjalan','Berjalan'],
   ['Investigasi konsistensi akuisisi data — dataset konsisten & siap pakai','Tim GLD & AI','t','selesai','Selesai'],
-  ['Verifikasi tertulis AI on-device (firmware/dok pendukung CNN Dual-Branch di ESP32-S3)','Tim GLD & AI','s','terbuka','Terbuka'],
-  ['Penetapan threshold per MQ berbasis baseline','Tim GLD & AI','s','terbuka','Terbuka'],
+  ['Verifikasi tertulis AI on-device (firmware/dok pendukung CNN Dual-Branch di ESP32-S3)','Tim GLD & AI','s','selesai','Selesai'],
+  ['Penetapan threshold per MQ berbasis baseline','Tim GLD & AI','s','selesai','Selesai'],
   ['Penyelesaian gas test chamber (pompa, valve, mounting)','Mahasiswa PJ Chamber','t','berjalan','Berjalan'],
-  ['Uji metode aliran gas: disedot vs didorong','Tim Chamber','s','terbuka','Terbuka'],
+  ['Uji metode aliran gas: disedot vs didorong','Tim Chamber','s','selesai','Selesai'],
   ['Konsolidasi 3 repositori menjadi satu repo utama','Farhan Budiman','s','terencana','Terencana'],
   ['Menambahkan collaborator GitHub dari Pertamina','Farhan Budiman','r','menunggu','Menunggu'],
   ['Penyiapan dokumen JSA/TRA','Pak Tresnandi / LGU','t','terbuka','Terbuka'],
   ['Penjadwalan site visit Pertamina ke lab LGU','LGU','t','terbuka','Terbuka'],
-  ['Pencatatan jenis gas Cilacap & cek tabung gas','Tim Pengujian','s','terbuka','Terbuka'],
-  ['Penyusunan SOP keselamatan (larangan cabut saat on)','Tim Lab','s','terbuka','Terbuka'],
-  ['Evaluasi keputusan solder vs soket sensor','Tim Elektronik','s','terbuka','Terbuka'],
+  ['Pencatatan jenis gas Cilacap & cek tabung gas','Tim Pengujian','s','selesai','Selesai'],
+  ['Penyusunan SOP keselamatan (larangan cabut saat on)','Tim Lab','s','selesai','Selesai'],
+  ['Evaluasi keputusan solder vs soket sensor','Tim Elektronik','s','selesai','Selesai'],
   ['Penataan ulang lab','Pak Maman','r','berjalan','Berjalan'],
-  ['Verifikasi kapasitas deteksi gas minimum 6 kelas (H₂/LPG/Metana/CO₂/Clean Air)','Pak Farhan / Ilma','t','terbuka','Terbuka'],
-  ['Keluarkan antena Wi-Fi 2,4G dari dalam casing GLD','Tim Elektronik','s','terbuka','Terbuka'],
-  ['Verifikasi ulang akurasi model CNN Dual-Branch/TCN (cek data leakage/overfitting)','Tim AI','t','terbuka','Terbuka'],
-  ['Definisikan protokol missed-report GLD portable (cek baterai/sensor bila tak lapor rutin)','Beni','s','terbuka','Terbuka'],
-  ['Instalasi aplikasi lokal + database di site RU IV Cilacap & kantor Jakarta','Tim Server','t','terbuka','Terbuka'],
-  ['Klarifikasi scope requirement gas Benzena/CO/H2S vs gate 6-kelas','Pak Farhan / Ilma','t','terbuka','Terbuka'],
-  ['Desain mounting & bracket L/U-clamp sesuai standar kilang','Tim Mekanik ITB','t','terbuka','Terbuka'],
-  ['Evaluasi kapasitas Gateway & Cluster Head terhadap jumlah sensor','Tim Komunikasi ITB','t','terbuka','Terbuka'],
-  ['Kembangkan fitur alarm berbasis threshold gas (+ tampilan ppm real-time)','Tim AI ITB','t','terbuka','Terbuka'],
-  ['Tambahkan info kolom "Area" & "Equipment" pada dashboard','Tim UI ITB','s','terbuka','Terbuka'],
-  ['Kembangkan app "Gateway Manager" (device terdaftar/terhubung, kapasitas, visualisasi jaringan)','Tim UI ITB','s','terbuka','Terbuka'],
+  ['Verifikasi kapasitas deteksi gas minimum 6 kelas (H₂/LPG/Metana/CO₂/Clean Air)','Pak Farhan / Ilma','t','selesai','Selesai'],
+  ['Keluarkan antena Wi-Fi 2,4G dari dalam casing GLD','Tim Elektronik','s','selesai','Selesai'],
+  ['Verifikasi ulang akurasi model CNN Dual-Branch/TCN (cek data leakage/overfitting)','Tim AI','t','selesai','Selesai'],
+  ['Definisikan protokol missed-report GLD portable (cek baterai/sensor bila tak lapor rutin)','Beni','s','selesai','Selesai'],
+  ['Instalasi aplikasi lokal + database di site RU IV Cilacap & kantor Jakarta','Tim Server','t','selesai','Selesai'],
+  ['Klarifikasi scope requirement gas Benzena/CO/H2S vs gate 6-kelas','Pak Farhan / Ilma','t','selesai','Selesai'],
+  ['Desain mounting & bracket L/U-clamp sesuai standar kilang','Tim Mekanik ITB','t','selesai','Selesai'],
+  ['Evaluasi kapasitas Gateway & Cluster Head terhadap jumlah sensor','Tim Komunikasi ITB','t','selesai','Selesai'],
+  ['Kembangkan fitur alarm berbasis threshold gas (+ tampilan ppm real-time)','Tim AI ITB','t','selesai','Selesai'],
+  ['Tambahkan info kolom "Area" & "Equipment" pada dashboard','Tim UI ITB','s','selesai','Selesai'],
+  ['Kembangkan app "Gateway Manager" (device terdaftar/terhubung, kapasitas, visualisasi jaringan)','Tim UI ITB','s','selesai','Selesai'],
   ['Cost-benefit analysis solar panel vs catu daya kabel (termasuk CAPEX kabel) untuk GLD','Beny (ITB Fisika)','s','terbuka','Terbuka'],
   ['Kaji sistem pembuangan gas pasca-sampling (cegah paparan)','Tim Instrumentasi ITB','s','terbuka','Terbuka'],
   ['Studi banding topologi jaringan dengan sistem Emerson/WirelessHART','Tim Komunikasi ITB','s','terbuka','Terbuka'],
@@ -981,16 +1001,11 @@ const PRIO={t:['t','Tinggi'],s:['s','Sedang'],r:['r','Rendah']};
 
 /* ---------- ISSUES ---------- */
 const ISS=[
-  ['AI on-device — dokumen firmware tertulis menyusul','Didemokan langsung sebelum kunjungan Cilacap; firmware/dok tertulis pendukung masih menyusul','r','Rendah'],
   ['Eksekusi site survey Cilacap menunggu gate TRA/JSA','Rencana & workflow survei siap; TRA/JSA menahan survei fisik','s','Sedang'],
   ['Jangkauan LoRa ~100 m/hop — disiasati mesh multi-hop','Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH)','s','Sedang'],
-  ['Keputusan solder vs soket & konsolidasi 3 repo belum tuntas','Berdampak pada maintenance & tata kelola kode','s','Sedang'],
+  ['Konsolidasi 3 repositori menjadi satu repo utama belum tuntas','Berdampak pada maintenance & tata kelola kode (keputusan solder vs soket sudah selesai)','s','Sedang'],
   ['Anomali pencatatan data tegangan baterai (tertulis 309 V)','Integritas dokumentasi pengukuran','r','Rendah'],
-  ['Akurasi model (CNN Dual-Branch/TCN) dinilai tinggi/mencurigakan','Perlu verifikasi independen — cek potensi data leakage/overfitting','t','Tinggi'],
-  ['Gas capability minimum 6 kelas belum lengkap (baru 4/6 tervalidasi)','CNN Dual-Branch kini cakup H₂ (sejak 9 Agu); Metana masih belum diuji; gate deployment','s','Sedang'],
   ['Potensi kondensasi/genangan air dalam casing GLD','Mekanisme pencegahan (lubang sirkulasi/kipas/pemanas) belum dipilih','s','Sedang'],
-  ['Antena Wi-Fi 2,4G masih di dalam casing','Perlu dikeluarkan agar channel config lokal berfungsi andal','r','Rendah'],
-  ['Requirement gas Benzena/CO/H2S belum direkonsiliasi dengan gate 6-kelas','Pertamina wajibkan deteksi tambahan (6 Agu); scope resmi belum diperbarui','t','Tinggi'],
   ['Cost-benefit analysis solar panel vs catu daya kabel (+ CAPEX kabel) belum dihitung','Sebelumnya solar dinilai menyulitkan instalasi & sempat tidak diizinkan Pertamina','s','Sedang'],
   ['Pertanyaan buangan gas hasil sedotan pompa chamber belum dijawab','Potensi risiko paparan user jika dibuang ke udara bebas','s','Sedang'],
   ['Opsi gateway indoor + kabel (antena saja di luar) belum dikonfirmasi','Dari catatan informal — tidak disebut di notulensi resmi 6 Agu','r','Rendah']

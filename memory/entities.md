@@ -36,6 +36,7 @@
 | p:indra | Mas Indra | Pertamina, RU Cilacap — meeting 24 Jul |
 | p:pinduan | Pak Pindoan | Pertamina — meminta instalasi aplikasi monitoring di kantor pusat Jakarta (selain site), weekly meeting 30 Jul |
 | p:raihan | Raihan Fakhar ("Pak Raihan") | Pertamina, PIC **RU VII Kasim** — arahan mounting GLD/CH ikuti pola existing (rapat 6 Agu); **menanyakan kebutuhan solar panel** untuk GLD (baterai+solar) di rapat yang sama, diteruskan via WA ke Beny (ITB Fisika) utk dihitung |
+| p:erick | Pak Erick | **LGU** — memimpin (lead) komunikasi & koordinasi instalasi GLD di seluruh kilang (lintas-RU, bukan cuma Cilacap), disebutkan 18 Sep (dec:124). Belum ada detail afiliasi/jabatan lebih lanjut — dicatat apa adanya dari draf pesan WA user, belum dikonfirmasi via dokumen/notulen tertulis |
 
 > Catatan: "Pak Sena" (notulen 24 Jul) kemungkinan sama dengan `p:senna` (Pak Senna); "Pak Maman" konsisten dengan `p:maman`. "Pak Muhammad" (LGU, notulen 24 Jul) belum punya ID — kemungkinan overlap dengan `p:beny`/`p:maman`, perlu klarifikasi.
 

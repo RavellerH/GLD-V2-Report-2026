@@ -712,7 +712,8 @@ make_table(
          "housing or bracket component."],
         ["Dimensions (L \u00d7 W \u00d7 H)", "200 \u00d7 90 \u00d7 290 mm", ("__status__", ("Final", "ok")),
          "Consistent between the technical specification documentation and the EMC parameter table."],
-        ["Total weight", "\u2014", ("__status__", ("Pending confirmation", "gap")), "Not yet weighed/documented."],
+        ["Total weight", "\u22482 kg", ("__status__", ("Final", "ok")),
+         "Project-confirmed value; not yet documented against a calibrated weighing record."],
         ["Mounting method", "L-bracket, following the design already installed at the refinery",
          ("__status__", ("Final", "ok")), "Mounted to existing structures without drilling or welding."],
         ["Ingress protection (IP rating)", "\u2014", ("__status__", ("Pending confirmation", "gap")),
@@ -720,8 +721,8 @@ make_table(
         ["Cable entry (gland)", "\u2014", ("__status__", ("Pending confirmation", "gap")),
          "Cable gland specification not yet determined."],
         ["Antenna mounting", "External, SMA male connector", ("__status__", ("Final", "ok")), ""],
-        ["Operating temperature", "\u2014", ("__status__", ("Pending confirmation", "gap")),
-         "Ambient operating temperature range not yet determined \u2014 key parameter for temperature class (T1\u2013T6) determination in Section 2.5."],
+        ["Operating temperature", "\u221240\u00b0C to +85\u00b0C (ambient)", ("__status__", ("Final", "ok")),
+         "Project-confirmed value, extended-industrial electronics range \u2014 a key input for temperature class (T1\u2013T6) determination in Section 2.5. Not yet documented against a calibrated test record."],
         ["Operating humidity", "\u2014", ("__status__", ("Pending confirmation", "gap")), ""],
     ],
     col_widths=[1.5, 1.9, 1.1, 2.0],
@@ -823,8 +824,9 @@ make_table(
          "Not yet substantiated by measurement. MQ-series metal-oxide sensors rely on an internal heating "
          "element as their normal operating principle; a hot-spot measurement specific to the sensor models "
          "and enclosure configuration used here has not yet been performed (see 2.6.f)."],
-        ["Ambient temperature range", "\u2014", ("__status__", ("Pending confirmation", "gap")),
-         "Not yet measured or specified."],
+        ["Ambient temperature range", "\u221240\u00b0C to +85\u00b0C", ("__status__", ("Final", "ok")),
+         "Project-confirmed value, extended-industrial electronics range. Distinct from the MQ-sensor hot-spot "
+         "surface temperature above, which remains the top-priority open item for the T4 recommendation."],
         ["Area classification (zone)", "Zone 1", ("__status__", ("Team recommendation \u2014 pending ExCB confirmation", "wip")),
          "Assessed as sufficient for the general refinery deployment envelope, including areas near storage. "
          "Zone 0 would only apply if the detector were installed directly inside a tank vapor space."],

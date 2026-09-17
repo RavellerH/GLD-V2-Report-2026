@@ -20,16 +20,21 @@
 ## Orang (`p:`) — dari notulen/laporan
 | ID | Nama | Peran/konteks |
 |---|---|---|
-| p:maman | Pak Maman | Pemaparan GLD, arahan teknis, penataan lab, WDT eksternal |
-| p:fahmi | Fahmi | Tim Elektronik — ruang lingkup, DC converter, simulasi daya |
-| p:farhan | Farhan Budiman | Repositori kode & collaborator |
-| p:fahdzi | Pak Fahdzi | Model TCNN/TCN |
-| p:ryan | Ryan (Lab IoT) | Pengumpulan data solar |
-| p:ilmania | Ilmania Syakira (disebut "Ilma"/"Ilmania") | Titik pengecasan; notulis; PIC verifikasi gas capability (dec 24 Jul); penulis/editor terakhir presentasi model **CNN Dual-Branch** (6 Agu) — kemungkinan lintas Lab Fisika & Lab IoT, belum dikonfirmasi |
+| p:maman | Drs. Maman Budiman, M.Eng., Ph.D. (dulu "Pak Maman") | Pemaparan GLD, arahan teknis, penataan lab, WDT eksternal; **Ketua Proyek & Hardware Lead** (Surat Tugas SP-001/SP-002, 17 Sep) |
+| p:fahmi | Fahmi Budiman (dulu "Fahmi") | Tim Elektronik — ruang lingkup, DC converter, simulasi daya; **Hardware & Firmware Engineer** (Surat Tugas, 17 Sep) |
+| p:farhan | Farhan Budiman | Repositori kode & collaborator; **Software Frontend Developer — Desain Presentasi, CAD 3D Design, dan Pelaporan** (Surat Tugas, 17 Sep) |
+| p:fahdzi | Dr. Fahdzi Muttaqien, S.Si., M.Si., M.Sc., M.Eng., Ph.D. (dulu "Pak Fahdzi") | Model TCNN/TCN; **Machine Learning & AI Lead** (Surat Tugas, 17 Sep) |
+| p:ryan | Ryan (Lab IoT) | Pengumpulan data solar; **Hardware & PCB Design Engineer** (Surat Tugas, 17 Sep) |
+| p:ilmania | Ilmania Syakira (disebut "Ilma"/"Ilmania") | Titik pengecasan; notulis; PIC verifikasi gas capability (dec 24 Jul); penulis/editor terakhir presentasi model **CNN Dual-Branch** (6 Agu) — kemungkinan lintas Lab Fisika & Lab IoT, belum dikonfirmasi; **Machine Learning Engineer** (Surat Tugas, 17 Sep) |
 | p:tresnandi | Pak Tresnandi | Dokumen JSA/TRA; ditanya soal sisa anggaran proyek (sudah didistribusikan) — pertanyaan terbuka dari weekly meeting 30 Jul |
 | p:senna | Pak Senna | Pertamina — lokasi, mode, gateway |
-| p:nina | Bu Nina (Dr. Nina Siti Aminah, ITB Fisika) | Hazardous / standar pemasangan; penulis `Parameter spesifikasi EMC_lengkap.docx` (19 Agu) |
-| p:beny | Kak Beny | Overall system architecture, AI |
+| p:nina | Dr. Nina Siti Aminah, S.T., S.Si., M.Si. (dulu "Bu Nina", ITB Fisika) | Hazardous / standar pemasangan; penulis `Parameter spesifikasi EMC_lengkap.docx` (19 Agu); **Project Lead – Administrasi Sertifikasi** (Surat Tugas, 17 Sep) |
+| p:beny | Beny Agustirandi (dulu "Kak Beny") | Overall system architecture, AI; **Jaringan LoRa, Konektivitas, dan Sistem** (Surat Tugas, 17 Sep) |
+| p:anggi | Anggi | Tim proyek GLD — **Asisten Machine Learning, mendukung p:ilmania** (Surat Tugas, 17 Sep) |
+| p:syifa | Syifa | Tim proyek GLD — **Asisten Jaringan & Konektivitas, mendukung p:beny** (Surat Tugas, 17 Sep) |
+| p:aldi | Aldi | Tim proyek GLD — **Hardware & PCB Design Engineer, mendukung p:ryan** (Surat Tugas, 17 Sep) |
+| p:erick | Erick R Koncara | **Komunikator (Communicator)** tim proyek GLD (Surat Tugas, 17 Sep) — belum ada konteks lain |
+| p:harry | Ir. Harry Fardiman | **Direktur Utama PT LAPI Ganesha Utama** — penandatangan Surat Tugas SP-001/SP-002 (17 Sep) |
 | p:totong | Pak Totong | Diskusi peletakan tiang/rooftop |
 | p:adit | Pak Adit | Pertamina — meeting 24 Jul |
 | p:roni | Mas Roni | Pertamina — meeting 24 Jul |

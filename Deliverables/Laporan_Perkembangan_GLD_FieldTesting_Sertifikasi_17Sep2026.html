@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laporan Perkembangan GLD — Field Testing &amp; Sertifikasi (17 September 2026)</title>
+<style>
+:root{--ink:#2F4050;--teal:#1ABB9C;--teal-2:#149174;--paper:#F3F3F4;--line:#D9E0E5;--muted:#667585;--warn:#E5934F;--danger:#E2495A;--ok:#1E9B76;--surface:#fff;--info:#1C93C6}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.6 "Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px 56px}
+.letterhead{background:var(--ink);color:#fff;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.letterhead .org b{display:block;font-size:15px}.letterhead .org span{font-size:12px;color:#B9C6D0}
+.letterhead .doc{text-align:right;font-size:12px;color:#B9C6D0}
+.hero{background:#fff;border:1px solid var(--line);border-top:none;padding:28px 26px;margin-bottom:4px}
+h1{font-size:24px;line-height:1.25;margin:0 0 8px;color:var(--ink)}
+.sub{color:var(--muted);margin:0;max-width:800px;font-size:13.5px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pill{font-size:11.5px;font-weight:700;border:1px solid var(--line);padding:4px 9px;border-radius:20px;color:var(--muted)}
+.pill.teal{background:var(--teal);border-color:var(--teal);color:#fff}
+.pill.info{background:#E4F2FA;border-color:#c7e4f2;color:#12678f}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:14px;box-shadow:0 1px 2px #2f40500b}
+.kpi .n{font-size:20px;font-weight:800;color:var(--teal-2)}
+.kpi .lbl{font-size:11px;color:var(--muted);margin-top:2px}
+.kpi .sub2{font-size:10.5px;color:var(--muted);margin-top:6px}
+.section{background:var(--surface);border:1px solid var(--line);border-radius:7px;margin-top:16px;overflow:hidden}
+.head{padding:15px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px;background:#FAFBFC}
+.head .n{width:27px;height:27px;border-radius:50%;background:var(--teal);color:#fff;text-align:center;line-height:27px;font-weight:800;flex:none;font-size:13px}
+.head h2{font-size:17px;margin:0}
+.head .tag{margin-left:auto;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px}
+.tag.ok{background:#ddf4ec;color:#147356}.tag.warn{background:#fff0d2;color:#946000}.tag.block{background:#ffe0de;color:#ae3029}.tag.info{background:#E4F2FA;color:#12678f}
+.body{padding:18px 20px 20px}
+h3{font-size:14px;margin:18px 0 6px}
+h3:first-child{margin-top:0}
+p{margin:0 0 10px}
+.banner{margin:14px 0;padding:12px 14px;border-radius:5px;border-left:4px solid var(--warn);background:#fff8ee}
+.banner.danger{border-color:var(--danger);background:#fdedee}
+.banner.ok{border-color:var(--ok);background:#eefaf6}
+.banner.info{border-color:var(--info);background:#eaf6fc}
+.banner b{display:block;margin-bottom:3px}
+.table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+.table th{background:#edf2f5;text-align:left;font-size:11px;letter-spacing:.02em;color:#566777;padding:9px;font-weight:700}
+.table td{padding:9px;vertical-align:top;border-bottom:1px solid var(--line)}
+.table tr:last-child td{border-bottom:0}
+.status{display:inline-block;border-radius:12px;padding:2px 9px;font-size:11px;font-weight:700;white-space:nowrap}
+.ready{background:#ddf4ec;color:#147356}.open{background:#fff0d2;color:#946000}.block{background:#ffe0de;color:#ae3029}.partial{background:#f6f1dc;color:#7a6a18}
+.role{color:var(--muted);font-size:12px}
+ul.plain{margin:6px 0 12px;padding-left:20px}ul.plain li{margin-bottom:5px}
+.linklist{margin:8px 0 0;padding-left:20px;font-size:13px}.linklist li{margin-bottom:4px;overflow-wrap:break-word}
+code{overflow-wrap:break-word;word-break:break-word;font-size:12.5px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+.two-col .colcard{border:1px solid var(--line);border-radius:6px;padding:13px 15px}
+.two-col .colcard h4{margin:0 0 8px;font-size:13px}
+.colcard.lgu h4{color:var(--teal-2)}.colcard.pertamina h4{color:#B5651D}
+.rfbox{border:1px solid #c7e4f2;background:#f5fbfd;border-radius:6px;padding:14px 16px;margin-top:10px}
+.rfgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.rfstat{background:#fff;border:1px solid var(--line);border-radius:6px;padding:10px 12px;text-align:center}
+.rfstat .v{font-size:16px;font-weight:800;color:var(--info)}
+.rfstat .k{font-size:10.5px;color:var(--muted);margin-top:3px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:6px 0 2px}
+.step{border:1px solid var(--line);border-radius:5px;padding:11px;background:#fbfcfc}
+.step b{display:block;font-size:12.5px}.step span{font-size:11.5px;color:var(--muted)}
+footer{margin-top:22px;color:var(--muted);font-size:11px;padding:0 4px}
+@media print{body{background:#fff}.wrap{max-width:none;padding:10mm}.section{break-inside:avoid}.table tr{break-inside:avoid}}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.two-col,.rfgrid,.flow{grid-template-columns:1fr}.wrap{padding:0 14px 30px}}
+</style>
+</head>
+<body>
+<!-- GLD-NAV-START -->
+<style>@media print{#gld-cross-nav{display:none !important}}</style>
+<div id="gld-cross-nav" style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
+<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
+<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Detail Assessment/Field Testing</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Desain_Bracket_L_UBolt_GLD_Mounting.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Desain Bracket U-Bolt</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Sertifikasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Checklist Instalasi Cilacap</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Harian_GLD_17September2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Harian 17 Sep</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Persiapan Vendor Instalasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Laporan Perkembangan 17 Sep</span>
+</div>
+<!-- GLD-NAV-END -->
+
+<main class="wrap">
+
+<div class="letterhead">
+  <div class="org"><b>LAPI Ganesha Utama (LGU)</b><span>bersama Lab IoT &amp; Lab Fisika ITB</span></div>
+  <div class="doc">Laporan Perkembangan Proyek<br>Untuk: PT Pertamina Patra Niaga</div>
+</div>
+
+<section class="hero">
+<h1>Laporan Perkembangan GLD Tahap 2<br>Jalur Field Testing &amp; Sertifikasi ATEX/IECEx</h1>
+<p class="sub">Ringkasan perkembangan per hari ini, mencakup dua jalur kerja paralel: (1) field testing/pilot rekayasa dan kesiapan lapangan RU IV Cilacap, dan (2) sertifikasi kepatuhan area berbahaya (ATEX/IP/EMC/RF). Disusun secara transparan — memuat capaian maupun pekerjaan yang masih terbuka.</p>
+<div class="meta">
+<span class="pill teal">17 SEPTEMBER 2026</span>
+<span class="pill">Rev 1.1</span>
+<span class="pill info">Field Testing + Sertifikasi</span>
+</div>
+</section>
+
+<div class="kpis">
+<div class="kpi"><div class="n">44%</div><div class="lbl">Progres pilot/field testing</div><div class="sub2">vs baseline rencana 43% pada tanggal yang sama</div></div>
+<div class="kpi"><div class="n">20%</div><div class="lbl">Termin 1 field testing</div><div class="sub2">laporan pemenuhan sudah diajukan</div></div>
+<div class="kpi"><div class="n">≈20%</div><div class="lbl">Progres sertifikasi s/d sertifikat</div><div class="sub2">metodologi 5 fase × 4 track (ATEX/IP/EMC/RF)</div></div>
+<div class="kpi"><div class="n">21/8/10</div><div class="lbl">Checklist dokumen ExCB</div><div class="sub2">final / sebagian / belum tersedia (dari 39 butir)</div></div>
+<div class="kpi"><div class="n">1/7</div><div class="lbl">Syarat Termin 1 sertifikasi</div><div class="sub2">terpenuhi penuh — lihat matriks di bawah</div></div>
+</div>
+
+<!-- ================= FIELD TESTING ================= -->
+<section class="section">
+<div class="head"><span class="n">1</span><h2>Perkembangan Field Testing</h2><span class="tag ok">BERJALAN</span></div>
+<div class="body">
+
+<h3>Capaian teknis sampai saat ini</h3>
+<ul class="plain">
+<li>Rantai end-to-end <b>GLD → Cluster Head → Gateway → Server</b> berfungsi, termasuk failover Cluster Head dan mesh multi-hop 8-CH se-kampus (menyiasati keterbatasan jangkauan LoRa per-hop).</li>
+<li>Inferensi AI klasifikasi gas (CNN, 4 kelas: LPG/CO₂/Udara Bersih/H₂) berjalan <b>on-device di ESP32-S3</b> GLD, bukan lagi di PC/emulator.</li>
+<li>Model prediksi kebocoran (TCN) mencapai akurasi ≥92% pada dataset 8-sensor; dataset konsisten &amp; siap dipakai untuk pengembangan lanjutan.</li>
+<li>Push alarm sudah diuji dan berfungsi: GLD yang disemprot gas mengirim alarm otomatis ke server tanpa perlu polling manual.</li>
+</ul>
+
+<h3>Baru hari ini — hasil awal uji ketahanan RF terhadap interferensi</h3>
+<div class="rfbox">
+<p>Tim Lab Fisika ITB (S2FI, PIC: Beny Agustirandi) melaporkan hasil pengujian awal ketahanan tautan radio LoRa terhadap gangguan (interferensi) pada frekuensi yang sama:</p>
+<ul class="plain">
+<li>Sistem diuji dengan interferensi pada <b>frekuensi yang sama</b>, daya gangguan cukup tinggi (<b>10–25 dBm</b>).</li>
+<li>Transmit dan receive <b>tetap stabil</b> selama pengujian; tidak ada perubahan signifikan pada RSSI terukur.</li>
+<li>RSSI stabil di kisaran <b>−17 dBm hingga −18 dBm</b>, meski gangguan terus diberikan.</li>
+<li>Variasi sudut arah sumber gangguan juga sudah dicoba — hasil tetap konsisten, sistem tetap stabil.</li>
+</ul>
+<div class="rfgrid">
+<div class="rfstat"><div class="v">10–25 dBm</div><div class="k">Daya interferensi co-channel yang diuji</div></div>
+<div class="rfstat"><div class="v">−17 s/d −18 dBm</div><div class="k">RSSI terukur, stabil selama uji</div></div>
+<div class="rfstat"><div class="v">Stabil</div><div class="k">TX/RX di seluruh sudut yang diuji</div></div>
+<div class="rfstat"><div class="v">Berlanjut</div><div class="k">Rencana: durasi lebih lama + tipe interferensi lain</div></div>
+</div>
+<p class="role" style="margin-top:10px">Catatan: hasil ini disampaikan tim secara informal hari ini (17 September); laporan pengukuran formal dan rencana uji lanjutan (durasi lebih lama, tipe interferensi tambahan) akan menyusul terpisah. Dicantumkan di sini sebagai indikasi awal kekuatan sinyal terhadap gangguan RF, bukan hasil akhir/final.</p>
+</div>
+
+<h3>Strategi kesiapan lapangan RU IV Cilacap (diperbarui hari ini)</h3>
+<p>Survey lokasi (9–10 Agustus) sudah selesai. <b>Instalasi fisik dan commissioning belum dimulai.</b> Arah kerja yang dipilih adalah kombinasi dua jalur berikut — jalur uji lapangan sementara/non-permanen <b>tidak</b> ditempuh:</p>
+<table class="table">
+<thead><tr><th>Jalur</th><th>Deskripsi</th><th>Status hari ini</th></tr></thead>
+<tbody>
+<tr><td><b>A. Chamber gas di kantor kilang</b><br><span class="role">Bukan area proses</span></td><td>Chamber uji gas portable dibawa &amp; dioperasikan di kantor kilang Cilacap untuk pengambilan dataset dan pelatihan model AI langsung di lokasi.</td><td><span class="status ready">DIPILIH — CHAMBER SIAP</span></td></tr>
+<tr><td><b>C. Instalasi permanen di lokasi non-ATEX</b><br><span class="role">Bukan area berbahaya</span></td><td>GLD/Cluster Head dipasang permanen, dibatasi hanya pada titik yang secara klasifikasi <b>bukan area berbahaya</b> — sehingga tidak perlu menunggu sertifikasi ATEX selesai.</td><td><span class="status open">DIPILIH — MENUNGGU KONFIRMASI TERTULIS KLASIFIKASI AREA</span></td></tr>
+</tbody>
+</table>
+
+<div class="banner info"><b>Alasan pendekatan ini.</b> Pengiriman sampel gas berbahaya (termasuk H₂S) dari Cilacap ke Bandung untuk pengujian di laboratorium ITB memerlukan penanganan khusus dan tidak dapat menggunakan jasa ekspedisi/kurir umum — gas yang mudah terbakar dan/atau beracun termasuk kategori barang berbahaya yang dibatasi peraturan pos &amp; kebijakan ekspedisi umum. Karena itu, pendekatan yang dipilih adalah <b>membawa chamber uji ke lokasi gas</b> (bukan mengirim sampel gas ke lab), sekaligus mempercepat kesiapan instalasi lapangan tanpa menunggu proses pengiriman sampel.</div>
+
+<div class="banner ok"><b>Metodologi ini berlaku sebagai pola kerja standar</b> yang akan diulang di setiap Refinery Unit ke depannya (bukan khusus Cilacap): chamber dibawa ke lokasi kilang → dataset diambil on-site → model AI dilatih menggunakan data lokal → model hasil pelatihan dipasang ke firmware GLD di lokasi tersebut, dengan jenis gas yang dilatih disesuaikan kebutuhan RU masing-masing.</div>
+
+<div class="flow">
+<div class="step"><b>1. Chamber tiba di lokasi</b><span>Dibawa ke kantor kilang, bukan area proses.</span></div>
+<div class="step"><b>2. Pengambilan dataset</b><span>Sampel gas relevan diuji langsung on-site.</span></div>
+<div class="step"><b>3. Pelatihan model</b><span>Model AI dilatih menggunakan data lokal.</span></div>
+<div class="step"><b>4. Inject ke firmware</b><span>Model dipasang ke GLD yang akan dipasang di lokasi.</span></div>
+</div>
+
+<div class="banner ok"><b>Pembagian tanggung jawab instalasi fisik (Jalur C).</b> Eksekusi fisik pemasangan (bracket, Cluster Head, sensor node) di lokasi RU dilakukan oleh vendor yang ditunjuk Pertamina, termasuk pemenuhan kompetensi/sertifikasi kerja di ketinggian. LGU berperan menyediakan basis desain (gambar mounting, spesifikasi) serta supervisi teknis/QA dan pekerjaan elektrikal spesifik-GLD (terminasi catu daya, energize, commissioning).</div>
+
+<h3>Status Termin 1 Field Testing (20%)</h3>
+<table class="table">
+<thead><tr><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Laporan pemenuhan deliverable Termin 1 (Rev 02)</td><td><span class="status ready">SUDAH DIAJUKAN</span></td></tr>
+<tr><td>Draft Berita Acara Serah Terima (BAST)</td><td><span class="status open">MENUNGGU DATA ADMINISTRASI</span><br><span class="role">nomor/tanggal/nilai SPK, identitas &amp; tanda tangan penandatangan dari Pertamina</span></td></tr>
+<tr><td>Instalasi, commissioning, SAT, as-built RU IV</td><td><span class="status block">TAHAP BERIKUTNYA</span><br><span class="role">tidak diklaim selesai — mengikuti jadwal Jalur A/C di atas</span></td></tr>
+</tbody>
+</table>
+<p class="role">Dasar penilaian Termin 1 field testing: detail engineering lengkap, kesiapan hardware (GLD dan Cluster Head), integrasi GLD–CH–Gateway–Server, mesh/failover, dan alarm push yang sudah terbukti berfungsi — merepresentasikan baseline prototipe/laboratorium, bukan instalasi di lokasi RU.</p>
+
+<h3>Yang perlu ditindaklanjuti bersama Pertamina</h3>
+<ul class="plain">
+<li>Konfirmasi tertulis klasifikasi area (bukan area berbahaya) untuk titik pasang permanen Jalur C, dari HSE/Engineering RU IV.</li>
+<li>Ketersediaan PC dedicated di dekat Gateway (disiapkan RU IV, dipasang &amp; dikonfigurasi LGU).</li>
+<li>Penugasan resmi vendor pelaksana pemasangan fisik, termasuk kompetensi kerja di ketinggian.</li>
+<li>Data administrasi SPK untuk penyelesaian BAST Termin 1 (nomor, tanggal, nilai, penandatangan).</li>
+<li>Dukungan sampel gas tambahan (H₂S, metana, amonia, dll.) untuk pengembangan kapabilitas deteksi lebih lanjut — mengingat kendala pengiriman sampel gas berbahaya di atas, dukungan penyediaan sampel langsung di lokasi kilang akan sangat membantu mempercepat proses.</li>
+</ul>
+
+</div>
+</section>
+
+<!-- ================= SERTIFIKASI ================= -->
+<section class="section">
+<div class="head"><span class="n">2</span><h2>Perkembangan Sertifikasi ATEX/IECEx</h2><span class="tag warn">BERJALAN — PERSIAPAN DOKUMEN</span></div>
+<div class="body">
+
+<p>Proyek sertifikasi kepatuhan area berbahaya (ATEX, dilengkapi IP/EMC/RF) berjalan paralel dengan field testing, dengan dua metrik progres yang mengukur hal berbeda:</p>
+<ul class="plain">
+<li><b>≈20% progres keseluruhan sampai sertifikat terbit</b> — metodologi bottom-up 5 fase × 4 track (ATEX/IP/EMC/RF); fase Uji Laboratorium Terakreditasi (bobot terbesar, 41,7%) masih di angka 0% karena belum dimulai.</li>
+<li><b>Checklist dokumen ExCB (39 butir)</b> — 21 final/tersedia, 8 sebagian, 10 belum tersedia. Bagian legalitas &amp; organisasi (formulir aplikasi, izin usaha, struktur organisasi, ISO 9001) sedang disusun.</li>
+</ul>
+
+<h3>Status dokumen desain &amp; manufaktur (bagian teknis inti checklist)</h3>
+<table class="table">
+<thead><tr><th>Butir</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Gambar teknis lengkap (assembly, enclosure)</td><td><span class="status partial">SEBAGIAN</span></td></tr>
+<tr><td>Bill of Material komponen kritis-Ex</td><td><span class="status partial">SEBAGIAN</span></td></tr>
+<tr><td>Datasheet material non-logam (enclosure/gasket)</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>Deskripsi proses manufaktur</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>Kalkulasi proteksi ledakan</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>Kalkulasi kelas suhu</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>Instruksi pakai &amp; instalasi</td><td><span class="status partial">SEBAGIAN</span></td></tr>
+<tr><td>Informasi nameplate</td><td><span class="status block">BELUM</span></td></tr>
+<tr><td>Sertifikat komponen ber-Ex</td><td><span class="status block">BELUM</span></td></tr>
+</tbody>
+</table>
+
+<h3>Lima faktor utama yang menahan progres</h3>
+<table class="table">
+<thead><tr><th>Faktor</th><th>Kondisi saat ini</th><th>Dampak</th></tr></thead>
+<tbody>
+<tr><td><b>Metode proteksi Ex belum diputuskan</b></td><td>Pilihan antara Ex d, Ex e, atau Ex i belum ditetapkan/dikonfirmasi ke lembaga sertifikasi (ExCB).</td><td>Menahan kalkulasi proteksi ledakan, gambar flame-path, dan arah desain casing.</td></tr>
+<tr><td><b>Kelas suhu T4 belum diverifikasi</b></td><td>Belum ada pengukuran hot-spot; heater sensor gas (MQ) lazimnya beroperasi ~200–400°C, sementara ambang T4 = ≤135°C permukaan.</td><td>Risiko teknis terbesar — bila hasil ukur tidak memenuhi, desain sensing head perlu penyesuaian, bukan sekadar dokumen.</td></tr>
+<tr><td><b>Bagian legalitas &amp; organisasi sedang disusun</b></td><td>Formulir aplikasi, izin usaha, struktur organisasi, sertifikat ISO 9001.</td><td>Submission ke ExCB belum dapat dibuka meski berkas teknis lengkap.</td></tr>
+<tr><td><b>Belum ada komponen bersertifikat Ex</b></td><td>Komponen proteksi (mis. flame arrestor) dan baterai cadangan belum diverifikasi status Ex-nya.</td><td>Butir sertifikat komponen Ex masih kosong.</td></tr>
+<tr><td><b>Sebagian item menunggu mitra pembuat casing</b></td><td>Datasheet material, proses manufaktur, kelengkapan BOM mekanis (gasket/cable gland/potting), nameplate.</td><td>Bergantung jadwal komitmen mitra eksternal, di luar kendali langsung tim.</td></tr>
+</tbody>
+</table>
+
+<h3>Status Termin 1 sertifikasi (40%) — 7 syarat kontraktual</h3>
+<table class="table">
+<thead><tr><th>#</th><th>Syarat</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Prototipe enclosure tersedia</td><td><span class="status partial">SEBAGIAN</span></td></tr>
+<tr><td>2</td><td>Prototipe telah diuji (mekanik/termal/sealing/fault)</td><td><span class="status block">BELUM ADA BUKTI</span></td></tr>
+<tr><td>3</td><td>Ada iterasi perbaikan desain berbasis hasil uji</td><td><span class="status block">BELUM ADA BUKTI</span></td></tr>
+<tr><td>4</td><td>Disaksikan &amp; divalidasi Pertamina</td><td><span class="status block">BELUM ADA BUKTI</span></td></tr>
+<tr><td>5</td><td>Dilakukan sebelum uji laboratorium terakreditasi</td><td><span class="status ready">URUTAN MASIH SESUAI</span></td></tr>
+<tr><td>6</td><td>Berita acara</td><td><span class="status block">BELUM ADA</span></td></tr>
+<tr><td>7</td><td>Laporan pekerjaan Termin 1</td><td><span class="status block">BELUM ADA</span></td></tr>
+</tbody>
+</table>
+<p class="role">Status di atas adalah pemetaan bukti dokumen terhadap masing-masing syarat, disampaikan apa adanya untuk dievaluasi Pertamina. Titik penentu utama adalah sesi pengujian enclosure yang disaksikan langsung oleh perwakilan Pertamina — begitu sesi ini terjadi dan didokumentasikan, sebagian besar syarat di atas dapat tertutup sekaligus.</p>
+
+<h3>Yang membutuhkan keputusan/dukungan Pertamina</h3>
+<ul class="plain">
+<li>Penjadwalan sesi pengujian enclosure yang disaksikan langsung oleh perwakilan Pertamina (witness test).</li>
+<li>Konfirmasi klasifikasi area berbahaya (zona, kelompok gas) yang berlaku di titik pasang RU IV — menjadi dasar penetapan skema klasifikasi ATEX akhir, sekaligus dasar penentuan titik pasang permanen Jalur C di atas.</li>
+<li>Dukungan sampel gas tambahan (H₂S, Benzena, dll.) untuk pengembangan &amp; verifikasi kapabilitas deteksi sesuai kebutuhan lapangan.</li>
+<li>Kesepakatan format &amp; jadwal berita acara/validasi untuk setiap milestone pengujian, agar tercatat resmi.</li>
+</ul>
+
+</div>
+</section>
+
+<!-- ================= RINGKASAN TINDAK LANJUT ================= -->
+<section class="section">
+<div class="head"><span class="n">3</span><h2>Ringkasan Pembagian Kerja &amp; Tindak Lanjut</h2></div>
+<div class="body">
+<div class="two-col">
+<div class="colcard lgu">
+<h4>Sudah/sedang disiapkan LGU &amp; ITB</h4>
+<ul class="plain">
+<li>Hardware &amp; firmware GLD–CH–Gateway–Server, AI on-device, dataset gas</li>
+<li>Uji ketahanan RF terhadap interferensi (berjalan, hasil awal positif)</li>
+<li>Basis desain mounting bracket, sudah diserahkan ke vendor</li>
+<li>Draft JSA/HSE, checklist kesiapan instalasi</li>
+<li>Berkas teknis sertifikasi (checklist ExCB, dokumen desain yang tersedia)</li>
+<li>Chamber uji gas portable, siap dioperasikan di kantor kilang</li>
+</ul>
+</div>
+<div class="colcard pertamina">
+<h4>Perlu dari Pertamina / RU IV</h4>
+<ul class="plain">
+<li>Konfirmasi tertulis klasifikasi area untuk titik pasang permanen (Jalur C)</li>
+<li>Penyediaan PC dedicated dekat Gateway</li>
+<li>Penugasan &amp; jadwal vendor pelaksana instalasi fisik</li>
+<li>Jadwal sesi witness pengujian enclosure</li>
+<li>Data administrasi SPK untuk BAST Termin 1</li>
+<li>Dukungan sampel gas tambahan (H₂S, Benzena, dll.)</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<p><b>Dokumen pendukung terkait:</b> laporan pemenuhan deliverable Termin 1 field testing &amp; sertifikasi, checklist kesiapan instalasi RU IV Cilacap, dashboard sertifikasi ATEX/IECEx, dan datasheet teknis perangkat — tersedia dalam paket dokumen lengkap yang dapat diserahkan terpisah.</p>
+<p>Sebagian angka pada laporan ini adalah estimasi interpretatif tim penyusun berdasarkan data teknis internal, bukan hasil audit pihak ketiga. Skema klasifikasi sertifikasi (grup gas/kelas suhu/zona) yang disebut adalah rekomendasi tim, menunggu konfirmasi lembaga sertifikasi (ExCB) dan Pertamina.</p>
+<p>LAPI Ganesha Utama (LGU) bersama Lab IoT &amp; Lab Fisika ITB — Jl. Dederuk No.30, Bandung 40133. Dokumen disusun 17 September 2026, revisi 1.1.</p>
+</footer>
+
+</main></body></html>

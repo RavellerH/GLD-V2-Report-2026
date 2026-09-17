@@ -16,6 +16,7 @@ FILES = [
     ("Laporan_Harian_GLD_17September2026.html", "Laporan Harian 17 Sep", False),
     ("Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html", "Persiapan Vendor Instalasi", False),
     ("Laporan_Perkembangan_GLD_FieldTesting_Sertifikasi_17Sep2026.html", "Laporan Perkembangan 17 Sep", False),
+    ("Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html", "Pembagian Persiapan Instalasi", False),
 ]
 
 # Dikeluarkan dari navigasi atas permintaan user (4 Sep) - tidak perlu ditampilkan/dinavigasikan:

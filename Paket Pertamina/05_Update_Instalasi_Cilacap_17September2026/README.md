@@ -1,6 +1,6 @@
 # Update Persiapan Instalasi RU IV Cilacap — 17 September 2026
 
-Paket ringkas untuk dibagikan (mis. via WhatsApp) ke tim Pertamina — kumpulan 6 dokumen PDF terkait progres proyek GLD Tahap 2 secara keseluruhan dan persiapan instalasi RU IV Cilacap, field testing, serta sertifikasi ATEX/IECEx.
+Paket ringkas untuk dibagikan (mis. via WhatsApp) ke tim Pertamina — kumpulan 6 dokumen (masing-masing tersedia dalam **.pdf dan .html**) terkait progres proyek GLD Tahap 2 secara keseluruhan dan persiapan instalasi RU IV Cilacap, field testing, serta sertifikasi ATEX/IECEx.
 
 | File | Isi |
 |---|---|
@@ -16,4 +16,8 @@ Paket ringkas untuk dibagikan (mis. via WhatsApp) ke tim Pertamina — kumpulan 
 - **Instalasi fisik di RU IV Cilacap belum dimulai** — survey lokasi sudah selesai (9–10 Agustus), dokumen-dokumen di atas adalah persiapan menuju mobilisasi, bukan laporan pekerjaan yang sudah berjalan.
 - Dokumen terakhir (draf permintaan material) **belum final** — sejumlah item (orientasi mounting, jenis kabel/konektor, berat/IP rating unit) masih menunggu kesepakatan bersama vendor, ditandai jelas di dalam dokumen.
 - `Dashboard_GLD_ProjectManagement.pdf` dicetak 14 September; kontennya masih akurat per hari ini (tidak ada perubahan substantif sejak itu, hanya penambahan tautan navigasi antar-dokumen yang tidak muncul di versi cetak).
-- Versi HTML interaktif (termasuk viewer 3D untuk desain bracket) tersedia di folder `Deliverables/` pada repo — file PDF di sini adalah versi statis untuk kemudahan berbagi.
+
+## Cara pakai
+
+- File `.pdf` — paling praktis untuk dibagikan/dibaca cepat di HP (mis. via WhatsApp), termasuk lampiran foto/CAD.
+- File `.html` — buka di browser (Chrome/Edge/Firefox), tidak perlu internet, menampilkan elemen interaktif yang tidak muncul di PDF (mis. **viewer 3D** untuk desain bracket di `Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html`). Setiap file HTML punya bar navigasi ke dokumen lain di repo utama — tautan ke dokumen yang **tidak ada** di folder ringkas ini (mis. Knowledge Graph, Checklist Instalasi) hanya akan berfungsi bila dibuka dari dalam folder `Deliverables/` pada repo, bukan dari salinan paket ini.

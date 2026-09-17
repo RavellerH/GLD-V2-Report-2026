@@ -102,6 +102,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - `Deliverables/Formulir_Isian_Data_Dasar_Sertifikasi_ATEX_GLD.{docx,pdf}` — formulir isian **internal** (4 hlm) utk mengumpulkan data Bagian 1 checklist ExCB yg belum ada: legalitas (NIB/NPWP/akta/domisili/KBLI), bagan organisasi & kontak, alamat + profil fasilitas produksi (termasuk data mitra casing), dan sistem mutu/ISO 9001 — plus daftar lampiran & blok pengesahan. Bukan berkas yg dikirim ke ExCB (17 Sep, dec:102).
 
+- `Deliverables/Daftar_Pertanyaan_Mitra_Casing_ATEX_GLD.{docx,pdf}` — **31 pertanyaan** untuk mitra casing eksternal (A pengalaman/legalitas · **B metode proteksi ledakan, paling menentukan** · C material · D konstruksi & pengujian · E sampel/jadwal/komersial), tiap pertanyaan diikat ke butir checklist ExCB yang ditutupnya + kolom jawaban & daftar lampiran. Kunci: A2 (enclosure yg sudah bersertifikat komponen Ex) & B4 (flame arrestor utk bukaan sensor MQ) (17 Sep, dec:103).
+
 🚫 **3 file berikut MASIH ADA di `Deliverables/` tapi SUDAH DIKELUARKAN dari navigasi antar-deliverable** (dec:65, 4 Sep, permintaan user — "tidak perlu ditampilkan/ada navigasinya"): `Datasheet_Sistem_GLD_Slides_source.html`, `Notulen_Meeting_GLD_24Jul2026.html`, `Notulen_Meeting_GLD_30Jul2026.html`. Jangan tautkan file-file ini dari deliverable baru manapun kecuali diminta ulang oleh user.
 
 Dokumen sumber (dari tim/klien) ada di `Sumber Dokumen/` — katalog lengkap → [`memory/files_catalog.md`](memory/files_catalog.md).

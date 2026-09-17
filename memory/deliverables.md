@@ -81,6 +81,12 @@ Alur: (1) sampul dengan verdict **BELUM SIAP DIAJUKAN**, (2) posisi hari ini —
 
 QA: `validate.py` PASS, QA visual 11 slide via render LibreOffice→PyMuPDF dalam 2 putaran (temuan yang diperbaiki: judul dua baris menabrak kicker pada slide 3/6/7/9, sumbu chart mulai dari -1, pemenggalan kata “ber-witness”, ruang kosong berlebih slide 2). Versi PDF ikut disimpan untuk dibagikan.
 
+## `Daftar_Pertanyaan_Mitra_Casing_ATEX_GLD.{docx,pdf}` (17 Sep 2026)
+
+Daftar **31 pertanyaan** (5 halaman, Bahasa Indonesia) untuk dikirim ke mitra casing/enclosure eksternal, disusun dari sisi butir checklist ExCB yang masih kosong. Kelompok: A. pengalaman/peran/legalitas mitra (6) · **B. metode proteksi ledakan (6 — paling menentukan)** · C. material (6) · D. konstruksi, pengujian & dokumentasi (8) · E. sampel uji, jadwal & komersial (5). Setiap baris punya kolom "Untuk melengkapi" yang menyebut butir yang ditutupnya (2.6.a–i, 1.3, 1.4, 1.5, Bagian 3) dan kolom kosong "Jawaban mitra". Ditutup daftar 10 lampiran yang diharapkan + blok pengesahan.
+
+Dua pertanyaan paling kritis: **A2** (bisakah mitra menyediakan enclosure yang sudah bersertifikat komponen Ex — jalur tercepat) dan **B4** (bukaan sensor MQ yang tidak bisa disegel → flame arrestor sinter-metal bersertifikat). Dokumen memuat konteks produk ringkas agar mitra tak perlu membaca technical file penuh, dan menegaskan Zona 1/2G/T4/IP66-67 masih berstatus permintaan. Generator: `scripts/build_pertanyaan_mitra_casing.py` (dec:103).
+
 ## `Formulir_Isian_Data_Dasar_Sertifikasi_ATEX_GLD.{docx,pdf}` (17 Sep 2026)
 
 Formulir isian **internal** (4 halaman, Bahasa Indonesia) untuk mengumpulkan data Bagian 1 checklist ExCB yang belum tersedia: formulir aplikasi (4 field), legalitas perusahaan (8), organisasi & kontak (7), fasilitas produksi (7 — sebagian diisi mitra casing), sistem mutu (5), plus daftar 10 lampiran dan blok pengesahan. Diisi oleh fungsi legal/administrasi & mutu LGU; hasilnya ditranskrip ke Bagian 1 dokumen submission berbahasa Inggris. Instruksi tegas di dalamnya: **kosongkan bila belum ada, jangan diisi perkiraan**. Bukan berkas yang dikirim ke ExCB. Generator: `scripts/build_form_data_dasar_atex.py` (dec:102).

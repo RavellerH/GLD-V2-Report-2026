@@ -22,7 +22,7 @@
 |---|---|---|
 | p:maman | Drs. Maman Budiman, M.Eng., Ph.D. (dulu "Pak Maman") | Pemaparan GLD, arahan teknis, penataan lab, WDT eksternal; **Ketua Proyek & Hardware Lead** (Surat Tugas SP-001/SP-002, 17 Sep) |
 | p:fahmi | Fahmi Budiman (dulu "Fahmi") | Tim Elektronik — ruang lingkup, DC converter, simulasi daya; **Hardware & Firmware Engineer** (Surat Tugas, 17 Sep) |
-| p:farhan | Farhan Budiman | Repositori kode & collaborator; **Software Frontend Developer — Desain Presentasi, CAD 3D Design, dan Pelaporan** (Surat Tugas, 17 Sep) |
+| p:farhan | Farhan Budiman | Repositori kode & collaborator; **Software Frontend Developer — Desain Presentasi, CAD 3D Design, dan Pelaporan** (Surat Tugas, 17 Sep); user sesi ini — juga mengonfirmasi (17 Sep) dirinya **turut aktif di track AI/ML**, bukan cuma software/desain — belum diputuskan apakah ini diformalkan ke Fungsi Surat Tugas |
 | p:fahdzi | Dr. Fahdzi Muttaqien, S.Si., M.Si., M.Sc., M.Eng., Ph.D. (dulu "Pak Fahdzi") | Model TCNN/TCN; **Machine Learning & AI Lead** (Surat Tugas, 17 Sep) |
 | p:ryan | Ryan (Lab IoT) | Pengumpulan data solar; **Hardware & PCB Design Engineer** (Surat Tugas, 17 Sep) |
 | p:ilmania | Ilmania Syakira (disebut "Ilma"/"Ilmania") | Titik pengecasan; notulis; PIC verifikasi gas capability (dec 24 Jul); penulis/editor terakhir presentasi model **CNN Dual-Branch** (6 Agu) — kemungkinan lintas Lab Fisika & Lab IoT, belum dikonfirmasi; **Machine Learning Engineer** (Surat Tugas, 17 Sep) |
@@ -35,6 +35,8 @@
 | p:aldi | Aldi | Tim proyek GLD — **Hardware & PCB Design Engineer, mendukung p:ryan** (Surat Tugas, 17 Sep) |
 | p:erick | Erick R Koncara | **Komunikator (Communicator)** tim proyek GLD (Surat Tugas, 17 Sep) — belum ada konteks lain |
 | p:harry | Ir. Harry Fardiman | **Direktur Utama PT LAPI Ganesha Utama** — penandatangan Surat Tugas SP-001/SP-002 (17 Sep) |
+| p:nashwan | Nashwan Iqbal Ramdhani | Tim proyek GLD — **membantu track Hardware**, dikonfirmasi user (17 Sep) **kurang aktif** — belum masuk tabel personel Surat Tugas, status keikutsertaan formal belum dikonfirmasi |
+| p:dede | Pak Dede | Tim proyek GLD — **membantu Dr. Nina Siti Aminah** (track Administrasi Sertifikasi), dikonfirmasi user 17 Sep — belum masuk tabel personel Surat Tugas, status keikutsertaan formal belum dikonfirmasi |
 | p:totong | Pak Totong | Diskusi peletakan tiang/rooftop |
 | p:adit | Pak Adit | Pertamina — meeting 24 Jul |
 | p:roni | Mas Roni | Pertamina — meeting 24 Jul |

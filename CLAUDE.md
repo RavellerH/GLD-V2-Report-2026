@@ -96,6 +96,9 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **17 Sep — Matriks pembagian persiapan instalasi 3-pihak dibuat** (dec:110): `Deliverables/Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.{html,pdf}` (5 hlm) — matriks 3-kolom (LGU &amp; ITB / Pertamina RU IV / Vendor Instalasi) per 6 tema kerja, merangkum &amp; mereorganisasi checklist 10 Sep (dec:78) dan daftar vendor 17 Sep (dec:101), disinkronkan dgn keputusan Jalur A+C (dec:106) dan lokasi Jalur C di perimeter SRU (dec:109). File ke-14 di navigasi bersama.
 
+- 🆕 **17 Sep — Draf permintaan penyediaan material instalasi dibuat** (dec:113): `Deliverables/Draf_Permintaan_Penyediaan_Material_Instalasi_RU-IV_Cilacap.{html,pdf}` (5 hlm) — spek bracket/U-bolt (2"/DN50, OD 60,3mm, M10, pelat 250&times;250mm), catu daya (24VDC &ge;1A), dimensi enclosure (200&times;90&times;290mm), dibagi tegas item **FINAL** vs **belum ditentukan/perlu disepakati vendor** (orientasi mounting, fastener grade, konektor/kabel, berat/IP rating/cable gland/suhu-kelembapan — dikonfirmasi genuinely belum ada nilainya di manapun, dec:95). Ditandai eksplisit "Draf, bukan dokumen pengadaan final".
+- 🆕 **17 Sep — Paket ringkas untuk WA Pertamina dibuat** (dec:114): `Paket Pertamina/05_Update_Instalasi_Cilacap_17September2026/` — 4 PDF terbaru + README, untuk dibagikan cepat via WhatsApp.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

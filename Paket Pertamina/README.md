@@ -2,15 +2,16 @@
 
 Paket ini berisi dokumen laporan & dashboard proyek **Gas Leak Detection (GLD) Tahap 2**, disusun oleh LAPI Ganesha Utama (LGU) bersama Lab IoT & Lab Fisika ITB, per **5 September 2026**.
 
-Isinya dikelompokkan menjadi **4 folder**: satu presentasi ringkas untuk manajemen, 2 folder dokumentasi teknis lengkap untuk **2 jalur paralel** proyek yang berbeda tujuan dan metrik progresnya, dan 1 folder datasheet perangkat resmi:
+Isinya dikelompokkan menjadi beberapa folder: satu presentasi ringkas untuk manajemen, 2 folder dokumentasi teknis lengkap untuk **2 jalur paralel** proyek yang berbeda tujuan dan metrik progresnya, 1 folder datasheet perangkat resmi, 1 folder gabungan laporan Termin 1, dan 1 folder update ringkas siap-bagi:
 
-| Folder | Isi | Progres resmi per 5 Sep |
+| Folder | Isi | Progres resmi |
 |---|---|---|
-| **`00_Presentasi_VP/`** | Slide deck ringkas (8 slide) untuk VP — rangkuman sertifikasi + field testing dalam satu presentasi | Ringkasan dari 2 baris di bawah |
-| **`01_Pilot_Field_Testing/`** | Progres rekayasa & kesiapan lapangan program pilot/field testing — dashboard proyek, laporan progres kronologis, arsitektur sistem, draft JSA/HSE, desain mounting bracket | **44%** (vs baseline rencana 43%) |
-| **`02_Sertifikasi_ATEX_IECEx/`** | Progres proyek sertifikasi kepatuhan area berbahaya (ATEX/IP/EMC/RF) untuk perangkat GLD | **≈20–43%** tergantung definisi — lihat catatan di folder tsb |
+| **`00_Presentasi_VP/`** | Slide deck ringkas (8 slide) untuk VP — rangkuman sertifikasi + field testing dalam satu presentasi | Ringkasan dari 2 baris di bawah (per 5 Sep) |
+| **`01_Pilot_Field_Testing/`** | Progres rekayasa & kesiapan lapangan program pilot/field testing — dashboard proyek, laporan progres kronologis, arsitektur sistem, draft JSA/HSE, desain mounting bracket | **44%** (vs baseline rencana 43%, per 5 Sep) |
+| **`02_Sertifikasi_ATEX_IECEx/`** | Progres proyek sertifikasi kepatuhan area berbahaya (ATEX/IP/EMC/RF) untuk perangkat GLD | **≈20–43%** tergantung definisi — lihat catatan di folder tsb (per 5 Sep) |
 | **`03_Technical_Datasheets_LabIoTITB/`** | Datasheet teknis resmi Lab IoT ITB (Rev 4.0) per perangkat — Whole System, GasleakDetector, CH, Gateway, Server — ID &amp; EN | Dokumen sumber, bukan progres |
 | **`04_Laporan_Termin_1/`** | Kedua laporan pemenuhan Termin 1 dikumpulkan di satu tempat: field testing (20%) dan sertifikasi (40%), plus draft BAST field testing | Lihat catatan kesiapan di masing-masing laporan |
+| **`05_Update_Instalasi_Cilacap_17September2026/`** | Paket ringkas 4 PDF untuk dibagikan cepat (mis. WhatsApp): laporan perkembangan field testing & sertifikasi, matriks persiapan instalasi (dgn foto/CAD), daftar persiapan vendor, dan draf permintaan material ke vendor | Update per 17 Sep — lokasi Jalur C instalasi permanen sudah dikonfirmasi Pertamina (perimeter SRU) |
 
 Setiap folder punya `README.md` sendiri yang merinci isi filenya.
 

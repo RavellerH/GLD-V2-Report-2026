@@ -1,5 +1,11 @@
 from pathlib import Path
 
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import datetime as dt
+
 from docx import Document
 from docx.enum.table import WD_ALIGN_VERTICAL, WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -10,6 +16,67 @@ from docx.shared import Inches, Pt, RGBColor
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "Deliverables"
 OUT_DOCX = OUT_DIR / "Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.docx"
+CHART_PNG = ROOT / "scripts" / "assets" / "kurva_s_instalasi_chart.png"
+
+
+def build_chart():
+    CHART_PNG.parent.mkdir(parents=True, exist_ok=True)
+    plt.rcParams.update({
+        "font.family": "sans-serif",
+        "font.sans-serif": ["Arial", "DejaVu Sans"],
+        "font.size": 12,
+        "axes.edgecolor": "#000000",
+        "text.color": "#000000",
+        "axes.labelcolor": "#000000",
+        "xtick.color": "#000000",
+        "ytick.color": "#000000",
+    })
+
+    d0 = dt.date(2026, 9, 10)
+    d1 = dt.date(2026, 9, 18)
+    d2 = dt.date(2026, 9, 24)  # projection endpoint (undated, visual only)
+
+    fig, ax = plt.subplots(figsize=(9.6, 4.7), dpi=200)
+
+    # actual line (solid black)
+    ax.plot([d0, d1], [0, 38], color="#000000", linewidth=2.6, marker="o",
+             markersize=7, markerfacecolor="#000000", zorder=5)
+    # projection (dashed gray, direction only - no fixed date)
+    ax.plot([d1, d2], [38, 62], color="#595959", linewidth=1.8, linestyle=(0, (5, 4)), zorder=4)
+
+    # 95% threshold reference line
+    ax.axhline(95, color="#000000", linewidth=1.1, linestyle=(0, (6, 4)), alpha=0.65, zorder=2)
+    ax.text(d2, 96.5, "95% — ambang meeting lanjutan RU IV", ha="right", va="bottom",
+            fontsize=9.5, color="#000000", fontweight="bold")
+
+    # data point labels
+    ax.annotate("10 Sep 2026\nchecklist disusun\n0%", xy=(d0, 0), xytext=(0, -38),
+                textcoords="offset points", ha="center", va="top", fontsize=9.3, color="#262626")
+    ax.annotate("38%", xy=(d1, 38), xytext=(0, 12), textcoords="offset points",
+                ha="center", va="bottom", fontsize=13, fontweight="bold", color="#000000")
+    ax.annotate("18 Sep 2026 (hari ini)", xy=(d1, 38), xytext=(0, -38),
+                textcoords="offset points", ha="center", va="top", fontsize=9.3, color="#262626")
+    ax.annotate("rencana —\njadwal menyusul", xy=(d2, 62), xytext=(-6, 6),
+                textcoords="offset points", ha="right", va="bottom", fontsize=9, color="#595959")
+
+    ax.set_xlim(d0 - dt.timedelta(days=1), d2 + dt.timedelta(days=1))
+    ax.set_ylim(-8, 108)
+    ax.set_yticks([0, 25, 50, 75, 100])
+    ax.set_yticklabels(["0%", "25%", "50%", "75%", "100%"])
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=2))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
+    ax.grid(axis="y", color="#D9D9D9", linewidth=0.8, zorder=0)
+    for spine in ("top", "right"):
+        ax.spines[spine].set_visible(False)
+    for spine in ("left", "bottom"):
+        ax.spines[spine].set_color("#000000")
+        ax.spines[spine].set_linewidth(1.1)
+    ax.tick_params(colors="#000000", labelsize=9.5)
+
+    fig.tight_layout(pad=1.2)
+    fig.savefig(CHART_PNG, facecolor="white", bbox_inches="tight")
+    plt.close(fig)
+    return CHART_PNG
 
 BLACK = "000000"
 DARK = "262626"
@@ -385,6 +452,16 @@ def build_document():
         "bukan proyeksi presisi harian.",
         bold_lead="Metodologi. ",
     )
+
+    chart_path = build_chart()
+    doc.add_picture(str(chart_path), width=Inches(6.7))
+    doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    cap = doc.add_paragraph()
+    cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    cap.paragraph_format.space_after = Pt(12)
+    r = cap.add_run("Grafik 1. Kurva-S persiapan instalasi RU IV Cilacap — garis solid: aktual, garis putus-putus: proyeksi arah (belum bertanggal pasti)")
+    set_run_font(r, size=8.3, italic=True, color=MID)
+
     add_table(
         doc,
         ["Tanggal", "Peristiwa", "Progres keseluruhan"],

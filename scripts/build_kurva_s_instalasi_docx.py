@@ -32,7 +32,7 @@ def build_chart():
         "ytick.color": "#000000",
     })
 
-    d0 = dt.date(2026, 9, 10)
+    d0 = dt.date(2026, 8, 10)  # kunjungan/survey terakhir RU IV Cilacap (9-10 Agustus 2026)
     d1 = dt.date(2026, 9, 18)
 
     fig, ax = plt.subplots(figsize=(9.6, 4.7), dpi=200)
@@ -43,22 +43,22 @@ def build_chart():
 
     # 95% threshold reference line (disebutkan Pertamina utk syarat agenda meeting RU IV)
     ax.axhline(95, color="#000000", linewidth=1.1, linestyle=(0, (6, 4)), alpha=0.65, zorder=2)
-    ax.text(d0 + dt.timedelta(hours=6), 91, "95% — ambang meeting lanjutan RU IV (disebut Pertamina)",
+    ax.text(d0 + dt.timedelta(days=1), 91, "95% — ambang meeting lanjutan RU IV (disebut Pertamina)",
             ha="left", va="top", fontsize=9.2, color="#000000", fontweight="bold")
 
     # data point labels
-    ax.annotate("10 Sep 2026\nchecklist disusun\n0%", xy=(d0, 0), xytext=(0, -38),
+    ax.annotate("9–10 Agustus 2026\nsurvey lokasi RU IV Cilacap\n(kunjungan terakhir)\n0%", xy=(d0, 0), xytext=(0, -42),
                 textcoords="offset points", ha="center", va="top", fontsize=9.3, color="#262626")
-    ax.annotate("100%", xy=(d1, 100), xytext=(18, 4), textcoords="offset points",
-                ha="left", va="center", fontsize=14, fontweight="bold", color="#000000")
-    ax.annotate("18 Sep 2026\n(hari ini)", xy=(d1, 100), xytext=(18, -22), textcoords="offset points",
-                ha="left", va="top", fontsize=9.3, color="#262626")
+    ax.annotate("100%", xy=(d1, 100), xytext=(-16, 4), textcoords="offset points",
+                ha="right", va="center", fontsize=14, fontweight="bold", color="#000000")
+    ax.annotate("18 Sep 2026\n(hari ini)", xy=(d1, 100), xytext=(-6, -26), textcoords="offset points",
+                ha="right", va="top", fontsize=9.3, color="#262626")
 
-    ax.set_xlim(d0 - dt.timedelta(days=1), d1 + dt.timedelta(days=2.6))
-    ax.set_ylim(-8, 112)
+    ax.set_xlim(d0 - dt.timedelta(days=2), d1 + dt.timedelta(days=2))
+    ax.set_ylim(-10, 112)
     ax.set_yticks([0, 25, 50, 75, 100])
     ax.set_yticklabels(["0%", "25%", "50%", "75%", "100%"])
-    ax.xaxis.set_major_locator(mdates.DayLocator(interval=2))
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=7))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
     ax.grid(axis="y", color="#D9D9D9", linewidth=0.8, zorder=0)
     for spine in ("top", "right"):
@@ -443,8 +443,9 @@ def build_document():
         doc,
         "Metodologi. Kurva ini melacak progres LGU & ITB secara khusus — sesuai pertanyaan yang diajukan "
         "Pertamina ('dari sisi LGU persiapannya sudah berapa persen?'), bukan angka gabungan tiga pihak. "
-        "Baru ada dua titik data yang bisa dipertanggungjawabkan secara tertulis: saat checklist kerja "
-        "bersama pertama kali disusun (10 September 2026) dan hari ini (18 September 2026).",
+        "Titik awal diambil dari kunjungan/survey lapangan terakhir ke RU IV Cilacap (9–10 Agustus 2026) "
+        "— belum ada kunjungan lain setelahnya — dibandingkan dengan snapshot kesiapan hari ini "
+        "(18 September 2026).",
         bold_lead="Metodologi. ",
     )
 
@@ -461,7 +462,7 @@ def build_document():
         doc,
         ["Tanggal", "Peristiwa", "Progres LGU & ITB"],
         [
-            ("10 September 2026", "Checklist kerja bersama tiga pihak pertama kali disusun", "0%"),
+            ("9–10 Agustus 2026", "Survey lokasi RU IV Cilacap (kunjungan lapangan terakhir)", "0%"),
             ("18 September 2026 (hari ini)", "Seluruh 15 item tanggung jawab LGU & ITB selesai/siap", "100%"),
         ],
         [1.7, 3.85, 1.25],

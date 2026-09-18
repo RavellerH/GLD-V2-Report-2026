@@ -18,6 +18,7 @@ FILES = [
     ("Laporan_Perkembangan_GLD_FieldTesting_Sertifikasi_17Sep2026.html", "Laporan Perkembangan 17 Sep", False),
     ("Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html", "Pembagian Persiapan Instalasi", False),
     ("Draf_Permintaan_Penyediaan_Material_Instalasi_RU-IV_Cilacap.html", "Draf Permintaan Material", False),
+    ("Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.html", "Kurva-S Persiapan Instalasi", False),
 ]
 
 # Dikeluarkan dari navigasi atas permintaan user (4 Sep) - tidak perlu ditampilkan/dinavigasikan:
@@ -67,8 +68,10 @@ def inject(fname):
     with open(path, encoding="utf-8") as f:
         data = f.read()
 
-    # remove any previously injected nav (idempotent re-run)
-    data = re.sub(re.escape(NAV_START) + r".*?" + re.escape(NAV_END) + r"\n?", "", data, flags=re.S)
+    # remove any previously injected nav (idempotent re-run) - also eat the
+    # leading newline inserted before NAV_START so re-runs don't accumulate
+    # a stray blank line each time
+    data = re.sub(r"\n?" + re.escape(NAV_START) + r".*?" + re.escape(NAV_END) + r"\n?", "", data, flags=re.S)
 
     nav_html = build_nav(fname)
 

@@ -74,6 +74,14 @@ tr:last-child td{border-bottom:0}
 td b{color:var(--ink)}
 .frac{font-family:var(--mono);font-weight:700}
 .frac.g{color:var(--good)} .frac.p{color:var(--warn)}
+.cathead td{background:var(--surface-3);font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--ink-2);font-weight:700;padding:8px 10px}
+.itemtbl td:first-child{font-family:var(--mono);font-size:11px;color:var(--ink-soft);width:22px}
+.itemtbl td:nth-child(3){white-space:nowrap;font-size:11.5px;color:var(--ink-soft)}
+.pill2{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill2.ok{background:var(--good-soft);color:var(--good)}
+.pill2.pend{background:var(--warn-soft);color:var(--warn)}
+@media print{.itemtbl tr{break-inside:avoid}}
 
 .note{font-size:12px;color:var(--ink-2);margin-top:16px;padding:13px 15px;background:var(--surface-2);
   border:1px solid var(--line);border-left:3px solid var(--info);border-radius:6px;line-height:1.65}
@@ -194,6 +202,66 @@ footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
       <tr><td><b>6. Koordinasi &amp; commissioning hari-H</b></td><td class="frac g">3/3</td><td class="frac p">0/2</td><td class="frac p">0/1</td></tr>
       <tr><td><b>Total</b></td><td class="frac g">15/15</td><td class="frac p">0/14</td><td class="frac p">0/11</td></tr>
     </table>
+  </div>
+
+  <div class="card">
+    <h2>Rincian per item (40 item)</h2>
+    <p class="hint">Daftar lengkap item yang menjadi dasar perhitungan di atas. Metodologi: item dihitung <b>selesai</b> bila status tertulis SELESAI/TERSEDIA/SIAP/SUDAH; selain itu dihitung <b>belum</b>. Sumber: "Pembagian Persiapan Instalasi RU IV Cilacap" (17 Sep 2026).</p>
+    <table class="itemtbl">
+      <tr><th>#</th><th>Item</th><th>Pihak</th><th>Status</th><th></th></tr>
+      <tr class="cathead"><td colspan="5">1. Lokasi &amp; Klasifikasi Area</td></tr>
+      <tr><td>1</td><td>Basis desain mounting bracket (L-bracket + U-bolt 2&Prime;/DN50), non-invasive &mdash; tanpa bor/las</td><td>LGU</td><td>SELESAI</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>2</td><td>Gambar CAD (STEP/OBJ) diserahkan ke vendor sbg acuan fabrikasi</td><td>LGU</td><td>SELESAI</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>3</td><td>Dokumen klasifikasi area tertulis resmi (perimeter SRU)</td><td>RU IV</td><td>DALAM PROSES</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>4</td><td>Penetapan titik pasang detail per unit, rute kabel &amp; tinggi kerja</td><td>RU IV</td><td>SURVEY ADA, DETAIL BELUM DIKUNCI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>5</td><td>Verifikasi lapangan &amp; shop drawing titik pasang</td><td>Vendor</td><td>MENUNGGU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>6</td><td>Konfirmasi orientasi bracket (tiang vertikal vs handrail horizontal)</td><td>Vendor</td><td>BELUM DIKONFIRMASI</td><td><span class="pill2 pend">belum</span></td></tr>
+
+      <tr class="cathead"><td colspan="5">2. Dokumen, Izin &amp; Keselamatan Kerja</td></tr>
+      <tr><td>7</td><td>Draft JSA/HSE sbg acuan awal (belum menggantikan TRA/JSA resmi)</td><td>LGU</td><td>TERSEDIA (DRAFT)</td><td><span class="pill2 ok">selesai*</span></td></tr>
+      <tr><td>8</td><td>Checklist kesiapan instalasi lengkap sbg referensi kerja bersama</td><td>LGU</td><td>TERSEDIA</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>9</td><td>Pengesahan TRA/JSA spesifik titik pasang</td><td>RU IV</td><td>BELUM DISAHKAN</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>10</td><td>Izin kerja, izin masuk personel &amp; surat masuk barang</td><td>RU IV</td><td>WAJIB SEBELUM MOBILISASI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>11</td><td>Penugasan resmi vendor pelaksana &amp; konfirmasi kompetensi kerja tinggi</td><td>RU IV</td><td>PERLU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>12</td><td>Daftar kontak PIC (operasi/HSE/control room/IT) &amp; jalur stop-work</td><td>RU IV</td><td>PERLU DIISI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>13</td><td>Personel bersertifikasi kerja di ketinggian &amp; metode kerja aman</td><td>Vendor</td><td>MENUNGGU PENUGASAN RESMI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>14</td><td>Toolbox meeting, APD, LOTO, gas test, koordinasi control room</td><td>Vendor</td><td>PERLU RENCANA KERJA</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>15</td><td>Partisipasi dalam pengesahan TRA/JSA sbg pelaksana fisik</td><td>Vendor</td><td>MENUNGGU</td><td><span class="pill2 pend">belum</span></td></tr>
+
+      <tr class="cathead"><td colspan="5">3. Perangkat, Mekanik &amp; Bracket</td></tr>
+      <tr><td>16</td><td>Unit GLD (3 RU IV + 1 cadangan), firmware &amp; AI on-device</td><td>LGU</td><td>SIAP, VERIFIKASI PRA-MOBILISASI</td><td><span class="pill2 ok">selesai*</span></td></tr>
+      <tr><td>17</td><td>Spesifikasi bracket/U-bolt/fastener sudah diberikan ke vendor</td><td>LGU</td><td>SELESAI</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>18</td><td>Supervisi teknis/QA selama pemasangan fisik</td><td>LGU</td><td>SIAP DILAKSANAKAN</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>19</td><td>Menyetujui metode mounting non-invasive pada struktur existing</td><td>RU IV</td><td>MENUNGGU KONFIRMASI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>20</td><td>Menyediakan akses ke struktur existing titik pasang</td><td>RU IV</td><td>TERGANTUNG SURVEY DETAIL</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>21</td><td>Fabrikasi &amp; pemasangan fisik bracket</td><td>Vendor</td><td>MENUNGGU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>22</td><td>Menyediakan alat kerja, kunci, dan fastener sesuai spesifikasi</td><td>Vendor</td><td>DETAIL FASTENER TERBUKA</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>23</td><td>Melaksanakan pemasangan fisik GLD &amp; Cluster Head</td><td>Vendor</td><td>BELUM DAPAT DIMULAI</td><td><span class="pill2 pend">belum</span></td></tr>
+
+      <tr class="cathead"><td colspan="5">4. Catu Daya &amp; Kabel</td></tr>
+      <tr><td>24</td><td>Spesifikasi catu daya 24VDC &ge;1A per unit GLD sudah ditetapkan</td><td>LGU</td><td>SELESAI</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>25</td><td>Terminasi elektrikal spesifik-GLD, energize, dan commissioning</td><td>LGU</td><td>SIAP DILAKSANAKAN</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>26</td><td>Menyediakan titik catu daya 24VDC di lokasi pasang</td><td>RU IV</td><td>PERLU KONFIRMASI TITIK</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>27</td><td>Menyediakan jalur kabel dari sumber daya ke titik pasang</td><td>RU IV</td><td>MENUNGGU KONFIRMASI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>28</td><td>Instalasi fisik jalur kabel, terminasi mekanik &amp; identifikasi kabel</td><td>Vendor</td><td>MENUNGGU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>29</td><td>Menerapkan LOTO selama pekerjaan instalasi kabel &amp; catu daya</td><td>Vendor</td><td>MENUNGGU RENCANA KERJA</td><td><span class="pill2 pend">belum</span></td></tr>
+
+      <tr class="cathead"><td colspan="5">5. Jaringan &amp; Server</td></tr>
+      <tr><td>30</td><td>Setup PC server, MQTT broker, adapter MQTT&rarr;backend, dan dashboard</td><td>LGU</td><td>SIAP DIKONFIGURASI</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>31</td><td>Router LGU sendiri di lokasi &mdash; jaringan field berjalan independen</td><td>LGU</td><td>SUDAH DIRANCANG</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>32</td><td>Uji lokal &amp; acceptance test sebelum serah terima</td><td>LGU</td><td>CHECKLIST HARI-H DISIAPKAN</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>33</td><td>Menyediakan PC dedicated fisik dekat Gateway</td><td>RU IV</td><td>MENUNGGU PENGADAAN</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>34</td><td>Review keamanan IT bila dashboard dibuka ke intranet kantor (NIC kedua)</td><td>RU IV</td><td>REVIEW FORMAL TERBUKA</td><td><span class="pill2 pend">belum</span></td></tr>
+
+      <tr class="cathead"><td colspan="5">6. Koordinasi &amp; Commissioning Hari-H</td></tr>
+      <tr><td>35</td><td>Memimpin energize &amp; uji fungsional bersama HSE/control room</td><td>LGU</td><td>SIAP DILAKSANAKAN</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>36</td><td>Menyusun kriteria acceptance test (telemetri, alarm/clear, rollback)</td><td>LGU</td><td>SUDAH DISUSUN</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>37</td><td>Menyerahkan log commissioning, konfigurasi akhir &amp; foto titik pasang</td><td>LGU</td><td>SIAP DILAKSANAKAN</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>38</td><td>Menyediakan PIC operasi/HSE/control room saat hari-H</td><td>RU IV</td><td>PERLU DIISI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>39</td><td>Menyetujui rencana energize &amp; menandatangani berita acara commissioning</td><td>RU IV</td><td>MENUNGGU JADWAL</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>40</td><td>Hadir sbg pelaksana fisik hari-H, dikoordinasikan LGU/HSE</td><td>Vendor</td><td>MENUNGGU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
+    </table>
+    <p class="hint" style="margin:14px 0 0">* Item #7 (JSA) dan #16 (unit GLD) dihitung selesai dari sisi LGU, tapi masing-masing masih menyisakan syarat di pihak lain: #7 masih berstatus draft, menunggu pengesahan resmi RU IV (item #9); #16 masih perlu verifikasi pra-mobilisasi (cek serial number/firmware/kondisi fisik) sebelum keberangkatan.</p>
   </div>
 
   <div class="note">

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kurva-S — Persiapan Instalasi RU IV Cilacap</title>
+<style>
+:root{
+  --paper:#F3F3F4; --surface:#FFFFFF; --surface-2:#F7F8F9; --surface-3:#ECEEF1;
+  --ink:#2B2B2B; --ink-2:#676A6C; --ink-soft:#9CA0A3; --line:#E7EAEC; --line-2:#D7DADE;
+  --accent:#1ABB9C; --accent-2:#149174; --accent-soft:#E6F8F4;
+  --good:#1ABB9C; --good-soft:#E6F8F4; --warn:#E5934F; --warn-soft:#FDF1E6;
+  --crit:#E2495A; --crit-soft:#FBE7E9; --info:#1C93C6; --info-soft:#E4F2FA;
+  --charcoal:#2F4050; --charcoal-2:#293846; --charcoal-3:#3A4C5E;
+  --shadow:0 1px 1px rgba(43,43,43,.04),0 2px 5px rgba(43,43,43,.05);
+  --radius:7px; --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+  --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+  --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+  --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+  --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+  --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
+}}
+:root[data-theme="dark"]{
+  --paper:#1A2330; --surface:#212B3A; --surface-2:#26313F; --surface-3:#2E3B4A;
+  --ink:#E7EBEF; --ink-2:#AAB2BC; --ink-soft:#7C8794; --line:#31404F; --line-2:#3C4E5F;
+  --accent:#33D9B4; --accent-2:#7FE8CC; --accent-soft:#153A32;
+  --good:#33D9B4; --good-soft:#123A31; --warn:#F5AD6C; --warn-soft:#3B2A15;
+  --crit:#F1727F; --crit-soft:#3B1A1E; --info:#4FC1EE; --info-soft:#123244;
+  --charcoal:#151D27; --charcoal-2:#0F151C; --charcoal-3:#233040;
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.32);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.topbar{height:4px;background:linear-gradient(90deg,var(--charcoal) 0%,var(--accent) 46%,var(--accent-2) 100%)}
+.wrap{max-width:980px;margin:0 auto;padding:26px 22px 60px}
+.hero{background:var(--charcoal);color:#fff;border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow)}
+.hero h1{margin:0 0 8px;font-size:24px;letter-spacing:-.01em}
+.hero .sub{color:#C9D2DA;margin:0;max-width:74ch;font-size:13.5px;line-height:1.6}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pill{font-family:var(--mono);font-size:11px;font-weight:700;border:1px solid var(--charcoal-3);padding:4px 10px;border-radius:999px;color:#D5DEE7}
+.pill.acc{background:var(--accent);border-color:var(--accent);color:#08221C}
+.themerow{display:flex;justify-content:flex-end;margin-bottom:8px}
+.themebtn{font-family:var(--mono);font-size:11px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-2);color:var(--ink-2);padding:6px 11px;border-radius:999px;box-shadow:var(--shadow)}
+.themebtn:hover{border-color:var(--accent);color:var(--ink)}
+@media print{.themerow{display:none}}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px;margin-top:20px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.kpi.warn::before{background:var(--warn)}
+.kpi .lab{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+.kpi .val{font-family:var(--mono);font-size:30px;font-weight:700;letter-spacing:-.02em;margin-top:4px}
+.kpi .sub{font-size:11.5px;color:var(--ink-soft);margin-top:3px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;margin-top:18px}
+.card h2{font-size:16px;margin:0 0 4px}
+.card .hint{font-size:12px;color:var(--ink-soft);max-width:76ch;margin:0 0 14px;line-height:1.6}
+.chart-scroll{overflow-x:auto}
+svg{display:block;max-width:100%}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+table{width:100%;border-collapse:collapse;margin-top:4px;font-size:12.6px}
+th{background:var(--surface-2);text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);padding:9px 10px;font-weight:700;border-bottom:1px solid var(--line)}
+td{padding:9px 10px;vertical-align:top;border-bottom:1px solid var(--line);color:var(--ink-2)}
+tr:last-child td{border-bottom:0}
+td b{color:var(--ink)}
+.frac{font-family:var(--mono);font-weight:700}
+.frac.g{color:var(--good)} .frac.p{color:var(--warn)}
+
+.note{font-size:12px;color:var(--ink-2);margin-top:16px;padding:13px 15px;background:var(--surface-2);
+  border:1px solid var(--line);border-left:3px solid var(--info);border-radius:6px;line-height:1.65}
+.note b{color:var(--ink)}
+footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
+@media print{.themebtn{display:none}}
+@media(max-width:640px){.wrap{padding:16px}.hero{padding:20px}}
+</style>
+</head>
+<body>
+<!-- GLD-NAV-START -->
+<style>@media print{#gld-cross-nav{display:none !important}}</style>
+<div id="gld-cross-nav" style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
+<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
+<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Detail Assessment/Field Testing</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Desain_Bracket_L_UBolt_GLD_Mounting.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Desain Bracket U-Bolt</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Sertifikasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Checklist Instalasi Cilacap</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Harian_GLD_17September2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Harian 17 Sep</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Persiapan Vendor Instalasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Perkembangan_GLD_FieldTesting_Sertifikasi_17Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Perkembangan 17 Sep</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Pembagian Persiapan Instalasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Draf_Permintaan_Penyediaan_Material_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draf Permintaan Material</a><span style="opacity:.35;color:#8A97A6">&middot;</span><span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Kurva-S Persiapan Instalasi</span>
+</div>
+<!-- GLD-NAV-END -->
+
+<div class="topbar"></div>
+<div class="wrap">
+  <div class="themerow"><button class="themebtn" onclick="toggleTheme()">Ganti tema</button></div>
+  <section class="hero">
+    <h1>Kurva-S — Persiapan Instalasi<br>RU IV Cilacap</h1>
+    <p class="sub">Status kesiapan sebelum mobilisasi &amp; pemasangan fisik GLD di RU IV Cilacap, per kategori kerja dan per pihak (LGU &amp; ITB, Pertamina RU IV, Vendor Instalasi). Ini bukan Kurva-S proyek keseluruhan 9 bulan &mdash; cakupannya khusus tahap persiapan instalasi Cilacap.</p>
+    <div class="meta">
+      <span class="pill acc">REV 1.0 &middot; 18 SEPTEMBER 2026</span>
+      <span class="pill">STATUS: PRA-MOBILISASI</span>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi">
+      <div class="lab">LGU &amp; ITB</div>
+      <div class="val">100%</div>
+      <div class="sub">15 dari 15 item persiapan siap/selesai</div>
+    </div>
+    <div class="kpi warn">
+      <div class="lab">Pertamina RU IV</div>
+      <div class="val">0%</div>
+      <div class="sub">14 item &mdash; dokumen &amp; infrastruktur dalam proses</div>
+    </div>
+    <div class="kpi warn">
+      <div class="lab">Vendor Instalasi</div>
+      <div class="val">0%</div>
+      <div class="sub">11 item &mdash; menunggu penugasan resmi</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">Keseluruhan</div>
+      <div class="val">38%</div>
+      <div class="sub">15 dari 40 item lintas 3 pihak</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Tren persiapan (keseluruhan)</h2>
+    <p class="hint">Dihitung dari checklist kerja bersama 3 pihak. Baru ada 2 titik data yang bisa dipertanggungjawabkan: saat checklist pertama disusun (10 Sep) dan hari ini (18 Sep) &mdash; belum ada pengukuran harian di antaranya, jadi garis di bawah ini menghubungkan dua titik nyata, bukan tren presisi harian.</p>
+    <div class="chart-scroll">
+      <svg viewBox="0 0 700 300" role="img" aria-label="Kurva-S persiapan instalasi RU IV Cilacap">
+        <!-- gridlines -->
+        <g font-family="ui-monospace,monospace" font-size="10.5" fill="var(--ink-soft)">
+          <line x1="70" y1="252" x2="670" y2="252" stroke="var(--line)"/>
+          <line x1="70" y1="20" x2="70" y2="252" stroke="var(--line)"/>
+          <g stroke="var(--line)" stroke-dasharray="2 4">
+            <line x1="70" y1="204" x2="670" y2="204"/>
+            <line x1="70" y1="156" x2="670" y2="156"/>
+            <line x1="70" y1="108" x2="670" y2="108"/>
+            <line x1="70" y1="60" x2="670" y2="60"/>
+          </g>
+          <text x="60" y="256" text-anchor="end">0%</text>
+          <text x="60" y="208" text-anchor="end">25%</text>
+          <text x="60" y="160" text-anchor="end">50%</text>
+          <text x="60" y="112" text-anchor="end">75%</text>
+          <text x="60" y="64" text-anchor="end">100%</text>
+        </g>
+        <!-- ambang meeting RU IV (>95%) -->
+        <line x1="70" y1="30.8" x2="670" y2="30.8" stroke="var(--crit)" stroke-width="1.3" stroke-dasharray="5 4" opacity=".7"/>
+        <text x="668" y="25" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="var(--crit)">95% &mdash; ambang meeting RU IV</text>
+
+        <!-- actual solid: 10 Sep (0%) -> 18 Sep (38%) -->
+        <path d="M120 252 L 590 161.6" fill="none" stroke="var(--accent)" stroke-width="2.6"/>
+        <!-- projection dashed: 18 Sep -> arah target, tanggal belum ditentukan -->
+        <path d="M590 161.6 L 660 118" fill="none" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="5 5"/>
+
+        <circle cx="120" cy="252" r="4.5" fill="var(--ink-soft)"/>
+        <text x="120" y="272" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="var(--ink-2)">10 Sep</text>
+        <text x="120" y="286" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)">checklist disusun</text>
+
+        <circle cx="590" cy="161.6" r="5.5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>
+        <text x="590" y="146" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="700" fill="var(--accent-2)">38%</text>
+        <text x="590" y="272" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="var(--ink-2)">18 Sep (hari ini)</text>
+
+        <text x="640" y="106" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)">rencana &mdash;</text>
+        <text x="640" y="118" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)">jadwal menyusul</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--accent)"></i>Aktual (keseluruhan, gabungan 3 pihak)</span>
+      <span><i class="dot" style="background:var(--ink-soft)"></i>Proyeksi arah (belum bertanggal pasti)</span>
+      <span><i class="dot" style="background:var(--crit)"></i>Ambang meeting lanjutan RU IV (&gt;95%, disebut Pertamina 18 Sep)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Breakdown per kategori &amp; pihak</h2>
+    <p class="hint">Jumlah item persiapan yang sudah selesai/siap dibanding total item pada kategori tsb, per pihak. Rincian penuh per item ada di dokumen "Pembagian Persiapan Instalasi RU IV Cilacap" (17 Sep).</p>
+    <table>
+      <tr><th>Kategori</th><th>LGU &amp; ITB</th><th>Pertamina RU IV</th><th>Vendor Instalasi</th></tr>
+      <tr><td><b>1. Lokasi &amp; klasifikasi area</b></td><td class="frac g">2/2</td><td class="frac p">0/2</td><td class="frac p">0/2</td></tr>
+      <tr><td><b>2. Dokumen, izin &amp; K3</b></td><td class="frac g">2/2</td><td class="frac p">0/4</td><td class="frac p">0/3</td></tr>
+      <tr><td><b>3. Perangkat, mekanik &amp; bracket</b></td><td class="frac g">3/3</td><td class="frac p">0/2</td><td class="frac p">0/3</td></tr>
+      <tr><td><b>4. Catu daya &amp; kabel</b></td><td class="frac g">2/2</td><td class="frac p">0/2</td><td class="frac p">0/2</td></tr>
+      <tr><td><b>5. Jaringan &amp; server</b></td><td class="frac g">3/3</td><td class="frac p">0/2</td><td>&mdash;</td></tr>
+      <tr><td><b>6. Koordinasi &amp; commissioning hari-H</b></td><td class="frac g">3/3</td><td class="frac p">0/2</td><td class="frac p">0/1</td></tr>
+      <tr><td><b>Total</b></td><td class="frac g">15/15</td><td class="frac p">0/14</td><td class="frac p">0/11</td></tr>
+    </table>
+  </div>
+
+  <div class="note">
+    <b>Langkah berikutnya:</b> pengesahan TRA/JSA spesifik titik pasang, penugasan resmi vendor instalatur oleh Pertamina RU IV, dan penyediaan infrastruktur di lokasi (titik catu daya, PC server, akses struktur) &mdash; ketiganya berada di sisi Pertamina RU IV &amp; vendor. Dari sisi LGU, seluruh item persiapan yang menjadi tanggung jawab kami sudah selesai. Kami usulkan meeting online bersama vendor instalatur dan RU IV untuk menyepakati jadwal dan menutup item-item ini bersama.
+  </div>
+
+  <footer>
+    Dokumen ini merangkum "Pembagian Persiapan Instalasi RU IV Cilacap" (17 Sep 2026) dan "Checklist Kesiapan Instalasi RU IV Cilacap" (10 Sep 2026). Bukan izin kerja, sertifikat, atau pengganti persetujuan HSE/operasi Pertamina. Instalasi permanen di area berbahaya tetap menunggu gate keselamatan &amp; sertifikasi terkait.
+  </footer>
+</div>
+<script>
+function toggleTheme(){
+  const r=document.documentElement;
+  const cur=r.getAttribute('data-theme');
+  const sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+  let next;
+  if(!cur) next = sysDark ? 'light' : 'dark';
+  else if(cur==='dark') next='light';
+  else next='dark';
+  r.setAttribute('data-theme', next);
+  try{localStorage.setItem('gld-theme', next);}catch(e){}
+}
+try{
+  const saved=localStorage.getItem('gld-theme');
+  if(saved) document.documentElement.setAttribute('data-theme', saved);
+}catch(e){}
+</script>
+</body>
+</html>

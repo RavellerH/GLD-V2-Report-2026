@@ -18,6 +18,7 @@ FILES = [
     ("Laporan_Perkembangan_GLD_FieldTesting_Sertifikasi_17Sep2026.html", "Laporan Perkembangan 17 Sep", False),
     ("Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html", "Pembagian Persiapan Instalasi", False),
     ("Draf_Permintaan_Penyediaan_Material_Instalasi_RU-IV_Cilacap.html", "Draf Permintaan Material", False),
+    ("Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.html", "Kurva-S Persiapan Instalasi", False),
 ]
 
 # Dikeluarkan dari navigasi atas permintaan user (4 Sep) - tidak perlu ditampilkan/dinavigasikan:

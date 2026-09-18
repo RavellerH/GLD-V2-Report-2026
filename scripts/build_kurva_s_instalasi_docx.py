@@ -34,33 +34,28 @@ def build_chart():
 
     d0 = dt.date(2026, 9, 10)
     d1 = dt.date(2026, 9, 18)
-    d2 = dt.date(2026, 9, 24)  # projection endpoint (undated, visual only)
 
     fig, ax = plt.subplots(figsize=(9.6, 4.7), dpi=200)
 
-    # actual line (solid black)
-    ax.plot([d0, d1], [0, 38], color="#000000", linewidth=2.6, marker="o",
+    # actual line (solid black) - LGU & ITB readiness only (what was asked)
+    ax.plot([d0, d1], [0, 100], color="#000000", linewidth=2.6, marker="o",
              markersize=7, markerfacecolor="#000000", zorder=5)
-    # projection (dashed gray, direction only - no fixed date)
-    ax.plot([d1, d2], [38, 62], color="#595959", linewidth=1.8, linestyle=(0, (5, 4)), zorder=4)
 
-    # 95% threshold reference line
+    # 95% threshold reference line (disebutkan Pertamina utk syarat agenda meeting RU IV)
     ax.axhline(95, color="#000000", linewidth=1.1, linestyle=(0, (6, 4)), alpha=0.65, zorder=2)
-    ax.text(d2, 96.5, "95% — ambang meeting lanjutan RU IV", ha="right", va="bottom",
-            fontsize=9.5, color="#000000", fontweight="bold")
+    ax.text(d0 + dt.timedelta(hours=6), 91, "95% — ambang meeting lanjutan RU IV (disebut Pertamina)",
+            ha="left", va="top", fontsize=9.2, color="#000000", fontweight="bold")
 
     # data point labels
     ax.annotate("10 Sep 2026\nchecklist disusun\n0%", xy=(d0, 0), xytext=(0, -38),
                 textcoords="offset points", ha="center", va="top", fontsize=9.3, color="#262626")
-    ax.annotate("38%", xy=(d1, 38), xytext=(0, 12), textcoords="offset points",
-                ha="center", va="bottom", fontsize=13, fontweight="bold", color="#000000")
-    ax.annotate("18 Sep 2026 (hari ini)", xy=(d1, 38), xytext=(0, -38),
-                textcoords="offset points", ha="center", va="top", fontsize=9.3, color="#262626")
-    ax.annotate("rencana —\njadwal menyusul", xy=(d2, 62), xytext=(-6, 6),
-                textcoords="offset points", ha="right", va="bottom", fontsize=9, color="#595959")
+    ax.annotate("100%", xy=(d1, 100), xytext=(18, 4), textcoords="offset points",
+                ha="left", va="center", fontsize=14, fontweight="bold", color="#000000")
+    ax.annotate("18 Sep 2026\n(hari ini)", xy=(d1, 100), xytext=(18, -22), textcoords="offset points",
+                ha="left", va="top", fontsize=9.3, color="#262626")
 
-    ax.set_xlim(d0 - dt.timedelta(days=1), d2 + dt.timedelta(days=1))
-    ax.set_ylim(-8, 108)
+    ax.set_xlim(d0 - dt.timedelta(days=1), d1 + dt.timedelta(days=2.6))
+    ax.set_ylim(-8, 112)
     ax.set_yticks([0, 25, 50, 75, 100])
     ax.set_yticklabels(["0%", "25%", "50%", "75%", "100%"])
     ax.xaxis.set_major_locator(mdates.DayLocator(interval=2))
@@ -446,10 +441,10 @@ def build_document():
     add_heading(doc, "2  Tren Persiapan", 1)
     add_paragraph(
         doc,
-        "Metodologi. Baru ada dua titik data yang bisa dipertanggungjawabkan secara tertulis: saat checklist "
-        "kerja bersama pertama kali disusun (10 September 2026) dan hari ini (18 September 2026). Belum ada "
-        "pengukuran harian di antara keduanya, sehingga tren di bawah ini menghubungkan dua titik nyata, "
-        "bukan proyeksi presisi harian.",
+        "Metodologi. Kurva ini melacak progres LGU & ITB secara khusus — sesuai pertanyaan yang diajukan "
+        "Pertamina ('dari sisi LGU persiapannya sudah berapa persen?'), bukan angka gabungan tiga pihak. "
+        "Baru ada dua titik data yang bisa dipertanggungjawabkan secara tertulis: saat checklist kerja "
+        "bersama pertama kali disusun (10 September 2026) dan hari ini (18 September 2026).",
         bold_lead="Metodologi. ",
     )
 
@@ -459,24 +454,25 @@ def build_document():
     cap = doc.add_paragraph()
     cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
     cap.paragraph_format.space_after = Pt(12)
-    r = cap.add_run("Grafik 1. Kurva-S persiapan instalasi RU IV Cilacap — garis solid: aktual, garis putus-putus: proyeksi arah (belum bertanggal pasti)")
+    r = cap.add_run("Grafik 1. Kurva-S kesiapan LGU & ITB, persiapan instalasi RU IV Cilacap")
     set_run_font(r, size=8.3, italic=True, color=MID)
 
     add_table(
         doc,
-        ["Tanggal", "Peristiwa", "Progres keseluruhan"],
+        ["Tanggal", "Peristiwa", "Progres LGU & ITB"],
         [
             ("10 September 2026", "Checklist kerja bersama tiga pihak pertama kali disusun", "0%"),
-            ("18 September 2026 (hari ini)", "Snapshot terkini — dasar dokumen ini", "38%"),
-            ("Belum ditentukan", "Rencana lanjutan — menyusul pengesahan TRA/JSA, penugasan vendor resmi, dan penyediaan infrastruktur oleh RU IV", "→ menuju 95%*"),
+            ("18 September 2026 (hari ini)", "Seluruh 15 item tanggung jawab LGU & ITB selesai/siap", "100%"),
         ],
         [1.7, 3.85, 1.25],
         font_size=9,
     )
     add_paragraph(
         doc,
-        "* Ambang yang disebutkan Pertamina (18 September 2026): meeting lanjutan bersama RU IV baru akan "
-        "diagendakan setelah progres keseluruhan melewati 95%.",
+        "* Ambang yang disebutkan Pertamina pada percakapan 18 September 2026 (>95% agar meeting lanjutan "
+        "bersama RU IV dapat diagendakan) sudah terlampaui dari sisi kesiapan LGU & ITB. Ini tidak mencakup "
+        "kesiapan Pertamina RU IV dan Vendor Instalasi, yang saat dokumen ini disusun masih 0% (lihat Bagian 1 "
+        "dan 3) — perizinan dan penugasan resmi tetap berada di luar kendali LGU.",
         size=8.6, color=MID, space_after=10,
     )
 

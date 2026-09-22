@@ -70,7 +70,7 @@ footer{font-family:Arial,Helvetica,sans-serif;font-size:10.5px;color:var(--muted
 <table class="docctl">
 <tr><th>Document title</th><td>GLD Instruction Manual</td></tr>
 <tr><th>Document number</th><td>LGU/GLD/INSTR-MAN/2026-001</td></tr>
-<tr><th>Revision</th><td>0.1 (Working Draft)</td></tr>
+<tr><th>Revision</th><td>0.2 (Working Draft)</td></tr>
 <tr><th>Date</th><td>22 September 2026</td></tr>
 <tr><th>Prepared by</th><td>LAPI Ganesha Utama (LGU), with IoT Lab &amp; Physics Lab ITB</td></tr>
 <tr><th>Object of this manual</th><td>Node Sensor (GLD) only &mdash; Cluster Head and Gateway are separate devices, referenced only for system context</td></tr>
@@ -82,6 +82,7 @@ footer{font-family:Arial,Helvetica,sans-serif;font-size:10.5px;color:var(--muted
 <table class="revtable">
 <tr><th style="width:90px">Revision</th><th style="width:110px">Date</th><th>Description</th></tr>
 <tr><td>0.1</td><td>22 Sep 2026</td><td>Initial working draft, structured from the reference manual of a comparable certified gas detector (New Cosmos KD-12/KD-12R) and populated with GLD's confirmed design data.</td></tr>
+<tr><td>0.2</td><td>22 Sep 2026</td><td>Added safety-warning, operating-mode (Inference/Dataset/Nulling), and commissioning-equipment content drafted 18 Sep 2026, cross-referenced with &sect;2.6.g of the certification document.</td></tr>
 </table>
 
 <div class="toc">
@@ -123,6 +124,11 @@ footer{font-family:Arial,Helvetica,sans-serif;font-size:10.5px;color:var(--muted
 <li>Any cable entry device and blanking element used with GLD in a hazardous area must be of a type of protection and certification suitable for the intended zone and correctly installed. GLD's own cable entry specification is currently <span class="status-pending">Pending confirmation</span> (Section 13); do not assume a specific cable gland is suitable without written confirmation.</li>
 <li>Do not disassemble the product or modify its enclosure, wiring, or firmware. Doing so may compromise any explosion-protection measures once certification is finalized, and will void any future certification coverage.</li>
 <li>Be sure to ground the unit in accordance with the site's electrical safety requirements to prevent electric shock.</li>
+<li>Only trained and authorized personnel may install, commission, operate, inspect, or maintain GLD.</li>
+<li>Isolate and verify the 24&nbsp;VDC supply before opening the enclosure or changing wiring. Apply the site lockout/tagout (LOTO) procedure.</li>
+<li>Perform alarm tests with appropriate site controls and hearing protection where an audible alarm device is connected.</li>
+<li>Perform sensor nulling only in confirmed clean air, and accept the result only when all eight sensors report a complete 8/8 pass (see Section 9, Operating Modes); otherwise correct the cause and repeat.</li>
+<li>Remove the unit from service if there is visible damage, water ingress, an unresolved sensor fault, failed alarm proof, or a loss of protective-earth continuity.</li>
 </ul>
 </div>
 <div class="box caution"><span class="lbl">Caution</span>
@@ -132,6 +138,7 @@ footer{font-family:Arial,Helvetica,sans-serif;font-size:10.5px;color:var(--muted
 <li>Handle the sensor unit and enclosure with care. The gas-sensing elements are directly exposed to ambient air (not enclosed) and can be damaged by physical impact, dust ingress, or contact with liquids.</li>
 <li>Mounting to existing plant structures must not involve drilling or welding unless a different method has been separately approved in writing by the site (RU IV). See Section 5, Installation.</li>
 <li>Fasteners used for mounting must use a material and grade suitable for the site environment (anti-corrosion required); the specific fastener grade for GLD's bracket is currently <span class="status-pending">Pending confirmation</span> (Section 13).</li>
+<li>Do not create new cable entries, enlarge an entry, leave unused entries open, or substitute a general-purpose gland once a certified entry device is specified (Section 13).</li>
 </ul>
 </div>
 <div class="box note"><span class="lbl">Note</span>
@@ -264,6 +271,17 @@ footer{font-family:Arial,Helvetica,sans-serif;font-size:10.5px;color:var(--muted
 <div class="box note"><span class="lbl">Note</span>
 <p style="margin:0">The current 3-class model does not yet cover CO&#8322;, Benzene, CO, or H&#8322;S. Expansion of gas coverage depends on the availability of reference gas samples for on-site training (see Section 11, Maintenance).</p>
 </div>
+<h3>9.1 Operating Modes</h3>
+<p>GLD firmware distinguishes three operating modes:</p>
+<table class="spec">
+<tr><th>Mode</th><th>Purpose</th><th>Use restriction</th></tr>
+<tr><td>Inference</td><td>Normal gas-class inference and alarm operation</td><td>Production operating mode after commissioning</td></tr>
+<tr><td>Dataset</td><td>Engineering / data-collection activity</td><td>Not a substitute for approved detection operation</td></tr>
+<tr><td>Nulling</td><td>Sensor baseline / calibration activity</td><td>Clean air only; perform under an approved procedure; require a complete 8/8 result (see Section 11.2)</td></tr>
+</table>
+<div class="box caution"><span class="lbl">Caution</span>
+<p style="margin:0">Do not change firmware, model files, alarm thresholds, or calibration parameters from the field without controlled approval and a documented rollback path. Before each operating period, check power, enclosure condition, diagnostic status, communication status, and the absence of active faults. Treat an alarm as a real process-safety event until the site response procedure establishes otherwise.</p>
+</div>
 
 <h2><span class="no">10.</span>Status Indication and Fault Conditions</h2>
 <p>GLD has no on-unit digital display or numeric fault-code readout comparable to a conventional stand-alone gas detector. Status and fault information are available through two channels:</p>
@@ -286,8 +304,22 @@ footer{font-family:Arial,Helvetica,sans-serif;font-size:10.5px;color:var(--muted
 <p>A formal inspection frequency (e.g., monthly/quarterly/annual, as used by comparable certified detectors) has not yet been established for GLD and should be defined by LGU together with Pertamina RU IV as part of the operational handover.</p>
 <h3>11.2 Sensor Response Verification</h3>
 <p>GLD's sensor response is verified using the project's portable gas test chamber and reference gas samples, following the project's on-site chamber-based methodology: the chamber is brought to the deployment location, a controlled gas sample is introduced, and the sensor/classifier response is checked and, where needed, the on-device model is retrained using the locally captured data. This differs from the zero/span calibration procedure used by conventional analog gas detectors, since GLD does not have an analog output to calibrate; instead, its AI classifier is verified and retrained against reference gas exposure.</p>
+<p>Before returning a unit to Inference mode after verification or maintenance, run <b>Nulling</b> mode (Section 9.1) in confirmed clean air. Accept the result only when all eight sensors report a complete 8/8 pass; otherwise correct the cause and repeat before placing the unit back in service.</p>
 <h3>11.3 Sensor Replacement and Service Life</h3>
 <p>The metal-oxide (MQ-series) sensing elements used in GLD are consumable components with a finite service life, as is typical for this sensor technology. A specific recommended replacement interval for GLD's sensors has not yet been established and should not be assumed to match the service life figures published for other sensor technologies (e.g., electrochemical or NDIR sensors used in other detector models). See Section 16, Service Life.</p>
+<h3>11.4 Commissioning and Test Equipment</h3>
+<p>The following equipment is used to commission and functionally verify a GLD unit before it is placed in service:</p>
+<table class="spec">
+<tr><th>Equipment</th><th>Purpose</th></tr>
+<tr><td>Regulated 24&nbsp;VDC power supply</td><td>Provides a stable 24&nbsp;VDC supply during commissioning and functional testing.</td></tr>
+<tr><td>Digital multimeter</td><td>Measures actual voltage, verifies polarity and continuity, and supports grounding/bonding verification.</td></tr>
+<tr><td>Calibrated gas source / gas test kit</td><td>Provides the required gas types to verify correct sensor response.</td></tr>
+<tr><td>Gas test chamber</td><td>Provides a controlled gas-exposure environment for reproducible test conditions (see Section 11.2).</td></tr>
+<tr><td>Alarm load / relay simulator</td><td>Verifies that the alarm output and connected electrical load operate correctly.</td></tr>
+<tr><td>LoRa peer / gateway</td><td>Verifies that data transmitted by GLD is successfully received by the intended system.</td></tr>
+<tr><td>Laptop and approved software</td><td>Reviews diagnostic information, configuration, logging, and firmware identification; stores commissioning and test evidence.</td></tr>
+<tr><td>Calibrated torque screwdriver</td><td>Ensures glands, terminals, enclosure fasteners, and grounding connections are tightened to approved torque values (Section 13).</td></tr>
+</table>
 
 <h2><span class="no">12.</span>Troubleshooting</h2>
 <table class="spec">
@@ -372,7 +404,7 @@ footer{font-family:Arial,Helvetica,sans-serif;font-size:10.5px;color:var(--muted
 </div>
 
 <footer>
-Prepared by LAPI Ganesha Utama (LGU) in collaboration with IoT Lab &amp; Physics Lab, Institut Teknologi Bandung (ITB), for the GLD Tahap 2 program with PT Pertamina Patra Niaga. This document is a working draft (Rev 0.1, 22 September 2026) structured from the instruction manual of a comparable certified diffusion-type gas detector, and is not yet an approved operational manual. Fields marked &ldquo;Pending confirmation&rdquo; must not be relied upon for procurement, installation, or certification purposes without further verification.
+Prepared by LAPI Ganesha Utama (LGU) in collaboration with IoT Lab &amp; Physics Lab, Institut Teknologi Bandung (ITB), for the GLD Tahap 2 program with PT Pertamina Patra Niaga. This document is a working draft (Rev 0.2, 22 September 2026) structured from the instruction manual of a comparable certified diffusion-type gas detector, and is not yet an approved operational manual. Fields marked &ldquo;Pending confirmation&rdquo; must not be relied upon for procurement, installation, or certification purposes without further verification.
 </footer>
 
 </main>

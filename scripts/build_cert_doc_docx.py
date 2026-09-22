@@ -203,8 +203,8 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "0.2"
-DOC_DATE = "17 September 2026"
+REVISION = "0.4"
+DOC_DATE = "22 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -245,7 +245,8 @@ meta_rows = [
     ("Status", "Working Document \u2014 Draft for Internal Review"),
     ("Classification", "Confidential \u2014 prepared for ATEX/IECEx certification body (ExCB) submission"),
     ("Certification subject", "Node Sensor (GLD) \u2014 V2"),
-    ("Manufacturer", "PT LAPI Ganesha Utama"),
+    ("Manufacturer", "PT Galaksi Megatama Indonesia"),
+    ("Design & development authority", "PT LAPI Ganesha Utama"),
     ("Technical partner", "Institute of Technology Bandung"),
     ("Reference checklist", "IECEx/ATEX Certification Information Requirements"),
 ]
@@ -276,9 +277,18 @@ for i, h in enumerate(["Revision", "Date", "Description"]):
 for rev, rev_date, rev_desc in [
     ("0.1", "11 September 2026",
      "Initial issue \u2014 Section 2 (Items 1\u20136) and Section 3."),
-    (REVISION, DOC_DATE,
+    ("0.2", "17 September 2026",
      "Section 1, Basic Information (Application and Organization), added \u2014 Items 1.1\u20131.5. "
      "Document now covers all three sections of the checklist."),
+    ("0.3", "22 September 2026",
+     "Manufacturer-of-record for Section 1 changed to PT Galaksi Megatama Indonesia (legal documents "
+     "on file); PT LAPI Ganesha Utama recorded as design and development authority. Section 2.6.g "
+     "draft content (safety warnings, installation procedures, operating modes, commissioning "
+     "equipment) added."),
+    (REVISION, DOC_DATE,
+     "Candidate enclosure component data (ADC12 die-cast alloy, M20\u00d71.5 cable entry, "
+     "electrostatic-safety parameters) added to Sections 2.3.c, 2.6.a, and 2.6.c, sourced from a "
+     "supplier reference drawing in the casing partner's supply chain."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -349,8 +359,9 @@ note_box(
     "Scope of this document. This is a compilation of design evidence and an honest readiness assessment "
     "against the ExCB checklist, prepared in support of a future submission — it is not itself a "
     "certificate and does not constitute self-certification. The final enclosure/casing (material selection, "
-    "manufacture, gasket, and cable entry) is being developed by an external mechanical/casing partner and is "
-    "not yet in the authors' possession; items that depend on that design (material datasheets, manufacturing "
+    "manufacture, gasket, and cable entry) is being developed by an external mechanical/casing partner (PT "
+    "Galaksi Megatama Indonesia — legal identity confirmed, Section 1.4) and is not yet in the authors' "
+    "possession; items that depend on that design (material datasheets, manufacturing "
     "process description, explosion-protection calculations) are reported as not yet available for that "
     "reason, not because the work has stalled. The product is still at from-scratch development/prototype "
     "stage — no finalized, serialized units exist yet, which is why a formal sample register (Section "
@@ -387,6 +398,18 @@ note_box("How this section is presented. The items below are administrative rath
          "engineering output. Every required field is therefore set out in full so that it can be collected in a "
          "single pass, with its current status stated plainly. No field has been filled with an assumed or "
          "placeholder value.", shade=INFO_SHADE)
+note_box("Manufacturer-of-record for this section: PT Galaksi Megatama Indonesia. This section reports the "
+         "legal/corporate particulars of PT Galaksi Megatama Indonesia as the Manufacturer named in the ExCB "
+         "application, since it holds the Indonesian industrial manufacturing business license (NIB) relevant to "
+         "fabricating the equipment (KBLI 25119/25120/28221/25920 — metal products, pressurized-vessel-class "
+         "containers, metalworking machinery, and special metal-treatment services). PT LAPI Ganesha Utama (LGU) "
+         "is the design and development authority responsible for the electronics, firmware, and system "
+         "engineering of the GLD, working with the Institute of Technology Bandung as technical partner; it is "
+         "recorded as such throughout Sections 2 and 3. This attribution reflects a working decision recorded 22 "
+         "September 2026 based on PT Galaksi's legal documents (deed of establishment, NIB, NPWP, MOLHR "
+         "ratification decree, tax registration certificate) supplied to the authors — it has not yet been "
+         "confirmed directly with either company's officers as the final arrangement for the ExCB submission and "
+         "should be verified before formal filing.", shade=WARN_SHADE)
 
 p("Original excerpt, Section 1 — source: IECEx ATEX Certification Information Requirements (ExCB):",
   size=9.5, bold=True, color=NAVY, space_after=2)
@@ -402,12 +425,14 @@ make_table(
     [
         ["1.1 Application form (ExCB template)", ("__status__", ("Template not yet received", "gap")),
          "Issued by the ExCB"],
-        ["1.2 Business license / company registration", ("__status__", ("To be provided", "gap")),
-         "Manufacturer — legal/administration"],
-        ["1.3 Organizational chart and contact information", ("__status__", ("To be provided", "gap")),
-         "Manufacturer — management"],
+        ["1.2 Business license / company registration", ("__status__", ("Partially available", "wip")),
+         "Manufacturer (PT Galaksi Megatama Indonesia) — legal documents now on file; a few particulars still open"],
+        ["1.3 Organizational chart and contact information", ("__status__", ("Partially available", "wip")),
+         "Manufacturer — Board of Directors/Commissioners names known from the deed; a full org chart and named "
+         "ExCB contacts remain to be provided"],
         ["1.4 Manufacturing plant address and facility profile", ("__status__", ("Partially available", "wip")),
-         "Manufacturer + external casing partner"],
+         "Manufacturer's registered office and production-site addresses now on file; floor profile, process "
+         "capability, and quality system still pending"],
         ["1.5 ISO 9001 certificate, quality manual, procedure index", ("__status__", ("To be confirmed", "gap")),
          "Manufacturer — quality function"],
     ],
@@ -422,7 +447,10 @@ p("The application form is issued by the certification body as a template and ha
 make_table(
     ["Application field", "Value", "Status", "Reference"],
     [
-        ["Applicant / manufacturer", "PT LAPI Ganesha Utama", ("__status__", ("Confirmed", "ok")), ""],
+        ["Applicant / manufacturer", "PT Galaksi Megatama Indonesia", ("__status__", ("Confirmed", "ok")),
+         "Section 1.2"],
+        ["Design and development authority", "PT LAPI Ganesha Utama (LGU)",
+         ("__status__", ("Confirmed", "ok")), ""],
         ["Technical development partner",
          "Institute of Technology Bandung — IoT Laboratory & Physics Laboratory",
          ("__status__", ("Confirmed", "ok")), ""],
@@ -455,23 +483,35 @@ doc.add_heading("1.2 · Business License / Company Registration Certificate", le
 make_table(
     ["Required particular", "Status", "Remarks"],
     [
-        ["Registered legal name", ("__status__", ("Available", "ok")), "PT LAPI Ganesha Utama."],
-        ["Legal form and shareholding status", ("__status__", ("To be provided", "gap")),
-         "As stated in the deed of establishment."],
-        ["Business registration number", ("__status__", ("To be provided", "gap")),
-         "Business identification number issued under Indonesian company registration."],
-        ["Taxpayer identification number", ("__status__", ("To be provided", "gap")), ""],
-        ["Deed of establishment and latest amendment", ("__status__", ("To be provided", "gap")),
-         "Including the ministerial approval/registration record."],
-        ["Registered (domicile) address", ("__status__", ("To be provided", "gap")),
-         "Registered address as it appears on the certificate; required even where it differs from the "
-         "manufacturing address in 1.4."],
-        ["Scope of business activity relevant to this product", ("__status__", ("To be provided", "gap")),
-         "The registered activity classification should be consistent with manufacture of the equipment being "
-         "certified."],
-        ["Scanned certificate, with English translation where requested", ("__status__", ("To be provided", "gap")),
-         "Certification bodies commonly accept a scanned copy; some require a translation or a notarized copy. "
-         "To be confirmed with the ExCB."],
+        ["Registered legal name", ("__status__", ("Available", "ok")), "PT Galaksi Megatama Indonesia."],
+        ["Legal form and shareholding status", ("__status__", ("Available", "ok")),
+         "Perseroan Terbatas (limited liability company), National Private / PMDN (domestic investment), Small "
+         "Enterprise scale. Deed No. 52 (22 Sep 2022, Notary Steffi Alphanie, S.H., M.Kn., Cilegon City): "
+         "President Director Nur Rohman (2,250 shares), Director Antonius Prasetyo (2,625 shares), Commissioner "
+         "Crisa Andi Sujatmiko (2,625 shares); authorized capital Rp300,000,000, paid-up Rp75,000,000."],
+        ["Business registration number", ("__status__", ("Available", "ok")),
+         "NIB (Business Identification Number) 0510220020593, issued 5 Oct 2022 under Indonesia's risk-based "
+         "business licensing (OSS) system."],
+        ["Taxpayer identification number", ("__status__", ("Available", "ok")),
+         "NPWP 61.126.496.1-427.000 (16-digit: 0611264961427000), Tax Service Office of Pratama West Bekasi, "
+         "registered 29 Sep 2022."],
+        ["Deed of establishment and latest amendment", ("__status__", ("Partially available", "wip")),
+         "Deed of Establishment No. 52 dated 22 Sep 2022, ratified by Ministry of Law and Human Rights Decree No. "
+         "AHU-0067398.AH.01.01.Year 2022 (29 Sep 2022, Company Register No. AHU-0194149.AH.01.11.Year 2022). No "
+         "subsequent amendment deed has been supplied; whether one exists is unconfirmed."],
+        ["Registered (domicile) address", ("__status__", ("Available", "ok")),
+         "Plaza Summarecon Bekasi, Jl. Bulevar Ahmad Yani Kav. K.01, Level 7, Harapanmulya Village, Medansatria "
+         "Sub-district, Bekasi City, West Java, Postal Code 17143."],
+        ["Scope of business activity relevant to this product", ("__status__", ("Partially available", "wip")),
+         "NIB lists KBLI 25119 (other prefabricated metal products for construction), 25120 (tanks, reservoirs "
+         "and containers of metal – explicitly including pressurized gas cylinders), 28221 (machinery/machine "
+         "tools for metalworking), and 25920 (special metal-treatment industrial services), among others, at "
+         "production sites in Cikarang Selatan and Mustikajaya, Bekasi. This is a general metal-fabrication "
+         "license; it does not by itself constitute an Ex-specific manufacturing qualification."],
+        ["Scanned certificate, with English translation where requested", ("__status__", ("Available", "ok")),
+         "NIB, NPWP, Deed of Establishment, MOLHR ratification decree, and Certificate of Registration (SKT) are "
+         "on file with sworn English translations (Fikri Said Obed, S.S., Sworn Translator, Jakarta, 19 Sep "
+         "2026). Notarization/legalization requirements for ExCB submission to be confirmed."],
     ],
     col_widths=[2.1, 1.3, 3.1],
 )
@@ -480,11 +520,17 @@ doc.add_heading("1.3 · Organizational Chart and Contact Information", level=2)
 make_table(
     ["Required particular", "Status", "Remarks"],
     [
-        ["Organizational chart", ("__status__", ("To be provided", "gap")),
-         "Should show the units responsible for design, production, and quality, and the reporting line between "
-         "them."],
-        ["Authorized signatory for the application", ("__status__", ("To be provided", "gap")),
-         "Name and position of the officer empowered to sign on behalf of the manufacturer."],
+        ["Organizational chart", ("__status__", ("Partially available", "wip")),
+         "Statutory Board of Directors/Commissioners known from the deed of establishment (below); a functional "
+         "chart showing the units responsible for design, production, and quality, and the reporting line "
+         "between them, has not been provided."],
+        ["Board of Directors and Board of Commissioners", ("__status__", ("Available", "ok")),
+         "President Director: Nur Rohman. Director: Antonius Prasetyo. Commissioner: Crisa Andi Sujatmiko. "
+         "(Deed No. 52, 22 Sep 2022.)"],
+        ["Authorized signatory for the application", ("__status__", ("To be confirmed", "wip")),
+         "The President Director (Nur Rohman) is the statutory officer entitled to represent the company "
+         "(Articles of Association, Art. 12.5.a); whether he is the specific individual who will sign the ExCB "
+         "application is not yet confirmed."],
         ["Certification project contact", ("__status__", ("To be provided", "gap")),
          "Name, position, e-mail, and telephone — the single point of contact for ExCB correspondence."],
         ["Technical contact for the product", ("__status__", ("To be provided", "gap")),
@@ -501,21 +547,30 @@ make_table(
 )
 
 doc.add_heading("1.4 · Manufacturing Plant Address and Introduction of Production Facilities", level=2)
-p("The structure of the supply chain is known and is stated below; the addresses and the facility profile "
-  "itself are not yet documented. The product is at prototype stage, and the location for serial production has "
-  "not been fixed — this is stated as a fact of the current development phase, not as an omission from the "
-  "file.")
+p("The Manufacturer's registered office and NIB-listed production-site addresses are now on file (below). "
+  "Facility floor profile, process capability, and quality-system detail are not yet documented. The product is "
+  "at prototype stage, and the specific location where serial units will be produced has not been fixed — this "
+  "is stated as a fact of the current development phase, not as an omission from the file.")
 make_table(
     ["Production element", "Status", "Remarks"],
     [
+        ["Manufacturer's registered office and production sites", ("__status__", ("Available", "ok")),
+         "PT Galaksi Megatama Indonesia — registered office: Plaza Summarecon Bekasi, Jl. Bulevar Ahmad Yani "
+         "Kav. K.01, Level 7, Bekasi City, West Java. NIB-registered production sites: Jl. Kp. Jatipilar, "
+         "Cikarang Selatan, Bekasi Regency; and Jl. WR Supratman, Mustikajaya, Bekasi City. NIB lists "
+         "metalworking KBLI including 25120 (Manufacture of Tanks, Reservoirs and Containers of Metal – "
+         "explicitly covers pressurized gas cylinders), 25119, 28221 (metalworking machinery), and 25920 "
+         "(special metal-treatment services). This confirms a licensed general metal-fabrication business — it "
+         "is not an Ex-certified enclosure manufacturer license, and no ISO 9001 or Ex-specific quality "
+         "certificate has been supplied."],
         ["Printed circuit board fabrication and assembly", ("__status__", ("Partially available", "wip")),
-         "The electronic design is maintained as a native EasyEDA/JLCPCB project and the component supply chain "
-         "is referenced to LCSC supplier part numbers throughout the bill of materials (Section 2.6.b). The "
-         "fabrication and assembly provider, and its address, remain to be confirmed in writing."],
-        ["Enclosure / casing manufacture", ("__status__", ("To be provided", "gap")),
-         "Developed and manufactured by an external mechanical partner (see “About this document”). "
-         "That partner's identity, plant address, and process capability are to be supplied by the partner and "
-         "are prerequisites for Sections 2.6.c and 2.6.d."],
+         "The electronic design is maintained by LGU as a native EasyEDA/JLCPCB project and the component supply "
+         "chain is referenced to LCSC supplier part numbers throughout the bill of materials (Section 2.6.b). "
+         "The fabrication and assembly provider, and its address, remain to be confirmed in writing."],
+        ["Enclosure / casing manufacture", ("__status__", ("Partially available", "wip")),
+         "Enclosure development and manufacture sits with the Manufacturer, PT Galaksi Megatama Indonesia "
+         "(identity and registered addresses above). Plant floor profile, process capability, and Ex-specific "
+         "process controls remain to be provided (see remaining rows below and Sections 2.6.c/2.6.d)."],
         ["Final assembly, configuration, and functional test", ("__status__", ("Prototype stage", "wip")),
          "Currently carried out in the development laboratory environment. The production location for serial "
          "units has not been fixed."],
@@ -594,7 +649,8 @@ doc.add_heading("2.2 \u00b7 Product Name, Model, and Specification List", level=
 spec_rows = [
     ("Product name", "Gas Leak Detector (GLD) \u2014 Node Sensor"),
     ("Model / version", "GLD V2 (Version 2)"),
-    ("Manufacturer", "PT LAPI Ganesha Utama"),
+    ("Manufacturer", "PT Galaksi Megatama Indonesia"),
+    ("Design & development authority", "PT LAPI Ganesha Utama (LGU)"),
     ("Technical development partner", "Institute of Technology Bandung \u2014 IoT Laboratory & Physics Laboratory"),
     ("End client / program owner", "PT Pertamina Patra Niaga (initial deployment site: Refinery Unit IV, Cilacap)"),
     ("Primary function", "Acquisition of 8-channel gas sensor data and LoRa transmission"),
@@ -709,7 +765,11 @@ make_table(
          "supplier listing's own certification claims have not been independently verified — the "
          "listing's specification text could not be retrieved for cross-check, so this should be treated as "
          "project-confirmed sourcing context, not a verified datasheet citation. PVC is not used in any "
-         "housing or bracket component."],
+         "housing or bracket component. Candidate alloy grade: a Chinese enclosure-component manufacturer's "
+         "drawing for a related die-cast sub-component (“Universal Base,” part no. BP18-1Z — see "
+         "Section 2.6.a) specifies material ADC12 (a standard die-cast aluminum alloy). This is a supplier "
+         "reference drawing for a candidate component under evaluation by the casing partner, not yet confirmed "
+         "as the grade used in GLD's own enclosure body."],
         ["Dimensions (L \u00d7 W \u00d7 H)", "200 \u00d7 90 \u00d7 290 mm", ("__status__", ("Final", "ok")),
          "Consistent between the technical specification documentation and the EMC parameter table."],
         ["Total weight", "\u22482 kg", ("__status__", ("Final", "ok")),
@@ -719,7 +779,9 @@ make_table(
         ["Ingress protection (IP rating)", "\u2014", ("__status__", ("Pending confirmation", "gap")),
          "Not yet tested/determined."],
         ["Cable entry (gland)", "\u2014", ("__status__", ("Pending confirmation", "gap")),
-         "Cable gland specification not yet determined."],
+         "Cable gland specification not yet determined. The BP18-1Z reference drawing above uses M20\u00d71.5-6H "
+         "entries (a common thread size for Ex/IP-rated cable glands) \u2014 noted as a candidate reference only, "
+         "not a confirmed GLD specification."],
         ["Antenna mounting", "External, SMA male connector", ("__status__", ("Final", "ok")), ""],
         ["Operating temperature", "\u221240\u00b0C to +85\u00b0C (ambient)", ("__status__", ("Final", "ok")),
          "Project-confirmed value, extended-industrial electronics range \u2014 a key input for temperature class (T1\u2013T6) determination in Section 2.5. Not yet documented against a calibrated test record."],
@@ -948,7 +1010,16 @@ make_table(
          "above. The Ex-d-specific flame-path parameters \u2014 joint gap, length, and free internal volume "
          "\u2014 are not called out; that dimensioning has to be added deliberately once a protection concept "
          "is confirmed (Section 2.5), not derived automatically from the CAD export."],
-        ["Junction box / terminal / grounding connection drawings", ("__status__", ("Not yet available", "gap")), ""],
+        ["Junction box / terminal / grounding connection drawings",
+         ("__status__", ("Candidate reference only", "wip")),
+         "A Chinese enclosure-component supplier's drawing for a die-cast “Universal Base” (part no. "
+         "BP18-1Z, material ADC12, 0.6 kg, drawing scale 1:1) has been received via the casing partner's supply "
+         "chain. It specifies 2× M20×1.5-6H cable-entry threads, 4× M4-6H and 1× M5×1.5-6g "
+         "fixing threads, 3× Ø8 mm mounting holes, an internal bore up to Ø94.7 mm, and overall "
+         "dimensions approximately 124×115×67.5 mm. Its footprint does not match GLD's main enclosure "
+         "(200×90×290 mm), so this is understood as a candidate junction-box/terminal sub-component "
+         "under evaluation, not yet confirmed as part of GLD's design. A dedicated grounding connection drawing "
+         "has not been provided."],
     ],
     col_widths=[2.6, 1.3, 2.8],
 )
@@ -1001,8 +1072,8 @@ note_box(
     "actually asks for \u2014 enclosure, gasket, cable entry device, battery, potting compound, and the gas "
     "sensor itself, with material grade and Ex/UL/CCC certification for each \u2014 remains not yet compiled. "
     "These are mechanical/safety parts, not electronic components: the enclosure itself is under design by an "
-    "external mechanical/casing development partner and its bill of materials has not yet been provided to "
-    "the authors.",
+    "external mechanical/casing development partner (legal identity now confirmed as PT Galaksi Megatama "
+    "Indonesia — see Section 1.4) and its bill of materials has not yet been provided to the authors.",
     shade=WARN_SHADE,
 )
 
@@ -1012,7 +1083,13 @@ p("Datasheets or supplier conformity declarations for non-metallic materials (en
   "retardancy, CTI value, and chemical resistance \u2014 have not yet been collected.")
 note_box(
     "Status: Not yet available. Dependent on the enclosure design and material selection, which sits with "
-    "the external casing development partner rather than the authors.",
+    "the external casing development partner (PT Galaksi Megatama Indonesia, Section 1.4) rather than the "
+    "authors. Partial candidate data: the BP18-1Z reference drawing (Section 2.6.a) specifies a powder-coating "
+    "surface treatment with two electrostatic-safety parameters directly relevant to this checklist item \u2014 "
+    "maximum surface charge transfer <10 nC and maximum surface capacitance <5 pF (coating thickness \u2264 0.2 "
+    "mm). These are the type of parameter IEC 60079-0 requires for coated/non-metallic surfaces on Ex "
+    "equipment, but they describe a supplier's candidate component, not a confirmed datasheet for GLD's own "
+    "enclosure finish.",
     shade=INFO_SHADE,
 )
 
@@ -1021,9 +1098,9 @@ p("A description of manufacturing processes relevant to explosion-protection saf
   "accuracy control, explosion-proof surface treatment, welding, potting, die-casting, bonding) has not yet "
   "been documented.")
 note_box(
-    "Status: Not yet available. This describes the casing partner's manufacturing process, not an internal "
-    "electronics process \u2014 it will need to be obtained from that partner once their process is "
-    "finalized.",
+    "Status: Not yet available. This describes the casing partner's (PT Galaksi Megatama Indonesia) "
+    "manufacturing process, not an internal electronics process \u2014 it will need to be obtained from that "
+    "partner once their process is finalized.",
     shade=INFO_SHADE,
 )
 
@@ -1050,24 +1127,84 @@ doc.add_heading("2.6.g \u00b7 Usage and Installation Instructions (Draft)", leve
 make_table(
     ["Sub-item", "Status", "Remarks"],
     [
-        ["a) Safety warnings", ("__status__", ("Not yet available", "gap")),
-         "No Ex-specific safety warnings have been drafted."],
+        ["a) Safety warnings", ("__status__", ("Draft available", "wip")),
+         "Drafted below (18 Sep 2026); not yet reviewed against a selected explosion-protection concept."],
         ["b) Installation requirements (cable entry, torque, grounding, cleaning)",
-         ("__status__", ("Partially available", "wip")),
-         "A mechanical mounting method exists separately (L-bracket, installed to existing structures without "
-         "drilling or welding \u2014 see Section 2.3.c), but cable-entry method, torque values, grounding "
-         "requirements, and cleaning requirements have not yet been formally specified."],
-        ["c) Operating instructions and maintenance requirements", ("__status__", ("Partially available", "wip")),
-         "A firmware command/operation reference exists (Serial, MQTT, and LoRa command protocol for "
-         "engineering use), but it covers software operation and commissioning \u2014 not Ex-specific "
-         "maintenance or inspection requirements (frequency, content, precautions)."],
+         ("__status__", ("Draft available", "wip")),
+         "Procedural text drafted below; the mechanical mounting method itself (L-bracket, no drilling/welding "
+         "\u2014 Section 2.3.c) and the specific cable gland/torque values are still pending final component "
+         "selection."],
+        ["c) Operating instructions and maintenance requirements", ("__status__", ("Draft available", "wip")),
+         "Drafted below, alongside a firmware command/operation reference (Serial, MQTT, LoRa protocol) used "
+         "for engineering commissioning. Ex-specific maintenance frequency/content is not yet defined pending "
+         "protection-concept selection."],
     ],
     col_widths=[2.4, 1.3, 3.0],
 )
 note_box(
-    "Status: Partially available \u2014 not yet consolidated into an Ex-specific installation and operation "
-    "manual for ExCB review.",
-    shade=INFO_SHADE,
+    "Status: Draft text available (source: internal working draft, Rev. 18 Sep 2026). This is a draft for "
+    "review, not a finalized, Ex-approved installation and operation manual. It has not been checked against a "
+    "selected type of protection (Ex d/e/i, Section 2.6.e), a confirmed temperature class (Section 2.6.f), or "
+    "finalized cable-entry/enclosure hardware. It also feeds the standalone Instruction_Manual_GLD deliverable.",
+    shade=WARN_SHADE,
+)
+
+p("2.6.g.a \u00b7 Safety Warnings (Draft)", size=10.5, bold=True, color=NAVY, space_after=2)
+for _b in [
+    "Only trained and authorized personnel may install, commission, operate, inspect, or maintain the detector.",
+    "Isolate and verify the 24 VDC supply before opening the enclosure or changing wiring. Apply the site "
+    "lockout/tagout procedure.",
+    "Use only the approved production power arrangement: 24 VDC.",
+    "Perform alarm tests with appropriate site controls and hearing protection where audible devices are "
+    "connected.",
+    "Perform sensor nulling only in confirmed clean air. Accept the operation only when all eight sensors "
+    "report a complete 8/8 result; otherwise correct the cause and repeat.",
+    "Do not drill, weld, enlarge cable entries, bypass protective devices, or modify the enclosure without "
+    "written engineering and Ex approval.",
+    "Remove the unit from service if there is visible damage, water ingress, an unresolved sensor fault, "
+    "failed alarm proof, or a loss of protective-earth continuity.",
+]:
+    bp = doc.add_paragraph(style="List Bullet")
+    bp.paragraph_format.space_after = Pt(2)
+    br = bp.add_run(_b)
+    br.font.size = Pt(10)
+
+p("2.6.g.b \u00b7 Detailed Installation Requirements (Draft)", size=10.5, bold=True, color=NAVY, space_after=2)
+p("Cable entry method: Use only cable glands, adaptors, blanking elements, and seals approved for the final "
+  "protection concept, certificate, thread form, IP rating, cable outer diameter, and installation "
+  "temperature. Do not create new entries, enlarge an entry, leave unused entries open, or substitute a "
+  "general-purpose gland. Maintain the manufacturer sealing and clamping sequence. Record the installed "
+  "component part number and certificate reference.", size=10)
+p("Torque requirements: Torque values shall comply with the approved enclosure, terminal, cable-gland, and "
+  "blanking-plug manufacturer instructions. (Specific torque figures are not yet available \u2014 dependent on "
+  "final hardware selection.)", size=10)
+p("Grounding requirements: Connect the enclosure to the approved protective-earth system using the "
+  "designated grounding terminal. Verify continuity before energization.", size=10)
+p("Cleaning requirements: For routine cleaning, isolate the equipment as required by site procedure and use "
+  "a soft lint-free cloth lightly dampened with clean water or an approved mild cleaner. Do not use "
+  "abrasives, aggressive solvents, dry compressed air, high-pressure spray, or tools that can damage the "
+  "enclosure, gasket, label, antenna, or cable entries. Keep liquid out of all openings.", size=10)
+
+p("2.6.g.c \u00b7 Operating Instructions and Maintenance Requirements (Draft)", size=10.5, bold=True, color=NAVY,
+  space_after=2)
+p("Before each operating period, check power, enclosure condition, diagnostic status, communication status, "
+  "and the absence of active faults. Treat an alarm as a real process-safety event until the site response "
+  "procedure establishes otherwise. If the detector reports a fault or loses required communication, notify "
+  "the responsible operator and place the affected detection point in the site impairment process. Do not "
+  "change firmware, model files, alarm thresholds, or calibration parameters from the field without "
+  "controlled approval and a documented rollback path.", size=10)
+p("Three operating modes are distinguished:", size=10)
+make_table(
+    ["Mode", "Purpose", "Use restriction"],
+    [
+        ["Inference", "Normal gas-class inference and alarm operation", "Production operating mode after "
+         "commissioning"],
+        ["Dataset", "Engineering / data-collection activity", "Not a substitute for approved detection "
+         "operation"],
+        ["Nulling", "Sensor baseline / calibration activity", "Clean air only; perform under approved "
+         "procedure; require complete 8/8 result"],
+    ],
+    col_widths=[1.3, 3.0, 2.4],
 )
 
 doc.add_heading("2.6.h \u00b7 Nameplate Information", level=3)
@@ -1119,6 +1256,31 @@ make_table(
 note_box(
     "Status: Draft plan only \u2014 not yet executed, and not evidence of ExCB/laboratory test readiness.",
     shade=INFO_SHADE,
+)
+
+p("A second, commissioning-oriented equipment list is drafted separately (source: internal working draft, "
+  "Rev. 18 Sep 2026), organized by physical test apparatus rather than by test group:")
+make_table(
+    ["Equipment", "Purpose"],
+    [
+        ["Regulated 24 VDC power supply", "Provides a stable 24 VDC supply to the GLD during commissioning "
+         "and functional testing."],
+        ["Digital multimeter", "Measures the actual voltage, verifies polarity and continuity, and supports "
+         "grounding/bonding verification."],
+        ["Calibrated gas source / gas test kit", "Provides the required gas types to verify that the sensors "
+         "respond correctly when exposed to the target gases."],
+        ["Gas test chamber", "Provides a controlled gas-exposure environment so that gas concentration, "
+         "exposure time, and test conditions can be reproduced."],
+        ["Alarm load / relay simulator", "Physically verifies that the alarm output and connected electrical "
+         "load operate correctly."],
+        ["LoRa peer / gateway", "Verifies that data transmitted by the GLD is successfully received by the "
+         "intended system."],
+        ["Laptop and approved software", "Used to review diagnostic information, configuration, logging, "
+         "firmware identification, and to store commissioning and test evidence."],
+        ["Calibrated torque screwdriver", "Ensures that glands, terminals, enclosure fasteners, and "
+         "grounding connections are tightened to the approved torque values."],
+    ],
+    col_widths=[2.0, 4.7],
 )
 
 # ============================================================

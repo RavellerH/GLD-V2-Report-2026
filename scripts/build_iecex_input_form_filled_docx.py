@@ -200,7 +200,7 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-CIR/2026-001"
-REVISION = "0.1"
+REVISION = "0.2"
 DOC_DATE = "22 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -266,6 +266,39 @@ note_box(
     "development/prototype stage; no finalized, serialized units exist yet.",
     shade=WARN_SHADE,
 )
+
+p("Revision History", size=11.5, bold=True, color=NAVY, space_after=4)
+rt = doc.add_table(rows=1, cols=3)
+rt.style = "Table Grid"
+rhdr = rt.rows[0].cells
+for i, h in enumerate(["Revision", "Date", "Description"]):
+    set_cell_shading(rhdr[i], HEAD_SHADE)
+    rhdr[i].paragraphs[0].paragraph_format.space_after = Pt(2)
+    r = rhdr[i].paragraphs[0].add_run(h.upper())
+    r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = GRAY
+for rev, rev_date, rev_desc in [
+    ("0.1", "22 September 2026",
+     "Initial issue — filled in against the internal working-draft template "
+     "(IECEx ATEX Certification Information Requirements_Rev18092026.docx), covering all three sections "
+     "of the checklist."),
+    (REVISION, DOC_DATE,
+     "Total weight corrected to 2.3 kg; IP rating confirmed as IP66; operating humidity confirmed as "
+     "10–90% RH non-condensing; cable gland confirmed as M20×1.5 (IP66-rated) — all raised to Final "
+     "(Section 2.3). Power consumption rounded to 8 W. Removed the ambiguous “no plastic or PVC” "
+     "parenthetical from the product description (Section 2.1) and generalized “L-bracket” to "
+     "“bracket” in that same narrative sentence (the dimensioned bracket/U-bolt specification in "
+     "Section 2.3 is unaffected). “GLD V2 (Version 2)” simplified to “GLD V2”. Layout fix: kept the "
+     "Section 2.6.b BOM paragraph together across the page break."),
+]:
+    rrow = rt.add_row().cells
+    for i, v in enumerate([rev, rev_date, rev_desc]):
+        rrow[i].paragraphs[0].paragraph_format.space_after = Pt(2)
+        r = rrow[i].paragraphs[0].add_run(v)
+        r.font.size = Pt(9.5)
+for _row in rt.rows:
+    _row.cells[0].width = Inches(0.9)
+    _row.cells[1].width = Inches(1.3)
+    _row.cells[2].width = Inches(4.3)
 
 doc.add_page_break()
 

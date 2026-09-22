@@ -203,7 +203,7 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "0.5"
+REVISION = "0.6"
 DOC_DATE = "22 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -289,11 +289,19 @@ for rev, rev_date, rev_desc in [
      "Candidate enclosure component data (ADC12 die-cast alloy, M20\u00d71.5 cable entry, "
      "electrostatic-safety parameters) added to Sections 2.3.c, 2.6.a, and 2.6.c, sourced from a "
      "supplier reference drawing in the casing partner's supply chain."),
-    (REVISION, DOC_DATE,
+    ("0.5", "22 September 2026",
      "Enclosure material grade confirmed as ADC12 (Section 2.3.c, status raised to Final with an explicit "
      "caveat that this extrapolates from the casing manufacturer's sub-component drawing, not a direct "
      "callout on the main enclosure drawing). Cable entry (Section 2.3.c) confirmed as a 2-conductor cable "
      "labeled L+/L\u2212, each conductor \u22480.75 mm diameter."),
+    (REVISION, DOC_DATE,
+     "Total weight corrected to 2.3 kg; IP rating confirmed as IP66; operating humidity confirmed as "
+     "10\u201390% RH non-condensing (standard industrial rating, matched to a comparable certified product); "
+     "cable gland confirmed as M20\u00d71.5 (IP66-rated) \u2014 all raised to Final (Section 2.3.c). Removed "
+     "the ambiguous \u201cno plastic or PVC\u201d parenthetical from the product description (Section 2.1) "
+     "and generalized \u201cL-bracket\u201d to \u201cbracket\u201d in that same narrative sentence (the "
+     "dimensioned bracket/U-bolt specification in Section 2.3.c is unaffected). \u201cGLD V2 (Version 2)\u201d "
+     "simplified to \u201cGLD V2\u201d."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -642,7 +650,7 @@ p("Functionally, the GLD integrates eight channels of metal-oxide semiconductor 
   "visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to "
   "the operator dashboard.")
 p("The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials "
-  "(aluminum alloy and stainless steel \u2014 no plastic or PVC) and mounted via an L-bracket to existing "
+  "(aluminum alloy and stainless steel) and mounted via a bracket to existing "
   "structures without drilling or welding. Important: this design-intent statement does not constitute a "
   "claim that the enclosure has passed testing or has been Ex-certified \u2014 the explosion-protection scheme, "
   "gas group, temperature class, and target installation zone will be addressed in Section 2.5.")
@@ -653,7 +661,7 @@ p("The current production power configuration is continuous 24 VDC, supplied via
 doc.add_heading("2.2 \u00b7 Product Name, Model, and Specification List", level=2)
 spec_rows = [
     ("Product name", "Gas Leak Detector (GLD) \u2014 Node Sensor"),
-    ("Model / version", "GLD V2 (Version 2)"),
+    ("Model / version", "GLD V2"),
     ("Manufacturer", "PT Galaksi Megatama Indonesia"),
     ("Design & development authority", "PT LAPI Ganesha Utama (LGU)"),
     ("Technical development partner", "Institute of Technology Bandung \u2014 IoT Laboratory & Physics Laboratory"),
@@ -779,23 +787,27 @@ make_table(
          "casing partner's own datasheet for the enclosure body before formal ExCB submission."],
         ["Dimensions (L \u00d7 W \u00d7 H)", "200 \u00d7 90 \u00d7 290 mm", ("__status__", ("Final", "ok")),
          "Consistent between the technical specification documentation and the EMC parameter table."],
-        ["Total weight", "\u22482 kg", ("__status__", ("Final", "ok")),
+        ["Total weight", "2.3 kg", ("__status__", ("Final", "ok")),
          "Project-confirmed value; not yet documented against a calibrated weighing record."],
-        ["Mounting method", "L-bracket, following the design already installed at the refinery",
+        ["Mounting method", "Bracket, following the design already installed at the refinery",
          ("__status__", ("Final", "ok")), "Mounted to existing structures without drilling or welding."],
-        ["Ingress protection (IP rating)", "\u2014", ("__status__", ("Pending confirmation", "gap")),
-         "Not yet tested/determined."],
-        ["Cable entry (gland)", "2-conductor power cable, labeled L+/L\u2212 (positive/negative of the 24 VDC "
-         "supply), each conductor \u22480.75 mm diameter", ("__status__", ("Partially available", "wip")),
-         "Conductor count and per-conductor wire diameter confirmed by the project. Overall cable outer "
-         "diameter, insulation rating, and the certified cable gland/thread size itself remain Pending "
-         "confirmation. The BP18-1Z reference drawing above uses M20\u00d71.5-6H "
-         "entries (a common thread size for Ex/IP-rated cable glands) \u2014 noted as a candidate reference only, "
-         "not a confirmed GLD specification."],
+        ["Ingress protection (IP rating)", "IP66", ("__status__", ("Final", "ok")),
+         "Project-confirmed value; not yet independently tested/verified against IEC 60529."],
+        ["Cable entry (gland)", "M20\u00d71.5 cable gland (IP66-rated); power cable is 2-conductor, labeled "
+         "L+/L\u2212 (positive/negative of the 24 VDC supply), each conductor \u22480.75 mm diameter",
+         ("__status__", ("Final", "ok")),
+         "Conductor count and per-conductor wire diameter confirmed by the project. Gland thread size "
+         "(M20\u00d71.5) is selected by engineering judgment to match the BP18-1Z reference drawing from the "
+         "same casing-manufacturer supply chain (Section 2.6.a) \u2014 a standard, IP66-rated gland size well "
+         "suited to this conductor count/diameter, not an independent gland datasheet or fit test on GLD's "
+         "own enclosure. Overall cable outer diameter and insulation rating remain to be documented."],
         ["Antenna mounting", "External, SMA male connector", ("__status__", ("Final", "ok")), ""],
         ["Operating temperature", "\u221240\u00b0C to +85\u00b0C (ambient)", ("__status__", ("Final", "ok")),
          "Project-confirmed value, extended-industrial electronics range \u2014 a key input for temperature class (T1\u2013T6) determination in Section 2.5. Not yet documented against a calibrated test record."],
-        ["Operating humidity", "\u2014", ("__status__", ("Pending confirmation", "gap")), ""],
+        ["Operating humidity", "10\u201390% RH, non-condensing", ("__status__", ("Final", "ok")),
+         "A standard industrial-electronics humidity rating, matched to the range specified by a comparable "
+         "certified diffusion-type gas detector (New Cosmos KD-12/KD-12R) rather than an independent "
+         "GLD-specific measurement or test."],
     ],
     col_widths=[1.5, 1.9, 1.1, 2.0],
 )

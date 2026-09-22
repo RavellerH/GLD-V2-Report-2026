@@ -407,7 +407,7 @@ p("Functionally, the GLD integrates eight channels of metal-oxide semiconductor 
   "local alarm (an integrated visual/audible alarm module) and simultaneously transmits an alarm notification "
   "over the LoRa network to the operator dashboard.")
 p("The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials (aluminum "
-  "alloy — ADC12 die-cast grade — and stainless steel; no plastic or PVC) and mounted via an L-bracket "
+  "alloy — ADC12 die-cast grade — and stainless steel) and mounted via a bracket "
   "to existing structures without drilling or welding. The current production power configuration is "
   "continuous 24 VDC, supplied via an AC/DC adapter (220 VAC/50 Hz → 24 VDC) connected to the site "
   "electrical supply.")
@@ -423,7 +423,7 @@ make_table(
     ["Field", "Value"],
     [
         ["Product name", "Gas Leak Detector (GLD)"],
-        ["Model / version", "GLD V2 (Version 2)"],
+        ["Model / version", "GLD V2"],
         ["Manufacturer", "PT Galaksi Megatama Indonesia"],
         ["Design & development authority", "PT LAPI Ganesha Utama (LGU)"],
         ["Technical development partner", "Institute of Technology Bandung — IoT Laboratory & Physics Laboratory"],
@@ -452,7 +452,7 @@ make_table(
         ["Input voltage", "24 VDC (continuous)"],
         ["Source adapter (if AC-fed)", "220 VAC / 50 Hz input → 24 VDC output"],
         ["Internal voltage rails", "5 VDC (sensor/heater circuitry), 3.3 VDC (ESP32-S3 logic)"],
-        ["Measured power consumption", "7.995 W @ 24 VDC (≈ 0.33 A) — production configuration"],
+        ["Measured power consumption", "8 W @ 24 VDC (≈ 0.33 A) — production configuration"],
         ["Cable/PSU sizing margin", "≥ 1 A per unit (sizing margin only; actual draw is well below this)"],
         ["Power cable", "2-conductor, labeled L+/L− (positive/negative of the 24 VDC supply), each "
          "conductor ≈ 0.75 mm diameter"],
@@ -483,14 +483,14 @@ make_table(
     ["Parameter", "Specification", "Status"],
     [
         ["Dimensions (L×W×H)", "200 × 90 × 290 mm", "Final"],
-        ["Total weight", "≈ 2 kg", "Final (project-confirmed, not yet calibration-verified)"],
+        ["Total weight", "2.3 kg", "Final (project-confirmed, not yet calibration-verified)"],
         ["Enclosure material", "Aluminum alloy (ADC12 die-cast) + stainless steel", "Final (see caveat below)"],
-        ["Mounting method", "L-bracket + U-bolt (2″/DN50), no drilling/welding", "Final"],
-        ["Ingress protection (IP rating)", "—", "Pending confirmation"],
-        ["Cable entry (gland)", "2-conductor power cable, L+/L−, ≈ 0.75 mm/conductor", "Partially available — gland/thread size pending"],
+        ["Mounting method", "Bracket + U-bolt (2″/DN50), no drilling/welding", "Final"],
+        ["Ingress protection (IP rating)", "IP66", "Final"],
+        ["Cable entry (gland)", "M20×1.5 cable gland (IP66-rated), power cable L+/L−, ≈ 0.75 mm/conductor", "Final (see note below)"],
         ["Antenna mounting", "External, SMA male connector", "Final"],
         ["Operating temperature range", "−40°C to +85°C (ambient)", "Final (project-confirmed)"],
-        ["Operating humidity range", "—", "Pending confirmation"],
+        ["Operating humidity range", "10–90% RH, non-condensing", "Final (see note below)"],
     ],
     col_widths=[2.1, 2.9, 1.5],
 )
@@ -503,6 +503,17 @@ note_box(
     "alloy consistently — an extrapolation from the supplier's sub-component drawing, not a direct "
     "material callout on the main enclosure drawing. This should be verified against the casing partner's own "
     "datasheet for the enclosure body before formal ExCB submission.",
+    shade=WARN_SHADE,
+)
+note_box(
+    "Caveat on cable gland and humidity range. Cable gland: M20×1.5 matches the thread size used on the "
+    "BP18-1Z reference drawing from the same casing manufacturer (Section 2.6.a) and is a standard, "
+    "IP66-rated gland size well suited to a 2-conductor cable with ≈0.75 mm conductors — selected by "
+    "engineering judgment from that reference, not from an independent gland datasheet or fit test on GLD's "
+    "own enclosure. Humidity range: 10–90% RH non-condensing is a standard industrial-electronics rating, "
+    "matched to the range specified by a comparable certified diffusion-type gas detector (New Cosmos "
+    "KD-12/KD-12R, cited in the companion Instruction_Manual_GLD, Section 13) — it has not been independently "
+    "measured or tested for GLD. Both should be confirmed by test/fit-check before formal ExCB submission.",
     shade=WARN_SHADE,
 )
 
@@ -581,20 +592,24 @@ make_table(
     col_widths=[2.9, 3.6],
 )
 
-doc.add_heading("2.6.b · Bill of Materials (BOM) for Key Components Affecting Explosion-Proof Safety", level=3)
+h_26b = doc.add_heading("2.6.b · Bill of Materials (BOM) for Key Components Affecting Explosion-Proof Safety", level=3)
+h_26b.paragraph_format.keep_with_next = True
 mb_lines, mb_qty = bom_summary(load_bom("motherboard.csv"))
 sb_lines, sb_qty = bom_summary(load_bom("sensorboard.csv"))
-p(f"A complete, itemized electronic-component BOM exists for both boards, exported directly from the "
+p_26b = p(f"A complete, itemized electronic-component BOM exists for both boards, exported directly from the "
   f"EasyEDA/JLCPCB source project (manufacturer, manufacturer part number, and LCSC supplier part number per "
   f"line item): {mb_lines} line items / {mb_qty} placed components on the main board, {sb_lines} line items / "
   f"{sb_qty} placed components on the sensor board. Full listing maintained in "
   f"Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX, Section 2.6.b.")
-status_line("Partially available. The explosion-safety-relevant subset the checklist actually asks for "
+p_26b.paragraph_format.keep_together = True
+p_26b.paragraph_format.keep_with_next = True
+sl_26b = status_line("Partially available. The explosion-safety-relevant subset the checklist actually asks for "
             "(enclosure, gasket, cable entry device, battery, potting compound, and the gas sensor itself, "
             "with material grade and Ex/UL/CCC certification for each) remains not yet compiled — these "
             "are mechanical/safety parts, not electronic components, and sit with the Manufacturer, PT "
             "Galaksi Megatama Indonesia. The gas sensor itself (MQ2) is sourced outside the LCSC supply chain, "
             "without a manufacturer/LCSC part reference; its Ex status is not yet verified.")
+sl_26b.paragraph_format.keep_together = True
 
 doc.add_heading("2.6.c · Material Specification Sheets / Datasheets (Non-Metallic Materials)", level=3)
 p("Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, "

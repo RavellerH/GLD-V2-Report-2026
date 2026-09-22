@@ -407,7 +407,7 @@ hr.font.size = Pt(8); hr.font.color.rgb = GRAY; hr.font.italic = True
 footer = sec.footer
 footer.is_linked_to_previous = False
 fp = footer.paragraphs[0]
-fr1 = fp.add_run("LGU/GLD/INSTR-MAN/2026-001  ·  Rev. 0.5")
+fr1 = fp.add_run("LGU/GLD/INSTR-MAN/2026-001  ·  Rev. 0.6")
 fr1.font.size = Pt(8); fr1.font.color.rgb = GRAY
 tab_stops = fp.paragraph_format.tab_stops
 tab_stops.add_tab_stop(Inches(6.5), alignment=2)

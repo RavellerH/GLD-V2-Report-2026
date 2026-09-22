@@ -203,7 +203,7 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "0.4"
+REVISION = "0.5"
 DOC_DATE = "22 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -285,10 +285,15 @@ for rev, rev_date, rev_desc in [
      "on file); PT LAPI Ganesha Utama recorded as design and development authority. Section 2.6.g "
      "draft content (safety warnings, installation procedures, operating modes, commissioning "
      "equipment) added."),
-    (REVISION, DOC_DATE,
+    ("0.4", "22 September 2026",
      "Candidate enclosure component data (ADC12 die-cast alloy, M20\u00d71.5 cable entry, "
      "electrostatic-safety parameters) added to Sections 2.3.c, 2.6.a, and 2.6.c, sourced from a "
      "supplier reference drawing in the casing partner's supply chain."),
+    (REVISION, DOC_DATE,
+     "Enclosure material grade confirmed as ADC12 (Section 2.3.c, status raised to Final with an explicit "
+     "caveat that this extrapolates from the casing manufacturer's sub-component drawing, not a direct "
+     "callout on the main enclosure drawing). Cable entry (Section 2.3.c) confirmed as a 2-conductor cable "
+     "labeled L+/L\u2212, each conductor \u22480.75 mm diameter."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -657,7 +662,7 @@ spec_rows = [
     ("Microcontroller", "ESP32-S3-WROOM-1U-N16R8"),
     ("LoRa radio module", "E22-900MM22S"),
     ("Dimensions (L\u00d7W\u00d7H)", "200 \u00d7 90 \u00d7 290 mm"),
-    ("Enclosure material", "Aluminum alloy + stainless steel"),
+    ("Enclosure material", "Aluminum alloy (ADC12 die-cast) + stainless steel"),
 ]
 st = doc.add_table(rows=0, cols=2); st.style = "Table Grid"
 for k, v in spec_rows:
@@ -752,8 +757,8 @@ doc.add_heading("2.3.c \u00b7 Mechanical Parameters \u2014 Node Sensor (GLD)", l
 make_table(
     ["Parameter", "Specification", "Status", "Remarks"],
     [
-        ["Enclosure material", "Aluminum alloy + stainless steel",
-         ("__status__", ("Partially available — specific grade pending", "wip")),
+        ["Enclosure material", "Aluminum alloy (ADC12 die-cast) + stainless steel",
+         ("__status__", ("Final", "ok")),
          "Per project confirmation, the production enclosure is sourced from a commercially available "
          "CE/ATEX-marketed explosion-proof gas-detector housing product line (referenced supplier listing: "
          "Alibaba.com, “CE ATEX Explosion Proof H2 Sensor”), consistent with the cast-metal housing, "
@@ -761,15 +766,17 @@ make_table(
          "(Section 2.4). This is corroborated by an internal case CAD drawing (“GLD ATEX CASE v3,” "
          "dated 8 September 2026) specifying a cylindrical sensor-case body (Ø102 mm outer housing ring, "
          "Ø90/Ø80 mm internal bores) that incorporates a stainless-steel filter mesh disc, a small DC "
-         "cooling fan, and a transparent viewing window. The specific alloy/grade of the aluminum body and the "
-         "supplier listing's own certification claims have not been independently verified — the "
-         "listing's specification text could not be retrieved for cross-check, so this should be treated as "
-         "project-confirmed sourcing context, not a verified datasheet citation. PVC is not used in any "
-         "housing or bracket component. Candidate alloy grade: a Chinese enclosure-component manufacturer's "
-         "drawing for a related die-cast sub-component (“Universal Base,” part no. BP18-1Z — see "
-         "Section 2.6.a) specifies material ADC12 (a standard die-cast aluminum alloy). This is a supplier "
-         "reference drawing for a candidate component under evaluation by the casing partner, not yet confirmed "
-         "as the grade used in GLD's own enclosure body."],
+         "cooling fan, and a transparent viewing window. PVC is not used in any housing or bracket "
+         "component. Alloy grade — ADC12: the enclosure metal is die-cast aluminum grade ADC12 (a standard, "
+         "widely used die-cast aluminum alloy), per project confirmation. Caveat on how this grade was "
+         "established: ADC12 is the material called out on a Chinese enclosure-component manufacturer's "
+         "drawing for a related die-cast sub-component (“Universal Base,” part no. BP18-1Z, from the "
+         "same casing-partner supply chain — see Section 2.6.a); the “GLD ATEX CASE v3” drawing of "
+         "the main enclosure body itself does not carry its own material callout. The project has confirmed "
+         "ADC12 as the enclosure grade on the basis that the same casing manufacturer's die-cast product line "
+         "uses this alloy consistently — this is an extrapolation from the supplier's sub-component drawing, "
+         "not a direct material callout on the main enclosure drawing, and should be verified against the "
+         "casing partner's own datasheet for the enclosure body before formal ExCB submission."],
         ["Dimensions (L \u00d7 W \u00d7 H)", "200 \u00d7 90 \u00d7 290 mm", ("__status__", ("Final", "ok")),
          "Consistent between the technical specification documentation and the EMC parameter table."],
         ["Total weight", "\u22482 kg", ("__status__", ("Final", "ok")),
@@ -778,8 +785,11 @@ make_table(
          ("__status__", ("Final", "ok")), "Mounted to existing structures without drilling or welding."],
         ["Ingress protection (IP rating)", "\u2014", ("__status__", ("Pending confirmation", "gap")),
          "Not yet tested/determined."],
-        ["Cable entry (gland)", "\u2014", ("__status__", ("Pending confirmation", "gap")),
-         "Cable gland specification not yet determined. The BP18-1Z reference drawing above uses M20\u00d71.5-6H "
+        ["Cable entry (gland)", "2-conductor power cable, labeled L+/L\u2212 (positive/negative of the 24 VDC "
+         "supply), each conductor \u22480.75 mm diameter", ("__status__", ("Partially available", "wip")),
+         "Conductor count and per-conductor wire diameter confirmed by the project. Overall cable outer "
+         "diameter, insulation rating, and the certified cable gland/thread size itself remain Pending "
+         "confirmation. The BP18-1Z reference drawing above uses M20\u00d71.5-6H "
          "entries (a common thread size for Ex/IP-rated cable glands) \u2014 noted as a candidate reference only, "
          "not a confirmed GLD specification."],
         ["Antenna mounting", "External, SMA male connector", ("__status__", ("Final", "ok")), ""],

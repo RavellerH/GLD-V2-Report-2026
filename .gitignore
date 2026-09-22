@@ -1,0 +1,24 @@
+# Scratch/working directories for intermediate build output (renders, screenshots,
+# extracted assets, debug dumps). Never commit new files here — existing tracked
+# files under these paths are left as historical record per project decision.
+.tmp/
+tmp/
+
+# Packaged zip mirrors of Paket Pertamina/ subfolders — regenerate on demand for
+# sending (WA/email) instead of tracking duplicated binaries in git.
+Paket Pertamina/*.zip
+
+# Office transient lock files
+~$*.doc
+~$*.docx
+~$*.ppt
+~$*.pptx
+~$*.xls
+~$*.xlsx
+
+# Debug/inspection artifacts from build scripts
+*.inspect.ndjson
+
+# OS cruft
+Thumbs.db
+.DS_Store

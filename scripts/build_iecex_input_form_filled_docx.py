@@ -200,7 +200,7 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-CIR/2026-001"
-REVISION = "0.2"
+REVISION = "0.3"
 DOC_DATE = "22 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -281,7 +281,7 @@ for rev, rev_date, rev_desc in [
      "Initial issue — filled in against the internal working-draft template "
      "(IECEx ATEX Certification Information Requirements_Rev18092026.docx), covering all three sections "
      "of the checklist."),
-    (REVISION, DOC_DATE,
+    ("0.2", "22 September 2026",
      "Total weight corrected to 2.3 kg; IP rating confirmed as IP66; operating humidity confirmed as "
      "10–90% RH non-condensing; cable gland confirmed as M20×1.5 (IP66-rated) — all raised to Final "
      "(Section 2.3). Power consumption rounded to 8 W. Removed the ambiguous “no plastic or PVC” "
@@ -289,6 +289,10 @@ for rev, rev_date, rev_desc in [
      "“bracket” in that same narrative sentence (the dimensioned bracket/U-bolt specification in "
      "Section 2.3 is unaffected). “GLD V2 (Version 2)” simplified to “GLD V2”. Layout fix: kept the "
      "Section 2.6.b BOM paragraph together across the page break."),
+    (REVISION, DOC_DATE,
+     "“Bracket”/“L-bracket” terminology corrected throughout to “U-bolt mounting plate” (Sections 2.1, "
+     "2.3, 2.6.a), matching the actual CAD drawing (a flat 250×250 mm plate secured by 2× U-bolts — not "
+     "an angled/L-shaped bracket)."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -440,7 +444,7 @@ p("Functionally, the GLD integrates eight channels of metal-oxide semiconductor 
   "local alarm (an integrated visual/audible alarm module) and simultaneously transmits an alarm notification "
   "over the LoRa network to the operator dashboard.")
 p("The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials (aluminum "
-  "alloy — ADC12 die-cast grade — and stainless steel) and mounted via a bracket "
+  "alloy — ADC12 die-cast grade — and stainless steel) and mounted via a U-bolt mounting plate "
   "to existing structures without drilling or welding. The current production power configuration is "
   "continuous 24 VDC, supplied via an AC/DC adapter (220 VAC/50 Hz → 24 VDC) connected to the site "
   "electrical supply.")
@@ -518,7 +522,7 @@ make_table(
         ["Dimensions (L×W×H)", "200 × 90 × 290 mm", "Final"],
         ["Total weight", "2.3 kg", "Final (project-confirmed, not yet calibration-verified)"],
         ["Enclosure material", "Aluminum alloy (ADC12 die-cast) + stainless steel", "Final (see caveat below)"],
-        ["Mounting method", "Bracket + U-bolt (2″/DN50), no drilling/welding", "Final"],
+        ["Mounting method", "U-bolt mounting plate (2″/DN50), no drilling/welding", "Final"],
         ["Ingress protection (IP rating)", "IP66", "Final"],
         ["Cable entry (gland)", "M20×1.5 cable gland (IP66-rated), power cable L+/L−, ≈ 0.75 mm/conductor", "Final (see note below)"],
         ["Antenna mounting", "External, SMA male connector", "Final"],
@@ -599,7 +603,7 @@ figure(os.path.join(SCHEMATIC_DIR, "10-pcb-layout.png"), max_w=4.6, max_h=4.6,
 p("A dimensioned mechanical drawing exists for the enclosure's external envelope and mounting hardware, "
   "drafted from a solid CAD model (STEP format, millimeter units):")
 figure(os.path.join(DRAWING_DIR, "bracket-mounting-drawing.png"), max_w=6.2, max_h=4.6,
-       cap="Enclosure envelope & L-bracket/U-bolt mounting assembly — dimensioned drawing sheet "
+       cap="Enclosure envelope & U-bolt mounting plate assembly — dimensioned drawing sheet "
            "(drafted 31 Aug 2026, from a STEP solid model).")
 p("A separate, internal contingency/alternate enclosure design (“GLD ATEX CASE v3”) exists in "
   "parallel with the primary commercial-enclosure sourcing path referenced in Section 2.3:")

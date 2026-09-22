@@ -515,7 +515,7 @@ def build_document():
 
     ITEMS = [
         ("1. LOKASI & KLASIFIKASI AREA",),
-        ("1", "Basis desain mounting bracket (L-bracket + U-bolt 2″/DN50), non-invasive — tanpa bor/las", "LGU", "SELESAI", "SELESAI"),
+        ("1", "Basis desain mounting (pelat mounting U-bolt 2″/DN50), non-invasive — tanpa bor/las", "LGU", "SELESAI", "SELESAI"),
         ("2", "Gambar CAD (STEP/OBJ) diserahkan ke vendor sebagai acuan fabrikasi", "LGU", "SELESAI", "SELESAI"),
         ("3", "Dokumen klasifikasi area tertulis resmi (perimeter SRU)", "RU IV", "Dalam proses", "BELUM"),
         ("4", "Penetapan titik pasang detail per unit, rute kabel & tinggi kerja", "RU IV", "Survey ada, detail belum dikunci", "BELUM"),

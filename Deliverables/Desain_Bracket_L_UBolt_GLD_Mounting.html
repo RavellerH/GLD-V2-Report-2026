@@ -232,7 +232,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 
     <section class="zone" id="z1">
       <div class="zone-head"><span class="zn">01</span><h2>Ringkasan &amp; Tujuan</h2></div>
-      <p class="lede">Sensor GLD perlu dipasang pada struktur pipa <b>existing</b> di area kilang RU IV Cilacap — baik <b>tiang vertikal</b> (kolom/pole) maupun <b>handrail horizontal</b> — tanpa membuat struktur baru, tanpa pengelasan, dan tanpa pengeboran ke struktur permanen (keputusan resmi rapat 6 Agustus 2026, mengacu pada praktik mounting sistem <i>Corrosion Monitoring</i> Emerson yang sudah terpasang &amp; teruji di kilang). Kombinasi <b>pelat siku (L-bracket) + U-bolt</b> adalah metode standar industri untuk kebutuhan ini — dipakai luas untuk mounting pipa proses, sensor CEMS, kamera CCTV, antena, dan perangkat instrumentasi lain.</p>
+      <p class="lede">Sensor GLD perlu dipasang pada struktur pipa <b>existing</b> di area kilang RU IV Cilacap — baik <b>tiang vertikal</b> (kolom/pole) maupun <b>handrail horizontal</b> — tanpa membuat struktur baru, tanpa pengelasan, dan tanpa pengeboran ke struktur permanen (keputusan resmi rapat 6 Agustus 2026, mengacu pada praktik mounting sistem <i>Corrosion Monitoring</i> Emerson yang sudah terpasang &amp; teruji di kilang). Kombinasi <b>pelat mounting datar + U-bolt</b> (kadang disebut <i>U-bolt mounting plate</i> atau, pada varian berbentuk siku, <i>L-bracket</i>) adalah metode standar industri untuk kebutuhan ini — dipakai luas untuk mounting pipa proses, sensor CEMS, kamera CCTV, antena, dan perangkat instrumentasi lain. <b>Desain GLD sendiri (bagian 04) memakai pelat datar</b>, bukan varian siku/L.</p>
       <div class="banner good"><span class="ic">✅</span><span><b>Status saat ini:</b> desain kerja CAD "ATEX Casing v2" (bagian 04) sudah dibuat dan siap-fabrikasi, dikonkretkan dari arahan bracket L/U-clamp (6 Agu) dan referensi L-bracket ala Emerson (19 Agu). Dokumen ini menggabungkan referensi standar umum (bagian 02–03) dengan spesifikasi desain aktual (bagian 04 dst.) supaya bisa dipakai sebagai satu acuan lengkap — untuk tim fabrikasi maupun untuk diskusi lanjutan dengan Pertamina.</span></div>
       <div class="banner warn"><span class="ic">⚠️</span><span><b>Satu hal belum terverifikasi:</b> apakah desain V2 saat ini sudah bisa dipasang di <b>kedua orientasi</b> (tiang vertikal dan handrail horizontal) tanpa varian terpisah. Detail &amp; rekomendasi ada di bagian 07 — jangan nyatakan ke Pertamina bahwa ini "sudah pasti mendukung keduanya" sebelum dikonfirmasi desainer.</span></div>
     </section>
@@ -297,7 +297,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <div class="spec"><span class="k">Minimum masih layak</span><span class="v">35 mm</span></div>
         <div class="spec"><span class="k">Bracket lebih tebal/spacer</span><span class="v">45–60 mm</span></div>
       </div>
-      <div class="banner info"><span class="ic">📏</span><span><b>Pengukuran tambahan dari model 3D</b> (referensi, bukan pengganti gambar kerja berdimensi resmi — satuan model diasumsikan cm sesuai konvensi ekspor CAD, dikonversi ke mm): dimensi keseluruhan bounding box assembly ≈ <b>259 × 182 × 315 mm</b>; pelat L-bracket (material "Iron - Polished" pada model) berukuran ≈ <b>≈259 × 250 × 10 mm</b> — tebal pelat ≈10 mm ini tidak tercantum eksplisit pada tabel dimensi di gambar kerja utama, diturunkan dari geometri file 3D.</span></div>
+      <div class="banner info"><span class="ic">📏</span><span><b>Pengukuran tambahan dari model 3D</b> (referensi, bukan pengganti gambar kerja berdimensi resmi — satuan model diasumsikan cm sesuai konvensi ekspor CAD, dikonversi ke mm): dimensi keseluruhan bounding box assembly ≈ <b>259 × 182 × 315 mm</b>; pelat mounting U-bolt (material "Iron - Polished" pada model, pelat datar bukan siku) berukuran ≈ <b>≈259 × 250 × 10 mm</b> — tebal pelat ≈10 mm ini tidak tercantum eksplisit pada tabel dimensi di gambar kerja utama, diturunkan dari geometri file 3D.</span></div>
       <ul class="tight">
         <li>Mounting <b>non-invasive</b> ke struktur pipa existing — tanpa pengeboran/pengelasan, selaras keputusan resmi 6 &amp; 19 Agustus.</li>
         <li>Dilengkapi pelat spacer untuk penyesuaian ketebalan bracket terhadap variasi diameter/posisi pipa.</li>
@@ -398,7 +398,7 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
 var MAT_LABEL = {
   'Aluminum_-_Anodized_Glossy_(Blue)': 'Badan sensor GLD (aluminium anodized biru)',
   'Steel_-_Satin': 'U-bolt, mur &amp; elemen pengencang (steel satin)',
-  'Iron_-_Polished': 'Pelat L-bracket (iron polished)',
+  'Iron_-_Polished': 'Pelat mounting U-bolt (iron polished)',
   'Acrylic_(Red)': 'Lensa indikator / beacon alarm (akrilik merah)',
   'EPX_82_(with_Carbon_M2_M3_L1_3D_Printers)': 'Dudukan / adapter cetak 3D (EPX carbon)',
   'Fabric_(White)': 'Gasket / seal kecil (fabric)'

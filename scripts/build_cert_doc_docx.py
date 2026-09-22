@@ -203,7 +203,7 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "0.6"
+REVISION = "0.7"
 DOC_DATE = "22 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -294,7 +294,7 @@ for rev, rev_date, rev_desc in [
      "caveat that this extrapolates from the casing manufacturer's sub-component drawing, not a direct "
      "callout on the main enclosure drawing). Cable entry (Section 2.3.c) confirmed as a 2-conductor cable "
      "labeled L+/L\u2212, each conductor \u22480.75 mm diameter."),
-    (REVISION, DOC_DATE,
+    ("0.6", "22 September 2026",
      "Total weight corrected to 2.3 kg; IP rating confirmed as IP66; operating humidity confirmed as "
      "10\u201390% RH non-condensing (standard industrial rating, matched to a comparable certified product); "
      "cable gland confirmed as M20\u00d71.5 (IP66-rated) \u2014 all raised to Final (Section 2.3.c). Removed "
@@ -302,6 +302,10 @@ for rev, rev_date, rev_desc in [
      "and generalized \u201cL-bracket\u201d to \u201cbracket\u201d in that same narrative sentence (the "
      "dimensioned bracket/U-bolt specification in Section 2.3.c is unaffected). \u201cGLD V2 (Version 2)\u201d "
      "simplified to \u201cGLD V2\u201d."),
+    (REVISION, DOC_DATE,
+     "\u201cL-bracket\u201d terminology corrected throughout to \u201cU-bolt mounting plate\u201d (Sections "
+     "2.1, 2.3.c, 2.6.g), matching the actual CAD drawing (a flat 250\u00d7250 mm plate secured by 2\u00d7 "
+     "U-bolts \u2014 not an angled/L-shaped bracket)."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -650,7 +654,7 @@ p("Functionally, the GLD integrates eight channels of metal-oxide semiconductor 
   "visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to "
   "the operator dashboard.")
 p("The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials "
-  "(aluminum alloy and stainless steel) and mounted via a bracket to existing "
+  "(aluminum alloy and stainless steel) and mounted via a U-bolt mounting plate to existing "
   "structures without drilling or welding. Important: this design-intent statement does not constitute a "
   "claim that the enclosure has passed testing or has been Ex-certified \u2014 the explosion-protection scheme, "
   "gas group, temperature class, and target installation zone will be addressed in Section 2.5.")
@@ -789,7 +793,7 @@ make_table(
          "Consistent between the technical specification documentation and the EMC parameter table."],
         ["Total weight", "2.3 kg", ("__status__", ("Final", "ok")),
          "Project-confirmed value; not yet documented against a calibrated weighing record."],
-        ["Mounting method", "Bracket, following the design already installed at the refinery",
+        ["Mounting method", "U-bolt mounting plate, following the design already installed at the refinery",
          ("__status__", ("Final", "ok")), "Mounted to existing structures without drilling or welding."],
         ["Ingress protection (IP rating)", "IP66", ("__status__", ("Final", "ok")),
          "Project-confirmed value; not yet independently tested/verified against IEC 60529."],
@@ -1153,7 +1157,7 @@ make_table(
          "Drafted below (18 Sep 2026); not yet reviewed against a selected explosion-protection concept."],
         ["b) Installation requirements (cable entry, torque, grounding, cleaning)",
          ("__status__", ("Draft available", "wip")),
-         "Procedural text drafted below; the mechanical mounting method itself (L-bracket, no drilling/welding "
+         "Procedural text drafted below; the mechanical mounting method itself (U-bolt mounting plate, no drilling/welding "
          "\u2014 Section 2.3.c) and the specific cable gland/torque values are still pending final component "
          "selection."],
         ["c) Operating instructions and maintenance requirements", ("__status__", ("Draft available", "wip")),

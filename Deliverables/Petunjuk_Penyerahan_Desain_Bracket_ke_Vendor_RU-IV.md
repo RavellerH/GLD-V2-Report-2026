@@ -19,7 +19,7 @@ Dokumen ini menjadi cover sheet penyerahan desain bracket mounting GLD kepada ve
 
 ## Basis desain yang diberikan
 
-- Metode mounting: L-bracket + **2 U-bolt**, non-invasive pada struktur pipa existing; tanpa pengelasan atau pengeboran pada struktur permanen.
+- Metode mounting: pelat mounting datar + **2 U-bolt**, non-invasive pada struktur pipa existing; tanpa pengelasan atau pengeboran pada struktur permanen.
 - Konfigurasi CAD saat ini: target pipa **2 in / DN50, OD 60,3 mm**; U-bolt **M10**, inside width **62–65 mm**, inside height **95–100 mm**, dan panjang ulir rekomendasi **40 mm**.
 - Disediakan pelat spacer untuk penyesuaian posisi/ketebalan bracket.
 - Hindari PVC. Pilihan material final, coating, grade fastener, serta proteksi korosi harus disetujui vendor dan RU IV sesuai kondisi lokasi.

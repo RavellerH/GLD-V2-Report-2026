@@ -247,7 +247,7 @@ field_table([
      "II 2G Ex [d/e/i — TBD] IIC T4 Gb.", TBD),
     ("Rating 技术参数", "24 VDC, arus maks. ≈0,33 A, daya maks. 7,995 W (≈8 W) — "
      "konfigurasi produksi (bukan varian baterai R&D)", AVAILABLE),
-    ("Product size and weight 产品尺寸及重量", "200 × 90 × 290 mm; 2,3 kg", AVAILABLE),
+    ("Product size and weight 产品尺寸及重量", "200 × 90 × 290 mm; 2,378 kg", AVAILABLE),
 ], widths=(2.0, 4.4, 0.9))
 
 p("Short description of product(s) / 产品的简要描述 — draf:", size=9.8, bold=True,

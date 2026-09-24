@@ -200,8 +200,8 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-CIR/2026-001"
-REVISION = "0.3"
-DOC_DATE = "22 September 2026"
+REVISION = "0.4"
+DOC_DATE = "24 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -289,10 +289,13 @@ for rev, rev_date, rev_desc in [
      "“bracket” in that same narrative sentence (the dimensioned bracket/U-bolt specification in "
      "Section 2.3 is unaffected). “GLD V2 (Version 2)” simplified to “GLD V2”. Layout fix: kept the "
      "Section 2.6.b BOM paragraph together across the page break."),
-    (REVISION, DOC_DATE,
+    ("0.3", "22 September 2026",
      "“Bracket”/“L-bracket” terminology corrected throughout to “U-bolt mounting plate” (Sections 2.1, "
      "2.3, 2.6.a), matching the actual CAD drawing (a flat 250×250 mm plate secured by 2× U-bolts — not "
      "an angled/L-shaped bracket)."),
+    (REVISION, DOC_DATE,
+     "Total weight, operating temperature, and operating humidity (Section 2.3) updated to 2.378 kg, "
+     "−20°C to +60°C, and 5–95% RH respectively, per current project specification data."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -520,14 +523,14 @@ make_table(
     ["Parameter", "Specification", "Status"],
     [
         ["Dimensions (L×W×H)", "200 × 90 × 290 mm", "Final"],
-        ["Total weight", "2.3 kg", "Final (project-confirmed, not yet calibration-verified)"],
+        ["Total weight", "2.378 kg", "Final (project-confirmed, not yet calibration-verified)"],
         ["Enclosure material", "Aluminum alloy (ADC12 die-cast) + stainless steel", "Final (see caveat below)"],
         ["Mounting method", "U-bolt mounting plate (2″/DN50), no drilling/welding", "Final"],
         ["Ingress protection (IP rating)", "IP66", "Final"],
         ["Cable entry (gland)", "M20×1.5 cable gland (IP66-rated), power cable L+/L−, ≈ 0.75 mm/conductor", "Final (see note below)"],
         ["Antenna mounting", "External, SMA male connector", "Final"],
-        ["Operating temperature range", "−40°C to +85°C (ambient)", "Final (project-confirmed)"],
-        ["Operating humidity range", "10–90% RH, non-condensing", "Final (see note below)"],
+        ["Operating temperature range", "−20°C to +60°C (ambient)", "Final (project-confirmed)"],
+        ["Operating humidity range", "5–95% RH, non-condensing", "Final (project-confirmed)"],
     ],
     col_widths=[2.1, 2.9, 1.5],
 )
@@ -543,14 +546,12 @@ note_box(
     shade=WARN_SHADE,
 )
 note_box(
-    "Caveat on cable gland and humidity range. Cable gland: M20×1.5 matches the thread size used on the "
-    "BP18-1Z reference drawing from the same casing manufacturer (Section 2.6.a) and is a standard, "
-    "IP66-rated gland size well suited to a 2-conductor cable with ≈0.75 mm conductors — selected by "
-    "engineering judgment from that reference, not from an independent gland datasheet or fit test on GLD's "
-    "own enclosure. Humidity range: 10–90% RH non-condensing is a standard industrial-electronics rating, "
-    "matched to the range specified by a comparable certified diffusion-type gas detector (New Cosmos "
-    "KD-12/KD-12R, cited in the companion Instruction_Manual_GLD, Section 13) — it has not been independently "
-    "measured or tested for GLD. Both should be confirmed by test/fit-check before formal ExCB submission.",
+    "Caveat on cable gland. M20×1.5 matches the thread size used on the BP18-1Z reference drawing from the "
+    "same casing manufacturer (Section 2.6.a) and is a standard, IP66-rated gland size well suited to a "
+    "2-conductor cable with ≈0.75 mm conductors — selected by engineering judgment from that reference, not "
+    "from an independent gland datasheet or fit test on GLD's own enclosure. This should be confirmed by "
+    "test/fit-check before formal ExCB submission. The operating temperature and humidity ranges above are "
+    "current project-specification values (24 Sep 2026), not yet documented against a calibrated test record.",
     shade=WARN_SHADE,
 )
 

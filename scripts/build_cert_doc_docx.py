@@ -203,8 +203,8 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "0.7"
-DOC_DATE = "22 September 2026"
+REVISION = "0.8"
+DOC_DATE = "24 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -302,10 +302,14 @@ for rev, rev_date, rev_desc in [
      "and generalized \u201cL-bracket\u201d to \u201cbracket\u201d in that same narrative sentence (the "
      "dimensioned bracket/U-bolt specification in Section 2.3.c is unaffected). \u201cGLD V2 (Version 2)\u201d "
      "simplified to \u201cGLD V2\u201d."),
-    (REVISION, DOC_DATE,
+    ("0.7", "22 September 2026",
      "\u201cL-bracket\u201d terminology corrected throughout to \u201cU-bolt mounting plate\u201d (Sections "
      "2.1, 2.3.c, 2.6.g), matching the actual CAD drawing (a flat 250\u00d7250 mm plate secured by 2\u00d7 "
      "U-bolts \u2014 not an angled/L-shaped bracket)."),
+    (REVISION, DOC_DATE,
+     "Total weight, operating temperature, and operating humidity (Sections 2.3.c, 2.5) updated to "
+     "2.378 kg, \u221220\u00b0C to +60\u00b0C, and 5\u201395% RH respectively, per current project "
+     "specification data."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -791,8 +795,9 @@ make_table(
          "casing partner's own datasheet for the enclosure body before formal ExCB submission."],
         ["Dimensions (L \u00d7 W \u00d7 H)", "200 \u00d7 90 \u00d7 290 mm", ("__status__", ("Final", "ok")),
          "Consistent between the technical specification documentation and the EMC parameter table."],
-        ["Total weight", "2.3 kg", ("__status__", ("Final", "ok")),
-         "Project-confirmed value; not yet documented against a calibrated weighing record."],
+        ["Total weight", "2.378 kg", ("__status__", ("Final", "ok")),
+         "Total weight of PCB, casing, and sensors combined; project-confirmed value, not yet documented "
+         "against a calibrated weighing record."],
         ["Mounting method", "U-bolt mounting plate, following the design already installed at the refinery",
          ("__status__", ("Final", "ok")), "Mounted to existing structures without drilling or welding."],
         ["Ingress protection (IP rating)", "IP66", ("__status__", ("Final", "ok")),
@@ -806,12 +811,10 @@ make_table(
          "suited to this conductor count/diameter, not an independent gland datasheet or fit test on GLD's "
          "own enclosure. Overall cable outer diameter and insulation rating remain to be documented."],
         ["Antenna mounting", "External, SMA male connector", ("__status__", ("Final", "ok")), ""],
-        ["Operating temperature", "\u221240\u00b0C to +85\u00b0C (ambient)", ("__status__", ("Final", "ok")),
-         "Project-confirmed value, extended-industrial electronics range \u2014 a key input for temperature class (T1\u2013T6) determination in Section 2.5. Not yet documented against a calibrated test record."],
-        ["Operating humidity", "10\u201390% RH, non-condensing", ("__status__", ("Final", "ok")),
-         "A standard industrial-electronics humidity rating, matched to the range specified by a comparable "
-         "certified diffusion-type gas detector (New Cosmos KD-12/KD-12R) rather than an independent "
-         "GLD-specific measurement or test."],
+        ["Operating temperature", "\u221220\u00b0C to +60\u00b0C (ambient)", ("__status__", ("Final", "ok")),
+         "Project-confirmed value \u2014 a key input for temperature class (T1\u2013T6) determination in Section 2.5. Not yet documented against a calibrated test record."],
+        ["Operating humidity", "5\u201395% RH, non-condensing", ("__status__", ("Final", "ok")),
+         "Project-confirmed value. Not yet documented against a calibrated test record."],
     ],
     col_widths=[1.5, 1.9, 1.1, 2.0],
 )
@@ -912,9 +915,10 @@ make_table(
          "Not yet substantiated by measurement. MQ-series metal-oxide sensors rely on an internal heating "
          "element as their normal operating principle; a hot-spot measurement specific to the sensor models "
          "and enclosure configuration used here has not yet been performed (see 2.6.f)."],
-        ["Ambient temperature range", "\u221240\u00b0C to +85\u00b0C", ("__status__", ("Final", "ok")),
-         "Project-confirmed value, extended-industrial electronics range. Distinct from the MQ-sensor hot-spot "
-         "surface temperature above, which remains the top-priority open item for the T4 recommendation."],
+        ["Ambient temperature range", "\u221220\u00b0C to +60\u00b0C", ("__status__", ("Final", "ok")),
+         "Project-confirmed value, consistent with the Mechanical Parameters table (Section 2.3.c). Distinct "
+         "from the MQ-sensor hot-spot surface temperature above, which remains the top-priority open item for "
+         "the T4 recommendation."],
         ["Area classification (zone)", "Zone 1", ("__status__", ("Team recommendation \u2014 pending ExCB confirmation", "wip")),
          "Assessed as sufficient for the general refinery deployment envelope, including areas near storage. "
          "Zone 0 would only apply if the detector were installed directly inside a tank vapor space."],

@@ -242,9 +242,13 @@ field_table([
     ("Product 产品名称", "Gas Leak Detector (GLD) — Node Sensor", AVAILABLE),
     ("Model No 全部型号", "GLD V2 (satu model saat ini; belum ada varian lain)", AVAILABLE),
     ("Main model 主测型号", "GLD V2", AVAILABLE),
-    ("Marking Code 防爆标识", "Belum bisa diisi — tergantung Method of Protection yang belum "
-     "diputuskan (lihat bagian Method of Protection). Rekomendasi tim sejauh ini (bukan keputusan ExCB): "
-     "II 2G Ex [d/e/i — TBD] IIC T4 Gb.", TBD),
+    ("Marking Code 防爆标识", "Belum final — tergantung Method of Protection yang belum diputuskan "
+     "(lihat bagian Method of Protection). Draf tim per 24 Sep 2026 (bukan keputusan ExCB): "
+     "II 2G Ex [db/ib] IIC T4 Gb (dipersempit ke Ex d atau Ex i, opsi Ex e/n/dst. sudah dikesampingkan "
+     "tim). ⚠️ Draf tim yg sama sempat juga menulis “Ex tb IIIC T135°C Db, Tamb −40°C to +85°C” di bagian "
+     "nameplate — TIDAK dipakai di sini krn ini disalin dari marking produk referensi (flame detector "
+     "Talentum, bukan data GLD) dan bertentangan dgn tabel Mechanical Parameters di dokumen yg sama "
+     "(−20°C to +60°C, dec:144); GLD juga belum pernah dinilai butuh proteksi debu (“D”/“tb”).", TBD),
     ("Rating 技术参数", "24 VDC, arus maks. ≈0,33 A, daya maks. 7,995 W (≈8 W) — "
      "konfigurasi produksi (bukan varian baterai R&D)", AVAILABLE),
     ("Product size and weight 产品尺寸及重量", "200 × 90 × 290 mm; 2,378 kg", AVAILABLE),
@@ -331,10 +335,13 @@ p("Dicocokkan terhadap isi Dokumen Teknis Sertifikasi GLD IECEx/ATEX (Bagian 2.6
 field_table([
     ("User Instructions (English)", "Tersedia — Instruction_Manual_GLD.docx (Rev 0.8)", AVAILABLE),
     ("Wiring/Circuit diagram", "Tersedia — diagram blok skematik 9 lembar penuh (§2.6.a)", AVAILABLE),
-    ("CDF (critical component list)", "Sebagian — BOM elektronik lengkap ada (EasyEDA/JLCPCB), tapi daftar "
-     "komponen kritis Ex-safety-relevant (enclosure/gasket/cable gland/baterai) belum disusun terpisah", PARTIAL),
-    ("Drawings (structure)", "Sebagian — gambar CAD berdimensi casing v3 & bracket ada, tapi gambar struktur "
-     "resmi dari mitra casing (PT Galaksi) dengan parameter flame-path belum ada", PARTIAL),
+    ("CDF (critical component list)", "Sebagian — BOM elektronik lengkap ada (EasyEDA/JLCPCB); komponen "
+     "Ex-safety-relevant kini teridentifikasi by name (mesh stainless steel, gasket karet, DC fan, "
+     "battery case) dari gambar exploded-view draf tim 24 Sep, tapi grade material/sertifikat Ex per "
+     "komponen masih belum ada", PARTIAL),
+    ("Drawings (structure)", "Sebagian — gambar CAD berdimensi casing v3 & bracket ada, plus gambar common "
+     "base (BP18-1Z) & exploded-view assembly berlabel dari draf tim 24 Sep; gambar struktur resmi dari "
+     "mitra casing (PT Galaksi) dengan parameter flame-path/section-view masih belum ada", PARTIAL),
     ("Specification", "Tersedia — Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX itu sendiri berfungsi sbg spec", AVAILABLE),
     ("Rating Label", "Belum ada — desain nameplate/marking belum dibuat (§2.6.h)", ("Belum tersedia", GAP)),
     ("Declaration of Difference Between Models", "Tidak relevan saat ini — hanya 1 model (GLD V2), tidak ada "

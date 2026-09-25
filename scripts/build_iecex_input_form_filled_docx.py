@@ -659,12 +659,13 @@ p("Per IEC 60079-0:2017, once GLD's specific non-metallic components are identif
   "glass-transition temperature (Tg) safely outside the confirmed −20°C to +60°C ambient operating range "
   "(Section 2.3); and UV/weathering-resistance data for any component exposed outdoors. These thresholds "
   "are cited from the standard itself and have not yet been matched against actual component datasheets.")
-p("Non-metallic components identified in the design so far that this item will need to cover: the protective "
-  "mesh/flame-arrestor cover over the gas-sensing element (Section 2.6.a — material not yet confirmed; may "
-  "prove to be metallic, which would place it outside this specific checklist item); the cover-to-body "
-  "sealing gasket/O-ring providing the IP66 rating (Section 2.3); the integral seal of the candidate "
+p("Non-metallic components in the design that this item will need to cover: the cover-to-body sealing "
+  "gasket providing the IP66 rating (Section 2.3 — identified as a rubber gasket in the casing partner's "
+  "assembly drawing, specific compound/grade not yet specified); the integral seal of the candidate "
   "M20×1.5 cable gland (Section 2.3); and the antenna/SMA feedthrough insulator (material not yet "
-  "specified).")
+  "specified). The protective mesh cover over the gas-sensing element is now identified as a "
+  "stainless-steel wire mesh in the same assembly drawing — being metallic, it falls outside this specific "
+  "non-metallic-materials checklist item.")
 status_line("Not yet available, pending the enclosure design and material selection with the casing partner "
             "— this data has been formally requested from that partner. "
             "Partial candidate data: the BP18-1Z reference drawing (Section 2.6.a) specifies a powder-coating "

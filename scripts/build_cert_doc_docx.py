@@ -203,7 +203,7 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "0.9"
+REVISION = "1.0"
 DOC_DATE = "25 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -310,12 +310,16 @@ for rev, rev_date, rev_desc in [
      "Total weight, operating temperature, and operating humidity (Sections 2.3.c, 2.5) updated to "
      "2.378 kg, \u221220\u00b0C to +60\u00b0C, and 5\u201395% RH respectively, per current project "
      "specification data."),
-    (REVISION, DOC_DATE,
+    ("0.9", "25 September 2026",
      "Section 2.6.c (material specification sheets, non-metallic materials) expanded with the specific "
      "IEC 60079-0 requirements (CTI class, glow-wire/flame-retardancy, Tg vs. the confirmed operating range, "
      "UV/weathering resistance) and a list of the non-metallic components in GLD's own design that this item "
      "will need to cover (sensor mesh/flame-arrestor cover, cover-to-body sealing gasket, cable-gland seal, "
      "antenna feedthrough insulator); status remains Not yet available pending the casing partner's data."),
+    (REVISION, DOC_DATE,
+     "Section 2.6.c updated with materials confirmed from a newer casing-partner assembly drawing: the "
+     "protective mesh cover is stainless steel (metallic, outside the scope of this non-metallic-materials "
+     "item) and the cover-to-body seal is a rubber gasket (compound/grade still not specified)."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -1124,12 +1128,13 @@ p("Per IEC 60079-0:2017, once GLD's specific non-metallic components are identif
   "range (Section 2.3.c); and UV/weathering-resistance data for any component exposed outdoors. These "
   "thresholds are cited from the standard itself and have not yet been matched against actual component "
   "datasheets.")
-p("Non-metallic components identified in the design so far that this item will need to cover: the protective "
-  "mesh/flame-arrestor cover over the gas-sensing element (Section 2.6.a \u2014 material not yet confirmed; may "
-  "prove to be metallic, which would place it outside this specific checklist item); the cover-to-body "
-  "sealing gasket/O-ring providing the IP66 rating (Section 2.3.c \u2014 material/grade not yet specified); the "
-  "integral seal of the candidate M20\u00d71.5 cable gland (Section 2.3.c); and the antenna/SMA feedthrough "
-  "insulator (material not yet specified).")
+p("Non-metallic components in the design that this item will need to cover: the cover-to-body sealing "
+  "gasket providing the IP66 rating (Section 2.3.c \u2014 identified as a rubber gasket in the casing "
+  "partner's assembly drawing, specific compound/grade not yet specified); the integral seal of the "
+  "candidate M20\u00d71.5 cable gland (Section 2.3.c); and the antenna/SMA feedthrough insulator (material "
+  "not yet specified). The protective mesh cover over the gas-sensing element is now identified as a "
+  "stainless-steel wire mesh in the same assembly drawing \u2014 being metallic, it falls outside this "
+  "specific non-metallic-materials checklist item.")
 note_box(
     "Status: Not yet available. Dependent on the enclosure design and material selection, which sits with "
     "the external casing development partner (PT Galaksi Megatama Indonesia, Section 1.4) rather than the "

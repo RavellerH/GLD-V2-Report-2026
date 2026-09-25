@@ -190,7 +190,8 @@ for k, v in [
     ("Dokumen acuan data", "Dokumen Teknis Sertifikasi GLD IECEx/ATEX — No. LGU/GLD/IECEX-TDF/2026-001"),
     ("Tujuan", "Draf isian internal agar transkrip ke formulir resmi GTS tinggal salin — BUKAN berkas "
                 "yang dikirim ke GTS"),
-    ("Status", "Applicant sudah diputuskan (LGU). Sebagian field lain masih “Perlu keputusan”/data belum ada — lihat highlight"),
+    ("Status", "Applicant, alamat LGU, dan PIC kontak (Dr. Maman Budiman) sudah terisi. Method of "
+     "Protection, penandatangan resmi, dan Sample Return masih “Perlu keputusan” — lihat highlight"),
 ]:
     row = meta.add_row().cells
     set_cell_shading(row[0], HEAD_SHADE)
@@ -209,9 +210,11 @@ note_box(
     "Formulir GTS memisahkan dua entitas: “Applicant” (pemohon/委托方) dan “Manufacturer” "
     "(制造商). Dikonfirmasi user (23 Sep 2026): “Applicant” = PT LAPI Ganesha Utama (LGU) — "
     "konsisten dengan peran LGU sebagai design and development authority di dokumen sertifikasi "
-    "(dec:130–131); PT Galaksi Megatama Indonesia tetap “Manufacturer”. Alamat resmi, PIC "
-    "kontak, dan penandatangan LGU untuk pengajuan ini BELUM ada di berkas manapun di repo — masih "
-    "perlu dilengkapi sebelum formulir bisa ditranskrip penuh.",
+    "(dec:130–131); PT Galaksi Megatama Indonesia tetap “Manufacturer”. Alamat resmi LGU (Jl. Dederuk "
+    "No. 30, Sadang Serang, Bandung) dan PIC kontak (Dr. Maman Budiman, ITB — teknis/PIC proyek GLD) "
+    "sudah dikonfirmasi user (25 Sep 2026). Penandatangan resmi aplikasi (authorized signatory) masih "
+    "BELUM ditentukan — ini biasanya pejabat berwenang mewakili LGU secara hukum, bukan otomatis sama "
+    "dengan PIC teknis/kontak korespondensi.",
     shade=NOTE_SHADE, text_color=INK, label="✓ Diputuskan:", label_color=GOOD,
 )
 
@@ -220,12 +223,16 @@ p("1. Applicant Contact Information — Info Kontak Pemohon", size=12.5, bold=Tr
   color=NAVY, space_after=4)
 field_table([
     ("Applicant company name — 委托方公司名称", "PT LAPI Ganesha Utama (LGU)", AVAILABLE),
-    ("Applicant company address", "Belum ada di berkas manapun — perlu alamat resmi terdaftar LGU", TBD),
-    ("Contact person", "Belum ditentukan — lihat Formulir_Isian_Data_Dasar butir 3.3 (PIC proyek sertifikasi)", TBD),
-    ("Position", "Belum ditentukan", TBD),
-    ("Mobile / Tel", "Belum ditentukan", TBD),
-    ("E-mail", "Belum ditentukan", TBD),
-    ("Report & invoice mailing address", "Diasumsikan alamat LGU (Applicant) — sama seperti alamat Applicant di atas, cek ulang", DRAFT),
+    ("Applicant company address", "Jl. Dederuk No. 30, Sadang Serang, Kecamatan Coblong, Kota Bandung, "
+     "Jawa Barat 40133", AVAILABLE),
+    ("Contact person", "Dr. Maman Budiman", AVAILABLE),
+    ("Position", "IoT Researcher & Senior Lecturer, Instrumentation and Computation Physics Research "
+     "Group, Institut Teknologi Bandung (ITB) — technical development partner; PIC proyek sertifikasi GLD",
+     AVAILABLE),
+    ("Mobile / Tel", "+62 812 2238 241", AVAILABLE),
+    ("E-mail", "mamanbudiman@yahoo.com", AVAILABLE),
+    ("Report & invoice mailing address", "Sama dengan alamat Applicant di atas (Jl. Dederuk No. 30, Sadang "
+     "Serang, Bandung 40133)", AVAILABLE),
 ], widths=(2.0, 3.5, 1.8))
 
 # ============================================================ 2. Data bilingual
@@ -235,7 +242,8 @@ p("Kolom “Chinese” pada formulir asli tidak diisi di sini — belum ada terj
   size=9, italic=True, color=GRAY, space_after=6)
 field_table([
     ("Applicant 申请公司", "PT LAPI Ganesha Utama (LGU)", AVAILABLE),
-    ("Add 申请公司地址", "= baris Applicant company address di atas (belum ada data)", TBD),
+    ("Add 申请公司地址", "Jl. Dederuk No. 30, Sadang Serang, Kecamatan Coblong, Kota Bandung, Jawa Barat "
+     "40133, Indonesia", AVAILABLE),
     ("Manufacturer 制造商", "PT Galaksi Megatama Indonesia", AVAILABLE),
     ("Add 制造商地址", "Plaza Summarecon Bekasi, Jl. Bulevar Ahmad Yani Kav. K.01, Level 7, "
      "Harapanmulya Village, Medansatria Sub-district, Bekasi City, West Java 17143, Indonesia", AVAILABLE),

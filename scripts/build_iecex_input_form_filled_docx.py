@@ -653,7 +653,20 @@ doc.add_heading("2.6.c · Material Specification Sheets / Datasheets (Non-Metall
 p("Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, "
   "insulators, potting compounds) — covering heat/cold resistance, anti-aging, anti-static, flame "
   "retardancy, CTI value, and chemical resistance — have not yet been collected.")
-status_line("Not yet available, pending the enclosure design and material selection with the casing partner. "
+p("Per IEC 60079-0:2017, once GLD's specific non-metallic components are identified the applicable "
+  "requirements are: a Comparative Tracking Index (CTI) class per Table 5/6 appropriate to the equipment's "
+  "creepage/clearance design; a glow-wire or needle-flame flame-retardancy result per §26.4–26.5; a "
+  "glass-transition temperature (Tg) safely outside the confirmed −20°C to +60°C ambient operating range "
+  "(Section 2.3); and UV/weathering-resistance data for any component exposed outdoors. These thresholds "
+  "are cited from the standard itself and have not yet been matched against actual component datasheets.")
+p("Non-metallic components identified in the design so far that this item will need to cover: the protective "
+  "mesh/flame-arrestor cover over the gas-sensing element (Section 2.6.a — material not yet confirmed; may "
+  "prove to be metallic, which would place it outside this specific checklist item); the cover-to-body "
+  "sealing gasket/O-ring providing the IP66 rating (Section 2.3); the integral seal of the candidate "
+  "M20×1.5 cable gland (Section 2.3); and the antenna/SMA feedthrough insulator (material not yet "
+  "specified).")
+status_line("Not yet available, pending the enclosure design and material selection with the casing partner "
+            "— this data has been formally requested from that partner. "
             "Partial candidate data: the BP18-1Z reference drawing (Section 2.6.a) specifies a powder-coating "
             "surface treatment with electrostatic-safety parameters directly relevant to this item — "
             "maximum surface charge transfer <10 nC and maximum surface capacitance <5 pF (coating thickness "

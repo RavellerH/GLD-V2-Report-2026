@@ -203,8 +203,8 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "0.8"
-DOC_DATE = "24 September 2026"
+REVISION = "0.9"
+DOC_DATE = "25 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -306,10 +306,16 @@ for rev, rev_date, rev_desc in [
      "\u201cL-bracket\u201d terminology corrected throughout to \u201cU-bolt mounting plate\u201d (Sections "
      "2.1, 2.3.c, 2.6.g), matching the actual CAD drawing (a flat 250\u00d7250 mm plate secured by 2\u00d7 "
      "U-bolts \u2014 not an angled/L-shaped bracket)."),
-    (REVISION, DOC_DATE,
+    ("0.8", "24 September 2026",
      "Total weight, operating temperature, and operating humidity (Sections 2.3.c, 2.5) updated to "
      "2.378 kg, \u221220\u00b0C to +60\u00b0C, and 5\u201395% RH respectively, per current project "
      "specification data."),
+    (REVISION, DOC_DATE,
+     "Section 2.6.c (material specification sheets, non-metallic materials) expanded with the specific "
+     "IEC 60079-0 requirements (CTI class, glow-wire/flame-retardancy, Tg vs. the confirmed operating range, "
+     "UV/weathering resistance) and a list of the non-metallic components in GLD's own design that this item "
+     "will need to cover (sensor mesh/flame-arrestor cover, cover-to-body sealing gasket, cable-gland seal, "
+     "antenna feedthrough insulator); status remains Not yet available pending the casing partner's data."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -1111,11 +1117,25 @@ doc.add_heading("2.6.c \u00b7 Material Specification Sheets / Datasheets (Non-Me
 p("Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, "
   "insulators, potting compounds) \u2014 covering heat/cold resistance, anti-aging, anti-static, flame "
   "retardancy, CTI value, and chemical resistance \u2014 have not yet been collected.")
+p("Per IEC 60079-0:2017, once GLD's specific non-metallic components are identified the applicable "
+  "requirements are: a Comparative Tracking Index (CTI) class per Table 5/6 appropriate to the equipment's "
+  "creepage/clearance design; a glow-wire or needle-flame flame-retardancy result per \u00a726.4\u201326.5; a "
+  "glass-transition temperature (Tg) safely outside the confirmed \u221220\u00b0C to +60\u00b0C ambient operating "
+  "range (Section 2.3.c); and UV/weathering-resistance data for any component exposed outdoors. These "
+  "thresholds are cited from the standard itself and have not yet been matched against actual component "
+  "datasheets.")
+p("Non-metallic components identified in the design so far that this item will need to cover: the protective "
+  "mesh/flame-arrestor cover over the gas-sensing element (Section 2.6.a \u2014 material not yet confirmed; may "
+  "prove to be metallic, which would place it outside this specific checklist item); the cover-to-body "
+  "sealing gasket/O-ring providing the IP66 rating (Section 2.3.c \u2014 material/grade not yet specified); the "
+  "integral seal of the candidate M20\u00d71.5 cable gland (Section 2.3.c); and the antenna/SMA feedthrough "
+  "insulator (material not yet specified).")
 note_box(
     "Status: Not yet available. Dependent on the enclosure design and material selection, which sits with "
     "the external casing development partner (PT Galaksi Megatama Indonesia, Section 1.4) rather than the "
-    "authors. Partial candidate data: the BP18-1Z reference drawing (Section 2.6.a) specifies a powder-coating "
-    "surface treatment with two electrostatic-safety parameters directly relevant to this checklist item \u2014 "
+    "authors; this data has been formally requested from that partner. Partial candidate data: the BP18-1Z "
+    "reference drawing (Section 2.6.a) specifies a powder-coating surface treatment with two "
+    "electrostatic-safety parameters directly relevant to this checklist item \u2014 "
     "maximum surface charge transfer <10 nC and maximum surface capacitance <5 pF (coating thickness \u2264 0.2 "
     "mm). These are the type of parameter IEC 60079-0 requires for coated/non-metallic surfaces on Ex "
     "equipment, but they describe a supplier's candidate component, not a confirmed datasheet for GLD's own "

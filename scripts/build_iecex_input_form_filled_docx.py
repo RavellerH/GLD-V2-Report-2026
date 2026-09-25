@@ -450,7 +450,9 @@ p("The enclosure is designed for hazardous-area deployment at refinery sites, us
   "alloy — ADC12 die-cast grade — and stainless steel) and mounted via a U-bolt mounting plate "
   "to existing structures without drilling or welding. The current production power configuration is "
   "continuous 24 VDC, supplied via an AC/DC adapter (220 VAC/50 Hz → 24 VDC) connected to the site "
-  "electrical supply.")
+  "electrical supply. The Node Sensor (GLD) itself receives only 24 VDC at its terminal and never carries "
+  "220 VAC internally — the AC/DC adapter is a separate, site-supplied device outside the physical boundary "
+  "of the certified unit.")
 note_box(
     "Important: this design-intent description does not constitute a claim that the enclosure has passed "
     "testing or has been Ex-certified. The explosion-protection scheme, gas group, temperature class, and "
@@ -662,8 +664,10 @@ p("Per IEC 60079-0:2017, once GLD's specific non-metallic components are identif
 p("Non-metallic components in the design that this item will need to cover: the cover-to-body sealing "
   "gasket providing the IP66 rating (Section 2.3 — identified as a rubber gasket in the casing partner's "
   "assembly drawing, specific compound/grade not yet specified); the integral seal of the candidate "
-  "M20×1.5 cable gland (Section 2.3); and the antenna/SMA feedthrough insulator (material not yet "
-  "specified). The protective mesh cover over the gas-sensing element is now identified as a "
+  "M20×1.5 cable gland — per project direction, specified together with the gland itself from the "
+  "BP18-1Z reference (Section 2.3), rather than as a separately sourced component; and the antenna/SMA "
+  "feedthrough insulator (material not yet specified). The protective mesh cover over the gas-sensing "
+  "element is now identified as a "
   "stainless-steel wire mesh in the same assembly drawing — being metallic, it falls outside this specific "
   "non-metallic-materials checklist item.")
 status_line("Not yet available, pending the enclosure design and material selection with the casing partner "

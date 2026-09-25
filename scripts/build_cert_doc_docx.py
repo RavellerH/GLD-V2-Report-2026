@@ -203,7 +203,7 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "1.0"
+REVISION = "1.1"
 DOC_DATE = "25 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -316,10 +316,16 @@ for rev, rev_date, rev_desc in [
      "UV/weathering resistance) and a list of the non-metallic components in GLD's own design that this item "
      "will need to cover (sensor mesh/flame-arrestor cover, cover-to-body sealing gasket, cable-gland seal, "
      "antenna feedthrough insulator); status remains Not yet available pending the casing partner's data."),
-    (REVISION, DOC_DATE,
+    ("1.0", "25 September 2026",
      "Section 2.6.c updated with materials confirmed from a newer casing-partner assembly drawing: the "
      "protective mesh cover is stainless steel (metallic, outside the scope of this non-metallic-materials "
      "item) and the cover-to-body seal is a rubber gasket (compound/grade still not specified)."),
+    (REVISION, DOC_DATE,
+     "Added an explicit equipment-boundary statement to Section 2.3.a: the Node Sensor (GLD) receives only "
+     "24 VDC at its terminal and never carries 220 VAC internally; the AC/DC adapter is a separate, "
+     "site-supplied device outside the certified unit's physical boundary. Section 2.6.c cable-gland seal "
+     "remark clarified as specified together with the M20×1.5 gland itself from the BP18-1Z reference, "
+     "per project direction, rather than as a separately sourced item."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -725,6 +731,11 @@ make_table(
         ["AC/DC adapter output", "24 VDC", ("__status__", ("Final", "ok")), ""],
         ["Internal operating voltage", "5 VDC & 3.3 VDC", ("__status__", ("Final", "ok")),
          "5 VDC for the MQ sensor/heater circuitry; 3.3 VDC for ESP32-S3 logic. Per-rail current not yet documented separately."],
+        ["Equipment boundary (mains exposure)", "None — 24 VDC only", ("__status__", ("Final", "ok")),
+         "The Node Sensor (GLD) itself receives only 24 VDC at its terminal and never carries 220 VAC "
+         "internally. The AC/DC adapter (220 VAC/50 Hz → 24 VDC) is a separate, site-supplied device "
+         "outside the physical boundary of the certified unit; its own installation location (e.g., relative "
+         "to the hazardous-area zone) is a site electrical-design matter, not a parameter of this equipment."],
         ["Maximum input current", "\u22480.33 A @ 24 VDC", ("__status__", ("Calculated", "ok")),
          "Calculated from measured maximum power consumption (7.995 W) divided by 24 VDC."],
         ["Maximum power consumption", "7.995 W @ 24 VDC", ("__status__", ("Measured \u2014 production config.", "ok")),
@@ -1131,9 +1142,11 @@ p("Per IEC 60079-0:2017, once GLD's specific non-metallic components are identif
 p("Non-metallic components in the design that this item will need to cover: the cover-to-body sealing "
   "gasket providing the IP66 rating (Section 2.3.c \u2014 identified as a rubber gasket in the casing "
   "partner's assembly drawing, specific compound/grade not yet specified); the integral seal of the "
-  "candidate M20\u00d71.5 cable gland (Section 2.3.c); and the antenna/SMA feedthrough insulator (material "
-  "not yet specified). The protective mesh cover over the gas-sensing element is now identified as a "
-  "stainless-steel wire mesh in the same assembly drawing \u2014 being metallic, it falls outside this "
+  "candidate M20\u00d71.5 cable gland \u2014 per project direction, specified together with the gland "
+  "itself from the BP18-1Z reference (Section 2.3.c), rather than as a separately sourced component; and "
+  "the antenna/SMA feedthrough insulator (material not yet specified). The protective mesh cover over the "
+  "gas-sensing element is now identified as a stainless-steel wire mesh in the same assembly drawing "
+  "\u2014 being metallic, it falls outside this "
   "specific non-metallic-materials checklist item.")
 note_box(
     "Status: Not yet available. Dependent on the enclosure design and material selection, which sits with "

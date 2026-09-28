@@ -203,8 +203,8 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "1.1"
-DOC_DATE = "25 September 2026"
+REVISION = "1.2"
+DOC_DATE = "28 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -320,12 +320,19 @@ for rev, rev_date, rev_desc in [
      "Section 2.6.c updated with materials confirmed from a newer casing-partner assembly drawing: the "
      "protective mesh cover is stainless steel (metallic, outside the scope of this non-metallic-materials "
      "item) and the cover-to-body seal is a rubber gasket (compound/grade still not specified)."),
-    (REVISION, DOC_DATE,
+    ("1.1", "25 September 2026",
      "Added an explicit equipment-boundary statement to Section 2.3.a: the Node Sensor (GLD) receives only "
      "24 VDC at its terminal and never carries 220 VAC internally; the AC/DC adapter is a separate, "
      "site-supplied device outside the certified unit's physical boundary. Section 2.6.c cable-gland seal "
      "remark clarified as specified together with the M20×1.5 gland itself from the BP18-1Z reference, "
      "per project direction, rather than as a separately sourced item."),
+    (REVISION, DOC_DATE,
+     "Type of protection narrowed to a single team recommendation, Ex d (flameproof enclosure), in Sections "
+     "1.1 and 2.5 — selected over Ex e and Ex i based on the existing ADC12 die-cast enclosure with a "
+     "stainless-steel mesh flame path (matching the three certified reference products reviewed) and the "
+     "MQ-sensor heaters' continuous, unregulated power draw being difficult to reconcile with intrinsically "
+     "safe energy limits for Group IIC. Section 2.6.e updated accordingly. Still an internal recommendation, "
+     "not an ExCB decision."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -501,10 +508,10 @@ make_table(
          ("__status__", ("Target — verification outstanding", "wip")), "Sections 2.5, 2.6.f"],
         ["Requested gas group", "IIC",
          ("__status__", ("Internal recommendation, not an ExCB decision", "wip")), "Section 2.5"],
-        ["Type of protection", "Not yet selected — Ex d, Ex e, and Ex i under evaluation",
-         ("__status__", ("Open", "gap")), "Section 2.6.e"],
+        ["Type of protection", "Ex d — flameproof enclosure",
+         ("__status__", ("Internal recommendation, not an ExCB decision", "wip")), "Section 2.5"],
         ["Standards to be applied",
-         "IEC 60079-0, together with the standard corresponding to the type of protection once selected",
+         "IEC 60079-0, together with IEC 60079-1 (flameproof enclosures “d”)",
          ("__status__", ("Dependent on the item above", "gap")), "Section 2.6.e"],
         ["Certification route requested",
          "IECEx Certificate of Conformity and/or ATEX EU-type examination",
@@ -943,14 +950,24 @@ make_table(
         ["Area classification (zone)", "Zone 1", ("__status__", ("Team recommendation \u2014 pending ExCB confirmation", "wip")),
          "Assessed as sufficient for the general refinery deployment envelope, including areas near storage. "
          "Zone 0 would only apply if the detector were installed directly inside a tank vapor space."],
+        ["Type of protection", "Ex d \u2014 flameproof enclosure", ("__status__", ("Team recommendation \u2014 pending ExCB confirmation", "wip")),
+         "Selected over Ex e and Ex i based on the existing enclosure design: a die-cast aluminum (ADC12) "
+         "housing with a stainless-steel wire mesh over the sensing element functions as a flame path/flame "
+         "arrestor, the same pattern used by the three comparable certified gas detectors reviewed as "
+         "references (all Ex d). Ex i was set aside because the MQ-series sensor heaters draw continuous "
+         "power (\u22480.75 W each) directly from an unregulated 24 VDC supply rather than through certified "
+         "current-limiting barriers, difficult to reconcile with intrinsically-safe energy limits for Group "
+         "IIC. Ex e was not pursued because it is not intended for enclosures with normally-energized, "
+         "potentially arcing parts such as the sensor heaters."],
     ],
     col_widths=[1.3, 1.1, 1.9, 2.4],
 )
 note_box(
     "These are engineering recommendations, not a certification decision. An independent readiness "
     "assessment of the same checklist item, prepared separately from the underlying firmware/hardware "
-    "repository, reached the same conclusion \u2014 gas group, temperature class, ambient range, and zone "
-    "are not yet formally established. Final classification requires explicit agreement with the ExCB.",
+    "repository, reached the same conclusion \u2014 gas group, temperature class, ambient range, zone, and "
+    "type of protection are not yet formally established. Final classification requires explicit agreement "
+    "with the ExCB.",
     shade=WARN_SHADE,
 )
 
@@ -1173,11 +1190,12 @@ note_box(
 )
 
 doc.add_heading("2.6.e \u00b7 Explosion-Protection Calculations and Explanations (if applicable)", level=3)
-p("Calculations depend on the explosion-protection concept selected (e.g., Ex d, Ex e, Ex i), which has not "
-  "yet been confirmed with the ExCB, and on final enclosure geometry from the casing development partner. No "
-  "calculations have been performed.")
+p("Flame-path (joint gap, length) and free-internal-volume calculations specific to Ex d (Section 2.5, team "
+  "recommendation) have not yet been performed, pending final enclosure geometry from the casing development "
+  "partner and a confirmed protection concept with the ExCB.")
 note_box(
-    "Status: Not yet available \u2014 pending protection-concept confirmation and final enclosure design.",
+    "Status: Not yet available \u2014 pending ExCB confirmation of the Ex d protection concept and final "
+    "enclosure design.",
     shade=INFO_SHADE,
 )
 

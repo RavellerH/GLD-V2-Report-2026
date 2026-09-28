@@ -200,8 +200,8 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "LGU/GLD/IECEX-CIR/2026-001"
-REVISION = "0.4"
-DOC_DATE = "24 September 2026"
+REVISION = "0.5"
+DOC_DATE = "28 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -293,9 +293,14 @@ for rev, rev_date, rev_desc in [
      "“Bracket”/“L-bracket” terminology corrected throughout to “U-bolt mounting plate” (Sections 2.1, "
      "2.3, 2.6.a), matching the actual CAD drawing (a flat 250×250 mm plate secured by 2× U-bolts — not "
      "an angled/L-shaped bracket)."),
-    (REVISION, DOC_DATE,
+    ("0.4", "24 September 2026",
      "Total weight, operating temperature, and operating humidity (Section 2.3) updated to 2.378 kg, "
      "−20°C to +60°C, and 5–95% RH respectively, per current project specification data."),
+    (REVISION, DOC_DATE,
+     "Type of protection narrowed to a single team recommendation, Ex d (flameproof enclosure), in Section "
+     "2.5 — selected over Ex e and Ex i based on the existing ADC12 die-cast enclosure with a stainless-steel "
+     "mesh flame path and the MQ-sensor heaters' continuous, unregulated power draw. Section 2.6.e updated "
+     "accordingly. Still an internal recommendation, not an ExCB decision."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -586,10 +591,17 @@ make_table(
         ["Gas group", "IIC", "Internal recommendation, not an ExCB decision"],
         ["Temperature class", "T4 (≤135°C)", "Target — hot-spot verification outstanding (Section 2.6.f)"],
         ["Area classification", "Zone 1, Equipment Category 2G, Group II", "Requested — subject to ExCB assessment"],
-        ["Type of protection", "Not yet selected — Ex d, Ex e, and Ex i under evaluation", "Open"],
+        ["Type of protection", "Ex d — flameproof enclosure", "Internal recommendation, not an ExCB decision"],
     ],
     col_widths=[1.8, 2.9, 2.0],
 )
+p("Type of protection selected over Ex e and Ex i based on the existing enclosure design: a die-cast "
+  "aluminum (ADC12) housing with a stainless-steel mesh cover over the sensing element, functioning as a "
+  "flame path/flame arrestor — the same pattern used by the three comparable certified gas detectors "
+  "reviewed as references (all Ex d). Ex i was set aside because the MQ-series sensor heaters draw "
+  "continuous power (≈0.75 W each) directly from an unregulated 24 VDC supply rather than through "
+  "certified current-limiting barriers, difficult to reconcile with intrinsically-safe energy limits for "
+  "Group IIC.", size=9.5, italic=True)
 p("These classification parameters are the applicant's proposal, recorded here as a request, not as an agreed "
   "or granted classification. Cluster Head and Gateway devices are assumed to always sit in a safe area "
   "(project assumption, not the result of a formal area-classification study by Pertamina).", size=9.5, italic=True)
@@ -686,9 +698,9 @@ status_line("Not yet available — this describes the Manufacturer's (PT Galaksi
             "process, not an internal electronics process.")
 
 doc.add_heading("2.6.e · Explosion-Protection Calculations and Explanations (if applicable)", level=3)
-p("Calculations depend on the explosion-protection concept selected (e.g., Ex d, Ex e, Ex i), which has not "
-  "yet been confirmed with the ExCB, and on final enclosure geometry.")
-status_line("Not yet available — pending protection-concept confirmation and final enclosure design.")
+p("Flame-path (joint gap, length) and free-internal-volume calculations specific to Ex d (Section 2.5, team "
+  "recommendation) have not yet been performed, pending final enclosure geometry and ExCB confirmation.")
+status_line("Not yet available — pending ExCB confirmation of the Ex d protection concept and final enclosure design.")
 
 doc.add_heading("2.6.f · Temperature Group Calculation (Hottest-Point Temperature Estimation)", level=3)
 p("No hottest-point temperature calculation or measurement has been performed for this product. As general "

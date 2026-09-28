@@ -191,7 +191,8 @@ for k, v in [
     ("Tujuan", "Draf isian internal agar transkrip ke formulir resmi GTS tinggal salin — BUKAN berkas "
                 "yang dikirim ke GTS"),
     ("Status", "Applicant, alamat LGU, dan PIC kontak (Dr. Maman Budiman) sudah terisi. Method of "
-     "Protection, penandatangan resmi, dan Sample Return masih “Perlu keputusan” — lihat highlight"),
+     "Protection kini rekomendasi tim (Ex d, 28 Sep — bukan keputusan resmi/ExCB). Penandatangan resmi "
+     "dan Sample Return masih “Perlu keputusan” — lihat highlight"),
 ]:
     row = meta.add_row().cells
     set_cell_shading(row[0], HEAD_SHADE)
@@ -250,13 +251,13 @@ field_table([
     ("Product 产品名称", "Gas Leak Detector (GLD) — Node Sensor", AVAILABLE),
     ("Model No 全部型号", "GLD V2 (satu model saat ini; belum ada varian lain)", AVAILABLE),
     ("Main model 主测型号", "GLD V2", AVAILABLE),
-    ("Marking Code 防爆标识", "Belum final — tergantung Method of Protection yang belum diputuskan "
-     "(lihat bagian Method of Protection). Draf tim per 24 Sep 2026 (bukan keputusan ExCB): "
-     "II 2G Ex [db/ib] IIC T4 Gb (dipersempit ke Ex d atau Ex i, opsi Ex e/n/dst. sudah dikesampingkan "
-     "tim). ⚠️ Draf tim yg sama sempat juga menulis “Ex tb IIIC T135°C Db, Tamb −40°C to +85°C” di bagian "
-     "nameplate — TIDAK dipakai di sini krn ini disalin dari marking produk referensi (flame detector "
-     "Talentum, bukan data GLD) dan bertentangan dgn tabel Mechanical Parameters di dokumen yg sama "
-     "(−20°C to +60°C, dec:144); GLD juga belum pernah dinilai butuh proteksi debu (“D”/“tb”).", TBD),
+    ("Marking Code 防爆标识", "Belum final — rekomendasi tim per 28 Sep 2026 (bukan keputusan ExCB): "
+     "II 2G Ex db IIC T4 Gb (Method of Protection dipersempit ke Ex d — lihat bagian Method of Protection; "
+     "opsi Ex e/i/n/dst. sudah dikesampingkan tim). ⚠️ Draf tim sebelumnya (24 Sep) sempat juga menulis "
+     "“Ex tb IIIC T135°C Db, Tamb −40°C to +85°C” di bagian nameplate — TIDAK dipakai di sini krn ini "
+     "disalin dari marking produk referensi (flame detector Talentum, bukan data GLD) dan bertentangan "
+     "dgn tabel Mechanical Parameters di dokumen yg sama (−20°C to +60°C, dec:144); GLD juga belum pernah "
+     "dinilai butuh proteksi debu (“D”/“tb”).", TBD),
     ("Rating 技术参数", "24 VDC, arus maks. ≈0,33 A, daya maks. 7,995 W (≈8 W) — "
      "konfigurasi produksi (bukan varian baterai R&D)", AVAILABLE),
     ("Product size and weight 产品尺寸及重量", "200 × 90 × 290 mm; 2,378 kg", AVAILABLE),
@@ -274,15 +275,20 @@ note_box(
 )
 
 # ============================================================ Method of protection
-p("Method of Protection — Belum diputuskan (penghambat utama, lihat dec:98)", size=12.5, bold=True,
-  color=GAP, space_after=4)
+p("Method of Protection — Rekomendasi tim: Ex d (lihat dec:98, dec:150)", size=12.5, bold=True,
+  color=WARN, space_after=4)
 note_box(
     "Ini bukan sekadar formulir kosong — memilih salah satu opsi ini adalah keputusan rekayasa yang "
-    "menentukan seluruh scope pengujian (flame-path, komponen bersertifikat Ex, dst.). Belum ada keputusan "
-    "resmi. Kandidat yang relevan berdasarkan riset internal (bukan rekomendasi final): “Ex d” "
-    "(flameproof enclosure — cocok untuk casing die-cast aluminium ADC12 yang sudah ada) dan/atau "
-    "“Ex i” (intrinsic safety — relevan karena catu daya rendah, 24VDC/~8W) untuk sirkuit "
-    "internal. Jangan mencentang opsi manapun sebelum ada keputusan tim engineering.",
+    "menentukan seluruh scope pengujian (flame-path, komponen bersertifikat Ex, dst.). Rekomendasi tim "
+    "(28 Sep 2026, bukan keputusan ExCB): “Ex d” (flameproof enclosure) — cocok dengan desain casing yang "
+    "sudah ada (die-cast aluminium ADC12 + tutup mesh stainless steel sebagai flame path/flame arrestor), "
+    "pola yang sama dipakai ketiga produk gas detector bersertifikat yang sudah dipelajari sebagai referensi "
+    "(Talentum 16000, Sensepoint XCD, KD-12 — semuanya Ex d). “Ex i” (intrinsic safety) dikesampingkan: "
+    "heater sensor MQ menyala terus (≈0,75 W/sensor) langsung dari catu 24VDC tanpa barrier pembatas arus "
+    "bersertifikat — sulit direkonsiliasi dengan batas energi intrinsically-safe untuk Grup IIC. “Ex e” "
+    "(increased safety) juga tidak dikejar karena tidak ditujukan untuk komponen yang normalnya beroperasi "
+    "dengan percikan/panas (heater sensor). Tetap tandai sebagai rekomendasi tim, bukan keputusan resmi tim "
+    "engineering/ExCB — perlu sign-off formal sebelum submission.",
     shade=WARN_SHADE, text_color=WARN, label="⚠",
 )
 checkbox_list([
@@ -297,7 +303,8 @@ checkbox_list([
     "Gas and Dust – Encapsulation \"m\"",
     "Dust – Protection by enclosures \"t\"",
     "Safety-, Control-, Regulation Device (EN 50495)",
-], checked_labels=[])
+], checked_labels=["Gas – Flameproof enclosures \"d\""],
+   note_map={"Gas – Flameproof enclosures \"d\"": "rekomendasi tim, belum sign-off resmi"})
 
 # ============================================================ Group / subgroup / level
 p("Group Equipment, Explosion Subgroup, Level of Protection", size=12.5, bold=True, color=NAVY, space_after=4)

@@ -19,6 +19,7 @@ FILES = [
     ("Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html", "Pembagian Persiapan Instalasi", False),
     ("Draf_Permintaan_Penyediaan_Material_Instalasi_RU-IV_Cilacap.html", "Draf Permintaan Material", False),
     ("Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.html", "Kurva-S Persiapan Instalasi", False),
+    ("Laporan_Kesiapan_Meeting_Pertamina_29September2026.html", "Bahan Rapat Pertamina 29 Sep", False),
 ]
 
 # Dikeluarkan dari navigasi atas permintaan user (4 Sep) - tidak perlu ditampilkan/dinavigasikan:

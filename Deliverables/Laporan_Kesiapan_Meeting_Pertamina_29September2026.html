@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laporan Kesiapan Instalasi RU IV Cilacap — Bahan Rapat Pertamina (29 September 2026)</title>
+<style>
+:root{--ink:#2F4050;--teal:#1ABB9C;--teal-2:#149174;--paper:#F3F3F4;--line:#D9E0E5;--muted:#667585;--warn:#E5934F;--danger:#E2495A;--ok:#1E9B76;--surface:#fff;--info:#1C93C6;--pertamina:#3E7CB1;--vendor:#B5651D}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.6 "Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px 56px}
+.letterhead{background:var(--ink);color:#fff;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.letterhead .org b{display:block;font-size:15px}.letterhead .org span{font-size:12px;color:#B9C6D0}
+.letterhead .doc{text-align:right;font-size:12px;color:#B9C6D0}
+.hero{background:#fff;border:1px solid var(--line);border-top:none;padding:28px 26px;margin-bottom:4px}
+h1{font-size:24px;line-height:1.25;margin:0 0 8px;color:var(--ink)}
+.sub{color:var(--muted);margin:0;max-width:840px;font-size:13.5px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pill{font-size:11.5px;font-weight:700;border:1px solid var(--line);padding:4px 9px;border-radius:20px;color:var(--muted)}
+.pill.teal{background:var(--teal);border-color:var(--teal);color:#fff}
+.pill.red{background:#ffe0de;border-color:#ffcfcb;color:#ae3029}
+.pill.info{background:#E4F2FA;border-color:#c7e4f2;color:#12678f}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:14px;box-shadow:0 1px 2px #2f40500b}
+.kpi .n{font-size:19px;font-weight:800;color:var(--teal-2)}
+.kpi .lbl{font-size:11px;color:var(--muted);margin-top:2px}
+.kpi .sub2{font-size:10px;color:var(--muted);margin-top:6px}
+.section{background:var(--surface);border:1px solid var(--line);border-radius:7px;margin-top:16px;overflow:hidden}
+.head{padding:15px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px;background:#FAFBFC}
+.head .n{width:27px;height:27px;border-radius:50%;background:var(--teal);color:#fff;text-align:center;line-height:27px;font-weight:800;flex:none;font-size:13px}
+.head h2{font-size:17px;margin:0}
+.head .tag{margin-left:auto;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px}
+.body{padding:18px 20px 20px}
+h3{font-size:14px;margin:18px 0 6px}
+h3:first-child{margin-top:0}
+p{margin:0 0 10px}
+.banner{margin:14px 0;padding:12px 14px;border-radius:5px;border-left:4px solid var(--warn);background:#fff8ee}
+.banner.danger{border-color:var(--danger);background:#fdedee}
+.banner.ok{border-color:var(--ok);background:#eefaf6}
+.banner.info{border-color:var(--info);background:#eaf6fc}
+.banner b{display:block;margin-bottom:3px}
+.table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+.table th{background:#edf2f5;text-align:left;font-size:11px;letter-spacing:.02em;color:#566777;padding:9px;font-weight:700}
+.table td{padding:9px;vertical-align:top;border-bottom:1px solid var(--line)}
+.table tr:last-child td{border-bottom:0}
+.status{display:inline-block;border-radius:12px;padding:2px 9px;font-size:10.5px;font-weight:700;white-space:nowrap}
+.ready{background:#ddf4ec;color:#147356}.open{background:#fff0d2;color:#946000}.block{background:#ffe0de;color:#ae3029}.partial{background:#f6f1dc;color:#7a6a18}
+.prio{display:inline-block;border-radius:5px;padding:1px 7px;font-size:10px;font-weight:800;white-space:nowrap;margin-right:6px}
+.prio.p1{background:#ae3029;color:#fff}.prio.p2{background:#946000;color:#fff}.prio.p3{background:#5b7a90;color:#fff}
+.subhead{font-weight:700;font-size:12.5px;color:var(--teal-2);text-transform:uppercase;letter-spacing:.02em;margin:16px 0 6px}
+.subhead:first-child{margin-top:0}
+.ss-row{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px}
+.ss-lab{color:var(--muted)}.ss-val{font-weight:800;color:var(--teal-2)}
+.ss-track{position:relative;height:14px;background:#e7ebee;border-radius:8px;overflow:hidden;margin-bottom:2px}
+.ss-fill{position:absolute;top:0;left:0;height:100%;background:var(--teal);border-radius:8px 0 0 8px}
+.ss-mark{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.ss-note{font-size:10.5px;color:var(--muted);margin-top:2px}
+.track-block{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin-bottom:12px;background:#fbfcfc}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.role{color:var(--muted);font-size:12px}
+.linklist{margin:8px 0 0;padding-left:20px;font-size:13px}.linklist li{margin-bottom:4px;overflow-wrap:break-word}
+code{overflow-wrap:break-word;word-break:break-word;font-size:12.5px}
+footer{margin-top:22px;color:var(--muted);font-size:11px;padding:0 4px}
+.decnum{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:800;margin-right:8px;flex:none}
+.declist{list-style:none;margin:8px 0 0;padding:0}
+.declist li{display:flex;align-items:flex-start;margin-bottom:9px;font-size:13.5px}
+@media print{body{background:#fff}.wrap{max-width:none;padding:10mm}.section{break-inside:avoid}.table tr{break-inside:avoid}}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.wrap{padding:0 14px 30px}}
+</style>
+</head>
+<body>
+<!-- GLD-NAV-START -->
+<style>@media print{#gld-cross-nav{display:none !important}}</style>
+<div id="gld-cross-nav" style="background:#2F4050;border-bottom:3px solid #1ABB9C;padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:13px;position:relative;z-index:99999;">
+<span style="font-weight:700;color:#7FE8CC;margin-right:8px;white-space:nowrap;">GLD Tahap 2 &mdash; Deliverables</span>
+<a href="Dashboard_GLD_ProjectManagement.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Proyek</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Datasheet Sistem</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="JSA_HSE_RU-IV_Cilacap_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draft JSA/HSE</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Knowledge_Graph_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Knowledge Graph</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Progres_ByDate_GLD.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Progres</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Detail_Progres_Assessment_FieldTesting_Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Detail Assessment/Field Testing</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Desain_Bracket_L_UBolt_GLD_Mounting.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Desain Bracket U-Bolt</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Dashboard Sertifikasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Checklist Instalasi Cilacap</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Harian_GLD_17September2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Harian 17 Sep</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Persiapan Vendor Instalasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Laporan_Perkembangan_GLD_FieldTesting_Sertifikasi_17Sep2026.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Laporan Perkembangan 17 Sep</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Pembagian Persiapan Instalasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Draf_Permintaan_Penyediaan_Material_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Draf Permintaan Material</a><span style="opacity:.35;color:#8A97A6">&middot;</span><a href="Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.html" style="color:#D5DEE7;text-decoration:none;padding:4px 10px;border-radius:5px;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#3A4C5E'" onmouseout="this.style.background='transparent'">Kurva-S Persiapan Instalasi</a><span style="opacity:.35;color:#8A97A6">&middot;</span><span style="background:#1ABB9C;color:#fff;padding:4px 10px;border-radius:5px;font-weight:700;white-space:nowrap;">Bahan Rapat Pertamina 29 Sep</span>
+</div>
+<!-- GLD-NAV-END -->
+
+<main class="wrap">
+
+<div class="letterhead">
+<div class="org"><b>PT LAPI Ganesha Utama (LGU) &amp; Lab IoT/Fisika ITB</b><span>Gas Leak Detection (GLD) Tahap 2 — PT Pertamina Patra Niaga</span></div>
+<div class="doc">Bahan Rapat Internal Pertamina<br>29 September 2026</div>
+</div>
+
+<section class="hero">
+<h1>Laporan Kesiapan Instalasi RU IV Cilacap<br>Rangkuman Proyek, Kurva-S, &amp; Detail Persiapan Pertamina/Vendor</h1>
+<p class="sub">Disusun untuk rapat dengan Pertamina membahas kesiapan instalasi di RU IV Cilacap. Merangkum status proyek keseluruhan (termasuk jalur sertifikasi ATEX/IECEx yang berjalan paralel) dan memperinci daftar persiapan yang menjadi tanggung jawab <b>Pertamina RU IV</b> dan <b>vendor instalasi</b> sebelum mobilisasi dapat dijadwalkan.</p>
+<div class="meta">
+<span class="pill teal">REV 1.0 · 28 SEPTEMBER 2026</span>
+<span class="pill">STATUS: PRA-INSTALASI</span>
+<span class="pill red">INSTALASI PERMANEN AREA BERBAHAYA: BELUM GO</span>
+<span class="pill info">SERTIFIKASI: TAHAP PERSIAPAN DOKUMEN</span>
+</div>
+</section>
+
+<div class="kpis">
+<div class="kpi"><div class="n">49%</div><div class="lbl">Progres proyek keseluruhan</div><div class="sub2">vs rencana 52% (data 17 Sep — belum ada milestone lapangan baru sejak itu)</div></div>
+<div class="kpi"><div class="n">0%</div><div class="lbl">Instalasi fisik RU IV</div><div class="sub2">Survey lokasi selesai 9–10 Agu; fisik &amp; commissioning belum dimulai</div></div>
+<div class="kpi"><div class="n">21/8/10</div><div class="lbl">Checklist ExCB (final/sebagian/belum)</div><div class="sub2">Per 17 Sep — beberapa item spek fisik sudah maju sejak (lihat §2)</div></div>
+<div class="kpi"><div class="n">38%</div><div class="lbl">Persiapan instalasi (KPI LGU/Pertamina/Vendor)</div><div class="sub2">18 Sep — LGU 100% (sisi rekayasa), Pertamina &amp; vendor 0%</div></div>
+<div class="kpi"><div class="n">4</div><div class="lbl">Keputusan diminta dari rapat ini</div><div class="sub2">Lihat §6</div></div>
+</div>
+
+<div class="banner info"><b>Cara membaca laporan ini.</b> Semua angka progres diberi tanggal data sumbernya secara eksplisit. Tidak ada milestone lapangan (instalasi/perizinan/penugasan vendor) yang tercatat berubah antara 17–28 September — sesi kerja pada periode itu difokuskan ke penyusunan dokumen sertifikasi ATEX. Bila ada perkembangan lapangan yang belum tercatat di sini, mohon dikonfirmasi saat rapat.</div>
+
+<!-- ================= 1. RINGKASAN & KURVA-S ================= -->
+<section class="section">
+<div class="head"><span class="n">1</span><h2>Ringkasan Proyek &amp; Kurva-S</h2></div>
+<div class="body">
+
+<div class="track-block">
+<div class="ss-row"><span class="ss-lab"><b>Progres proyek keseluruhan</b> (baseline Project Timeline 9 bulan, Jun 2026–Feb 2027)</span><span class="ss-val">49%</span></div>
+<div class="ss-track"><div class="ss-fill" style="width:49%"></div><div class="ss-mark" style="left:52%"></div></div>
+<div class="ss-note">vs rencana 52% pada tanggal yang sama (garis vertikal) → <b>-3 poin</b>, murni sisi rekayasa lab. Data per 17 Sep 2026 (belum di-reassess ulang). Sisa pekerjaan kini bergantung gate eksternal (metode proteksi ATEX, TRA/JSA RU IV), bukan throughput rekayasa. Detail lengkap &amp; Gantt interaktif: <a href="Dashboard_GLD_ProjectManagement.html">Dashboard_GLD_ProjectManagement.html</a>.</div>
+</div>
+
+<div class="track-block">
+<div class="ss-row"><span class="ss-lab"><b>Jalur sertifikasi ATEX/IECEx/IP/EMC/RF</b> (4-track, metodologi bottom-up per fase)</span><span class="ss-val">≈20%</span></div>
+<div class="ss-track"><div class="ss-fill" style="width:20%;background:var(--info)"></div></div>
+<div class="ss-note">Estimasi 5 Sep 2026 (metodologi berbeda dari S-curve proyek di atas — tidak dibandingkan langsung). Sejak itu ada kemajuan dokumen konkret (§2) namun belum dihitung ulang jadi persentase baru. Detail: <a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html">Dashboard_Sertifikasi_GLD_ATEX_IECEx.html</a>.</div>
+</div>
+
+<div class="track-block">
+<div class="ss-row"><span class="ss-lab"><b>Persiapan instalasi RU IV Cilacap</b> (KPI 4-track: LGU&amp;ITB / Pertamina RU IV / Vendor / keseluruhan)</span><span class="ss-val">38%</span></div>
+<div class="ss-track"><div class="ss-fill" style="width:38%;background:#B5651D"></div></div>
+<div class="ss-note">Data 18 Sep 2026 — LGU &amp; ITB 100% (sisi rekayasa/desain selesai), Pertamina RU IV 0%, Vendor Instalasi 0% (belum ditunjuk resmi). 100% LGU <b>tidak termasuk</b> perizinan — 4 item izin sepenuhnya tanggung jawab RU IV. Detail &amp; breakdown 40 item: <a href="Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.html">Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.html</a>.</div>
+</div>
+
+<div class="track-block">
+<div class="ss-row"><span class="ss-lab"><b>Termin 1 — Field Testing</b> (syarat kontraktual 20%)</span><span class="ss-val">20%</span></div>
+<div class="ss-track"><div class="ss-fill" style="width:100%"></div></div>
+<div class="ss-note">Dinilai layak diajukan per audit 11 Sep — outstanding: BAST/berita acara instalasi. Termin 1 Sertifikasi (40%) dilaporkan dengan status per-syarat, tanpa kesimpulan sepihak "siap/tidak siap" — penilaian pemenuhan diserahkan ke evaluasi Pertamina (lihat §2).</div>
+</div>
+
+<p style="margin-top:12px">Ketiga jalur (proyek keseluruhan, sertifikasi, persiapan instalasi) berjalan <b>paralel</b>, bukan berurutan — instalasi permanen di area yang memerlukan ATEX menunggu sertifikasi selesai, tetapi jalur non-ATEX (chamber gas di kantor kilang + instalasi permanen di lokasi non-ATEX seperti perimeter SRU) dapat berjalan tanpa menunggu sertifikasi ATEX kelar.</p>
+</div>
+</section>
+
+<!-- ================= 2. STATUS SERTIFIKASI ================= -->
+<section class="section">
+<div class="head"><span class="n">2</span><h2>Status Sertifikasi ATEX/IECEx (Ringkas)</h2><span class="tag" style="background:#fff0d2;color:#946000">TAHAP PERSIAPAN DOKUMEN</span></div>
+<div class="body">
+<p>Checklist ExCB (lembaga sertifikasi asing) per 17 Sep 2026: <b>21 item final, 8 sebagian, 10 belum</b> dari total kerangka Bagian 1–3. Sejak itu beberapa item konkret sudah maju:</p>
+<ul class="linklist">
+<li><b>Manufacturer resmi dikonfirmasi</b>: PT Galaksi Megatama Indonesia (mitra casing) — legalitas (Akta/NIB/NPWP/SK Kemenkumham) sudah lengkap; LGU tercatat sebagai <i>Design and development authority</i>.</li>
+<li><b>Beberapa spesifikasi fisik naik status Final</b>: berat 2,378 kg, IP66, cable gland M20×1,5, suhu operasi −20°C s/d +60°C, kelembapan operasi 5–95% RH, material enclosure ADC12+stainless steel — nilai proyek dari draf tim terkini, belum lewat pengujian/kalibrasi independen.</li>
+<li><b>Formulir aplikasi resmi diterima</b> dari lembaga sertifikasi GTS (Shanghai Global Testing Services) — draf isian internal sudah dibuat, Applicant = PT LAPI Ganesha Utama (LGU).</li>
+</ul>
+<div class="banner danger"><b>Penghambat utama — belum berubah.</b> <b>Metode proteksi Ex (d/e/i, dst.) belum diputuskan</b> — ini menahan pengisian BOM Ex-critical, kalkulasi proteksi ledakan, dan nameplate. <b>Kelas suhu T4 (≤135°C) belum diverifikasi</b> — nol pengukuran hot-spot heater sensor MQ (~200–400°C) — satu-satunya temuan yang berpotensi memaksa perubahan desain, bukan sekadar dokumen.</div>
+<p style="margin-top:10px">Detail lengkap: <a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html">Dashboard_Sertifikasi_GLD_ATEX_IECEx.html</a> · <a href="Presentasi_Internal_Kesiapan_Sertifikasi_ATEX_Sep2026.pdf">Presentasi_Internal_Kesiapan_Sertifikasi_ATEX_Sep2026.pdf</a> · dokumen submission teknis <code>Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX.pdf</code> (bahasa Inggris, untuk ExCB).</p>
+</div>
+</section>
+
+<!-- ================= 3. STATUS INSTALASI ================= -->
+<section class="section">
+<div class="head"><span class="n">3</span><h2>Status Instalasi RU IV Cilacap</h2></div>
+<div class="body">
+<div class="banner ok"><b>Arah kerja yang sudah diputuskan.</b> Kombinasi uji chamber gas (dioperasikan di kantor kilang, non-area proses) dan instalasi permanen <b>di lokasi non-ATEX</b> — lokasi sudah dikonfirmasi Pertamina: area aman di <b>perimeter Sulfur Recovery Unit (SRU)</b>, bukan di dalam unit proses.</div>
+<table class="table">
+<thead><tr><th>Tahap</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Survey lokasi</td><td><span class="status ready">SELESAI</span> (9–10 Agustus 2026)</td></tr>
+<tr><td>Basis desain bracket mounting (U-bolt 2"/DN50, CAD)</td><td><span class="status ready">SELESAI</span> — sudah diserahkan sebagai acuan fabrikasi</td></tr>
+<tr><td>Penugasan resmi vendor instalasi</td><td><span class="status block">BELUM</span> — menunggu penunjukan Pertamina</td></tr>
+<tr><td>TRA/JSA spesifik titik pasang</td><td><span class="status block">BELUM DISAHKAN</span> — draft LGU tersedia sebagai acuan awal</td></tr>
+<tr><td>Klasifikasi area tertulis resmi (perimeter SRU)</td><td><span class="status open">DALAM PROSES</span> — lokasi sudah pasti, dokumen formal menyusul</td></tr>
+<tr><td>Orientasi bracket di titik pasang aktual (vertikal vs horizontal)</td><td><span class="status block">BELUM DIKONFIRMASI</span> — desain saat ini visual paling sesuai untuk handrail horizontal</td></tr>
+<tr><td>Instalasi fisik &amp; commissioning</td><td><span class="status block">BELUM DIMULAI</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ================= 4. DETAIL PERTAMINA ================= -->
+<section class="section">
+<div class="head" style="border-left:4px solid var(--pertamina)"><span class="n" style="background:var(--pertamina)">4</span><h2>Detail — Yang Harus Disiapkan <span style="color:var(--pertamina)">Pertamina RU IV</span></h2></div>
+<div class="body">
+<p style="font-size:12.5px;color:var(--muted)">Legenda prioritas: <span class="prio p1">P1</span> wajib sebelum mobilisasi/mulai kerja &middot; <span class="prio p2">P2</span> perlu diselesaikan segera, tidak langsung menghentikan kerja &middot; <span class="prio p3">P3</span> koordinasi/administratif.</p>
+
+<div class="subhead">A. Perizinan &amp; HSE</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p1">P1</span></td><td>Mengesahkan TRA/JSA spesifik titik pasang bersama LGU &amp; (bila sudah ditunjuk) vendor — mencakup SIMOPS, bahaya listrik 24VDC, kerja di ketinggian, energize/commissioning.</td><td><span class="status block">BELUM DISAHKAN</span></td></tr>
+<tr><td><span class="prio p1">P1</span></td><td>Menerbitkan izin kerja (SIKA/PTW), izin masuk personel, dan surat masuk barang/alat.</td><td><span class="status block">WAJIB SEBELUM MOBILISASI</span></td></tr>
+<tr><td><span class="prio p1">P1</span></td><td>Menugaskan resmi vendor instalasi &amp; mengonfirmasi kompetensi/sertifikasi kerja di ketinggian vendor tersebut.</td><td><span class="status block">BELUM DITUNJUK</span></td></tr>
+<tr><td><span class="prio p1">P1</span></td><td>Menerbitkan dokumen klasifikasi area tertulis resmi (HSE/Engineering) untuk titik pasang di perimeter SRU — jangan diasumsikan, harus tertulis.</td><td><span class="status open">DALAM PROSES</span></td></tr>
+<tr><td><span class="prio p2">P2</span></td><td>Menyepakati daftar kontak PIC (operasi, HSE, control room, IT) dan jalur stop-work untuk hari-H.</td><td><span class="status open">PERLU DIISI</span></td></tr>
+</tbody>
+</table>
+
+<div class="subhead">B. Lokasi &amp; Infrastruktur</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p1">P1</span></td><td>Penetapan titik pasang detail per unit GLD/Cluster Head/Gateway — termasuk rute kabel, tinggi kerja, dan akses.</td><td><span class="status open">SURVEY ADA, DETAIL BELUM DIKUNCI</span></td></tr>
+<tr><td><span class="prio p2">P2</span></td><td>Menyediakan/mengizinkan akses ke struktur existing (handrail/pipa) yang dipakai sebagai titik pasang bracket.</td><td><span class="status open">TERGANTUNG SURVEY DETAIL</span></td></tr>
+<tr><td><span class="prio p2">P2</span></td><td>Menyetujui metode mounting non-invasive (U-bolt, tanpa bor/las) pada struktur existing.</td><td><span class="status open">MENUNGGU KONFIRMASI</span></td></tr>
+</tbody>
+</table>
+
+<div class="subhead">C. Catu Daya &amp; Jaringan</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p2">P2</span></td><td>Menyediakan kabel &amp; PSU 24 VDC ≥1 A per unit GLD sampai ke titik pasang (adapter AC/DC bila sumbernya 220VAC/50Hz — di luar boundary unit GLD yang disertifikasi).</td><td><span class="status open">BELUM DISEDIAKAN</span></td></tr>
+<tr><td><span class="prio p2">P2</span></td><td>Menyediakan PC fisik dedicated dekat Gateway untuk server LGU (broker MQTT + backend + dashboard), dan menyatukan jaringan field GW↔CH↔sensor (router disediakan LGU).</td><td><span class="status open">PERLU DIPASTIKAN</span></td></tr>
+</tbody>
+</table>
+
+<div class="subhead">D. Material &amp; Spesifikasi yang Perlu Disepakati Bersama</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p3">P3</span></td><td>Jenis konektor catu daya, gauge kabel, dan proteksi/IP kabel dari titik distribusi ke unit GLD.</td><td><span class="status block">BELUM DITENTUKAN</span></td></tr>
+<tr><td><span class="prio p3">P3</span></td><td>Grade/ukuran fastener bracket (mur/baut/washer anti-korosi) — LGU sudah usulkan standar umum (BS 3974/DIN 3570/ASME B18.31.2), menunggu konfirmasi vendor/RU.</td><td><span class="status open">USULAN LGU, PERLU DIKONFIRMASI</span></td></tr>
+</tbody>
+</table>
+
+<div class="subhead">E. Jadwal &amp; Koordinasi</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p2">P2</span></td><td>Menyepakati jadwal mobilisasi &amp; durasi kerja bersama LGU dan vendor.</td><td><span class="status open">PERLU KONFIRMASI</span></td></tr>
+<tr><td><span class="prio p3">P3</span></td><td>Menetapkan representative RU IV yang mendampingi di lapangan selama instalasi.</td><td><span class="status open">PERLU DIISI</span></td></tr>
+</tbody>
+</table>
+
+<p style="margin-top:10px">Rincian lengkap per kategori: <a href="Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html">Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html</a> · <a href="Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html">Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html</a>.</p>
+</div>
+</section>
+
+<!-- ================= 5. DETAIL VENDOR ================= -->
+<section class="section">
+<div class="head" style="border-left:4px solid var(--vendor)"><span class="n" style="background:var(--vendor)">5</span><h2>Detail — Yang Harus Disiapkan <span style="color:var(--vendor)">Vendor Instalasi</span></h2></div>
+<div class="body">
+<div class="banner ok"><b>Prinsip pembagian kerja (dikonfirmasi LGU–Pertamina).</b> Vendor adalah pelaksana fisik di lapangan, termasuk kompetensi dan sertifikasi kerja di ketinggian. LGU tidak memasang unit secara fisik — perannya basis desain, supervisi teknis/QA, dan elektrikal spesifik GLD (energize, terminasi, commissioning).</div>
+
+<div class="subhead">A. Legalitas &amp; Izin Kerja</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p1">P1</span></td><td>Berpartisipasi dalam pengesahan TRA/JSA sebagai pelaksana fisik.</td><td><span class="status open">MENUNGGU</span></td></tr>
+<tr><td><span class="prio p1">P1</span></td><td>Mengurus izin kerja (SIKA/PTW), izin masuk personel &amp; barang sesuai prosedur RU IV.</td><td><span class="status open">MENUNGGU PENUGASAN</span></td></tr>
+</tbody>
+</table>
+
+<div class="subhead">B. Personel &amp; Kompetensi</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p1">P1</span></td><td>Personel bersertifikat kerja di ketinggian sesuai titik pasang — sertifikasi HSE ketinggian tanggung jawab vendor, bukan LGU.</td><td><span class="status open">MENUNGGU PENUGASAN RESMI</span></td></tr>
+<tr><td><span class="prio p2">P2</span></td><td>Menunjuk supervisor lapangan dengan jalur komunikasi ke supervisor QA LGU dan PIC HSE/control room RU IV.</td><td><span class="status open">PERLU PENUNJUKAN</span></td></tr>
+</tbody>
+</table>
+
+<div class="subhead">C. Material, Alat &amp; Fastener</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p2">P2</span></td><td>Fabrikasi bracket L + U-bolt sesuai basis desain LGU (2"/DN50, OD pipa 60,3mm, M10; inside width 62–65mm, height 95–100mm, plat 250×250mm).</td><td><span class="status open">MENUNGGU SHOP DRAWING</span></td></tr>
+<tr><td><span class="prio p3">P3</span></td><td>Mur/baut/washer anti-korosi, alat kerja standar (torque wrench, alat ukur, alat angkat/tangga/scaffolding), APD lengkap, LOTO, gas test bila dipersyaratkan.</td><td><span class="status open">DETAIL FASTENER TERBUKA</span></td></tr>
+<tr><td><span class="prio p1">P1</span></td><td>Tanpa pengelasan/pengeboran struktur permanen kecuali metode disetujui tertulis RU IV.</td><td><span class="status block">BATASAN TETAP</span></td></tr>
+</tbody>
+</table>
+
+<div class="subhead">D. Verifikasi Lapangan (Sebelum Fabrikasi Final)</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p1">P1</span></td><td>Verifikasi diameter, bentuk, material, kondisi aktual struktur di setiap titik pasang (GLD, CH, Gateway).</td><td><span class="status open">VERIFIKASI VENDOR</span></td></tr>
+<tr><td><span class="prio p1">P1</span></td><td>Konfirmasi tertulis orientasi pemasangan (tiang vertikal vs handrail/pipa horizontal) — desain CAD belum diverifikasi tertulis untuk kedua orientasi.</td><td><span class="status block">PERLU KONFIRMASI TERTULIS</span></td></tr>
+<tr><td><span class="prio p2">P2</span></td><td>Verifikasi beban total unit, vibrasi, beban angin, clearance maintenance, dan akses kerja.</td><td><span class="status open">VERIFIKASI VENDOR</span></td></tr>
+</tbody>
+</table>
+
+<div class="subhead">E. Unit &amp; Catu Daya yang Menyertai Instalasi</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p2">P2</span></td><td>Verifikasi pra-mobilisasi: 3 unit GLD RU IV + 1 cadangan (serial number, firmware, kondisi casing/konektor).</td><td><span class="status open">VERIFIKASI PRA-MOBILISASI</span></td></tr>
+<tr><td><span class="prio p2">P2</span></td><td>Menyiapkan jalur kabel, proteksi, terminasi, identifikasi kabel dari titik catu daya (kabel/PSU disediakan RU IV) sesuai instruksi LGU/RU IV.</td><td><span class="status open">KOORDINASI DENGAN LGU/RU IV</span></td></tr>
+<tr><td><span class="prio p3">P3</span></td><td>Menyiapkan akses &amp; kondisi aman untuk energize/terminasi elektrikal (dipimpin LGU) — bukan mengeksekusi sendiri.</td><td><span class="status open">KOORDINASI DENGAN LGU</span></td></tr>
+</tbody>
+</table>
+
+<div class="subhead">F. Koordinasi Hari-H</div>
+<table class="table">
+<thead><tr><th></th><th>Item</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><span class="prio p2">P2</span></td><td>Menyepakati jadwal mobilisasi &amp; durasi kerja bersama RU IV dan LGU.</td><td><span class="status open">PERLU KONFIRMASI</span></td></tr>
+<tr><td><span class="prio p3">P3</span></td><td>Menyiapkan daftar kontak &amp; rencana rollback/pelepasan bila ditemukan kondisi tidak sesuai (struktur tak sesuai desain, area ternyata hazardous tanpa dasar sertifikasi).</td><td><span class="status open">DISEPAKATI SEBELUM MULAI</span></td></tr>
+</tbody>
+</table>
+
+<p style="margin-top:10px">Rincian lengkap: <a href="Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html">Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html</a> (dokumen serah-terima ke vendor, 6 sub-bagian checklist).</p>
+</div>
+</section>
+
+<!-- ================= 6. KEPUTUSAN DIMINTA ================= -->
+<section class="section">
+<div class="head"><span class="n">6</span><h2>Keputusan yang Diminta dari Rapat Ini</h2></div>
+<div class="body">
+<ol class="declist">
+<li><span class="decnum">1</span><span><b>Penunjukan resmi vendor instalasi</b> beserta konfirmasi kompetensi/sertifikasi HSE kerja di ketinggian — tanpa ini, jadwal fabrikasi bracket &amp; mobilisasi tidak dapat ditetapkan.</span></li>
+<li><span class="decnum">2</span><span><b>Jadwal pengesahan TRA/JSA</b> spesifik titik pasang (SIMOPS, listrik 24VDC, kerja tinggi, energize/commissioning) — siapa PIC review dari RU IV/HSE dan target tanggal.</span></li>
+<li><span class="decnum">3</span><span><b>Konfirmasi tertulis klasifikasi area</b> untuk titik pasang di perimeter SRU (safe area, sesuai keputusan lokasi non-ATEX yang sudah disepakati) — dokumen formal dari HSE/Engineering RU IV.</span></li>
+<li><span class="decnum">4</span><span><b>Target tanggal mobilisasi &amp; instalasi permanen</b> — begitu vendor ditunjuk dan TRA/JSA disahkan, kapan realistis fabrikasi bracket + pemasangan dapat dimulai.</span></li>
+</ol>
+<p style="margin-top:12px;font-size:12.5px;color:var(--muted)">Catatan tambahan (bila relevan dibahas): orientasi bracket vertikal/horizontal masih perlu diverifikasi vendor terhadap struktur aktual sebelum fabrikasi massal; jalur sertifikasi ATEX (metode proteksi Ex, verifikasi kelas suhu T4) berjalan paralel dan tidak menghambat instalasi di lokasi non-ATEX seperti perimeter SRU.</p>
+</div>
+</section>
+
+<footer><b>Dokumen acuan:</b> <a href="Dashboard_GLD_ProjectManagement.html">Dashboard Proyek</a> · <a href="Dashboard_Sertifikasi_GLD_ATEX_IECEx.html">Dashboard Sertifikasi ATEX</a> · <a href="Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.html">Kurva-S Persiapan Instalasi</a> · <a href="Checklist_Kesiapan_Instalasi_RU-IV_Cilacap.html">Checklist Kesiapan Instalasi</a> · <a href="Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html">Pembagian Persiapan Instalasi</a> · <a href="Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html">Daftar Persiapan Vendor</a> · <a href="Draf_Permintaan_Penyediaan_Material_Instalasi_RU-IV_Cilacap.html">Draf Permintaan Material</a>. Dokumen ini merangkum data yang sudah ada di deliverable-deliverable tersebut untuk keperluan rapat — bukan sumber data baru, bukan izin kerja, dan tidak menggantikan persetujuan HSE/operasi Pertamina.</footer>
+
+</main></body></html>

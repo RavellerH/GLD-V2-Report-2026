@@ -199,19 +199,19 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # ============================================================
 # COVER
 # ============================================================
-DOC_NO = "LGU/GLD/IECEX-CIR/2026-001"
-REVISION = "0.5"
+DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
+REVISION = "0.6"
 DOC_DATE = "28 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
 set_cell_shading(lc, "1A2B3D")
 lc.paragraphs[0].paragraph_format.space_after = Pt(2)
-lr = lc.paragraphs[0].add_run("PT LAPI GANESHA UTAMA")
+lr = lc.paragraphs[0].add_run("PT GALAKSI MEGATAMA INDONESIA")
 lr.font.bold = True; lr.font.size = Pt(14); lr.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
 lp2 = lc.add_paragraph()
 lp2.paragraph_format.space_after = Pt(3)
-lr2 = lp2.add_run("In technical partnership with the Institute of Technology Bandung")
+lr2 = lp2.add_run("Manufacturer of record")
 lr2.font.size = Pt(9.5); lr2.font.color.rgb = RGBColor(0xC7, 0xD2, 0xE0)
 doc.add_paragraph().paragraph_format.space_after = Pt(14)
 
@@ -239,9 +239,7 @@ meta_rows = [
     ("Classification", "Confidential — prepared for ATEX/IECEx certification body (ExCB) submission"),
     ("Based on (source template)", "IECEx ATEX Certification Information Requirements_Rev18092026.docx "
      "(internal working draft, 18 Sep 2026)"),
-    ("Manufacturer", "PT Galaksi Megatama Indonesia"),
-    ("Design & development authority", "PT LAPI Ganesha Utama (LGU)"),
-    ("Technical partner", "Institute of Technology Bandung"),
+    ("Applicant / Manufacturer", "PT Galaksi Megatama Indonesia"),
     ("Companion document", "Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX (exhaustive item-by-item status "
      "tracking) — authoritative for item-level status where the two documents differ"),
 ]
@@ -296,11 +294,16 @@ for rev, rev_date, rev_desc in [
     ("0.4", "24 September 2026",
      "Total weight, operating temperature, and operating humidity (Section 2.3) updated to 2.378 kg, "
      "−20°C to +60°C, and 5–95% RH respectively, per current project specification data."),
-    (REVISION, DOC_DATE,
+    ("0.5", "28 September 2026",
      "Type of protection narrowed to a single team recommendation, Ex d (flameproof enclosure), in Section "
      "2.5 — selected over Ex e and Ex i based on the existing ADC12 die-cast enclosure with a stainless-steel "
      "mesh flame path and the MQ-sensor heaters' continuous, unregulated power draw. Section 2.6.e updated "
      "accordingly. Still an internal recommendation, not an ExCB decision."),
+    (REVISION, DOC_DATE,
+     "Applicant/Manufacturer identity simplified to a single entity, PT Galaksi Megatama Indonesia (document "
+     "number prefix changed to GMI/...). Removed all references to PT LAPI Ganesha Utama as “design and "
+     "development authority” and to the Institute of Technology Bandung as “technical partner” "
+     "throughout (letterhead, Document Control, Sections 1.2, 1.4)."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -367,10 +370,8 @@ p("Issued by the ExCB as a template; not yet received.")
 status_line("Template not yet received from the ExCB.")
 
 doc.add_heading("1.2 · Manufacturer's Business License / Company Registration Certificate", level=2)
-p("The Manufacturer named in this application is PT Galaksi Megatama Indonesia, which holds the Indonesian "
-  "industrial manufacturing business license (NIB) relevant to fabricating the equipment. PT LAPI Ganesha "
-  "Utama (LGU) is the design and development authority responsible for the electronics, firmware, and system "
-  "engineering of the GLD, working with the Institute of Technology Bandung as technical partner.")
+p("The Applicant and Manufacturer named in this application is PT Galaksi Megatama Indonesia, which holds "
+  "the Indonesian industrial manufacturing business license (NIB) relevant to fabricating the equipment.")
 make_table(
     ["Particular", "Value"],
     [
@@ -414,7 +415,7 @@ make_table(
         ["Registered office", "Plaza Summarecon Bekasi, Jl. Bulevar Ahmad Yani Kav. K.01, Level 7, Bekasi City, West Java"],
         ["Production site 1", "Jl. Kp. Jatipilar, Cikarang Selatan, Bekasi Regency"],
         ["Production site 2", "Jl. WR Supratman, Mustikajaya, Bekasi City"],
-        ["Electronics design/assembly (LGU)", "Native EasyEDA/JLCPCB project; fabrication/assembly provider and its address to be confirmed in writing"],
+        ["Electronics design/assembly", "Native EasyEDA/JLCPCB project; fabrication/assembly provider and its address to be confirmed in writing"],
     ],
     col_widths=[2.3, 4.2],
 )
@@ -472,8 +473,6 @@ make_table(
         ["Product name", "Gas Leak Detector (GLD)"],
         ["Model / version", "GLD V2"],
         ["Manufacturer", "PT Galaksi Megatama Indonesia"],
-        ["Design & development authority", "PT LAPI Ganesha Utama (LGU)"],
-        ["Technical development partner", "Institute of Technology Bandung — IoT Laboratory & Physics Laboratory"],
         ["Program owner", "PT Pertamina Patra Niaga (initial deployment site: Refinery Unit IV, Cilacap)"],
         ["Primary function", "Acquisition of 8-channel gas sensor data and LoRa transmission"],
         ["Microcontroller", "ESP32-S3-WROOM-1U-N16R8"],
@@ -802,8 +801,8 @@ r = foot.add_run(
     "template's own section order rather than the more exhaustive item-by-item status tracking maintained in "
     "Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX — the two documents are maintained in parallel and should "
     "stay consistent; treat the exhaustive tracking document as authoritative for item-level status where "
-    "they differ. Data sources: the official product technical datasheet (Institute of Technology Bandung, "
-    "Revision 4.0), internal technical specification documentation, EMC parameter measurement data, EasyEDA/"
+    "they differ. Data sources: the official product technical datasheet (Revision 4.0), internal technical "
+    "specification documentation, EMC parameter measurement data, EasyEDA/"
     "JLCPCB design exports, and PT Galaksi Megatama Indonesia's legal documents."
 )
 r.font.size = Pt(9); r.font.color.rgb = GRAY; r.font.italic = True

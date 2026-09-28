@@ -202,19 +202,19 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # ============================================================
 # COVER / LETTERHEAD
 # ============================================================
-DOC_NO = "LGU/GLD/IECEX-TDF/2026-001"
-REVISION = "1.2"
+DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
+REVISION = "1.3"
 DOC_DATE = "28 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
 set_cell_shading(lc, "1A2B3D")
 lc.paragraphs[0].paragraph_format.space_after = Pt(2)
-lr = lc.paragraphs[0].add_run("PT LAPI GANESHA UTAMA")
+lr = lc.paragraphs[0].add_run("PT GALAKSI MEGATAMA INDONESIA")
 lr.font.bold = True; lr.font.size = Pt(14); lr.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
 lp2 = lc.add_paragraph()
 lp2.paragraph_format.space_after = Pt(3)
-lr2 = lp2.add_run("In technical partnership with the Institute of Technology Bandung")
+lr2 = lp2.add_run("Manufacturer of record")
 lr2.font.size = Pt(9.5); lr2.font.color.rgb = RGBColor(0xC7, 0xD2, 0xE0)
 doc.add_paragraph().paragraph_format.space_after = Pt(14)
 
@@ -245,9 +245,7 @@ meta_rows = [
     ("Status", "Working Document \u2014 Draft for Internal Review"),
     ("Classification", "Confidential \u2014 prepared for ATEX/IECEx certification body (ExCB) submission"),
     ("Certification subject", "Node Sensor (GLD) \u2014 V2"),
-    ("Manufacturer", "PT Galaksi Megatama Indonesia"),
-    ("Design & development authority", "PT LAPI Ganesha Utama"),
-    ("Technical partner", "Institute of Technology Bandung"),
+    ("Applicant / Manufacturer", "PT Galaksi Megatama Indonesia"),
     ("Reference checklist", "IECEx/ATEX Certification Information Requirements"),
 ]
 mt = doc.add_table(rows=0, cols=2)
@@ -282,9 +280,8 @@ for rev, rev_date, rev_desc in [
      "Document now covers all three sections of the checklist."),
     ("0.3", "22 September 2026",
      "Manufacturer-of-record for Section 1 changed to PT Galaksi Megatama Indonesia (legal documents "
-     "on file); PT LAPI Ganesha Utama recorded as design and development authority. Section 2.6.g "
-     "draft content (safety warnings, installation procedures, operating modes, commissioning "
-     "equipment) added."),
+     "on file). Section 2.6.g draft content (safety warnings, installation procedures, operating modes, "
+     "commissioning equipment) added."),
     ("0.4", "22 September 2026",
      "Candidate enclosure component data (ADC12 die-cast alloy, M20\u00d71.5 cable entry, "
      "electrostatic-safety parameters) added to Sections 2.3.c, 2.6.a, and 2.6.c, sourced from a "
@@ -326,13 +323,20 @@ for rev, rev_date, rev_desc in [
      "site-supplied device outside the certified unit's physical boundary. Section 2.6.c cable-gland seal "
      "remark clarified as specified together with the M20×1.5 gland itself from the BP18-1Z reference, "
      "per project direction, rather than as a separately sourced item."),
-    (REVISION, DOC_DATE,
+    ("1.2", "28 September 2026",
      "Type of protection narrowed to a single team recommendation, Ex d (flameproof enclosure), in Sections "
      "1.1 and 2.5 — selected over Ex e and Ex i based on the existing ADC12 die-cast enclosure with a "
      "stainless-steel mesh flame path (matching the three certified reference products reviewed) and the "
      "MQ-sensor heaters' continuous, unregulated power draw being difficult to reconcile with intrinsically "
      "safe energy limits for Group IIC. Section 2.6.e updated accordingly. Still an internal recommendation, "
      "not an ExCB decision."),
+    (REVISION, DOC_DATE,
+     "Applicant/Manufacturer identity simplified to a single entity, PT Galaksi Megatama Indonesia, "
+     "throughout the document (document number prefix changed to GMI/...). Removed all references to PT "
+     "LAPI Ganesha Utama as “design and development authority” and to the Institute of Technology "
+     "Bandung as “technical partner” (Sections 1.1, 1.3, 2.2, letterhead, Document Control) per "
+     "updated applicant-identity decision; narrative passages describing electronics design/engineering work "
+     "were made generic rather than deleted, to avoid implying the Manufacturer performed work it did not."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -442,18 +446,16 @@ note_box("How this section is presented. The items below are administrative rath
          "engineering output. Every required field is therefore set out in full so that it can be collected in a "
          "single pass, with its current status stated plainly. No field has been filled with an assumed or "
          "placeholder value.", shade=INFO_SHADE)
-note_box("Manufacturer-of-record for this section: PT Galaksi Megatama Indonesia. This section reports the "
-         "legal/corporate particulars of PT Galaksi Megatama Indonesia as the Manufacturer named in the ExCB "
-         "application, since it holds the Indonesian industrial manufacturing business license (NIB) relevant to "
-         "fabricating the equipment (KBLI 25119/25120/28221/25920 — metal products, pressurized-vessel-class "
-         "containers, metalworking machinery, and special metal-treatment services). PT LAPI Ganesha Utama (LGU) "
-         "is the design and development authority responsible for the electronics, firmware, and system "
-         "engineering of the GLD, working with the Institute of Technology Bandung as technical partner; it is "
-         "recorded as such throughout Sections 2 and 3. This attribution reflects a working decision recorded 22 "
-         "September 2026 based on PT Galaksi's legal documents (deed of establishment, NIB, NPWP, MOLHR "
-         "ratification decree, tax registration certificate) supplied to the authors — it has not yet been "
-         "confirmed directly with either company's officers as the final arrangement for the ExCB submission and "
-         "should be verified before formal filing.", shade=WARN_SHADE)
+note_box("Applicant and Manufacturer of record for this document: PT Galaksi Megatama Indonesia. This section "
+         "reports the legal/corporate particulars of PT Galaksi Megatama Indonesia, since it holds the "
+         "Indonesian industrial manufacturing business license (NIB) relevant to fabricating the equipment "
+         "(KBLI 25119/25120/28221/25920 — metal products, pressurized-vessel-class containers, "
+         "metalworking machinery, and special metal-treatment services). PT Galaksi Megatama Indonesia is "
+         "recorded as the sole applicant and manufacturer throughout this document. This attribution reflects a "
+         "working decision recorded 28 September 2026 based on PT Galaksi's legal documents (deed of "
+         "establishment, NIB, NPWP, MOLHR ratification decree, tax registration certificate) supplied to the "
+         "authors — it has not yet been confirmed directly with the company's officers as the final "
+         "arrangement for the ExCB submission and should be verified before formal filing.", shade=WARN_SHADE)
 
 p("Original excerpt, Section 1 — source: IECEx ATEX Certification Information Requirements (ExCB):",
   size=9.5, bold=True, color=NAVY, space_after=2)
@@ -493,11 +495,6 @@ make_table(
     [
         ["Applicant / manufacturer", "PT Galaksi Megatama Indonesia", ("__status__", ("Confirmed", "ok")),
          "Section 1.2"],
-        ["Design and development authority", "PT LAPI Ganesha Utama (LGU)",
-         ("__status__", ("Confirmed", "ok")), ""],
-        ["Technical development partner",
-         "Institute of Technology Bandung — IoT Laboratory & Physics Laboratory",
-         ("__status__", ("Confirmed", "ok")), ""],
         ["Product name", "Gas Leak Detector (GLD) — Node Sensor", ("__status__", ("Confirmed", "ok")),
          "Section 2.2"],
         ["Model / version", "GLD V2", ("__status__", ("Confirmed", "ok")), "Section 2.2"],
@@ -581,9 +578,6 @@ make_table(
          "The engineer who will answer technical queries on the technical file."],
         ["Quality contact", ("__status__", ("To be provided", "gap")),
          "Counterpart for the quality assessment referred to in 1.5."],
-        ["Technical partner contact",
-         ("__status__", ("Organization identified; contact to be confirmed", "wip")),
-         "Institute of Technology Bandung — IoT Laboratory / Physics Laboratory."],
         ["Correspondence address and working language", ("__status__", ("To be provided", "gap")),
          "English is assumed for correspondence with the ExCB unless stated otherwise."],
     ],
@@ -608,7 +602,7 @@ make_table(
          "is not an Ex-certified enclosure manufacturer license, and no ISO 9001 or Ex-specific quality "
          "certificate has been supplied."],
         ["Printed circuit board fabrication and assembly", ("__status__", ("Partially available", "wip")),
-         "The electronic design is maintained by LGU as a native EasyEDA/JLCPCB project and the component supply "
+         "The electronic design is maintained as a native EasyEDA/JLCPCB project and the component supply "
          "chain is referenced to LCSC supplier part numbers throughout the bill of materials (Section 2.6.b). "
          "The fabrication and assembly provider, and its address, remain to be confirmed in writing."],
         ["Enclosure / casing manufacture", ("__status__", ("Partially available", "wip")),
@@ -694,8 +688,6 @@ spec_rows = [
     ("Product name", "Gas Leak Detector (GLD) \u2014 Node Sensor"),
     ("Model / version", "GLD V2"),
     ("Manufacturer", "PT Galaksi Megatama Indonesia"),
-    ("Design & development authority", "PT LAPI Ganesha Utama (LGU)"),
-    ("Technical development partner", "Institute of Technology Bandung \u2014 IoT Laboratory & Physics Laboratory"),
     ("End client / program owner", "PT Pertamina Patra Niaga (initial deployment site: Refinery Unit IV, Cilacap)"),
     ("Primary function", "Acquisition of 8-channel gas sensor data and LoRa transmission"),
     ("Microcontroller", "ESP32-S3-WROOM-1U-N16R8"),
@@ -713,8 +705,8 @@ for k, v in spec_rows:
     r2 = row[1].paragraphs[0].add_run(v); r2.font.size = Pt(10)
     row[0].width = Inches(2.2); row[1].width = Inches(4.3)
 doc.add_paragraph().paragraph_format.space_after = Pt(6)
-p("Source: official product technical datasheet (Institute of Technology Bandung, Revision 4.0), "
-  "cross-referenced with internal technical specification documentation and EMC parameter measurement data.",
+p("Source: official product technical datasheet (Revision 4.0), cross-referenced with internal technical "
+  "specification documentation and EMC parameter measurement data.",
   size=9, italic=True, color=GRAY)
 
 doc.add_heading("2.3 \u00b7 Functional Description and Technical Parameters (Electrical, Mechanical, etc.)", level=2)
@@ -1377,8 +1369,8 @@ foot.paragraph_format.space_before = Pt(10)
 r = foot.add_run(
     "This is a working document, prepared in stages, drafted in direct reference to the IECEx/ATEX "
     "Certification Information Requirements (original English/Mandarin version issued by the certification "
-    "body). Data sources: the official product technical datasheet (Institute of Technology Bandung, "
-    "Revision 4.0), internal technical specification documentation, EMC parameter measurement data, and "
+    "body). Data sources: the official product technical datasheet (Revision 4.0), internal technical "
+    "specification documentation, EMC parameter measurement data, and "
     "product photography. Fields marked \u201cPending confirmation\u201d are not yet final and must not be "
     "relied upon for procurement or certification purposes without further verification."
 )

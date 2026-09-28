@@ -187,12 +187,13 @@ for k, v in [
     ("Formulir sumber", "Application Form for ATEX, versi A0 — Shanghai Global Testing Services Co., Ltd. "
                           "(GTS), diterima 23 Sep 2026"),
     ("Berkas asli", "Sumber Dokumen/input form sertifikasi/GTS_ATEX_Application_Form_A0.pdf"),
-    ("Dokumen acuan data", "Dokumen Teknis Sertifikasi GLD IECEx/ATEX — No. LGU/GLD/IECEX-TDF/2026-001"),
+    ("Dokumen acuan data", "Dokumen Teknis Sertifikasi GLD IECEx/ATEX — No. GMI/GLD/IECEX-TDF/2026-001"),
     ("Tujuan", "Draf isian internal agar transkrip ke formulir resmi GTS tinggal salin — BUKAN berkas "
                 "yang dikirim ke GTS"),
-    ("Status", "Applicant, alamat LGU, dan PIC kontak (Dr. Maman Budiman) sudah terisi. Method of "
-     "Protection kini rekomendasi tim (Ex d, 28 Sep — bukan keputusan resmi/ExCB). Penandatangan resmi "
-     "dan Sample Return masih “Perlu keputusan” — lihat highlight"),
+    ("Status", "Applicant = Manufacturer = PT Galaksi Megatama Indonesia (28 Sep, satu entitas — LGU/ITB "
+     "tidak lagi dicantumkan). Method of Protection kini rekomendasi tim (Ex d, 28 Sep — bukan keputusan "
+     "resmi/ExCB). Nama PIC teknis (kontak day-to-day), penandatangan resmi, dan Sample Return masih "
+     "“Perlu keputusan” — lihat highlight"),
 ]:
     row = meta.add_row().cells
     set_cell_shading(row[0], HEAD_SHADE)
@@ -209,13 +210,16 @@ doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
 note_box(
     "Formulir GTS memisahkan dua entitas: “Applicant” (pemohon/委托方) dan “Manufacturer” "
-    "(制造商). Dikonfirmasi user (23 Sep 2026): “Applicant” = PT LAPI Ganesha Utama (LGU) — "
-    "konsisten dengan peran LGU sebagai design and development authority di dokumen sertifikasi "
-    "(dec:130–131); PT Galaksi Megatama Indonesia tetap “Manufacturer”. Alamat resmi LGU (Jl. Dederuk "
-    "No. 30, Sadang Serang, Bandung) dan PIC kontak (Dr. Maman Budiman, ITB — teknis/PIC proyek GLD) "
-    "sudah dikonfirmasi user (25 Sep 2026). Penandatangan resmi aplikasi (authorized signatory) masih "
-    "BELUM ditentukan — ini biasanya pejabat berwenang mewakili LGU secara hukum, bukan otomatis sama "
-    "dengan PIC teknis/kontak korespondensi.",
+    "(制造商). **Keputusan diperbarui (28 Sep 2026, menggantikan keputusan 23 Sep/dec:142)**: "
+    "“Applicant” = “Manufacturer” = **PT Galaksi Megatama Indonesia** — satu entitas tunggal. "
+    "LGU dan ITB tidak lagi dicantumkan di formulir maupun dokumen sertifikasi manapun. Alamat "
+    "Applicant memakai alamat resmi (kantor terdaftar) PT Galaksi dari dokumen legalitas (Akta/NIB/"
+    "NPWP/SK Kemenkumham). Nama Direksi diketahui dari akta (Presiden Direktur: Nur Rohman; Direktur: "
+    "Antonius Prasetyo; Komisaris: Crisa Andi Sujatmiko — Akta No. 52, 22 Sep 2022) — Presiden Direktur "
+    "adalah pejabat berwenang mewakili perusahaan secara hukum (representasi statutori), tapi **nomor "
+    "telepon/e-mail pribadi beliau maupun PIC teknis day-to-day untuk korespondensi ExCB TIDAK ada di "
+    "dokumen legalitas manapun** — jangan ditebak, tandai “Perlu keputusan” sampai PT Galaksi menunjuk "
+    "kontak resminya.",
     shade=NOTE_SHADE, text_color=INK, label="✓ Diputuskan:", label_color=GOOD,
 )
 
@@ -223,17 +227,17 @@ note_box(
 p("1. Applicant Contact Information — Info Kontak Pemohon", size=12.5, bold=True,
   color=NAVY, space_after=4)
 field_table([
-    ("Applicant company name — 委托方公司名称", "PT LAPI Ganesha Utama (LGU)", AVAILABLE),
-    ("Applicant company address", "Jl. Dederuk No. 30, Sadang Serang, Kecamatan Coblong, Kota Bandung, "
-     "Jawa Barat 40133", AVAILABLE),
-    ("Contact person", "Dr. Maman Budiman", AVAILABLE),
-    ("Position", "IoT Researcher & Senior Lecturer, Instrumentation and Computation Physics Research "
-     "Group, Institut Teknologi Bandung (ITB) — technical development partner; PIC proyek sertifikasi GLD",
+    ("Applicant company name — 委托方公司名称", "PT Galaksi Megatama Indonesia", AVAILABLE),
+    ("Applicant company address", "Plaza Summarecon Bekasi, Jl. Bulevar Ahmad Yani Kav. K.01, Level 7, "
+     "Harapanmulya Village, Medansatria Sub-district, Bekasi City, West Java 17143, Indonesia", AVAILABLE),
+    ("Contact person", "Belum ditunjuk — Presiden Direktur (Nur Rohman, per Akta No. 52) adalah "
+     "penandatangan sah secara hukum, tapi PIC teknis/korespondensi day-to-day untuk ExCB belum "
+     "ditentukan perusahaan", TBD),
+    ("Position", "—", TBD),
+    ("Mobile / Tel", "Tidak ada di dokumen legalitas — perlu diminta langsung ke PT Galaksi", TBD),
+    ("E-mail", "Tidak ada di dokumen legalitas — perlu diminta langsung ke PT Galaksi", TBD),
+    ("Report & invoice mailing address", "Sama dengan alamat Applicant di atas (Plaza Summarecon Bekasi)",
      AVAILABLE),
-    ("Mobile / Tel", "+62 812 2238 241", AVAILABLE),
-    ("E-mail", "mamanbudiman@yahoo.com", AVAILABLE),
-    ("Report & invoice mailing address", "Sama dengan alamat Applicant di atas (Jl. Dederuk No. 30, Sadang "
-     "Serang, Bandung 40133)", AVAILABLE),
 ], widths=(2.0, 3.5, 1.8))
 
 # ============================================================ 2. Data bilingual
@@ -242,12 +246,11 @@ p("Kolom “Chinese” pada formulir asli tidak diisi di sini — belum ada terj
   "untuk data produk; tanyakan ke GTS apakah wajib disediakan pemohon atau diterjemahkan oleh lab.",
   size=9, italic=True, color=GRAY, space_after=6)
 field_table([
-    ("Applicant 申请公司", "PT LAPI Ganesha Utama (LGU)", AVAILABLE),
-    ("Add 申请公司地址", "Jl. Dederuk No. 30, Sadang Serang, Kecamatan Coblong, Kota Bandung, Jawa Barat "
-     "40133, Indonesia", AVAILABLE),
-    ("Manufacturer 制造商", "PT Galaksi Megatama Indonesia", AVAILABLE),
-    ("Add 制造商地址", "Plaza Summarecon Bekasi, Jl. Bulevar Ahmad Yani Kav. K.01, Level 7, "
+    ("Applicant 申请公司", "PT Galaksi Megatama Indonesia", AVAILABLE),
+    ("Add 申请公司地址", "Plaza Summarecon Bekasi, Jl. Bulevar Ahmad Yani Kav. K.01, Level 7, "
      "Harapanmulya Village, Medansatria Sub-district, Bekasi City, West Java 17143, Indonesia", AVAILABLE),
+    ("Manufacturer 制造商", "PT Galaksi Megatama Indonesia (sama dengan Applicant — satu entitas)", AVAILABLE),
+    ("Add 制造商地址", "Sama dengan alamat Applicant di atas", AVAILABLE),
     ("Product 产品名称", "Gas Leak Detector (GLD) — Node Sensor", AVAILABLE),
     ("Model No 全部型号", "GLD V2 (satu model saat ini; belum ada varian lain)", AVAILABLE),
     ("Main model 主测型号", "GLD V2", AVAILABLE),

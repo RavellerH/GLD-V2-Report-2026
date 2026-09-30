@@ -4,7 +4,7 @@ Paket PDF internal untuk pelaporan anggaran operasional PT LAPI Ganesha Utama. M
 
 | No | File | Isi |
 |---|---|---|
-| 00 | `00_Laporan_Status_Proyek_GLD_LGU_30September2026.pdf` | **Laporan utama** (7 hlm): ringkasan eksekutif, Kurva-S proyek (49% vs rencana 62%), status 12 aktivitas Gantt, kesiapan dokumen sertifikasi (≈43%), pengajuan ke GTS, hasil uji suhu, status Termin 1 (Field Testing & Sertifikasi), persiapan instalasi RU IV, **timeline progres harian 20 Apr–30 Sep**, risiko & keputusan yang diperlukan |
+| 00 | `00_Laporan_Status_Proyek_GLD_LGU_30September2026.pdf` | **Laporan utama** (8 hlm): ringkasan eksekutif, Kurva-S proyek (61% vs rencana 62%), status 12 aktivitas Gantt, kesiapan dokumen sertifikasi (≈43%), pengajuan ke GTS, hasil uji suhu, status Termin 1 (Field Testing & Sertifikasi), persiapan instalasi RU IV, **timeline progres harian 20 Apr–30 Sep**, risiko & keputusan yang diperlukan |
 | 01 | `01_Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.pdf` | Kurva-S khusus persiapan instalasi (data 18 Sep) |
 | 02 | `02_Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.pdf` | Matriks persiapan LGU & ITB / Pertamina RU IV / Vendor |
 | 03 | `03_Materi_Rapat_Koordinasi_Pertamina_29September2026.pdf` | Slide rapat koordinasi dengan Pertamina 29 Sep |

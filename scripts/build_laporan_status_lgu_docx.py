@@ -188,20 +188,19 @@ def build_chart():
             (dt.date(2027, 2, 28), 100)]
     act = [(dt.date(2026, 6, 1), 0), (dt.date(2026, 6, 12), 6), (dt.date(2026, 6, 30), 16),
            (dt.date(2026, 7, 7), 23), (dt.date(2026, 7, 15), 30), (dt.date(2026, 7, 24), 39),
-           (dt.date(2026, 9, 4), 44), (dt.date(2026, 9, 17), 49), (TODAY, 49)]
+           (dt.date(2026, 9, 4), 44), (dt.date(2026, 9, 17), 49), (TODAY, 61)]
     plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Calibri", "Arial", "DejaVu Sans"],
                          "font.size": 10})
     fig, ax = plt.subplots(figsize=(9.2, 4.4), dpi=200)
     ax.plot([d for d, _ in plan], [v for _, v in plan], color="#8A97A6", lw=2, ls=(0, (6, 4)),
             label="Rencana (baseline Kick-Off, 9 bulan)")
-    ax.plot([d for d, _ in act[:-1]], [v for _, v in act[:-1]], color="#1B2A4A", lw=2.6, marker="o",
+    ax.plot([d for d, _ in act], [v for _, v in act], color="#1B2A4A", lw=2.6, marker="o",
             ms=5, label="Aktual (hasil assessment)")
-    ax.plot([act[-2][0], act[-1][0]], [act[-2][1], act[-1][1]], color="#1B2A4A", lw=2, ls=":")
     ax.axvline(TODAY, color="#B23A3A", lw=1.2, ls="--")
     ax.text(TODAY + dt.timedelta(days=3), 6, "30 Sep 2026", color="#B23A3A", fontsize=9, fontweight="bold")
-    ax.annotate("Aktual 49%", xy=(TODAY, 49), xytext=(12, -16), textcoords="offset points",
+    ax.annotate("Aktual 61%", xy=(TODAY, 61), xytext=(12, -14), textcoords="offset points",
                 fontsize=9.5, fontweight="bold", color="#1B2A4A")
-    ax.annotate("Rencana 62%", xy=(TODAY, 62), xytext=(-78, 6), textcoords="offset points",
+    ax.annotate("Rencana 62%", xy=(TODAY, 62), xytext=(-82, 10), textcoords="offset points",
                 fontsize=9.5, fontweight="bold", color="#5B5B5B")
     ax.set_ylim(0, 105)
     ax.set_yticks([0, 20, 40, 60, 80, 100])
@@ -296,17 +295,18 @@ p("Laporan ini merangkum posisi proyek GLD Tahap 2 per 30 September 2026 untuk k
   "jalur rekayasa/lapangan (Kurva-S proyek 9 bulan) dan jalur sertifikasi ATEX/IECEx — ditambah dua "
   "milestone pembayaran Termin 1 yang dinilai terpisah oleh Pertamina.")
 kpi_row([
-    ("PROGRES REKAYASA/LAPANGAN", "49%", "vs rencana 62% (−13 poin)", NAVY),
+    ("PROGRES REKAYASA/LAPANGAN", "61%", "vs rencana 62% (−1 poin)", NAVY),
     ("KESIAPAN DOKUMEN SERTIFIKASI", "≈43%", "21 item checklist, berbobot", NAVY),
     ("TERMIN 1 FIELD TESTING (20%)", "Lengkap", "laporan & draf BAST tersedia", GREEN),
     ("TERMIN 1 SERTIFIKASI (40%)", "Berjalan", "bukti uji & witness disiapkan", AMBER),
 ])
 p("Poin utama:", bold=True, space_after=3)
 for t in [
-    "Progres rekayasa/lapangan 49% tidak bergerak sejak 17 September, sementara baseline rencana naik ke 62% "
-    "pada akhir September. Selisih −13 poin berasal dari pekerjaan yang kini tertahan gate eksternal "
-    "(instalasi RU IV menunggu penugasan vendor, TRA/JSA, dan klasifikasi area oleh Pertamina), bukan "
-    "dari rekayasa yang melambat.",
+    "Progres rekayasa/lapangan naik dari 49% (17 September) menjadi 61% per 30 September, terhadap rencana "
+    "62% (selisih −1 poin). Desain, prototipe, dan persiapan HSE/izin sudah tuntas. Item yang berada di "
+    "pihak Pertamina dicatat terpisah (Bagian 5.2) dan tidak dihitung dalam progres LGU. Empat "
+    "aktivitas terakhir (instalasi, field trial, evaluasi, roadmap) baru terjadwal November–Februari, "
+    "sehingga batas atas Kurva-S saat ini ≈67%.",
     "Aplikasi sertifikasi ATEX sudah dikirim ke GTS (agen sertifikasi) sekitar 29 September dengan Applicant "
     "dan Manufacturer PT Galaksi Megatama Indonesia, marking usulan II 2G Ex db IIC T4 Gb. Proses berlanjut "
     "melalui putaran iterasi dari GTS.",
@@ -319,9 +319,9 @@ for t in [
 # ---------------------------------------------------------------- 2. Kurva-S
 doc.add_heading("2. Progres Proyek & Kurva-S", level=1)
 p("Baseline Kurva-S dikalibrasi ke Project Timeline 9 bulan pada Deck Kick-Off (12 Juni 2026 – Februari "
-  "2027, 12 aktivitas). Progres aktual adalah rata-rata status 12 aktivitas Gantt; assessment terakhir "
-  "17 September 2026 (49%) dan dikonfirmasi tetap valid per 30 September karena tidak ada aktivitas Gantt "
-  "yang bergerak sejak itu.")
+  "2027, 12 aktivitas). Progres aktual adalah rata-rata status 12 aktivitas Gantt dengan bobot sama; "
+  "di-reassess per 30 September 2026 menjadi 61%. Pekerjaan sertifikasi ATEX/IECEx tidak termasuk dalam 12 "
+  "aktivitas ini dan dilaporkan terpisah pada Bagian 3.")
 fig = doc.add_paragraph()
 fig.alignment = WD_ALIGN_PARAGRAPH.CENTER
 add_picture_fit(fig, CHART, max_w_in=6.6)
@@ -330,19 +330,19 @@ p("Gambar 1. Kurva-S proyek — rencana vs aktual, per 30 September 2026.", size
 table(["Tanggal", "Aktual", "Rencana", "Selisih", "Catatan"], [
     ["24 Jul 2026", "39%", "19%", "+20", "Rekayasa lab mendahului jadwal"],
     ["4 Sep 2026", "44%", "43%", "+1", "Pekerjaan mulai bergantung gate eksternal"],
-    ["17 Sep 2026", "49%", "52%", "−3", "Assessment terakhir"],
-    ["30 Sep 2026", "49%", "62%", "−13", "Rencana naik (integration test & HSE/permit), aktual tertahan gate"],
+    ["17 Sep 2026", "49%", "52%", "−3", "Uji ketahanan RF, persiapan instalasi"],
+    ["30 Sep 2026", "61%", "62%", "−1", "Desain & prototipe selesai, diajukan ke sertifikasi; uji suhu; persiapan HSE/izin tuntas"],
 ], [1.1, 0.8, 0.8, 0.8, 3.0])
 p("Status 12 aktivitas Gantt:", bold=True, space_after=3)
 table(["#", "Aktivitas", "Jadwal rencana", "Progres", "Status"], [
     ["1", "Kick-off & konfirmasi requirement", "8–15 Jun", "100%", "Selesai"],
-    ["2", "Site survey & rencana pengambilan data", "15 Jun – 7 Jul", "75%", "Sebagian — survey RU IV selesai 9–10 Agu"],
-    ["3", "Detailed design", "1–21 Jul", "92%", "Hampir selesai"],
-    ["4", "Prototype build", "15 Jul – 21 Agu", "68%", "Berjalan"],
-    ["5", "Lab test", "15 Agu – 21 Sep", "65%", "Berjalan"],
+    ["2", "Site survey & rencana pengambilan data", "15 Jun – 7 Jul", "90%", "Hampir selesai — survey 9–10 Agu; metode chamber on-site"],
+    ["3", "Detailed design", "1–21 Jul", "100%", "Selesai — spesifikasi enclosure final, konsep Ex d"],
+    ["4", "Prototype build", "15 Jul – 21 Agu", "100%", "Selesai — sampel S/N GLD2-0x1001 diajukan ke sertifikasi"],
+    ["5", "Lab test", "15 Agu – 21 Sep", "72%", "Berjalan — uji suhu 30 Sep"],
     ["6", "AI model training / validation", "15 Agu – 21 Sep", "85%", "Berjalan"],
     ["7", "Integration test (fungsional)", "1 Jul – 7 Okt", "80%", "Berjalan"],
-    ["8", "HSE review & permit preparation", "1–14 Nov", "22%", "Menunggu proses RU IV"],
+    ["8", "HSE review & permit preparation", "1–14 Nov", "100%", "Selesai — dokumen persiapan HSE & instalasi diserahkan"],
     ["9", "Field installation", "15 Nov – 7 Des", "0%", "Belum mulai"],
     ["10", "Field trial", "8 Des – 7 Jan", "0%", "Belum mulai"],
     ["11", "Evaluation & final report", "1–21 Jan", "0%", "Belum mulai"],
@@ -403,7 +403,7 @@ p("Syarat kontraktual Termin 1 Sertifikasi mencakup uji prototipe internal, iter
   "laporan pekerjaan. Penilaian pemenuhan merupakan evaluasi Pertamina. Status penyiapan bukti per 30 "
   "September:")
 table(["#", "Syarat", "Status", "Bukti / kekurangan"], [
-    ["1", "Prototipe enclosure tersedia", "Sebagian", "Unit terakit & terfoto; S/N GLD2-0x1001 ditetapkan; lembar identifikasi sampel untuk ditandatangani"],
+    ["1", "Prototipe enclosure tersedia", "Tersedia", "Prototipe selesai; sampel S/N GLD2-0x1001 diajukan ke sertifikasi; lembar identifikasi sampel untuk ditandatangani"],
     ["2", "Prototipe diuji (mekanik/termal/sealing/fault)", "Sebagian", "Uji termal internal 30 Sep; uji mekanik, sealing, dan fault menyusul"],
     ["3", "Iterasi desain berbasis hasil uji", "Dalam penyiapan", "Perubahan posisi antena ke atas base; dikaitkan dengan temuan uji pada sesi witness"],
     ["4", "Disaksikan & divalidasi Pertamina", "Perlu dijadwalkan", "Sesi witness uji enclosure bersama Pertamina"],
@@ -420,16 +420,24 @@ doc.add_heading("5. Persiapan Instalasi RU IV Cilacap", level=1)
 p("Arah kerja: uji chamber gas di kantor kilang (non-area proses) dan instalasi permanen di lokasi non-ATEX, "
   "yaitu perimeter Sulfur Recovery Unit. Eksekusi fisik oleh vendor yang ditunjuk Pertamina; LGU berperan "
   "sebagai basis desain, supervisi teknis/QA, dan pekerjaan elektrikal spesifik GLD.")
+doc.add_heading("5.1 Pekerjaan LGU & ITB", level=2)
 table(["Tahap", "Status"], [
     ["Survey lokasi", "Selesai (9–10 Agustus 2026)"],
-    ["Basis desain bracket U-bolt (CAD) & dokumen persiapan", "Selesai — diteruskan ke grup Pertamina 30 Sep"],
-    ["Kesiapan sisi LGU & ITB (Kurva-S persiapan instalasi)", "Selesai — 100% (keseluruhan 38%)"],
-    ["Penugasan resmi vendor instalasi", "Menunggu proses RU IV"],
-    ["Pengesahan TRA/JSA & izin kerja", "Menunggu proses RU IV"],
-    ["Dokumen klasifikasi area perimeter SRU", "Menunggu proses RU IV"],
+    ["Basis desain bracket U-bolt (CAD)", "Selesai"],
+    ["Dokumen persiapan instalasi (pembagian tugas, daftar vendor, permintaan material, draf JSA)", "Selesai — diserahkan ke Pertamina 30 Sep"],
+    ["Kesiapan sisi LGU & ITB (Kurva-S persiapan instalasi)", "Selesai — 100%"],
     ["Rapat koordinasi persiapan (29 Sep)", "Selesai — 4 keputusan diajukan"],
-    ["Instalasi fisik & commissioning", "Belum mulai"],
+    ["Supervisi QA & elektrikal spesifik GLD saat instalasi", "Siap — dilaksanakan saat mobilisasi"],
 ], [3.6, 2.9], status_col=1)
+doc.add_heading("5.2 Item di pihak Pertamina (tidak dihitung dalam progres LGU)", level=2)
+p("Item berikut merupakan kewenangan Pertamina RU IV dan vendor yang ditunjuk Pertamina. Dicantumkan sebagai "
+  "informasi ketergantungan jadwal, bukan sebagai progres atau kekurangan pekerjaan LGU.")
+table(["Item", "Pihak"], [
+    ["Penugasan resmi vendor instalasi", "Pertamina RU IV"],
+    ["Pengesahan TRA/JSA & penerbitan izin kerja", "Pertamina RU IV (HSE)"],
+    ["Dokumen klasifikasi area perimeter SRU", "Pertamina RU IV (HSE/Engineering)"],
+    ["Fabrikasi bracket & pemasangan fisik", "Vendor instalasi (ditunjuk Pertamina)"],
+], [3.6, 2.9])
 
 # ---------------------------------------------------------------- 6. Timeline
 doc.add_heading("6. Timeline Progres Harian", level=1)
@@ -476,7 +484,7 @@ TL = [
     ("25 Sep", "Material mesh (stainless) & gasket (karet) dikonfirmasi; batas kelistrikan 24 VDC; dossier tim Rev 25 Sep.", "Sertifikasi"),
     ("28 Sep", "Metode proteksi Ex d dipilih (usulan tim); Applicant = PT Galaksi; bahan rapat Pertamina disiapkan.", "Sertifikasi"),
     ("29 Sep", "Aplikasi & dossier dikirim ke GTS; rapat koordinasi persiapan instalasi dengan Pertamina.", "Milestone"),
-    ("30 Sep", "Data pengukuran suhu pertama (indikasi T4 positif); dokumen persiapan instalasi diteruskan ke Pertamina; audit progres.", "Milestone"),
+    ("30 Sep", "Data pengukuran suhu pertama (indikasi T4 positif); dokumen persiapan instalasi diteruskan ke Pertamina; Kurva-S 61%.", "Milestone"),
 ]
 tbl = doc.add_table(rows=1, cols=3)
 tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -519,7 +527,7 @@ doc.add_paragraph().paragraph_format.space_after = Pt(4)
 # ---------------------------------------------------------------- 7. Risiko
 doc.add_heading("7. Risiko & Keputusan yang Diperlukan", level=1)
 table(["Risiko / isu", "Dampak", "Tindak lanjut", "Pihak"], [
-    ["Instalasi RU IV tertahan (vendor, TRA/JSA, klasifikasi area)", "Deviasi Kurva-S melebar; termin lapangan tertunda", "Kawal 4 keputusan rapat 29 Sep", "Pertamina RU IV"],
+    ["Jadwal mobilisasi bergantung item di pihak Pertamina (Bagian 5.2)", "Jadwal instalasi & termin lapangan dapat bergeser", "Kawal 4 keputusan rapat 29 Sep", "Pertamina RU IV"],
     ["Bukti uji & witness Termin 1 Sertifikasi masih disiapkan", "Waktu evaluasi Termin 1 Sertifikasi bergantung pada sesi ini", "Jadwalkan sesi uji disaksikan Pertamina + berita acara", "LGU & Pertamina"],
     ["Urutan Termin 1: sampel terkirim sebelum witness", "Urutan syarat 5 terganggu", "Kirim sampel setelah sesi witness selesai", "LGU"],
     ["Inkonsistensi dossier di GTS (Tamb, marking debu, cable entry)", "Penilaian T4 bisa memakai +85°C → gagal", "Betulkan pada iterasi GTS berikutnya", "Tim sertifikasi"],
@@ -531,14 +539,14 @@ for t in [
     "Persetujuan jadwal dan anggaran sesi uji internal yang disaksikan Pertamina (Termin 1 sertifikasi).",
     "Penunjukan PIC yang mengawal umpan balik iterasi dari GTS dan penyelarasan dossier.",
     "Penegasan penandatangan resmi (authorized signatory) di pihak PT Galaksi untuk formulir aplikasi.",
-    "Eskalasi ke Pertamina atas item yang menunggu proses RU IV (vendor, TRA/JSA, klasifikasi area).",
+    "Koordinasi dengan Pertamina atas item di pihak RU IV (vendor, TRA/JSA, klasifikasi area).",
 ]:
     bullet(t)
 
 # ---------------------------------------------------------------- 8. Lampiran
 doc.add_heading("8. Daftar Lampiran", level=1)
 table(["No", "Dokumen", "Keterangan"], [
-    ["01", "Kurva-S Persiapan Instalasi RU IV Cilacap", "KPI 3 pihak, 40 item persiapan"],
+    ["01", "Kurva-S Persiapan Instalasi RU IV Cilacap", "Kesiapan per pihak; sisi LGU & ITB 100%"],
     ["02", "Pembagian Persiapan Instalasi RU IV Cilacap", "Matriks LGU & ITB / Pertamina / Vendor"],
     ["03", "Materi Rapat Koordinasi 29 September 2026", "Slide presentasi rapat dengan Pertamina"],
     ["04", "Laporan Termin 1 Field Testing (20%) Rev02", "Beserta draf BAST (05)"],

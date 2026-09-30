@@ -200,8 +200,8 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "0.6"
-DOC_DATE = "28 September 2026"
+REVISION = "0.7"
+DOC_DATE = "30 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -299,11 +299,14 @@ for rev, rev_date, rev_desc in [
      "2.5 — selected over Ex e and Ex i based on the existing ADC12 die-cast enclosure with a stainless-steel "
      "mesh flame path and the MQ-sensor heaters' continuous, unregulated power draw. Section 2.6.e updated "
      "accordingly. Still an internal recommendation, not an ExCB decision."),
-    (REVISION, DOC_DATE,
+    ("0.6", "28 September 2026",
      "Applicant/Manufacturer identity simplified to a single entity, PT Galaksi Megatama Indonesia (document "
-     "number prefix changed to GMI/...). Removed all references to PT LAPI Ganesha Utama as “design and "
-     "development authority” and to the Institute of Technology Bandung as “technical partner” "
-     "throughout (letterhead, Document Control, Sections 1.2, 1.4)."),
+     "number prefix changed to GMI/...). The separate “design and development authority” and “technical "
+     "partner” entries were removed (letterhead, Document Control, Sections 1.2, 1.4)."),
+    (REVISION, DOC_DATE,
+     "Section 2.6.f populated with a preliminary internal surface-temperature measurement (normal, maximum-load "
+     "and fan-stalled conditions), extrapolated to +60°C ambient: highest value ≈114°C against an effective "
+     "T4 limit of 130°C. Status raised to Partially available; open measurement items listed."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -588,7 +591,7 @@ make_table(
     ["Parameter", "Value", "Status"],
     [
         ["Gas group", "IIC", "Internal recommendation, not an ExCB decision"],
-        ["Temperature class", "T4 (≤135°C)", "Target — hot-spot verification outstanding (Section 2.6.f)"],
+        ["Temperature class", "T4 (≤135°C)", "Target — preliminary internal measurement supports it (Section 2.6.f); formal verification outstanding"],
         ["Area classification", "Zone 1, Equipment Category 2G, Group II", "Requested — subject to ExCB assessment"],
         ["Type of protection", "Ex d — flameproof enclosure", "Internal recommendation, not an ExCB decision"],
     ],
@@ -702,13 +705,25 @@ p("Flame-path (joint gap, length) and free-internal-volume calculations specific
 status_line("Not yet available — pending ExCB confirmation of the Ex d protection concept and final enclosure design.")
 
 doc.add_heading("2.6.f · Temperature Group Calculation (Hottest-Point Temperature Estimation)", level=3)
-p("No hottest-point temperature calculation or measurement has been performed for this product. As general "
-  "context: MQ-series metal-oxide gas sensors operate using an internal heating element, a class of sensor "
-  "commonly associated with published operating temperatures in the approximate 200–400°C range — "
-  "however, this is a general characteristic of the sensor class, not a measured value for the specific "
-  "sensor models, drive circuitry, and enclosure configuration used in this product.")
-status_line("Not yet available. A worst-case hot-spot measurement is the top-priority action required to "
-            "substantiate the recommended T4 classification.")
+p("A preliminary internal surface-temperature measurement has been carried out on a GLD V2 unit (eight "
+  "thermocouple channels plus ambient; normal operation, maximum load, and fan stalled; 180 minutes each at "
+  "approximately 24–25°C ambient). Maximum values, extrapolated to the +60°C maximum rated ambient:")
+make_table(
+    ["Condition", "MQ sensor body", "PCB", "External enclosure"],
+    [
+        ["Normal operation", "44.2 → ≈79°C", "52.4 → ≈88°C", "32.1 → ≈67°C"],
+        ["Maximum load", "55.0 → ≈91°C", "58.3 → ≈94°C", "34.8 → ≈71°C"],
+        ["Fan stalled (malfunction)", "78.4 → ≈114°C", "63.4 → ≈99°C", "43.9 → ≈79°C"],
+    ],
+    col_widths=[1.9, 1.6, 1.5, 1.7],
+)
+p("The highest extrapolated value (≈114°C) is below the effective T4 limit of 130°C (135°C less the 5 K "
+  "margin under IEC 60079-0). Under the recommended Ex d concept, the external enclosure surface (≈79°C) "
+  "governs the temperature class. Open items: DC/DC converter, power inductor and MOSFET/diode not yet "
+  "measured; alarm/transmit condition not measured; maximum-load PCB reading not yet at thermal "
+  "equilibrium; test metadata (date, unit, thermocouple type, supply voltage) not yet recorded; confirmation "
+  "at maximum ambient requires ExCB type testing. Full detail in the companion technical document.")
+status_line("Partially available — preliminary internal measurement; indicates T4 is achievable with margin.")
 
 doc.add_heading("2.6.g · Usage and Installation Instructions (Draft)", level=3)
 p("Safety warnings:", bold=True, size=10.5, space_after=3)

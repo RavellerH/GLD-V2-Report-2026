@@ -203,8 +203,8 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "1.3"
-DOC_DATE = "28 September 2026"
+REVISION = "1.4"
+DOC_DATE = "30 September 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -330,13 +330,18 @@ for rev, rev_date, rev_desc in [
      "MQ-sensor heaters' continuous, unregulated power draw being difficult to reconcile with intrinsically "
      "safe energy limits for Group IIC. Section 2.6.e updated accordingly. Still an internal recommendation, "
      "not an ExCB decision."),
-    (REVISION, DOC_DATE,
+    ("1.3", "28 September 2026",
      "Applicant/Manufacturer identity simplified to a single entity, PT Galaksi Megatama Indonesia, "
-     "throughout the document (document number prefix changed to GMI/...). Removed all references to PT "
-     "LAPI Ganesha Utama as “design and development authority” and to the Institute of Technology "
-     "Bandung as “technical partner” (Sections 1.1, 1.3, 2.2, letterhead, Document Control) per "
-     "updated applicant-identity decision; narrative passages describing electronics design/engineering work "
-     "were made generic rather than deleted, to avoid implying the Manufacturer performed work it did not."),
+     "throughout the document (document number prefix changed to GMI/...). The separate “design and "
+     "development authority” and “technical partner” entries were removed (Sections 1.1, 1.3, 2.2, "
+     "letterhead, Document Control); narrative passages describing electronics design/engineering work were "
+     "made generic rather than deleted, to avoid implying the Manufacturer performed work it did not."),
+    (REVISION, DOC_DATE,
+     "Section 2.6.f populated with a preliminary internal surface-temperature measurement (eight thermocouple "
+     "channels; normal, maximum-load and fan-stalled conditions; 180 minutes each), including extrapolation to "
+     "the +60°C maximum ambient: highest value ≈114°C (MQ sensor body, fan stalled) against an "
+     "effective T4 limit of 130°C. Status raised from Not yet available to Partially available; open "
+     "measurement items listed. Sections 1.1 and 2.5 temperature-class remarks updated accordingly."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -502,7 +507,8 @@ make_table(
         ["Requested area classification", "Zone 1, Equipment Category 2G, Group II",
          ("__status__", ("Requested — subject to ExCB assessment", "wip")), "Section 2.5"],
         ["Requested temperature class", "T4 (≤135 °C)",
-         ("__status__", ("Target — verification outstanding", "wip")), "Sections 2.5, 2.6.f"],
+         ("__status__", ("Target — preliminary internal measurement supports it; formal verification outstanding", "wip")),
+         "Sections 2.5, 2.6.f"],
         ["Requested gas group", "IIC",
          ("__status__", ("Internal recommendation, not an ExCB decision", "wip")), "Section 2.5"],
         ["Type of protection", "Ex d — flameproof enclosure",
@@ -932,13 +938,14 @@ make_table(
          "Hydrogen (H\u2082) is one of the three gases the classifier is designed to detect (Section 2.3.b); "
          "IIC is required for hydrogen and inherently covers IIB and IIA."],
         ["Temperature class", "T4 (\u2264135\u00b0C)", ("__status__", ("Team recommendation \u2014 pending verification", "wip")),
-         "Not yet substantiated by measurement. MQ-series metal-oxide sensors rely on an internal heating "
-         "element as their normal operating principle; a hot-spot measurement specific to the sensor models "
-         "and enclosure configuration used here has not yet been performed (see 2.6.f)."],
+         "Supported by a preliminary internal surface-temperature measurement (Section 2.6.f): the highest value, "
+         "extrapolated to the +60\u00b0C maximum ambient, is \u2248114\u00b0C (MQ sensor body, fan-stalled "
+         "condition), below the T4 limit less the 5 K margin (130\u00b0C). Not yet final \u2014 several "
+         "measurement points and conditions remain open (see 2.6.f), and confirmation requires ExCB type testing."],
         ["Ambient temperature range", "\u221220\u00b0C to +60\u00b0C", ("__status__", ("Final", "ok")),
-         "Project-confirmed value, consistent with the Mechanical Parameters table (Section 2.3.c). Distinct "
-         "from the MQ-sensor hot-spot surface temperature above, which remains the top-priority open item for "
-         "the T4 recommendation."],
+         "Project-confirmed value, consistent with the Mechanical Parameters table (Section 2.3.c). Used as the "
+         "reference for extrapolating the preliminary surface-temperature measurements in Section 2.6.f to "
+         "worst-case ambient."],
         ["Area classification (zone)", "Zone 1", ("__status__", ("Team recommendation \u2014 pending ExCB confirmation", "wip")),
          "Assessed as sufficient for the general refinery deployment envelope, including areas near storage. "
          "Zone 0 would only apply if the detector were installed directly inside a tank vapor space."],
@@ -1192,14 +1199,65 @@ note_box(
 )
 
 doc.add_heading("2.6.f \u00b7 Temperature Group Calculation (Hottest-Point Temperature Estimation)", level=3)
-p("No hottest-point temperature calculation or measurement has been performed for this product. As general "
-  "context: MQ-series metal-oxide gas sensors operate using an internal heating element, a class of sensor "
-  "commonly associated with published operating temperatures in the approximate 200\u2013400\u00b0C range \u2014 "
-  "however, this is a general characteristic of the sensor class, not a measured value for the specific "
-  "sensor models, drive circuitry, and enclosure configuration used in this product. A worst-case hot-spot "
-  "measurement is identified as the top-priority action required to substantiate the recommended T4 "
-  "classification in Section 2.5.")
-note_box("Status: Not yet available.", shade=INFO_SHADE)
+p("A preliminary internal surface-temperature measurement has been carried out on a GLD V2 unit using "
+  "thermocouples at eight locations (plus an ambient reference), under three conditions: normal operation, "
+  "maximum load, and fan stalled (an expected malfunction of the internal DC cooling fan). Each condition was "
+  "logged for 180 minutes at an ambient temperature of approximately 24\u201325\u00b0C.")
+make_table(
+    ["Channel", "Location", "Rationale"],
+    [
+        ["T amb", "Air around the unit", "Reference temperature"],
+        ["TC-1", "Hottest MQ sensor body", "The sensor heater is the main potential heat source"],
+        ["TC-2", "DC fan motor/body", "Normal and stalled-fan heating"],
+        ["TC-3", "DC/DC converter", "Power component \u2014 not yet measured"],
+        ["TC-4", "Power inductor", "Potential hot spot \u2014 not yet measured"],
+        ["TC-5", "MOSFET / power diode", "Potential local heating \u2014 not yet measured"],
+        ["TC-6", "Hottest PCB area", "PCB temperature verification"],
+        ["TC-7", "External enclosure surface near the heat source", "Candidate external maximum"],
+        ["TC-8", "Other external enclosure surface", "Confirms the external maximum is not missed"],
+    ],
+    col_widths=[0.8, 2.6, 3.1],
+)
+p("Maximum values recorded over the 180-minute runs, and the same values extrapolated to the +60\u00b0C maximum "
+  "rated ambient (Section 2.5) by adding the measured temperature rise above ambient:")
+make_table(
+    ["Condition", "Mean T amb", "MQ sensor body (TC-1)", "PCB (TC-6)", "Fan (TC-2)", "External enclosure (TC-7/8)"],
+    [
+        ["Normal operation", "24.9\u00b0C", "44.2 \u2192 \u224879\u00b0C", "52.4 \u2192 \u224888\u00b0C",
+         "36.3\u00b0C", "32.1 \u2192 \u224867\u00b0C"],
+        ["Maximum load", "24.2\u00b0C", "55.0 \u2192 \u224891\u00b0C", "58.3 \u2192 \u224894\u00b0C",
+         "30.2\u00b0C", "34.8 \u2192 \u224871\u00b0C"],
+        ["Fan stalled (malfunction)", "24.8\u00b0C", "78.4 \u2192 \u2248114\u00b0C", "63.4 \u2192 \u224899\u00b0C",
+         "36.3\u00b0C", "43.9 \u2192 \u224879\u00b0C"],
+    ],
+    col_widths=[1.4, 0.8, 1.2, 1.1, 0.8, 1.2],
+)
+p("Preliminary reading against T4. The T4 limit is 135\u00b0C; with the 5 K margin applied for temperature "
+  "classes T3\u2013T6 under IEC 60079-0, the effective limit is 130\u00b0C. The highest extrapolated value, "
+  "\u2248114\u00b0C on the MQ sensor body in the fan-stalled condition, leaves a margin of about 16 K. The heater "
+  "element itself (in the approximate 200\u2013400\u00b0C range typical of this sensor class) sits inside the "
+  "sensor can and was not measured directly; the measured sensor-body surface is 44\u201378\u00b0C. Under the "
+  "recommended flameproof concept (Ex d, Section 2.5), the temperature class is governed by the external "
+  "surfaces of the flameproof enclosure, whose extrapolated maximum is \u224879\u00b0C.")
+p("Open items before this can be treated as a temperature-class verification:", bold=True)
+for item in [
+    "TC-3, TC-4 and TC-5 (DC/DC converter, power inductor, MOSFET/power diode) have not been measured; no "
+    "independent hot-spot location check has been recorded.",
+    "The alarm/transmit condition has not been measured.",
+    "Thermal equilibrium was not demonstrated in every run: the PCB reading under maximum load was still rising "
+    "in the final hour (46.4 \u2192 55.8 \u2192 58.3\u00b0C), above the 2 K/h stability criterion.",
+    "Two short excursions on TC-7 (43.4 and 43.9\u00b0C) in the fan-stalled run, with neighbouring readings near "
+    "30\u00b0C, should be checked for thermocouple contact before the external maximum is finalised.",
+    "Test metadata is not yet recorded: date, operator, unit identification, thermocouple type, supply voltage "
+    "(the most unfavourable voltage within the rated range should be used), and whether the enclosure was fully "
+    "closed.",
+    "Extrapolation to +60\u00b0C assumes a constant temperature rise above ambient; confirmation requires testing "
+    "at maximum ambient as part of ExCB type testing.",
+]:
+    p("\u2022  " + item)
+note_box("Status: Partially available \u2014 preliminary internal measurement. Indicates T4 is achievable with "
+         "margin; not a substitute for type testing, and the open items above must be closed first.",
+         shade=WARN_SHADE)
 
 doc.add_heading("2.6.g \u00b7 Usage and Installation Instructions (Draft)", level=3)
 make_table(

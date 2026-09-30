@@ -18,6 +18,6 @@ Paket PDF internal untuk pelaporan anggaran operasional PT LAPI Ganesha Utama. M
 
 ## Catatan
 
-- Klasifikasi: **internal — konfidensial**. Laporan utama memuat penilaian jujur (mis. Termin 1 Sertifikasi belum memenuhi syarat uji & witness) yang tidak ditujukan untuk dikirim ke Pertamina apa adanya.
+- Klasifikasi: **internal — konfidensial**. Status Termin 1 disajikan per syarat kontraktual (bukti tersedia / sebagian / dalam penyiapan); penilaian pemenuhan dan keputusan pembayaran merupakan evaluasi Pertamina, bukan kesimpulan tim.
 - Angka Kurva-S: rencana per 30 Sep adalah **62%** (baseline Kick-Off); angka 52% yang muncul di dokumen-dokumen sebelumnya adalah posisi rencana per 17 Sep.
 - Sumber laporan utama: `scripts/build_laporan_status_lgu_docx.py` (docx → PDF via Word).

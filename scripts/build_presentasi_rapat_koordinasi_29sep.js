@@ -195,7 +195,7 @@ function prioTag(s, x, y, level) {
     { label: "Proyek keseluruhan", pct: 49, plan: 52, note: "vs rencana 52% (data 17 Sep) — sisi rekayasa lab", color: BLUE },
     { label: "Sertifikasi ATEX/IECEx", pct: 20, plan: null, note: "estimasi 5 Sep, metodologi bottom-up 4-track", color: "1C93C6" },
     { label: "Persiapan instalasi RU IV", pct: 38, plan: null, note: "LGU&ITB 100% (rekayasa) · Pertamina & Vendor 0%", color: VENDOR },
-    { label: "Termin 1 — Field Testing", pct: 100, plan: null, note: "dinilai layak diajukan (20% syarat kontraktual)", color: OK },
+    { label: "Dokumen Termin 1 — Field Testing", pct: 100, plan: null, note: "laporan pemenuhan & draf BAST lengkap; evaluasi oleh Pertamina", color: OK },
   ];
   tracks.forEach((t, i) => {
     const y = 1.7 + i * 0.98;

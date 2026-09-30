@@ -35,7 +35,7 @@ TODAY = dt.date(2026, 9, 30)
 # Status word -> color, used for the status column of any table.
 STATUS_MAP = [
     (("SELESAI", "TERSEDIA", "FINAL", "LAYAK", "TERKIRIM", "POSITIF"), GREEN),
-    (("SEBAGIAN", "PROSES", "MENUNGGU", "REKOMENDASI", "AWAL", "BERJALAN"), AMBER),
+    (("SEBAGIAN", "PROSES", "MENUNGGU", "REKOMENDASI", "AWAL", "BERJALAN", "PENYIAPAN", "DIJADWALKAN"), AMBER),
     (("BELUM", "TERTINGGAL", "GAGAL", "RISIKO"), RED),
 ]
 
@@ -298,8 +298,8 @@ p("Laporan ini merangkum posisi proyek GLD Tahap 2 per 30 September 2026 untuk k
 kpi_row([
     ("PROGRES REKAYASA/LAPANGAN", "49%", "vs rencana 62% (−13 poin)", NAVY),
     ("KESIAPAN DOKUMEN SERTIFIKASI", "≈43%", "21 item checklist, berbobot", NAVY),
-    ("TERMIN 1 FIELD TESTING (20%)", "Layak", "tinggal pengesahan & BAST", GREEN),
-    ("TERMIN 1 SERTIFIKASI (40%)", "Belum", "butuh uji + witness + BA", RED),
+    ("TERMIN 1 FIELD TESTING (20%)", "Lengkap", "laporan & draf BAST tersedia", GREEN),
+    ("TERMIN 1 SERTIFIKASI (40%)", "Berjalan", "bukti uji & witness disiapkan", AMBER),
 ])
 p("Poin utama:", bold=True, space_after=3)
 for t in [
@@ -312,9 +312,7 @@ for t in [
     "melalui putaran iterasi dari GTS.",
     "Data pengukuran suhu pertama (30 September) memberi indikasi positif untuk kelas suhu T4: kasus "
     "terburuk ≈114°C pada ambient +60°C, di bawah batas efektif 130°C.",
-    "Termin 1 sertifikasi (40%) belum dapat diajukan hanya dengan kelengkapan dokumen — kontrak "
-    "mensyaratkan uji prototipe internal yang disaksikan Pertamina dan berita acara, sebelum sampel "
-    "dikirim ke laboratorium.",
+    "Kedua Termin 1 dievaluasi oleh Pertamina. Dokumen Termin 1 Field Testing (laporan pemenuhan dan draf BAST) sudah lengkap. Untuk Termin 1 Sertifikasi, tim sedang menyiapkan bukti uji prototipe internal yang disaksikan Pertamina beserta berita acara, sesuai syarat kontraktual.",
 ]:
     bullet(t)
 
@@ -394,25 +392,26 @@ p("Batas T4 135°C dikurangi margin 5 K (IEC 60079-0) = 130°C. Kasus terburuk �
 # ---------------------------------------------------------------- 4. Termin
 doc.add_heading("4. Status Termin Pembayaran", level=1)
 doc.add_heading("4.1 Termin 1 Field Testing (20%)", level=2)
-p("Dinilai layak diajukan berdasarkan audit 11 September 2026: detail engineering, kesiapan 4 GLD dan 16 "
-  "Cluster Head, konfigurasi firmware, integrasi GLD–CH–Gateway–Server, mesh/failover, dan alarm push "
-  "sudah terdokumentasi. Sisa langkah administratif: pengesahan laporan dan BAST (draf tersedia). "
-  "Instalasi, commissioning, dan as-built masuk termin lapangan berikutnya. Status pengajuan/pembayaran "
-  "belum tercatat dalam laporan ini.")
+p("Laporan pemenuhan deliverable (Rev02) dan draf BAST sudah tersedia. Bukti yang terdokumentasi mencakup "
+  "detail engineering, kesiapan 4 GLD dan 16 Cluster Head, konfigurasi firmware, integrasi "
+  "GLD–CH–Gateway–Server, mesh/failover, dan alarm push. Langkah administratif berikutnya: pengesahan laporan "
+  "dan BAST. Penilaian pemenuhan dan keputusan pembayaran merupakan evaluasi Pertamina. Instalasi, "
+  "commissioning, dan as-built termasuk dalam termin lapangan berikutnya.")
 doc.add_heading("4.2 Termin 1 Sertifikasi (40%)", level=2)
-p("Termin ini bukan milestone kelengkapan dokumen. Kontrak mensyaratkan prototipe diuji internal, hasil uji "
-  "memicu iterasi desain, disaksikan dan divalidasi Pertamina, dilakukan sebelum uji laboratorium "
-  "terakreditasi, dan dituangkan dalam berita acara. Status per 30 September:")
+p("Syarat kontraktual Termin 1 Sertifikasi mencakup uji prototipe internal, iterasi desain berdasarkan hasil "
+  "uji, witness dan validasi oleh Pertamina sebelum uji laboratorium terakreditasi, serta berita acara dan "
+  "laporan pekerjaan. Penilaian pemenuhan merupakan evaluasi Pertamina. Status penyiapan bukti per 30 "
+  "September:")
 table(["#", "Syarat", "Status", "Bukti / kekurangan"], [
-    ["1", "Prototipe enclosure tersedia", "Sebagian (membaik)", "Unit terakit & terfoto; S/N GLD2-0x1001 ditetapkan; lembar identifikasi sampel belum ditandatangani"],
-    ["2", "Prototipe diuji (mekanik/termal/sealing/fault)", "Sebagian", "Uji termal internal 30 Sep; uji mekanik, sealing, fault belum"],
-    ["3", "Iterasi desain berbasis hasil uji", "Belum", "Kandidat: antena dipindah ke atas base — belum dikaitkan dengan temuan uji"],
-    ["4", "Disaksikan & divalidasi Pertamina", "Belum", "Belum ada sesi witness uji enclosure"],
-    ["5", "Selesai sebelum uji lab terakreditasi", "Tersedia", "Sampel belum dikirim ke lab — sesi witness harus terjadi sebelum pengiriman"],
-    ["6", "Berita acara", "Belum", "Template tersedia; menunggu data uji yang disaksikan"],
+    ["1", "Prototipe enclosure tersedia", "Sebagian", "Unit terakit & terfoto; S/N GLD2-0x1001 ditetapkan; lembar identifikasi sampel untuk ditandatangani"],
+    ["2", "Prototipe diuji (mekanik/termal/sealing/fault)", "Sebagian", "Uji termal internal 30 Sep; uji mekanik, sealing, dan fault menyusul"],
+    ["3", "Iterasi desain berbasis hasil uji", "Dalam penyiapan", "Perubahan posisi antena ke atas base; dikaitkan dengan temuan uji pada sesi witness"],
+    ["4", "Disaksikan & divalidasi Pertamina", "Perlu dijadwalkan", "Sesi witness uji enclosure bersama Pertamina"],
+    ["5", "Selesai sebelum uji lab terakreditasi", "Tersedia", "Sampel masih di tim; sesi witness dilakukan sebelum pengiriman sampel"],
+    ["6", "Berita acara", "Perlu dijadwalkan", "Template tersedia; diisi setelah sesi witness"],
     ["7", "Laporan pekerjaan", "Tersedia", "Laporan 15 Sep; perlu diperbarui setelah uji & witness"],
 ], [0.3, 1.9, 1.2, 3.1], status_col=2)
-box("Langkah tercepat: jadwalkan satu sesi uji internal yang disaksikan Pertamina — ulang uji termal dengan "
+box("Langkah berikutnya: jadwalkan satu sesi uji internal yang disaksikan Pertamina — ulang uji termal dengan "
     "titik DC/DC, inductor, MOSFET; tambah pemeriksaan mekanik/dimensi dan uji sealing sederhana — lalu "
     "tuangkan dalam berita acara, sebelum sampel dikirim melalui GTS.", kind="ok", label="Rekomendasi.")
 
@@ -521,8 +520,8 @@ doc.add_paragraph().paragraph_format.space_after = Pt(4)
 doc.add_heading("7. Risiko & Keputusan yang Diperlukan", level=1)
 table(["Risiko / isu", "Dampak", "Tindak lanjut", "Pihak"], [
     ["Instalasi RU IV tertahan (vendor, TRA/JSA, klasifikasi area)", "Deviasi Kurva-S melebar; termin lapangan tertunda", "Kawal 4 keputusan rapat 29 Sep", "Pertamina RU IV"],
-    ["Termin 1 sertifikasi belum memenuhi syarat uji & witness", "Pembayaran 40% tertunda", "Jadwalkan sesi uji disaksikan Pertamina + berita acara", "LGU & Pertamina"],
-    ["Urutan Termin 1: sampel terkirim sebelum witness", "Syarat 5 gugur", "Tahan pengiriman sampel sampai witness selesai", "LGU"],
+    ["Bukti uji & witness Termin 1 Sertifikasi masih disiapkan", "Waktu evaluasi Termin 1 Sertifikasi bergantung pada sesi ini", "Jadwalkan sesi uji disaksikan Pertamina + berita acara", "LGU & Pertamina"],
+    ["Urutan Termin 1: sampel terkirim sebelum witness", "Urutan syarat 5 terganggu", "Kirim sampel setelah sesi witness selesai", "LGU"],
     ["Inkonsistensi dossier di GTS (Tamb, marking debu, cable entry)", "Penilaian T4 bisa memakai +85°C → gagal", "Betulkan pada iterasi GTS berikutnya", "Tim sertifikasi"],
     ["Titik panas belum lengkap diukur", "Kelas suhu belum terverifikasi penuh", "Ukur DC/DC, inductor, MOSFET, kondisi alarm/Tx", "Tim teknis"],
     ["Sampel gas tambahan (H2S, dll.) belum tersedia", "Kapabilitas gas tambahan tertunda", "Chamber on-site di kilang; pengadaan paralel", "Pertamina & LGU"],

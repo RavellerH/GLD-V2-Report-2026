@@ -16,5 +16,5 @@ Paket ringkas 3 dokumen (pdf+html) — file persiapan instalasi RU IV Cilacap un
 
 ## Cara pakai
 
-- File `.pdf` — paling praktis untuk dibagikan/dibaca cepat di HP (mis. via WhatsApp).
-- File `.html` — buka di browser (Chrome/Edge/Firefox), tidak perlu internet. Bar navigasi di bagian atas tiap file sudah disesuaikan agar hanya menaut ke 3 dokumen dalam folder ini.
+- File `.pdf` — **format surat resmi berletterhead** (PT LAPI Ganesha Utama, Document Control, nomor halaman) hasil generate dari `.docx` terpisah, bukan lagi cetakan langsung dari halaman web berwarna — paling praktis untuk dibagikan/dibaca cepat di HP (mis. via WhatsApp).
+- File `.html` — versi interaktif berwarna asli, dibuka di browser (Chrome/Edge/Firefox), tidak perlu internet. Bar navigasi di bagian atas tiap file sudah disesuaikan agar hanya menaut ke 3 dokumen dalam folder ini.

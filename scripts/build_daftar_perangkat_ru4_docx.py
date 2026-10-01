@@ -19,7 +19,7 @@ from build_persiapan_instalasi_corporate_docx import (
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Daftar_Perangkat_dan_Kebutuhan_Pemasangan_GLD_RU-IV_Cilacap.docx")
 DOC_NO = "LGU/GLD/INSTALASI-PERANGKAT/2026-001"
-REVISION = "1.0"
+REVISION = "1.1"
 DOC_DATE = "2 Oktober 2026"
 
 doc, sec = make_doc()
@@ -214,8 +214,9 @@ table(["Perangkat", "Kebutuhan di lokasi", "Pihak"], [
      "anti-korosi, tanpa las/bor pada struktur existing\nPemasangan fisik unit",
      "Vendor instalasi"],
     ["Cluster Head",
-     "Lokasi outdoor di area aman dengan paparan matahari untuk panel surya\nStruktur pemasangan "
-     "(bracket/U-clamp ke struktur existing atau tiang)", "Pertamina RU IV & vendor"],
+     "Lokasi outdoor di area aman dengan paparan matahari untuk panel surya\nTiang tegak (pipa) sebagai "
+     "dudukan unit CH, bracket 2 panel surya (diklem ke tiang), dan antena di puncak tiang — konfigurasi "
+     "seperti Gambar 1", "Pertamina RU IV & vendor"],
     ["Gateway",
      "Ruang indoor di area aman + stopkontak untuk adaptor 5 V\nTitik antena di luar/atap dengan jalur kabel "
      "antena ke unit", "Pertamina RU IV"],
@@ -227,6 +228,29 @@ table(["Perangkat", "Kebutuhan di lokasi", "Pihak"], [
      "Penetapan titik pasang & dokumen klasifikasi area\nPengesahan TRA/JSA, izin kerja, izin masuk personel & barang\n"
      "Penugasan vendor instalasi\nPIC operasi, HSE, control room, dan IT selama pemasangan", "Pertamina RU IV"],
 ], [1.25, 4.05, 1.2], keep=False)
+
+doc.add_heading("Contoh konfigurasi pemasangan Cluster Head", level=2)
+p("Cluster Head akan dipasang dengan konfigurasi seperti foto uji di bawah: unit CH dan antena omni berada "
+  "pada satu tiang, dua panel surya dipasang pada bracket baja yang diklem (U-clamp) ke tiang dengan arah "
+  "hadap berlawanan, dan kabel diturunkan sepanjang tiang. Bracket ini tidak memerlukan las maupun bor "
+  "pada tiang.")
+ph = doc.add_table(rows=2, cols=3)
+ph.alignment = WD_TABLE_ALIGNMENT.CENTER
+caps = ["(a) Bracket 2 panel surya, diklem ke tiang", "(b) Tiang + antena, uji di lapangan",
+        "(c) Tiang + antena, uji di atap gedung"]
+for i, fn in enumerate(["ch_bracket_solar_detail.jpg", "ch_mast_antena_lapangan.jpg", "ch_mast_antena_atap.jpg"]):
+    c = ph.rows[0].cells[i]
+    c.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    c.paragraphs[0].add_run().add_picture(os.path.join(REPO, "scripts", "assets", "ch_mount_photos", fn),
+                                          width=Inches(2.05))
+    cp = ph.rows[1].cells[i].paragraphs[0]
+    cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    r = cp.add_run(caps[i]); r.font.size = Pt(8.4); r.font.color.rgb = GRAY
+p("Gambar 1. Konfigurasi pemasangan Cluster Head dengan bracket panel surya (uji LGU & ITB di Bandung).",
+  size=9, bold=True, align=WD_ALIGN_PARAGRAPH.CENTER, space_after=4)
+p("Drum pada foto hanya dudukan sementara untuk pengujian. Di RU IV, tiang dipasang permanen (ditanam dan "
+  "dicor, atau diklem ke struktur existing) sesuai dokumen Spesifikasi Material Instalasi; material tiang "
+  "dan dudukan mengikuti ketentuan kilang.", size=9, italic=True, color=GRAY)
 
 # ---------------------------------------------------------------- 4
 doc.add_heading("4. Yang Disiapkan LGU & ITB", level=1)

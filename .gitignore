@@ -22,3 +22,4 @@ Paket Pertamina/*.zip
 # OS cruft
 Thumbs.db
 .DS_Store
+__pycache__/

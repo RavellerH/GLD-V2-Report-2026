@@ -172,7 +172,7 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 **Status produksi unit (per 6 Agu):**
 | Item | Jumlah |
 |---|---|
-| CH besar | 9 |
+| CH besar (seukuran paket baterai GLD — dec:171) | 9 |
 | CH kecil | 7 |
 | GLD (sesuai permintaan saat ini) | 4 |
 

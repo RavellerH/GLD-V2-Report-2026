@@ -28,7 +28,7 @@ OUT = os.path.join(REPO, "Deliverables",
                    "Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.docx")
 
 DOC_NO = "LGU/GLD/INSTALASI-SPEK/2026-001"
-REV = "1.2"
+REV = "1.3"
 DATE = "1 Oktober 2026"
 HEADER = "Spesifikasi Material Instalasi GLD — RU IV Cilacap"
 
@@ -258,20 +258,31 @@ def build():
         ["Ukuran", "2\" NPS Schedule 40 — OD 60,3 mm, tebal dinding 3,91 mm", "FINAL"],
         ["Panjang batang", "1,6 m = 1,0 m di atas tanah + 0,6 m tertanam di cor. "
                            "Satu batang pipa standar 6 m cukup untuk ketiga tiang GLD (3 × 1,6 m = 4,8 m)", "USULAN"],
-        ["Tinggi pasang unit GLD", "Unit (tinggi 290 mm) dijepit di bagian atas tiang → titik tengah sensor "
-                                   "± 0,8 m dari tanah. Posisi dapat digeser turun sepanjang tiang", "KONFIRMASI"],
+        ["Tinggi pasang unit GLD", "Rekomendasi: titik tengah sensor ± 0,5 m dari tanah (unit 290 mm berada ± 0,35–0,65 m). "
+                                   "Sisa tiang di atas unit memberi ruang geser bila HSE RU IV menetapkan tinggi lain", "USULAN"],
         ["Ujung atas", "Ditutup pipe cap (las di bengkel atau ulir) agar air hujan tidak masuk", "USULAN"],
         ["Ujung bawah (dalam cor)", "Diberi besi silang/angkur (mis. 2× besi Ø12 mm tembus pipa) agar tiang tidak berputar", "USULAN"],
         ["Pondasi", "Lubang 40 × 40 × 60 cm, beton fc' ≥ 20 MPa (± K-250), permukaan atas dibuat miring menjauhi tiang", "USULAN"],
         ["Masa tunggu", "Unit GLD dipasang setelah beton cukup kuat (umumnya ≥ 3 hari; ikuti praktik pelaksana RU IV)", "USULAN"],
         ["Tegak lurus", "Toleransi vertikal ≤ 1° (cek waterpass saat pengecoran)", "USULAN"],
     ], [1.6, 4.3, 1.0], status_col=2)
-    banner(doc, "Catatan tinggi sensor",
-           "Tiang 1 m di atas tanah menempatkan sensor ± 0,8 m dari tanah — di bawah batas \"setinggi orang\" "
-           "dari rapat 6 Agustus, sehingga pemasangan & perawatan tidak memerlukan pekerjaan ketinggian. Posisi rendah "
-           "ini sesuai untuk gas yang lebih berat dari udara (LPG, H₂S). Untuk gas ringan (H₂, metana) sensor "
-           "idealnya lebih tinggi; bila suatu titik terutama menyasar gas ringan, tiang titik tersebut dapat dibuat "
-           "lebih panjang. Tinggi final per titik disepakati bersama HSE RU IV.")
+    para(doc, "Tinggi sensor menurut jenis gas", bold=True, color=NAVY, after=3)
+    para(doc, "Tidak ada satu tinggi yang ideal untuk semua gas. Panduan umum industri (IEC 60079-29-2, "
+         "ISA RP12.13 Part II) menentukan tinggi berdasarkan berat jenis gas dan letak sumber bocor:", size=9.6)
+    table(doc, ["Jenis gas", "Sifat", "Tinggi sensor ideal"], [
+        ["LPG (propana/butana), CO₂", "Jauh lebih berat dari udara, mengendap di tanah/parit", "0,3–0,5 m dari tanah"],
+        ["H₂S", "Sedikit lebih berat dari udara, toksik", "0,3–0,6 m untuk deteksi kebocoran; zona napas 1,2–1,8 m untuk proteksi pekerja"],
+        ["CO", "Hampir sama dengan udara", "Zona napas 1,5–1,8 m"],
+        ["Metana", "Lebih ringan, naik", "± 0,5–1 m di atas sumber bocor"],
+        ["H₂", "Sangat ringan, naik cepat", "Di atas sumber bocor / titik tertinggi tempat gas bisa terperangkap"],
+    ], [1.7, 2.4, 2.8])
+    banner(doc, "Rekomendasi untuk perimeter SRU: titik tengah sensor ± 0,5 m dari tanah",
+           "Satu unit GLD membaca beberapa gas sekaligus, sehingga tingginya selalu kompromi. Di perimeter SRU, "
+           "gas yang paling relevan (H₂S, LPG) cenderung turun, sehingga posisi rendah paling efektif — sekaligus "
+           "tanpa pekerjaan ketinggian. Jangan di bawah ± 0,3 m karena sensor bermesh terbuka bisa terkena cipratan "
+           "air, lumpur, dan genangan. Untuk titik yang terutama menyasar H₂/metana, tinggi ditentukan dari posisi "
+           "sumber bocor (flange/valve), bukan dari tanah; tiang titik tersebut dibuat lebih panjang. "
+           "Tinggi final per titik disepakati bersama HSE RU IV saat penentuan titik (letak sumber bocor & arah angin).")
 
     heading(doc, "3.2 Tiang Cluster Head", level=2)
     table(doc, ["Parameter", "Spesifikasi", "Status"], [

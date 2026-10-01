@@ -28,7 +28,7 @@ OUT = os.path.join(REPO, "Deliverables",
                    "Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.docx")
 
 DOC_NO = "LGU/GLD/INSTALASI-SPEK/2026-001"
-REV = "1.3"
+REV = "1.4"
 DATE = "1 Oktober 2026"
 HEADER = "Spesifikasi Material Instalasi GLD — RU IV Cilacap"
 
@@ -388,8 +388,8 @@ def build():
     table(doc, ["Item", "Spesifikasi", "Penyedia", "Status"], [
         ["PC server", "PC fisik, 2 port LAN (NIC kedua bisa USB-LAN), di ruang server lokal. "
                       "Usulan minimum: 4 core / 8 GB RAM / SSD 256 GB", "Pertamina", "USULAN"],
-        ["Router lapangan", "Router Wi-Fi untuk Gateway ↔ PC server (jaringan GLD terpisah dari jaringan kilang)", "LGU", "FINAL"],
-        ["Gateway ↔ router", "Satu ruangan, jarak ± 1–5 m, tanpa sekat logam (Gateway memakai Wi-Fi)", "—", "USULAN"],
+        ["Router lapangan", "Router Wi-Fi milik LGU, satu ruangan dengan Gateway; dikonfigurasi LGU sebelum mobilisasi (lihat §5.2)", "LGU", "FINAL"],
+        ["Gateway ↔ router", "Wi-Fi 2,4 GHz, satu ruangan, jarak ± 1–5 m, tanpa sekat logam", "—", "FINAL"],
         ["Kabel router ↔ PC server", "Cat6 sesuai jarak antar-ruang (maks. 90 m per segmen), lewat jalur kabel/conduit gedung", "RU IV", "KONFIRMASI"],
         ["Kabel PC ↔ intranet kantor", "Cat6 ke titik jaringan kantor terdekat; panjang mengikuti lokasi (> 90 m → switch/fiber). "
                                        "Akses hanya untuk API/dashboard", "Pertamina (IT RU IV)", "KONFIRMASI"],
@@ -398,7 +398,18 @@ def build():
         ["UPS", "Disarankan ≥ 1 kVA untuk PC + router + Gateway agar alarm tetap tercatat saat listrik padam", "Pertamina", "USULAN"],
     ], [1.45, 3.2, 1.25, 1.0], status_col=3)
 
-    heading(doc, "5.2 Kabel koaksial antena Gateway", level=2)
+    heading(doc, "5.2 Skema jaringan lokal", level=2)
+    table(doc, ["Segmen", "Media & ketentuan", "Status"], [
+        ["Gateway → router", "Wi-Fi 2,4 GHz (Gateway berbasis ESP32-S3 hanya mendukung 2,4 GHz), WPA2, SSID khusus jaringan GLD", "FINAL"],
+        ["Router → PC server (LAN 1)", "Kabel Cat6 dari ruang Gateway ke ruang server lokal; IP tetap untuk PC server (MQTT broker)", "FINAL"],
+        ["PC server → intranet kantor (LAN 2)", "Port LAN kedua ke titik jaringan kantor; hanya untuk akses dashboard/API dari kantor. "
+                                                "PC tidak meneruskan (routing) lalu lintas antara jaringan GLD dan intranet", "FINAL"],
+        ["Internet", "Tidak ada. Router tanpa WAN/SIM; seluruh sistem berjalan lokal", "FINAL"],
+        ["Spesifikasi minimum router", "Wi-Fi 2,4 GHz 802.11n, ≥ 1 port LAN gigabit, catu 220 VAC; disediakan & dikonfigurasi LGU", "FINAL"],
+        ["Panjang Cat6 router ↔ PC", "Mengikuti jarak rute antar-ruang (≤ 90 m per segmen); diukur saat survey ruangan", "KONFIRMASI"],
+    ], [1.85, 4.05, 1.0], status_col=2)
+
+    heading(doc, "5.3 Kabel koaksial antena Gateway", level=2)
     table(doc, ["Parameter", "Spesifikasi", "Status"], [
         ["Jenis kabel", "Koaksial 50 Ω low-loss, LMR-400 atau setara (tahan UV untuk bagian luar)", "USULAN"],
         ["Panjang", "Sependek mungkin; target ≤ 15 m dari antena ke Gateway. Rumus: rute aktual × 1,10 + 1 m", "USULAN"],
@@ -458,12 +469,12 @@ def build():
         ["9", "PSU 24 VDC", "Opsi A: 3 × (≥1 A) · Opsi B: 1 × (≥5 A)", "3 atau 1 unit", "RU IV"],
         ["10", "Box/panel PSU + MCB + terminal", "Untuk area aman", "3 atau 1 set", "RU IV"],
         ["11", "Kabel daya 2 inti", "Ukuran & panjang per §4", "Σ per §4.4", "RU IV"],
-        ["12", "Kabel koaksial LMR-400 + konektor N", "Antena GW → Gateway, ≤ 15 m (§5.2)", "1 jalur", "RU IV"],
-        ["13", "Penangkal petir koaksial", "50 Ω, 900 MHz, konektor N (§5.2)", "1 buah", "RU IV"],
+        ["12", "Kabel koaksial LMR-400 + konektor N", "Antena GW → Gateway, ≤ 15 m (§5.3)", "1 jalur", "RU IV"],
+        ["13", "Penangkal petir koaksial", "50 Ω, 900 MHz, konektor N (§5.3)", "1 buah", "RU IV"],
         ["14", "Kabel grounding + klem", "Mengikuti standar RU IV (tiang, mast, penangkal petir)", f"{n_all} titik + 1", "RU IV"],
         ["15", "PC server + UPS", "Lihat §5.1", "1 set", "Pertamina"],
         ["16", "Kabel Cat6", "Router ↔ PC server, PC ↔ intranet kantor", "2 jalur", "RU IV / IT RU IV"],
-        ["17", "Router lapangan", "Lihat §5.1", "1 unit", "LGU"],
+        ["17", "Router lapangan", "Lihat §5.2", "1 unit", "LGU"],
         ["18", "Unit GLD, CH, Gateway + antena, panel surya CH", "Perangkat sistem", f"{N_GLD} / {N_CH} / {N_GW}", "LGU"],
     ], [0.4, 1.85, 2.5, 1.15, 1.0])
 

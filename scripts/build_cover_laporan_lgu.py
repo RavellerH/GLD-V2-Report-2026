@@ -75,7 +75,7 @@ DOCS = [
 
 TTD = {
     "tempat": "Bandung, ........ Oktober 2026",
-    "team_leader": "(.......................................)",
+    "team_leader": "Dr. Maman Budiman",
     "dirut": "Ir. Harry Fardiman",
     "ppn_jabatan": "Manager Domestic Product Content & Digitalization\nPT Pertamina Patra Niaga",
     "ppn_nama": "Agustinus Pindoan Panjaitan",

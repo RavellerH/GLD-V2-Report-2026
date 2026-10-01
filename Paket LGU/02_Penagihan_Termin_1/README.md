@@ -10,7 +10,7 @@ Laporan Termin 1 dengan halaman depan format laporan LGU (cover, lembar kontrol 
 
 ## Yang masih perlu dilengkapi sebelum ditandatangani
 - **No. Kontrak** di lembar kontrol dokumen (kosong).
-- **Nama Team Leader** proyek GLD di lembar pengesahan & kata pengantar (titik-titik).
+- Team Leader: **Dr. Maman Budiman** (sudah tercantum di lembar pengesahan & kata pengantar).
 - **Tanggal** pengesahan ("........ Oktober 2026").
 - Nama Direktur Utama (Ir. Harry Fardiman) dan pejabat Pertamina (Agustinus Pindoan Panjaitan, Manager Domestic Product Content & Digitalization) diambil dari contoh laporan URS — mohon dicek masih sesuai untuk kontrak GLD.
 

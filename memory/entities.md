@@ -20,7 +20,7 @@
 ## Orang (`p:`) — dari notulen/laporan
 | ID | Nama | Peran/konteks |
 |---|---|---|
-| p:maman | Pak Maman | Pemaparan GLD, arahan teknis, penataan lab, WDT eksternal |
+| p:maman | Pak Maman (Dr. Maman Budiman) | **Team Leader proyek GLD** (dikonfirmasi user 2 Okt 2026 — dipakai di lembar pengesahan & kata pengantar laporan LGU). Pemaparan GLD, arahan teknis, penataan lab, WDT eksternal; IoT Researcher & Senior Lecturer ITB |
 | p:fahmi | Fahmi | Tim Elektronik — ruang lingkup, DC converter, simulasi daya |
 | p:farhan | Farhan Budiman | Repositori kode & collaborator |
 | p:fahdzi | Pak Fahdzi | Model TCNN/TCN |

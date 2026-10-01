@@ -28,8 +28,8 @@ OUT = os.path.join(REPO, "Deliverables",
                    "Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.docx")
 
 DOC_NO = "LGU/GLD/INSTALASI-SPEK/2026-001"
-REV = "1.4"
-DATE = "1 Oktober 2026"
+REV = "1.5"
+DATE = "2 Oktober 2026"
 HEADER = "Spesifikasi Material Instalasi GLD — RU IV Cilacap"
 
 # Asumsi perencanaan (diganti begitu data lapangan tersedia)
@@ -226,7 +226,8 @@ def build():
         ["Kabel antena Gateway", "Koaksial 50 Ω low-loss (LMR-400 atau setara), ≤ 15 m, + penangkal petir koaksial", "1 jalur", "USULAN"],
         ["Kabel jaringan", "Cat6 (router ↔ PC server, PC ↔ intranet kantor)", "2 jalur", "USULAN"],
         ["PC server", "PC fisik di ruang server lokal (bersebelahan dengan ruang Gateway), 2 port LAN", "1 unit", "FINAL"],
-        ["Klem U-bolt & pelat", "U-bolt 2\"/DN50 thread M10, pelat 250×250 mm (desain LGU), untuk GLD & CH", "2 U-bolt per titik", "FINAL"],
+        ["Klem U-bolt & pelat", "U-bolt 2\"/DN50 thread M10, pelat 250×250 mm (desain LGU), untuk GLD", "2 U-bolt per titik GLD", "FINAL"],
+        ["Bracket panel surya CH", "Bracket baja 2 panel (milik LGU), diklem ke tiang 2\", tanpa las/bor — dibawa LGU", "1 set per CH", "FINAL"],
         ["Grounding tiang", "Bonding ke sistem grounding RU IV", f"{N_GLD + N_CH + N_GW} titik*", "KONFIRMASI"],
     ], [1.35, 3.35, 1.25, 0.95], status_col=3)
     para(doc, f"* Unit Cluster Head (CH) yang tersedia lebih dari 5. Dokumen ini memakai **{N_CH} titik CH "
@@ -290,10 +291,22 @@ def build():
         ["Panjang batang", "4,0 m = 3,0 m di atas tanah + 1,0 m tertanam", "USULAN"],
         ["Alasan tinggi", "Antena LoRa ditempatkan di atas halangan (orang, kendaraan, peralatan) untuk jangkauan antar-CH", "USULAN"],
         ["Pondasi", "Lubang 50 × 50 × 100 cm, beton fc' ≥ 20 MPa, angkur silang di ujung bawah", "USULAN"],
-        ["Dudukan panel surya", "2 panel per CH, menghadap utara, kemiringan ± 10–15°. Dimensi panel diserahkan tim LGU", "KONFIRMASI"],
-        ["Mounting CH", "Pelat U-bolt yang sama dengan GLD (2\"/DN50, M10)", "FINAL"],
+        ["Bracket panel surya", "Bracket baja 2 panel **disediakan dan dibawa LGU**, diklem ke tiang 2\" (OD 60,3 mm) "
+                                "tanpa las/bor; dua panel dipasang berlawanan arah seperti Gambar 3.1", "FINAL"],
+        ["Mounting CH & antena", "Unit CH dan antena dipasang di bagian atas tiang (perangkat & klem dari LGU); "
+                                 "tiang CH tidak memakai pelat U-bolt 250×250 mm", "FINAL"],
+        ["Ujung atas tiang", "Tertutup oleh dudukan CH/antena (bukan pipe cap); sambungan dibuat rapat agar air hujan tidak masuk", "FINAL"],
         ["Tinggi final per titik", "Ditentukan tim RF LGU saat penempatan (line of sight antar-CH)", "KONFIRMASI"],
     ], [1.6, 4.3, 1.0], status_col=2)
+    ph = doc.add_paragraph()
+    ph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    ph.paragraph_format.keep_with_next = True
+    for fn in ("ch_bracket_solar_detail.jpg", "ch_mast_antena_atap.jpg"):
+        ph.add_run().add_picture(os.path.join(REPO, "scripts", "assets", "ch_mount_photos", fn), height=Inches(2.9))
+        ph.add_run("    ")
+    para(doc, "Gambar 3.1 Konfigurasi Cluster Head: bracket 2 panel surya diklem ke tiang (kiri), unit CH & antena "
+              "di bagian atas tiang (kanan). Foto uji LGU & ITB; drum hanya dudukan sementara — di RU IV tiang "
+              "ditanam & dicor.", size=8.8, color=GRAY, italic=True)
 
     heading(doc, "3.3 Mast antena Gateway", level=2)
     para(doc, "Gateway ditempatkan **di dalam ruangan** di dekat ruang server lokal, tetapi antenanya harus "
@@ -445,27 +458,27 @@ def build():
     ], [1.3, 3.65, 1.0, 0.95], status_col=3)
     banner(doc, "Perlu dicek sebelum fabrikasi pelat",
            "Desain pelat U-bolt saat ini secara visual paling sesuai untuk pipa horizontal (handrail). Karena "
-           "seluruh titik memakai tiang baru yang berdiri vertikal, kecocokan orientasi pelat pada tiang vertikal "
+           "seluruh titik GLD memakai tiang baru yang berdiri vertikal, kecocokan orientasi pelat pada tiang vertikal "
            "perlu dicek tim desain LGU bersama pelaksana RU IV sebelum pelat difabrikasi.", bg="FBE9E9")
 
     # 7. BoQ
     heading(doc, "7. Daftar kebutuhan (BoQ) perencanaan")
     para(doc, f"Basis: {N_GLD} GLD + {N_CH} CH + {N_GW} Gateway. Angka CH dan panjang kabel adalah asumsi perencanaan; "
          "sesuaikan setelah titik final ditetapkan.", size=9.6)
-    n_pole = N_GLD + N_CH          # tiang yang memakai pelat U-bolt
-    n_all = n_pole + N_GW          # semua tiang/mast yang dicor & di-grounding
+    n_pole = N_GLD                 # tiang yang memakai pelat U-bolt (CH memakai bracket surya LGU)
+    n_all = N_GLD + N_CH + N_GW    # semua tiang/mast yang dicor & di-grounding
     beton = N_GLD * 0.096 + N_CH * 0.25 + N_GW * 0.30
     beton_s = f"{beton:.1f}".replace(".", ",")
     table(doc, ["No", "Item", "Spesifikasi", "Qty", "Penyedia"], [
         ["1", "Pipa tiang GLD", "Galvanis 2\" Sch40, 1,6 m (dipotong dari 1 batang 6 m)", f"{N_GLD} batang", "RU IV"],
         ["2", "Pipa tiang CH", "Galvanis 2\" Sch40, 4,0 m", f"{N_CH} batang", "RU IV"],
         ["3", "Pipa mast antena Gateway", "Galvanis 2\" Sch40, 6,0 m (+ guy wire bila perlu)", f"{N_GW} batang", "RU IV"],
-        ["4", "Pipe cap 2\"", "Penutup ujung atas tiang/mast", f"{n_all} buah", "RU IV"],
+        ["4", "Pipe cap 2\"", "Penutup ujung atas tiang GLD & mast GW (tiang CH tidak)", f"{N_GLD + N_GW} buah", "RU IV"],
         ["5", "Beton cor", f"GLD {N_GLD}×0,10 + CH {N_CH}×0,25 + GW {N_GW}×0,30 m³ ≈ {beton_s} m³ "
                           "(belum termasuk susut/sisa)", "± 2,5 m³", "RU IV"],
-        ["6", "U-bolt 2\" M10 + mur/ring", "Lihat §6 (GLD & CH)", f"{2*n_pole} U-bolt, {4*n_pole} set mur", "RU IV"],
+        ["6", "U-bolt 2\" M10 + mur/ring", "Lihat §6 (GLD saja)", f"{2*n_pole} U-bolt, {4*n_pole} set mur", "RU IV"],
         ["7", "Pelat mounting 250×250 mm", "Sesuai gambar LGU", f"{n_pole} buah", "RU IV"],
-        ["8", "Dudukan panel surya CH", "2 panel per CH", f"{N_CH} set", "RU IV (dimensi dari LGU)"],
+        ["8", "Bracket panel surya CH", "Bracket baja 2 panel, klem ke tiang 2\" (Gambar 3.1)", f"{N_CH} set", "LGU"],
         ["9", "PSU 24 VDC", "Opsi A: 3 × (≥1 A) · Opsi B: 1 × (≥5 A)", "3 atau 1 unit", "RU IV"],
         ["10", "Box/panel PSU + MCB + terminal", "Untuk area aman", "3 atau 1 set", "RU IV"],
         ["11", "Kabel daya 2 inti", "Ukuran & panjang per §4", "Σ per §4.4", "RU IV"],

@@ -28,7 +28,7 @@ OUT = os.path.join(REPO, "Deliverables",
                    "Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.docx")
 
 DOC_NO = "LGU/GLD/INSTALASI-SPEK/2026-001"
-REV = "1.0"
+REV = "1.1"
 DATE = "1 Oktober 2026"
 HEADER = "Spesifikasi Material Instalasi GLD — RU IV Cilacap"
 
@@ -159,8 +159,9 @@ def build():
     tr.font.size = Pt(18); tr.font.bold = True; tr.font.color.rgb = NAVY
     para(doc, "Tiang besi, kabel catu daya 24 VDC, jaringan Gateway–server, fastener, "
          "grounding, dan daftar kebutuhan (BoQ) untuk pemasangan sistem Gas Leak Detection "
-         "di area aman perimeter Sulfur Recovery Unit (SRU). Disusun agar tim PT Pertamina "
-         "Patra Niaga dan vendor instalasi dapat mulai menyiapkan material.",
+         "di area aman perimeter Sulfur Recovery Unit (SRU). RU IV menyatakan bersedia mendukung "
+         "penuh pelaksanaan instalasi; dokumen ini disusun agar tim RU IV dapat mulai menyiapkan "
+         "material dan pekerjaan sipil/elektrikal.",
          size=10.6, color=GRAY, after=10)
 
     # document control
@@ -168,7 +169,7 @@ def build():
         ("Nomor dokumen", DOC_NO), ("Revisi", REV), ("Tanggal", DATE),
         ("Status", "Draf kerja — bahan rapat koordinasi 2 Oktober 2026, bukan dokumen pengadaan final"),
         ("Disiapkan oleh", "PT LAPI Ganesha Utama, bersama Lab IoT & Fisika Institut Teknologi Bandung"),
-        ("Ditujukan kepada", "PT Pertamina Patra Niaga — RU IV Cilacap & vendor instalasi yang ditunjuk"),
+        ("Ditujukan kepada", "PT Pertamina Patra Niaga — RU IV Cilacap (pelaksana instalasi, termasuk kontraktor yang ditunjuk RU IV)"),
     ]
     p_ = doc.add_paragraph()
     r = p_.add_run("Document Control")
@@ -218,12 +219,14 @@ def build():
     table(doc, ["Kebutuhan", "Spesifikasi singkat", "Jumlah (perencanaan)", "Status"], [
         ["Tiang GLD", "Pipa baja galvanis 2\" Sch40 (OD 60,3 mm), panjang 2,5 m, ditanam & dicor", f"{N_GLD} batang", "USULAN"],
         ["Tiang Cluster Head", "Pipa baja galvanis 2\" Sch40 (OD 60,3 mm), panjang 4,0 m, ditanam & dicor", f"{N_CH} batang*", "USULAN"],
-        ["Pondasi cor", "GLD 40×40×80 cm · CH 50×50×100 cm, beton fc' ≥ 20 MPa", f"{N_GLD + N_CH} titik*", "USULAN"],
+        ["Mast antena Gateway", "Pipa baja galvanis 2\" Sch40, panjang 6 m (± 4,8 m di atas tanah), ditanam & dicor di dekat ruang Gateway", f"{N_GW} batang", "USULAN"],
+        ["Pondasi cor", "GLD 40×40×80 cm · CH 50×50×100 cm · mast GW 50×50×120 cm, beton fc' ≥ 20 MPa", f"{N_GLD + N_CH + N_GW} titik*", "USULAN"],
         ["Catu daya GLD", "24 VDC, kapasitas ≥ 1 A per unit (konsumsi aktual ≈ 0,33 A)", f"{N_GLD} unit beban", "FINAL"],
         ["Kabel daya 24 VDC", "2 inti tembaga; ukuran mengikuti jarak (Tabel 4.2): 1,5–6 mm²", "Σ jarak + cadangan", "KONFIRMASI"],
-        ["Kabel jaringan", "Cat6 (PC ↔ router LGU, PC ↔ intranet kantor)", "2 jalur", "USULAN"],
-        ["PC server", "PC fisik dekat Gateway, 2 port LAN (dual-network)", "1 unit", "FINAL"],
-        ["Klem U-bolt & pelat", "U-bolt 2\"/DN50 thread M10, pelat 250×250 mm (desain LGU)", "2 U-bolt per titik", "FINAL"],
+        ["Kabel antena Gateway", "Koaksial 50 Ω low-loss (LMR-400 atau setara), ≤ 15 m, + penangkal petir koaksial", "1 jalur", "USULAN"],
+        ["Kabel jaringan", "Cat6 (router ↔ PC server, PC ↔ intranet kantor)", "2 jalur", "USULAN"],
+        ["PC server", "PC fisik di ruang server lokal (bersebelahan dengan ruang Gateway), 2 port LAN", "1 unit", "FINAL"],
+        ["Klem U-bolt & pelat", "U-bolt 2\"/DN50 thread M10, pelat 250×250 mm (desain LGU), untuk GLD & CH", "2 U-bolt per titik", "FINAL"],
         ["Grounding tiang", "Bonding ke sistem grounding RU IV", f"{N_GLD + N_CH + N_GW} titik*", "KONFIRMASI"],
     ], [1.35, 3.35, 1.25, 0.95], status_col=3)
     para(doc, f"* Unit Cluster Head (CH) yang tersedia lebih dari 5. Dokumen ini memakai **{N_CH} titik CH "
@@ -236,12 +239,12 @@ def build():
     table(doc, ["Perangkat", "Jumlah", "Sumber daya", "Penempatan"], [
         ["GLD (Node Sensor)", f"{N_GLD} unit", "24 VDC melalui kabel", "Titik deteksi di area aman perimeter SRU"],
         ["Cluster Head (CH)", f">5 tersedia (rencana {N_CH})", "Panel surya (2 panel) + baterai, tanpa kabel", "Di antara GLD dan Gateway, membentuk jaringan LoRa mesh"],
-        ["Gateway (GW)", f"{N_GW} unit", "Menunggu konfirmasi tim LGU (lihat §5)", "Safe area, dekat PC server"],
-        ["PC server", "1 unit", "220 VAC", "Dekat Gateway; disediakan Pertamina, dikonfigurasi LGU"],
-        ["Router lapangan", "1 unit", "220 VAC", "Dekat PC server; disediakan LGU"],
+        ["Gateway (GW)", f"{N_GW} unit", "220 VAC via adaptor (rating dari tim LGU, lihat §5)", "Di dalam ruangan, dekat ruang server lokal; antena di luar pada mast tinggi"],
+        ["PC server", "1 unit", "220 VAC", "Ruang server lokal; disediakan Pertamina, dikonfigurasi LGU"],
+        ["Router lapangan", "1 unit", "220 VAC", "Satu ruangan dengan Gateway; disediakan LGU"],
     ], [1.4, 1.35, 1.95, 2.2])
-    para(doc, "Alur data: GLD → (LoRa) → CH → (LoRa mesh) → Gateway → (Wi-Fi) → router LGU → PC server "
-         "(MQTT broker + dashboard). PC server juga tersambung ke intranet kantor kilang lewat port LAN "
+    para(doc, "Alur data: GLD → (LoRa) → CH → (LoRa mesh) → antena Gateway di mast → (kabel koaksial) → Gateway "
+         "di dalam ruangan → (Wi-Fi) → router LGU → (kabel Cat6) → PC server (MQTT broker + dashboard). PC server juga tersambung ke intranet kantor kilang lewat port LAN "
          "kedua agar dashboard dapat diakses dari kantor.", size=9.6)
 
     # 3. tiang
@@ -259,7 +262,7 @@ def build():
         ["Ujung atas", "Ditutup pipe cap (las di bengkel atau ulir) agar air hujan tidak masuk", "USULAN"],
         ["Ujung bawah (dalam cor)", "Diberi besi silang/angkur (mis. 2× besi Ø12 mm tembus pipa) agar tiang tidak berputar", "USULAN"],
         ["Pondasi", "Lubang 40 × 40 × 80 cm, beton fc' ≥ 20 MPa (± K-250), permukaan atas dibuat miring menjauhi tiang", "USULAN"],
-        ["Masa tunggu", "Unit GLD dipasang setelah beton cukup kuat (umumnya ≥ 3 hari; ikuti praktik vendor)", "USULAN"],
+        ["Masa tunggu", "Unit GLD dipasang setelah beton cukup kuat (umumnya ≥ 3 hari; ikuti praktik pelaksana RU IV)", "USULAN"],
         ["Tegak lurus", "Toleransi vertikal ≤ 1° (cek waterpass saat pengecoran)", "USULAN"],
     ], [1.6, 4.3, 1.0], status_col=2)
     banner(doc, "Catatan tinggi sensor",
@@ -268,7 +271,7 @@ def build():
            "ringan (H₂, metana) lebih tinggi. Karena posisi unit bisa digeser di sepanjang tiang, tinggi final "
            "per titik dapat disepakati bersama HSE RU IV tanpa mengubah tiang.")
 
-    heading(doc, "3.2 Tiang Cluster Head (dan Gateway bila di luar ruangan)", level=2)
+    heading(doc, "3.2 Tiang Cluster Head", level=2)
     table(doc, ["Parameter", "Spesifikasi", "Status"], [
         ["Material & ukuran", "Sama dengan tiang GLD: pipa baja galvanis 2\" Sch40, OD 60,3 mm", "USULAN"],
         ["Panjang batang", "4,0 m = 3,0 m di atas tanah + 1,0 m tertanam", "USULAN"],
@@ -279,12 +282,30 @@ def build():
         ["Tinggi final per titik", "Ditentukan tim RF LGU saat penempatan (line of sight antar-CH)", "KONFIRMASI"],
     ], [1.6, 4.3, 1.0], status_col=2)
 
-    heading(doc, "3.3 Grounding & penandaan", level=2)
+    heading(doc, "3.3 Mast antena Gateway", level=2)
+    para(doc, "Gateway ditempatkan **di dalam ruangan** di dekat ruang server lokal, tetapi antenanya harus "
+         "tinggi karena Gateway adalah titik pusat jaringan mesh: semua CH mengirim data ke antena ini. "
+         "Antena dipasang di luar gedung pada mast, lalu disambung ke Gateway dengan kabel koaksial.", size=9.6)
+    table(doc, ["Parameter", "Spesifikasi", "Status"], [
+        ["Antena", "Antena fiber omni 8 dBi, 920–923 MHz (bawaan perangkat Gateway, disediakan LGU)", "FINAL"],
+        ["Tinggi antena", "Puncak antena ≥ 2 m di atas atap gedung terdekat dan lebih tinggi dari antena CH (3 m). "
+                          "Target perencanaan ± 5–6 m dari tanah", "USULAN"],
+        ["Opsi 1 (disarankan): mast berdiri sendiri", "Pipa baja galvanis 2\" Sch40 panjang 6 m (1 batang standar): ± 4,8 m di atas tanah + "
+                                                    "1,2 m tertanam; pondasi 50 × 50 × 120 cm; ditempatkan sedekat mungkin dengan dinding ruang Gateway", "USULAN"],
+        ["Opsi 2: mast di dinding/atap gedung", "Pipa 2\" dengan wall bracket/klem ke dinding atau parapet; perlu izin RU IV "
+                                               "karena melubangi/menjepit struktur gedung", "KONFIRMASI"],
+        ["Penguat mast", "Bila tinggi > 5 m atau angin kencang: tambah guy wire 3 arah atau klem ke dinding gedung", "USULAN"],
+        ["Klem antena", "Mengikuti klem bawaan antena (umumnya untuk pipa Ø 30–60 mm)", "USULAN"],
+        ["Grounding & petir", "Mast di-bonding ke grounding RU IV; penangkal petir koaksial dipasang di titik kabel masuk gedung", "KONFIRMASI"],
+    ], [1.75, 4.15, 1.0], status_col=2)
+
+    heading(doc, "3.4 Grounding & penandaan", level=2)
     bullets(doc, [
         "Setiap tiang logam di-bonding ke sistem grounding RU IV (mis. kabel BC/NYA hijau-kuning 16 mm² + klem pipa "
         "+ sepatu kabel), atau ground rod tersendiri bila titik grounding jauh. **Metode dan nilai resistansi mengikuti "
         "standar RU IV.**",
-        "Tiang CH yang lebih tinggi dari struktur sekitarnya: perlu tidaknya proteksi petir ditentukan HSE/elektrikal RU IV.",
+        "Tiang CH dan mast Gateway lebih tinggi dari struktur sekitarnya: perlu tidaknya proteksi petir tambahan "
+        "ditentukan HSE/elektrikal RU IV.",
         "Setiap tiang diberi label nomor titik (GLD-01…03, CH-01…, GW-01) yang sama dengan nomor di dashboard.",
     ])
 
@@ -330,7 +351,7 @@ def build():
         ["Masuk ke unit GLD", "Cable gland M20 × 1,5 (IP66). Diameter luar kabel harus masuk rentang klem gland; "
                               "kabel armor memerlukan gland tipe armored", "FINAL"],
         ["Terminasi", "Ujung kabel diberi ferrule/skun; sambungan ke konduktor L+/L− di dalam unit dikerjakan teknisi LGU", "FINAL"],
-        ["Pelaksana", "Penarikan kabel & PSU oleh vendor/RU IV; terminasi akhir, energize & commissioning oleh LGU", "FINAL"],
+        ["Pelaksana", "Penarikan kabel & PSU oleh RU IV; terminasi akhir, energize & commissioning oleh LGU", "FINAL"],
     ], [1.6, 4.3, 1.0], status_col=2)
 
     heading(doc, "4.4 Menghitung panjang kabel", level=2)
@@ -347,25 +368,53 @@ def build():
 
     # 5. jaringan & server
     heading(doc, "5. Gateway, PC server & jaringan")
+    para(doc, "Tata letak: ruang Gateway (Gateway + router LGU) bersebelahan/dekat dengan ruang server lokal "
+         "(PC server). Gateway tersambung ke router lewat Wi-Fi, sehingga keduanya sebaiknya satu ruangan; "
+         "router ke PC server memakai kabel Cat6.", size=9.6)
+    heading(doc, "5.1 Ruang Gateway & ruang server", level=2)
     table(doc, ["Item", "Spesifikasi", "Penyedia", "Status"], [
-        ["PC server", "PC fisik, 2 port LAN (NIC kedua bisa USB-LAN), dekat Gateway, di safe area. "
+        ["PC server", "PC fisik, 2 port LAN (NIC kedua bisa USB-LAN), di ruang server lokal. "
                       "Usulan minimum: 4 core / 8 GB RAM / SSD 256 GB", "Pertamina", "USULAN"],
         ["Router lapangan", "Router Wi-Fi untuk Gateway ↔ PC server (jaringan GLD terpisah dari jaringan kilang)", "LGU", "FINAL"],
-        ["Kabel PC ↔ router", "Cat6 patch cord 2–5 m", "LGU", "USULAN"],
+        ["Gateway ↔ router", "Satu ruangan, jarak ± 1–5 m, tanpa sekat logam (Gateway memakai Wi-Fi)", "—", "USULAN"],
+        ["Kabel router ↔ PC server", "Cat6 sesuai jarak antar-ruang (maks. 90 m per segmen), lewat jalur kabel/conduit gedung", "RU IV", "KONFIRMASI"],
         ["Kabel PC ↔ intranet kantor", "Cat6 ke titik jaringan kantor terdekat; panjang mengikuti lokasi (> 90 m → switch/fiber). "
                                        "Akses hanya untuk API/dashboard", "Pertamina (IT RU IV)", "KONFIRMASI"],
-        ["Jarak Gateway ↔ router", "Sebaiknya dalam satu ruangan/area tanpa sekat logam (Gateway memakai Wi-Fi)", "—", "USULAN"],
-        ["Daya Gateway", "Menunggu konfirmasi tim LGU (adaptor 220 VAC atau panel surya + baterai seperti CH)", "LGU", "KONFIRMASI"],
-        ["Stop kontak 220 VAC", "Minimal 4 titik di lokasi PC (PC, monitor, router, Gateway)", "Pertamina", "USULAN"],
-        ["UPS", "Disarankan ≥ 1 kVA untuk PC + router agar alarm tetap tercatat saat listrik padam", "Pertamina", "USULAN"],
+        ["Daya Gateway", "Adaptor 220 VAC dari stop kontak ruang Gateway; tegangan & rating adaptor dikonfirmasi tim LGU", "LGU", "KONFIRMASI"],
+        ["Stop kontak 220 VAC", "Ruang Gateway: min. 2 (Gateway, router). Ruang server: min. 3 (PC, monitor, cadangan)", "RU IV", "USULAN"],
+        ["UPS", "Disarankan ≥ 1 kVA untuk PC + router + Gateway agar alarm tetap tercatat saat listrik padam", "Pertamina", "USULAN"],
     ], [1.45, 3.2, 1.25, 1.0], status_col=3)
+
+    heading(doc, "5.2 Kabel koaksial antena Gateway", level=2)
+    table(doc, ["Parameter", "Spesifikasi", "Status"], [
+        ["Jenis kabel", "Koaksial 50 Ω low-loss, LMR-400 atau setara (tahan UV untuk bagian luar)", "USULAN"],
+        ["Panjang", "Sependek mungkin; target ≤ 15 m dari antena ke Gateway. Rumus: rute aktual × 1,10 + 1 m", "USULAN"],
+        ["Konektor", "Tipe N di sisi antena & penangkal petir; adaptor/pigtail ke konektor antena Gateway "
+                     "(tipe konektor Gateway dikonfirmasi tim LGU)", "KONFIRMASI"],
+        ["Penangkal petir", "Coaxial lightning arrester 50 Ω untuk 900 MHz (tipe gas discharge), konektor N, "
+                            "dipasang di titik kabel masuk gedung dan di-grounding", "USULAN"],
+        ["Kabel masuk gedung", "Lewat lubang/sleeve dinding yang disegel, dengan drip loop (lengkungan turun) sebelum masuk", "USULAN"],
+        ["Kedap air", "Semua sambungan konektor di luar ruangan dibalut self-amalgamating tape", "USULAN"],
+        ["Radius tekuk", "Tidak ditekuk tajam (LMR-400: radius minimum ± 2,5 cm sekali tekuk, ± 10 cm untuk tekukan berulang)", "USULAN"],
+    ], [1.6, 4.3, 1.0], status_col=2)
+    para(doc, "Redaman kabel pada 921 MHz (nilai katalog umum, belum termasuk ± 0,5 dB rugi konektor). "
+         "Setiap 3 dB redaman memangkas setengah daya sinyal dari dan ke seluruh CH, jadi kabel harus pendek dan berkualitas:",
+         size=9.6)
+    table(doc, ["Panjang kabel", "LMR-240 (≈ 0,25 dB/m)", "LMR-400 (≈ 0,13 dB/m)", "LMR-600 (≈ 0,08 dB/m)"], [
+        ["5 m", "1,2 dB", "0,6 dB", "0,4 dB"],
+        ["10 m", "2,5 dB", "1,3 dB", "0,8 dB"],
+        ["15 m", "3,7 dB", "1,9 dB", "1,2 dB"],
+        ["25 m", "6,2 dB", "3,2 dB", "2,1 dB"],
+    ], [1.6, 1.75, 1.75, 1.8])
+    para(doc, "**Rekomendasi:** LMR-400 sampai 15 m. Bila rute lebih dari 20 m, pakai LMR-600 atau pindahkan "
+         "Gateway ke ruangan yang lebih dekat dengan mast. Hindari kabel RG-58 (redaman ± 0,5 dB/m).", size=9.6)
 
     # 6. fastener
     heading(doc, "6. Bracket, fastener & aksesori per titik")
     table(doc, ["Item", "Spesifikasi", "Per titik", "Status"], [
         ["U-bolt", "2\"/DN50, thread M10, lebar dalam 62–65 mm, tinggi dalam 95–100 mm, panjang ulir 40 mm", "2 buah", "FINAL"],
         ["Mur & ring", "M10 — mur + ring datar + ring per, material anti-karat (disarankan SS316 karena dekat laut)", "4 set", "USULAN"],
-        ["Pelat mounting", "250 × 250 mm, dibuat vendor sesuai gambar desain LGU", "1 buah", "FINAL"],
+        ["Pelat mounting", "250 × 250 mm, dibuat pelaksana RU IV sesuai gambar desain LGU", "1 buah", "FINAL"],
         ["Spacer", "45–60 mm (bila perlu)", "sesuai kebutuhan", "FINAL"],
         ["Kabel ties", "Tahan UV, stainless atau nylon UV", "± 10 buah", "USULAN"],
         ["Larangan", "Tanpa PVC pada housing/bracket; tanpa bor/las pada struktur existing kilang", "—", "FINAL"],
@@ -373,50 +422,58 @@ def build():
     banner(doc, "Perlu dicek sebelum fabrikasi pelat",
            "Desain pelat U-bolt saat ini secara visual paling sesuai untuk pipa horizontal (handrail). Karena "
            "seluruh titik memakai tiang baru yang berdiri vertikal, kecocokan orientasi pelat pada tiang vertikal "
-           "perlu dicek tim desain LGU bersama vendor sebelum pelat difabrikasi.", bg="FBE9E9")
+           "perlu dicek tim desain LGU bersama pelaksana RU IV sebelum pelat difabrikasi.", bg="FBE9E9")
 
     # 7. BoQ
     heading(doc, "7. Daftar kebutuhan (BoQ) perencanaan")
     para(doc, f"Basis: {N_GLD} GLD + {N_CH} CH + {N_GW} Gateway. Angka CH dan panjang kabel adalah asumsi perencanaan; "
          "sesuaikan setelah titik final ditetapkan.", size=9.6)
-    n_pole = N_GLD + N_CH
+    n_pole = N_GLD + N_CH          # tiang yang memakai pelat U-bolt
+    n_all = n_pole + N_GW          # semua tiang/mast yang dicor & di-grounding
+    beton = N_GLD * 0.128 + N_CH * 0.25 + N_GW * 0.30
     table(doc, ["No", "Item", "Spesifikasi", "Qty", "Penyedia"], [
-        ["1", "Pipa tiang GLD", "Galvanis 2\" Sch40, 2,5 m", f"{N_GLD} batang", "Vendor"],
-        ["2", "Pipa tiang CH", "Galvanis 2\" Sch40, 4,0 m", f"{N_CH} batang", "Vendor"],
-        ["3", "Pipe cap 2\"", "Penutup ujung atas tiang", f"{n_pole} buah", "Vendor"],
-        ["4", "Beton cor", f"GLD {N_GLD}×0,13 m³ + CH {N_CH}×0,25 m³ ≈ {N_GLD*0.128 + N_CH*0.25:.1f} m³ (belum termasuk susut/sisa)", "± 2 m³", "Vendor"],
-        ["5", "U-bolt 2\" M10 + mur/ring", "Lihat §6", f"{2*n_pole} U-bolt, {4*n_pole} set mur", "Vendor"],
-        ["6", "Pelat mounting 250×250 mm", "Sesuai gambar LGU", f"{n_pole} buah", "Vendor"],
-        ["7", "Dudukan panel surya CH", "2 panel per CH", f"{N_CH} set", "Vendor (dimensi dari LGU)"],
-        ["8", "PSU 24 VDC", "Opsi A: 3 × (≥1 A) · Opsi B: 1 × (≥5 A)", "3 atau 1 unit", "RU IV / vendor"],
-        ["9", "Box/panel PSU + MCB + terminal", "Untuk area aman", "3 atau 1 set", "RU IV / vendor"],
-        ["10", "Kabel daya 2 inti", "Ukuran & panjang per §4", "Σ per §4.4", "RU IV / vendor"],
-        ["11", "Kabel grounding + klem", "Mengikuti standar RU IV", f"{n_pole + N_GW} titik", "Vendor"],
-        ["12", "PC server + UPS + stop kontak", "Lihat §5", "1 set", "Pertamina"],
-        ["13", "Kabel Cat6", "Patch + jalur ke intranet kantor", "2 jalur", "LGU / IT RU IV"],
-        ["14", "Router lapangan", "Lihat §5", "1 unit", "LGU"],
-        ["15", "Unit GLD, CH, Gateway, panel surya CH", "Perangkat sistem", f"{N_GLD} / {N_CH} / {N_GW}", "LGU"],
-    ], [0.4, 1.75, 2.6, 1.15, 1.0])
+        ["1", "Pipa tiang GLD", "Galvanis 2\" Sch40, 2,5 m", f"{N_GLD} batang", "RU IV"],
+        ["2", "Pipa tiang CH", "Galvanis 2\" Sch40, 4,0 m", f"{N_CH} batang", "RU IV"],
+        ["3", "Pipa mast antena Gateway", "Galvanis 2\" Sch40, 6,0 m (+ guy wire bila perlu)", f"{N_GW} batang", "RU IV"],
+        ["4", "Pipe cap 2\"", "Penutup ujung atas tiang/mast", f"{n_all} buah", "RU IV"],
+        ["5", "Beton cor", f"GLD {N_GLD}×0,13 + CH {N_CH}×0,25 + GW {N_GW}×0,30 m³ ≈ {beton:.1f} m³ "
+                          "(belum termasuk susut/sisa)", "± 2,5 m³", "RU IV"],
+        ["6", "U-bolt 2\" M10 + mur/ring", "Lihat §6 (GLD & CH)", f"{2*n_pole} U-bolt, {4*n_pole} set mur", "RU IV"],
+        ["7", "Pelat mounting 250×250 mm", "Sesuai gambar LGU", f"{n_pole} buah", "RU IV"],
+        ["8", "Dudukan panel surya CH", "2 panel per CH", f"{N_CH} set", "RU IV (dimensi dari LGU)"],
+        ["9", "PSU 24 VDC", "Opsi A: 3 × (≥1 A) · Opsi B: 1 × (≥5 A)", "3 atau 1 unit", "RU IV"],
+        ["10", "Box/panel PSU + MCB + terminal", "Untuk area aman", "3 atau 1 set", "RU IV"],
+        ["11", "Kabel daya 2 inti", "Ukuran & panjang per §4", "Σ per §4.4", "RU IV"],
+        ["12", "Kabel koaksial LMR-400 + konektor N", "Antena GW → Gateway, ≤ 15 m (§5.2)", "1 jalur", "RU IV"],
+        ["13", "Penangkal petir koaksial", "50 Ω, 900 MHz, konektor N (§5.2)", "1 buah", "RU IV"],
+        ["14", "Kabel grounding + klem", "Mengikuti standar RU IV (tiang, mast, penangkal petir)", f"{n_all} titik + 1", "RU IV"],
+        ["15", "PC server + UPS", "Lihat §5.1", "1 set", "Pertamina"],
+        ["16", "Kabel Cat6", "Router ↔ PC server, PC ↔ intranet kantor", "2 jalur", "RU IV / IT RU IV"],
+        ["17", "Router lapangan", "Lihat §5.1", "1 unit", "LGU"],
+        ["18", "Unit GLD, CH, Gateway + antena, panel surya CH", "Perangkat sistem", f"{N_GLD} / {N_CH} / {N_GW}", "LGU"],
+    ], [0.4, 1.85, 2.5, 1.15, 1.0])
 
     # 8. pertanyaan rapat
     heading(doc, "8. Yang perlu diputuskan di rapat 2 Oktober")
-    table(doc, ["No", "Pertanyaan untuk RU IV / vendor", "Dampak bila belum dijawab"], [
+    table(doc, ["No", "Pertanyaan untuk RU IV", "Dampak bila belum dijawab"], [
         ["1", "Titik/koordinat final 3 GLD di perimeter SRU, dan jarak rute ke sumber 220 VAC terdekat", "Panjang & ukuran kabel tidak bisa dipesan"],
         ["2", "Pilih Opsi A (PSU per titik) atau Opsi B (PSU pusat)", "Jumlah PSU & ukuran kabel"],
         ["3", "Standar kabel & rute RU IV (ditanam / conduit / cable tray), termasuk material selubung", "Jenis kabel & cable gland"],
-        ["4", "Standar & titik grounding, serta perlu tidaknya proteksi petir untuk tiang CH", "Item grounding di BoQ"],
-        ["5", "Izin galian & pengecoran di area perimeter SRU, serta dokumen klasifikasi area tertulis", "Jadwal mobilisasi vendor"],
-        ["6", "Lokasi ruangan PC server/Gateway, ketersediaan 220 VAC, UPS, dan titik jaringan intranet kantor", "Penempatan Gateway & kabel LAN"],
-        ["7", "Vendor yang ditunjuk & jadwal fabrikasi/pemasangan", "Jadwal instalasi"],
+        ["4", "Standar & titik grounding, serta perlu tidaknya proteksi petir untuk tiang CH dan mast Gateway", "Item grounding di BoQ"],
+        ["5", "Izin galian & pengecoran di area perimeter SRU, serta dokumen klasifikasi area tertulis", "Jadwal mulai pekerjaan sipil"],
+        ["6", "Ruang Gateway & ruang server lokal: lokasi, jarak antar-ruang, 220 VAC, UPS, titik intranet kantor", "Panjang Cat6 & penempatan router"],
+        ["7", "Lokasi mast antena Gateway (berdiri sendiri vs di dinding/atap) & jarak rute koaksial ke ruang Gateway", "Panjang & tipe kabel koaksial"],
+        ["8", "Tim/kontraktor pelaksana RU IV & jadwal fabrikasi/pemasangan", "Jadwal instalasi"],
     ], [0.4, 4.0, 2.5])
 
     heading(doc, "9. Batasan dokumen")
     bullets(doc, [
         "Angka berstatus USULAN berasal dari praktik umum industri, bukan dari kajian struktur/elektrikal formal. "
-        "Vendor dan RU IV dapat menyesuaikan dengan standar yang berlaku di kilang.",
-        "Pembagian kerja tetap: vendor yang ditunjuk Pertamina mengerjakan fabrikasi & pemasangan fisik (termasuk "
-        "pekerjaan ketinggian dan K3); LGU menyediakan basis desain, supervisi teknis/QA, serta terminasi elektrikal, "
-        "energize, dan commissioning GLD.",
+        "RU IV dapat menyesuaikan dengan standar yang berlaku di kilang.",
+        "Pembagian kerja: RU IV mendukung penuh instalasi, yaitu penyediaan material, pekerjaan sipil, "
+        "kelistrikan, dan pemasangan fisik (termasuk pekerjaan ketinggian & K3) oleh tim/kontraktor RU IV. "
+        "LGU menyediakan perangkat sistem, basis desain, supervisi teknis/QA, serta terminasi elektrikal, "
+        "energize, dan commissioning.",
         "Instalasi permanen hanya di lokasi yang tidak memerlukan ATEX (area aman), sesuai kesepakatan sebelumnya.",
     ], size=9.6)
 

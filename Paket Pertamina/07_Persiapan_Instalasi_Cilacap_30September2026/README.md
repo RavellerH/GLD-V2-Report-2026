@@ -1,5 +1,7 @@
 # Persiapan Instalasi RU IV Cilacap — untuk dibagikan ke Pertamina (diperbarui 1 Oktober 2026)
 
+> ✅ **Terkirim 1 Oktober 2026** — ketiga PDF sudah dikirim ke grup WhatsApp Pertamina sebelum rapat 2 Oktober.
+
 Paket 3 dokumen persiapan instalasi GLD di RU IV Cilacap (area aman perimeter SRU), bahan rapat koordinasi 2 Oktober 2026.
 
 | File | Isi |

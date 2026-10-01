@@ -1,20 +1,27 @@
-# Persiapan Instalasi RU IV Cilacap — untuk dibagikan ke Pertamina (30 September 2026)
+# Persiapan Instalasi RU IV Cilacap — untuk dibagikan ke Pertamina (diperbarui 1 Oktober 2026)
 
-Paket ringkas 3 dokumen (pdf+html) — file persiapan instalasi RU IV Cilacap untuk diteruskan ke grup WhatsApp besar (a.n. Pak Senna, Pertamina). Framing status disesuaikan: item yang genuinely menunggu proses/standar dari RU IV Cilacap diberi label demikian; item yang murni domain internal (LGU/vendor) tidak dilabel sebagai tanggung jawab RU IV.
+Paket 3 dokumen persiapan instalasi GLD di RU IV Cilacap (area aman perimeter SRU), bahan rapat koordinasi 2 Oktober 2026.
 
 | File | Isi |
 |---|---|
-| `Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.pdf` | Matriks siapa menyiapkan apa (LGU & ITB / Pertamina RU IV / Vendor Instalasi) per 6 tema kerja — lokasi & klasifikasi area, dokumen/izin/keselamatan kerja, perangkat & bracket, catu daya, arsitektur server, dan koordinasi hari-H. Dilengkapi lampiran bukti visual (CAD bracket, foto prototipe, foto chamber gas). |
-| `Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.pdf` | Dokumen yang diserahkan ke vendor pelaksana yang ditunjuk Pertamina — pembagian tanggung jawab, dokumen pendukung, checklist persiapan 6 kategori, item wajib dikonfirmasi vendor, dan batasan keselamatan sebelum mobilisasi. |
-| `Draf_Permintaan_Penyediaan_Material_Instalasi_RU-IV_Cilacap.pdf` | **Draf** — spesifikasi/ukuran material ke vendor (bracket, U-bolt, catu daya, dimensi enclosure), item yang sudah final dari desain vs yang masih menunggu standar/persetujuan RU IV Cilacap atau kesepakatan bersama vendor. |
+| `Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.pdf` | **Rev 1.4.** Spesifikasi material yang perlu disiapkan RU IV: tiang besi galvanis 2" ditanam & dicor (GLD 1 m di atas tanah, CH 3 m, mast antena Gateway ±4,8 m), rekomendasi tinggi sensor per jenis gas, kabel 24 VDC (2 opsi PSU + tabel ukuran vs panjang), Gateway di dalam ruangan dengan antena di mast + kabel koaksial, skema jaringan lokal, fastener, BoQ, dan 8 pertanyaan yang perlu diputuskan di rapat. |
+| `Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.pdf` / `.html` | **Rev 1.5.** Matriks siapa menyiapkan apa — LGU & ITB / Pertamina RU IV / Pelaksana Instalasi RU IV — per 6 tema kerja, dengan lampiran bukti visual (CAD, foto prototipe, foto chamber gas). |
+| `Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.pdf` / `.html` | **Rev 1.2.** Daftar persiapan untuk pelaksana instalasi RU IV: pembagian tanggung jawab, dokumen pendukung, checklist sebelum mobilisasi, item wajib dikonfirmasi, dan batasan keselamatan. |
+
+## Perubahan dibanding versi 30 September
+
+- **RU IV mendukung penuh instalasi.** Istilah "vendor yang ditunjuk Pertamina" diganti "Pelaksana Instalasi RU IV" (tim/kontraktor yang ditetapkan RU IV), termasuk penyediaan material dan pekerjaan fisik/K3. LGU tetap: perangkat, basis desain, supervisi teknis/QA, terminasi elektrikal, energize, dan commissioning.
+- **Tiang baru** (ditanam & dicor), bukan lagi menjepit ke struktur yang sudah ada.
+- **Gateway di dalam ruangan** dekat ruang server lokal, antena di mast luar; router LGU satu ruangan dengan Gateway (Wi-Fi), router ke PC server lewat LAN, tanpa internet.
+- `Draf_Permintaan_Penyediaan_Material...` **dikeluarkan** — digantikan oleh `Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.pdf`.
 
 ## Catatan penting
 
-- **Instalasi fisik di RU IV Cilacap belum dimulai** — survey lokasi sudah selesai (9–10 Agustus); dokumen-dokumen ini adalah persiapan menuju mobilisasi, bukan laporan pekerjaan yang sudah berjalan.
-- Item yang masih terbuka digolongkan menurut siapa yang memprosesnya: yang menunggu standar/persetujuan RU IV Cilacap diberi label eksplisit ("menunggu standar RU IV", dsb.); yang murni kesepakatan teknis internal (mis. grade fastener, verifikasi lapangan orientasi bracket) tetap dicatat sebagai tanggung jawab LGU/vendor — bukan ditahan oleh RU IV.
-- `Draf_Permintaan_Penyediaan_Material...` eksplisit ditandai "Draf, bukan dokumen pengadaan final".
+- **Instalasi fisik belum dimulai.** Survey lokasi selesai 9–10 Agustus; dokumen ini persiapan menuju mobilisasi.
+- Angka berstatus USULAN di dokumen Spesifikasi berasal dari praktik umum industri, bukan kajian struktur/elektrikal formal — dapat disesuaikan dengan standar RU IV.
+- Pelat mounting U-bolt masih perlu dikonfirmasi kecocokannya untuk tiang vertikal sebelum difabrikasi.
 
 ## Cara pakai
 
-- File `.pdf` — **format surat resmi berletterhead** (PT LAPI Ganesha Utama, Document Control, nomor halaman) hasil generate dari `.docx` terpisah, bukan lagi cetakan langsung dari halaman web berwarna — paling praktis untuk dibagikan/dibaca cepat di HP (mis. via WhatsApp).
-- File `.html` — versi interaktif berwarna asli, dibuka di browser (Chrome/Edge/Firefox), tidak perlu internet. Bar navigasi di bagian atas tiap file sudah disesuaikan agar hanya menaut ke 3 dokumen dalam folder ini.
+- File `.pdf` — format surat resmi berletterhead, paling praktis dibuka di HP (WhatsApp).
+- File `.html` — versi interaktif berwarna, dibuka di browser tanpa internet. Bar navigasi di atas hanya menaut ke dokumen di folder ini.

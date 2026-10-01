@@ -52,15 +52,15 @@ DOC_SPECS = [
         src="Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.html",
         out="Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.docx",
         doc_no="LGU/GLD/INSTALASI-PEMBAGIAN/2026-001",
-        revision="1.4", date="30 September 2026",
+        revision="1.5", date="1 Oktober 2026",
         header_label="Pembagian Persiapan Instalasi — RU IV Cilacap",
     ),
     dict(
         src="Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.html",
         out="Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.docx",
         doc_no="LGU/GLD/INSTALASI-VENDOR/2026-001",
-        revision="1.1", date="30 September 2026",
-        header_label="Daftar Persiapan Vendor Instalasi — RU IV Cilacap",
+        revision="1.2", date="1 Oktober 2026",
+        header_label="Daftar Persiapan Pelaksana Instalasi — RU IV Cilacap",
     ),
     dict(
         src="Draf_Permintaan_Penyediaan_Material_Instalasi_RU-IV_Cilacap.html",
@@ -74,7 +74,7 @@ DOC_SPECS = [
 PARTY_ORDER = [
     ("lgu", "LGU & ITB"),
     ("pertamina", "Pertamina RU IV"),
-    ("vendor", "Vendor Instalasi"),
+    ("vendor", "Pelaksana Instalasi RU IV"),
 ]
 PARTY_HEAD_SHADE = {"lgu": "1B2A4A", "pertamina": "2E5F8A", "vendor": "8A4A15"}
 

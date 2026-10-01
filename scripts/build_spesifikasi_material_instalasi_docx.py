@@ -433,12 +433,13 @@ def build():
     n_pole = N_GLD + N_CH          # tiang yang memakai pelat U-bolt
     n_all = n_pole + N_GW          # semua tiang/mast yang dicor & di-grounding
     beton = N_GLD * 0.096 + N_CH * 0.25 + N_GW * 0.30
+    beton_s = f"{beton:.1f}".replace(".", ",")
     table(doc, ["No", "Item", "Spesifikasi", "Qty", "Penyedia"], [
         ["1", "Pipa tiang GLD", "Galvanis 2\" Sch40, 1,6 m (dipotong dari 1 batang 6 m)", f"{N_GLD} batang", "RU IV"],
         ["2", "Pipa tiang CH", "Galvanis 2\" Sch40, 4,0 m", f"{N_CH} batang", "RU IV"],
         ["3", "Pipa mast antena Gateway", "Galvanis 2\" Sch40, 6,0 m (+ guy wire bila perlu)", f"{N_GW} batang", "RU IV"],
         ["4", "Pipe cap 2\"", "Penutup ujung atas tiang/mast", f"{n_all} buah", "RU IV"],
-        ["5", "Beton cor", f"GLD {N_GLD}×0,10 + CH {N_CH}×0,25 + GW {N_GW}×0,30 m³ ≈ {f"{beton:.1f}".replace(".", ",")} m³ "
+        ["5", "Beton cor", f"GLD {N_GLD}×0,10 + CH {N_CH}×0,25 + GW {N_GW}×0,30 m³ ≈ {beton_s} m³ "
                           "(belum termasuk susut/sisa)", "± 2,5 m³", "RU IV"],
         ["6", "U-bolt 2\" M10 + mur/ring", "Lihat §6 (GLD & CH)", f"{2*n_pole} U-bolt, {4*n_pole} set mur", "RU IV"],
         ["7", "Pelat mounting 250×250 mm", "Sesuai gambar LGU", f"{n_pole} buah", "RU IV"],

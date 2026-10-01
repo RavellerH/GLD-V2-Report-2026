@@ -28,7 +28,7 @@ OUT = os.path.join(REPO, "Deliverables",
                    "Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.docx")
 
 DOC_NO = "LGU/GLD/INSTALASI-SPEK/2026-001"
-REV = "1.1"
+REV = "1.2"
 DATE = "1 Oktober 2026"
 HEADER = "Spesifikasi Material Instalasi GLD — RU IV Cilacap"
 
@@ -217,10 +217,10 @@ def build():
     # 1. ringkasan
     heading(doc, "1. Ringkasan — yang perlu disiapkan")
     table(doc, ["Kebutuhan", "Spesifikasi singkat", "Jumlah (perencanaan)", "Status"], [
-        ["Tiang GLD", "Pipa baja galvanis 2\" Sch40 (OD 60,3 mm), panjang 2,5 m, ditanam & dicor", f"{N_GLD} batang", "USULAN"],
+        ["Tiang GLD", "Pipa baja galvanis 2\" Sch40 (OD 60,3 mm), panjang 1,6 m (1,0 m di atas tanah), ditanam & dicor", f"{N_GLD} batang", "USULAN"],
         ["Tiang Cluster Head", "Pipa baja galvanis 2\" Sch40 (OD 60,3 mm), panjang 4,0 m, ditanam & dicor", f"{N_CH} batang*", "USULAN"],
         ["Mast antena Gateway", "Pipa baja galvanis 2\" Sch40, panjang 6 m (± 4,8 m di atas tanah), ditanam & dicor di dekat ruang Gateway", f"{N_GW} batang", "USULAN"],
-        ["Pondasi cor", "GLD 40×40×80 cm · CH 50×50×100 cm · mast GW 50×50×120 cm, beton fc' ≥ 20 MPa", f"{N_GLD + N_CH + N_GW} titik*", "USULAN"],
+        ["Pondasi cor", "GLD 40×40×60 cm · CH 50×50×100 cm · mast GW 50×50×120 cm, beton fc' ≥ 20 MPa", f"{N_GLD + N_CH + N_GW} titik*", "USULAN"],
         ["Catu daya GLD", "24 VDC, kapasitas ≥ 1 A per unit (konsumsi aktual ≈ 0,33 A)", f"{N_GLD} unit beban", "FINAL"],
         ["Kabel daya 24 VDC", "2 inti tembaga; ukuran mengikuti jarak (Tabel 4.2): 1,5–6 mm²", "Σ jarak + cadangan", "KONFIRMASI"],
         ["Kabel antena Gateway", "Koaksial 50 Ω low-loss (LMR-400 atau setara), ≤ 15 m, + penangkal petir koaksial", "1 jalur", "USULAN"],
@@ -256,20 +256,22 @@ def build():
     table(doc, ["Parameter", "Spesifikasi", "Status"], [
         ["Material", "Pipa baja karbon galvanis celup panas (hot-dip galvanized), mis. ASTM A53 / API 5L Gr.B", "USULAN"],
         ["Ukuran", "2\" NPS Schedule 40 — OD 60,3 mm, tebal dinding 3,91 mm", "FINAL"],
-        ["Panjang batang", "2,5 m = 1,8 m di atas tanah + 0,7 m tertanam di cor", "USULAN"],
-        ["Tinggi pasang unit GLD", "± 1,5 m dari tanah (setinggi orang, sesuai arahan rapat 6 Agustus). "
-                                   "Posisi dapat digeser sepanjang tiang", "KONFIRMASI"],
+        ["Panjang batang", "1,6 m = 1,0 m di atas tanah + 0,6 m tertanam di cor. "
+                           "Satu batang pipa standar 6 m cukup untuk ketiga tiang GLD (3 × 1,6 m = 4,8 m)", "USULAN"],
+        ["Tinggi pasang unit GLD", "Unit (tinggi 290 mm) dijepit di bagian atas tiang → titik tengah sensor "
+                                   "± 0,8 m dari tanah. Posisi dapat digeser turun sepanjang tiang", "KONFIRMASI"],
         ["Ujung atas", "Ditutup pipe cap (las di bengkel atau ulir) agar air hujan tidak masuk", "USULAN"],
         ["Ujung bawah (dalam cor)", "Diberi besi silang/angkur (mis. 2× besi Ø12 mm tembus pipa) agar tiang tidak berputar", "USULAN"],
-        ["Pondasi", "Lubang 40 × 40 × 80 cm, beton fc' ≥ 20 MPa (± K-250), permukaan atas dibuat miring menjauhi tiang", "USULAN"],
+        ["Pondasi", "Lubang 40 × 40 × 60 cm, beton fc' ≥ 20 MPa (± K-250), permukaan atas dibuat miring menjauhi tiang", "USULAN"],
         ["Masa tunggu", "Unit GLD dipasang setelah beton cukup kuat (umumnya ≥ 3 hari; ikuti praktik pelaksana RU IV)", "USULAN"],
         ["Tegak lurus", "Toleransi vertikal ≤ 1° (cek waterpass saat pengecoran)", "USULAN"],
     ], [1.6, 4.3, 1.0], status_col=2)
     banner(doc, "Catatan tinggi sensor",
-           "Tinggi 1,5 m mengikuti arahan rapat 6 Agustus (instalasi baru dicoba setinggi orang). Dalam praktik "
-           "umum, sensor untuk gas yang lebih berat dari udara (LPG, H₂S) dipasang lebih rendah, sedangkan untuk gas "
-           "ringan (H₂, metana) lebih tinggi. Karena posisi unit bisa digeser di sepanjang tiang, tinggi final "
-           "per titik dapat disepakati bersama HSE RU IV tanpa mengubah tiang.")
+           "Tiang 1 m di atas tanah menempatkan sensor ± 0,8 m dari tanah — di bawah batas \"setinggi orang\" "
+           "dari rapat 6 Agustus, sehingga pemasangan & perawatan tidak memerlukan pekerjaan ketinggian. Posisi rendah "
+           "ini sesuai untuk gas yang lebih berat dari udara (LPG, H₂S). Untuk gas ringan (H₂, metana) sensor "
+           "idealnya lebih tinggi; bila suatu titik terutama menyasar gas ringan, tiang titik tersebut dapat dibuat "
+           "lebih panjang. Tinggi final per titik disepakati bersama HSE RU IV.")
 
     heading(doc, "3.2 Tiang Cluster Head", level=2)
     table(doc, ["Parameter", "Spesifikasi", "Status"], [
@@ -430,13 +432,13 @@ def build():
          "sesuaikan setelah titik final ditetapkan.", size=9.6)
     n_pole = N_GLD + N_CH          # tiang yang memakai pelat U-bolt
     n_all = n_pole + N_GW          # semua tiang/mast yang dicor & di-grounding
-    beton = N_GLD * 0.128 + N_CH * 0.25 + N_GW * 0.30
+    beton = N_GLD * 0.096 + N_CH * 0.25 + N_GW * 0.30
     table(doc, ["No", "Item", "Spesifikasi", "Qty", "Penyedia"], [
-        ["1", "Pipa tiang GLD", "Galvanis 2\" Sch40, 2,5 m", f"{N_GLD} batang", "RU IV"],
+        ["1", "Pipa tiang GLD", "Galvanis 2\" Sch40, 1,6 m (dipotong dari 1 batang 6 m)", f"{N_GLD} batang", "RU IV"],
         ["2", "Pipa tiang CH", "Galvanis 2\" Sch40, 4,0 m", f"{N_CH} batang", "RU IV"],
         ["3", "Pipa mast antena Gateway", "Galvanis 2\" Sch40, 6,0 m (+ guy wire bila perlu)", f"{N_GW} batang", "RU IV"],
         ["4", "Pipe cap 2\"", "Penutup ujung atas tiang/mast", f"{n_all} buah", "RU IV"],
-        ["5", "Beton cor", f"GLD {N_GLD}×0,13 + CH {N_CH}×0,25 + GW {N_GW}×0,30 m³ ≈ {beton:.1f} m³ "
+        ["5", "Beton cor", f"GLD {N_GLD}×0,10 + CH {N_CH}×0,25 + GW {N_GW}×0,30 m³ ≈ {f"{beton:.1f}".replace(".", ",")} m³ "
                           "(belum termasuk susut/sisa)", "± 2,5 m³", "RU IV"],
         ["6", "U-bolt 2\" M10 + mur/ring", "Lihat §6 (GLD & CH)", f"{2*n_pole} U-bolt, {4*n_pole} set mur", "RU IV"],
         ["7", "Pelat mounting 250×250 mm", "Sesuai gambar LGU", f"{n_pole} buah", "RU IV"],

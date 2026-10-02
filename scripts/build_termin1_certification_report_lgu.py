@@ -113,14 +113,17 @@ REPL = [
     ('"`checklist-sertifikasi.html`, `laporan-analisis-kekurangan.html`, `status-kekurangan.html`."',
      '"Checklist sertifikasi, laporan analisis kesiapan, dan status per butir."'),
     ('"DALAM PENYIAPAN", "Log iterasi Rev A ke Rev B yang merujuk temuan uji disusun setelah uji enclosure."',
-     '"SEBAGIAN", "Iterasi desain tersedia: PCB MotherBoard GLD Ver2 (BOM 9 Sep, layout 11 Sep 2026) dan casing ATEX v2 ke v3 (8 Sep 2026). Log keterkaitan revisi dengan temuan uji sedang dirangkum."'),
+     '"SEBAGIAN", "Iterasi desain tersedia: PCB Node Sensor GLD telah melalui lima versi (V1 hingga V5) dan casing berkembang dari ATEX Casing v2 ke v3 (8 Sep 2026). Log keterkaitan revisi dengan temuan uji sedang dirangkum."'),
     ('3, "Ada iterasi perbaikan desain berbasis hasil uji", "DALAM PENYIAPAN",',
      '3, "Ada iterasi perbaikan desain berbasis hasil uji", "SEBAGIAN",'),
     ("""Terdapat file desain `ATEX CASING v2` dan desain bracket U-bolt sebagai versi "
         "desain terkini.",""",
      """Iterasi desain perangkat keras telah dilakukan pada dua komponen "
-        "utama: (1) PCB motherboard direvisi menjadi MotherBoard GLD Ver2 (BOM 9 September 2026, layout PCB "
-        "11 September 2026) beserta sensor board MQ; (2) casing berkembang dari ATEX Casing v2 (desain mounting "
+        "utama: (1) PCB Node Sensor GLD telah melalui lima versi, V1 hingga V5 (Gambar 3.3): V1 memuat soket "
+        "delapan sensor MQ langsung pada papan utama; versi berikutnya memakai modul sensor MQ terpisah dengan "
+        "penyempurnaan tata letak motherboard; V5 menggunakan susunan beberapa papan dengan konektor antar-papan "
+        "dan terminal blok untuk kabel daya. Dokumentasi BOM dan layout PCB (EasyEDA) tersedia per 9–11 "
+        "September 2026; (2) casing berkembang dari ATEX Casing v2 (desain mounting "
         "U-bolt) ke GLD ATEX Case v3 (8 September 2026) dengan mesh filter stainless steel, kipas DC, dan "
         "dimensi yang disesuaikan untuk kebutuhan sertifikasi Ex d.","""),
     ("""Desain tersebut terutama memodelkan assembly mounting/bracket, bukan riwayat iterasi enclosure. Change "
@@ -131,6 +134,15 @@ REPL = [
     ("Tujuh foto perakitan pada `Sumber Dokumen/sertifikasi-atex-gld-v2-2026/GLD/`, ", "Tujuh foto perakitan prototipe, "),
     ("`ATEX CASING v2` (STEP/OBJ) dan `Desain_Bracket_L_UBolt_GLD_Mounting.pdf`.", "gambar CAD ATEX Casing v2 (STEP/OBJ) dan desain bracket U-bolt."),
     ("Basis desain mekanik enclosure dan mounting, `GLD U Bolt Bracket/`.", "Basis desain mekanik enclosure dan mounting."),
+    ("""    sub(
+        4, "Disaksikan dan divalidasi Pertamina",""", """    _pcb = ROOT / "scripts" / "assets" / "pcb_iterasi" / "gld_pcb_v1_v5.png"
+    if _pcb.exists():
+        _p = doc.add_paragraph()
+        _p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        _p.add_run().add_picture(str(_pcb), width=Inches(6.3))
+        add_caption(doc, "Gambar 3.3 Iterasi PCB Node Sensor GLD, versi V1 hingga V5 (tampak atas dan bawah)")
+    sub(
+        4, "Disaksikan dan divalidasi Pertamina","""),
 ]
 
 for old, new in REPL:

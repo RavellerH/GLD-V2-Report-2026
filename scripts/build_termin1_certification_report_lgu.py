@@ -152,6 +152,7 @@ REPL = [
     ('"`Template_Log_Uji_dan_Iterasi_Enclosure.md`"', '"Template tersedia"'),
     ('"`Template_Berita_Acara_Validasi_Prototipe.md`"', '"Template tersedia"'),
     ("Template kerja tersedia di \"\n        \"`Template_Berita_Acara_Validasi_Prototipe.md` dan diisi", "Template kerja telah \"\n        \"tersedia dan diisi"),
+    ("(`Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev02`).", "(Laporan Pemenuhan Deliverable Termin 1 Field Testing, Rev 0.2)."),
 ]
 
 for old, new in REPL:

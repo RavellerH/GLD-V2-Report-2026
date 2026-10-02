@@ -50,7 +50,7 @@ DOCS = [
         ],
     },
     {
-        "src": "Paket Pertamina/04_Laporan_Termin_1/Laporan_Pemenuhan_Deliverable_Termin_1_Sertifikasi_GLD.pdf",
+        "src": "Paket LGU/02_Penagihan_Termin_1/src/Laporan_Termin_1_Sertifikasi_LGU.pdf",
         "out": "Paket LGU/02_Penagihan_Termin_1/03_Laporan_Termin_1_Sertifikasi_40Persen.pdf",
         "jenis": "Laporan Pemenuhan Deliverable Termin 1",
         "band": "Laporan Termin 1\nSertifikasi ATEX/IECEx (40%)",

@@ -15,3 +15,6 @@ Laporan Termin 1 dengan halaman depan format laporan LGU (cover, lembar kontrol 
 - Nama Direktur Utama (Ir. Harry Fardiman) dan pejabat Pertamina (Agustinus Pindoan Panjaitan, Manager Domestic Product Content & Digitalization) diambil dari contoh laporan URS — mohon dicek masih sesuai untuk kontrak GLD.
 
 Sumber: `scripts/build_cover_laporan_lgu.py` (halaman depan digabung ke PDF laporan asli di `Paket Pertamina/04_Laporan_Termin_1/`).
+
+## Catatan penulisan status
+Pada laporan Sertifikasi (03), status syarat ditulis **Tersedia / Sebagian / Dalam Penyiapan** — tidak memakai label "belum tersedia" / "belum ada" (arahan 2 Okt 2026). Substansi bukti sama dengan laporan 15 Sep; sumber varian ini `scripts/build_termin1_certification_report_lgu.py` (output antara di `src/`).

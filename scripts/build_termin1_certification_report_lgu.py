@@ -113,24 +113,29 @@ REPL = [
     ('"`checklist-sertifikasi.html`, `laporan-analisis-kekurangan.html`, `status-kekurangan.html`."',
      '"Checklist sertifikasi, laporan analisis kesiapan, dan status per butir."'),
     ('"DALAM PENYIAPAN", "Log iterasi Rev A ke Rev B yang merujuk temuan uji disusun setelah uji enclosure."',
-     '"SEBAGIAN", "Iterasi desain tersedia: PCB Node Sensor GLD telah melalui lima versi (V1 hingga V5) dan casing berkembang dari ATEX Casing v2 ke v3 (8 Sep 2026). Log keterkaitan revisi dengan temuan uji sedang dirangkum."'),
+     '"SEBAGIAN", "Iterasi desain tersedia: PCB Node Sensor GLD lima versi (V1–V5) dengan catatan perubahan per versi, termasuk perbaikan temuan V2 pada V3, dan casing berkembang dari ATEX Casing v2 ke v3 (8 Sep 2026). Log keterkaitan revisi dengan temuan uji sedang dirangkum."'),
     ('3, "Ada iterasi perbaikan desain berbasis hasil uji", "DALAM PENYIAPAN",',
      '3, "Ada iterasi perbaikan desain berbasis hasil uji", "SEBAGIAN",'),
     ("""Terdapat file desain `ATEX CASING v2` dan desain bracket U-bolt sebagai versi "
         "desain terkini.",""",
      """Iterasi desain perangkat keras telah dilakukan pada dua komponen "
-        "utama: (1) PCB Node Sensor GLD telah melalui lima versi, V1 hingga V5 (Gambar 3.3): V1 memuat soket "
-        "delapan sensor MQ langsung pada papan utama; versi berikutnya memakai modul sensor MQ terpisah dengan "
-        "penyempurnaan tata letak motherboard; V5 menggunakan susunan beberapa papan dengan konektor antar-papan "
-        "dan terminal blok untuk kabel daya. Dokumentasi BOM dan layout PCB (EasyEDA) tersedia per 9–11 "
+        "utama. (1) PCB Node Sensor GLD telah melalui lima versi dengan catatan perubahan per versi (Gambar 3.3): "
+        "V1 sebagai baseline — ESP32, ADC ADS1256, multiplexer TCA9548, DAC MCP4725, jalur analog INA333/OPA333/LM321, "
+        "dan bridge sensor MQ berada pada satu motherboard; V2 memindahkan INA333, MCP4725, dan bridge MQ ke "
+        "SensorBoardMQ terpisah dengan saklar daya TPS22919, mengganti LM321 dengan OPA320, serta menambahkan "
+        "PCF8574 dan sensor suhu-kelembapan SHT40; V3 memperbaiki temuan pada V2 — jalur catu +5VA disambungkan "
+        "dan soket kipas DC 5 V dikembalikan; V4 menambahkan cover PCB dengan terminal kabel serta lubang baut "
+        "untuk pemasangan motherboard; V5 memisahkan fungsi akuisisi (ADS1256, TCA9548, OPA320, PCF8574, SHT40, "
+        "+5VA) ke Sensor PCB yang terhubung melalui konektor 16-pin PHD2.0, sementara motherboard adapter "
+        "mempertahankan ESP32 dan watchdog TPL5010. Dokumentasi BOM dan layout PCB tersedia per 9–11 "
         "September 2026; (2) casing berkembang dari ATEX Casing v2 (desain mounting "
         "U-bolt) ke GLD ATEX Case v3 (8 September 2026) dengan mesh filter stainless steel, kipas DC, dan "
         "dimensi yang disesuaikan untuk kebutuhan sertifikasi Ex d.","""),
     ("""Desain tersebut terutama memodelkan assembly mounting/bracket, bukan riwayat iterasi enclosure. Change "
         "log Revisi A ke Revisi B yang merujuk temuan uji, tindakan koreksi, bukti implementasi, dan "
         "hasil uji ulang disusun setelah uji enclosure.",""",
-     """Change log formal yang menautkan setiap revisi dengan temuan uji, tindakan koreksi, bukti "
-        "implementasi, dan hasil uji ulang (termasuk hasil uji termal 30 September 2026) sedang dirangkum.","""),
+     """Catatan perubahan per versi PCB telah tersedia. Penautan setiap revisi dengan temuan uji, "
+        "tindakan koreksi, dan hasil uji ulang (termasuk hasil uji termal 30 September 2026) sedang dirangkum.","""),
     ("Tujuh foto perakitan pada `Sumber Dokumen/sertifikasi-atex-gld-v2-2026/GLD/`, ", "Tujuh foto perakitan prototipe, "),
     ("`ATEX CASING v2` (STEP/OBJ) dan `Desain_Bracket_L_UBolt_GLD_Mounting.pdf`.", "gambar CAD ATEX Casing v2 (STEP/OBJ) dan desain bracket U-bolt."),
     ("Basis desain mekanik enclosure dan mounting, `GLD U Bolt Bracket/`.", "Basis desain mekanik enclosure dan mounting."),

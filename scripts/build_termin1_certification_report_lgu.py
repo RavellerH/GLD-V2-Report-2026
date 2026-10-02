@@ -143,6 +143,15 @@ REPL = [
         add_caption(doc, "Gambar 3.3 Iterasi PCB Node Sensor GLD, versi V1 hingga V5 (tampak atas dan bawah)")
     sub(
         4, "Disaksikan dan divalidasi Pertamina","""),
+    ("3 foto urutan perakitan + 4 foto komponen di `sertifikasi-atex-gld-v2-2026/GLD/`.", "3 foto urutan perakitan dan 4 foto komponen."),
+    ('"`Dokumen_spesifikasi_input_2.docx`, `Parameter spesifikasi EMC_lengkap.docx`."', '"Spesifikasi input sertifikasi dan parameter uji EMC."'),
+    ('"Dashboard Sertifikasi GLD ATEX/IECEx", "Kurva-S, gap analysis 4 track, dan rubrik interpretasi progres."',
+     '"Dashboard Sertifikasi GLD ATEX/IECEx", "Kurva-S dan pemantauan progres 4 jalur sertifikasi."'),
+    ('"Persiapan_Termin_1.md dan 3 template kerja", "Matriks gap awal (10 September 2026) dan template log uji, berita acara, serta laporan pekerjaan."',
+     '"Rencana kerja Termin 1 dan template kerja", "Rencana kerja (10 September 2026) serta template log uji, berita acara, dan laporan pekerjaan."'),
+    ('"`Template_Log_Uji_dan_Iterasi_Enclosure.md`"', '"Template tersedia"'),
+    ('"`Template_Berita_Acara_Validasi_Prototipe.md`"', '"Template tersedia"'),
+    ("Template kerja tersedia di \"\n        \"`Template_Berita_Acara_Validasi_Prototipe.md` dan diisi", "Template kerja telah \"\n        \"tersedia dan diisi"),
 ]
 
 for old, new in REPL:

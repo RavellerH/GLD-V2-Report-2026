@@ -4,9 +4,9 @@ Laporan Termin 1 dengan halaman depan format laporan LGU (cover, lembar kontrol 
 
 | No | File | Isi |
 |---|---|---|
-| 01 | `01_Laporan_Termin_1_Field_Testing_20Persen.pdf` | Laporan pemenuhan Termin 1 Field Testing (20%), rev 0.2, 11 Sep 2026 — 5 hlm depan + 11 hlm isi |
+| 01 | `01_Laporan_Termin_1_Field_Testing_20Persen.pdf` | Laporan pemenuhan Termin 1 Field Testing (20%), rev 0.2, 11 Sep 2026 — 5 hlm depan + 10 hlm isi |
 | 02 | `02_Draft_BAST_Termin_1_Field_Testing_20Persen.{pdf,docx}` | Draf BAST pendamping dengan kop format laporan LGU (logo LGU | judul | logo Pertamina); `.docx` untuk diisi nomor/tanggal/SPK |
-| 03 | `03_Laporan_Termin_1_Sertifikasi_40Persen.pdf` | Laporan pemenuhan Termin 1 Sertifikasi (40%), rev 0.2, 2 Okt 2026 — status diperbarui (uji termal 30 Sep, pengajuan GTS ±29 Sep, Ex d) — 5 hlm depan + 9 hlm isi |
+| 03 | `03_Laporan_Termin_1_Sertifikasi_40Persen.pdf` | Laporan pemenuhan Termin 1 Sertifikasi (40%), rev 0.2, 2 Okt 2026 — status diperbarui (uji termal 30 Sep, pengajuan GTS ±29 Sep, Ex d) — 5 hlm depan + 9 hlm isi (Referensi Dokumen internal tidak disertakan) |
 
 ## Yang masih perlu dilengkapi sebelum ditandatangani
 - **No. Kontrak** di lembar kontrol dokumen (kosong).

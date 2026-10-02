@@ -234,8 +234,12 @@ def daftar_isi(doc, entries):
 
 def build(d):
     src = pymupdf.open(os.path.join(ROOT, d["src"]))
+    # Bagian "Referensi Dokumen" (daftar sumber internal) tidak disertakan pada paket penagihan.
+    last = src[-1].get_text()
+    if "Referensi Dokumen" in last:
+        src.delete_page(src.page_count - 1)
     out = pymupdf.open()
-    entries = headings(src)
+    entries = [e for e in headings(src) if "Referensi Dokumen" not in e[1]]
     jml = 5 + src.page_count
     cover(out, d)
     kontrol(out, d, jml)

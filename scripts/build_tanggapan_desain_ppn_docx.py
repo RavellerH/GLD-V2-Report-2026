@@ -135,7 +135,7 @@ for k, v in [
     ("Ditujukan kepada", "Tim PT Pertamina Patra Niaga — RU IV Cilacap"),
     ("Menanggapi", "Block diagram lingkup kerja, layout titik pemasangan, dan MoM Koordinasi Persiapan "
                    "Pemasangan GLD 29 September 2026 dari Pertamina RU IV"),
-    ("Dokumen LGU terkait", "Daftar Perangkat & Kebutuhan Pemasangan rev 1.1; Spesifikasi Material Instalasi rev 1.5"),
+    ("Dokumen LGU terkait", "Daftar Perangkat & Kebutuhan Pemasangan rev 1.2; Spesifikasi Material Instalasi rev 1.5"),
 ]:
     row = mt.add_row().cells
     set_cell_shading(row[0], HEAD_SHADE)
@@ -235,7 +235,7 @@ table(["No", "Pertanyaan", "Pihak"], [
 doc.add_heading("6. Tindak Lanjut LGU", level=1)
 for t in [
     "Daftar perangkat, spesifikasi, dimensi, dan kebutuhan utilitas (tindak lanjut no. 1 MoM 29 Sep) telah "
-    "disampaikan dalam Daftar Perangkat & Kebutuhan Pemasangan rev 1.1 dan Spesifikasi Material Instalasi rev 1.5.",
+    "disampaikan dalam Daftar Perangkat & Kebutuhan Pemasangan rev 1.2 dan Spesifikasi Material Instalasi rev 1.5.",
     "Setelah rapat teknis, LGU memperbarui Spesifikasi Material (jumlah titik, tiang CH, Gateway, router) dan BoQ "
     "sesuai layout final sebagai dasar rekomendasi kebutuhan lapangan dan kontrak jasa pemasangan RU IV.",
     "LGU mendampingi plot posisi perangkat dan penentuan aksesori serta wiring pada sesi teknis bersama perwakilan lokasi.",

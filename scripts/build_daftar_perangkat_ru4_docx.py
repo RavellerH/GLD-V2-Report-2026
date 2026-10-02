@@ -19,7 +19,7 @@ from build_persiapan_instalasi_corporate_docx import (
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Daftar_Perangkat_dan_Kebutuhan_Pemasangan_GLD_RU-IV_Cilacap.docx")
 DOC_NO = "LGU/GLD/INSTALASI-PERANGKAT/2026-001"
-REVISION = "1.1"
+REVISION = "1.2"
 DOC_DATE = "2 Oktober 2026"
 
 doc, sec = make_doc()
@@ -182,7 +182,7 @@ table(["Perangkat", "Jumlah", "Spesifikasi utama", "Penempatan"], [
      "Titik pantau di perimeter SRU (outdoor)"],
     ["Cluster Head (CH)", "2 unit",
      "Relay LoRa dua radio (star + mesh)\nCatu daya solar (2 panel) + baterai 18650; maks 0,73 W\n"
-     "8 × 8 × 21 cm, enclosure metal\nAntena 3 dBi (star) dan 8 dBi (mesh)",
+     "CH besar: enclosure aluminium silinder ± Ø76 × 104 mm (+ konektor ± 15 mm)\nAntena 3 dBi (star) dan 8 dBi (mesh)",
      "Outdoor, area aman, terpapar sinar matahari"],
     ["Gateway", "1 unit",
      "Jembatan LoRa mesh ke MQTT (ESP32-S3)\n5 V via adaptor; maks 0,73 W\n8 × 8 × 21 cm, enclosure metal\n"

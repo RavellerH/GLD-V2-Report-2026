@@ -7,6 +7,7 @@ yang diminta Pak Tresnandi (1 Okt 2026) untuk dokumen penagihan termin.
 Pakai: py scripts/build_cover_laporan_lgu.py
 """
 import os
+import re
 import pymupdf
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -191,15 +192,61 @@ def pengantar(doc, d):
     text(page, (W - 300, y + 22, W - 70, y + 40), "Team Leader", 10.5, align=pymupdf.TEXT_ALIGN_RIGHT)
 
 
+def headings(src):
+    """Judul bab (15 pt) & sub-bab (12 pt) bernomor dari laporan sumber -> (level, judul, halaman)."""
+    out = []
+    for i, page in enumerate(src):
+        for b in page.get_text("dict")["blocks"]:
+            for ln in b.get("lines", []):
+                t = "".join(s["text"] for s in ln["spans"]).strip()
+                sz = max(s["size"] for s in ln["spans"])
+                if sz > 11.5 and re.match(r"^\d+(\.\d+)?\s", t):
+                    out.append((1 if sz > 13.5 else 2, t, i + 1))
+    return out
+
+
+def daftar_isi(doc, entries):
+    page = doc.new_page(width=W, height=H)
+    fonts(page)
+    text(page, (60, 80, W - 60, 110), "DAFTAR ISI", 16, "arb")
+    far = pymupdf.Font(fontfile=os.path.join(FONT_DIR, "arial.ttf"))
+    fbd = pymupdf.Font(fontfile=os.path.join(FONT_DIR, "arialbd.ttf"))
+    rows = entries
+    y = 140
+    x1 = W - 70
+    for lvl, judul, hal in rows:
+        font, f = ("arb", fbd) if lvl == 1 else ("ar", far)
+        size = 10.5 if lvl == 1 else 10
+        x0 = 70 if lvl == 1 else 92
+        page.insert_text((x0, y), judul, fontname=font, fontsize=size)
+        if hal is not None:
+            num = str(hal)
+            nw = far.text_length(num, fontsize=10)
+            page.insert_text((x1 - nw, y), num, fontname="ar", fontsize=10)
+            start = x0 + f.text_length(judul, fontsize=size) + 6
+            dots = int((x1 - nw - 6 - start) / far.text_length(".", fontsize=10))
+            if dots > 0:
+                page.insert_text((start, y), "." * dots, fontname="ar", fontsize=10, color=(0.45, 0.45, 0.45))
+        y += 22 if lvl == 1 else 18
+    page.insert_text((70, y + 14), "Nomor halaman mengikuti nomor \"Halaman\" pada laporan.", fontname="ar",
+                     fontsize=8.5, color=(0.4, 0.4, 0.4))
+
+
 def build(d):
     src = pymupdf.open(os.path.join(ROOT, d["src"]))
     out = pymupdf.open()
-    jml = 4 + src.page_count
+    entries = headings(src)
+    jml = 5 + src.page_count
     cover(out, d)
     kontrol(out, d, jml)
     pengesahan(out, d)
     pengantar(out, d)
+    daftar_isi(out, entries)
     out.insert_pdf(src)
+    front = 5
+    toc = [[1, "Cover", 1], [1, "Lembar Pengesahan", 3], [1, "Kata Pengantar", 4], [1, "Daftar Isi", 5]]
+    toc += [[lvl, judul, front + hal] for lvl, judul, hal in entries]
+    out.set_toc(toc)
     out.set_metadata({"title": d["judul"].replace("\n", " "), "author": "PT LAPI Ganesha Utama"})
     path = os.path.join(ROOT, d["out"])
     os.makedirs(os.path.dirname(path), exist_ok=True)

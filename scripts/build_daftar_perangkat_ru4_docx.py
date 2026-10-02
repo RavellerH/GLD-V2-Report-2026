@@ -185,7 +185,7 @@ table(["Perangkat", "Jumlah", "Spesifikasi utama", "Penempatan"], [
      "CH besar: enclosure aluminium silinder ± Ø76 × 104 mm (+ konektor ± 15 mm)\nAntena 3 dBi (star) dan 8 dBi (mesh)",
      "Outdoor, area aman, terpapar sinar matahari"],
     ["Gateway", "1 unit",
-     "Jembatan LoRa mesh ke MQTT (ESP32-S3)\n5 V via adaptor; maks 0,73 W\n8 × 8 × 21 cm, enclosure metal\n"
+     "Jembatan LoRa mesh ke MQTT (ESP32-S3)\n5 V via adaptor; maks 0,73 W\nEnclosure metal (dimensi dikonfirmasi tim LGU)\n"
      "Antena omni 8 dBi; uplink Wi-Fi ke PC server",
      "Unit di dalam ruangan (safe area); antena di luar/atap"],
     ["PC server site", "1 unit",

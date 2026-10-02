@@ -57,8 +57,8 @@ DOCS = [
         "judul": "Laporan Pemenuhan Deliverable\nTermin 1 — Sertifikasi",
         "sub": "Program Sertifikasi Hazardous Area (ATEX/IECEx)\nGas Leak Detector — GLD Tahap 2",
         "nodok": "LGU-GLD-T1-CERT-2026-001",
-        "rev": "0.1",
-        "tgl": "15 September 2026",
+        "rev": "0.2",
+        "tgl": "2 Oktober 2026",
         "pengantar": [
             "Puji syukur kami panjatkan ke hadirat Tuhan Yang Maha Esa atas rahmat dan karunia-Nya "
             "sehingga Laporan Pemenuhan Deliverable Termin 1 Program Sertifikasi Hazardous Area "

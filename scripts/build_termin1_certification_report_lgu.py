@@ -53,6 +53,65 @@ REPL = [
      '''templatenya sudah tersedia dan "
         "diisi setelah data pendasarnya (hasil uji enclosure dan witness) tersedia."'''),
     ('"Belum ada dokumen"', '"Dalam penyiapan"'),
+    # --- pembaruan status per 2 Okt 2026 (rev 0.2) ---
+    ('("Revisi", "0.1")', '("Revisi", "0.2")'),
+    ('("Tanggal", "15 September 2026")', '("Tanggal", "2 Oktober 2026")'),
+    ("seluruh bukti dan kekurangan yang teridentifikasi terhadap syarat Termin 1 ",
+     "seluruh bukti pemenuhan dan pekerjaan lanjutan terhadap syarat Termin 1 "),
+    ("pengembang serta kekurangan yang masih teridentifikasi terhadap syarat kontraktual, tanpa menyimpulkan ",
+     "pengembang serta pekerjaan lanjutan yang sedang disiapkan terhadap syarat kontraktual, tanpa menyimpulkan "),
+    ('bold_lead="Kekurangan teridentifikasi. "', 'bold_lead="Tindak lanjut. "'),
+    ('"Ringkasan bukti/kekurangan"', '"Ringkasan bukti dan tindak lanjut"'),
+    ("Bagian ini merinci bukti yang ditemukan dan kekurangan yang teridentifikasi untuk setiap syarat pada ",
+     "Bagian ini merinci bukti yang ditemukan dan tindak lanjut untuk setiap syarat pada "),
+    ("berdasarkan audit repo dokumentasi proyek per 15 September 2026.",
+     "berdasarkan status pekerjaan per 2 Oktober 2026."),
+    ("disusun dari seluruh bukti yang ada di repo per 15 September 2026.",
+     "disusun dari seluruh bukti pekerjaan per 2 Oktober 2026."),
+    ("identitas sampel/nomor seri/revisi belum ditetapkan formal.",
+     "nomor seri sampel GLD2-0x1001 telah ditetapkan pada formulir aplikasi; lembar identifikasi sampel bertanda tangan sedang disiapkan."),
+    ('"DALAM PENYIAPAN", "Protokol dan hasil uji khusus enclosure yang traceable sedang disiapkan."',
+     '"SEBAGIAN", "Uji termal internal 30 Sep 2026 telah dilaksanakan (8 titik thermocouple, 3 kondisi beban, 180 menit); uji mekanik, sealing/IP pra-uji, dan fault condition sedang disiapkan."'),
+    ("Sertifikasi masih tahap persiapan dokumen; sampel belum dikirim ke laboratorium sehingga urutan tahap masih terjaga.",
+     "Formulir aplikasi dan dossier teknis telah diajukan ke GTS (agen sertifikasi) sekitar 29 Sep 2026; pengujian di laboratorium terakreditasi dilakukan sesudah tahap ini, sehingga urutan tahap terjaga."),
+    ('2, "Prototipe telah diuji", "DALAM PENYIAPAN",', '2, "Prototipe telah diuji", "SEBAGIAN",'),
+    ('menetapkan jenis pre-compliance test yang direncanakan.",',
+     'menetapkan jenis pre-compliance test yang direncanakan. Uji termal internal telah dilaksanakan pada "\n'
+     '        "30 September 2026: 8 titik thermocouple pada kondisi normal, beban maksimum, dan kipas mati selama "\n'
+     '        "180 menit. Ekstrapolasi ke suhu ambien +60 °C memberikan suhu titik terpanas ± 114 °C, di bawah "\n'
+     '        "batas efektif kelas suhu T4 (130 °C).",'),
+    ("Protokol dan hasil uji khusus enclosure sedang disiapkan: inspeksi mekanik/dimensi, uji termal/hotspot, ",
+     "Uji lanjutan khusus enclosure sedang disiapkan: inspeksi mekanik/dimensi, pelengkapan titik ukur termal, "),
+    ('''Bukti kematangan fungsi sistem di atas "
+        "tidak menggantikan pengujian enclosure ini.",''', '''Hasil uji termal internal akan "
+        "dilengkapi dan disaksikan dalam sesi uji bersama Pertamina.",'''),
+    ('''Status proyek per pertengahan September 2026 menyatakan sertifikasi masih pada "
+        "tahap persiapan dokumen; ''', '''Formulir aplikasi ATEX dan dossier teknis telah diajukan ke GTS (agen "
+        "sertifikasi) sekitar 29 September 2026; '''),
+    ("sertifikasi dengan dua metrik yang tidak saling menggantikan:", "sertifikasi dengan metrik berikut:"),
+    ('''        ("Progres keseluruhan proyek (5 fase x 4 track, bottom-up)", "≈ 20% (per 5 September 2026)", "Metrik paling konservatif — memasukkan fase Uji Laboratorium Terakreditasi (bobot 41,7% dari total durasi) yang dijadwalkan pada tahap berikutnya."),
+        ("Kesiapan dokumen ATEX (checklist teknis 29 item)", "≈ 43%", "Murni kelengkapan dokumentasi/checklist teknis, tidak termasuk pelaksanaan pengujian."),''',
+     '''        ("Kesiapan dokumen sertifikasi (21 butir checklist ExCB, berbobot)", "≈ 43% (per 30 September 2026)", "Kelengkapan dokumentasi teknis; tidak termasuk pelaksanaan pengujian di laboratorium."),
+        ("Pengajuan ke agen sertifikasi (GTS)", "Diajukan ± 29 September 2026", "Formulir aplikasi ATEX + dossier teknis; iterasi dokumen mengikuti tanggapan GTS."),
+        ("Uji termal internal", "Dilaksanakan 30 September 2026", "Indikasi positif kelas suhu T4 (± 114 °C vs batas 130 °C)."),'''),
+    ("Kedua metrik ini adalah indikator", "Metrik ini adalah indikator"),
+    ('''gas spesifik (rekomendasi tim: IIC) dan metode proteksi (Ex i atau Ex d) masih terbuka dan menjadi "
+        "bagian dari pekerjaan uji lanjutan. Detail lengkap Kurva-S dan gap analysis per track ada di "
+        "`Dashboard_Sertifikasi_GLD_ATEX_IECEx.html`."''',
+     '''gas IIC dan metode proteksi Ex d (flameproof enclosure) telah ditetapkan, dengan penandaan yang "
+        "diajukan II 2G Ex db IIC T4 Gb."'''),
+    ('"6 Dokumen yang Masih Perlu Disusun"', '"6 Dokumen Tahap Lanjutan"'),
+    ('''serta kekurangan yang masih "
+        "teridentifikasi terhadap ketujuh''', '''serta pekerjaan lanjutan "
+        "terhadap ketujuh'''),
+    ('''"Tim pengembang tidak menyimpulkan sendiri apakah paket ini layak atau belum layak diajukan untuk "
+        "pembayaran 40 persen — penilaian''', '''"Berdasarkan bukti tersebut, LGU mengajukan pembayaran Termin 1 sebesar 40 persen; "
+        "penilaian'''),
+    ("`Persiapan_Termin_1.md` (identitas prototipe", "kerangka kerja tim (identitas prototipe"),
+    ("seluruh bukti dan kekurangan di atas", "seluruh bukti dan tindak lanjut di atas"),
+    ('"Checklist dan analisis kekurangan sertifikasi"', '"Checklist dan analisis kesiapan sertifikasi"'),
+    ('"`checklist-sertifikasi.html`, `laporan-analisis-kekurangan.html`, `status-kekurangan.html`."',
+     '"Checklist sertifikasi, laporan analisis kesiapan, dan status per butir."'),
 ]
 
 for old, new in REPL:

@@ -112,6 +112,25 @@ REPL = [
     ('"Checklist dan analisis kekurangan sertifikasi"', '"Checklist dan analisis kesiapan sertifikasi"'),
     ('"`checklist-sertifikasi.html`, `laporan-analisis-kekurangan.html`, `status-kekurangan.html`."',
      '"Checklist sertifikasi, laporan analisis kesiapan, dan status per butir."'),
+    ('"DALAM PENYIAPAN", "Log iterasi Rev A ke Rev B yang merujuk temuan uji disusun setelah uji enclosure."',
+     '"SEBAGIAN", "Iterasi desain tersedia: PCB MotherBoard GLD Ver2 (BOM 9 Sep, layout 11 Sep 2026) dan casing ATEX v2 ke v3 (8 Sep 2026). Log keterkaitan revisi dengan temuan uji sedang dirangkum."'),
+    ('3, "Ada iterasi perbaikan desain berbasis hasil uji", "DALAM PENYIAPAN",',
+     '3, "Ada iterasi perbaikan desain berbasis hasil uji", "SEBAGIAN",'),
+    ("""Terdapat file desain `ATEX CASING v2` dan desain bracket U-bolt sebagai versi "
+        "desain terkini.",""",
+     """Iterasi desain perangkat keras telah dilakukan pada dua komponen "
+        "utama: (1) PCB motherboard direvisi menjadi MotherBoard GLD Ver2 (BOM 9 September 2026, layout PCB "
+        "11 September 2026) beserta sensor board MQ; (2) casing berkembang dari ATEX Casing v2 (desain mounting "
+        "U-bolt) ke GLD ATEX Case v3 (8 September 2026) dengan mesh filter stainless steel, kipas DC, dan "
+        "dimensi yang disesuaikan untuk kebutuhan sertifikasi Ex d.","""),
+    ("""Desain tersebut terutama memodelkan assembly mounting/bracket, bukan riwayat iterasi enclosure. Change "
+        "log Revisi A ke Revisi B yang merujuk temuan uji, tindakan koreksi, bukti implementasi, dan "
+        "hasil uji ulang disusun setelah uji enclosure.",""",
+     """Change log formal yang menautkan setiap revisi dengan temuan uji, tindakan koreksi, bukti "
+        "implementasi, dan hasil uji ulang (termasuk hasil uji termal 30 September 2026) sedang dirangkum.","""),
+    ("Tujuh foto perakitan pada `Sumber Dokumen/sertifikasi-atex-gld-v2-2026/GLD/`, ", "Tujuh foto perakitan prototipe, "),
+    ("`ATEX CASING v2` (STEP/OBJ) dan `Desain_Bracket_L_UBolt_GLD_Mounting.pdf`.", "gambar CAD ATEX Casing v2 (STEP/OBJ) dan desain bracket U-bolt."),
+    ("Basis desain mekanik enclosure dan mounting, `GLD U Bolt Bracket/`.", "Basis desain mekanik enclosure dan mounting."),
 ]
 
 for old, new in REPL:

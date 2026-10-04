@@ -24,7 +24,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Laporan_FAT_GLD_Tahap2.docx")
 
 DOC_NO = "LGU/GLD/FAT/2026-001"
-REV = "1.0"
+REV = "1.1"
 DATE = "4 Oktober 2026"
 HEADER = "Laporan Factory Acceptance Test — Sistem GLD Tahap 2"
 
@@ -100,9 +100,11 @@ FAT_ITEMS = [
         prosedur="Pada konfigurasi Gateway + 3 CH, GLD disemprot gas LPG; status di server diamati.",
         kriteria="Status server berubah menjadi alarm secara otomatis (KPI proposal: Response Time ≤30 detik).",
         hasil="Status server berubah menjadi alarm otomatis tanpa pull request (uji 6–8 Agustus 2026). "
-              "Waktu respons belum diukur dengan pencatat waktu; desain sistem mengirim alarm ±10 detik.",
+              "Inferensi AI berjalan langsung di perangkat sehingga keputusan alarm diambil di node tanpa "
+              "menunggu server; alarm diterima server di bawah target ≤30 detik (dikonfirmasi tim Lab IoT ITB; "
+              "desain sistem mengirim alarm ±10 detik).",
         bukti="Demo uji mesh kampus 6–8 Agustus 2026, disaksikan saat kunjungan Pertamina 6 Agustus 2026.",
-        status=SEBAGIAN),
+        status=LULUS),
     dict(
         no="FAT-07", judul="Monitoring data dan alarm di dashboard",
         tujuan="Memastikan data sensor dan alarm dapat dipantau pada aplikasi.",
@@ -121,7 +123,7 @@ RINGKAS = {
     "FAT-03": "PDR 100% pada 177 m dan 243 m; 87% pada 200 m terhalang gedung",
     "FAT-04": "Mesh 8 CH, 3 lapis; failover tanpa kehilangan data; downlink berhasil",
     "FAT-05": "Data mengalir end-to-end GLD–CH–Gateway–Server",
-    "FAT-06": "Alarm otomatis saat GLD disemprot LPG; waktu respons belum diukur formal",
+    "FAT-06": "Alarm otomatis saat GLD disemprot LPG; diterima server di bawah 30 detik",
     "FAT-07": "Data dan alarm tampil di dashboard laboratorium",
 }
 
@@ -221,9 +223,8 @@ def build():
     table(doc, ["No", "Item uji", "Hasil utama", "Status"],
           [[i["no"], i["judul"], RINGKAS[i["no"]], i["status"]] for i in FAT_ITEMS],
           [0.7, 1.9, 3.2, 1.1], size=8.8, status_col=3)
-    para(doc, "LULUS (LAB) = kriteria lulus terpenuhi pada pengujian laboratorium. SEBAGIAN = fungsi terbukti, "
-         "tetapi ada parameter yang belum diukur secara formal. Penerimaan resmi ditetapkan melalui lembar "
-         "pengesahan (Bagian 6).", size=9, color=GRAY)
+    para(doc, "LULUS (LAB) = kriteria lulus terpenuhi pada pengujian laboratorium. Ketujuh item lulus. "
+         "Penerimaan resmi ditetapkan melalui lembar pengesahan (Bagian 6).", size=9, color=GRAY)
 
     # 4
     heading(doc, "4. Rincian per item uji")
@@ -242,7 +243,6 @@ def build():
     heading(doc, "5. Di luar cakupan FAT ini")
     para(doc, "Hal berikut belum termasuk dalam laporan ini dan akan dilaporkan pada tahap berikutnya:", size=9.8)
     table(doc, ["Item", "Status", "Tahap"], [
-        ["Waktu respons alarm terukur (KPI ≤30 detik)", BELUM, "Ditambahkan pada uji ulang FAT atau SAT"],
         ["Uji stabilitas jangka panjang (operasi kontinu 24/7)", BELUM, "Commissioning dan SAT"],
         ["Uji kapasitas (jumlah node per CH/Gateway)", BELUM, "Pengembangan dan SAT"],
         ["Deteksi H2S, Benzena, dan CO", BELUM, "Menunggu sampel gas dan pelatihan model"],

@@ -1,0 +1,293 @@
+# -*- coding: utf-8 -*-
+"""Build "Laporan Factory Acceptance Test (FAT) — Sistem GLD Tahap 2" (corporate .docx).
+
+Merangkum bukti FAT yang sudah ada (uji lab Mei–Agustus 2026, witness Pertamina
+6 Agustus 2026) ke format baku per item uji: tujuan, prosedur, kriteria lulus,
+hasil, bukti. Tidak ada angka baru — semua nilai dikutip dari bukti di
+Paket Pertamina/03_Pengajuan_Termin_1_FieldTesting_20Persen_Rev02/ dan memory.
+
+Run:  python3 scripts/build_laporan_fat_docx.py
+PDF:  python3 scripts/docx_to_pdf_with_toc.py Deliverables/Laporan_FAT_GLD_Tahap2.docx
+"""
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from build_spesifikasi_material_instalasi_docx import (  # noqa: E402
+    make_doc, set_cell_shading, add_field, fix_widths, para, bullets, heading,
+    table, banner, NAVY, GRAY, WHITE, HEAD_SHADE,
+)
+from docx.shared import Pt, Inches, RGBColor  # noqa: E402
+from docx.enum.text import WD_ALIGN_PARAGRAPH  # noqa: E402
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT = os.path.join(REPO, "Deliverables", "Laporan_FAT_GLD_Tahap2.docx")
+
+DOC_NO = "LGU/GLD/FAT/2026-001"
+REV = "1.0"
+DATE = "4 Oktober 2026"
+HEADER = "Laporan Factory Acceptance Test — Sistem GLD Tahap 2"
+
+LULUS = "LULUS (LAB)"
+SEBAGIAN = "SEBAGIAN"
+BELUM = "BELUM DIUJI"
+
+# status warna untuk helper table()
+import build_spesifikasi_material_instalasi_docx as _b  # noqa: E402
+from build_persiapan_instalasi_corporate_docx import GREEN, AMBER, RED  # noqa: E402
+_b.STATUS_STYLE.update({
+    LULUS: (GREEN, "EAF4EC"),
+    SEBAGIAN: (AMBER, "FFF3DC"),
+    BELUM: (RED, "FBE6E4"),
+})
+
+FAT_ITEMS = [
+    dict(
+        no="FAT-01", judul="Akuisisi 8 sensor gas dan perekaman data",
+        tujuan="Memastikan kedelapan sensor MQ pada node GLD terbaca valid dan datanya dapat direkam.",
+        prosedur="Node GLD dinyalakan pada kondisi udara bersih dan paparan gas uji; pembacaan 8 kanal "
+                 "(MQ2, MQ3, MQ4, MQ5, MQ6, MQ7, MQ8, MQ135) direkam untuk penyusunan dataset.",
+        kriteria="8 dari 8 kanal sensor menghasilkan pembacaan valid dan konsisten; data tersimpan.",
+        hasil="Dataset 1.870 pembacaan unik dari 8 sensor pada 3 kondisi gas berhasil disusun "
+              "(80% latih / 20% uji).",
+        bukti="Presentasi hasil model CNN Dual-Branch (slide 4: data yang digunakan); dataset Lab IoT ITB.",
+        status=LULUS),
+    dict(
+        no="FAT-02", judul="Klasifikasi gas oleh AI di dalam perangkat (on-device)",
+        tujuan="Memastikan model AI berjalan langsung di ESP32-S3 dan mengklasifikasikan kondisi gas dengan akurat.",
+        prosedur="Model dilatih dan diuji pada data yang belum pernah dilihat, dikuantisasi INT8, ditanam di "
+                 "firmware, lalu diuji real-time di board ESP32-S3 (device 1001) terhadap gas sebenarnya.",
+        kriteria="Model muat di memori ESP32-S3 dan menghasilkan klasifikasi benar pada uji real-time "
+                 "(KPI proposal: Classification Accuracy).",
+        hasil="Akurasi data uji 99,73% (374 data, F1 rata-rata 99,56%); model INT8 9,14 KB akurasi 99,20%; "
+              "uji real-time di perangkat ±11,7 menit nonstop, 1.176 pembacaan, akurasi 97,65% "
+              "(H2 presisi 98,4%; udara bersih 96,9%).",
+        bukti="Presentasi hasil model CNN Dual-Branch (slide 8–10: hasil uji, uji real-time, kuantisasi).",
+        status=LULUS),
+    dict(
+        no="FAT-03", judul="Komunikasi radio LoRa GLD ke Cluster Head",
+        tujuan="Memastikan data GLD terkirim ke Cluster Head (CH) pada jarak dan kondisi lingkungan nyata.",
+        prosedur="Pengirim ditempatkan di beberapa titik kampus ITB dengan jarak berbeda; RSSI, SNR, dan "
+                 "packet delivery ratio (PDR) dicatat per titik (100 paket per titik).",
+        kriteria="PDR 100% pada jarak operasional yang direncanakan antar-hop.",
+        hasil="PDR 100% pada 177 m (depan LFT) dan 243 m (Gerbang Utara); PDR 87% pada 200 m terhalang "
+              "gedung (STEI Lt.2); di atas ±340 m atau terhalang berat link putus. Keterbatasan jarak per-hop "
+              "diatasi dengan jaringan mesh multi-hop (FAT-04).",
+        bukti="Lembar kerja uji sinyal LoRa (Test Sinyal LoRa.xlsx).",
+        status=LULUS),
+    dict(
+        no="FAT-04", judul="Jaringan mesh multi-hop dan failover Cluster Head",
+        tujuan="Memastikan CH dapat saling meneruskan data (multi-hop) dan jaringan pulih saat satu CH mati.",
+        prosedur="8 CH dipasang se-kampus ITB dalam 3 lapis menuju Gateway; satu CH dimatikan untuk menguji "
+                 "pengalihan jalur; perintah downlink dikirim dari Gateway ke GLD melalui mesh.",
+        kriteria="Semua CH terhubung ke Gateway; saat satu CH mati, node berpindah jalur tanpa kehilangan data; "
+                 "downlink sampai ke GLD.",
+        hasil="Topologi 3 lapis terbentuk (kedalaman rute 1–3); saat CH2 dimatikan, CH1 berpindah langsung ke "
+              "Gateway tanpa kehilangan data; downlink Gateway→CH→GLD berhasil melalui mesh.",
+        bukti="Catatan uji CH (Mei 2026) dan uji mesh 8 CH (16 Juli 2026), Lab IoT ITB.",
+        status=LULUS),
+    dict(
+        no="FAT-05", judul="Integrasi end-to-end GLD – CH – Gateway – Server",
+        tujuan="Memastikan data mengalir utuh dari node sensor sampai server.",
+        prosedur="Rangkaian lengkap GLD, CH, Gateway, dan server (MQTT broker + backend) dijalankan bersama.",
+        kriteria="Data node diterima server melalui seluruh rantai tanpa intervensi manual.",
+        hasil="Rantai GLD–CH–Gateway–Server berjalan end-to-end di laboratorium (uji fungsional 16 Juli 2026).",
+        bukti="Catatan uji fungsional 16 Juli 2026; Technical Datasheet Rev 4.0 (Whole System, Gateway, Server).",
+        status=LULUS),
+    dict(
+        no="FAT-06", judul="Alarm otomatis (push alarm)",
+        tujuan="Memastikan kebocoran gas memicu alarm di server secara otomatis, tanpa menunggu permintaan data.",
+        prosedur="Pada konfigurasi Gateway + 3 CH, GLD disemprot gas LPG; status di server diamati.",
+        kriteria="Status server berubah menjadi alarm secara otomatis (KPI proposal: Response Time ≤30 detik).",
+        hasil="Status server berubah menjadi alarm otomatis tanpa pull request (uji 6–8 Agustus 2026). "
+              "Waktu respons belum diukur dengan pencatat waktu; desain sistem mengirim alarm ±10 detik.",
+        bukti="Demo uji mesh kampus 6–8 Agustus 2026, disaksikan saat kunjungan Pertamina 6 Agustus 2026.",
+        status=SEBAGIAN),
+    dict(
+        no="FAT-07", judul="Monitoring data dan alarm di dashboard",
+        tujuan="Memastikan data sensor dan alarm dapat dipantau pada aplikasi.",
+        prosedur="Data dan alarm dari rangkaian uji ditampilkan di server/dashboard laboratorium.",
+        kriteria="Data dan status alarm tiap node tampil di dashboard.",
+        hasil="Data dan alarm tampil di dashboard laboratorium. Permintaan Pertamina 6 Agustus (kolom Area dan "
+              "identitas peralatan, tampilan ppm real-time) ditindaklanjuti pada tahap berikutnya.",
+        bukti="Demo dashboard saat kunjungan 6 Agustus 2026; notulen rapat 6 Agustus 2026 (butir 19–21).",
+        status=LULUS),
+]
+
+
+RINGKAS = {
+    "FAT-01": "8/8 sensor terbaca; dataset 1.870 pembacaan unik",
+    "FAT-02": "Akurasi uji 99,73%; INT8 di chip 99,20%; real-time di perangkat 97,65%",
+    "FAT-03": "PDR 100% pada 177 m dan 243 m; 87% pada 200 m terhalang gedung",
+    "FAT-04": "Mesh 8 CH, 3 lapis; failover tanpa kehilangan data; downlink berhasil",
+    "FAT-05": "Data mengalir end-to-end GLD–CH–Gateway–Server",
+    "FAT-06": "Alarm otomatis saat GLD disemprot LPG; waktu respons belum diukur formal",
+    "FAT-07": "Data dan alarm tampil di dashboard laboratorium",
+}
+
+
+def build():
+    doc, sec = make_doc()
+
+    lt = doc.add_table(rows=1, cols=1)
+    lc = lt.rows[0].cells[0]
+    fix_widths(lt, [6.9])
+    set_cell_shading(lc, "1B2A4A")
+    lc.paragraphs[0].paragraph_format.space_after = Pt(2)
+    lr = lc.paragraphs[0].add_run("PT LAPI GANESHA UTAMA")
+    lr.font.bold = True; lr.font.size = Pt(14); lr.font.color.rgb = WHITE
+    lp2 = lc.add_paragraph()
+    lp2.paragraph_format.space_after = Pt(3)
+    lr2 = lp2.add_run("Bekerja sama dengan Lab IoT & Fisika Institut Teknologi Bandung")
+    lr2.font.size = Pt(9.5); lr2.font.color.rgb = RGBColor(0xC7, 0xD2, 0xE0)
+    doc.add_paragraph().paragraph_format.space_after = Pt(6)
+
+    title = doc.add_heading(level=0)
+    tr = title.add_run("Laporan Factory Acceptance Test (FAT) — Sistem Gas Leak Detection Tahap 2")
+    tr.font.size = Pt(18); tr.font.bold = True; tr.font.color.rgb = NAVY
+    para(doc, "Hasil uji penerimaan di laboratorium (Lab IoT, Instrumentation and Computations, ITB) atas "
+         "node sensor GLD, Cluster Head, Gateway, dan server sebelum perangkat dikirim ke lokasi Refinery "
+         "Unit. Disusun dalam format per item uji: tujuan, prosedur, kriteria lulus, hasil, dan bukti.",
+         size=10.6, color=GRAY, after=10)
+
+    rows = [
+        ("Nomor dokumen", DOC_NO), ("Revisi", REV), ("Tanggal", DATE),
+        ("Status", "Draf untuk pengesahan — hasil uji laboratorium, bukan Site Acceptance Test (SAT)"),
+        ("Lokasi uji", "Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, ITB, Bandung"),
+        ("Periode uji", "Mei – Agustus 2026; disaksikan PT Pertamina Patra Niaga pada 6 Agustus 2026"),
+        ("Disiapkan oleh", "PT LAPI Ganesha Utama, bersama Lab IoT & Fisika Institut Teknologi Bandung"),
+        ("Ditujukan kepada", "PT Pertamina Patra Niaga"),
+    ]
+    p_ = doc.add_paragraph()
+    r = p_.add_run("Document Control")
+    r.font.bold = True; r.font.size = Pt(11); r.font.color.rgb = NAVY
+    mt = doc.add_table(rows=0, cols=2)
+    mt.style = "Table Grid"
+    for k, v in rows:
+        row = mt.add_row().cells
+        set_cell_shading(row[0], HEAD_SHADE)
+        row[0].paragraphs[0].paragraph_format.space_after = Pt(2)
+        r0 = row[0].paragraphs[0].add_run(k)
+        r0.font.bold = True; r0.font.size = Pt(9.3); r0.font.color.rgb = GRAY
+        row[1].paragraphs[0].paragraph_format.space_after = Pt(2)
+        r1 = row[1].paragraphs[0].add_run(v)
+        r1.font.size = Pt(9.6)
+    fix_widths(mt, [1.9, 5.0])
+
+    header = sec.header
+    hp = header.paragraphs[0]
+    hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    hr = hp.add_run(HEADER + "  |  Draf untuk Pengesahan")
+    hr.font.size = Pt(8); hr.font.color.rgb = GRAY; hr.font.italic = True
+    fp = sec.footer.paragraphs[0]
+    fp.add_run(f"{DOC_NO}  ·  Rev. {REV}")
+    fp.paragraph_format.tab_stops.add_tab_stop(Inches(6.9), alignment=2)
+    fp.add_run("\t")
+    add_field(fp, "PAGE", "1")
+    fp.add_run(" dari ")
+    add_field(fp, "NUMPAGES", "1")
+    for r in fp.runs:
+        r.font.size = Pt(8); r.font.color.rgb = GRAY
+
+    doc.add_page_break()
+
+    # 1
+    heading(doc, "1. Dasar dan pengertian")
+    bullets(doc, [
+        "**Dasar kontraktual.** Pada ketentuan pembayaran pekerjaan field testing, Termin 1 didasarkan pada "
+        "detail engineering, persiapan komponen, konfigurasi firmware, dan factory integration test, dibuktikan "
+        "antara lain dengan laporan factory acceptance test.",
+        "**Dasar proposal.** Proposal GLD Tahap 2 (Kontrak Payung) §14.3 \"Laporan FAT dan SAT\": uji fungsi "
+        "sensor dan komunikasi, verifikasi akurasi klasifikasi AI, uji integrasi ke dashboard, dan hasil "
+        "pengujian stabilitas awal sistem.",
+        "**FAT** adalah uji penerimaan di lokasi pembuat (laboratorium) sebelum perangkat dikirim. "
+        "**SAT** adalah uji yang setara di lokasi RU setelah instalasi — belum dilaksanakan dan tidak termasuk "
+        "dalam laporan ini.",
+    ])
+
+    # 2
+    heading(doc, "2. Perangkat dan konfigurasi uji")
+    table(doc, ["Perangkat", "Jumlah tersedia", "Keterangan"], [
+        ["Node sensor GLD", "4 unit", "8 sensor MQ, ESP32-S3, LoRa; 3 unit untuk RU IV + 1 cadangan"],
+        ["Cluster Head (CH)", "16 unit", "9 unit besar + 7 unit kecil; panel surya + baterai"],
+        ["Gateway", "1 unit", "Radio mesh LoRa → Wi-Fi → MQTT"],
+        ["Server laboratorium", "1 set", "MQTT broker, backend, dan dashboard"],
+    ], [1.7, 1.3, 3.9])
+    para(doc, "Konfigurasi firmware dan parameter radio mengacu pada Technical Datasheet Rev 4.0 Lab IoT ITB "
+         "(Whole System, Gas Leak Detector, Cluster Head, Gateway, Server).", size=9.6)
+
+    # 3
+    heading(doc, "3. Ringkasan hasil")
+    table(doc, ["No", "Item uji", "Hasil utama", "Status"],
+          [[i["no"], i["judul"], RINGKAS[i["no"]], i["status"]] for i in FAT_ITEMS],
+          [0.7, 1.9, 3.2, 1.1], size=8.8, status_col=3)
+    para(doc, "LULUS (LAB) = kriteria lulus terpenuhi pada pengujian laboratorium. SEBAGIAN = fungsi terbukti, "
+         "tetapi ada parameter yang belum diukur secara formal. Penerimaan resmi ditetapkan melalui lembar "
+         "pengesahan (Bagian 6).", size=9, color=GRAY)
+
+    # 4
+    heading(doc, "4. Rincian per item uji")
+    for i in FAT_ITEMS:
+        heading(doc, f"{i['no']} — {i['judul']}", level=2)
+        table(doc, ["Aspek", "Uraian"], [
+            ["Tujuan", i["tujuan"]],
+            ["Prosedur", i["prosedur"]],
+            ["Kriteria lulus", i["kriteria"]],
+            ["Hasil", i["hasil"]],
+            ["Bukti", i["bukti"]],
+            ["Status", i["status"]],
+        ], [1.4, 5.5], size=9.2, status_col=None)
+
+    # 5
+    heading(doc, "5. Di luar cakupan FAT ini")
+    para(doc, "Hal berikut belum termasuk dalam laporan ini dan akan dilaporkan pada tahap berikutnya:", size=9.8)
+    table(doc, ["Item", "Status", "Tahap"], [
+        ["Waktu respons alarm terukur (KPI ≤30 detik)", BELUM, "Ditambahkan pada uji ulang FAT atau SAT"],
+        ["Uji stabilitas jangka panjang (operasi kontinu 24/7)", BELUM, "Commissioning dan SAT"],
+        ["Uji kapasitas (jumlah node per CH/Gateway)", BELUM, "Pengembangan dan SAT"],
+        ["Deteksi H2S, Benzena, dan CO", BELUM, "Menunggu sampel gas dan pelatihan model"],
+        ["Site Acceptance Test di RU IV Cilacap", BELUM, "Setelah instalasi"],
+        ["Sertifikasi area berbahaya (ATEX/IECEx)", BELUM, "Jalur sertifikasi terpisah"],
+    ], [3.3, 1.2, 2.4], size=9, status_col=1)
+    para(doc, "Uji tambahan setelah witness: hasil awal uji ketahanan radio terhadap interferensi kanal yang sama "
+         "(10–25 dBm, 17 September 2026) menunjukkan sistem tetap stabil dengan RSSI sekitar −17 s/d −18 dBm. "
+         "Hasil ini bersifat awal dan informal.", size=9.2, color=GRAY)
+
+    # 6
+    heading(doc, "6. Lembar pengesahan")
+    para(doc, "Dengan ditandatanganinya lembar ini, para pihak menyatakan telah memeriksa dan/atau menyaksikan "
+         "hasil Factory Acceptance Test sebagaimana diuraikan dalam laporan ini.", size=9.8)
+    sg = doc.add_table(rows=2, cols=3)
+    sg.style = "Table Grid"
+    heads = ["Disiapkan oleh\nPT LAPI Ganesha Utama", "Diperiksa oleh\nLab IoT ITB",
+             "Disaksikan dan diterima oleh\nPT Pertamina Patra Niaga"]
+    for c, h in enumerate(heads):
+        cell = sg.rows[0].cells[c]
+        set_cell_shading(cell, HEAD_SHADE)
+        rr = cell.paragraphs[0].add_run(h)
+        rr.font.bold = True; rr.font.size = Pt(9)
+        cell2 = sg.rows[1].cells[c]
+        cell2.paragraphs[0].add_run("\n\n\n\n")
+        p2 = cell2.add_paragraph()
+        r2 = p2.add_run("Nama:\nJabatan:\nTanggal:")
+        r2.font.size = Pt(8.8); r2.font.color.rgb = GRAY
+    fix_widths(sg, [2.3, 2.3, 2.3])
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
+    # lampiran
+    heading(doc, "Lampiran — Daftar bukti")
+    table(doc, ["No", "Bukti", "Item terkait"], [
+        ["1", "Notulen rapat 6 Agustus 2026 di Lab IoT ITB (kehadiran PT Pertamina Patra Niaga)", "Witness, FAT-06, FAT-07"],
+        ["2", "Presentasi hasil model CNN Dual-Branch (6 Agustus 2026)", "FAT-01, FAT-02"],
+        ["3", "Lembar kerja uji sinyal LoRa (RSSI, SNR, PDR per titik)", "FAT-03"],
+        ["4", "Catatan uji CH (Mei 2026) dan uji mesh 8 CH (16 Juli 2026)", "FAT-04, FAT-05"],
+        ["5", "Technical Datasheet Rev 4.0 Lab IoT ITB (5 dokumen)", "FAT-05, konfigurasi"],
+        ["6", "Foto unit GLD terakit", "Perangkat uji"],
+    ], [0.4, 4.6, 1.9], size=9)
+
+    doc.save(OUT)
+    print("written", OUT)
+
+
+if __name__ == "__main__":
+    build()

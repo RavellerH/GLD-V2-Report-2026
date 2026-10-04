@@ -2,7 +2,7 @@
 
 Paket laporan FAT beserta lampiran bukti dan 3 laporan uji lab formal (lampiran 7–9), untuk pengajuan Termin 1 Field Testing (SPK: "laporan factory acceptance test"). Nomor lampiran sama dengan tabel "Lampiran — Daftar bukti" di laporan.
 
-> **File gabungan (satu PDF):** `Laporan_FAT_GLD_Tahap2_Lengkap_dengan_Lampiran.pdf` — Laporan FAT + lampiran 1–9 berurutan dengan halaman pemisah dan bookmark (181 hlm, ±6,4 MB). File-file di bawah adalah versi terpisahnya.
+> **File gabungan (satu PDF):** `Laporan_FAT_GLD_Tahap2_Lengkap_dengan_Lampiran.pdf` — diawali halaman depan format laporan LGU (cover, kontrol dokumen, lembar pengesahan, kata pengantar, daftar isi), lalu Laporan FAT + lampiran 1–9 berurutan dengan halaman pemisah dan bookmark (186 hlm, ±7,3 MB). File-file di bawah adalah versi terpisahnya.
 
 | File | Isi | Item FAT |
 |---|---|---|

@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 """Gabungkan Laporan FAT + seluruh lampiran (termasuk 3 Laporan Uji Lab) menjadi satu PDF
-dengan halaman pemisah per lampiran dan bookmark.
+dengan halaman depan format laporan LGU (cover, kontrol dokumen, lembar pengesahan,
+kata pengantar, daftar isi), halaman pemisah per lampiran, dan bookmark.
 
 Run: python3 scripts/merge_laporan_fat_lengkap.py
 Out: Paket Pertamina/09_Laporan_FAT_GLD_Tahap2/Laporan_FAT_GLD_Tahap2_Lengkap_dengan_Lampiran.pdf
 """
 import os
+import sys
 import pymupdf
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import build_cover_laporan_lgu as lgu  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 D = os.path.join(REPO, "Paket Pertamina", "09_Laporan_FAT_GLD_Tahap2")
@@ -14,6 +19,42 @@ OUT = os.path.join(D, "Laporan_FAT_GLD_Tahap2_Lengkap_dengan_Lampiran.pdf")
 A4 = pymupdf.paper_rect("a4")
 NAVY = (0x1B / 255, 0x2A / 255, 0x4A / 255)
 GREY = (0.3, 0.3, 0.3)
+
+COVER = {
+    "jenis": "Laporan Factory Acceptance Test",
+    "band": "Laporan FAT\nField Testing GLD Tahap 2",
+    "judul": "Laporan Factory Acceptance Test\n(FAT)",
+    "sub": "Pengembangan dan Field Testing Sistem\nGas Leak Detection (GLD) Tahap 2",
+    "nodok": "LGU/GLD/FAT/2026-001",
+    "rev": "1.3",
+    "tgl": "4 Oktober 2026",
+    "pengantar": [
+        "Puji syukur kami panjatkan ke hadirat Tuhan Yang Maha Esa atas rahmat dan karunia-Nya "
+        "sehingga Laporan Factory Acceptance Test (FAT) pekerjaan Pengembangan dan Field Testing "
+        "Sistem Gas Leak Detection (GLD) Tahap 2 ini dapat disusun dengan baik.",
+        "Laporan ini menyajikan hasil pengujian perangkat GLD, Cluster Head, Gateway, dan server di "
+        "laboratorium sebelum perangkat dikirim ke lokasi, mencakup tujuh item uji (FAT-01 sampai FAT-07), "
+        "lembar pengesahan uji, serta lampiran bukti pendukung termasuk tiga Laporan Uji Laboratorium. "
+        "Pengujian di lokasi (Site Acceptance Test dan commissioning) akan dilaporkan terpisah setelah "
+        "instalasi di RU IV Cilacap. Penilaian penerimaan sepenuhnya merupakan kewenangan "
+        "PT Pertamina Patra Niaga.",
+        "Kami mengucapkan terima kasih kepada PT Pertamina Patra Niaga serta seluruh pihak yang telah "
+        "berkontribusi dalam pelaksanaan pekerjaan ini, termasuk Lab IoT/Instrumentation and Computation "
+        "Institut Teknologi Bandung. Kami terbuka terhadap saran dan masukan untuk penyempurnaan "
+        "pekerjaan pada tahap berikutnya.",
+    ],
+}
+FRONT = 5  # cover, kontrol dokumen, lembar pengesahan, kata pengantar, daftar isi
+
+# Bab laporan FAT: (level, judul, halaman di laporan FAT)
+BAB_FAT = [
+    (1, "1. Dasar dan pengertian", 2),
+    (1, "2. Perangkat dan konfigurasi uji", 2),
+    (1, "3. Ringkasan hasil", 2),
+    (1, "4. Rincian per item uji", 2),
+    (1, "5. Lembar pengesahan uji", 4),
+    (1, "Daftar bukti lampiran", 5),
+]
 
 LAMPIRAN = [
     ("1", "Notulen Rapat 6 Agustus 2026 (Witness PT Pertamina Patra Niaga)",
@@ -44,8 +85,9 @@ LAMPIRAN = [
 
 
 def main():
-    out = pymupdf.open()
+    body = pymupdf.open()
     toc = []
+    out = body
 
     def addpdf(path):
         out.insert_pdf(pymupdf.open(os.path.join(D, path)))
@@ -68,12 +110,28 @@ def main():
         toc.append([1, f"Lampiran {no} - {title}", out.page_count])
 
     addpdf("00_Laporan_FAT_GLD_Tahap2.pdf")
-    toc.append([1, "Laporan Factory Acceptance Test (FAT)", 1])
     for no, title, desc, fat, files in LAMPIRAN:
         sep(no, title, desc, fat)
         for fn in files:
             (addimg if fn.endswith(".jpg") else addpdf)(fn)
-    out.set_toc(toc)
+
+    # halaman depan format laporan LGU, lalu isi
+    out = pymupdf.open()
+    lgu.cover(out, COVER)
+    lgu.kontrol(out, COVER, FRONT + body.page_count)
+    lgu.pengesahan(out, COVER)
+    lgu.pengantar(out, COVER)
+    entries = [(lvl, t, FRONT + h) for lvl, t, h in BAB_FAT]
+    entries += [(1, t, FRONT + h) for _, t, h in toc]
+    lgu.daftar_isi(out, entries, "Nomor halaman mengacu pada urutan halaman berkas PDF ini.")
+    out.insert_pdf(body)
+    outline = [[1, "Cover", 1], [1, "Lembar Pengesahan", 3], [1, "Kata Pengantar", 4], [1, "Daftar Isi", 5],
+               [1, "Laporan Factory Acceptance Test (FAT)", FRONT + 1]]
+    outline += [[2, t, FRONT + h] for _, t, h in BAB_FAT]
+    outline += [[1, t, FRONT + h] for _, t, h in toc]
+    out.set_toc(outline)
+    out.set_metadata({"title": "Laporan Factory Acceptance Test (FAT) - Sistem GLD Tahap 2",
+                      "author": "PT LAPI Ganesha Utama"})
     out.save(OUT, garbage=4, deflate=True)
     print(OUT, out.page_count, "halaman", round(os.path.getsize(OUT) / 1e6, 1), "MB")
 

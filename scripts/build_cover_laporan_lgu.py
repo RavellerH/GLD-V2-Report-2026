@@ -14,6 +14,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 ASSET = os.path.join(HERE, "assets", "lgu_cover")
 FONT_DIR = r"C:\Windows\Fonts"
+FONT_FILES = {"ar": "arial.ttf", "arb": "arialbd.ttf", "arbi": "arialbi.ttf"}
+if not os.path.isdir(FONT_DIR):  # Linux: Liberation Sans (metrik sama dengan Arial)
+    FONT_DIR = "/usr/share/fonts/truetype/liberation"
+    FONT_FILES = {"ar": "LiberationSans-Regular.ttf", "arb": "LiberationSans-Bold.ttf",
+                  "arbi": "LiberationSans-BoldItalic.ttf"}
+
+
+def ff(name):
+    return os.path.join(FONT_DIR, FONT_FILES[name])
 
 RED = (196 / 255, 53 / 255, 45 / 255)
 BLUE = (89 / 255, 135 / 255, 187 / 255)
@@ -84,9 +93,8 @@ TTD = {
 
 
 def fonts(page):
-    page.insert_font(fontname="ar", fontfile=os.path.join(FONT_DIR, "arial.ttf"))
-    page.insert_font(fontname="arb", fontfile=os.path.join(FONT_DIR, "arialbd.ttf"))
-    page.insert_font(fontname="arbi", fontfile=os.path.join(FONT_DIR, "arialbi.ttf"))
+    for n in FONT_FILES:
+        page.insert_font(fontname=n, fontfile=ff(n))
 
 
 def text(page, rect, s, size, font="ar", color=BLACK, align=pymupdf.TEXT_ALIGN_CENTER, lh=1.25):
@@ -96,7 +104,7 @@ def text(page, rect, s, size, font="ar", color=BLACK, align=pymupdf.TEXT_ALIGN_C
 
 
 def underline_name(page, cx, y, s, size=10.5):
-    f = pymupdf.Font(fontfile=os.path.join(FONT_DIR, "arialbd.ttf"))
+    f = pymupdf.Font(fontfile=ff("arb"))
     w = f.text_length(s, fontsize=size)
     text(page, (cx - 150, y, cx + 150, y + 18), s, size, "arb")
     page.draw_line((cx - w / 2, y + size + 2), (cx + w / 2, y + size + 2), width=0.7)
@@ -205,12 +213,12 @@ def headings(src):
     return out
 
 
-def daftar_isi(doc, entries):
+def daftar_isi(doc, entries, catatan="Nomor halaman mengikuti nomor \"Halaman\" pada laporan."):
     page = doc.new_page(width=W, height=H)
     fonts(page)
     text(page, (60, 80, W - 60, 110), "DAFTAR ISI", 16, "arb")
-    far = pymupdf.Font(fontfile=os.path.join(FONT_DIR, "arial.ttf"))
-    fbd = pymupdf.Font(fontfile=os.path.join(FONT_DIR, "arialbd.ttf"))
+    far = pymupdf.Font(fontfile=ff("ar"))
+    fbd = pymupdf.Font(fontfile=ff("arb"))
     rows = entries
     y = 140
     x1 = W - 70
@@ -228,7 +236,7 @@ def daftar_isi(doc, entries):
             if dots > 0:
                 page.insert_text((start, y), "." * dots, fontname="ar", fontsize=10, color=(0.45, 0.45, 0.45))
         y += 22 if lvl == 1 else 18
-    page.insert_text((70, y + 14), "Nomor halaman mengikuti nomor \"Halaman\" pada laporan.", fontname="ar",
+    page.insert_text((70, y + 14), catatan, fontname="ar",
                      fontsize=8.5, color=(0.4, 0.4, 0.4))
 
 

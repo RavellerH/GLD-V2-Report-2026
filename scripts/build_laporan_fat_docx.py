@@ -24,7 +24,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Laporan_FAT_GLD_Tahap2.docx")
 
 DOC_NO = "LGU/GLD/FAT/2026-001"
-REV = "1.2"
+REV = "1.3"
 DATE = "4 Oktober 2026"
 HEADER = "Laporan Factory Acceptance Test — Sistem GLD Tahap 2"
 
@@ -269,6 +269,9 @@ def build():
         ["4", "Catatan uji CH (Mei 2026) dan uji mesh 8 CH (16 Juli 2026)", "FAT-04, FAT-05"],
         ["5", "Technical Datasheet Rev 4.0 Lab IoT ITB (5 dokumen)", "FAT-05, konfigurasi"],
         ["6", "Foto unit GLD terakit", "Perangkat uji"],
+        ["7", "Laporan Uji Laboratorium 01 — Model AI (LGU/GLD/UJI-LAB/2026-001)", "FAT-01, FAT-02"],
+        ["8", "Laporan Uji Laboratorium 02 — Komunikasi LoRa (LGU/GLD/UJI-LAB/2026-002)", "FAT-03"],
+        ["9", "Laporan Uji Laboratorium 03 — Mesh, Failover, Downlink & Integrasi (LGU/GLD/UJI-LAB/2026-003)", "FAT-04 s.d. FAT-07"],
     ], [0.4, 4.6, 1.9], size=9)
 
     doc.save(OUT)

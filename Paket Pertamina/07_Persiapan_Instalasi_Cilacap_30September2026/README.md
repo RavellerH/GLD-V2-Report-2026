@@ -6,7 +6,7 @@ Paket 3 dokumen persiapan instalasi GLD di RU IV Cilacap (area aman perimeter SR
 
 | File | Isi |
 |---|---|
-| `Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.pdf` | **Rev 1.4.** Spesifikasi material yang perlu disiapkan RU IV: tiang besi galvanis 2" ditanam & dicor (GLD 1 m di atas tanah, CH 3 m, mast antena Gateway ±4,8 m), rekomendasi tinggi sensor per jenis gas, kabel 24 VDC (2 opsi PSU + tabel ukuran vs panjang), Gateway di dalam ruangan dengan antena di mast + kabel koaksial, skema jaringan lokal, fastener, BoQ, dan 8 pertanyaan yang perlu diputuskan di rapat. |
+| `Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.pdf` | **Rev 1.5 (2 Okt).** Tiang CH: bracket 2 panel surya & unit CH+antena di atas tiang disediakan LGU (Gambar 3.1), tiang CH tanpa pelat U-bolt & pipe cap. Spesifikasi material yang perlu disiapkan RU IV: tiang besi galvanis 2" ditanam & dicor (GLD 1 m di atas tanah, CH 3 m, mast antena Gateway ±4,8 m), rekomendasi tinggi sensor per jenis gas, kabel 24 VDC (2 opsi PSU + tabel ukuran vs panjang), Gateway di dalam ruangan dengan antena di mast + kabel koaksial, skema jaringan lokal, fastener, BoQ, dan 8 pertanyaan yang perlu diputuskan di rapat. |
 | `Pembagian_Persiapan_Instalasi_RU-IV_Cilacap.pdf` / `.html` | **Rev 1.5.** Matriks siapa menyiapkan apa — LGU & ITB / Pertamina RU IV / Pelaksana Instalasi RU IV — per 6 tema kerja, dengan lampiran bukti visual (CAD, foto prototipe, foto chamber gas). |
 | `Daftar_Persiapan_Vendor_Instalasi_RU-IV_Cilacap.pdf` / `.html` | **Rev 1.2.** Daftar persiapan untuk pelaksana instalasi RU IV: pembagian tanggung jawab, dokumen pendukung, checklist sebelum mobilisasi, item wajib dikonfirmasi, dan batasan keselamatan. |
 

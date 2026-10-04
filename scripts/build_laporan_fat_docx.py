@@ -24,7 +24,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Laporan_FAT_GLD_Tahap2.docx")
 
 DOC_NO = "LGU/GLD/FAT/2026-001"
-REV = "1.1"
+REV = "1.2"
 DATE = "4 Oktober 2026"
 HEADER = "Laporan Factory Acceptance Test — Sistem GLD Tahap 2"
 
@@ -224,7 +224,7 @@ def build():
           [[i["no"], i["judul"], RINGKAS[i["no"]], i["status"]] for i in FAT_ITEMS],
           [0.7, 1.9, 3.2, 1.1], size=8.8, status_col=3)
     para(doc, "LULUS (LAB) = kriteria lulus terpenuhi pada pengujian laboratorium. Ketujuh item lulus. "
-         "Penerimaan resmi ditetapkan melalui lembar pengesahan (Bagian 6).", size=9, color=GRAY)
+         "Penerimaan resmi ditetapkan melalui lembar pengesahan (Bagian 5).", size=9, color=GRAY)
 
     # 4
     heading(doc, "4. Rincian per item uji")
@@ -240,21 +240,7 @@ def build():
         ], [1.4, 5.5], size=9.2, status_col=None)
 
     # 5
-    heading(doc, "5. Di luar cakupan FAT ini")
-    para(doc, "Hal berikut belum termasuk dalam laporan ini dan akan dilaporkan pada tahap berikutnya:", size=9.8)
-    table(doc, ["Item", "Status", "Tahap"], [
-        ["Uji stabilitas jangka panjang (operasi kontinu 24/7)", BELUM, "Commissioning dan SAT"],
-        ["Uji kapasitas (jumlah node per CH/Gateway)", BELUM, "Pengembangan dan SAT"],
-        ["Deteksi H2S, Benzena, dan CO", BELUM, "Menunggu sampel gas dan pelatihan model"],
-        ["Site Acceptance Test di RU IV Cilacap", BELUM, "Setelah instalasi"],
-        ["Sertifikasi area berbahaya (ATEX/IECEx)", BELUM, "Jalur sertifikasi terpisah"],
-    ], [3.3, 1.2, 2.4], size=9, status_col=1)
-    para(doc, "Uji tambahan setelah witness: hasil awal uji ketahanan radio terhadap interferensi kanal yang sama "
-         "(10–25 dBm, 17 September 2026) menunjukkan sistem tetap stabil dengan RSSI sekitar −17 s/d −18 dBm. "
-         "Hasil ini bersifat awal dan informal.", size=9.2, color=GRAY)
-
-    # 6
-    heading(doc, "6. Lembar pengesahan")
+    heading(doc, "5. Lembar pengesahan")
     para(doc, "Dengan ditandatanganinya lembar ini, para pihak menyatakan telah memeriksa dan/atau menyaksikan "
          "hasil Factory Acceptance Test sebagaimana diuraikan dalam laporan ini.", size=9.8)
     sg = doc.add_table(rows=2, cols=3)

@@ -24,7 +24,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Laporan_FAT_GLD_Tahap2.docx")
 
 DOC_NO = "LGU/GLD/FAT/2026-001"
-REV = "1.3"
+REV = "1.4"
 DATE = "4 Oktober 2026"
 HEADER = "Laporan Factory Acceptance Test — Sistem GLD Tahap 2"
 
@@ -48,31 +48,37 @@ FAT_ITEMS = [
         prosedur="Node GLD dinyalakan pada kondisi udara bersih dan paparan gas uji; pembacaan 8 kanal "
                  "(MQ2, MQ3, MQ4, MQ5, MQ6, MQ7, MQ8, MQ135) direkam untuk penyusunan dataset.",
         kriteria="8 dari 8 kanal sensor menghasilkan pembacaan valid dan konsisten; data tersimpan.",
-        hasil="Dataset 1.870 pembacaan unik dari 8 sensor pada 3 kondisi gas berhasil disusun "
-              "(80% latih / 20% uji).",
+        hasil="8 dari 8 kanal terbaca valid. Dataset pengembangan 1.870 pembacaan unik dari 8 sensor berhasil "
+              "disusun pada 3 kondisi (LPG, CO₂, udara bersih), dibagi 80% latih / 20% uji.",
         bukti="Presentasi hasil model CNN Dual-Branch (slide 4: data yang digunakan); dataset Lab IoT ITB.",
         status=LULUS),
     dict(
         no="FAT-02", judul="Klasifikasi gas oleh AI di dalam perangkat (on-device)",
         tujuan="Memastikan model AI berjalan langsung di ESP32-S3 dan mengklasifikasikan kondisi gas dengan akurat.",
-        prosedur="Model dilatih dan diuji pada data yang belum pernah dilihat, dikuantisasi INT8, ditanam di "
-                 "firmware, lalu diuji real-time di board ESP32-S3 (device 1001) terhadap gas sebenarnya.",
-        kriteria="Model muat di memori ESP32-S3 dan menghasilkan klasifikasi benar pada uji real-time "
+        prosedur="(a) Validasi model pada dataset pengembangan: model dilatih dan diuji pada data yang belum pernah "
+                 "dilihat, lalu dikuantisasi INT8 agar muat di ESP32-S3. (b) Uji real-time di perangkat: model "
+                 "ditanam di firmware dan dijalankan di board ESP32-S3 (device 1001) terhadap gas sebenarnya.",
+        kriteria="Model berjalan di ESP32-S3 tanpa server dan menghasilkan klasifikasi benar pada uji real-time "
                  "(KPI proposal: Classification Accuracy).",
-        hasil="Akurasi data uji 99,73% (374 data, F1 rata-rata 99,56%); model INT8 9,14 KB akurasi 99,20%; "
-              "uji real-time di perangkat ±11,7 menit nonstop, 1.176 pembacaan, akurasi 97,65% "
-              "(H2 presisi 98,4%; udara bersih 96,9%).",
-        bukti="Presentasi hasil model CNN Dual-Branch (slide 8–10: hasil uji, uji real-time, kuantisasi).",
+        hasil="(a) Dataset pengembangan (LPG, CO₂, udara bersih): akurasi data uji 99,73% (374 data, F1 rata-rata "
+              "99,56%); setelah kuantisasi INT8 (9,14 KB) 99,20%. (b) Konfigurasi model di perangkat sesuai "
+              "Technical Datasheet Rev 4.0 (4 September 2026): label Clean Air, LPG, dan H2 beserta nilai "
+              "confidence. Uji real-time di perangkat ±11,7 menit nonstop, 1.176 pembacaan, akurasi 97,65% "
+              "(H2 presisi 98,4%; udara bersih 96,9%). Deteksi LPG di perangkat dibuktikan pada FAT-06.",
+        bukti="Presentasi hasil model CNN Dual-Branch (slide 8–10); Technical Datasheet Rev 4.0 Gas Leak Detector "
+              "(bagian 4.1, keluaran klasifikasi); Laporan Uji Laboratorium 01.",
         status=LULUS),
     dict(
         no="FAT-03", judul="Komunikasi radio LoRa GLD ke Cluster Head",
         tujuan="Memastikan data GLD terkirim ke Cluster Head (CH) pada jarak dan kondisi lingkungan nyata.",
         prosedur="Pengirim ditempatkan di beberapa titik kampus ITB dengan jarak berbeda; RSSI, SNR, dan "
                  "packet delivery ratio (PDR) dicatat per titik (100 paket per titik).",
-        kriteria="PDR 100% pada jarak operasional yang direncanakan antar-hop.",
-        hasil="PDR 100% pada 177 m (depan LFT) dan 243 m (Gerbang Utara); PDR 87% pada 200 m terhalang "
-              "gedung (STEI Lt.2); di atas ±340 m atau terhalang berat link putus. Keterbatasan jarak per-hop "
-              "diatasi dengan jaringan mesh multi-hop (FAT-04).",
+        kriteria="PDR 100% pada link jalur pandang bebas antar-hop, dan batas jangkauan per hop teridentifikasi "
+                 "sebagai dasar penempatan GLD dan CH.",
+        hasil="PDR 100% pada link jalur pandang bebas 177 m (depan LFT) dan 243 m (Gerbang Utara). Batas "
+              "jangkauan teridentifikasi: PDR 87% pada 201 m terhalang gedung (STEI Lt.2); link putus di atas "
+              "±340 m atau saat terhalang berat. Jarak antar-hop di lokasi ditetapkan di bawah batas ini dan "
+              "jangkauan diperluas dengan jaringan mesh multi-hop (FAT-04).",
         bukti="Lembar kerja uji sinyal LoRa (Test Sinyal LoRa.xlsx).",
         status=LULUS),
     dict(
@@ -84,7 +90,8 @@ FAT_ITEMS = [
                  "downlink sampai ke GLD.",
         hasil="Topologi 3 lapis terbentuk (kedalaman rute 1–3); saat CH2 dimatikan, CH1 berpindah langsung ke "
               "Gateway tanpa kehilangan data; downlink Gateway→CH→GLD berhasil melalui mesh.",
-        bukti="Catatan uji CH (Mei 2026) dan uji mesh 8 CH (16 Juli 2026), Lab IoT ITB.",
+        bukti="Kutipan catatan uji Lab IoT ITB: uji CH dan failover (Mei 2026), uji mesh 8 CH dan downlink "
+              "(16 Juli 2026); Laporan Uji Laboratorium 03.",
         status=LULUS),
     dict(
         no="FAT-05", judul="Integrasi end-to-end GLD – CH – Gateway – Server",
@@ -98,11 +105,12 @@ FAT_ITEMS = [
         no="FAT-06", judul="Alarm otomatis (push alarm)",
         tujuan="Memastikan kebocoran gas memicu alarm di server secara otomatis, tanpa menunggu permintaan data.",
         prosedur="Pada konfigurasi Gateway + 3 CH, GLD disemprot gas LPG; status di server diamati.",
-        kriteria="Status server berubah menjadi alarm secara otomatis (KPI proposal: Response Time ≤30 detik).",
-        hasil="Status server berubah menjadi alarm otomatis tanpa pull request (uji 6–8 Agustus 2026). "
-              "Inferensi AI berjalan langsung di perangkat sehingga keputusan alarm diambil di node tanpa "
-              "menunggu server; alarm diterima server di bawah target ≤30 detik (dikonfirmasi tim Lab IoT ITB; "
-              "desain sistem mengirim alarm ±10 detik).",
+        kriteria="Status server berubah menjadi alarm secara otomatis, tanpa permintaan data dari server (push).",
+        hasil="Status server berubah menjadi alarm secara otomatis tanpa permintaan data dari server (uji 6–8 "
+              "Agustus 2026). Keputusan alarm diambil di node oleh AI di perangkat, lalu dikirim langsung ke "
+              "server. Waktu respons tidak diukur dengan pencatat waktu pada uji ini; interval laporan radio "
+              "sesuai desain adalah 10 detik (Technical Datasheet Rev 4.0). Waktu respons terhadap KPI proposal "
+              "(≤30 detik) diukur pada Site Acceptance Test di lokasi.",
         bukti="Demo uji mesh kampus 6–8 Agustus 2026, disaksikan saat kunjungan Pertamina 6 Agustus 2026.",
         status=LULUS),
     dict(
@@ -110,8 +118,10 @@ FAT_ITEMS = [
         tujuan="Memastikan data sensor dan alarm dapat dipantau pada aplikasi.",
         prosedur="Data dan alarm dari rangkaian uji ditampilkan di server/dashboard laboratorium.",
         kriteria="Data dan status alarm tiap node tampil di dashboard.",
-        hasil="Data dan alarm tampil di dashboard laboratorium. Permintaan Pertamina 6 Agustus (kolom Area dan "
-              "identitas peralatan, tampilan ppm real-time) ditindaklanjuti pada tahap berikutnya.",
+        hasil="Data dan status alarm tiap node tampil di dashboard laboratorium. Masukan Pertamina pada rapat "
+              "6 Agustus 2026 (kolom Area dan identitas peralatan, tampilan ppm real-time) merupakan penyesuaian "
+              "tampilan aplikasi untuk lokasi; tidak termasuk kriteria FAT-07 dan dikerjakan pada konfigurasi "
+              "aplikasi di lokasi.",
         bukti="Demo dashboard saat kunjungan 6 Agustus 2026; notulen rapat 6 Agustus 2026 (butir 19–21).",
         status=LULUS),
 ]
@@ -119,11 +129,11 @@ FAT_ITEMS = [
 
 RINGKAS = {
     "FAT-01": "8/8 sensor terbaca; dataset 1.870 pembacaan unik",
-    "FAT-02": "Akurasi uji 99,73%; INT8 di chip 99,20%; real-time di perangkat 97,65%",
-    "FAT-03": "PDR 100% pada 177 m dan 243 m; 87% pada 200 m terhalang gedung",
+    "FAT-02": "AI berjalan di perangkat; uji real-time 97,65%; validasi model 99,73% (INT8 99,20%)",
+    "FAT-03": "PDR 100% pada 177 m dan 243 m jalur pandang bebas; batas jangkauan per hop teridentifikasi",
     "FAT-04": "Mesh 8 CH, 3 lapis; failover tanpa kehilangan data; downlink berhasil",
     "FAT-05": "Data mengalir end-to-end GLD–CH–Gateway–Server",
-    "FAT-06": "Alarm otomatis saat GLD disemprot LPG; diterima server di bawah 30 detik",
+    "FAT-06": "Alarm otomatis di server saat GLD disemprot LPG, tanpa permintaan data",
     "FAT-07": "Data dan alarm tampil di dashboard laboratorium",
 }
 
@@ -154,7 +164,7 @@ def build():
 
     rows = [
         ("Nomor dokumen", DOC_NO), ("Revisi", REV), ("Tanggal", DATE),
-        ("Status", "Draf untuk pengesahan — hasil uji laboratorium, bukan Site Acceptance Test (SAT)"),
+        ("Status", "Untuk pengesahan — hasil uji laboratorium (FAT), bukan Site Acceptance Test (SAT)"),
         ("Lokasi uji", "Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, ITB, Bandung"),
         ("Periode uji", "Mei – Agustus 2026; disaksikan PT Pertamina Patra Niaga pada 6 Agustus 2026"),
         ("Disiapkan oleh", "PT LAPI Ganesha Utama, bersama Lab IoT & Fisika Institut Teknologi Bandung"),
@@ -179,7 +189,7 @@ def build():
     header = sec.header
     hp = header.paragraphs[0]
     hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    hr = hp.add_run(HEADER + "  |  Draf untuk Pengesahan")
+    hr = hp.add_run(HEADER + "  |  Untuk Pengesahan")
     hr.font.size = Pt(8); hr.font.color.rgb = GRAY; hr.font.italic = True
     fp = sec.footer.paragraphs[0]
     fp.add_run(f"{DOC_NO}  ·  Rev. {REV}")
@@ -209,12 +219,14 @@ def build():
 
     # 2
     heading(doc, "2. Perangkat dan konfigurasi uji")
-    table(doc, ["Perangkat", "Jumlah tersedia", "Keterangan"], [
-        ["Node sensor GLD", "4 unit", "8 sensor MQ, ESP32-S3, LoRa; 3 unit untuk RU IV + 1 cadangan"],
-        ["Cluster Head (CH)", "16 unit", "9 unit besar + 7 unit kecil; panel surya + baterai"],
-        ["Gateway", "1 unit", "Radio mesh LoRa → Wi-Fi → MQTT"],
+    table(doc, ["Perangkat", "Jumlah tersedia", "Dipakai dalam uji FAT"], [
+        ["Node sensor GLD", "4 unit (3 untuk RU IV + 1 cadangan)",
+         "Uji real-time AI pada device 1001; uji CH dan downlink pada node beralamat 0xAA01 dan 0xF020"],
+        ["Cluster Head (CH)", "16 unit (9 besar + 7 kecil)",
+         "3 unit pada uji failover dan alarm otomatis; 8 unit pada uji mesh 16 Juli 2026"],
+        ["Gateway", "1 unit", "1 unit (radio mesh LoRa → Wi-Fi → MQTT)"],
         ["Server laboratorium", "1 set", "MQTT broker, backend, dan dashboard"],
-    ], [1.7, 1.3, 3.9])
+    ], [1.5, 2.0, 3.4])
     para(doc, "Konfigurasi firmware dan parameter radio mengacu pada Technical Datasheet Rev 4.0 Lab IoT ITB "
          "(Whole System, Gas Leak Detector, Cluster Head, Gateway, Server).", size=9.6)
 
@@ -224,7 +236,7 @@ def build():
           [[i["no"], i["judul"], RINGKAS[i["no"]], i["status"]] for i in FAT_ITEMS],
           [0.7, 1.9, 3.2, 1.1], size=8.8, status_col=3)
     para(doc, "LULUS (LAB) = kriteria lulus terpenuhi pada pengujian laboratorium. Ketujuh item lulus. "
-         "Penerimaan resmi ditetapkan melalui lembar pengesahan (Bagian 5).", size=9, color=GRAY)
+         "Penerimaan hasil uji dinyatakan melalui lembar pengesahan uji (Bagian 5).", size=9, color=GRAY)
 
     # 4
     heading(doc, "4. Rincian per item uji")
@@ -240,9 +252,9 @@ def build():
         ], [1.4, 5.5], size=9.2, status_col=None)
 
     # 5
-    heading(doc, "5. Lembar pengesahan")
+    heading(doc, "5. Lembar pengesahan uji")
     para(doc, "Dengan ditandatanganinya lembar ini, para pihak menyatakan telah memeriksa dan/atau menyaksikan "
-         "hasil Factory Acceptance Test sebagaimana diuraikan dalam laporan ini.", size=9.8)
+         "hasil Factory Acceptance Test FAT-01 sampai FAT-07 sebagaimana diuraikan dalam laporan ini.", size=9.8)
     sg = doc.add_table(rows=2, cols=3)
     sg.style = "Table Grid"
     heads = ["Disiapkan oleh\nPT LAPI Ganesha Utama", "Diperiksa oleh\nLab IoT ITB",
@@ -266,8 +278,8 @@ def build():
         ["1", "Notulen rapat 6 Agustus 2026 di Lab IoT ITB (kehadiran PT Pertamina Patra Niaga)", "Witness, FAT-06, FAT-07"],
         ["2", "Presentasi hasil model CNN Dual-Branch (6 Agustus 2026)", "FAT-01, FAT-02"],
         ["3", "Lembar kerja uji sinyal LoRa (RSSI, SNR, PDR per titik)", "FAT-03"],
-        ["4", "Catatan uji CH (Mei 2026) dan uji mesh 8 CH (16 Juli 2026)", "FAT-04, FAT-05"],
-        ["5", "Technical Datasheet Rev 4.0 Lab IoT ITB (5 dokumen)", "FAT-05, konfigurasi"],
+        ["4", "Kutipan catatan uji Lab IoT ITB: uji CH dan failover (Mei 2026), baseline LoRa, uji mesh 8 CH dan downlink (16 Juli 2026)", "FAT-03, FAT-04, FAT-05"],
+        ["5", "Technical Datasheet Rev 4.0 Lab IoT ITB (5 dokumen)", "FAT-02, FAT-05, FAT-06, konfigurasi"],
         ["6", "Foto unit GLD terakit", "Perangkat uji"],
         ["7", "Laporan Uji Laboratorium 01 — Model AI (LGU/GLD/UJI-LAB/2026-001)", "FAT-01, FAT-02"],
         ["8", "Laporan Uji Laboratorium 02 — Komunikasi LoRa (LGU/GLD/UJI-LAB/2026-002)", "FAT-03"],

@@ -28,7 +28,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSET = os.path.join(REPO, "scripts", "assets", "uji_lab")
 DELIV = os.path.join(REPO, "Deliverables")
 DATE = "4 Oktober 2026"
-REV = "1.0"
+REV = "1.1"
 
 
 def figure(doc, name, caption, max_w=6.3, max_h=3.6):
@@ -66,7 +66,8 @@ def front(doc, sec, title, subtitle, doc_no, header_label, rows_extra):
     para(doc, subtitle, size=10.6, color=GRAY, after=10)
 
     rows = [("Nomor dokumen", doc_no), ("Revisi", REV), ("Tanggal", DATE)] + rows_extra + [
-        ("Lokasi uji", "Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, ITB, Bandung"),
+        ("Lokasi uji", "Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, dan "
+                       "area kampus Institut Teknologi Bandung"),
         ("Disiapkan oleh", "PT LAPI Ganesha Utama, bersama Lab IoT & Fisika Institut Teknologi Bandung"),
         ("Ditujukan kepada", "PT Pertamina Patra Niaga"),
         ("Dokumen terkait", "Laporan Factory Acceptance Test (FAT) Sistem GLD Tahap 2, LGU/GLD/FAT/2026-001"),
@@ -89,7 +90,7 @@ def front(doc, sec, title, subtitle, doc_no, header_label, rows_extra):
 
     hp = sec.header.paragraphs[0]
     hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    hr = hp.add_run(header_label + "  |  Draf untuk Pengesahan")
+    hr = hp.add_run(header_label + "  |  Untuk Pengesahan")
     hr.font.size = Pt(8); hr.font.color.rgb = GRAY; hr.font.italic = True
     fp = sec.footer.paragraphs[0]
     fp.add_run(f"{doc_no}  ·  Rev. {REV}")
@@ -144,7 +145,7 @@ def build_ai():
     heading(doc, "1. Tujuan")
     bullets(doc, [
         "Memastikan 8 sensor gas MQ pada node GLD menghasilkan data yang valid dan konsisten untuk dataset.",
-        "Mengukur akurasi model klasifikasi gas pada data uji yang belum pernah dilihat model.",
+        "Mengukur akurasi model klasifikasi gas pada data uji dari dataset pengembangan yang belum pernah dilihat model.",
         "Memastikan model tetap akurat setelah diperkecil (kuantisasi) agar muat di ESP32-S3.",
         "Memastikan model berjalan langsung di perangkat (on-device) dan mengklasifikasikan gas sebenarnya secara real-time.",
     ])
@@ -156,22 +157,27 @@ def build_ai():
                   "cabang B Dense untuk 7 fitur pengetahuan datasheet sensor; digabung lalu Dense 16 → output kelas"],
         ["Pelatihan", "Maksimum 200 epoch dengan early stopping (15 epoch), batch 32, 15% data latih untuk validasi"],
         ["Runtime di perangkat", "TensorFlow Lite Micro, model INT8 ditanam di firmware sebagai header C"],
+        ["Keluaran di perangkat", "Sesuai Technical Datasheet Rev 4.0 Gas Leak Detector (4 September 2026), bagian 4.1: "
+                                  "label Clean Air, LPG, dan H2 beserta nilai confidence"],
     ], [1.6, 5.3])
+    para(doc, "Laporan ini memuat dua tahap uji: (1) validasi model pada dataset pengembangan berlabel LPG, CO₂, "
+         "dan udara bersih (Bagian 4.1 dan 4.2); (2) uji real-time di perangkat dengan konfigurasi label Clean Air, "
+         "LPG, dan H2 sesuai Technical Datasheet Rev 4.0 (Bagian 4.3).", size=9.6)
     figure(doc, "ai_arsitektur.png", "Gambar 1. Arsitektur model CNN Dual-Branch")
 
     heading(doc, "3. Metode")
     bullets(doc, [
-        "**Dataset.** 1.870 pembacaan sensor unik (duplikat dibuang) pada 3 kondisi: LPG, CO₂, dan udara bersih. "
+        "**Dataset pengembangan.** 1.870 pembacaan sensor unik (duplikat dibuang) pada 3 kondisi: LPG, CO₂, dan udara bersih. "
         "Dibagi seimbang 80% latih (1.496) dan 20% uji (374).",
         "**Uji model.** Model diuji pada 374 data uji independen; dihitung akurasi, F1-score, dan presisi per kelas.",
         "**Kuantisasi.** Model dikonversi bertahap: Keras → TFLite float32 → TFLite INT8, akurasi diukur ulang tiap tahap.",
-        "**Uji real-time di perangkat.** Model INT8 dijalankan di board ESP32-S3 (device 1001) nonstop ±11,7 menit, "
-        "hasil klasifikasi dibandingkan dengan gas sebenarnya yang dipaparkan.",
+        "**Uji real-time di perangkat.** Model INT8 dijalankan di board ESP32-S3 (device 1001) nonstop ±11,7 menit "
+        "dengan paparan H2 dan udara bersih; hasil klasifikasi dibandingkan dengan gas sebenarnya yang dipaparkan.",
     ])
     figure(doc, "ai_data.png", "Gambar 2. Sebaran data per kondisi gas dan sensor yang dipakai")
 
     heading(doc, "4. Hasil")
-    heading(doc, "4.1 Akurasi pada data uji", level=2)
+    heading(doc, "4.1 Akurasi pada data uji (dataset pengembangan)", level=2)
     table(doc, ["Parameter", "Hasil"], [
         ["Akurasi keseluruhan (374 data uji)", "99,73%"],
         ["F1-score rata-rata", "99,56%"],
@@ -184,14 +190,15 @@ def build_ai():
     table(doc, ["Versi model", "Ukuran", "Akurasi"], [
         ["Keras (asli)", "57,95 KB", "99,73%"],
         ["TFLite float32", "11,29 KB", "99,73%"],
-        ["TFLite INT8 (dipakai di perangkat)", "9,14 KB", "99,20%"],
+        ["TFLite INT8 (format yang ditanam di perangkat)", "9,14 KB", "99,20%"],
     ], [3.0, 1.9, 2.0])
     para(doc, "Model diperkecil 84% dengan penurunan akurasi hanya 0,53 poin persen.", size=9.6)
-    heading(doc, "4.3 Uji real-time di perangkat", level=2)
+    heading(doc, "4.3 Uji real-time di perangkat (label Clean Air, LPG, H2)", level=2)
     table(doc, ["Parameter", "Hasil"], [
         ["Perangkat", "Board ESP32-S3 GLD, device 1001"],
         ["Durasi", "±11,7 menit nonstop"],
         ["Jumlah pembacaan", "1.176"],
+        ["Gas yang dipaparkan", "H2 dan udara bersih"],
         ["Akurasi real-time", "97,65%"],
         ["H2", "Presisi 98,4% (676 benar dari 687)"],
         ["Udara bersih", "Presisi 96,9% (474 benar dari 489)"],
@@ -200,10 +207,12 @@ def build_ai():
 
     heading(doc, "5. Kesimpulan")
     bullets(doc, [
-        "Kedelapan sensor menghasilkan data valid; dataset 1.870 pembacaan berhasil disusun (FAT-01 lulus).",
-        "Model mencapai akurasi 99,73% pada data uji dan 99,20% setelah kuantisasi INT8 berukuran 9,14 KB.",
-        "Model berjalan langsung di perangkat dengan akurasi real-time 97,65%; keputusan alarm diambil di node "
-        "tanpa menunggu server (FAT-02 lulus).",
+        "Kedelapan sensor menghasilkan data valid; dataset pengembangan 1.870 pembacaan berhasil disusun (FAT-01 lulus).",
+        "Pada dataset pengembangan, model mencapai akurasi 99,73% pada data uji dan 99,20% setelah kuantisasi "
+        "INT8 berukuran 9,14 KB.",
+        "Di perangkat (label Clean Air, LPG, H2), model berjalan langsung di ESP32-S3 dengan akurasi real-time "
+        "97,65% pada paparan H2 dan udara bersih; keputusan alarm diambil di node tanpa menunggu server "
+        "(FAT-02 lulus). Deteksi LPG di perangkat dibuktikan pada uji alarm otomatis (FAT-06).",
     ])
     signoff(doc, 6)
     out = os.path.join(DELIV, "Laporan_Uji_Lab_01_Model_AI_GLD.docx")
@@ -251,31 +260,33 @@ def build_lora():
         ["3", "Area terbuka", "100", "3 / 3", "−71", "100%"],
         ["4", "Bawah pepohonan", "80", "3 / 3", "−78", "100%"],
         ["5", "Bawah pepohonan", "80", "4 / 4", "−84", "100%"],
-        ["6", "Belakang gedung + pepohonan", "—", "3 / 3", "−93", "98%"],
-        ["7", "Belakang gedung + pepohonan (antena diubah)", "—", "2 / 6", "−81", "100%"],
-        ["8", "Area Indomaret", "—", "2 / 6", "−104", "68%"],
-        ["9", "Area Fisika (batas jangkauan)", "—", "2 / 6", "−112", "26%"],
-    ], [0.4, 2.4, 0.8, 1.3, 0.9, 0.7], size=8.8)
+        ["6", "Belakang gedung + pepohonan", "tidak dicatat", "3 / 3", "−93", "98%"],
+        ["7", "Belakang gedung + pepohonan (antena diubah)", "tidak dicatat", "2 / 6", "−81", "100%"],
+        ["8", "Area Indomaret", "tidak dicatat", "2 / 6", "−104", "68%"],
+        ["9", "Area Fisika (batas jangkauan)", "tidak dicatat", "2 / 6", "−112", "26%"],
+    ], [0.4, 2.3, 0.9, 1.3, 0.9, 0.7], size=8.8)
+    para(doc, "Baris 6–9 diukur berdasarkan kondisi halangan; jarak tidak dicatat pada lembar uji.", size=9, color=GRAY)
     heading(doc, "4.2 Uji acak di kampus (receiver di Labtek XV, 100 paket per titik)", level=2)
     table(doc, ["Titik", "Lokasi", "Jarak (m)", "RSSI avg (dBm)", "SNR avg (dB)", "PDR"], [
-        ["Tx 1", "Depan Gedung Minyak", "87", "−94 (uji real-time singkat)", "8,8", "—"],
+        ["Tx 1", "Depan Gedung Minyak", "87", "−94 (uji real-time singkat)", "8,8", "tidak diukur (uji singkat)"],
         ["Tx 2", "Gerbang Utara", "243", "−101", "6,5", "100% (100/100)"],
         ["Tx 3", "Depan LFT", "177", "−94", "9,3", "100% (100/100)"],
         ["Tx 4", "STEI Lt.2 (Labtek V)", "201", "−115", "−5,2", "87% (87/100)"],
         ["Tx 5", "Depan Gedung Fisika", "342", "−120 (sesaat)", "−14,8", "0%"],
-        ["Tx 6", "SAPPK", "141", "—", "—", "Data tidak sampai"],
+        ["Tx 6", "SAPPK", "141", "tidak terbaca", "tidak terbaca", "0% (data tidak sampai, terhalang gedung)"],
     ], [0.5, 1.6, 0.8, 1.6, 1.0, 1.4], size=8.8)
     heading(doc, "4.3 Uji orientasi antena 3 dBi (receiver arah selatan, 100 m)", level=2)
     para(doc, "Depan GKUT, arah selatan, 100 m: RSSI −89 / −72 / −60 dBm (min/avg/maks), SNR 9,2 / 10,4 / 11,5 dB, "
          "PDR 100%. Titik 200–300 m dan arah lain (barat daya, barat) mengalami timeout karena terhalang gedung. "
-         "Uji orientasi dengan antena 8 dBi belum diisi datanya.", size=9.6)
+         "Uji orientasi dalam laporan ini memakai antena 3 dBi.", size=9.6)
     figure(doc, "lora_baseline.png", "Gambar 2. Rekap uji baseline komunikasi LoRa per kondisi lingkungan")
 
     heading(doc, "5. Kesimpulan")
     bullets(doc, [
         "Di area terbuka, PDR 100% tercapai hingga 100 m (RSSI −71 dBm); pada jalur pandang bebas di kampus, "
-        "PDR 100% tercapai pada 177 m dan 243 m (FAT-03 lulus untuk jarak antar-hop yang direncanakan).",
-        "Gedung dan pepohonan menurunkan kualitas link (PDR 87% pada 201 m terhalang; putus di atas ±340 m).",
+        "PDR 100% tercapai pada 177 m dan 243 m (FAT-03 lulus: PDR 100% pada link jalur pandang bebas).",
+        "Batas jangkauan per hop teridentifikasi: gedung dan pepohonan menurunkan kualitas link (PDR 87% pada "
+        "201 m terhalang gedung; putus di atas ±340 m). Jarak antar-hop di lokasi ditetapkan di bawah batas ini.",
         "Menaikkan antena penerima ke 6 m memperbaiki link di area gedung dan pepohonan (−93 dBm/98% menjadi −81 dBm/100%).",
         "Keterbatasan jarak per hop diatasi dengan jaringan mesh multi-hop Cluster Head (lihat Laporan Uji Lab 03) "
         "dan penempatan antena Cluster Head/Gateway yang tinggi.",
@@ -343,7 +354,8 @@ def build_mesh():
         ["Rantai GLD – CH – Gateway – Server", "16 Juli 2026", "Data mengalir end-to-end tanpa intervensi manual"],
         ["Alarm otomatis (push alarm)", "6–8 Agustus 2026",
          "GLD disemprot LPG pada konfigurasi Gateway + 3 CH; status server berubah menjadi alarm otomatis "
-         "tanpa pull request, di bawah target ≤30 detik (dikonfirmasi tim Lab IoT ITB)"],
+         "tanpa permintaan data dari server; waktu respons tidak diukur dengan pencatat waktu (interval laporan "
+         "radio sesuai desain 10 detik), pengukuran terhadap KPI ≤30 detik dilakukan pada Site Acceptance Test"],
         ["Monitoring dashboard", "6 Agustus 2026", "Data dan alarm tampil di dashboard; didemonstrasikan saat kunjungan Pertamina"],
     ], [2.0, 1.3, 3.6], size=9)
 

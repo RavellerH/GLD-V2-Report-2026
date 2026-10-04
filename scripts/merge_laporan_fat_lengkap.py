@@ -26,7 +26,7 @@ COVER = {
     "judul": "Laporan Factory Acceptance Test\n(FAT)",
     "sub": "Pengembangan dan Field Testing Sistem\nGas Leak Detection (GLD) Tahap 2",
     "nodok": "LGU/GLD/FAT/2026-001",
-    "rev": "1.3",
+    "rev": "1.4",
     "tgl": "4 Oktober 2026",
     "pengantar": [
         "Puji syukur kami panjatkan ke hadirat Tuhan Yang Maha Esa atas rahmat dan karunia-Nya "
@@ -36,8 +36,9 @@ COVER = {
         "laboratorium sebelum perangkat dikirim ke lokasi, mencakup tujuh item uji (FAT-01 sampai FAT-07), "
         "lembar pengesahan uji, serta lampiran bukti pendukung termasuk tiga Laporan Uji Laboratorium. "
         "Pengujian di lokasi (Site Acceptance Test dan commissioning) akan dilaporkan terpisah setelah "
-        "instalasi di RU IV Cilacap. Penilaian penerimaan sepenuhnya merupakan kewenangan "
-        "PT Pertamina Patra Niaga.",
+        "instalasi di RU IV Cilacap. Lembar Pengesahan pada halaman depan mengesahkan dokumen laporan ini; "
+        "penerimaan hasil uji dinyatakan pada Lembar Pengesahan Uji (Bagian 5 laporan FAT). Penilaian "
+        "penerimaan sepenuhnya merupakan kewenangan PT Pertamina Patra Niaga.",
         "Kami mengucapkan terima kasih kepada PT Pertamina Patra Niaga serta seluruh pihak yang telah "
         "berkontribusi dalam pelaksanaan pekerjaan ini, termasuk Lab IoT/Instrumentation and Computation "
         "Institut Teknologi Bandung. Kami terbuka terhadap saran dan masukan untuk penyempurnaan "
@@ -52,7 +53,7 @@ BAB_FAT = [
     (1, "2. Perangkat dan konfigurasi uji", 2),
     (1, "3. Ringkasan hasil", 2),
     (1, "4. Rincian per item uji", 2),
-    (1, "5. Lembar pengesahan uji", 4),
+    (1, "5. Lembar pengesahan uji", 5),
     (1, "Daftar bukti lampiran", 5),
 ]
 
@@ -61,15 +62,18 @@ LAMPIRAN = [
      "Notulen rapat di Lab IoT ITB yang dihadiri PT Pertamina Patra Niaga.", "Witness, FAT-06, FAT-07",
      ["Lampiran_01_Notulen_Rapat_Witness_6Agustus2026.pdf"]),
     ("2", "Hasil Uji Model AI CNN Dual-Branch",
-     "Presentasi tim Lab IoT ITB: dataset, arsitektur, akurasi uji, kuantisasi, uji real-time di perangkat.",
+     "Presentasi tim Lab IoT ITB (6 Agustus 2026): dataset pengembangan (LPG, CO2, udara bersih), arsitektur, "
+     "akurasi uji, kuantisasi, dan uji real-time di perangkat (H2 dan udara bersih).",
      "FAT-01, FAT-02", ["Lampiran_02_Hasil_Uji_Model_AI_CNN_DualBranch.pdf"]),
     ("3", "Data Uji Sinyal LoRa", "Lembar kerja RSSI, SNR, dan PDR per titik uji di kampus ITB.", "FAT-03",
      ["Lampiran_03_Uji_Sinyal_LoRa.pdf"]),
-    ("4", "Catatan Uji CH, Mesh, Failover, dan End-to-End (April-Juli 2026)",
-     "Catatan kerja mingguan tim Lab IoT ITB (87 halaman).", "FAT-04, FAT-05",
-     ["Lampiran_04_Uji_CH_Mesh_Failover_EndToEnd_Apr-Jul2026.pdf"]),
+    ("4", "Kutipan Catatan Uji CH, Failover, LoRa, Mesh, dan Downlink",
+     "Kutipan 30 halaman dari catatan kerja Lab IoT ITB (April-Juli 2026). Nomor halaman asal tercantum di "
+     "kanan bawah setiap halaman.", "FAT-03, FAT-04, FAT-05",
+     ["Lampiran_04_Kutipan_Uji_CH_Failover_LoRa_Mesh_Downlink.pdf"]),
     ("5", "Technical Datasheet Rev 4.0 Lab IoT ITB",
-     "Whole System, Gas Leak Detector, Cluster Head, Gateway, dan Server.", "FAT-05, konfigurasi",
+     "Whole System, Gas Leak Detector, Cluster Head, Gateway, dan Server (4 September 2026).",
+     "FAT-02, FAT-05, FAT-06, konfigurasi",
      [f"Lampiran_05_Technical_Datasheet_Rev4.0/Technical-Datasheet-{n}-ID.pdf"
       for n in ["Whole-System", "GasleakDetector", "CH", "Gateway", "Server"]]),
     ("6", "Foto Unit GLD Terakit", "Unit GLD yang diuji.", "Perangkat uji",

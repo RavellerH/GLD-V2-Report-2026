@@ -20,7 +20,8 @@ import build_cover_laporan_lgu as cv  # noqa: E402
 import build_word_penagihan_lgu as wp  # noqa: E402
 
 ROOT = cv.ROOT
-TMP = os.path.join(ROOT, "Paket LGU", "02_Penagihan_Termin_1", "src")
+import tempfile
+TMP = tempfile.mkdtemp(prefix="word_termin1_")  # berkas antara (gambar halaman, potongan docx) tidak disimpan di repo
 D = cv.DOCS[0]
 FINAL_PDF = os.path.join(ROOT, D["out"])
 OUT = FINAL_PDF[:-4] + ".docx"

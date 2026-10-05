@@ -12,7 +12,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "Paket Pertamina" / "01_Pilot_Field_Testing"
-OUT_DOCX = OUT_DIR / "Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD.docx"
+OUT_DOCX = ROOT / "Paket Pertamina" / "04_Laporan_Termin_1" / "Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev03.docx"
 
 CONTRACT_IMAGE = Path(
     r"C:\Users\HP\AppData\Local\Temp\codex-clipboard-783d6c24-1253-4e73-99bd-c702ded1db56.png"
@@ -126,6 +126,19 @@ def format_cell(cell, bold=False, color=TEXT, size=9.1, align=WD_ALIGN_PARAGRAPH
             set_run_font(run, size=size, bold=bold, color=color)
 
 
+def fix_widths(table, widths):
+    """Lebar kolom tetap (tblLayout=fixed + tblGrid) agar Word dan LibreOffice sama-sama patuh."""
+    tblPr = table._tbl.tblPr
+    lay = OxmlElement("w:tblLayout")
+    lay.set(qn("w:type"), "fixed")
+    tblPr.append(lay)
+    for gc, w in zip(table._tbl.tblGrid.findall(qn("w:gridCol")), widths):
+        gc.set(qn("w:w"), str(int(w * 1440)))
+    for row in table.rows:
+        for i, w in enumerate(widths):
+            row.cells[i].width = Inches(w)
+
+
 def add_table(doc, headers, rows, widths=None, font_size=9.1, status_col=None):
     table = doc.add_table(rows=1, cols=len(headers))
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -154,8 +167,10 @@ def add_table(doc, headers, rows, widths=None, font_size=9.1, status_col=None):
             if idx == status_col:
                 for run in cell.paragraphs[0].runs:
                     status = str(value).upper()
-                    color = GREEN if "MEMENUHI" in status or "TERVERIFIKASI" in status else AMBER
+                    color = GREEN if "MEMENUHI" in status or "TERVERIFIKASI" in status or "LULUS" in status else AMBER
                     set_run_font(run, size=font_size, bold=True, color=color)
+    if widths:
+        fix_widths(table, widths)
     doc.add_paragraph().paragraph_format.space_after = Pt(0)
     return table
 
@@ -253,8 +268,8 @@ def configure_styles(doc):
 def add_document_control(doc):
     rows = [
         ("Nomor dokumen", "LGU-GLD-T1-FIT-2026-001"),
-        ("Revisi", "0.2"),
-        ("Tanggal", "11 September 2026"),
+        ("Revisi", "0.3"),
+        ("Tanggal", "4 Oktober 2026"),
         ("Status", "Untuk review dan pengesahan Termin 1"),
         ("Disiapkan oleh", "LAPI Ganesha Utama bersama Lab IoT/Instrumentation and Computation ITB"),
         ("Ditujukan kepada", "PT Pertamina Patra Niaga"),
@@ -271,6 +286,10 @@ def add_document_control(doc):
         set_cell_shading(table.rows[i].cells[0], PALE_GRAY)
         format_cell(table.rows[i].cells[0], bold=True, size=9.2)
         format_cell(table.rows[i].cells[1], size=9.2)
+    fix_widths(table, [1.65, 4.85])
+
+
+FATREF = "Laporan Factory Acceptance Test (FAT) nomor LGU/GLD/FAT/2026-001 Rev 1.4 (Lampiran A)"
 
 
 def build_document():
@@ -341,7 +360,7 @@ def build_document():
     add_heading(doc, "1 Ringkasan Eksekutif", 1)
     add_paragraph(
         doc,
-        "Kesimpulan. Berdasarkan bukti teknis dan dokumentasi yang tersedia sampai 11 September 2026, "
+        "Kesimpulan. Berdasarkan bukti teknis dan dokumentasi yang tersedia sampai 4 Oktober 2026, "
         "pekerjaan Termin 1 telah mencapai penyelesaian substansial pada tahap rekayasa dan integrasi "
         "laboratorium. Paket ini layak diajukan kepada PT Pertamina Patra Niaga untuk evaluasi, penerimaan, "
         "dan pembayaran Termin 1 sebesar 20 persen.",
@@ -354,7 +373,9 @@ def build_document():
         "alarm push, serta peninjauan perkembangan sistem oleh PT Pertamina Patra Niaga di Lab IoT, "
         "Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung, sebelum "
         "kunjungan RU IV Cilacap. Berdasarkan konfirmasi PIC proyek pada 11 September 2026, kunjungan "
-        "Pertamina tersebut merupakan witness terhadap perkembangan dan integrasi sistem untuk tahap FAT/FIT."
+        "Pertamina tersebut merupakan witness terhadap perkembangan dan integrasi sistem untuk tahap FAT/FIT. "
+        f"Hasil uji tersebut dilaporkan lengkap dalam {FATREF}, beserta tiga Laporan Uji Laboratorium dan "
+        "bukti pendukungnya."
     )
     add_paragraph(
         doc,
@@ -369,7 +390,7 @@ def build_document():
         ("1", "Detail engineering dan desain", "MEMENUHI", "Arsitektur, datasheet sistem, TDS R4, desain mounting, serta dokumen HSE dan instalasi tersedia."),
         ("2", "Persiapan komponen", "MEMENUHI", "Empat unit GLD dan enam belas unit Cluster Head telah dilaporkan tersedia untuk pengembangan dan integrasi."),
         ("3", "Konfigurasi firmware", "MEMENUHI", "Akuisisi delapan sensor, inferensi lokal, komunikasi LoRa STAR/MESH, alarm, downlink, dan integrasi gateway-server terdokumentasi."),
-        ("4", "Factory integration test", "MEMENUHI DENGAN PENGESAHAN", "Rangkaian integrasi lab dan alarm push telah diuji; PT Pertamina Patra Niaga meninjau sistem di Lab IoT/Instrumentation and Computation ITB sebelum kunjungan Cilacap. Tanda tangan pengesahan disediakan pada laporan ini."),
+        ("4", "Factory integration test", "MEMENUHI DENGAN PENGESAHAN", "Tujuh item uji FAT-01 s.d. FAT-07 lulus pada pengujian laboratorium, dilaporkan dalam Laporan FAT (Lampiran A); PT Pertamina Patra Niaga meninjau sistem di Lab IoT/Instrumentation and Computation ITB sebelum kunjungan Cilacap. Tanda tangan pengesahan disediakan pada Laporan FAT dan laporan ini."),
         ("5", "Dokumen instalasi dan as-built", "MEMENUHI SESUAI TAHAP", "Dokumen instalasi dan konfigurasi as-built prototipe/laboratorium tersedia. As-built site final diterbitkan setelah instalasi lapangan."),
     ]
     add_table(doc, ["No", "Deliverable", "Status", "Dasar penilaian"], rows, [0.35, 1.65, 1.35, 3.15], font_size=8.8, status_col=2)
@@ -412,7 +433,7 @@ def build_document():
         ("DE-01", "Arsitektur sistem end-to-end", "Datasheet Sistem GLD Arsitektur Server dan Jaringan", "GLD ke CH melalui STAR, antar-CH melalui MESH, GW ke broker dan server."),
         ("DE-02", "Spesifikasi Gas Leak Detector", "Technical Datasheet GasleakDetector Revision 4.0", "Akuisisi 8 sensor MQ, ADS1256, ESP32-S3, LoRa, mode alarm dan downlink."),
         ("DE-03", "Spesifikasi CH, Gateway, Server", "Paket Technical Datasheet Revision 4.0", "Kontrak komunikasi, cache, queue, parent selection, broker, dan pemrosesan server."),
-        ("DE-04", "Desain mekanik pemasangan", "Desain Bracket L U-Bolt GLD Mounting", "Basis mounting non-invasif pada struktur existing tanpa las atau bor."),
+        ("DE-04", "Desain mekanik pemasangan", "Desain pelat mounting U-bolt GLD dan Spesifikasi Material Instalasi RU IV Cilacap Rev 1.5", "Pelat mounting U-bolt pada tiang besi galvanis 2 inci baru yang ditanam dan dicor; spesifikasi tiang, kabel 24 VDC, dan jaringan lokal."),
         ("DE-05", "Dokumen instalasi dan HSE", "JSA HSE RU IV dan Checklist Kesiapan Instalasi", "Prasyarat HSE, pembagian tanggung jawab, mobilisasi, commissioning, dan acceptance test."),
     ]
     add_table(doc, ["ID", "Cakupan", "Dokumen", "Isi yang dibuktikan"], rows, [0.6, 1.45, 2.15, 2.55], font_size=8.6)
@@ -421,7 +442,7 @@ def build_document():
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         p.add_run().add_picture(str(BRACKET_IMAGE), width=Inches(6.3))
-        add_caption(doc, "Gambar 2 Basis desain bracket L dan U-bolt untuk pemasangan GLD")
+        add_caption(doc, "Gambar 2 Basis desain pelat mounting U-bolt untuk pemasangan GLD")
 
     doc.add_page_break()
     add_heading(doc, "4 Kesiapan Komponen dan Perangkat", 1)
@@ -467,10 +488,10 @@ def build_document():
         add_bullet(doc, item)
     add_paragraph(
         doc,
-        "Catatan konfigurasi. Profil dokumentasi model AI pada TDS R4 masih perlu diselaraskan dengan profil "
-        "CNN Dual-Branch empat kelas yang telah dikonfirmasi tim. Perbedaan dokumentasi ini tidak membatalkan "
-        "fungsi inferensi lokal yang telah berjalan, tetapi harus ditutup sebelum penerbitan dokumen konfigurasi final.",
-        bold_lead="Catatan konfigurasi. ",
+        "Konfigurasi model AI. Keluaran model di perangkat mengikuti Technical Datasheet Revision 4.0 (4 September "
+        "2026): label Clean Air, LPG, dan H2 beserta nilai confidence. Validasi model pada dataset pengembangan dan "
+        "uji real-time di perangkat dirinci pada FAT-02 dalam Laporan FAT (Lampiran A).",
+        bold_lead="Konfigurasi model AI. ",
     )
 
     add_heading(doc, "6 Pelaksanaan Factory Integration Test", 1)
@@ -491,6 +512,12 @@ def build_document():
         "bagian akhir laporan disediakan untuk mengubah bukti witness tersebut menjadi acceptance formal Termin 1.",
         bold_lead="Kehadiran dan witness. ",
     )
+    add_paragraph(
+        doc,
+        "Laporan FAT. Rincian setiap item uji (tujuan, prosedur, kriteria lulus, hasil, dan bukti), lembar "
+        "pengesahan uji, serta lampiran bukti tercantum dalam Laporan Factory Acceptance Test (FAT) nomor LGU/GLD/FAT/2026-001 Rev 1.4 (Lampiran A). Tabel berikut merangkum hasilnya.",
+        bold_lead="Laporan FAT. ",
+    )
 
     doc.add_page_break()
     # Keep the continuation table clear of the running header in LibreOffice/PDF.
@@ -498,22 +525,23 @@ def build_document():
     spacer.paragraph_format.space_after = Pt(2)
     spacer.paragraph_format.line_spacing = Pt(4)
     rows = [
-        ("FAT-01", "Akuisisi sensor dan telemetri GLD", "TERVERIFIKASI DI LAB", "Data delapan sensor dapat dibaca dan direkam; dataset konsisten tersedia."),
-        ("FAT-02", "Inferensi AI lokal", "TERVERIFIKASI DI LAB", "Inferensi on-device pada ESP32-S3 telah dikonfirmasi dan didukung secara generik oleh TDS R4."),
-        ("FAT-03", "Komunikasi GLD ke CH", "TERVERIFIKASI DI LAB", "Link STAR dan payload lapangan berfungsi pada konfigurasi uji."),
-        ("FAT-04", "Mesh multi-hop dan failover CH", "TERVERIFIKASI DI LAB", "Topologi multi-hop 8 CH telah diuji untuk menyiasati keterbatasan jangkauan per-hop."),
-        ("FAT-05", "CH ke Gateway dan Server", "TERVERIFIKASI DI LAB", "Rantai GLD-CH-GW-Server telah berjalan end-to-end di laboratorium."),
-        ("FAT-06", "Alarm push", "TERVERIFIKASI DI LAB", "GLD disemprot LPG dan alarm diterima server otomatis tanpa pull request pada uji 6-8 Agustus."),
-        ("FAT-07", "Monitoring dan dokumentasi data", "TERVERIFIKASI DI LAB", "Data dan alarm dapat dipantau pada lingkungan server lab; commissioning produksi belum termasuk tahap ini."),
+        ("FAT-01", "Akuisisi 8 sensor gas dan perekaman data", "LULUS (LAB)", "8 dari 8 kanal terbaca valid; dataset pengembangan 1.870 pembacaan unik."),
+        ("FAT-02", "Klasifikasi gas oleh AI di dalam perangkat", "LULUS (LAB)", "AI berjalan di ESP32-S3 tanpa server; uji real-time 97,65% (H2 dan udara bersih); validasi model 99,73%, INT8 99,20%."),
+        ("FAT-03", "Komunikasi radio LoRa GLD ke CH", "LULUS (LAB)", "PDR 100% pada 177 m dan 243 m jalur pandang bebas; batas jangkauan per hop teridentifikasi."),
+        ("FAT-04", "Mesh multi-hop dan failover CH", "LULUS (LAB)", "Mesh 8 CH, 3 lapis; failover tanpa kehilangan data; downlink ke GLD berhasil."),
+        ("FAT-05", "Integrasi end-to-end GLD-CH-Gateway-Server", "LULUS (LAB)", "Data mengalir end-to-end tanpa intervensi manual (16 Juli 2026)."),
+        ("FAT-06", "Alarm otomatis (push alarm)", "LULUS (LAB)", "GLD disemprot LPG; status server berubah menjadi alarm otomatis tanpa permintaan data (6-8 Agustus 2026)."),
+        ("FAT-07", "Monitoring data dan alarm di dashboard", "LULUS (LAB)", "Data dan status alarm tiap node tampil di dashboard laboratorium."),
     ]
-    add_table(doc, ["Test ID", "Fungsi", "Hasil", "Bukti hasil"], rows, [0.65, 1.65, 1.55, 2.95], font_size=8.5, status_col=2)
+    add_table(doc, ["Test ID", "Item uji", "Status", "Hasil utama"], rows, [0.65, 1.75, 1.05, 3.35], font_size=8.5, status_col=2)
 
     add_paragraph(
         doc,
         "Hasil FAT. Fungsi inti yang diperlukan untuk melanjutkan ke persiapan lapangan telah ditunjukkan pada "
         "lingkungan laboratorium. Tidak ditemukan kegagalan integrasi yang menghentikan persiapan pilot. "
-        "Temuan yang masih terbuka bersifat penyempurnaan dokumentasi, penambahan kelas gas, commissioning "
-        "produksi, serta kepatuhan area berbahaya yang ditangani pada tahap berikutnya.",
+        "Pengukuran waktu respons alarm terhadap KPI proposal (30 detik), commissioning, dan Site Acceptance Test "
+        "dilaksanakan di lokasi setelah instalasi; penambahan kelas gas dan kepatuhan area berbahaya ditangani "
+        "pada tahap berikutnya.",
         bold_lead="Hasil FAT. ",
     )
 
@@ -529,7 +557,7 @@ def build_document():
     )
     rows = [
         ("As-built perangkat", "Tersedia sesuai tahap", "Foto unit terakit, spesifikasi hardware, TDS, konfigurasi firmware, dan arsitektur integrasi lab."),
-        ("Desain pemasangan", "Tersedia", "Bracket L dan U-bolt, konsep struktur existing, tanpa las atau bor."),
+        ("Desain pemasangan", "Tersedia", "Pelat mounting U-bolt pada tiang galvanis 2 inci baru (ditanam dan dicor), sesuai Spesifikasi Material Instalasi RU IV Cilacap Rev 1.5."),
         ("Metode dan HSE", "Tersedia sebagai draft", "JSA/HSE dan checklist pra-instalasi; pengesahan spesifik lokasi dilakukan sebelum pekerjaan fisik."),
         ("As-built lokasi RU IV", "Tahap berikutnya", "Diterbitkan setelah instalasi, pengukuran aktual, commissioning, dan SAT. Tidak diklaim selesai pada Termin 1."),
     ]
@@ -542,11 +570,13 @@ def build_document():
         ("E-03", "Technical Datasheet Revision 4.0", "Kontrak teknis GLD, CH, Gateway, Server, radio, keamanan, cache, alarm, dan downlink."),
         ("E-04", "Datasheet Sistem GLD Arsitektur Server dan Jaringan", "Dokumen detail engineering konsolidasi untuk perangkat, jaringan, server, daya, dan instalasi."),
         ("E-05", "Laporan Progres By Date GLD", "Kronologi pengujian, penyelesaian integrasi, dan perkembangan perangkat."),
-        ("E-06", "Test Sinyal LoRa dan log serial", "Data uji komunikasi serta bukti operasi perangkat."),
+        ("E-06", "Lembar kerja uji sinyal LoRa", "RSSI, SNR, dan PDR per titik uji di kampus ITB."),
         ("E-07", "Dataset sensor gas", "Data akuisisi delapan kanal untuk LPG, CO2, udara bersih, dan sesi baseline."),
-        ("E-08", "Desain Bracket L U-Bolt GLD Mounting", "Basis desain instalasi mekanik pada struktur existing."),
+        ("E-08", "Desain pelat mounting U-bolt GLD dan Spesifikasi Material Instalasi RU IV Cilacap Rev 1.5", "Basis desain instalasi mekanik, tiang baru, kabel 24 VDC, dan jaringan lokal."),
         ("E-09", "JSA HSE dan Checklist Kesiapan Instalasi RU IV", "Prasyarat HSE, mobilisasi, commissioning, dan acceptance test."),
         ("E-10", "Konfirmasi PIC proyek 11 September 2026", "PT Pertamina Patra Niaga telah hadir di Lab IoT/Instrumentation and Computation ITB untuk menyaksikan perkembangan/integrasi sebelum visit Cilacap."),
+        ("E-11", "Laporan Factory Acceptance Test LGU/GLD/FAT/2026-001 Rev 1.4 (Lampiran A)", "Hasil FAT-01 s.d. FAT-07, lembar pengesahan uji, dan lampiran bukti 1-9."),
+        ("E-12", "Laporan Uji Laboratorium 01, 02, dan 03 (dalam Lampiran A)", "Model AI, komunikasi LoRa, serta mesh, failover, downlink, dan integrasi."),
     ]
     add_table(doc, ["ID", "Bukti", "Relevansi"], rows, [0.55, 2.55, 3.65], font_size=8.7)
 
@@ -557,9 +587,9 @@ def build_document():
         "ditindaklanjuti pada tahapan lapangan dan sertifikasi."
     )
     rows = [
-        ("1", "Tanda tangan witness dan acceptance FAT", "Administrasi Termin 1", "Tutup melalui lembar pengesahan laporan dan BAST."),
+        ("1", "Tanda tangan witness dan acceptance FAT", "Administrasi Termin 1", "Tutup melalui lembar pengesahan uji pada Laporan FAT (Lampiran A), lembar pengesahan laporan ini, dan BAST."),
         ("2", "Nomor seri dan packing list per RU", "Mobilisasi", "Tetapkan sebelum pengiriman perangkat."),
-        ("3", "Instalasi, commissioning, dan SAT RU IV", "Termin lapangan", "Belum dimulai; dilaksanakan setelah izin dan kesiapan lokasi."),
+        ("3", "Instalasi, commissioning, dan SAT RU IV", "Termin lapangan", "Dilaksanakan setelah izin dan kesiapan lokasi; termasuk pengukuran waktu respons alarm."),
         ("4", "As-built site final", "Pasca-instalasi", "Susun berdasarkan ukuran, jalur, dan konfigurasi aktual."),
         ("5", "H2S, Benzena, dan kelas gas tambahan", "Pengembangan AI", "Menunggu ketersediaan sampel dan validasi model."),
         ("6", "Sertifikasi hazardous area", "Jalur sertifikasi", "Masih persiapan dokumen; tidak menjadi klaim laporan Termin 1 field testing."),
@@ -622,7 +652,7 @@ def build_document():
         "Technical Datasheets Lab IoT ITB Revision 4.0, 4 September 2026.",
         "Datasheet Sistem GLD Arsitektur Server dan Jaringan.",
         "Laporan Progres By Date GLD sampai 31 Agustus 2026.",
-        "Desain Bracket L U-Bolt GLD Mounting.",
+        "Desain pelat mounting U-bolt GLD dan Spesifikasi Material Instalasi RU IV Cilacap Rev 1.5.",
         "JSA HSE RU IV Cilacap GLD dan Checklist Kesiapan Instalasi RU IV Cilacap.",
         "Konfirmasi PIC proyek, 11 September 2026, mengenai witness PT Pertamina Patra Niaga di Lab IoT/Instrumentation and Computation ITB sebelum visit Cilacap.",
     ]

@@ -14,6 +14,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 ASSET = os.path.join(HERE, "assets", "lgu_cover")
 FONT_DIR = r"C:\Windows\Fonts"
+FONT_FILES = {"ar": "arial.ttf", "arb": "arialbd.ttf", "arbi": "arialbi.ttf"}
+if not os.path.isdir(FONT_DIR):  # Linux: Liberation Sans (metrik sama dengan Arial)
+    FONT_DIR = "/usr/share/fonts/truetype/liberation"
+    FONT_FILES = {"ar": "LiberationSans-Regular.ttf", "arb": "LiberationSans-Bold.ttf",
+                  "arbi": "LiberationSans-BoldItalic.ttf"}
+
+
+def ff(name):
+    return os.path.join(FONT_DIR, FONT_FILES[name])
 
 RED = (196 / 255, 53 / 255, 45 / 255)
 BLUE = (89 / 255, 135 / 255, 187 / 255)
@@ -25,15 +34,16 @@ W, H = pymupdf.paper_size("a4")
 
 DOCS = [
     {
-        "src": "Paket Pertamina/04_Laporan_Termin_1/Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev02.pdf",
+        "src": "Paket Pertamina/04_Laporan_Termin_1/Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev03.pdf",
+        "lampiran_fat": "Paket Pertamina/09_Laporan_FAT_GLD_Tahap2/Laporan_FAT_GLD_Tahap2_Lengkap_dengan_Lampiran.pdf",
         "out": "Paket LGU/02_Penagihan_Termin_1/01_Laporan_Termin_1_Field_Testing_20Persen.pdf",
         "jenis": "Laporan Pemenuhan Deliverable Termin 1",
         "band": "Laporan Termin 1\nField Testing (20%)",
         "judul": "Laporan Pemenuhan Deliverable\nTermin 1 — Field Testing",
         "sub": "Pengembangan dan Field Testing Sistem\nGas Leak Detection (GLD) Tahap 2",
         "nodok": "LGU-GLD-T1-FIT-2026-001",
-        "rev": "0.2",
-        "tgl": "11 September 2026",
+        "rev": "0.3",
+        "tgl": "4 Oktober 2026",
         "pengantar": [
             "Puji syukur kami panjatkan ke hadirat Tuhan Yang Maha Esa atas rahmat dan karunia-Nya "
             "sehingga Laporan Pemenuhan Deliverable Termin 1 pekerjaan Pengembangan dan Field Testing "
@@ -41,8 +51,12 @@ DOCS = [
             "Laporan ini disusun sebagai dokumen pendukung pengajuan Termin 1 sebesar 20 persen. Laporan "
             "memuat pemenuhan setiap ketentuan pembayaran Termin 1, mencakup detail engineering dan desain, "
             "kesiapan komponen, konfigurasi firmware, hasil Factory Integration Test (FIT), dokumentasi "
-            "instalasi dan as-built tahap laboratorium, serta register bukti pendukung. Penilaian pemenuhan "
-            "dan keputusan pembayaran sepenuhnya merupakan kewenangan PT Pertamina Patra Niaga.",
+            "instalasi dan as-built tahap laboratorium, serta register bukti pendukung. Laporan Factory "
+            "Acceptance Test (FAT) beserta tiga Laporan Uji Laboratorium dan bukti pendukungnya disertakan "
+            "sebagai Lampiran A. Lembar Pengesahan di halaman depan mengesahkan dokumen laporan ini; "
+            "penerimaan deliverable Termin 1 dinyatakan pada Bagian 11, dan penerimaan hasil uji FAT pada "
+            "Lembar Pengesahan Uji di Lampiran A. Penilaian pemenuhan dan keputusan pembayaran sepenuhnya "
+            "merupakan kewenangan PT Pertamina Patra Niaga.",
             "Kami mengucapkan terima kasih kepada PT Pertamina Patra Niaga serta seluruh pihak yang telah "
             "berkontribusi dalam pelaksanaan pekerjaan ini, termasuk Lab IoT/Instrumentation and Computation "
             "Institut Teknologi Bandung. Kami terbuka terhadap saran dan masukan untuk penyempurnaan "
@@ -84,9 +98,8 @@ TTD = {
 
 
 def fonts(page):
-    page.insert_font(fontname="ar", fontfile=os.path.join(FONT_DIR, "arial.ttf"))
-    page.insert_font(fontname="arb", fontfile=os.path.join(FONT_DIR, "arialbd.ttf"))
-    page.insert_font(fontname="arbi", fontfile=os.path.join(FONT_DIR, "arialbi.ttf"))
+    for n in FONT_FILES:
+        page.insert_font(fontname=n, fontfile=ff(n))
 
 
 def text(page, rect, s, size, font="ar", color=BLACK, align=pymupdf.TEXT_ALIGN_CENTER, lh=1.25):
@@ -96,7 +109,7 @@ def text(page, rect, s, size, font="ar", color=BLACK, align=pymupdf.TEXT_ALIGN_C
 
 
 def underline_name(page, cx, y, s, size=10.5):
-    f = pymupdf.Font(fontfile=os.path.join(FONT_DIR, "arialbd.ttf"))
+    f = pymupdf.Font(fontfile=ff("arb"))
     w = f.text_length(s, fontsize=size)
     text(page, (cx - 150, y, cx + 150, y + 18), s, size, "arb")
     page.draw_line((cx - w / 2, y + size + 2), (cx + w / 2, y + size + 2), width=0.7)
@@ -205,12 +218,12 @@ def headings(src):
     return out
 
 
-def daftar_isi(doc, entries):
+def daftar_isi(doc, entries, catatan="Nomor halaman mengikuti nomor \"Halaman\" pada laporan."):
     page = doc.new_page(width=W, height=H)
     fonts(page)
     text(page, (60, 80, W - 60, 110), "DAFTAR ISI", 16, "arb")
-    far = pymupdf.Font(fontfile=os.path.join(FONT_DIR, "arial.ttf"))
-    fbd = pymupdf.Font(fontfile=os.path.join(FONT_DIR, "arialbd.ttf"))
+    far = pymupdf.Font(fontfile=ff("ar"))
+    fbd = pymupdf.Font(fontfile=ff("arb"))
     rows = entries
     y = 140
     x1 = W - 70
@@ -228,8 +241,26 @@ def daftar_isi(doc, entries):
             if dots > 0:
                 page.insert_text((start, y), "." * dots, fontname="ar", fontsize=10, color=(0.45, 0.45, 0.45))
         y += 22 if lvl == 1 else 18
-    page.insert_text((70, y + 14), "Nomor halaman mengikuti nomor \"Halaman\" pada laporan.", fontname="ar",
+    page.insert_text((70, y + 14), catatan, fontname="ar",
                      fontsize=8.5, color=(0.4, 0.4, 0.4))
+
+
+def fat_label(t):
+    """Di dalam Lampiran A, lampiran milik Laporan FAT disebut 'Lampiran FAT n' agar tidak tertukar."""
+    if t.startswith("Lampiran "):
+        return "Lampiran FAT " + t[len("Lampiran "):]
+    return "Isi Laporan FAT (FAT-01 s.d. FAT-07)" if t.startswith("Laporan Factory") else t
+
+
+def lampiran_sep(doc, no, judul, desc, rujukan):
+    page = doc.new_page(width=W, height=H)
+    fonts(page)
+    page.draw_rect(pymupdf.Rect(482, 33, 519, 69), color=None, fill=RED)
+    page.draw_rect(pymupdf.Rect(482, 73, 519, 110), color=None, fill=BLUE)
+    text(page, (60, 300, W - 60, 340), f"LAMPIRAN {no}", 26, "arb")
+    text(page, (60, 350, W - 60, 400), judul, 16, "arb", lh=1.3)
+    text(page, (80, 410, W - 80, 470), desc, 10.5, lh=1.4)
+    text(page, (80, 480, W - 80, 520), "Dirujuk pada: " + rujukan, 10, lh=1.4, color=(0.35, 0.35, 0.35))
 
 
 def build(d):
@@ -240,16 +271,41 @@ def build(d):
         src.delete_page(src.page_count - 1)
     out = pymupdf.open()
     entries = [e for e in headings(src) if "Referensi Dokumen" not in e[1]]
-    jml = 5 + src.page_count
+    lamp, lamp_toc = None, []
+    if d.get("lampiran_fat"):
+        fat = pymupdf.open(os.path.join(ROOT, d["lampiran_fat"]))
+        lamp = pymupdf.open()
+        lampiran_sep(lamp, "A", "Laporan Factory Acceptance Test (FAT)",
+                     "Nomor dokumen LGU/GLD/FAT/2026-001 Rev 1.4, beserta lampiran bukti 1-9 "
+                     "(termasuk Laporan Uji Laboratorium 01, 02, dan 03).",
+                     "Bagian 6 (Pelaksanaan Factory Integration Test) dan Bagian 8 (Register Bukti)")
+        lamp.insert_pdf(fat, from_page=5)
+        # bookmark laporan FAT tanpa halaman depannya (5 hlm)
+        for lvl, t, pg in fat.get_toc():
+            if pg > 5 and t not in ("Cover", "Lembar Pengesahan", "Kata Pengantar", "Daftar Isi"):
+                lamp_toc.append((lvl, t, pg - 5 + 1))
+    jml = 5 + src.page_count + (lamp.page_count if lamp else 0)
     cover(out, d)
     kontrol(out, d, jml)
     pengesahan(out, d)
     pengantar(out, d)
-    daftar_isi(out, entries)
-    out.insert_pdf(src)
     front = 5
+    base = front + src.page_count
+    if lamp:
+        # satu konvensi untuk seluruh daftar isi: nomor urut halaman berkas PDF
+        di = [(lvl, j, front + hal) for lvl, j, hal in entries]
+        di.append((1, "Lampiran A - Laporan Factory Acceptance Test (FAT)", base + 1))
+        di += [(2, fat_label(t), base + pg) for lvl, t, pg in lamp_toc if lvl == 1]
+        daftar_isi(out, di, "Nomor halaman mengacu pada urutan halaman berkas PDF ini.")
+    else:
+        daftar_isi(out, entries)
+    out.insert_pdf(src)
     toc = [[1, "Cover", 1], [1, "Lembar Pengesahan", 3], [1, "Kata Pengantar", 4], [1, "Daftar Isi", 5]]
     toc += [[lvl, judul, front + hal] for lvl, judul, hal in entries]
+    if lamp:
+        out.insert_pdf(lamp)
+        toc.append([1, "Lampiran A - Laporan Factory Acceptance Test (FAT)", base + 1])
+        toc += [[min(lvl + 1, 3), fat_label(t) if lvl == 1 else t, base + pg] for lvl, t, pg in lamp_toc]
     out.set_toc(toc)
     out.set_metadata({"title": d["judul"].replace("\n", " "), "author": "PT LAPI Ganesha Utama"})
     path = os.path.join(ROOT, d["out"])

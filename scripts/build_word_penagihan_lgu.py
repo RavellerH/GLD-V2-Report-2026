@@ -227,7 +227,7 @@ def main():
     os.makedirs(TMP, exist_ok=True)
     bodies = {
         "01": os.path.join(ROOT, "Paket Pertamina", "04_Laporan_Termin_1",
-                           "Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev02.docx"),
+                           "Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev03.docx"),
         "03": os.path.join(TMP, "Laporan_Termin_1_Sertifikasi_LGU.docx"),
     }
     for d in cv.DOCS:

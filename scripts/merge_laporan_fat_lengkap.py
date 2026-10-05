@@ -27,7 +27,8 @@ COVER = {
     "sub": "Pengembangan dan Field Testing Sistem\nGas Leak Detection (GLD) Tahap 2",
     "nodok": "LGU/GLD/FAT/2026-001",
     "rev": "1.4",
-    "tgl": "4 Oktober 2026",
+    "tgl": "5 Oktober 2026",
+    "tempat": "Bandung, 5 Oktober 2026",
     "pengantar": [
         "Puji syukur kami panjatkan ke hadirat Tuhan Yang Maha Esa atas rahmat dan karunia-Nya "
         "sehingga Laporan Factory Acceptance Test (FAT) pekerjaan Pengembangan dan Field Testing "

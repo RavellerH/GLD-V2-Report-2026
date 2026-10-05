@@ -27,7 +27,7 @@ from PIL import Image  # noqa: E402
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSET = os.path.join(REPO, "scripts", "assets", "uji_lab")
 DELIV = os.path.join(REPO, "Deliverables")
-DATE = "4 Oktober 2026"
+DATE = "5 Oktober 2026"
 REV = "1.1"
 
 

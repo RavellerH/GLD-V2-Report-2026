@@ -43,7 +43,8 @@ DOCS = [
         "sub": "Pengembangan dan Field Testing Sistem\nGas Leak Detection (GLD) Tahap 2",
         "nodok": "LGU-GLD-T1-FIT-2026-001",
         "rev": "0.3",
-        "tgl": "4 Oktober 2026",
+        "tgl": "5 Oktober 2026",
+        "tempat": "Bandung, 5 Oktober 2026",
         "pengantar": [
             "Puji syukur kami panjatkan ke hadirat Tuhan Yang Maha Esa atas rahmat dan karunia-Nya "
             "sehingga Laporan Pemenuhan Deliverable Termin 1 pekerjaan Pengembangan dan Field Testing "
@@ -176,7 +177,7 @@ def pengesahan(doc, d):
          12, "arb", lh=1.45)
     text(page, (60, 245, W - 60, 290), "Dikerjakan oleh,\nPT LAPI Ganesha Utama", 10.5, lh=1.6)
     text(page, (60, 305, W - 60, 350), "Untuk\nPT Pertamina Patra Niaga", 10.5, lh=1.6)
-    text(page, (60, 365, W - 60, 385), TTD["tempat"], 10.5)
+    text(page, (60, 365, W - 60, 385), d.get("tempat", TTD["tempat"]), 10.5)
     lx, rx = cx - 120, cx + 120
     text(page, (lx - 120, 395, lx + 120, 415), "Team Leader,", 10.5)
     text(page, (rx - 120, 395, rx + 120, 415), "Direktur Utama,", 10.5)
@@ -197,7 +198,7 @@ def pengantar(doc, d):
                                    lineheight=1.5)
         y = r.y1 - left + 12
     y += 20
-    for s, f in [(TTD["tempat"], "ar"), ("PT LAPI Ganesha Utama", "ar")]:
+    for s, f in [(d.get("tempat", TTD["tempat"]), "ar"), ("PT LAPI Ganesha Utama", "ar")]:
         text(page, (W - 300, y, W - 70, y + 18), s, 10.5, f, align=pymupdf.TEXT_ALIGN_RIGHT)
         y += 22
     y += 55

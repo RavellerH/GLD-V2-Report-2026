@@ -25,7 +25,7 @@ OUT = os.path.join(REPO, "Deliverables", "Laporan_FAT_GLD_Tahap2.docx")
 
 DOC_NO = "LGU/GLD/FAT/2026-001"
 REV = "1.4"
-DATE = "4 Oktober 2026"
+DATE = "5 Oktober 2026"
 HEADER = "Laporan Factory Acceptance Test — Sistem GLD Tahap 2"
 
 LULUS = "LULUS (LAB)"

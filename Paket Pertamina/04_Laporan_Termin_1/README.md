@@ -4,7 +4,7 @@ Folder ini mengumpulkan **kedua laporan Termin 1** GLD Tahap 2 di satu tempat un
 
 | File | Jalur | Nilai Termin 1 | Isi |
 |---|---|---|---|
-| `Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev03.{docx,pdf}` | Pilot / field testing sistem GLD | 20% | **Rev 0.3 (4 Okt 2026, terbaru)** — tabel FAT diselaraskan dgn Laporan FAT rev 1.4 (LULUS (LAB) 7/7), model AI mengikuti TDS Rev 4.0, desain pemasangan = tiang baru + pelat U-bolt, Laporan FAT dirujuk sbg Lampiran A. `_Rev02` = versi 11 Sep (arsip). Matriks klausul, detail engineering, kesiapan komponen/firmware, hasil Factory Integration Test (FIT), register bukti, outstanding, dan lembar pengesahan |
+| `Laporan_Pemenuhan_Deliverable_Termin_1_FieldTesting_GLD_Rev03.{docx,pdf}` | Pilot / field testing sistem GLD | 20% | **Rev 0.3 (5 Okt 2026, terbaru)** — tabel FAT diselaraskan dgn Laporan FAT rev 1.4 (LULUS (LAB) 7/7), model AI mengikuti TDS Rev 4.0, desain pemasangan = tiang baru + pelat U-bolt, Laporan FAT dirujuk sbg Lampiran A. `_Rev02` = versi 11 Sep (arsip). Matriks klausul, detail engineering, kesiapan komponen/firmware, hasil Factory Integration Test (FIT), register bukti, outstanding, dan lembar pengesahan |
 | `Draft_BAST_Termin_1_FieldTesting_20Persen.{docx,pdf}` | Pilot / field testing | 20% | Draft berita acara serah terima generik pendamping laporan di atas — nomor/tanggal/nilai SPK dan tanda tangan belum diisi |
 | `Laporan_Pemenuhan_Deliverable_Termin_1_Sertifikasi_GLD.{docx,pdf}` | Sertifikasi hazardous area (ATEX/IECEx) GLD | 40% | Matriks bukti per 7 syarat kontraktual (status Tersedia/Sebagian/Belum Tersedia dilaporkan apa adanya), register bukti, dokumen yang masih perlu disusun, dan lembar evaluasi |
 

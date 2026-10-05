@@ -269,7 +269,7 @@ def add_document_control(doc):
     rows = [
         ("Nomor dokumen", "LGU-GLD-T1-FIT-2026-001"),
         ("Revisi", "0.3"),
-        ("Tanggal", "4 Oktober 2026"),
+        ("Tanggal", "5 Oktober 2026"),
         ("Status", "Untuk review dan pengesahan Termin 1"),
         ("Disiapkan oleh", "LAPI Ganesha Utama bersama Lab IoT/Instrumentation and Computation ITB"),
         ("Ditujukan kepada", "PT Pertamina Patra Niaga"),
@@ -360,7 +360,7 @@ def build_document():
     add_heading(doc, "1 Ringkasan Eksekutif", 1)
     add_paragraph(
         doc,
-        "Kesimpulan. Berdasarkan bukti teknis dan dokumentasi yang tersedia sampai 4 Oktober 2026, "
+        "Kesimpulan. Berdasarkan bukti teknis dan dokumentasi yang tersedia sampai 5 Oktober 2026, "
         "pekerjaan Termin 1 telah mencapai penyelesaian substansial pada tahap rekayasa dan integrasi "
         "laboratorium. Paket ini layak diajukan kepada PT Pertamina Patra Niaga untuk evaluasi, penerimaan, "
         "dan pembayaran Termin 1 sebesar 20 persen.",

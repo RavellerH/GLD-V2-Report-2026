@@ -83,6 +83,21 @@ PHOTOS = [
      "Inside jaws across the bore of the base at the top of the neck: reading ≈84.7 mm."),
     ("Gasket_caliper_cord_section.jpg", "Cover O-ring — cord cross-section 2.70 mm",
      "Black rubber O-ring of the cover-to-base joint measured across its cord: reading 2.70 mm."),
+    ("Base_ruler_internal_depth.jpg", "Base internal depth — steel rule ≈45 mm",
+     "Steel rule standing on the PCB-boss ledge inside the base: rim top at about 45 mm (rule reading, ±1 mm); "
+     "the floor below the ledge is not included."),
+    ("Oring_caliper_outer_diameter.jpg", "Cover O-ring — outer diameter ≈91.0 mm",
+     "O-ring removed and measured across its outside with the caliper jaws: reading ≈91.0 mm (unstretched; the "
+     "inner diameter is ≈85.6 mm by subtracting 2 × 2.70 mm cord)."),
+    ("Cover_caliper_internal_thread_length.jpg", "Cover internal thread length — caliper ≈18.9 mm",
+     "Caliper held vertically inside the cover from the cover rim to the end of the internal thread: reading "
+     "≈18.9 mm."),
+    ("Base_caliper_neck_height_from_body.jpg", "Base neck height from the body shoulder — caliper ≈20.2 mm",
+     "Caliper from the painted body shoulder below the O-ring to the top of the threaded neck: reading ≈20.2 mm "
+     "(compare ≈14.8 mm measured from the O-ring level, Figure 4-130)."),
+    ("Cover_ruler_internal_depth.jpg", "Cover internal depth — steel rule ≈47.5 mm",
+     "Steel rule standing on the stainless-steel mesh inside the cover: cover rim at about 47.5 mm (rule reading, "
+     "±1 mm)."),
 ]
 
 

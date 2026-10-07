@@ -139,6 +139,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — set lengkap gambar teknik/CAD masuk dokumen sertifikasi** (dec:191): subbagian 2.6.a.1 (register M-A1…M-F4: casing v2 + 6 view, 7 sheet CASE v3, BP18-1Z, 15 gambar komponen/terminal/grounding, 9 langkah assembly, dimensi MQ) via `scripts/gld_mech_drawings_section.py`. `Dokumen_Teknis_Sertifikasi` rev **1.6** (111 hlm), narrative rev **0.9** (91 hlm). Aturan user: **jangan kurangi gambar, tambahkan sedetail mungkin**.
 
+- 🆕 **7 Okt — audit penuh vs Panduan Revisi; dokumen sertifikasi kini mengikuti struktur panduan sampai detail** (dec:192): modul `scripts/gld_guide_sections.py` (EX/EL BOM, MAT register, d.1–d.13, IS-01…17+e.3, f.1–f.12, g.2–g.20, nameplate gas-only, sertifikat Ex, sampel GLD2-0x1001, matriks kepatuhan). `Dokumen_Teknis_Sertifikasi` rev **1.7** (138 hlm), narrative rev **1.0** (118 hlm). ⚠️ Foto terbaru di Google Drive belum bisa diakses (isi folder tidak dibagikan ke akun ini).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

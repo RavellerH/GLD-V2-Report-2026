@@ -1,0 +1,386 @@
+[
+ {
+  "id": "g.2",
+  "title": "Permitted installation environment",
+  "blocks": [
+   "The Gas Leak Detector (GLD) is intended for fixed installation in hazardous areas associated with oil and gas refinery facilities, including process units, tank farms, pipe racks, and storage/loading-unloading areas in which flammable gas atmospheres may be present.",
+   "The current certification target is Equipment Group II, Category 2G / EPL Gb, for installation in Zone 1 gas hazardous areas, subject to confirmation by the ExCB. The proposed gas group is IIC, and the proposed temperature class is T4. Final confirmation of the gas group and temperature class shall be based on the completed explosion-protection assessment, applicable component documentation, and the results of the required temperature evaluation and testing.",
+   "The GLD is intended to operate within an ambient temperature range of −20 °C to +60 °C and an operating relative-humidity range of 5–95% RH, non-condensing, as defined in the current product specification.",
+   "Installation shall be limited to locations and environmental conditions that are within the certified equipment marking and the conditions of use stated in the final certificate and approved instruction manual. The equipment shall not be installed in a hazardous area having a more severe gas group, temperature classification, ambient-temperature range, or other environmental condition than those covered by the final certification.",
+   "The GLD is intended for gas hazardous-area service only within the current certification scope. Installation in combustible-dust hazardous areas is excluded unless such use is separately assessed, tested, and approved as part of the certification scope.",
+   "The detector shall be installed in a position that permits free access of the surrounding atmosphere to the front gas-sampling inlet. The stainless-steel gas-entry mesh and the associated sampling path shall not be obstructed, covered, sealed, painted, or otherwise modified in a manner that could impair gas access to the sensing section.",
+   "The unit shall be mounted as a fixed installation using the approved mounting arrangement and in accordance with the orientation and mechanical details specified in the controlled drawings. Adequate clearance shall be maintained around the gas-sampling inlet, cable entries, antenna interface, and enclosure joints to permit correct operation, inspection, and maintenance.",
+   "The installation location shall protect the equipment from mechanical damage, unauthorized modification, excessive contamination, and environmental conditions beyond the approved operating limits. Cable entries, grounding connections, antenna interfaces, and other enclosure penetrations shall be installed only in accordance with the approved product configuration and the applicable installation instructions."
+  ]
+ },
+ {
+  "id": "g.3",
+  "title": "Mechanical mounting",
+  "blocks": [
+   "The Gas Leak Detector (GLD) shall be installed as a fixed-mounted device using the approved mechanical mounting bracket provided for the product. The mounting arrangement shall correspond to the configuration defined in the controlled mechanical drawings and shall not be modified without engineering review and approval.",
+   "The GLD is intended to be attached to existing plant structures by means of the approved bracket arrangement. Installation shall not require drilling, welding, machining, or other permanent modification of the supporting plant structure unless such modification is separately approved by the site owner and is outside the certified GLD construction.",
+   "The mounting bracket, fasteners, clamps, and associated hardware shall be of the specified type, material, size, and mechanical strength defined in the approved production drawings and bill of materials. Substitution of mounting components that may affect the mechanical integrity or certified configuration of the equipment shall not be permitted without controlled engineering approval.",
+   "The detector shall be mounted securely so that it cannot become loose, rotate unintentionally, or move under normal service conditions, vibration, maintenance activity, or foreseeable external mechanical loading. All mounting fasteners shall be tightened in accordance with the torque values specified in the approved assembly or installation documentation.",
+   "The installed orientation shall conform to the orientation specified in the controlled mechanical drawings. The installation shall maintain unobstructed access to the gas-sampling inlet, front stainless-steel mesh, antenna interface, cable-entry points, grounding connection, and enclosure joints required for normal operation, inspection, and maintenance.",
+   "The gas-sampling inlet shall not be positioned directly against a wall, pipe, mounting plate, structural member, or other obstruction that could restrict the flow of ambient gas into the sensing area. Adequate clearance around the sampling inlet shall be maintained in accordance with the approved installation drawing.",
+   "The mounting location shall be selected so that the enclosure and its associated components are protected from foreseeable mechanical impact, excessive vibration, deformation, and other mechanical stresses that could impair the integrity of the enclosure, gas-entry assembly, cable entry, antenna interface, alarm module, or grounding connection.",
+   "After installation, the mounting assembly shall be visually inspected to confirm correct orientation, secure fastening, absence of enclosure deformation, and unobstructed access to the sensing inlet and service interfaces."
+  ]
+ },
+ {
+  "id": "g.4",
+  "title": "Gas inlet / sensing-area requirements",
+  "blocks": [
+   "The Gas Leak Detector (GLD) shall be installed and maintained so that the gas-sampling inlet and sensing area remain continuously accessible to the surrounding atmosphere during normal operation.",
+   "Ambient gas enters the detector through the stainless-steel mesh located at the front of the enclosure. During the sampling cycle, the internal DC fan assists the movement of ambient gas through the front mesh and into the sensing area. Eight MQ-series gas sensors are installed within this sensing area. Each MQ sensor incorporates an additional stainless-steel protective mesh surrounding its sensing element.",
+   "The front gas-entry mesh, sampling opening, and associated airflow path shall remain unobstructed. The gas inlet shall not be covered, sealed, painted, taped, coated, or otherwise modified in a manner that could restrict or alter the intended gas flow to the sensing area. No additional filter, membrane, screen, protective cover, or other material shall be installed over the gas inlet unless specifically approved as part of the certified product configuration.",
+   "The detector shall be installed with sufficient clearance around the gas-sampling inlet to allow free circulation of the surrounding atmosphere. The front sensing inlet shall not be positioned directly against a wall, pipe, mounting plate, structural member, insulation, or other object that could restrict gas entry or interfere with the intended sampling airflow. The required minimum clearance, where applicable, shall be defined in the controlled installation drawing.",
+   "The stainless-steel front mesh shall be maintained in its approved production configuration. It shall not be removed, replaced, drilled, enlarged, reshaped, or substituted with a different mesh or protective element unless the change has been evaluated and approved through the applicable engineering and Ex certification change-control process.",
+   "The integrated protective mesh of each MQ sensor shall also remain intact and free from mechanical damage, deformation, contamination, or blockage. MQ sensors with damaged or missing protective mesh shall not be used.",
+   "The sensing area shall be kept free from excessive dust, deposits, oil, paint, corrosion products, insects, or other contamination that could obstruct the front mesh, fan, individual sensor meshes, or the intended gas-sampling path. Cleaning shall be performed only in accordance with the approved maintenance instructions and shall not damage the mesh, fan, sensor surfaces, enclosure sealing features, or other Ex-critical components.",
+   "The DC sampling fan shall be installed in the approved position and orientation behind the front stainless-steel mesh. The airflow direction, fan mounting, electrical connection, and mechanical clearance shall conform to the controlled assembly drawing. The fan shall not be substituted with a different model without controlled engineering review and approval.",
+   "The gas-sampling path shall be considered part of the controlled product construction. Any modification that changes the geometry, mesh arrangement, fan position, airflow path, sensing-chamber volume, or position of the MQ sensors shall require evaluation before implementation.",
+   "During inspection and maintenance, the front mesh, fan, sensing area, and individual MQ sensor meshes shall be checked for blockage, damage, contamination, corrosion, or other conditions that could affect gas access or the approved protection concept. If any such condition is detected, the detector shall be removed from normal service until the condition has been corrected and the unit has been verified as suitable for operation.",
+   "Note: The minimum clearance in front of the gas inlet, the approved fan orientation, and any dimensional requirements of the sensing chamber shall be specified in the controlled mechanical and installation drawings."
+  ]
+ },
+ {
+  "id": "g.5",
+  "title": "Electrical supply",
+  "blocks": [
+   "The Gas Leak Detector (GLD) shall be supplied from a 24 VDC power source in accordance with the approved product configuration. The current production configuration is intended for continuous operation from a 24 VDC supply. The product documentation presently identifies the 24 VDC supply as being derived from an AC/DC adapter connected to the site electrical supply.",
+   "The GLD internal power system converts the 24 VDC input to the required internal operating voltages. A 5 VDC rail is used for the MQ sensor/heater circuitry, while a 3.3 VDC rail is used for the ESP32-S3 logic and other applicable low-voltage electronics.",
+   "The currently documented maximum power consumption is 8 W at 24 VDC. The corresponding calculated input current at this operating point is approximately 0.33 A. This value is derived from the measured maximum power consumption divided by the nominal 24 VDC input voltage.",
+   "The 24 VDC input incorporates electrical protection features including resettable PTC devices, a 33 V TVS device on the 24 V input, and P-channel MOSFET input stages. These circuits are intended to provide protection against overcurrent, transient overvoltage, and reverse-polarity or other abnormal input conditions as defined by the final approved electrical design.",
+   "The polarity of the 24 VDC supply shall be verified before energizing the equipment. Power shall be connected only through the designated power-input terminals or connector defined in the approved wiring and terminal drawings. The power-input connection shall not be modified, bypassed, or connected to an alternative supply arrangement that is not included in the approved product configuration.",
+   "The equipment shall be de-energized before opening the enclosure, connecting or disconnecting field wiring, or carrying out maintenance activities that require access to the internal electrical system. The applicable site isolation and lockout/tagout procedures shall be followed before such work is performed.",
+   "The 24 VDC supply, associated field wiring, cable entry, terminals, protective-earth connection, and upstream protective devices shall be installed in accordance with the approved product documentation and applicable site electrical requirements.",
+   "Any alternative power source, power-conversion arrangement, battery supply, or other electrical configuration that is not included in the approved production configuration shall not be used unless it has been separately evaluated and approved through the applicable engineering and Ex certification change-control process.",
+   "Note: The permitted 24 VDC input-voltage tolerance, maximum startup/inrush current, required upstream fuse or circuit-breaker rating, and detailed terminal/wire-size requirements shall be defined in the final approved electrical specification and installation drawing."
+  ]
+ },
+ {
+  "id": "g.6",
+  "title": "Cable entry",
+  "blocks": [
+   "The Gas Leak Detector (GLD) shall use only cable-entry devices that are approved for the final certified product configuration. Cable glands, adaptors, blanking elements, seals, and associated entry components shall be compatible with the final explosion-protection concept, certificate requirements, thread form, ingress-protection rating, cable outer diameter, and permitted installation temperature range.",
+   "The cable-entry arrangement shall be installed exactly as defined in the approved mechanical drawings and installation instructions. No cable-entry opening shall be drilled, enlarged, re-machined, re-threaded, or otherwise modified in the field. Unused entries shall not be left open and shall be closed using the approved blanking element specified for the certified configuration.",
+   "The cable gland or entry device shall be selected for the actual cable type and cable outer diameter used in the installation. The manufacturer’s specified sealing, clamping, and assembly sequence shall be maintained. The installed cable shall be properly retained so that mechanical loading is not transferred to the internal electrical terminals.",
+   "All threaded cable-entry components shall be fully engaged in accordance with the minimum thread-engagement requirements defined by the approved enclosure and cable-entry configuration. Where a locking element is specified, it shall be applied only after the required thread engagement has been achieved.",
+   "Tightening of cable glands, adaptors, blanking elements, and related fittings shall comply with the torque values specified by the approved component manufacturer and the controlled installation documentation. Excessive tightening that could damage threads, seals, or enclosure parts shall be avoided, and insufficient tightening that could compromise sealing or mechanical retention shall not be permitted.",
+   "During installation and maintenance, the cable-entry components shall be inspected for correct part number, thread compatibility, sealing-element condition, proper cable clamping, complete thread engagement, and absence of mechanical damage, corrosion, cracking, or deformation. Components showing damage or deterioration shall not be reused unless specifically permitted by the approved component instructions.",
+   "The installed cable-entry component shall be traceable to the approved product configuration. The manufacturer, model or part number, thread type, applicable certificate reference, and installation details shall be recorded where required by the production or installation documentation. The current draft already requires recording the installed component part number and certificate reference.",
+   "Any substitution of a cable gland, adaptor, blanking plug, sealing element, or other cable-entry component shall be subject to controlled engineering review before implementation. A general-purpose cable gland or an entry component not covered by the approved product configuration shall not be used.",
+   "Note: The final cable-entry device manufacturer, model, thread designation, cable-diameter range, temperature range, ingress-protection rating, applicable Ex marking, certificate reference, and installation torque shall be confirmed in the controlled BOM and installation drawing before certification documentation is finalized."
+  ]
+ },
+ {
+  "id": "g.7",
+  "title": "Grounding and bonding",
+  "blocks": [
+   "The metallic enclosure of the Gas Leak Detector (GLD) shall be connected to the site protective-earth system using the designated external grounding stud provided on the enclosure. The grounding point shall be clearly identified by the protective-earth symbol and shall remain accessible for installation, inspection, and maintenance.",
+   "The protective-earth connection shall be installed using the approved grounding hardware, including the specified grounding stud, terminal lug, washers, fasteners, and other associated components defined in the controlled mechanical drawing and bill of materials.",
+   "All conductive enclosure parts that are required to be electrically bonded shall maintain reliable electrical continuity so that hazardous potential differences and electrostatic charge accumulation are minimized. The bonding arrangement between enclosure parts shall not be modified, insulated, painted over at the contact interface, or otherwise altered in a manner that could impair electrical continuity.",
+   "Before the GLD is energized, the protective-earth connection and bonding continuity shall be verified. The continuity check shall confirm that the external grounding stud is electrically connected to the applicable conductive enclosure parts in accordance with the approved design.",
+   "The grounding conductor, terminal lug, and grounding hardware shall be mechanically secure and protected against loosening, corrosion, and accidental disconnection. Tightening shall be carried out in accordance with the torque values specified in the approved assembly and installation documentation.",
+   "Where surface coatings, anodizing, paint, oxidation, or other insulating layers are present, the grounding and bonding contact surfaces shall be prepared or constructed so that the required electrical continuity is maintained. No unapproved coating, sealant, adhesive, or insulating material shall be introduced between designated bonding surfaces.",
+   "The protective-earth connection shall not be used as a mechanical support point for unrelated cables or equipment. The grounding arrangement shall be reserved for the intended protective-earth and bonding function defined by the approved product design.",
+   "During periodic inspection and maintenance, the grounding stud, lug, fasteners, bonding points, and accessible conductive connections shall be checked for looseness, corrosion, contamination, mechanical damage, or any other condition that could impair electrical continuity. Any defective grounding or bonding connection shall be corrected before the equipment is returned to service.",
+   "Any modification to the grounding stud, bonding arrangement, enclosure contact surfaces, grounding conductor arrangement, or associated hardware shall be subject to controlled engineering review before implementation.",
+   "Note: The grounding-conductor size, terminal-lug type, fastening torque, bonding arrangement, and continuity acceptance criteria shall be defined in the final controlled grounding drawing and installation documentation.",
+   "-   posisi grounding stud,",
+   "-   diameter/ukuran stud,",
+   "-   urutan washer–lug–nut,",
+   "-   material hardware,",
+   "-   simbol PE,",
+   "-   nilai torque,",
+   "-   acceptance limit continuity."
+  ]
+ },
+ {
+  "id": "g.8",
+  "title": "Antenna installation",
+  "blocks": [
+   "The Gas Leak Detector (GLD) uses an external omnidirectional antenna connected to the internal LoRa communication module through the approved RF interface. The production configuration specified in this documentation uses a 3 dBi external antenna with an SMA interface",
+   "The antenna shall be installed only in the position and orientation defined in the approved mechanical and assembly drawings. For the current production configuration, the antenna interface is located at the upper part of the base enclosure. Earlier side-mounted antenna arrangements shown in superseded photographs or drawings shall not be used for the certified production configuration.",
+   "The antenna, SMA connector, internal RF cable, U.FL connection where applicable, mounting hardware, sealing elements, and enclosure penetration shall correspond to the approved production configuration. Substitution of the antenna, connector, RF cable, bulkhead fitting, or associated mounting parts shall not be permitted without controlled engineering review and approval.",
+   "The antenna shall be mounted securely so that vibration, accidental movement, or handling does not loosen the RF connector or compromise the enclosure interface. The SMA connection shall be fully engaged and tightened in accordance with the approved component and assembly instructions. Excessive torque that could damage the connector, enclosure, sealing element, or internal RF cable shall be avoided.",
+   "The antenna mounting arrangement shall maintain the required enclosure sealing and mechanical integrity. Any gasket, O-ring, sealing washer, bulkhead fitting, or other sealing component associated with the antenna penetration shall be installed in the correct sequence and orientation defined in the controlled drawing.",
+   "The antenna installation shall not introduce any unapproved opening, gap, modification, drilling, or additional penetration through the enclosure wall. The antenna interface shall not be enlarged, re-machined, re-threaded, or otherwise modified in the field.",
+   "The external antenna shall be positioned so that it is not mechanically obstructed or excessively loaded by nearby plant structures, piping, cable trays, or other equipment. The installation arrangement shall minimize the risk of mechanical impact, bending, loosening, or damage to the antenna and its enclosure interface.",
+   "The antenna shall not be used as a lifting point, support point, handle, or attachment point for other equipment or cables.",
+   "During installation and periodic inspection, the antenna and RF interface shall be checked for secure fastening, corrosion, cracking, deformation, damaged insulation, loose connectors, damaged sealing components, and other conditions that could affect RF performance, enclosure integrity, or the approved Ex configuration. Any damaged component shall be replaced only with an approved equivalent specified in the controlled BOM.",
+   "The antenna type, gain, RF connector, cable assembly, and mounting arrangement shall remain consistent with the approved radio configuration. Any change in antenna type, antenna gain, cable length, RF connector arrangement, or mounting position shall be subject to engineering review to determine whether it affects the approved RF and explosion-protection configuration.",
+   "Note: The approved antenna manufacturer, model, maximum antenna gain, SMA connector part number, RF cable type and length, mounting torque, sealing arrangement, and final installation position shall be specified in the controlled BOM and mechanical drawing."
+  ]
+ },
+ {
+  "id": "g.9",
+  "title": "Commissioning",
+  "blocks": [
+   "Commissioning of the Gas Leak Detector (GLD) shall be performed only after the mechanical installation, electrical connection, cable-entry installation, grounding/bonding connection, antenna installation, and enclosure assembly have been completed in accordance with the approved installation documentation.",
+   "Commissioning shall be carried out only by trained and authorized personnel. Before energizing the equipment, the installer shall verify that the GLD is installed in the permitted hazardous-area environment and that the installation corresponds to the approved product configuration.",
+   "Prior to initial energization, the following items shall be verified:",
+   "-   the enclosure is correctly assembled and free from visible mechanical damage, corrosion, deformation, or contamination;",
+   "-   the front stainless-steel gas-entry mesh is clean, intact, correctly installed, and unobstructed;",
+   "-   the gas-sampling inlet has adequate clearance from surrounding structures;",
+   "-   the DC sampling fan is correctly installed and mechanically unobstructed;",
+   "-   all cable-entry devices, adaptors, blanking elements, and seals are correctly installed and securely tightened;",
+   "-   the 24 VDC input wiring is connected with the correct polarity;",
+   "-   the protective-earth and bonding connections are securely installed and electrical continuity has been verified;",
+   "-   the antenna and RF interface are correctly installed and securely fastened; and",
+   "-   all enclosure covers, threaded joints, fasteners, and locking features are correctly engaged in accordance with the approved assembly instructions.",
+   "After completion of the pre-energization inspection, the GLD may be energized from the approved 24 VDC supply. The supply voltage, polarity, and equipment current consumption shall be checked for conformity with the approved electrical specification. The current production configuration identified in the draft is based on continuous 24 VDC operation.",
+   "Following power-up, the GLD shall be allowed to complete its normal start-up and sensor stabilization sequence in accordance with the approved operating procedure. The operator shall verify that the processing unit, sensor-acquisition system, sampling fan, alarm module, and communication functions initialize without an active fault condition.",
+   "A sensor baseline or nulling procedure shall be performed only in confirmed clean air. The nulling procedure shall be considered acceptable only when all eight MQ sensor channels report a complete 8/8 successful result. If the nulling sequence is incomplete or any sensor channel reports a fault, the cause shall be investigated and corrected before the detector is placed into normal service.",
+   "The sampling function shall be verified by confirming that the internal DC fan operates during the applicable sampling cycle and that no physical obstruction exists in the gas-inlet or sensing path.",
+   "The local alarm function shall be tested to confirm correct operation of the integrated visual and audible alarm. Where a controlled gas test is used, the test shall be performed in accordance with the approved site procedure and with appropriate safety precautions.",
+   "The LoRa communication function shall be verified by confirming successful transmission of status and/or alarm information from the GLD to the designated cluster head or gateway. Any required wired diagnostic or Modbus communication interface may also be verified as part of the commissioning procedure where applicable.",
+   "Before the GLD is released for normal operation, the operator shall confirm that:",
+   "-   no unresolved sensor or system fault is present;",
+   "-   all eight sensor channels are operational;",
+   "-   the local alarm function has been verified;",
+   "-   the LoRa communication link is operational;",
+   "-   the grounding connection is intact;",
+   "-   the gas-sampling inlet remains unobstructed; and",
+   "-   the enclosure, cable entries, antenna interface, and other Ex-critical mechanical features remain correctly assembled.",
+   "If any required commissioning check is unsuccessful, the GLD shall not be placed into normal detection service until the cause has been identified, corrected, and the affected commissioning checks have been repeated successfully.",
+   "The commissioning results shall be recorded and shall include, as applicable, the product model and serial number, hardware revision, firmware version, AI model/configuration version, date of commissioning, supply voltage, nulling result, alarm-test result, communication-test result, grounding-continuity result, and identification of the responsible commissioning personnel.",
+   "Note: The required sensor stabilization/warm-up time, permitted 24 VDC input range, acceptance limits for grounding continuity, maximum commissioning current, and detailed gas-test procedure shall be defined in the final approved operating and commissioning procedure."
+  ]
+ },
+ {
+  "id": "g.10",
+  "title": "Operating modes",
+  "blocks": [
+   "The Gas Leak Detector (GLD) provides defined operating modes for normal gas-detection service, engineering/data-collection activities, and sensor baseline adjustment. Each operating mode shall be used only for its intended purpose and in accordance with the approved operating procedure.",
+   "Inference Mode",
+   "Inference Mode is the normal production operating mode of the GLD. In this mode, the detector acquires data from the eight MQ-series gas sensor channels, processes the sensor data using the embedded processing and gas-classification functions, evaluates the configured alarm criteria, and performs the normal alarm and communication functions.",
+   "Inference Mode shall be used after installation and commissioning have been successfully completed. The detector shall remain in this mode during normal gas-monitoring service unless an authorized maintenance, calibration, or engineering activity requires another approved mode.",
+   "Dataset Mode",
+   "Dataset Mode is intended for engineering and controlled data-collection activities. This mode may be used to acquire sensor data for development, verification, characterization, or other approved engineering purposes.",
+   "Dataset Mode is not a substitute for normal approved gas-detection operation and shall not be relied upon as the production operating mode while the detector is being used for normal hazardous-area gas monitoring. This limitation is already stated in the current draft.",
+   "Use of Dataset Mode shall be restricted to authorized personnel and shall be performed under a controlled procedure. Any engineering activity that changes firmware, AI model files, alarm thresholds, calibration parameters, or other controlled configuration items shall be subject to the applicable engineering change-control process.",
+   "Nulling Mode",
+   "Nulling Mode is intended for sensor baseline adjustment before or during approved commissioning and maintenance activities. The nulling procedure shall be performed only in confirmed clean air so that the baseline values of the eight MQ sensor channels are not influenced by the presence of target or interfering gases.",
+   "The nulling operation shall be considered acceptable only when all eight sensor channels complete the procedure successfully and report a complete 8/8 result. If the nulling process is incomplete or one or more channels do not pass, the cause shall be investigated and corrected before the detector is returned to normal service. The current draft already specifies clean-air operation and the complete 8/8 requirement.",
+   "After completion of Nulling Mode, the detector shall be returned to Inference Mode before being released for normal gas-detection operation.",
+   "Operating-Mode Control",
+   "Selection or change of operating mode shall be restricted to authorized operation, commissioning, maintenance, or engineering procedures. Operating-mode changes shall not bypass or disable any required safety, alarm, diagnostic, or configuration-control function of the approved product.",
+   "The active operating mode shall be identifiable through the approved diagnostic or service interface where applicable. Before the detector is released for normal service, the responsible personnel shall verify that the GLD has been returned to Inference Mode and that no unresolved fault or incomplete maintenance condition remains."
+  ]
+ },
+ {
+  "id": "g.11",
+  "title": "Normal operation",
+  "blocks": [
+   "Following successful installation, commissioning, and completion of the required sensor nulling procedure, the Gas Leak Detector (GLD) shall be placed in Inference Mode for normal gas-monitoring operation. Inference Mode is the approved production operating mode of the detector.",
+   "Before each operating period, the responsible personnel shall verify that the GLD is energized correctly, that the enclosure and external components show no visible damage, that the diagnostic status is normal, that the required communication link is available, and that no unresolved fault condition is present.",
+   "During normal operation, the GLD monitors the surrounding atmosphere using the eight MQ-series gas sensor channels. Sensor data are acquired and processed locally by the ESP32-S3 processing unit, and the embedded gas-classification function evaluates the multi-sensor response pattern. The principal detection and classification functions are performed locally within the GLD and therefore do not depend on a continuous connection to a central server.",
+   "During the applicable sampling cycle, ambient gas is admitted into the sensing area through the front stainless-steel mesh. The internal sampling arrangement assists the exposure of the eight MQ-series sensors to the surrounding atmosphere. Each MQ sensor provides an electrical response that is acquired by the detector electronics for subsequent processing and classification.",
+   "When the processed sensor response satisfies the configured alarm criteria, the GLD shall activate the integrated local visual and audible alarm and transmit the alarm information through the LoRa communication network to the associated monitoring system. The current product description defines these local and remote alarm paths as parallel alarm functions.",
+   "Any gas alarm generated during normal operation shall be treated as a genuine process-safety event until the applicable site response procedure has established otherwise. The operator shall follow the site-specific alarm-response procedure and shall not disregard, suppress, or bypass an active alarm without authorized investigation.",
+   "If the GLD reports a sensor, system, or diagnostic fault, or if the required communication link is lost, the responsible operator shall be informed and the affected detection point shall be handled in accordance with the site impairment procedure. The detector shall not be considered fully available for normal monitoring while an unresolved fault condition remains.",
+   "During normal operation, the front gas-sampling mesh and sensing inlet shall remain unobstructed. The enclosure, antenna, cable entries, grounding connection, and other Ex-critical external features shall remain in their approved installed condition. No enclosure cover, cable-entry device, sensor assembly, mesh, antenna interface, or other controlled construction feature shall be removed or modified while the detector is in normal service.",
+   "Firmware, AI model files, alarm thresholds, calibration parameters, and other controlled configuration settings shall not be changed in the field unless the change has been authorized through the approved engineering and configuration-control process and a documented rollback method is available.",
+   "If visible enclosure damage, water ingress, an unresolved sensor fault, a failed alarm function, or loss of protective-earth continuity is detected, the GLD shall be removed from normal service until the condition has been corrected and the detector has been verified as suitable for continued operation.",
+   "Normal operation shall be resumed only after any maintenance or corrective action has been completed, the enclosure has been correctly reassembled, the required functional checks have been successfully performed, and the GLD has been returned to Inference Mode with no unresolved fault condition."
+  ]
+ },
+ {
+  "id": "g.12",
+  "title": "Alarm and fault handling",
+  "blocks": [
+   "The Gas Leak Detector (GLD) shall provide alarm and fault indications in accordance with the approved production configuration and operating software. During normal operation, the detector continuously evaluates the processed response of the eight MQ-series gas sensor channels and the associated system diagnostic information.",
+   "When the configured alarm criteria indicate a gas-leak condition, the GLD shall initiate two parallel alarm paths:",
+   "1.  activation of the integrated local visual and audible alarm; and",
+   "2.  transmission of the alarm information through the LoRa communication network to the associated cluster head, gateway, or operator monitoring system, as applicable to the approved system configuration.",
+   "The local gas-detection and alarm-decision functions are performed within the GLD and shall not depend on a continuous connection to the remote monitoring system. Loss of the LoRa communication link shall therefore be treated as a communication or system-availability fault and shall not by itself be interpreted as confirmation that no hazardous gas condition exists.",
+   "Any gas alarm generated by the GLD shall be treated as a genuine process-safety event until the applicable site alarm-response procedure has established otherwise. The operator shall follow the site-specific emergency or gas-response procedure and shall not ignore, suppress, bypass, or disable an active gas alarm without authorized investigation.",
+   "Where the detector identifies a sensor fault, diagnostic fault, communication loss, power-related fault, or other condition that may impair the availability of the detection function, the responsible operator shall be notified and the affected detection point shall be placed into the applicable site impairment process until the fault has been corrected and the detector has been verified as suitable for continued operation.",
+   "A sensor-related fault shall be investigated whenever one or more of the eight MQ sensor channels fail the required diagnostic, baseline, or nulling criteria. A detector that cannot complete the required eight-channel sensor verification shall not be returned to normal gas-detection service until the cause has been identified and corrected. The current draft requires a complete 8/8 result for the nulling operation.",
+   "Fault investigation shall include, as applicable, verification of the 24 VDC power supply, internal sensor acquisition, sampling fan operation, local alarm module, LoRa communication, grounding continuity, enclosure condition, gas-entry path, and the status of the eight sensor channels.",
+   "If visible enclosure damage, water ingress, an unresolved sensor fault, a failed alarm proof test, or loss of protective-earth continuity is identified, the GLD shall be removed from service until the condition has been corrected and the detector has successfully completed the required inspection and functional verification.",
+   "Alarm or fault conditions shall not be cleared merely by power cycling, resetting, reconfiguring, or modifying the detector unless such action forms part of the approved operating or maintenance procedure. Any corrective action shall preserve the approved hardware, firmware, AI-model, alarm-threshold, calibration, and explosion-protection configuration.",
+   "Firmware, model files, alarm thresholds, and calibration parameters shall not be changed in the field as a means of suppressing an alarm or clearing a fault unless the change has been formally authorized through the controlled engineering and configuration-management process.",
+   "After a fault has been corrected, the GLD shall undergo the applicable functional checks before being returned to normal service. These checks shall include, as applicable, sensor-status verification, nulling in confirmed clean air, sampling-fan verification, local alarm verification, LoRa communication verification, grounding-continuity verification, and confirmation that no unresolved diagnostic condition remains.",
+   "The detector shall be returned to normal Inference Mode only after the required checks have been completed successfully and the responsible personnel have confirmed that the unit is suitable for continued operation.",
+   "Condition                          Required action",
+   "---------------------------------- -----------------------------------------------------------------------------------------------------",
+   "Gas alarm                          Treat as a real process-safety event and follow the site gas-response procedure",
+   "Sensor fault                       Investigate affected sensor channel(s); do not return to service until resolved",
+   "Nulling incomplete / not 8/8       Correct the cause and repeat nulling in confirmed clean air",
+   "LoRa communication loss            Notify operator and place affected detection point in the site impairment process",
+   "Local alarm failure                Remove detector from normal service until repaired and verified",
+   "Grounding fault                    De-energize/remove from service until continuity is restored",
+   "Water ingress / enclosure damage   Remove from service and inspect before recommissioning",
+   "Fault corrected                    Repeat applicable functional checks and return to Inference Mode only after successful verification"
+  ]
+ },
+ {
+  "id": "g.13",
+  "title": "Cleaning",
+  "blocks": [
+   "Cleaning of the Gas Leak Detector (GLD) shall be carried out only in accordance with the approved maintenance procedure and with the equipment isolated as required by the applicable site safety procedure.",
+   "For routine external cleaning, a soft, lint-free cloth lightly dampened with clean water or an approved mild cleaning agent shall be used. Cleaning shall be performed carefully so that the enclosure surface, labels, antenna, cable-entry components, seals, and other external parts are not damaged.",
+   "Abrasive materials, aggressive solvents, dry compressed air, high-pressure water spray, or tools that could damage the enclosure, gasket, label, antenna, cable entries, or other product components shall not be used. Liquid shall not be permitted to enter the equipment through openings, cable entries, enclosure joints, or other interfaces.",
+   "Particular attention shall be given to the condition of the front protective mesh and sensing area. The mesh shall remain free from visible deposits, contamination, corrosion products, or other material that could obstruct the gas-sampling path. The current maintenance schedule already requires periodic visual inspection of the sensor and protective mesh.",
+   "Cleaning of the sensing area shall be performed without deforming, puncturing, removing, or otherwise damaging the protective mesh or sensor assemblies. The integrated protective mesh of the MQ sensors shall not be mechanically altered during cleaning or maintenance.",
+   "The enclosure sealing surfaces, gasket, cable-entry seals, antenna interface, and other sealing components shall be visually inspected during cleaning for signs of deterioration, cracking, deformation, contamination, or mechanical damage. Any condition that could impair the enclosure or sealing performance shall be corrected before the detector is returned to service.",
+   "After cleaning, the GLD shall be inspected to confirm that no liquid, residue, foreign material, or cleaning agent remains in a manner that could interfere with the gas-sampling inlet, enclosure sealing, cable entry, antenna interface, grounding connection, or normal operation of the detector.",
+   "If cleaning reveals visible damage, water ingress, damaged sealing components, or other conditions that could affect safe operation, the GLD shall be removed from service until the condition has been corrected and the required inspection has been completed. The draft already requires removal from service in cases such as visible damage or water ingress.",
+   "Note: Any detailed cleaning method for the front stainless-steel mesh and the integrated MQ sensor mesh shall be defined only after the approved mesh construction and sensor manufacturer instructions have been confirmed."
+  ]
+ },
+ {
+  "id": "g.14",
+  "title": "Periodic inspection and maintenance",
+  "blocks": [
+   "The Gas Leak Detector (GLD) shall be subject to periodic inspection and preventive maintenance throughout its service life in order to maintain the gas-detection function, enclosure integrity, electrical safety, and the explosion-protection characteristics of the approved product configuration.",
+   "Inspection and maintenance shall be performed only by trained and authorized personnel in accordance with the approved maintenance procedure and the applicable hazardous-area safety requirements of the installation site.",
+   "Before any maintenance activity requiring the enclosure to be opened, the GLD shall be isolated from the 24 VDC power supply and the applicable site lockout/tagout procedure shall be followed. The enclosure shall not be opened while an explosive atmosphere may be present unless the equipment has been de-energized and the area has been confirmed safe in accordance with the applicable site procedure.",
+   "Routine Operational Inspection — Daily / Each Shift",
+   "During each operating shift, or at the frequency defined by the site operating procedure, the operator shall verify the general operational condition of the detector. The inspection shall include:",
+   "-   verification that the GLD is correctly powered;",
+   "-   verification that no active sensor or system fault is present;",
+   "-   inspection of the external enclosure for visible damage, corrosion, deformation, or evidence of water ingress;",
+   "-   verification of the diagnostic status;",
+   "-   verification of the LoRa communication status; and",
+   "-   confirmation that the detector remains available for normal gas-monitoring operation.",
+   "These checks correspond to the daily/each-shift inspection currently defined in the maintenance schedule.",
+   "Three-Month Inspection",
+   "At intervals not exceeding three months, the gas-sampling inlet, front stainless-steel protective mesh, sensing area, and accessible sensor components shall be visually inspected. The inspection shall confirm that:",
+   "-   the front mesh is clean and unobstructed;",
+   "-   no excessive dust, oil, deposits, insects, corrosion products, or other contamination restricts the gas-sampling path;",
+   "-   the front mesh shows no deformation, puncture, mechanical damage, or corrosion;",
+   "-   the MQ sensor assemblies and their integrated protective meshes show no visible damage or contamination; and",
+   "-   the sensing inlet remains correctly positioned and unobstructed by surrounding structures.",
+   "Cleaning, where required, shall be carried out in accordance with Section g.13 and shall not damage or alter the approved mesh or sensing arrangement. The current draft specifies visual inspection of the sensors and protective mesh at three-month intervals.",
+   "Six-Month Inspection and Functional Verification",
+   "At intervals not exceeding six months, a more detailed functional and mechanical inspection shall be carried out. The following activities shall be performed as applicable:",
+   "-   verification of the local visual and audible alarm function;",
+   "-   verification of sensor status;",
+   "-   sensor nulling/baseline verification in confirmed clean air in accordance with the approved procedure;",
+   "-   inspection of the enclosure joints, threaded interfaces, and other explosion-protection-related surfaces for corrosion, contamination, wear, or mechanical damage;",
+   "-   inspection of the front mesh and gas-sampling path;",
+   "-   inspection of the DC sampling fan for correct operation and absence of obstruction or abnormal mechanical condition; and",
+   "-   verification that no unresolved diagnostic or communication fault remains.",
+   "The existing draft specifies alarm-function testing, sensor recalibration/nulling, and inspection of flame paths and cover threads at six-month intervals.",
+   "Where nulling is performed, it shall be carried out only in confirmed clean air. The procedure shall be accepted only when all eight sensor channels successfully complete the required 8/8 result. If the required result is not obtained, the cause shall be investigated and corrected before the GLD is returned to normal service.",
+   "Annual Comprehensive Inspection",
+   "At least once every twelve months, a comprehensive inspection of the complete GLD installation shall be performed. The inspection shall include, as applicable:",
+   "-   protective-earth and bonding continuity verification;",
+   "-   inspection of the external grounding stud, terminal lug, washers, and associated fastening hardware;",
+   "-   inspection and verification of cable glands, cable-entry devices, adaptors, blanking elements, and sealing components;",
+   "-   verification of terminal and applicable mechanical tightening conditions;",
+   "-   inspection of enclosure gaskets and seals for ageing, cracking, hardening, deformation, contamination, or other deterioration;",
+   "-   inspection of enclosure joints, threads, and safety-critical mechanical interfaces;",
+   "-   inspection of the antenna, SMA interface, sealing arrangement, and RF cable connection;",
+   "-   inspection of the alarm module and associated enclosure interface;",
+   "-   inspection of the front gas-entry mesh, sampling fan, sensing area, and MQ sensor assemblies;",
+   "-   verification of the local alarm function;",
+   "-   verification of LoRa communication;",
+   "-   review of sensor condition and remaining service life; and",
+   "-   confirmation that the hardware, firmware, AI model, and configuration correspond to the approved product configuration.",
+   "The current draft specifies annual grounding-continuity verification, cable-gland and terminal checks, gasket/seal assessment, and evaluation of sensor-element service life.",
+   "Maintenance of Ex-Critical Components",
+   "Components that form part of the approved explosion-protection construction shall not be repaired, replaced, modified, or substituted with unapproved alternatives. This includes, as applicable, the enclosure, cover, front stainless-steel mesh, cable-entry components, seals and gaskets, grounding hardware, antenna interface, alarm-module interface, sampling fan, and other components identified in the Ex-critical BOM.",
+   "If an Ex-critical component is damaged or requires replacement, only the approved replacement component specified in the controlled BOM or other formally approved documentation shall be used. Any proposed substitution shall be subject to controlled engineering review before implementation.",
+   "Conditions Requiring Removal from Service",
+   "The GLD shall be removed from normal service if inspection or maintenance identifies a condition that could impair the detector function or the approved protection concept, including visible enclosure damage, water ingress, an unresolved sensor fault, failed alarm verification, or loss of protective-earth continuity. These conditions are already identified in the current safety instructions.",
+   "The equipment shall not be returned to normal operation until the identified condition has been corrected and the applicable inspection, functional verification, and commissioning checks have been completed successfully.",
+   "Maintenance Records",
+   "Periodic inspection and maintenance activities shall be documented. Records shall include, as applicable, the equipment model and serial number, inspection date, operating condition, findings, maintenance activities performed, components replaced, nulling or functional-test results, grounding-continuity result, firmware/configuration identification where relevant, and identification of the personnel performing the work.",
+   "Interval             Minimum activities",
+   "-------------------- ---------------------------------------------------------------------------------------------------------------------------------------------",
+   "Daily / Each Shift   Power, enclosure condition, diagnostics, active faults, LoRa communication",
+   "Every 3 Months       Front mesh, MQ sensor area, contamination, blockage, visible sensor/mesh damage",
+   "Every 6 Months       Alarm test, nulling 8/8, fan operation, enclosure/thread/interface inspection",
+   "Annually             Comprehensive inspection, PE/bonding continuity, glands/terminals, gasket/seals, antenna interface, alarm, LoRa, sensor service-life review"
+  ]
+ },
+ {
+  "id": "g.15",
+  "title": "Sensor Nulling / Calibration",
+  "blocks": [
+   "Sensor nulling shall be performed as part of commissioning and periodic maintenance in order to establish or verify the baseline condition of the eight MQ-series gas sensor channels.",
+   "The nulling procedure shall be carried out only in confirmed clean air, under conditions where the sensor responses are not influenced by the presence of target gases or other significant contaminants.",
+   "The nulling procedure shall be considered successful only when all eight sensor channels complete the procedure and report a complete 8/8 successful result. If one or more sensor channels fail to complete the nulling sequence, the detector shall not be returned to normal gas-detection operation until the cause has been identified and corrected.",
+   "Before nulling is initiated, the operator shall confirm that the GLD has completed its required start-up and sensor-stabilization sequence and that no unresolved system or sensor fault is present.",
+   "Nulling shall not be used to suppress, compensate for, or conceal a sensor fault, excessive sensor drift, contamination, abnormal sensor response, or other malfunction.",
+   "After successful completion of nulling, the GLD shall be returned to Inference Mode and the normal diagnostic status shall be verified before the detector is released for service.",
+   "Any calibration or gas-response verification beyond the nulling/baseline procedure shall be performed only in accordance with an approved calibration procedure using the applicable reference gas and test equipment. Calibration parameters shall not be changed in the field except through the controlled configuration-management process."
+  ]
+ },
+ {
+  "id": "g.16",
+  "title": "Inspection of Ex-Critical Parts",
+  "blocks": [
+   "Components identified as Ex-critical shall be inspected at the specified maintenance intervals and whenever the equipment is opened, serviced, repaired, or otherwise disturbed.",
+   "Ex-critical parts include, as applicable, the enclosure body and cover, front stainless-steel mesh assembly, enclosure joints and threaded interfaces, gaskets and seals, cable-entry devices, adaptors, blanking elements, grounding and bonding hardware, antenna interface, alarm-module interface, sampling fan, MQ sensor assemblies, and other components identified in the controlled Ex-critical BOM.",
+   "Inspection shall confirm that each Ex-critical component:",
+   "-   corresponds to the approved manufacturer, model, material, and part number;",
+   "-   is correctly installed in the approved orientation and position;",
+   "-   shows no unacceptable corrosion, wear, cracking, deformation, contamination, or mechanical damage;",
+   "-   has not been drilled, machined, re-threaded, reshaped, coated, or otherwise modified without approval;",
+   "-   retains the specified sealing, fastening, thread engagement, or mechanical retention characteristics; and",
+   "-   remains consistent with the approved product drawings and bill of materials.",
+   "Enclosure threads, joints, mesh assemblies, gaskets, cable-entry components, and other interfaces affecting the protection concept shall be examined carefully for damage or deterioration before the equipment is returned to service.",
+   "Any Ex-critical part that is damaged, missing, incorrectly installed, or inconsistent with the approved configuration shall be treated as a non-conforming condition. The GLD shall not be returned to normal operation until the condition has been corrected and the affected protection-related features have been re-inspected."
+  ]
+ },
+ {
+  "id": "g.17",
+  "title": "Firmware / Configuration Control",
+  "blocks": [
+   "The GLD firmware, embedded AI model, alarm parameters, communication settings, calibration data, and other controlled configuration items shall be maintained under formal configuration control.",
+   "Only firmware and AI-model versions that have been approved for the applicable GLD hardware revision shall be installed in production or field equipment.",
+   "The approved software configuration shall be identifiable by controlled version information, build identification, checksum/hash, or other traceable configuration identifier as defined by the project configuration-management procedure.",
+   "Firmware, AI model files, alarm thresholds, calibration parameters, communication settings, or other safety-related configuration items shall not be changed in the field without authorized engineering approval and a documented rollback method.",
+   "Any configuration change that could affect sensor acquisition, gas classification, alarm generation, fan operation, power consumption, communication behavior, diagnostic functions, or other characteristics relevant to the certified product shall be evaluated before release.",
+   "Following an approved firmware or configuration update, the GLD shall undergo the applicable verification procedure before being returned to service. This shall include confirmation of the installed version, sensor status, normal operating mode, alarm function, communication function, and absence of unresolved diagnostic faults.",
+   "Production and maintenance records shall identify the firmware version and, where applicable, the AI-model and configuration versions installed in each GLD unit."
+  ]
+ },
+ {
+  "id": "g.18",
+  "title": "Repair / Replacement Restrictions",
+  "blocks": [
+   "Repair, replacement, and modification of the GLD shall be carried out only by trained and authorized personnel using approved procedures and approved replacement components.",
+   "No field modification shall be made to the enclosure, gas-sampling path, front stainless-steel mesh, cable-entry openings, antenna interface, alarm-module interface, grounding arrangement, enclosure joints, threads, sealing surfaces, or other Ex-critical construction features.",
+   "Drilling, welding, machining, re-threading, enlarging cable entries, bypassing protective devices, or any other unauthorized modification of the approved enclosure or protection-related construction is prohibited.",
+   "Replacement parts shall correspond to the approved part number, material, rating, manufacturer, and configuration identified in the controlled BOM or other approved technical documentation.",
+   "Substitution of the front mesh, fan, MQ sensor type, gasket, cable gland, antenna, alarm component, electrical protection device, enclosure part, or any other Ex-critical component shall not be permitted without controlled engineering review and, where applicable, certification assessment.",
+   "Damaged enclosure joints, threads, sealing surfaces, or other protection-related mechanical features shall not be repaired by uncontrolled re-machining, filing, grinding, coating, or other field rework.",
+   "Following repair or replacement, the affected assembly shall be inspected and the applicable functional and safety checks shall be completed before the GLD is returned to normal service.",
+   "The GLD shall be removed from service if visible damage, water ingress, an unresolved sensor fault, failed alarm verification, or loss of protective-earth continuity is identified."
+  ]
+ },
+ {
+  "id": "g.19",
+  "title": "Storage / Transport",
+  "blocks": [
+   "During storage and transport, the GLD shall be protected against mechanical impact, excessive vibration, moisture ingress, corrosive contamination, dust accumulation, and other conditions that could damage the enclosure, sensing inlet, antenna, cable-entry components, grounding connection, or other controlled product features.",
+   "The detector shall be stored and transported in suitable protective packaging that prevents movement, impact, deformation, or abrasion of the enclosure and external components.",
+   "Particular care shall be taken to protect the front stainless-steel mesh, antenna, enclosure threads, sealing surfaces, cable-entry interfaces, and grounding stud from impact or contamination.",
+   "The GLD shall not be transported or stored with the gas-sampling inlet exposed to conditions likely to introduce excessive dust, oil, liquid, or other contaminants into the sensing area.",
+   "Covers, plugs, protective packaging, or other temporary transport protection used during shipping shall be removed before installation and shall not remain in place over the gas-sampling inlet during operation.",
+   "Before installation after storage or transport, the GLD shall be visually inspected for mechanical damage, corrosion, contamination, loose components, damaged seals, damaged mesh, or other abnormal conditions. Any damaged or suspect equipment shall be evaluated before being energized or placed into hazardous-area service.",
+   "The permitted storage-temperature range, storage humidity, packaging specification, and transportation environmental limits shall be defined in the final product specification and controlled logistics documentation."
+  ]
+ },
+ {
+  "id": "g.20",
+  "title": "Decommissioning",
+  "blocks": [
+   "Decommissioning of the Gas Leak Detector (GLD) shall be performed only by trained and authorized personnel in accordance with the applicable site electrical-isolation and hazardous-area procedures.",
+   "Before removal of the equipment, the 24 VDC supply shall be isolated and verified de-energized. The applicable lockout/tagout procedure shall be applied where required.",
+   "The enclosure shall not be opened and electrical connections shall not be disconnected while an explosive atmosphere may be present unless the equipment has been de-energized and the area has been confirmed safe in accordance with the site procedure.",
+   "After the equipment has been safely isolated, the power wiring, grounding conductor, antenna connection, communication interfaces, mounting hardware, and associated field connections may be disconnected in accordance with the approved removal procedure.",
+   "Any cable entry, conduit, or field wiring remaining at the installation location after removal of the GLD shall be left in a condition that maintains the safety and integrity of the remaining installation. Open hazardous-area cable or conduit entries shall be closed or otherwise made safe in accordance with the applicable site requirements.",
+   "The removed GLD shall be identified as decommissioned and shall not be returned to hazardous-area service unless it has been inspected, repaired where necessary, and recommissioned in accordance with the approved procedures.",
+   "Equipment intended for disposal shall be handled in accordance with the applicable site and regulatory requirements for electronic equipment, metallic components, printed circuit boards, and other materials contained in the product.",
+   "Where the unit has been exposed to process gas, chemical contamination, or other hazardous substances, appropriate site decontamination and handling procedures shall be followed before repair, transport, storage, or disposal."
+  ]
+ }
+]

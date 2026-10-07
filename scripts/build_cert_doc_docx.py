@@ -199,11 +199,15 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
     doc.add_paragraph().paragraph_format.space_after = Pt(2)
     return tbl
 
+import sys as _gsys
+_gsys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gld_guide_sections as _guide  # noqa: E402
+_H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 # ============================================================
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "1.6"
+REVISION = "1.7"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -347,12 +351,20 @@ for rev, rev_date, rev_desc in [
      "and ten annotated PCB layout views with board data (Section 2.6.a.8), including the protection-device "
      "list, grounding description and open verification items. Schematic status raised to Available; PCB "
      "layout remains Partially available."),
-    (REVISION, DOC_DATE,
+    ("1.6", "7 October 2026",
      "Section 2.6.a: the \u201cGLD ATEX CASE v3\u201d dimensioned enclosure drawing and the BP18-1Z supplier "
      "reference drawing are now reproduced as figures, and a new Section 2.6.a.1 adds the complete mechanical, "
      "enclosure and assembly drawing set (ATEX CASING v2 sheet and six CAD views, all seven GLD ATEX CASE v3 "
      "sheets, BP18-1Z, component/structure/terminal/grounding drawings, assembly sequence and MQ sensor "
      "dimension drawings) with a drawing register."),
+    (REVISION, DOC_DATE,
+     "Full audit against the reviewer's revision guide: added 2.4.1 photo-set coverage; 2.6.b.1\u20132 Ex-critical "
+     "mechanical (EX-01\u202617) and electrical (EL-01\u202613) BOM; 2.6.c.1 non-metallic materials register "
+     "(MAT-01\u202611); 2.6.d.1 manufacturing process control d.1\u2013d.13; 2.6.e.1\u20133 gas path, ignition-source "
+     "assessment IS-01\u202617 and protection concept e.3.1\u2013e.3.11; 2.6.f.1 temperature-class structure "
+     "f.1\u2013f.12 with results table; 2.6.g.1 usage and installation instructions g.2\u2013g.20; 2.6.h.1 proposed "
+     "nameplate (gas only, \u221220\u2026+60 \u00b0C); 2.6.i.1 required Ex component certificates; 3.1/3.3\u20133.4 sample "
+     "register (GLD2-0x1001) and fixtures; Annex compliance matrix."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -934,6 +946,7 @@ note_box(
     shade=INFO_SHADE,
 )
 
+_guide.photos(doc, _H4)
 doc.add_heading("2.5 \u00b7 Description of Intended Use and Installation Environment "
                  "(Gas Group, Temperature Class, Area Classification)", level=2)
 p("The GLD is intended for continuous, fixed-point monitoring of flammable and toxic gas leaks in oil & gas "
@@ -1189,6 +1202,7 @@ note_box(
     shade=WARN_SHADE,
 )
 
+_guide.bom(doc, _H4)
 doc.add_heading("2.6.c \u00b7 Material Specification Sheets / Datasheets (Non-Metallic Materials)", level=3)
 p("Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, "
   "insulators, potting compounds) \u2014 covering heat/cold resistance, anti-aging, anti-static, flame "
@@ -1222,6 +1236,7 @@ note_box(
     shade=INFO_SHADE,
 )
 
+_guide.materials(doc, _H4)
 doc.add_heading("2.6.d \u00b7 Manufacturing Process Description", level=3)
 p("A description of manufacturing processes relevant to explosion-protection safety (enclosure machining "
   "accuracy control, explosion-proof surface treatment, welding, potting, die-casting, bonding) has not yet "
@@ -1233,6 +1248,7 @@ note_box(
     shade=INFO_SHADE,
 )
 
+_guide.manufacturing(doc, _H4)
 doc.add_heading("2.6.e \u00b7 Explosion-Protection Calculations and Explanations (if applicable)", level=3)
 p("Flame-path (joint gap, length) and free-internal-volume calculations specific to Ex d (Section 2.5, team "
   "recommendation) have not yet been performed, pending final enclosure geometry from the casing development "
@@ -1243,6 +1259,7 @@ note_box(
     shade=INFO_SHADE,
 )
 
+_guide.ex_calc(doc, _H4)
 doc.add_heading("2.6.f \u00b7 Temperature Group Calculation (Hottest-Point Temperature Estimation)", level=3)
 p("A preliminary internal surface-temperature measurement has been carried out on a GLD V2 unit using "
   "thermocouples at eight locations (plus an ambient reference), under three conditions: normal operation, "
@@ -1304,6 +1321,7 @@ note_box("Status: Partially available \u2014 preliminary internal measurement. I
          "margin; not a substitute for type testing, and the open items above must be closed first.",
          shade=WARN_SHADE)
 
+_guide.temperature(doc, _H4)
 doc.add_heading("2.6.g \u00b7 Usage and Installation Instructions (Draft)", level=3)
 make_table(
     ["Sub-item", "Status", "Remarks"],
@@ -1388,12 +1406,14 @@ make_table(
     col_widths=[1.3, 3.0, 2.4],
 )
 
+_guide.usage(doc, _H4)
 doc.add_heading("2.6.h \u00b7 Nameplate Information", level=3)
 p("Nameplate artwork cannot yet be finalized: it depends on the certificate number, protection marking, "
   "temperature class, ambient range, IP rating, and serialization scheme \u2014 none of which has been "
   "assigned yet.")
 note_box("Status: Not yet available.", shade=INFO_SHADE)
 
+_guide.nameplate(doc, _H4)
 doc.add_heading("2.6.i \u00b7 Ex Component Certificates", level=3)
 p("No components in this design currently hold an Ex component certificate. As noted in Section 2.3.b, the "
   "processing unit (ESP32-S3-WROOM-1U-N16R8) and the communication module (E22-900MM22S) hold RF/EMC "
@@ -1404,18 +1424,17 @@ note_box("Status: Not yet available.", shade=INFO_SHADE)
 # ============================================================
 # SECTION 3
 # ============================================================
+_guide.ex_certs(doc, _H4)
 doc.add_heading("3. Sample Information", level=1)
 p("Model, serial number, and sample status (whether the unit can be powered on and operated), together with "
   "any required test fixtures or auxiliary equipment.")
 
 doc.add_heading("3.1 \u00b7 Model, Serial Number, and Status", level=2)
-p("No formal sample register or dossier for ExCB submission has been established. Internal engineering and "
-  "bench testing reference the \u201cGLD V2\u201d board configuration under firmware environment gld_v2; a "
-  "discrete unit serial-numbering scheme for certification samples has not yet been implemented.")
+p("Sample submitted: model GLD V2 (GLD_V2), serial number GLD2-0x1001. The sample powers on and runs in "
+  "Inference (normal operation) mode. The full sample register is given in Section 3.3.")
 note_box(
-    "Status: Not yet available. The product is still being built from scratch at prototype/development "
-    "stage; no finalized, serialized unit yet exists to register as a submission sample. This item becomes "
-    "actionable once a build reaches a stable, submission-ready configuration.",
+    "Status: Available \u2014 sample identified (GLD2-0x1001). Firmware and AI-model version still to be recorded "
+    "on the sample label and test record.",
     shade=INFO_SHADE,
 )
 
@@ -1465,6 +1484,10 @@ make_table(
 )
 
 # ============================================================
+_guide.sample(doc, _H4)
+doc.add_page_break()
+_guide.matrix(doc, lambda t: doc.add_heading(t, level=1))
+
 # FOOTER NOTE
 # ============================================================
 foot = doc.add_paragraph()

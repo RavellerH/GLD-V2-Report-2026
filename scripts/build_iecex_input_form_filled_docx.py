@@ -200,7 +200,7 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "0.9"
+REVISION = "1.0"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -310,10 +310,17 @@ for rev, rev_date, rev_desc in [
     ("0.8", "7 October 2026",
      "Section 2.6.a extended with the released main-board electrical schematic (26 sheets, Section 2.6.a.7) "
      "and ten annotated PCB layout views with board data (Section 2.6.a.8)."),
-    (REVISION, DOC_DATE,
+    ("0.9", "7 October 2026",
      "Section 2.6.a.1 added: complete mechanical, enclosure and assembly drawing set (ATEX CASING v2 sheet and "
      "six CAD views, all seven GLD ATEX CASE v3 sheets, BP18-1Z supplier drawing, component/structure/terminal/"
      "grounding drawings, assembly sequence and MQ sensor dimension drawings), with a drawing register."),
+    (REVISION, DOC_DATE,
+     "Full audit against the reviewer's revision guide: added 2.4.1 photo-set coverage; 2.6.b.1–2 Ex-critical "
+     "mechanical (EX-01…17) and electrical (EL-01…13) BOM; 2.6.c.1 non-metallic materials register (MAT-01…11); "
+     "2.6.d.1 manufacturing process control d.1–d.13; 2.6.e.1–3 gas path, ignition-source assessment IS-01…17 and "
+     "protection concept e.3.1–e.3.11; 2.6.f.1 temperature-class structure f.1–f.12 with results table; 2.6.g.1 "
+     "usage and installation instructions g.2–g.20; 2.6.h.1 proposed nameplate (gas only, −20…+60 °C); 2.6.i.1 "
+     "required Ex component certificates; 3.3–3.4 sample register (GLD2-0x1001) and fixtures; compliance matrix."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -369,6 +376,10 @@ for run in fp.runs:
 # ============================================================
 # SECTION 1 - BASIC INFORMATION
 # ============================================================
+import sys as _gsys
+_gsys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gld_guide_sections as _guide  # noqa: E402
+_H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 doc.add_heading("1. Basic Information (Application and Organization)", level=1)
 p("Application form (provided by ExCB as a template). Manufacturer's business license/company registration "
   "certificate. Manufacturer's organizational chart and contact information. Address of manufacturing plant "
@@ -591,6 +602,7 @@ for fn, cap in [
 ]:
     figure(os.path.join(PHOTO_DIR, fn), max_w=4.8, max_h=3.6, cap=cap)
 
+_guide.photos(doc, _H4)
 doc.add_heading("2.5 · Description of Intended Use and Installation Environment", level=2)
 p("The GLD is intended for continuous, fixed-point monitoring of flammable and toxic gas leaks in oil & gas "
   "refinery hazardous areas: process units, tank farms, pipe racks, and loading/unloading areas.")
@@ -683,6 +695,7 @@ sl_26b = status_line("Partially available. The explosion-safety-relevant subset 
             "without a manufacturer/LCSC part reference; its Ex status is not yet verified.")
 sl_26b.paragraph_format.keep_together = True
 
+_guide.bom(doc, _H4)
 doc.add_heading("2.6.c · Material Specification Sheets / Datasheets (Non-Metallic Materials)", level=3)
 p("Datasheets or supplier conformity declarations for non-metallic materials (enclosure components, seals, "
   "insulators, potting compounds) — covering heat/cold resistance, anti-aging, anti-static, flame "
@@ -710,6 +723,7 @@ status_line("Not yet available, pending the enclosure design and material select
             "≤0.2 mm), consistent with IEC 60079-0 coating requirements — but this describes a "
             "supplier's candidate component, not a confirmed datasheet for GLD's own enclosure finish.")
 
+_guide.materials(doc, _H4)
 doc.add_heading("2.6.d · Manufacturing Process Description", level=3)
 p("A description of manufacturing processes relevant to explosion-protection safety (enclosure machining "
   "accuracy control, explosion-proof surface treatment, welding, potting, die-casting, bonding) has not yet "
@@ -717,11 +731,13 @@ p("A description of manufacturing processes relevant to explosion-protection saf
 status_line("Not yet available — this describes the Manufacturer's (PT Galaksi Megatama Indonesia) "
             "process, not an internal electronics process.")
 
+_guide.manufacturing(doc, _H4)
 doc.add_heading("2.6.e · Explosion-Protection Calculations and Explanations (if applicable)", level=3)
 p("Flame-path (joint gap, length) and free-internal-volume calculations specific to Ex d (Section 2.5, team "
   "recommendation) have not yet been performed, pending final enclosure geometry and ExCB confirmation.")
 status_line("Not yet available — pending ExCB confirmation of the Ex d protection concept and final enclosure design.")
 
+_guide.ex_calc(doc, _H4)
 doc.add_heading("2.6.f · Temperature Group Calculation (Hottest-Point Temperature Estimation)", level=3)
 p("A preliminary internal surface-temperature measurement has been carried out on a GLD V2 unit (eight "
   "thermocouple channels plus ambient; normal operation, maximum load, and fan stalled; 180 minutes each at "
@@ -743,6 +759,7 @@ p("The highest extrapolated value (≈114°C) is below the effective T4 limit of
   "at maximum ambient requires ExCB type testing. Full detail in the companion technical document.")
 status_line("Partially available — preliminary internal measurement; indicates T4 is achievable with margin.")
 
+_guide.temperature(doc, _H4)
 doc.add_heading("2.6.g · Usage and Installation Instructions (Draft)", level=3)
 p("Safety warnings:", bold=True, size=10.5, space_after=3)
 for b in [
@@ -782,11 +799,13 @@ p("Before each operating period, check power, enclosure condition, diagnostic st
 status_line("Partially available (draft) — not yet consolidated into an Ex-specific installation and "
             "operation manual for ExCB review; also feeds the standalone Instruction_Manual_GLD deliverable.")
 
+_guide.usage(doc, _H4)
 doc.add_heading("2.6.h · Nameplate Information (must include all ATEX-required marking information)", level=3)
 p("Nameplate artwork cannot yet be finalized: it depends on the certificate number, protection marking, "
   "temperature class, ambient range, IP rating, and serialization scheme, none of which has been assigned yet.")
 status_line("Not yet available.")
 
+_guide.nameplate(doc, _H4)
 doc.add_heading("2.6.i · Ex Component Certificates", level=3)
 p("No components in this design currently hold an Ex component certificate. The processing unit "
   "(ESP32-S3-WROOM-1U-N16R8) and the communication module (E22-900MM22S) hold RF/EMC certifications (FCC, "
@@ -798,14 +817,13 @@ doc.add_page_break()
 # ============================================================
 # SECTION 3 - SAMPLE INFORMATION
 # ============================================================
+_guide.ex_certs(doc, _H4)
 doc.add_heading("3. Sample Information", level=1)
 
 doc.add_heading("3.1 · Model, Serial Number, and Status of the Sample", level=2)
-p("No formal sample register or dossier for ExCB submission has been established. Internal engineering and "
-  "bench testing reference the “GLD V2” board configuration under firmware environment gld_v2; a "
-  "discrete unit serial-numbering scheme for certification samples has not yet been implemented.")
-status_line("Not yet available. The product is still being built from scratch at prototype/development stage; "
-            "no finalized, serialized unit yet exists to register as a submission sample.")
+p("Sample submitted: model GLD V2 (GLD_V2), serial number GLD2-0x1001. The sample powers on and runs in "
+  "Inference (normal operation) mode. Full sample register in Section 3.3.")
+status_line("Available — sample identified (GLD2-0x1001); firmware/AI-model version to be recorded on the sample label.")
 
 doc.add_heading("3.2 · Necessary Test Fixtures or Auxiliary Equipment", level=2)
 p("Equipment anticipated for commissioning and bench-level functional verification:")
@@ -839,6 +857,10 @@ r = foot.add_run(
     "JLCPCB design exports, and PT Galaksi Megatama Indonesia's legal documents."
 )
 r.font.size = Pt(9); r.font.color.rgb = GRAY; r.font.italic = True
+
+_guide.sample(doc, _H4)
+doc.add_page_break()
+_guide.matrix(doc, lambda t: doc.add_heading(t, level=1))
 
 doc.save(OUT_PATH)
 print("written", OUT_PATH)

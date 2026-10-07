@@ -101,6 +101,48 @@ PHOTOS = [
 ]
 
 
+# (group title, first index, end index) — figure numbers are first_fig + index
+PHOTO_GROUPS = [
+    ("Assembly sequence — base, main board, sensors, fan, alarm, cable entry, cover (Figures 4-101 to 4-117)", 0, 17),
+    ("Assembled unit — external views (Figures 4-118 to 4-123)", 17, 23),
+    ("Nameplate position, antenna interface and threads (Figures 4-124 to 4-127)", 23, 27),
+    ("Dimensional check — caliper measurements of the base neck, bore and O-ring cord (Figures 4-128 to 4-132)", 27, 32),
+    ("Dimensional check — depths, cover thread length and O-ring diameter (Figures 4-133 to 4-137)", 32, 37),
+]
+
+
+def _fig_style(d):
+    """Paragraph style for drawing/figure titles: outline level 6 (PDF bookmark) and source of the list of drawings."""
+    from docx.enum.style import WD_STYLE_TYPE
+    from docx.oxml import OxmlElement as _OE
+    from docx.oxml.ns import qn as _qn
+    name = "GLD Figure Title"
+    try:
+        return d.styles[name]
+    except KeyError:
+        st = d.styles.add_style(name, WD_STYLE_TYPE.PARAGRAPH)
+        st.base_style = d.styles["Normal"]
+        st.paragraph_format.keep_with_next = True
+        ppr = st.element.get_or_add_pPr()
+        ol = _OE("w:outlineLvl")
+        ol.set(_qn("w:val"), "5")
+        ppr.append(ol)
+        return st
+
+
+def _group_heading(doc, text):
+    para = doc.add_heading("", level=5)
+    para.paragraph_format.space_before = Pt(8)
+    para.paragraph_format.space_after = Pt(4)
+    para.paragraph_format.keep_with_next = True
+    r = para.add_run(text)
+    r.font.size = Pt(10)
+    r.font.bold = True
+    r.font.italic = False
+    r.font.name = "Calibri"
+    r.font.color.rgb = NAVY
+
+
 def _fit(path, max_w, max_h):
     with Image.open(path) as im:
         w, h = im.size
@@ -126,27 +168,33 @@ def render(doc, h=None, first_fig=101):
                        "board), taken in assembly order from the empty base enclosure to the closed unit. No Ex "
                        "marking is shown; the MQ sensor mesh is not described as flame-arresting.")
     ri.font.size = Pt(9.5)
-    tbl = doc.add_table(rows=0, cols=2)
-    tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
-    for i in range(0, len(PHOTOS), 2):
-        row = tbl.add_row()
-        for j in range(2):
-            if i + j >= len(PHOTOS):
-                continue
-            fn, title_, desc = PHOTOS[i + j]
-            cell = row.cells[j]
-            p = cell.paragraphs[0]
-            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            path = os.path.join(A, fn)
-            p.add_run().add_picture(path, width=Inches(_fit(path, 3.0, 3.1)))
-            cp = cell.add_paragraph()
-            cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            cp.paragraph_format.space_after = Pt(8)
-            r1 = cp.add_run(f"Figure 4-{first_fig + i + j}. GLD V2 – {title_}.\n")
-            r1.font.bold = True
-            r1.font.size = Pt(8.5)
-            r1.font.color.rgb = NAVY
-            r2 = cp.add_run(desc)
-            r2.font.size = Pt(8)
-            r2.font.color.rgb = GRAY
+    for g_title, i0, i1 in PHOTO_GROUPS:
+        if h:
+            _group_heading(doc, g_title)
+        tbl = doc.add_table(rows=0, cols=2)
+        tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
+        for i in range(i0, i1, 2):
+            row = tbl.add_row()
+            for j in range(2):
+                if i + j >= i1:
+                    continue
+                fn, title_, desc = PHOTOS[i + j]
+                cell = row.cells[j]
+                p = cell.paragraphs[0]
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                path = os.path.join(A, fn)
+                p.add_run().add_picture(path, width=Inches(_fit(path, 3.0, 3.1)))
+                tp = cell.add_paragraph(style=_fig_style(doc))
+                tp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                tp.paragraph_format.space_after = Pt(0)
+                r1 = tp.add_run(f"Figure 4-{first_fig + i + j}. GLD V2 – {title_}.")
+                r1.font.bold = True
+                r1.font.size = Pt(8.5)
+                r1.font.color.rgb = NAVY
+                cp = cell.add_paragraph()
+                cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                cp.paragraph_format.space_after = Pt(8)
+                r2 = cp.add_run(desc)
+                r2.font.size = Pt(8)
+                r2.font.color.rgb = GRAY
     doc.add_paragraph().paragraph_format.space_after = Pt(4)

@@ -151,6 +151,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — gambar nameplate MS-05 & terminal/wiring MS-06 (dec:200)**: nameplate usulan 80×55 mm (ukuran = usulan), terminal PCB cover V4 dgn BAT ditandai "decision required". Cert doc rev **2.6** (156 hlm), narrative rev **1.9** (134 hlm).
 
+- 🆕 **7 Okt — navigasi dokumen sertifikasi detail (dec:201)**: TOC 5 level + daftar gambar/foto bernomor halaman + 224 bookmark PDF. Cert doc rev **2.7** (162 hlm), narrative rev **2.0** (141 hlm).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

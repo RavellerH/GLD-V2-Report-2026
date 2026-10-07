@@ -130,8 +130,47 @@ def picture(path, width_in, max_h_in=8.6):
     para.add_run().add_picture(path, width=Inches(width))
 
 
+def _fig_style(d):
+    """Paragraph style for drawing/figure titles: outline level 6 (PDF bookmark) and source of the list of drawings."""
+    from docx.enum.style import WD_STYLE_TYPE
+    from docx.oxml import OxmlElement as _OE
+    from docx.oxml.ns import qn as _qn
+    name = "GLD Figure Title"
+    try:
+        return d.styles[name]
+    except KeyError:
+        st = d.styles.add_style(name, WD_STYLE_TYPE.PARAGRAPH)
+        st.base_style = d.styles["Normal"]
+        st.paragraph_format.keep_with_next = True
+        ppr = st.element.get_or_add_pPr()
+        ol = _OE("w:outlineLvl")
+        ol.set(_qn("w:val"), "5")
+        ppr.append(ol)
+        return st
+
+
+def _hd(d, text, level, size, align=None, after=4, color=None):
+    """Real Word heading (for TOC + PDF outline) with explicit run formatting."""
+    if level == 6:
+        para = d.add_paragraph(style=_fig_style(d))
+    else:
+        para = d.add_heading("", level=level)
+    para.paragraph_format.space_after = Pt(after)
+    para.paragraph_format.space_before = Pt(8 if level <= 5 else 2)
+    para.paragraph_format.keep_with_next = True
+    if align is not None:
+        para.alignment = align
+    r = para.add_run(text)
+    r.font.size = Pt(size)
+    r.font.bold = True
+    r.font.italic = False
+    r.font.name = "Calibri"
+    r.font.color.rgb = color or NAVY
+    return para
+
+
 def caption(text):
-    p(text, size=9, bold=True, color=NAVY, space_after=3, align=WD_ALIGN_PARAGRAPH.CENTER)
+    _hd(doc, text, 6, 9, align=WD_ALIGN_PARAGRAPH.CENTER, after=3)
 
 
 

@@ -180,10 +180,47 @@ def _p(text, size=10, bold=False, italic=False, color=None, space_after=6, align
     return para
 
 
-def _sub(text):
-    para = _p(text, size=11.5, bold=True, color=NAVY, space_after=4)
+def _fig_style(d):
+    """Paragraph style for drawing/figure titles: outline level 6 (PDF bookmark) and source of the list of drawings."""
+    from docx.enum.style import WD_STYLE_TYPE
+    from docx.oxml import OxmlElement as _OE
+    from docx.oxml.ns import qn as _qn
+    name = "GLD Figure Title"
+    try:
+        return d.styles[name]
+    except KeyError:
+        st = d.styles.add_style(name, WD_STYLE_TYPE.PARAGRAPH)
+        st.base_style = d.styles["Normal"]
+        st.paragraph_format.keep_with_next = True
+        ppr = st.element.get_or_add_pPr()
+        ol = _OE("w:outlineLvl")
+        ol.set(_qn("w:val"), "5")
+        ppr.append(ol)
+        return st
+
+
+def _hd(d, text, level, size, align=None, after=4, color=None):
+    """Real Word heading (for TOC + PDF outline) with explicit run formatting."""
+    if level == 6:
+        para = d.add_paragraph(style=_fig_style(d))
+    else:
+        para = d.add_heading("", level=level)
+    para.paragraph_format.space_after = Pt(after)
+    para.paragraph_format.space_before = Pt(8 if level <= 5 else 2)
     para.paragraph_format.keep_with_next = True
+    if align is not None:
+        para.alignment = align
+    r = para.add_run(text)
+    r.font.size = Pt(size)
+    r.font.bold = True
+    r.font.italic = False
+    r.font.name = "Calibri"
+    r.font.color.rgb = color or NAVY
     return para
+
+
+def _sub(text):
+    return _hd(doc, text, 5, 11)
 
 
 def _note(text, fill=NOTE_SHADE):
@@ -252,14 +289,11 @@ def _figure(fid, fn, title, desc, max_w, max_h):
     para.paragraph_format.space_after = Pt(2)
     para.paragraph_format.keep_with_next = True
     para.add_run().add_picture(path, width=Inches(_fit(path, max_w, max_h)))
-    cap = doc.add_paragraph()
-    cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    cap.paragraph_format.space_after = Pt(12)
-    r1 = cap.add_run(f"{fid}. {title}" + ("\n" if desc else ""))
-    r1.font.bold = True
-    r1.font.size = Pt(9.5)
-    r1.font.color.rgb = NAVY
+    _hd(doc, f"{fid}. {title}", 6, 9.5, align=WD_ALIGN_PARAGRAPH.CENTER, after=1 if desc else 12)
     if desc:
+        cap = doc.add_paragraph()
+        cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        cap.paragraph_format.space_after = Pt(12)
         r2 = cap.add_run(desc)
         r2.font.size = Pt(8.5)
         r2.font.color.rgb = GRAY

@@ -58,12 +58,13 @@ normal.font.color.rgb = RGBColor(0x2B, 0x2B, 0x2B)
 normal.paragraph_format.space_after = Pt(8)
 normal.paragraph_format.line_spacing = 1.25
 
-for i, sz, col in [(1, 16, NAVY), (2, 13, NAVY), (3, 11, NAVY)]:
+for i, sz, col in [(1, 16, NAVY), (2, 13, NAVY), (3, 11, NAVY), (4, 10.5, NAVY), (5, 10, NAVY), (6, 9, NAVY)]:
     st = doc.styles[f"Heading {i}"]
     st.font.name = "Calibri"
     st.font.size = Pt(sz)
     st.font.bold = True
     st.font.color.rgb = col
+    st.font.italic = False
     st.paragraph_format.space_before = Pt(16 if i == 1 else 12)
     st.paragraph_format.space_after = Pt(6)
 
@@ -200,7 +201,7 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "1.9"
+REVISION = "2.0"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -337,8 +338,10 @@ for rev, rev_date, rev_desc in [
      "Further measurements added (Figures 4-133\u20134-137): base depth \u224845 mm, cover thread length \u224818.9 mm, cover depth \u224847.5 mm, O-ring OD \u224891.0 mm; free volume \u22480.4 L (indicative)."),
     ("1.8", "7 October 2026",
      "Measured sketches MS-01\u2026MS-04 of the cover-to-base joint added (e.3.13), illustrative, from caliper measurements."),
-    (REVISION, DOC_DATE,
+    ("1.9", "7 October 2026",
      "Proposed nameplate artwork MS-05 (2.6.h.1) and terminal/field-wiring diagram MS-06 (2.6.g.1) added (drafts)."),
+    (REVISION, DOC_DATE,
+     "Navigation: five-level Table of Contents, List of Drawings/Figures with page numbers, PDF bookmarks to individual drawings and photographs; photo groups added. No technical content changed."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -352,20 +355,39 @@ for _row in rt.rows:
 
 doc.add_page_break()
 
-for _toc_style, _toc_size in (("TOC 1", 10.5), ("TOC 2", 9.5)):
+for _lvl, (_toc_style, _toc_size) in enumerate((("TOC 1", 10.5), ("TOC 2", 9.5), ("TOC 3", 9), ("TOC 4", 8.5), ("TOC 5", 8)), 1):
     try:
         _st = doc.styles[_toc_style]
     except KeyError:
         _st = doc.styles.add_style(_toc_style, WD_STYLE_TYPE.PARAGRAPH)
     _st.font.size = Pt(_toc_size)
     _st.font.name = "Calibri"
+    _st.font.bold = (_lvl == 1)
+    _st.paragraph_format.left_indent = Cm(0.45 * (_lvl - 1))
     _st.paragraph_format.space_before = Pt(0)
     _st.paragraph_format.space_after = Pt(2)
 
 p("Table of Contents", size=13, bold=True, color=NAVY, space_after=6)
 toc_para = doc.add_paragraph()
-add_field(toc_para, 'TOC \\o "1-2" \\h \\z \\u',
+add_field(toc_para, 'TOC \\o "1-5" \\h \\z \\u',
           fallback_text="Right-click and choose Update Field to generate the table of contents.")
+
+try:
+    _st6 = doc.styles["TOC 6"]
+except KeyError:
+    _st6 = doc.styles.add_style("TOC 6", WD_STYLE_TYPE.PARAGRAPH)
+_st6.font.size = Pt(8.5)
+_st6.font.name = "Calibri"
+_st6.paragraph_format.left_indent = Cm(0)
+_st6.paragraph_format.space_before = Pt(0)
+_st6.paragraph_format.space_after = Pt(0)
+doc.add_page_break()
+p("List of Drawings, Schematic Sheets, Sketches and Photographs", size=12, bold=True, color=NAVY, space_after=2)
+p("Every drawing (M-xx), schematic sheet and layout view (Figure 8-n), measured sketch (MS-xx) and assembly "
+  "photograph (Figure 4-1xx) with its page. All entries are also PDF bookmarks.", size=8.5, color=GRAY, space_after=4)
+lof_para = doc.add_paragraph()
+add_field(lof_para, 'TOC \\h \\z \\t "GLD Figure Title,1"',
+          fallback_text="Right-click and choose Update Field to generate the list of drawings.")
 
 doc.add_page_break()
 
@@ -621,8 +643,8 @@ for fn, cap in [
 ]:
     figure(os.path.join(PHOTO_DIR, fn), max_w=4.8, max_h=3.6, cap=cap)
 
-_photos07.render(doc, _H4)
 _guide.photos(doc, _H4)
+_photos07.render(doc, _H4)
 doc.add_heading("2.5 · Description of Intended Use and Installation Environment", level=2)
 p("The GLD is intended for continuous, fixed-point monitoring of flammable and toxic gas leaks in oil & gas "
   "refinery hazardous areas: process units, tank farms, pipe racks, and loading/unloading areas.")
@@ -693,7 +715,7 @@ import gld_mech_drawings_section as _mech  # noqa: E402
 doc.add_page_break()
 _mech.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num="2.6.a.1")
 doc.add_page_break()
-_board.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num7="2.6.a.7", num8="2.6.a.8")
+_board.render(doc, h1=lambda t: doc.add_heading(t, level=4), h2=lambda t: doc.add_heading(t, level=5), content_w=6.2, num7="2.6.a.7", num8="2.6.a.8")
 doc.add_page_break()
 
 h_26b = doc.add_heading("2.6.b · Bill of Materials (BOM) for Key Components Affecting Explosion-Proof Safety", level=3)
@@ -817,7 +839,7 @@ p("Before each operating period, check power, enclosure condition, diagnostic st
   "procedure establishes otherwise. Do not change firmware, model files, alarm thresholds, or calibration "
   "parameters from the field without controlled approval and a documented rollback path.", size=10)
 status_line("Partially available (draft) — not yet consolidated into an Ex-specific installation and "
-            "operation manual for ExCB review; also feeds the standalone Instruction_Manual_GLD deliverable.")
+            "operation manual for ExCB review; also feeds the separate GLD instruction manual.")
 
 _guide.usage(doc, _H4)
 doc.add_heading("2.6.h · Nameplate Information (must include all ATEX-required marking information)", level=3)

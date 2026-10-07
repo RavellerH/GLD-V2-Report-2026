@@ -65,10 +65,49 @@ def _p(text, size=10, bold=False, italic=False, color=None, space_after=5, style
     return para
 
 
-def _sub(text):
-    para = _p(text, size=10.5, bold=True, color=NAVY, space_after=3)
+def _fig_style(d):
+    """Paragraph style for drawing/figure titles: outline level 6 (PDF bookmark) and source of the list of drawings."""
+    from docx.enum.style import WD_STYLE_TYPE
+    from docx.oxml import OxmlElement as _OE
+    from docx.oxml.ns import qn as _qn
+    name = "GLD Figure Title"
+    try:
+        return d.styles[name]
+    except KeyError:
+        st = d.styles.add_style(name, WD_STYLE_TYPE.PARAGRAPH)
+        st.base_style = d.styles["Normal"]
+        st.paragraph_format.keep_with_next = True
+        ppr = st.element.get_or_add_pPr()
+        ol = _OE("w:outlineLvl")
+        ol.set(_qn("w:val"), "5")
+        ppr.append(ol)
+        return st
+
+
+def _hd(d, text, level, size, align=None, after=4, color=None):
+    """Real Word heading (for TOC + PDF outline) with explicit run formatting."""
+    if level == 6:
+        para = d.add_paragraph(style=_fig_style(d))
+    else:
+        para = d.add_heading("", level=level)
+    para.paragraph_format.space_after = Pt(after)
+    para.paragraph_format.space_before = Pt(8 if level <= 5 else 2)
     para.paragraph_format.keep_with_next = True
+    if align is not None:
+        para.alignment = align
+    r = para.add_run(text)
+    r.font.size = Pt(size)
+    r.font.bold = True
+    r.font.italic = False
+    r.font.name = "Calibri"
+    r.font.color.rgb = color or NAVY
     return para
+
+
+def _sub(text):
+    import re as _re
+    lvl = 4 if _re.match(r"^\d\.\d+(\.[a-z])?\.\d+ |^\d\.\d+ ", text) else 5
+    return _hd(_doc, text, lvl, 10.5 if lvl == 4 else 10, after=3)
 
 
 def _bullet(text):
@@ -150,8 +189,7 @@ def _sketch(fn, cap):
     para.alignment = 1
     para.paragraph_format.keep_with_next = True
     para.add_run().add_picture(path, width=Inches(width))
-    cp = _p(cap, size=8.5, bold=True, color=NAVY, space_after=8)
-    cp.alignment = 1
+    _hd(_doc, cap, 6, 8.5, align=1, after=8)
 
 
 STATUS_LEGEND = ("Status legend: Final = confirmed and documented; Review = data exists but a rating or function "
@@ -542,8 +580,7 @@ def ex_calc(d, h=None):
         para.alignment = 1
         para.paragraph_format.keep_with_next = True
         para.add_run().add_picture(path, width=Inches(width))
-        cp = _p(cap, size=8.5, bold=True, color=NAVY, space_after=8)
-        cp.alignment = 1
+        _hd(_doc, cap, 6, 8.5, align=1, after=8)
 
 
 # ===================================================================================== 2.6.f temperature

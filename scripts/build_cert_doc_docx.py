@@ -51,12 +51,13 @@ normal.font.color.rgb = RGBColor(0x2B, 0x2B, 0x2B)
 normal.paragraph_format.space_after = Pt(8)
 normal.paragraph_format.line_spacing = 1.25
 
-for i, sz, col in [(1, 16, NAVY), (2, 13, NAVY), (3, 11, NAVY)]:
+for i, sz, col in [(1, 16, NAVY), (2, 13, NAVY), (3, 11, NAVY), (4, 10.5, NAVY), (5, 10, NAVY), (6, 9, NAVY)]:
     st = doc.styles[f"Heading {i}"]
     st.font.name = "Calibri"
     st.font.size = Pt(sz)
     st.font.bold = True
     st.font.color.rgb = col
+    st.font.italic = False
     st.paragraph_format.space_before = Pt(16 if i == 1 else 12)
     st.paragraph_format.space_after = Pt(6)
 
@@ -208,7 +209,7 @@ _H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "2.6"
+REVISION = "2.7"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -382,8 +383,10 @@ for rev, rev_date, rev_desc in [
      "Further measurements added (Figures 4-133\u20134-137): base internal depth \u224845 mm to the PCB-boss ledge, cover internal thread length \u224818.9 mm, cover depth \u224847.5 mm, neck height \u224820.2 mm from the body shoulder, O-ring OD \u224891.0 mm (ID \u224885.6 mm derived). Engaged cover-thread length now bounded by the neck (\u226414.8 mm); indicative gross free volume \u22480.4 L. e.3.12, EX-02, EX-06 and MAT-01 updated."),
     ("2.5", "7 October 2026",
      "Measured sketches MS-01 to MS-04 added (Section 2.6.e.3, item e.3.13): dimensioned half-sections of the base neck, cover, assembled threaded joint and O-ring, redrawn from the caliper and steel-rule measurements of Figures 4-127\u20134-137. Illustrative only; to be superseded by the enclosure manufacturer's toleranced drawing."),
-    (REVISION, DOC_DATE,
+    ("2.6", "7 October 2026",
      "Proposed nameplate artwork MS-05 (Section 2.6.h.1: 80 \u00d7 55 mm stainless plate proposal, gas-only marking II 2G Ex db IIC T4 Gb, \u221220 \u00b0C \u2264 Ta \u2264 +60 \u00b0C, IP66, 24 VDC 8 W) and terminal block / field wiring diagram MS-06 (Section 2.6.g.1: RS485, FAN, ALARM, BAT, 24V and PE, BAT flagged as decision required) added. Both are drafts, not controlled drawings."),
+    (REVISION, DOC_DATE,
+     "Navigation: all numbered subsections (d.1\u2013d.13, e.3.1\u2013e.3.13, f.1\u2013f.12, g.2\u2013g.20, EX/EL BOM, drawing groups A\u2013F, schematic/layout subsections, photo groups) promoted to headings; Table of Contents extended to five levels; new List of Drawings, Schematic Sheets, Sketches and Photographs with page numbers; PDF bookmarks down to individual drawings and photographs. Photo-coverage table 2.4.1 now precedes photo set 2.4.2. No technical content changed."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -399,21 +402,40 @@ doc.add_page_break()
 
 # Rapatkan gaya entri daftar isi supaya TOC muat dalam satu halaman
 # (dokumen ini punya banyak subjudul level-3: 2.3.a-c, 2.6.a-i).
-for _toc_style, _toc_size in (("TOC 1", 9.5), ("TOC 2", 9.0), ("TOC 3", 8.5)):
+for _lvl, (_toc_style, _toc_size) in enumerate((("TOC 1", 10), ("TOC 2", 9.5), ("TOC 3", 9), ("TOC 4", 8.5), ("TOC 5", 8)), 1):
     try:
         _st = doc.styles[_toc_style]
     except KeyError:
         _st = doc.styles.add_style(_toc_style, WD_STYLE_TYPE.PARAGRAPH)
     _st.font.size = Pt(_toc_size)
     _st.font.name = "Calibri"
+    _st.font.bold = (_lvl == 1)
+    _st.paragraph_format.left_indent = Cm(0.45 * (_lvl - 1))
     _st.paragraph_format.space_before = Pt(0)
     _st.paragraph_format.space_after = Pt(0)
     _st.paragraph_format.line_spacing = 1.0
 
 p("Table of Contents", size=12, bold=True, color=NAVY, space_after=4)
 toc_para = doc.add_paragraph()
-add_field(toc_para, 'TOC \\o "1-3" \\h \\z \\u',
+add_field(toc_para, 'TOC \\o "1-5" \\h \\z \\u',
           fallback_text="Right-click and choose Update Field to generate the table of contents.")
+
+try:
+    _st6 = doc.styles["TOC 6"]
+except KeyError:
+    _st6 = doc.styles.add_style("TOC 6", WD_STYLE_TYPE.PARAGRAPH)
+_st6.font.size = Pt(8.5)
+_st6.font.name = "Calibri"
+_st6.paragraph_format.left_indent = Cm(0)
+_st6.paragraph_format.space_before = Pt(0)
+_st6.paragraph_format.space_after = Pt(0)
+doc.add_page_break()
+p("List of Drawings, Schematic Sheets, Sketches and Photographs", size=12, bold=True, color=NAVY, space_after=2)
+p("Every drawing (M-xx), schematic sheet and layout view (Figure 8-n), measured sketch (MS-xx) and assembly "
+  "photograph (Figure 4-1xx) with its page. All entries are also PDF bookmarks.", size=8.5, color=GRAY, space_after=4)
+lof_para = doc.add_paragraph()
+add_field(lof_para, 'TOC \\h \\z \\t "GLD Figure Title,1"',
+          fallback_text="Right-click and choose Update Field to generate the list of drawings.")
 
 doc.add_page_break()
 
@@ -965,8 +987,8 @@ note_box(
     shade=INFO_SHADE,
 )
 
-_photos07.render(doc, _H4)
 _guide.photos(doc, _H4)
+_photos07.render(doc, _H4)
 doc.add_heading("2.5 \u00b7 Description of Intended Use and Installation Environment "
                  "(Gas Group, Temperature Class, Area Classification)", level=2)
 p("The GLD is intended for continuous, fixed-point monitoring of flammable and toxic gas leaks in oil & gas "
@@ -1174,7 +1196,7 @@ import gld_mech_drawings_section as _mech  # noqa: E402
 doc.add_page_break()
 _mech.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num="2.6.a.1")
 doc.add_page_break()
-_board.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num7="2.6.a.7", num8="2.6.a.8")
+_board.render(doc, h1=lambda t: doc.add_heading(t, level=4), h2=lambda t: doc.add_heading(t, level=5), content_w=6.2, num7="2.6.a.7", num8="2.6.a.8")
 doc.add_page_break()
 
 doc.add_heading("2.6.b \u00b7 Bill of Materials (BOM) for Explosion-Safety-Relevant Components", level=3)
@@ -1364,11 +1386,11 @@ note_box(
     "Status: Draft text available (source: internal working draft, Rev. 18 Sep 2026). This is a draft for "
     "review, not a finalized, Ex-approved installation and operation manual. It has not been checked against a "
     "selected type of protection (Ex d/e/i, Section 2.6.e), a confirmed temperature class (Section 2.6.f), or "
-    "finalized cable-entry/enclosure hardware. It also feeds the standalone Instruction_Manual_GLD deliverable.",
+    "finalized cable-entry/enclosure hardware. It also feeds the separate GLD instruction manual.",
     shade=WARN_SHADE,
 )
 
-p("2.6.g.a \u00b7 Safety Warnings (Draft)", size=10.5, bold=True, color=NAVY, space_after=2)
+doc.add_heading("2.6.g.a \u00b7 Safety Warnings (Draft)", level=4)
 for _b in [
     "Only trained and authorized personnel may install, commission, operate, inspect, or maintain the detector.",
     "Isolate and verify the 24 VDC supply before opening the enclosure or changing wiring. Apply the site "
@@ -1388,7 +1410,7 @@ for _b in [
     br = bp.add_run(_b)
     br.font.size = Pt(10)
 
-p("2.6.g.b \u00b7 Detailed Installation Requirements (Draft)", size=10.5, bold=True, color=NAVY, space_after=2)
+doc.add_heading("2.6.g.b \u00b7 Detailed Installation Requirements (Draft)", level=4)
 p("Cable entry method: Use only cable glands, adaptors, blanking elements, and seals approved for the final "
   "protection concept, certificate, thread form, IP rating, cable outer diameter, and installation "
   "temperature. Do not create new entries, enlarge an entry, leave unused entries open, or substitute a "
@@ -1404,8 +1426,7 @@ p("Cleaning requirements: For routine cleaning, isolate the equipment as require
   "abrasives, aggressive solvents, dry compressed air, high-pressure spray, or tools that can damage the "
   "enclosure, gasket, label, antenna, or cable entries. Keep liquid out of all openings.", size=10)
 
-p("2.6.g.c \u00b7 Operating Instructions and Maintenance Requirements (Draft)", size=10.5, bold=True, color=NAVY,
-  space_after=2)
+doc.add_heading("2.6.g.c \u00b7 Operating Instructions and Maintenance Requirements (Draft)", level=4)
 p("Before each operating period, check power, enclosure condition, diagnostic status, communication status, "
   "and the absence of active faults. Treat an alarm as a real process-safety event until the site response "
   "procedure establishes otherwise. If the detector reports a fault or loses required communication, notify "

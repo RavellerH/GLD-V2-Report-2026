@@ -208,7 +208,7 @@ _H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "2.0"
+REVISION = "2.2"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -370,8 +370,12 @@ for rev, rev_date, rev_desc in [
      "Section 2.4.2 added: photo set of the current production configuration (23 photographs, complete assembly sequence, Figures 4-101\u20134-123). Audit tables updated from the photographs: DC fan identified as CIXIKEJI CX5010B5H, 5 V 0.23 A (EX-05); prototype cable gland is a general-purpose polymer type to be replaced by a certified Ex d gland (EX-07, MAT-02, IS-13); blanking plug, grounding screw and BAT terminal located (EX-08, EX-12, EX-17); photo-coverage table 2.4.1 updated."),
     ("1.9", "7 October 2026",
      "Section 2.6.a.8: top/bottom renders of the GLD V4 main board and of the separate PCB cover (terminal board) added (Figure 8-11), with terminal designations and the changes from V3 (motherboard mounting holes to the PCB cover; separate PCB cover terminating the field connections)."),
-    (REVISION, DOC_DATE,
+    ("2.0", "7 October 2026",
      "Nameplate location added: flat top face of the base enclosure beside the antenna (Figure 4-124, Section 2.4.2; Section 2.6.h.1); photo-coverage table updated."),
+    ("2.1", "7 October 2026",
+     "Antenna interface photographs added (Figures 4-125 outside, 4-126 inside: brass SMA bulkhead through the enclosure wall with U.FL pigtail); EX-09 and EX-06 updated; photo coverage 10/12."),
+    (REVISION, DOC_DATE,
+     "Thread dimensions estimated from photographs and added (Figure 4-127; new Section 2.6.e.3 item e.3.12): cover \u2248M100 \u00d7 2 with \u224810 threads (\u224820 mm) engaged, side entries M20 \u00d7 1.5, antenna SMA 1/4\u2033-36 UNS, compared with the IEC 60079-1 threaded-joint rules; EX-02, EX-07, EX-08 and EX-09 updated. All values marked as estimates pending the enclosure manufacturer's drawing."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):

@@ -172,9 +172,9 @@ def photos(d, h=None):
          "Figures 4-104 (labelled terminal board), 4-112…4-114 (gland, cable, 24V termination)."),
         ("8", "Grounding / bonding point", "Partial",
          "Figures 4-116, 4-120 (external grounding screw); close-up with lug and conductor to be added."),
-        ("9", "Cable entry and antenna interface (all penetrations)", "Partial",
-         "Figures 4-112 (cable gland), 4-110 (beacon entry), 4-119 (blanking plug), 4-101 (antenna); close-up of the "
-         "antenna bulkhead to be added."),
+        ("9", "Cable entry and antenna interface (all penetrations)", "Available",
+         "Figures 4-112 (cable gland), 4-110 (beacon entry), 4-119 (blanking plug), 4-125/4-126 (antenna bulkhead "
+         "outside and inside), 4-127 (cover and entry threads)."),
         ("10", "Alarm module (LED/buzzer, gasket, fixing)", "Available", "Figures 4-110, 4-111; M-D5, M-E4."),
         ("11", "Enclosure opened — complete internal arrangement", "Available",
          "Figure 4-115 (open base with sensors and terminals next to the cover with fan)."),
@@ -196,8 +196,8 @@ def bom(d, h=None):
          "ADC12 die-cast aluminium alloy; wall thickness TBC; surface treatment TBC", "Flameproof enclosure (Ex d, proposed)",
          "Drawings M-B7, M-D7", "Open"),
         ("EX-02", "Enclosure cover (threaded)", "PT Galaksi Megatama Indonesia", "TBC",
-         "Aluminium alloy; thread form, pitch and engagement TBC", "Flameproof joint", "Assembly M-E9 (closed by turning clockwise)",
-         "Open"),
+         "Aluminium alloy; cover thread est. ≈M100 × 2, ≈10 threads (≈20 mm) engaged — estimate from photograph, "
+         "to be confirmed on drawing", "Flameproof joint", "Figure 4-127; assembly M-E9", "Open — estimate"),
         ("EX-03", "Front stainless-steel wire-mesh plate + locking bracket", "TBC", "TBC (M-D4, M-E1)",
          "Stainless steel; grade, mesh/pore size, thickness, layers TBC", "Gas inlet; flame-path element if certified",
          "Photograph, assembly illustration", "Open"),
@@ -209,15 +209,16 @@ def bom(d, h=None):
          "Gas sampling; potential ignition source (IS-02)", "Label, Figure 4-108; driven by Q5 (sheet 24)",
          "Partial"),
         ("EX-06", "Gaskets / O-rings", "TBC", "TBC (M-D2, M-D3)", "Rubber; compound, hardness, temperature range TBC",
-         "Environmental sealing (IP66)", "Photographs", "Open"),
-        ("EX-07", "Cable gland (24 VDC entry)", "TBC", "TBC", "M20×1.5 entry thread (BP18-1Z reference); Ex d barrier "
-         "gland required for IIC; cable range, IP, temperature TBC", "Cable-entry flame path and sealing",
+         "Environmental sealing (IP66)", "Photographs; O-rings on cover joint and blanking plug (Figure 4-125)", "Open"),
+        ("EX-07", "Cable gland (24 VDC entry)", "TBC", "TBC", "M20×1.5 entry thread (BP18-1Z reference; consistent "
+         "with Figure 4-127); Ex d barrier gland required for IIC; cable range, IP, temperature TBC", "Cable-entry flame path and sealing",
          "Current prototype uses a general-purpose black polymer gland (Figure 4-112) — to be replaced by a certified "
          "metallic Ex d barrier gland", "Pending certificate"),
-        ("EX-08", "Blanking plug / adaptor", "TBC", "TBC", "Metallic hexagon plug fitted in the lower entry; thread "
-         "and certification TBC", "Closes unused entry", "Figure 4-119", "Pending certificate"),
-        ("EX-09", "Antenna bulkhead / SMA interface", "TBC", "TBC", "SMA; material and sealing TBC",
-         "Enclosure penetration", "—", "Open"),
+        ("EX-08", "Blanking plug / adaptor", "TBC", "TBC", "Metallic hexagon plug with O-ring in the lower entry; "
+         "thread est. M20×1.5; certification TBC", "Closes unused entry", "Figure 4-119", "Pending certificate"),
+        ("EX-09", "Antenna bulkhead / SMA interface", "TBC", "TBC", "Brass SMA bulkhead (standard 1/4″-36 UNS "
+         "thread) in a spot-faced hole through the enclosure wall, U.FL pigtail inside; engagement and sealing TBC",
+         "Enclosure penetration (flame path under Ex d)", "Figures 4-125, 4-126", "Open"),
         ("EX-10", "External antenna", "TBC", "TBC", "Omnidirectional, 3 dBi, SMA; material/environmental rating TBC",
          "RF radiator", "M-D1", "Open"),
         ("EX-11", "LED / buzzer alarm beacon", "TBC", "TBC", "Driven at 24 V from J2 (sheet 25); housing, gasket, "
@@ -471,6 +472,28 @@ def ex_calc(d, h=None):
     for t, b in parts:
         _sub(t)
         _p(b, size=9.5)
+    _sub("e.3.12 Threaded joints — estimated dimensions (from photographs)")
+    _p("The dimensions below are estimates taken from photographs of the current production unit (Figure 4-127, "
+       "4-125, 4-126, 4-119) and from the BP18-1Z supplier drawing. They are given to show how each threaded "
+       "flame path compares with the IEC 60079-1 rules for threaded joints and must be replaced by the values on the "
+       "enclosure manufacturer's controlled drawing.", size=9.5)
+    _table(["Joint", "Estimated thread", "Estimated engagement", "IEC 60079-1 threaded-joint rule (Group IIC)",
+            "Assessment (preliminary)", "Status"], [
+        ("Cover to base (main enclosure)", "≈M100 × 2 (external thread on the base neck)",
+         "≈10 threads, ≈20 mm", "≥5 full threads engaged; axial engagement ≥8 mm where free volume >100 cm³ "
+         "(≥5 mm for ≤100 cm³); medium or fine tolerance class (6g/6H)",
+         "Engagement appears to exceed the minimum; free internal volume estimated >100 cm³ (bore ≈Ø90 mm)",
+         "Open — estimate"),
+        ("Cable entry (left)", "M20 × 1.5-6H (BP18-1Z drawing)", "TBC (wall thickness)",
+         "≥5 full threads engaged; thread length per gland certificate", "Requires certified Ex d gland",
+         "Open — estimate"),
+        ("Beacon entry (right)", "M20 × 1.5 (est.)", "TBC", "≥5 full threads engaged", "Beacon thread and certificate "
+         "to be confirmed", "Open — estimate"),
+        ("Lower entry (blanking plug)", "M20 × 1.5 (est.)", "TBC", "≥5 full threads; certified Ex d plug",
+         "Plug fitted with O-ring (Figure 4-125)", "Open — estimate"),
+        ("Antenna bulkhead", "SMA 1/4″-36 UNS (standard)", "TBC", "Flame path through the wall must be assessed or "
+         "a certified Ex d bushing used", "Bushing not certified", "Open — estimate"),
+    ], widths=(1.05, 1.1, 0.9, 1.6, 1.4, 0.6), status_col=5, size=7.5)
 
 
 # ===================================================================================== 2.6.f temperature
@@ -659,7 +682,7 @@ def matrix(d, h=None):
         ("1.4", "Plant address and facilities", "1.4", "Partial — PCB assembler to add"),
         ("1.5", "ISO 9001", "1.5", "Open — audit planned Oct 2026"),
         ("2.1–2.3", "Product description, specification, technical parameters", "2.1–2.3", "Final"),
-        ("2.4", "Photo set (12 views)", "2.4, 2.4.1, 2.4.2", "Partial — 9/12 available, 3 partial (PCB underside photo, grounding lug, antenna bulkhead)"),
+        ("2.4", "Photo set (12 views)", "2.4, 2.4.1, 2.4.2", "Partial — 10/12 available, 2 partial (PCB underside photo, grounding lug with conductor)"),
         ("2.5", "Intended use and environment (IIC, T4, Zone 1, −20…+60 °C)", "2.5", "Final (proposed classification)"),
         ("6(a).1–6(a).6", "Assembly, section, enclosure, mesh, MQ arrangement, fan drawings", "2.6.a, 2.6.a.1",
          "Partial — controlled toleranced drawings to issue"),

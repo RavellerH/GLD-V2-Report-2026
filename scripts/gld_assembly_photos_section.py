@@ -62,6 +62,16 @@ PHOTOS = [
     ("Nameplate_position_beside_antenna.jpg", "Nameplate position",
      "Flat top face of the base enclosure beside the antenna, between the antenna and the mounting lug — the "
      "intended location of the nameplate (marking still draft; not yet fitted)."),
+    ("Antenna_interface_outside.jpg", "Antenna interface — outside",
+     "External antenna screwed onto its connector on the top face of the base enclosure; the threaded cover joint "
+     "with its black O-ring and the hexagon blanking plug with O-ring are also visible."),
+    ("Antenna_interface_inside.jpg", "Antenna interface — inside the enclosure",
+     "Brass SMA bulkhead seated in a spot-faced hole through the enclosure wall, with the U.FL pigtail running to "
+     "the main board; PCB mounting boss below."),
+    ("Cover_thread_and_entry_thread.jpg", "Cover thread and side-entry thread",
+     "External thread on the base neck that carries the threaded cover (estimated ≈M100 × 2, about 10 visible "
+     "threads), black O-ring at the root of the thread, and an internally threaded side entry (estimated M20 × 1.5). "
+     "Values are estimates from the photograph; see Section 2.6.e.3."),
 ]
 
 

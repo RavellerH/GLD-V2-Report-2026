@@ -133,6 +133,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — Panduan Revisi ATEX/IECEx vs dossier terkirim ke GTS → `Deliverables/Daftar_Tindak_Lanjut_Revisi_ATEX_GLD.{docx,pdf}`** (dec:188): 13 gambar teknik + 13 foto yg harus disiapkan (user siapkan sendiri), 8 kontradiksi wajib dibetulkan sebelum kirim ulang (marking dust/Tamb −40/+85, Tamb campur, PG13.5 vs M20, Ex d, partisi PCB, baterai), dan item kosong 6.b–6.i.
 
+- 🆕 **7 Okt — 6(a).7 skematik & 6(a).8 layout PCB main board dilengkapi** (dec:189): `Deliverables/Dossier_Section_6a7_6a8_Schematic_PCB_GLD_V4.{docx,pdf}` dari file tim (26 lembar skematik + 10 tampilan layout). ⚠️ Temuan: rating PTC 16 V di jalur 24 V, MOSFET input tidak memblok polaritas terbalik, **jalur baterai terpasang di main board**, skematik/layout sensor board belum ada.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

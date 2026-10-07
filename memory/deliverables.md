@@ -219,3 +219,6 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 
 ### Daftar Tindak Lanjut Revisi ATEX (7 Okt 2026, dec:188)
 `Deliverables/Daftar_Tindak_Lanjut_Revisi_ATEX_GLD.{docx,pdf}` — daftar kerja internal (landscape, 7 hlm): gambar G-01..G-13, foto F-01..F-13, kontradiksi C-1..C-8, item non-gambar per butir checklist ExCB, urutan kerja. Basis: Panduan Revisi ATEX/IECEx vs dossier Rev25092026 terkirim ke GTS. Generator `scripts/build_daftar_tindak_lanjut_revisi_atex.py`, PDF via LibreOffice.
+
+### Sisipan dossier 6(a).7 & 6(a).8 — GLD V4 main board (7 Okt 2026, dec:189)
+`Deliverables/Dossier_Section_6a7_6a8_Schematic_PCB_GLD_V4.{docx,pdf}` — English, 38 hlm, siap ditempel ke dossier IECEx/ATEX: skematik 26 lembar + register/cakupan/proteksi/grounding/8 temuan; layout PCB 10 tampilan + data papan + tabel gambar. Generator `scripts/build_section_6a7_6a8_gld_v4.py`. Sumber asli di `Sumber Dokumen/Schematic_PCB_GLD_V4/`.

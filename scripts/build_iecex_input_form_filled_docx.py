@@ -200,7 +200,7 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "1.0"
+REVISION = "1.1"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -314,13 +314,15 @@ for rev, rev_date, rev_desc in [
      "Section 2.6.a.1 added: complete mechanical, enclosure and assembly drawing set (ATEX CASING v2 sheet and "
      "six CAD views, all seven GLD ATEX CASE v3 sheets, BP18-1Z supplier drawing, component/structure/terminal/"
      "grounding drawings, assembly sequence and MQ sensor dimension drawings), with a drawing register."),
-    (REVISION, DOC_DATE,
+    ("1.0", "7 October 2026",
      "Full audit against the reviewer's revision guide: added 2.4.1 photo-set coverage; 2.6.b.1–2 Ex-critical "
      "mechanical (EX-01…17) and electrical (EL-01…13) BOM; 2.6.c.1 non-metallic materials register (MAT-01…11); "
      "2.6.d.1 manufacturing process control d.1–d.13; 2.6.e.1–3 gas path, ignition-source assessment IS-01…17 and "
      "protection concept e.3.1–e.3.11; 2.6.f.1 temperature-class structure f.1–f.12 with results table; 2.6.g.1 "
      "usage and installation instructions g.2–g.20; 2.6.h.1 proposed nameplate (gas only, −20…+60 °C); 2.6.i.1 "
      "required Ex component certificates; 3.3–3.4 sample register (GLD2-0x1001) and fixtures; compliance matrix."),
+    (REVISION, DOC_DATE,
+     "Section 2.4.2 added: photo set of the current production configuration (23 photographs, Figures 4-101–4-123); EX-05 fan model (CIXIKEJI CX5010B5H, 5 V 0.23 A), EX-07 polymer prototype gland to be replaced by a certified Ex d gland, EX-08/EX-12/EX-17 and photo-coverage table updated."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -379,6 +381,7 @@ for run in fp.runs:
 import sys as _gsys
 _gsys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gld_guide_sections as _guide  # noqa: E402
+import gld_assembly_photos_section as _photos07  # noqa: E402
 _H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 doc.add_heading("1. Basic Information (Application and Organization)", level=1)
 p("Application form (provided by ExCB as a template). Manufacturer's business license/company registration "
@@ -602,6 +605,7 @@ for fn, cap in [
 ]:
     figure(os.path.join(PHOTO_DIR, fn), max_w=4.8, max_h=3.6, cap=cap)
 
+_photos07.render(doc, _H4)
 _guide.photos(doc, _H4)
 doc.add_heading("2.5 · Description of Intended Use and Installation Environment", level=2)
 p("The GLD is intended for continuous, fixed-point monitoring of flammable and toxic gas leaks in oil & gas "

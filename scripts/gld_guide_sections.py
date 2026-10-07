@@ -155,27 +155,31 @@ def photos(d, h=None):
        "<title>” with a one-sentence description; no Ex marking is shown as final and the MQ sensor mesh is not "
        "described as flame-arresting.", size=9.5)
     rows = [
-        ("1", "Overall external view — front, rear, left, right, top, bottom", "Partial",
-         "Assembled-unit photographs in this section; CAD views M-A2 and M-B1…M-B4 (Section 2.6.a.1). Six-side "
-         "photo set of the current production unit to be added."),
+        ("1", "Overall external view — front, rear, left, right, top, bottom", "Available",
+         "Current production unit: Figures 4-118 (front), 4-119…4-122 (sides), 4-123 (rear), 4-116 (closed, top); "
+         "CAD views M-A2 and M-B1…M-B4."),
         ("2", "Product identification / nameplate area", "Open",
          "To be photographed once the nameplate position is fixed; caption to state that the marking is draft."),
-        ("3", "Front sensing area (mesh, cover, fan behind it)", "Partial",
-         "M-D4 (stainless wire-mesh plate), M-B6/M-E1 (fan behind mesh)."),
-        ("4", "Internal sensing section (8 MQ sensors, fan, chamber)", "Partial",
-         "M-D6 (PCB with MQ sensors inside base casing)."),
-        ("5", "MQ sensor close-up (integrated protective mesh)", "Available", "M-D1 (MQ sensor)."),
+        ("3", "Front sensing area (mesh, cover, fan behind it)", "Available",
+         "Figure 4-115 (fan behind the mesh in the cover), 4-118 (mesh face); M-D4."),
+        ("4", "Internal sensing section (8 MQ sensors, fan, chamber)", "Available",
+         "Figures 4-107, 4-109…4-115 (sensor modules fitted, fan and cover); M-D6."),
+        ("5", "MQ sensor close-up (integrated protective mesh)", "Available", "Figure 4-105 (sensor module); M-D1."),
         ("6", "Main PCB — component side and underside", "Partial",
-         "M-D5, M-D6, M-D10; PCB layout views 2.6.a.8. Photographs of both PCB sides to be added."),
-        ("7", "Power input and terminal area", "Partial", "M-D14 (24 VDC connector and terminal block)."),
-        ("8", "Grounding / bonding point", "Partial", "M-D15 (external grounding stud); close-up with lug to be added."),
-        ("9", "Cable entry and antenna interface (all penetrations)", "Open",
-         "Close-ups of cable gland, SMA bulkhead, alarm interface and blanking plug to be added."),
-        ("10", "Alarm module (LED/buzzer, gasket, fixing)", "Available", "M-D5 (beacon with rubber gasket), M-E4."),
-        ("11", "Enclosure opened — complete internal arrangement", "Partial",
-         "M-D6; one photograph showing fan, sensors, PCB and terminals in the same view to be added."),
-        ("12", "Exploded / assembly sequence photographs", "Partial",
-         "Assembly photographs M-E6…M-E9; exploded illustrations M-D8, M-D9, M-E1."),
+         "Figures 4-102, 4-103 (component side in the enclosure); PCB layout views 2.6.a.8. Underside photograph "
+         "to be added."),
+        ("7", "Power input and terminal area", "Available",
+         "Figures 4-104 (labelled terminal board), 4-112…4-114 (gland, cable, 24V termination)."),
+        ("8", "Grounding / bonding point", "Partial",
+         "Figures 4-116, 4-120 (external grounding screw); close-up with lug and conductor to be added."),
+        ("9", "Cable entry and antenna interface (all penetrations)", "Partial",
+         "Figures 4-112 (cable gland), 4-110 (beacon entry), 4-119 (blanking plug), 4-101 (antenna); close-up of the "
+         "antenna bulkhead to be added."),
+        ("10", "Alarm module (LED/buzzer, gasket, fixing)", "Available", "Figures 4-110, 4-111; M-D5, M-E4."),
+        ("11", "Enclosure opened — complete internal arrangement", "Available",
+         "Figure 4-115 (open base with sensors and terminals next to the cover with fan)."),
+        ("12", "Exploded / assembly sequence photographs", "Available",
+         "Figures 4-101…4-117 (complete assembly sequence); exploded illustrations M-D8, M-D9, M-E1."),
     ]
     _table(["#", "Requested view", "Status", "Where shown / action"], rows, widths=(0.3, 2.2, 0.9, 3.2),
            status_col=2)
@@ -200,15 +204,18 @@ def bom(d, h=None):
         ("EX-04", "MQ sensor integrated protective mesh", "Sensor manufacturer TBC", "MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135",
          "Stainless-steel mesh (per sensor construction)", "Protective element; no flame-arresting claim",
          "Sensor data sheets (M-F1…M-F4)", "Open"),
-        ("EX-05", "DC sampling fan", "TBC", "Model TBC", "5 V; current, power, motor type, max. temperature TBC",
-         "Gas sampling; potential ignition source (IS-02)", "Driven by Q5 (sheet 24)", "Open"),
+        ("EX-05", "DC sampling fan", "CIXIKEJI", "CX5010B5H (DC brushless, 50 × 50 × 10 mm frame)",
+         "DC 5 V, 0.23 A (≈1.2 W); CE/FCC/RoHS only — no Ex certification; max. temperature TBC",
+         "Gas sampling; potential ignition source (IS-02)", "Label, Figure 4-108; driven by Q5 (sheet 24)",
+         "Partial"),
         ("EX-06", "Gaskets / O-rings", "TBC", "TBC (M-D2, M-D3)", "Rubber; compound, hardness, temperature range TBC",
          "Environmental sealing (IP66)", "Photographs", "Open"),
         ("EX-07", "Cable gland (24 VDC entry)", "TBC", "TBC", "M20×1.5 entry thread (BP18-1Z reference); Ex d barrier "
          "gland required for IIC; cable range, IP, temperature TBC", "Cable-entry flame path and sealing",
-         "Current prototype uses a waterproof cable connector (M-D14), to be replaced/confirmed", "Pending certificate"),
-        ("EX-08", "Blanking plug / adaptor", "TBC", "TBC", "M20×1.5; for any unused entry (BP18-1Z has two entries)",
-         "Closes unused entry", "—", "Pending certificate"),
+         "Current prototype uses a general-purpose black polymer gland (Figure 4-112) — to be replaced by a certified "
+         "metallic Ex d barrier gland", "Pending certificate"),
+        ("EX-08", "Blanking plug / adaptor", "TBC", "TBC", "Metallic hexagon plug fitted in the lower entry; thread "
+         "and certification TBC", "Closes unused entry", "Figure 4-119", "Pending certificate"),
         ("EX-09", "Antenna bulkhead / SMA interface", "TBC", "TBC", "SMA; material and sealing TBC",
          "Enclosure penetration", "—", "Open"),
         ("EX-10", "External antenna", "TBC", "TBC", "Omnidirectional, 3 dBi, SMA; material/environmental rating TBC",
@@ -216,7 +223,7 @@ def bom(d, h=None):
         ("EX-11", "LED / buzzer alarm beacon", "TBC", "TBC", "Driven at 24 V from J2 (sheet 25); housing, gasket, "
          "current TBC", "Local alarm; separate penetration", "M-D5", "Open"),
         ("EX-12", "Grounding stud", "TBC", "TBC", "External stud with PE symbol; size and material TBC",
-         "Protective earth / bonding", "M-D15", "Open"),
+         "Protective earth / bonding", "M-D15; Figures 4-116, 4-120", "Open"),
         ("EX-13", "Mounting fasteners", "TBC", "U-bolt mounting plate (M-A1)", "U-bolt 2″/DN50, M10 thread; plate "
          "250 × 250 mm; fastener grade TBC", "Mechanical retention", "Drawing M-A1", "Partial"),
         ("EX-14", "Internal insulating parts (PCB cover / terminal module)", "TBC", "M-D10, M-D11",
@@ -224,7 +231,8 @@ def bom(d, h=None):
         ("EX-15", "PCB substrate", "TBC (PCB fabricator)", "Main board Ø84 mm (2.6.a.8)",
          "Laminate grade, UL 94 rating, Tg, CTI, thickness TBC", "Carrier of energized circuits", "Layout views", "Open"),
         ("EX-16", "Potting / adhesive", "—", "—", "Not used in the current design (to be confirmed)", "—", "—", "TBC"),
-        ("EX-17", "Battery and holder", "—", "Battery path on main board (sheets 02–06); battery case in M-E3",
+        ("EX-17", "Battery and holder", "—", "Battery path on main board (sheets 02–06); BAT −/+ terminal on the "
+         "terminal board (Figure 4-104); battery case in M-E3",
          "—", "Included only if retained in the certified configuration", "Schematic", "Decision required"),
     ]
     _table(["Ref.", "Component", "Manufacturer", "Part / drawing no.", "Material / rating", "Safety function",
@@ -289,7 +297,8 @@ def materials(d, h=None):
     rows = [
         ("MAT-01", "Cover-to-body gasket", "Rubber; compound TBC", "TBC", "Temp. range, ageing, chemical resistance",
          "Datasheet", "Open"),
-        ("MAT-02", "Cable-gland sealing ring", "Per gland supplier", "Gland supplier", "Temp., flame rating, UV/chemical",
+        ("MAT-02", "Cable-gland body and sealing ring", "Current prototype: black polymer gland (Figure 4-112); "
+         "final: per certified Ex d gland", "Gland supplier", "Temp., flame rating, UV/chemical, electrostatic",
          "Datasheet / certificate", "Open"),
         ("MAT-03", "Main PCB laminate", "FR-4 type expected; exact grade TBC", "PCB fabricator", "Tg, CTI, UL 94",
          "Material datasheet", "Open"),
@@ -299,7 +308,8 @@ def materials(d, h=None):
          "Temp. rating, flame rating", "Cable datasheet", "Open"),
         ("MAT-06", "Antenna housing / insulator", "TBC", "TBC", "Temp., UV, electrostatic properties", "Datasheet",
          "Open"),
-        ("MAT-07", "Fan impeller / housing", "TBC", "TBC", "Temp., flame rating, mechanical", "Fan datasheet", "Open"),
+        ("MAT-07", "Fan impeller / housing", "Plastic (grade TBC)", "CIXIKEJI (CX5010B5H)", "Temp., flame rating, "
+         "mechanical", "Fan datasheet", "Open"),
         ("MAT-08", "Adhesive / sealant", "Not used (TBC)", "—", "Temp., chemical resistance, ageing", "Datasheet",
          "TBC"),
         ("MAT-09", "Enclosure powder coating", "Powder coating ≤0.2 mm (BP18-1Z reference)", "Casing supply chain",
@@ -397,7 +407,7 @@ def ex_calc(d, h=None):
          "Measured sensor-body surface ≤78.4 °C (fan stalled, 24.8 °C ambient); confirm heater construction and any "
          "flame-arresting function from manufacturer data", "Open"),
         ("IS-02", "DC sampling fan", "Winding heating, commutation, stalled rotor", "Front mesh upstream of fan",
-         "Fan body measured 36.3 °C (normal and stalled); confirm fan type, ratings, fault behaviour", "Open"),
+         "Fan CIXIKEJI CX5010B5H, 5 V 0.23 A; body measured 36.3 °C; confirm locked-rotor behaviour", "Open"),
         ("IS-03", "Main PCB", "Arc/spark, component failure, overheating", "Gas accessibility of PCB volume TBC",
          "Confirm whether the PCB volume is separated from the sensing chamber (see e.3.2)", "Open"),
         ("IS-04", "DC/DC converters", "Semiconductor / inductor heating, switching fault", "Depends on IS-03",
@@ -418,7 +428,7 @@ def ex_calc(d, h=None):
         ("IS-12", "Metallic enclosure and joints", "Spark from poor bonding/impact", "External atmosphere",
          "Verify bonding continuity and grounding", "Open"),
         ("IS-13", "Cable entry / gland / blanking devices", "Loss of protection", "External atmosphere",
-         "Finalize Ex d gland/plug list (EX-07, EX-08)", "Open"),
+         "Prototype gland is a general-purpose polymer type; finalize Ex d gland/plug list (EX-07, EX-08)", "Open"),
         ("IS-14", "Front stainless-steel mesh", "Flame transmission path", "Direct interface",
          "Confirm construction; certificate/test if claimed as flame-arresting", "Open"),
         ("IS-15", "MQ sensor protective mesh", "Flame transmission path", "Around each sensing element",
@@ -647,7 +657,7 @@ def matrix(d, h=None):
         ("1.4", "Plant address and facilities", "1.4", "Partial — PCB assembler to add"),
         ("1.5", "ISO 9001", "1.5", "Open — audit planned Oct 2026"),
         ("2.1–2.3", "Product description, specification, technical parameters", "2.1–2.3", "Final"),
-        ("2.4", "Photo set (12 views)", "2.4, 2.4.1", "Partial — current-unit photos to add"),
+        ("2.4", "Photo set (12 views)", "2.4, 2.4.1, 2.4.2", "Partial — 9/12 available; PCB underside, grounding-lug and antenna-bulkhead close-ups to add"),
         ("2.5", "Intended use and environment (IIC, T4, Zone 1, −20…+60 °C)", "2.5", "Final (proposed classification)"),
         ("6(a).1–6(a).6", "Assembly, section, enclosure, mesh, MQ arrangement, fan drawings", "2.6.a, 2.6.a.1",
          "Partial — controlled toleranced drawings to issue"),

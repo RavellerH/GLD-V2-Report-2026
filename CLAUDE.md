@@ -141,6 +141,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — audit penuh vs Panduan Revisi; dokumen sertifikasi kini mengikuti struktur panduan sampai detail** (dec:192): modul `scripts/gld_guide_sections.py` (EX/EL BOM, MAT register, d.1–d.13, IS-01…17+e.3, f.1–f.12, g.2–g.20, nameplate gas-only, sertifikat Ex, sampel GLD2-0x1001, matriks kepatuhan). `Dokumen_Teknis_Sertifikasi` rev **1.7** (138 hlm), narrative rev **1.0** (118 hlm). ⚠️ Foto terbaru di Google Drive belum bisa diakses (isi folder tidak dibagikan ke akun ini).
 
+- 🆕 **7 Okt — 23 foto assembly unit terbaru masuk dokumen sertifikasi (2.4.2)** (dec:193): dari Drive user → `Sumber Dokumen/Foto_Assembly_GLD_07Okt2026/`. Temuan: fan **CIXIKEJI CX5010B5H 5 V 0,23 A**; **gland 24 VDC prototipe = polimer general-purpose, wajib ganti gland Ex d**; terminal board punya terminal **BAT**. Cert doc rev **1.8** (143 hlm), narrative rev **1.1** (124 hlm).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

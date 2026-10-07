@@ -200,7 +200,7 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "0.8"
+REVISION = "0.9"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -307,9 +307,13 @@ for rev, rev_date, rev_desc in [
      "Section 2.6.f populated with a preliminary internal surface-temperature measurement (normal, maximum-load "
      "and fan-stalled conditions), extrapolated to +60°C ambient: highest value ≈114°C against an effective "
      "T4 limit of 130°C. Status raised to Partially available; open measurement items listed."),
-    (REVISION, DOC_DATE,
+    ("0.8", "7 October 2026",
      "Section 2.6.a extended with the released main-board electrical schematic (26 sheets, Section 2.6.a.7) "
      "and ten annotated PCB layout views with board data (Section 2.6.a.8)."),
+    (REVISION, DOC_DATE,
+     "Section 2.6.a.1 added: complete mechanical, enclosure and assembly drawing set (ATEX CASING v2 sheet and "
+     "six CAD views, all seven GLD ATEX CASE v3 sheets, BP18-1Z supplier drawing, component/structure/terminal/"
+     "grounding drawings, assembly sequence and MQ sensor dimension drawings), with a drawing register."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -653,6 +657,9 @@ make_table(
 import sys as _sys
 _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gld_v4_board_section as _board  # noqa: E402
+import gld_mech_drawings_section as _mech  # noqa: E402
+doc.add_page_break()
+_mech.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num="2.6.a.1")
 doc.add_page_break()
 _board.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num7="2.6.a.7", num8="2.6.a.8")
 doc.add_page_break()

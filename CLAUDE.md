@@ -137,6 +137,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — skematik & layout PCB V4 masuk ke dokumen sertifikasi** (dec:190): `Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX` rev **1.5** (2.6.a.7/2.6.a.8, skematik main board kini *Available*) & `IECEx_ATEX_Certification_Information_Requirements_GLD` rev **0.8**; konten dari modul bersama `scripts/gld_v4_board_section.py`. HTML cert doc tetap versi lama (builder HTML tertinggal di Draft 0.2).
 
+- 🆕 **7 Okt — set lengkap gambar teknik/CAD masuk dokumen sertifikasi** (dec:191): subbagian 2.6.a.1 (register M-A1…M-F4: casing v2 + 6 view, 7 sheet CASE v3, BP18-1Z, 15 gambar komponen/terminal/grounding, 9 langkah assembly, dimensi MQ) via `scripts/gld_mech_drawings_section.py`. `Dokumen_Teknis_Sertifikasi` rev **1.6** (111 hlm), narrative rev **0.9** (91 hlm). Aturan user: **jangan kurangi gambar, tambahkan sedetail mungkin**.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

@@ -203,7 +203,7 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "1.5"
+REVISION = "1.6"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -342,11 +342,17 @@ for rev, rev_date, rev_desc in [
      "the +60°C maximum ambient: highest value ≈114°C (MQ sensor body, fan stalled) against an "
      "effective T4 limit of 130°C. Status raised from Not yet available to Partially available; open "
      "measurement items listed. Sections 1.1 and 2.5 temperature-class remarks updated accordingly."),
-    (REVISION, DOC_DATE,
+    ("1.5", "7 October 2026",
      "Section 2.6.a extended with the released main-board electrical schematic (26 sheets, Section 2.6.a.7) "
      "and ten annotated PCB layout views with board data (Section 2.6.a.8), including the protection-device "
      "list, grounding description and open verification items. Schematic status raised to Available; PCB "
      "layout remains Partially available."),
+    (REVISION, DOC_DATE,
+     "Section 2.6.a: the \u201cGLD ATEX CASE v3\u201d dimensioned enclosure drawing and the BP18-1Z supplier "
+     "reference drawing are now reproduced as figures, and a new Section 2.6.a.1 adds the complete mechanical, "
+     "enclosure and assembly drawing set (ATEX CASING v2 sheet and six CAD views, all seven GLD ATEX CASE v3 "
+     "sheets, BP18-1Z, component/structure/terminal/grounding drawings, assembly sequence and MQ sensor "
+     "dimension drawings) with a drawing register."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -1061,6 +1067,26 @@ bdr2 = bd_fig_cap.add_run(
     "derived from a STEP solid model of the enclosure and bracket assembly."
 )
 bdr2.font.size = Pt(8.5); bdr2.font.color.rgb = GRAY
+IM_CAD_DIR = os.path.join(REPO, "scripts", "assets", "instruction_manual_cad")
+for _fn, _title, _desc in [
+    ("gld_atex_case_v3_dimensioned.png",
+     "\u201cGLD ATEX CASE v3\u201d \u2014 dimensioned enclosure drawing sheet",
+     "Internal contingency/alternate enclosure design (drafted 8 Sep 2026) with real dimensions. Shown as a "
+     "dimensioned reference; not yet confirmed as the production enclosure."),
+    ("bp18-1z_common_base_reference.png",
+     "\u201cUniversal Base\u201d BP18-1Z \u2014 supplier reference drawing",
+     "Die-cast base from the casing partner's supply chain (ADC12, 0.6 kg, 2\u00d7 M20\u00d71.5-6H cable "
+     "entries). Candidate junction-box/terminal sub-component under evaluation; footprint does not match the "
+     "GLD main enclosure."),
+]:
+    _fp = doc.add_paragraph()
+    _fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    add_picture_fit(_fp.add_run(), os.path.join(IM_CAD_DIR, _fn), 6.2, 7.0)
+    _fc = doc.add_paragraph()
+    _fc.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    _fc.paragraph_format.space_after = Pt(12)
+    _r1 = _fc.add_run(_title + "\n"); _r1.font.bold = True; _r1.font.size = Pt(9.5)
+    _r2 = _fc.add_run(_desc); _r2.font.size = Pt(8.5); _r2.font.color.rgb = GRAY
 make_table(
     ["Drawing type", "Status", "Remarks"],
     [
@@ -1111,6 +1137,9 @@ note_box(
 import sys as _sys
 _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gld_v4_board_section as _board  # noqa: E402
+import gld_mech_drawings_section as _mech  # noqa: E402
+doc.add_page_break()
+_mech.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num="2.6.a.1")
 doc.add_page_break()
 _board.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num7="2.6.a.7", num8="2.6.a.8")
 doc.add_page_break()

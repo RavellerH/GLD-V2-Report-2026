@@ -141,6 +141,19 @@ def _begin(d, h, title):
         _sub(title)
 
 
+def _sketch(fn, cap):
+    from PIL import Image as _Img
+    path = os.path.join(REPO, "scripts", "assets", "measured_sketches", fn)
+    w, hgt = _Img.open(path).size
+    width = min(6.2, 7.4 * w / hgt)
+    para = _doc.add_paragraph()
+    para.alignment = 1
+    para.paragraph_format.keep_with_next = True
+    para.add_run().add_picture(path, width=Inches(width))
+    cp = _p(cap, size=8.5, bold=True, color=NAVY, space_after=8)
+    cp.alignment = 1
+
+
 STATUS_LEGEND = ("Status legend: Final = confirmed and documented; Review = data exists but a rating or function "
                  "must be checked; Open = data not yet available; TBC = to be confirmed; Pending certificate = "
                  "certificate to be obtained; Decision required = design decision needed; N.A. = not applicable.")
@@ -636,6 +649,11 @@ def usage(d, h=None):
                 _p(b, size=9.5)
         if table_rows:
             _table(table_rows[0], table_rows[1:], widths=(1.8, 4.8), size=8)
+    _sub("Terminal block and field wiring (MS-06)")
+    _p("Terminal designations of the PCB cover (terminal board) and the field device connected to each pair. The "
+       "BAT terminals are outlined because their use in the certified 24 VDC configuration is still a design "
+       "decision (EX-17). Not to scale; not a controlled drawing.", size=9.5)
+    _sketch("MS-06_terminal_wiring.png", "MS-06 — Terminal block and field wiring, PCB cover (terminal board), GLD V4.")
 
 
 # ===================================================================================== 2.6.h nameplate
@@ -662,6 +680,12 @@ def nameplate(d, h=None):
         ("Warnings", "“WARNING – DO NOT OPEN WHEN AN EXPLOSIVE ATMOSPHERE MAY BE PRESENT”; additional warnings "
          "(e.g. electrostatic charging) as required by the certificate", "Proposed"),
     ], widths=(1.7, 3.6, 1.3), status_col=2, size=8)
+    _sub("Proposed nameplate artwork (MS-05)")
+    _p("Layout proposal showing the content above on one plate. Plate size (80 × 55 mm), material (stainless steel "
+       "0.5 mm, etched or engraved) and fixing (4 rivets or adhesive) are proposals to be confirmed against the flat "
+       "top face of the base; certificate numbers, CE/notified-body number, serial number and year are left blank.",
+       size=9.5)
+    _sketch("MS-05_nameplate_proposed.png", "MS-05 — Nameplate, proposed artwork and layout (draft, not a certified marking).")
 
 
 # ===================================================================================== 2.6.i Ex certificates
@@ -725,7 +749,7 @@ def matrix(d, h=None):
          "Partial — controlled toleranced drawings to issue"),
         ("6(a).7", "Main PCB schematic", "2.6.a.7", "Final (main board); sensor module open"),
         ("6(a).8", "PCB layout", "2.6.a.8", "Partial — rev/date, laminate data, sensor module"),
-        ("6(a).9–6(a).13", "Terminal, grounding, cable entry, antenna, alarm drawings", "2.6.a.1 (M-D14, M-D15, M-D5)",
+        ("6(a).9–6(a).13", "Terminal, grounding, cable entry, antenna, alarm drawings", "2.6.a.1 (M-D14, M-D15, M-D5); MS-06 in 2.6.g.1",
          "Partial — dimensioned drawings to issue"),
         ("6.b", "Ex-critical BOM (EX-01…17, EL-01…13)", "2.6.b, 2.6.b.1–2", "Partial"),
         ("6.c", "Non-metallic materials (MAT register)", "2.6.c, 2.6.c.1", "Open — supplier datasheets"),
@@ -733,7 +757,7 @@ def matrix(d, h=None):
         ("6.e", "Ignition sources IS-01…17 and protection concept e.3 (incl. measured joint sketches MS-01…04)", "2.6.e, 2.6.e.1–3", "Partial"),
         ("6.f", "Temperature class f.1–f.12", "2.6.f, 2.6.f.1", "Partial — measurements outstanding"),
         ("6.g", "Usage and installation instructions g.1–g.20", "2.6.g, 2.6.g.1", "Draft available"),
-        ("6.h", "Nameplate (gas only, −20…+60 °C)", "2.6.h, 2.6.h.1", "Proposed"),
+        ("6.h", "Nameplate (gas only, −20…+60 °C; artwork MS-05)", "2.6.h, 2.6.h.1", "Proposed"),
         ("6.i", "Ex component certificates", "2.6.i, 2.6.i.1", "Pending certificate"),
         ("3.1–3.2", "Sample and fixtures", "3.1–3.4", "Final"),
     ]

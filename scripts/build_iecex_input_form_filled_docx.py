@@ -200,7 +200,7 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "1.8"
+REVISION = "1.9"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -335,8 +335,10 @@ for rev, rev_date, rev_desc in [
      "Caliper measurements of the base and cover O-ring added (Figures 4-128\u20134-132; e.3.12, EX-01/02/06): neck wall 10.50/5.80 mm, thread height \u224814.8 mm, bore \u2248\u00d884.7 mm, O-ring cord \u00d82.70 mm; cover thread re-estimated \u2248M96 \u00d7 1.5."),
     ("1.7", "7 October 2026",
      "Further measurements added (Figures 4-133\u20134-137): base depth \u224845 mm, cover thread length \u224818.9 mm, cover depth \u224847.5 mm, O-ring OD \u224891.0 mm; free volume \u22480.4 L (indicative)."),
-    (REVISION, DOC_DATE,
+    ("1.8", "7 October 2026",
      "Measured sketches MS-01\u2026MS-04 of the cover-to-base joint added (e.3.13), illustrative, from caliper measurements."),
+    (REVISION, DOC_DATE,
+     "Proposed nameplate artwork MS-05 (2.6.h.1) and terminal/field-wiring diagram MS-06 (2.6.g.1) added (drafts)."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):

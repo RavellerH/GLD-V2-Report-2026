@@ -208,7 +208,7 @@ _H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "2.5"
+REVISION = "2.6"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -380,8 +380,10 @@ for rev, rev_date, rev_desc in [
      "Caliper measurements of the base and cover O-ring added (Figures 4-128\u20134-132): neck wall 10.50 mm at the root and 5.80 mm at the top, threaded-neck height \u224814.8 mm, bore \u2248\u00d884.7 mm, O-ring cord \u00d82.70 mm. Cover thread re-estimated as \u2248M96 \u00d7 1.5 (derived) replacing \u2248M100 \u00d7 2; e.3.12, EX-01, EX-02, EX-06 and MAT-01 updated. The measured bore differs from the \u00d894.7 mm of the BP18-1Z drawing."),
     ("2.4", "7 October 2026",
      "Further measurements added (Figures 4-133\u20134-137): base internal depth \u224845 mm to the PCB-boss ledge, cover internal thread length \u224818.9 mm, cover depth \u224847.5 mm, neck height \u224820.2 mm from the body shoulder, O-ring OD \u224891.0 mm (ID \u224885.6 mm derived). Engaged cover-thread length now bounded by the neck (\u226414.8 mm); indicative gross free volume \u22480.4 L. e.3.12, EX-02, EX-06 and MAT-01 updated."),
-    (REVISION, DOC_DATE,
+    ("2.5", "7 October 2026",
      "Measured sketches MS-01 to MS-04 added (Section 2.6.e.3, item e.3.13): dimensioned half-sections of the base neck, cover, assembled threaded joint and O-ring, redrawn from the caliper and steel-rule measurements of Figures 4-127\u20134-137. Illustrative only; to be superseded by the enclosure manufacturer's toleranced drawing."),
+    (REVISION, DOC_DATE,
+     "Proposed nameplate artwork MS-05 (Section 2.6.h.1: 80 \u00d7 55 mm stainless plate proposal, gas-only marking II 2G Ex db IIC T4 Gb, \u221220 \u00b0C \u2264 Ta \u2264 +60 \u00b0C, IP66, 24 VDC 8 W) and terminal block / field wiring diagram MS-06 (Section 2.6.g.1: RS485, FAN, ALARM, BAT, 24V and PE, BAT flagged as decision required) added. Both are drafts, not controlled drawings."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):

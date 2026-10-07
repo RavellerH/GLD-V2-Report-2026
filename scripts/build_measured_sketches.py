@@ -66,12 +66,13 @@ def thread(ax, r, z0, z1, outward=True, depth=0.9):
     ax.plot(xs[:-1], ys[:-1], lw=0.6, color=INK)
 
 
-def title_block(fig, code, title, sources):
+def title_block(fig, code, title, sources, basis=None):
     fig.subplots_adjust(bottom=0.13)
     fig.text(0.02, 0.075, f"{code}  ·  {title}", fontsize=10, weight="bold", color=INK)
-    fig.text(0.02, 0.012, "GLD V2 — illustrative sketch drawn from caliper / steel-rule measurements of the current "
-             "production unit (7 Oct 2026).\nNot a controlled drawing; dashed features not measured. "
-             f"Source: {sources}. Dimensions in mm.", fontsize=6.5, color=GREY, linespacing=1.4)
+    basis = basis or ("GLD V2 — illustrative sketch drawn from caliper / steel-rule measurements of the current "
+                      "production unit (7 Oct 2026).\nNot a controlled drawing; dashed features not measured.")
+    fig.text(0.02, 0.012, f"{basis} Source: {sources}. Dimensions in mm.", fontsize=6.5, color=GREY,
+             linespacing=1.4)
     fig.add_artist(Rectangle((0.008, 0.002), 0.984, 0.105, transform=fig.transFigure, fill=False, lw=0.8,
                              ec=INK))
 
@@ -237,6 +238,116 @@ def ms04():
     plt.close(fig)
 
 
+# ================================================================ MS-05 nameplate (proposed artwork)
+def ms05():
+    from matplotlib.patches import FancyBboxPatch
+    W, H = 80.0, 55.0                     # proposed plate size (mm) — to be confirmed against the top face
+    fig, ax = plt.subplots(figsize=(9, 7.0))
+    ax.add_patch(FancyBboxPatch((0, 0), W, H, boxstyle="round,pad=0,rounding_size=3", fc="#F7F8FA", ec=INK, lw=1.4))
+    for (x, y) in [(4, 4), (W - 4, 4), (4, H - 4), (W - 4, H - 4)]:
+        ax.add_patch(Circle((x, y), 1.1, fc="white", ec=INK, lw=0.8))
+    L = 7.5
+    rows = [
+        (H - 7.0, "PT Galaksi Megatama Indonesia · Bekasi, Indonesia", 7.5, "bold"),
+        (H - 12.5, "Gas Leak Detector   Model: GLD V2", 8.5, "bold"),
+        (H - 17.5, "S/N: GLD2-0x________      Year: ______", 7.0, "normal"),
+        (H - 24.0, "⟨Ex⟩  II 2G   Ex db IIC T4 Gb", 9.5, "bold"),
+        (H - 29.5, "−20 °C ≤ Ta ≤ +60 °C        IP66", 7.5, "normal"),
+        (H - 34.5, "24 VDC, 8 W max.        Cable entry M20 × 1.5", 7.0, "normal"),
+        (H - 39.5, "ATEX: ____________   IECEx: ____________", 7.0, "normal"),
+        (H - 45.0, "WARNING – DO NOT OPEN WHEN AN EXPLOSIVE", 7.0, "bold"),
+        (H - 49.0, "ATMOSPHERE MAY BE PRESENT", 7.0, "bold"),
+    ]
+    for y, t, fs, wt in rows:
+        ax.text(L, y, t, fontsize=fs, weight=wt, color=INK, va="center", family="DejaVu Sans")
+    ax.text(W - 7, H - 24.0, "CE xxxx", fontsize=8, weight="bold", color=INK, ha="right", va="center")
+    # dims
+    ext(ax, 0, -1, 0, -8); ext(ax, W, -1, W, -8)
+    dim(ax, (0, -6.5), (W, -6.5), "80 (proposed)", off=(0, -2.2))
+    ext(ax, W + 1, 0, W + 8, 0); ext(ax, W + 1, H, W + 8, H)
+    dim(ax, (W + 6.5, 0), (W + 6.5, H), "55 (proposed)", off=(2.6, 0), side="v")
+    ax.text(W + 3, -4, "4 × Ø2.2 holes (rivets)\nor adhesive — TBC", fontsize=7, color=GREY, va="top")
+    note = ("Material: stainless steel 0.5 mm, laser-etched or engraved (proposal). Location: flat top face of the base\n"
+            "enclosure beside the antenna (Figure 4-124). Blanks (____) are filled per unit or after certification;\n"
+            "group/category, Ex marking and IP rating are the applicant's proposal pending ExCB. Gas only — no dust marking.")
+    ax.text(0, -14, note, fontsize=7.2, color=INK, va="top", bbox=dict(fc="#F3F6FC", ec=BLUE, lw=0.6, pad=4))
+    ax.set_xlim(-4, W + 26)
+    ax.set_ylim(-32, H + 6)
+    finish(ax)
+    title_block(fig, "MS-05", "Nameplate — proposed artwork and layout (draft, not a certified marking)",
+                "Section 2.6.h.1 content; Figure 4-124 location",
+                basis="GLD V2 — proposed nameplate artwork (7 Oct 2026); plate size, material and fixing are a "
+                      "proposal.\nNot a certified marking; final content depends on the ATEX/IECEx certificate.")
+    fig.savefig(os.path.join(OUT, "MS-05_nameplate_proposed.png"), dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+
+# ================================================================ MS-06 terminal block and field wiring
+def ms06():
+    from matplotlib.patches import FancyBboxPatch
+    fig, ax = plt.subplots(figsize=(10, 7.4))
+    tw, th = 6.0, 7.0
+
+    def block(x0, y0, labels, group_lbls):
+        for i, lb in enumerate(labels):
+            x = x0 + i * tw
+            ax.add_patch(Rectangle((x, y0), tw, th, fc="#4FB7A0", ec=INK, lw=0.9))
+            ax.add_patch(Circle((x + tw / 2, y0 + th * 0.62), 1.6, fc="#D9DDE2", ec=INK, lw=0.7))
+            ax.plot([x + tw / 2 - 1.1, x + tw / 2 + 1.1], [y0 + th * 0.62] * 2, lw=0.8, color=INK)
+            ax.text(x + tw / 2, y0 - 1.6, lb, fontsize=8, ha="center", va="top", color=INK, weight="bold")
+        for (i0, i1, g) in group_lbls:
+            xm = x0 + (i0 + i1 + 1) * tw / 2
+            ax.text(xm, y0 + th + 1.6, g, fontsize=8.5, ha="center", color=INK, weight="bold")
+            ax.plot([x0 + i0 * tw + 0.6, x0 + (i1 + 1) * tw - 0.6], [y0 + th + 0.7] * 2, lw=0.8, color=INK)
+
+    # PCB cover outline
+    ax.add_patch(Circle((24, 22), 30, fc="#E9EEF7", ec=GREY, lw=0.8, ls="--"))
+    ax.text(24, 55, "PCB cover (terminal board), top view — not to scale", fontsize=7.5, color=GREY, ha="center")
+    x0 = 24 - 3 * tw
+    block(x0, 26, ["A", "B", "5V", "0V", "−", "+"], [(0, 1, "RS485"), (2, 3, "FAN"), (4, 5, "ALARM")])
+    block(24 - 2 * tw, 8, ["−", "+", "+", "−"], [(0, 1, "BAT"), (2, 3, "24V")])
+    ax.add_patch(Rectangle((24 - 2 * tw - 0.3, 7.7), 2 * tw + 0.6, th + 0.6, fill=False, ec="#C0392B", lw=1.6,
+                           ls="--"))
+    ax.text(24 - 2 * tw - 1, 6.5, "BAT: decision required —\nnot used in the 24 VDC\ncertified configuration",
+            fontsize=7, color="#C0392B", ha="right", va="top")
+    # field connections (right side)
+    X = 62
+    items = [
+        (40, "RS485 A / B", "RS-485 / Modbus RTU bus (optional field connection)", "via cable entry; pin 1 = B, pin 2 = A on main board"),
+        (32, "FAN 5V / 0V", "Internal DC fan CIXIKEJI CX5010B5H, 5 V 0.23 A", "internal wiring only; switched by Q5"),
+        (24, "ALARM − / +", "Alarm beacon (LED/buzzer), 24 V switched output", "through right-hand entry; driver Q4, flyback D8/D9"),
+        (14, "24V + / −", "Field supply 24 VDC, 8 W max. (≈0.33 A)", "left-hand Ex d gland M20 × 1.5; F1 PTC on 24V+, L1 choke on 24V−"),
+    ]
+    for y, t, d1, d2 in items:
+        ax.add_patch(FancyBboxPatch((X, y - 3.2), 74, 6.4, boxstyle="round,pad=0,rounding_size=1", fc="white",
+                                    ec=BLUE, lw=0.8))
+        ax.text(X + 1.5, y + 1.2, f"{t}:  {d1}", fontsize=7.6, color=INK, va="center", weight="bold")
+        ax.text(X + 1.5, y - 1.6, d2, fontsize=6.8, color=GREY, va="center")
+    for (yt, ys) in [(30, 40), (30, 32), (30, 24), (12, 14)]:
+        ax.annotate("", xy=(X, ys), xytext=(43, yt), arrowprops=dict(arrowstyle="-", lw=0.6, color=BLUE,
+                                                                      connectionstyle="arc3,rad=0"))
+    # earthing
+    ax.add_patch(FancyBboxPatch((X, 1.8), 74, 6.4, boxstyle="round,pad=0,rounding_size=1", fc="white", ec=INK, lw=0.8))
+    ax.text(X + 1.5, 6.2, "PE:  external grounding screw beside the cable gland (Figure 4-116)", fontsize=7.6,
+            color=INK, va="center", weight="bold")
+    ax.text(X + 1.5, 3.4, "conductor size / lug and internal bonding of circuit GND to enclosure: TBC", fontsize=6.8,
+            color=GREY, va="center")
+    # other interfaces
+    ax.text(-6, -12, "Other interfaces on the main board (not field terminals): micro-USB (service only, not used in "
+            "hazardous area), U.FL antenna lead to the SMA bulkhead,\n8 × 2×4 sensor headers (GND, +5V, AINx, SCLx, SDAx, "
+            "ENx, VMID). Terminal designations from the PCB cover (GLD V4) and Figure 4-104.", fontsize=7, color=INK,
+            va="top")
+    ax.set_xlim(-8, 138)
+    ax.set_ylim(-20, 60)
+    finish(ax)
+    title_block(fig, "MS-06", "Terminal block and field wiring — PCB cover (terminal board), GLD V4",
+                "Figure 4-104, Figure 8-11, schematic sheets 01, 02, 24, 25",
+                basis="GLD V2 — terminal and wiring diagram drawn from the PCB cover render, the assembly photographs and "
+                      "the main-board schematic (7 Oct 2026).\nNot a controlled drawing; not to scale.")
+    fig.savefig(os.path.join(OUT, "MS-06_terminal_wiring.png"), dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
-    ms01(); ms02(); ms03(); ms04()
+    ms01(); ms02(); ms03(); ms04(); ms05(); ms06()
     print("written", sorted(os.listdir(OUT)))

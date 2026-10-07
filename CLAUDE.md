@@ -143,6 +143,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — 23 foto assembly unit terbaru masuk dokumen sertifikasi (2.4.2)** (dec:193): dari Drive user → `Sumber Dokumen/Foto_Assembly_GLD_07Okt2026/`. Temuan: fan **CIXIKEJI CX5010B5H 5 V 0,23 A**; **gland 24 VDC prototipe = polimer general-purpose, wajib ganti gland Ex d**; terminal board punya terminal **BAT**. Cert doc rev **1.8** (143 hlm), narrative rev **1.1** (124 hlm).
 
+- 🆕 **7 Okt — ukuran base & O-ring diukur jangka sorong (dec:197)**: dinding leher 10,50/5,80 mm, tinggi ulir ≈14,8 mm, bore ≈84,7 mm, tali O-ring 2,70 mm (Fig. 4-128…4-132); estimasi ulir tutup kini ≈M96×1,5 (bukan M100×2). Bore ≠ Ø94,7 BP18-1Z. Cert doc rev **2.3** (149 hlm), narrative rev **1.6** (129 hlm).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

@@ -69,9 +69,20 @@ PHOTOS = [
      "Brass SMA bulkhead seated in a spot-faced hole through the enclosure wall, with the U.FL pigtail running to "
      "the main board; PCB mounting boss below."),
     ("Cover_thread_and_entry_thread.jpg", "Cover thread and side-entry thread",
-     "External thread on the base neck that carries the threaded cover (estimated ≈M100 × 2, about 10 visible "
-     "threads), black O-ring at the root of the thread, and an internally threaded side entry (estimated M20 × 1.5). "
-     "Values are estimates from the photograph; see Section 2.6.e.3."),
+     "External thread on the base neck that carries the threaded cover (about 10 visible threads), black O-ring at "
+     "the root of the thread, and an internally threaded side entry (estimated M20 × 1.5). Caliper measurements of "
+     "the same neck are given in Figures 4-128 to 4-131; see Section 2.6.e.3."),
+    ("Base_caliper_wall_at_Oring.jpg", "Base neck wall at the O-ring — caliper 10.50 mm",
+     "Vernier caliper (0.05 mm) across the neck wall at its root, just above the O-ring: reading 10.50 mm."),
+    ("Base_caliper_wall_at_top.jpg", "Base neck wall at the top — caliper 5.80 mm",
+     "Caliper across the threaded neck wall at its top edge (inner bore to thread crest): reading 5.80 mm."),
+    ("Base_caliper_thread_band_height.jpg", "Threaded neck height — caliper ≈14.8 mm",
+     "Caliper held vertically from the base shoulder (O-ring level) to the top of the threaded neck: reading "
+     "≈14.8 mm; about 10 thread crests are visible over this height."),
+    ("Base_caliper_inner_bore.jpg", "Base inner bore — caliper ≈84.7 mm",
+     "Inside jaws across the bore of the base at the top of the neck: reading ≈84.7 mm."),
+    ("Gasket_caliper_cord_section.jpg", "Cover O-ring — cord cross-section 2.70 mm",
+     "Black rubber O-ring of the cover-to-base joint measured across its cord: reading 2.70 mm."),
 ]
 
 

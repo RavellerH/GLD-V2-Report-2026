@@ -174,7 +174,7 @@ def photos(d, h=None):
          "Figures 4-116, 4-120 (external grounding screw); close-up with lug and conductor to be added."),
         ("9", "Cable entry and antenna interface (all penetrations)", "Available",
          "Figures 4-112 (cable gland), 4-110 (beacon entry), 4-119 (blanking plug), 4-125/4-126 (antenna bulkhead "
-         "outside and inside), 4-127 (cover and entry threads)."),
+         "outside and inside), 4-127 (cover and entry threads), 4-128–4-132 (caliper measurements of the base neck, bore and cover O-ring)."),
         ("10", "Alarm module (LED/buzzer, gasket, fixing)", "Available", "Figures 4-110, 4-111; M-D5, M-E4."),
         ("11", "Enclosure opened — complete internal arrangement", "Available",
          "Figure 4-115 (open base with sensors and terminals next to the cover with fan)."),
@@ -193,11 +193,12 @@ def bom(d, h=None):
        "subset and is controlled by part number or drawing number.", size=9.5)
     ex = [
         ("EX-01", "Main enclosure body", "PT Galaksi Megatama Indonesia", "GLD ATEX CASE v3 / common base (M-B7, M-D7)",
-         "ADC12 die-cast aluminium alloy; wall thickness TBC; surface treatment TBC", "Flameproof enclosure (Ex d, proposed)",
+         "ADC12 die-cast aluminium alloy; threaded-neck wall 10.50 mm at the root / 5.80 mm at the top, bore ≈Ø84.7 mm (caliper, Figures 4-128–4-131); body wall thickness elsewhere and surface treatment TBC", "Flameproof enclosure (Ex d, proposed)",
          "Drawings M-B7, M-D7", "Open"),
         ("EX-02", "Enclosure cover (threaded)", "PT Galaksi Megatama Indonesia", "TBC",
-         "Aluminium alloy; cover thread est. ≈M100 × 2, ≈10 threads (≈20 mm) engaged — estimate from photograph, "
-         "to be confirmed on drawing", "Flameproof joint", "Figure 4-127; assembly M-E9", "Open — estimate"),
+         "Aluminium alloy; mating base-neck thread height ≈14.8 mm with ≈10 threads (caliper, Figure 4-130); "
+         "thread size indicatively ≈M96 × 1.5 (derived from bore Ø84.7 mm + 2 × 5.80 mm wall and thread count) — "
+         "to be confirmed on drawing", "Flameproof joint", "Figures 4-127–4-131; assembly M-E9", "Open — measured/estimate"),
         ("EX-03", "Front stainless-steel wire-mesh plate + locking bracket", "TBC", "TBC (M-D4, M-E1)",
          "Stainless steel; grade, mesh/pore size, thickness, layers TBC", "Gas inlet; flame-path element if certified",
          "Photograph, assembly illustration", "Open"),
@@ -208,8 +209,9 @@ def bom(d, h=None):
          "DC 5 V, 0.23 A (≈1.2 W); CE/FCC/RoHS only — no Ex certification; max. temperature TBC",
          "Gas sampling; potential ignition source (IS-02)", "Label, Figure 4-108; driven by Q5 (sheet 24)",
          "Partial"),
-        ("EX-06", "Gaskets / O-rings", "TBC", "TBC (M-D2, M-D3)", "Rubber; compound, hardness, temperature range TBC",
-         "Environmental sealing (IP66)", "Photographs; O-rings on cover joint and blanking plug (Figure 4-125)", "Open"),
+        ("EX-06", "Gaskets / O-rings", "TBC", "TBC (M-D2, M-D3)", "Rubber; cover O-ring cord Ø2.70 mm (caliper, Figure 4-132); inner diameter, compound, hardness, "
+         "temperature range TBC", "Environmental sealing (IP66)",
+         "Photographs; O-rings on cover joint and blanking plug (Figures 4-125, 4-132)", "Open"),
         ("EX-07", "Cable gland (24 VDC entry)", "TBC", "TBC", "M20×1.5 entry thread (BP18-1Z reference; consistent "
          "with Figure 4-127); Ex d barrier gland required for IIC; cable range, IP, temperature TBC", "Cable-entry flame path and sealing",
          "Current prototype uses a general-purpose black polymer gland (Figure 4-112) — to be replaced by a certified "
@@ -296,7 +298,7 @@ def materials(d, h=None):
        "(UL 94 / glow-wire), CTI where relevant, electrostatic properties, chemical and UV/weather resistance, and "
        "Tg where relevant. Where the material is not yet identified the item stays Open.", size=9.5)
     rows = [
-        ("MAT-01", "Cover-to-body gasket", "Rubber; compound TBC", "TBC", "Temp. range, ageing, chemical resistance",
+        ("MAT-01", "Cover-to-body gasket", "Rubber O-ring, cord Ø2.70 mm (measured); compound TBC", "TBC", "Temp. range, ageing, chemical resistance",
          "Datasheet", "Open"),
         ("MAT-02", "Cable-gland body and sealing ring", "Current prototype: black polymer gland (Figure 4-112); "
          "final: per certified Ex d gland", "Gland supplier", "Temp., flame rating, UV/chemical, electrostatic",
@@ -472,18 +474,25 @@ def ex_calc(d, h=None):
     for t, b in parts:
         _sub(t)
         _p(b, size=9.5)
-    _sub("e.3.12 Threaded joints — estimated dimensions (from photographs)")
-    _p("The dimensions below are estimates taken from photographs of the current production unit (Figure 4-127, "
-       "4-125, 4-126, 4-119) and from the BP18-1Z supplier drawing. They are given to show how each threaded "
+    _sub("e.3.12 Threaded joints — measured and estimated dimensions")
+    _p("The cover-joint dimensions below were measured by the applicant with a vernier caliper (0.05 mm) on the "
+       "current production base (Figures 4-128 to 4-132): neck wall 10.50 mm at the root and 5.80 mm at the top, "
+       "threaded-neck height ≈14.8 mm, bore ≈Ø84.7 mm, O-ring cord Ø2.70 mm. Thread size and pitch are derived from "
+       "these readings and the visible thread count; the entry threads are estimates taken from photographs "
+       "(Figures 4-119, 4-125–4-127) and from the BP18-1Z supplier drawing. Note that the measured bore (≈Ø84.7 mm) "
+       "differs from the Ø94.7 mm bore of the BP18-1Z drawing, so that drawing is not the controlled drawing of this "
+       "base. They are given to show how each threaded "
        "flame path compares with the IEC 60079-1 rules for threaded joints and must be replaced by the values on the "
        "enclosure manufacturer's controlled drawing.", size=9.5)
-    _table(["Joint", "Estimated thread", "Estimated engagement", "IEC 60079-1 threaded-joint rule (Group IIC)",
+    _table(["Joint", "Thread (measured / estimated)", "Engagement", "IEC 60079-1 threaded-joint rule (Group IIC)",
             "Assessment (preliminary)", "Status"], [
-        ("Cover to base (main enclosure)", "≈M100 × 2 (external thread on the base neck)",
-         "≈10 threads, ≈20 mm", "≥5 full threads engaged; axial engagement ≥8 mm where free volume >100 cm³ "
+        ("Cover to base (main enclosure)", "≈M96 × 1.5, derived (external thread on the base neck; bore Ø84.7 + "
+         "2 × 5.80 mm wall; ≈10 crests over ≈14.8 mm)", "Threaded-neck height ≈14.8 mm (measured); ≈10 threads; "
+         "engaged length ≤14.8 mm depending on the cover", "≥5 full threads engaged; axial engagement ≥8 mm where free volume >100 cm³ "
          "(≥5 mm for ≤100 cm³); medium or fine tolerance class (6g/6H)",
-         "Engagement appears to exceed the minimum; free internal volume estimated >100 cm³ (bore ≈Ø90 mm)",
-         "Open — estimate"),
+         "Free internal volume >100 cm³ (bore Ø84.7 mm gives 56 cm² cross-section; >100 cm³ at any depth >18 mm) → "
+         "≥8 mm rule applies; available thread height 14.8 mm with ≈10 threads appears to exceed the minimum — engaged "
+         "length with the cover screwed home still to be measured", "Open — measured"),
         ("Cable entry (left)", "M20 × 1.5-6H (BP18-1Z drawing)", "TBC (wall thickness)",
          "≥5 full threads engaged; thread length per gland certificate", "Requires certified Ex d gland",
          "Open — estimate"),

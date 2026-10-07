@@ -166,8 +166,8 @@ def photos(d, h=None):
          "Figures 4-107, 4-109…4-115 (sensor modules fitted, fan and cover); M-D6."),
         ("5", "MQ sensor close-up (integrated protective mesh)", "Available", "Figure 4-105 (sensor module); M-D1."),
         ("6", "Main PCB — component side and underside", "Partial",
-         "Figures 4-102, 4-103 (component side in the enclosure); PCB layout views 2.6.a.8. Underside photograph "
-         "to be added."),
+         "Figures 4-102, 4-103 (component side in the enclosure); top/bottom renders of main board and PCB "
+         "cover (Figure 8-11); layout views 2.6.a.8. Photograph of the real board underside to be added."),
         ("7", "Power input and terminal area", "Available",
          "Figures 4-104 (labelled terminal board), 4-112…4-114 (gland, cable, 24V termination)."),
         ("8", "Grounding / bonding point", "Partial",
@@ -226,7 +226,7 @@ def bom(d, h=None):
          "Protective earth / bonding", "M-D15; Figures 4-116, 4-120", "Open"),
         ("EX-13", "Mounting fasteners", "TBC", "U-bolt mounting plate (M-A1)", "U-bolt 2″/DN50, M10 thread; plate "
          "250 × 250 mm; fastener grade TBC", "Mechanical retention", "Drawing M-A1", "Partial"),
-        ("EX-14", "Internal insulating parts (PCB cover / terminal module)", "TBC", "M-D10, M-D11",
+        ("EX-14", "Internal insulating parts (PCB cover / terminal module)", "TBC", "M-D10, M-D11; Figure 8-11",
          "Material, flammability, CTI TBC", "Insulation of terminals", "CAD render", "Open"),
         ("EX-15", "PCB substrate", "TBC (PCB fabricator)", "Main board Ø84 mm (2.6.a.8)",
          "Laminate grade, UL 94 rating, Tg, CTI, thickness TBC", "Carrier of energized circuits", "Layout views", "Open"),

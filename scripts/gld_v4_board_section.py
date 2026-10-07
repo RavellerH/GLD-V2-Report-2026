@@ -449,8 +449,43 @@ def render(d, h1=None, h2=None, content_w=6.2, num7="6(a).7", num8="6(a).8"):
               widths=(1.8, 0.5, 0.8, 2.6, 0.9), bold_first=False)
         table(["No", "Item", "Description"], items, widths=(0.4, 1.8, 4.4))
 
+    # ---- 3D renders: main board and PCB cover (terminal board), V4 vs V3
+    doc.add_page_break()
+    h2("3D renders — main board and PCB cover (terminal board), GLD V4")
+    p("The GLD V4 electronics consist of two stacked circular boards: the main board (motherboard) and a separate "
+      "PCB cover (terminal board) that carries the field-wiring terminals and covers the motherboard. Renders exported "
+      "from the PCB design; they show the boards as designed, not a dimensioned drawing.")
+    from docx.enum.table import WD_TABLE_ALIGNMENT as _ALIGN
+    grid = doc.add_table(rows=2, cols=2)
+    grid.alignment = _ALIGN.CENTER
+    for k, (fn, lab) in enumerate([
+            ("render_mb_top.png", "Main board — top (component side)"),
+            ("render_mb_bottom.png", "Main board — bottom"),
+            ("render_cover_top.png", "PCB cover (terminal board) — top"),
+            ("render_cover_bottom.png", "PCB cover (terminal board) — bottom")]):
+        cell = grid.rows[k // 2].cells[k % 2]
+        para = cell.paragraphs[0]
+        para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        para.add_run().add_picture(os.path.join(PCB, fn), width=Inches(CONTENT_W / 2 - 0.2))
+        lp = cell.add_paragraph()
+        lp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        lr = lp.add_run(lab)
+        lr.font.size = Pt(8.5)
+        lr.font.color.rgb = GRAY
+    caption("Figure 8-11. GLD V4 — main board and PCB cover (terminal board), top and bottom renders")
+    table(["Item", "Description"], [
+        ("Terminal designations (PCB cover, top)", "RS485 A, B · FAN 5V, 0V · ALARM −, + · BAT −, + · 24V +, −"),
+        ("Board-to-board interconnection", "Header connectors at the board edge (four positions) and pin rows on the "
+                                           "underside of the PCB cover"),
+        ("Change from V3 — mounting", "Bolt holes added for mounting the motherboard to the PCB cover"),
+        ("Change from V3 — PCB cover", "A separate PCB cover added to terminate the field connections and to cover "
+                                       "the motherboard"),
+        ("Note", "The BAT −/+ terminal is present on the PCB cover; its status in the certified configuration "
+                 "(24 VDC only) is to be decided together with the battery path on the main board."),
+    ], widths=(2.0, 4.6))
+
     doc.add_paragraph()
     note_box(f"Open items for {num8}: (a) layout revision and date for the drawing table; (b) PCB laminate grade, "
              "UL 94 rating, Tg, CTI, board thickness and copper weight; (c) purpose of the 4 × Ø 3.0 mm holes; "
-             "(d) layout drawings of the sensor-module board.", fill=WARN_SHADE)
+             "(d) layout drawings of the sensor-module board; (e) dimensioned/layout drawings of the PCB cover (terminal board).", fill=WARN_SHADE)
 

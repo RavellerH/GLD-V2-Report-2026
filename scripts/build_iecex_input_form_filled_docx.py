@@ -200,7 +200,7 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "1.1"
+REVISION = "1.2"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -321,8 +321,10 @@ for rev, rev_date, rev_desc in [
      "protection concept e.3.1–e.3.11; 2.6.f.1 temperature-class structure f.1–f.12 with results table; 2.6.g.1 "
      "usage and installation instructions g.2–g.20; 2.6.h.1 proposed nameplate (gas only, −20…+60 °C); 2.6.i.1 "
      "required Ex component certificates; 3.3–3.4 sample register (GLD2-0x1001) and fixtures; compliance matrix."),
-    (REVISION, DOC_DATE,
+    ("1.1", "7 October 2026",
      "Section 2.4.2 added: photo set of the current production configuration (23 photographs, Figures 4-101–4-123); EX-05 fan model (CIXIKEJI CX5010B5H, 5 V 0.23 A), EX-07 polymer prototype gland to be replaced by a certified Ex d gland, EX-08/EX-12/EX-17 and photo-coverage table updated."),
+    (REVISION, DOC_DATE,
+     "Section 2.6.a.8: GLD V4 main board and PCB cover (terminal board) renders added (Figure 8-11) with the changes from V3."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):

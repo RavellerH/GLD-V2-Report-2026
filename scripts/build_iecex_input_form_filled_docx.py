@@ -200,8 +200,8 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "0.7"
-DOC_DATE = "30 September 2026"
+REVISION = "0.8"
+DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -303,10 +303,13 @@ for rev, rev_date, rev_desc in [
      "Applicant/Manufacturer identity simplified to a single entity, PT Galaksi Megatama Indonesia (document "
      "number prefix changed to GMI/...). The separate “design and development authority” and “technical "
      "partner” entries were removed (letterhead, Document Control, Sections 1.2, 1.4)."),
-    (REVISION, DOC_DATE,
+    ("0.7", "30 September 2026",
      "Section 2.6.f populated with a preliminary internal surface-temperature measurement (normal, maximum-load "
      "and fan-stalled conditions), extrapolated to +60°C ambient: highest value ≈114°C against an effective "
      "T4 limit of 130°C. Status raised to Partially available; open measurement items listed."),
+    (REVISION, DOC_DATE,
+     "Section 2.6.a extended with the released main-board electrical schematic (26 sheets, Section 2.6.a.7) "
+     "and ten annotated PCB layout views with board data (Section 2.6.a.8)."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -636,8 +639,8 @@ figure(os.path.join(IM_CAD_DIR, "bp18-1z_common_base_reference.png"), max_w=6.0,
 make_table(
     ["Drawing type", "Status"],
     [
-        ["Electrical schematic / block diagram", "Partially available — not yet a released, revision-controlled drawing with a formal drawing number"],
-        ["PCB layout", "Partially available — native export and 3D model exist; not yet a released, toleranced drawing"],
+        ["Electrical schematic — main board", "Available — 26 sheets PGLD-GLD-V4-MB-SCH-01 to -26, rev. 1.0 (Section 2.6.a.7); sensor-module board schematic not yet included"],
+        ["PCB layout — main board", "Partially available — 10 views PGLD-GLD-V4-MB-PCB-01 to -10 (Section 2.6.a.8); layout rev/date, laminate data and sensor-module board layout open"],
         ["Assembly drawing", "Partially available — covers external envelope and mounting hardware, not internal PCB/component assembly sequence"],
         ["Component drawing", "Not yet available"],
         ["Enclosure structure drawing (gap, length, volume)", "Partially available — external envelope dimensioned; Ex-d-specific flame-path parameters not yet called out"],
@@ -645,6 +648,14 @@ make_table(
     ],
     col_widths=[2.9, 3.6],
 )
+
+# ---- 2.6.a.7 / 2.6.a.8: released main-board schematic set and PCB layout views (shared content) ----
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gld_v4_board_section as _board  # noqa: E402
+doc.add_page_break()
+_board.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num7="2.6.a.7", num8="2.6.a.8")
+doc.add_page_break()
 
 h_26b = doc.add_heading("2.6.b · Bill of Materials (BOM) for Key Components Affecting Explosion-Proof Safety", level=3)
 h_26b.paragraph_format.keep_with_next = True

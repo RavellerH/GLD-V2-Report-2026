@@ -203,8 +203,8 @@ def make_table(headers, rows, col_widths=None, status_col=None, font_size=9.5):
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "1.4"
-DOC_DATE = "30 September 2026"
+REVISION = "1.5"
+DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -336,12 +336,17 @@ for rev, rev_date, rev_desc in [
      "development authority” and “technical partner” entries were removed (Sections 1.1, 1.3, 2.2, "
      "letterhead, Document Control); narrative passages describing electronics design/engineering work were "
      "made generic rather than deleted, to avoid implying the Manufacturer performed work it did not."),
-    (REVISION, DOC_DATE,
+    ("1.4", "30 September 2026",
      "Section 2.6.f populated with a preliminary internal surface-temperature measurement (eight thermocouple "
      "channels; normal, maximum-load and fan-stalled conditions; 180 minutes each), including extrapolation to "
      "the +60°C maximum ambient: highest value ≈114°C (MQ sensor body, fan stalled) against an "
      "effective T4 limit of 130°C. Status raised from Not yet available to Partially available; open "
      "measurement items listed. Sections 1.1 and 2.5 temperature-class remarks updated accordingly."),
+    (REVISION, DOC_DATE,
+     "Section 2.6.a extended with the released main-board electrical schematic (26 sheets, Section 2.6.a.7) "
+     "and ten annotated PCB layout views with board data (Section 2.6.a.8), including the protection-device "
+     "list, grounding description and open verification items. Schematic status raised to Available; PCB "
+     "layout remains Partially available."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -752,10 +757,10 @@ make_table(
          "MINISMDC260F/16 resettable fuses (F1, F2, overcurrent), a Ruilong SMBJ33A TVS diode (D1) and 3\u00d7 "
          "UMW LESD5D5.0CT1G / 1\u00d7 DOWO SM712 ESD-protection arrays (D4, D5, D11, D6), and multiple Schottky "
          "diodes \u2014 MDD SS54 (D7, D13), MDD SS14 (D8, D9), GOOD-ARK SK36 (D12). This is genuine evidence "
-         "that overcurrent and transient/ESD protection circuitry exists on the board; which specific rail "
-         "each component protects and its exact circuit role (e.g., reverse-polarity blocking vs. flyback) "
-         "has not yet been cross-checked against the schematic net list, and no consolidated protection-scheme "
-         "write-up has been produced for ExCB review."],
+         "that overcurrent and transient/ESD protection circuitry exists on the board. The rail and circuit role "
+         "of each device are now tabulated from the released schematic (Section 2.6.a.7). Two points remain to "
+         "be confirmed there: the voltage rating of F1/F2 on the 24 V line, and whether the input P-channel "
+         "MOSFETs are intended to provide reverse-polarity protection."],
     ],
     col_widths=[1.6, 1.5, 1.1, 2.3],
 )
@@ -1059,14 +1064,16 @@ bdr2.font.size = Pt(8.5); bdr2.font.color.rgb = GRAY
 make_table(
     ["Drawing type", "Status", "Remarks"],
     [
-        ["Electrical schematic (component-level) / block diagram", ("__status__", ("Partially available", "wip")),
-         "Schematic capture and a derived 9-sheet block-diagram set exist with traceability evidence "
-         "(pin-to-net mapping). Not yet issued in a released, revision-controlled drawing format with a "
-         "formal drawing number."],
-        ["PCB layout", ("__status__", ("Partially available", "wip")),
-         "Native EasyEDA/JLCPCB layout export (routed copper) and a 3D solid model exist for the same board "
-         "revision. Not yet issued as a dimensioned, toleranced, released drawing with a formal drawing "
-         "number."],
+        ["Electrical schematic (component-level) \u2014 main board", ("__status__", ("Available", "ok")),
+         "Actual component-level schematic issued as 26 sheets (drawing nos. PGLD-GLD-V4-MB-SCH-01 to -26, "
+         "rev. 1.0, 19 Jul 2026), each with a sheet information table and component description table "
+         "(Section 2.6.a.7). Drawing-number prefix to be aligned with the applicant's document control; "
+         "verification items listed in 2.6.a.7 remain open. Sensor-module board schematic not yet included."],
+        ["PCB layout \u2014 main board", ("__status__", ("Partially available", "wip")),
+         "Ten annotated layout views (top, bottom, placement, dimensions \u00d884 mm, mounting holes, connectors, "
+         "power area, sensor interface, grounding) issued as PGLD-GLD-V4-MB-PCB-01 to -10 (Section 2.6.a.8). "
+         "Open: layout revision/date, laminate data (grade, UL 94, Tg, CTI, thickness, copper weight) and the "
+         "sensor-module board layout."],
         ["Assembly drawing", ("__status__", ("Partially available", "wip")),
          "A dimensioned drawing sheet exists for the enclosure/bracket mounting assembly (title block, "
          "orthographic + isometric views, parts table). It covers the external envelope and mounting "
@@ -1098,6 +1105,15 @@ note_box(
     "volume dimensioning, which requires a confirmed protection concept before it can be drawn.",
     shade=INFO_SHADE,
 )
+
+
+# ---- 2.6.a.7 / 2.6.a.8: released main-board schematic set and PCB layout views (shared content) ----
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gld_v4_board_section as _board  # noqa: E402
+doc.add_page_break()
+_board.render(doc, h1=lambda t: doc.add_heading(t, level=4), content_w=6.2, num7="2.6.a.7", num8="2.6.a.8")
+doc.add_page_break()
 
 doc.add_heading("2.6.b \u00b7 Bill of Materials (BOM) for Explosion-Safety-Relevant Components", level=3)
 mb_rows = load_bom("motherboard.csv")

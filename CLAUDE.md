@@ -135,6 +135,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — 6(a).7 skematik & 6(a).8 layout PCB main board dilengkapi** (dec:189): `Deliverables/Dossier_Section_6a7_6a8_Schematic_PCB_GLD_V4.{docx,pdf}` dari file tim (26 lembar skematik + 10 tampilan layout). ⚠️ Temuan: rating PTC 16 V di jalur 24 V, MOSFET input tidak memblok polaritas terbalik, **jalur baterai terpasang di main board**, skematik/layout sensor board belum ada.
 
+- 🆕 **7 Okt — skematik & layout PCB V4 masuk ke dokumen sertifikasi** (dec:190): `Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX` rev **1.5** (2.6.a.7/2.6.a.8, skematik main board kini *Available*) & `IECEx_ATEX_Certification_Information_Requirements_GLD` rev **0.8**; konten dari modul bersama `scripts/gld_v4_board_section.py`. HTML cert doc tetap versi lama (builder HTML tertinggal di Draft 0.2).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

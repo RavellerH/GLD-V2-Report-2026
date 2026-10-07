@@ -657,7 +657,7 @@ def matrix(d, h=None):
         ("1.4", "Plant address and facilities", "1.4", "Partial — PCB assembler to add"),
         ("1.5", "ISO 9001", "1.5", "Open — audit planned Oct 2026"),
         ("2.1–2.3", "Product description, specification, technical parameters", "2.1–2.3", "Final"),
-        ("2.4", "Photo set (12 views)", "2.4, 2.4.1, 2.4.2", "Partial — 9/12 available; PCB underside, grounding-lug and antenna-bulkhead close-ups to add"),
+        ("2.4", "Photo set (12 views)", "2.4, 2.4.1, 2.4.2", "Partial — 8/12 available, 3 partial (PCB underside, grounding lug, antenna bulkhead), 1 open (nameplate area)"),
         ("2.5", "Intended use and environment (IIC, T4, Zone 1, −20…+60 °C)", "2.5", "Final (proposed classification)"),
         ("6(a).1–6(a).6", "Assembly, section, enclosure, mesh, MQ arrangement, fan drawings", "2.6.a, 2.6.a.1",
          "Partial — controlled toleranced drawings to issue"),

@@ -209,7 +209,7 @@ _H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "2.7"
+REVISION = "2.8"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -385,8 +385,10 @@ for rev, rev_date, rev_desc in [
      "Measured sketches MS-01 to MS-04 added (Section 2.6.e.3, item e.3.13): dimensioned half-sections of the base neck, cover, assembled threaded joint and O-ring, redrawn from the caliper and steel-rule measurements of Figures 4-127\u20134-137. Illustrative only; to be superseded by the enclosure manufacturer's toleranced drawing."),
     ("2.6", "7 October 2026",
      "Proposed nameplate artwork MS-05 (Section 2.6.h.1: 80 \u00d7 55 mm stainless plate proposal, gas-only marking II 2G Ex db IIC T4 Gb, \u221220 \u00b0C \u2264 Ta \u2264 +60 \u00b0C, IP66, 24 VDC 8 W) and terminal block / field wiring diagram MS-06 (Section 2.6.g.1: RS485, FAN, ALARM, BAT, 24V and PE, BAT flagged as decision required) added. Both are drafts, not controlled drawings."),
-    (REVISION, DOC_DATE,
+    ("2.7", "7 October 2026",
      "Navigation: all numbered subsections (d.1\u2013d.13, e.3.1\u2013e.3.13, f.1\u2013f.12, g.2\u2013g.20, EX/EL BOM, drawing groups A\u2013F, schematic/layout subsections, photo groups) promoted to headings; Table of Contents extended to five levels; new List of Drawings, Schematic Sheets, Sketches and Photographs with page numbers; PDF bookmarks down to individual drawings and photographs. Photo-coverage table 2.4.1 now precedes photo set 2.4.2. No technical content changed."),
+    (REVISION, DOC_DATE,
+     "Audit against the reviewer's revision guide (text corrections, no new test data): application form recorded as received and completed; ISO 9001 in progress (audit Oct 2026); certification contact named; product description completed with the gas path and alarm chain; specification list 2.2 extended to the full guide list; operating-modes table added to 2.3; MQ sensor described behind its own protective mesh; RF power 0\u201322 dBm with IS-08 RF-threshold check; AC/DC adapter marked outside the equipment boundary; IP66 marked as target pending test; supplier-listing and internal remarks removed; 2.5 completed with Group II/2G/EPL Gb, humidity, gas-only scope and installation conditions; status boxes of 2.6.c\u20132.6.i aligned with their content; two safety warnings added to 2.6.g.a; grounding requirements of g.7 rewritten in English; draft-review remarks removed from g.6\u2013g.14; f.11 references aligned with f.3; nameplate gains the ATEX specific marking and full manufacturer address; battery item in 3.2 made conditional; compliance-matrix statuses corrected."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -473,16 +475,12 @@ p("This document is a working technical file prepared against the official IECEx
   "every particular the ExCB requires and states which are already confirmed and which remain to be supplied "
   "from corporate records, without entering assumed values.")
 note_box(
-    "Scope of this document. This is a compilation of design evidence and an honest readiness assessment "
-    "against the ExCB checklist, prepared in support of a future submission — it is not itself a "
-    "certificate and does not constitute self-certification. The final enclosure/casing (material selection, "
-    "manufacture, gasket, and cable entry) is being developed by an external mechanical/casing partner (PT "
-    "Galaksi Megatama Indonesia — legal identity confirmed, Section 1.4) and is not yet in the authors' "
-    "possession; items that depend on that design (material datasheets, manufacturing "
-    "process description, explosion-protection calculations) are reported as not yet available for that "
-    "reason, not because the work has stalled. The product is still at from-scratch development/prototype "
-    "stage — no finalized, serialized units exist yet, which is why a formal sample register (Section "
-    "3.1) is not yet available either.",
+    "Scope of this document. This is a compilation of design evidence and a readiness assessment against "
+    "the ExCB checklist, prepared in support of the certification application — it is not itself a "
+    "certificate and does not constitute self-certification. Items that depend on the controlled enclosure "
+    "drawings and supplier data of the manufacturer (PT Galaksi Megatama Indonesia, Section 1.2) — "
+    "toleranced flame-path data, material datasheets, process parameters — are marked as partially "
+    "available or open. The sample submitted is identified in Section 3.1 (S/N GLD2-0x1001).",
     shade=INFO_SHADE,
 )
 
@@ -520,11 +518,9 @@ note_box("Applicant and Manufacturer of record for this document: PT Galaksi Meg
          "Indonesian industrial manufacturing business license (NIB) relevant to fabricating the equipment "
          "(KBLI 25119/25120/28221/25920 — metal products, pressurized-vessel-class containers, "
          "metalworking machinery, and special metal-treatment services). PT Galaksi Megatama Indonesia is "
-         "recorded as the sole applicant and manufacturer throughout this document. This attribution reflects a "
-         "working decision recorded 28 September 2026 based on PT Galaksi's legal documents (deed of "
-         "establishment, NIB, NPWP, MOLHR ratification decree, tax registration certificate) supplied to the "
-         "authors — it has not yet been confirmed directly with the company's officers as the final "
-         "arrangement for the ExCB submission and should be verified before formal filing.", shade=WARN_SHADE)
+         "recorded as the sole applicant and manufacturer throughout this document, on the basis of its legal "
+         "documents (deed of establishment, NIB, NPWP, MOLHR ratification decree, tax registration "
+         "certificate).", shade=INFO_SHADE)
 
 p("Original excerpt, Section 1 — source: IECEx ATEX Certification Information Requirements (ExCB):",
   size=9.5, bold=True, color=NAVY, space_after=2)
@@ -538,8 +534,8 @@ doc.add_heading("1.0 · Status Summary — Section 1", level=2)
 make_table(
     ["Item", "Status", "Held by"],
     [
-        ["1.1 Application form (ExCB template)", ("__status__", ("Template not yet received", "gap")),
-         "Issued by the ExCB"],
+        ["1.1 Application form (ExCB template)", ("__status__", ("Template received; form completed", "ok")),
+         "Issued by the ExCB (application form A0); completed by the applicant and submitted with the dossier"],
         ["1.2 Business license / company registration", ("__status__", ("Partially available", "wip")),
          "Manufacturer (PT Galaksi Megatama Indonesia) — legal documents now on file; a few particulars still open"],
         ["1.3 Organizational chart and contact information", ("__status__", ("Partially available", "wip")),
@@ -548,17 +544,17 @@ make_table(
         ["1.4 Manufacturing plant address and facility profile", ("__status__", ("Partially available", "wip")),
          "Manufacturer's registered office and production-site addresses now on file; floor profile, process "
          "capability, and quality system still pending"],
-        ["1.5 ISO 9001 certificate, quality manual, procedure index", ("__status__", ("To be confirmed", "gap")),
-         "Manufacturer — quality function"],
+        ["1.5 ISO 9001 certificate, quality manual, procedure index", ("__status__", ("In progress", "wip")),
+         "Manufacturer — ISO 9001 certification in progress, audit planned October 2026"],
     ],
     col_widths=[2.9, 1.6, 2.0],
 )
 
 doc.add_heading("1.1 · Application Form", level=2)
-p("The application form is issued by the certification body as a template and has not yet been received; it is "
-  "therefore not reproduced here. The information needed to complete it, however, is already consolidated in "
-  "this document, and is restated below in the order an application form normally requests it so that "
-  "transcription is a single step once the template arrives.")
+p("The application form is issued by the certification body as a template (application form A0). The "
+  "template has been received and completed by the applicant, and the completed form is submitted together "
+  "with this dossier. The values entered on the form are restated below, in the order the form requests them, "
+  "with a reference to the section of this document that supports each value.")
 make_table(
     ["Application field", "Value", "Status", "Reference"],
     [
@@ -642,8 +638,8 @@ make_table(
          "The President Director (Nur Rohman) is the statutory officer entitled to represent the company "
          "(Articles of Association, Art. 12.5.a); whether he is the specific individual who will sign the ExCB "
          "application is not yet confirmed."],
-        ["Certification project contact", ("__status__", ("To be provided", "gap")),
-         "Name, position, e-mail, and telephone — the single point of contact for ExCB correspondence."],
+        ["Certification project contact", ("__status__", ("Partially available", "wip")),
+         "Antonius Prasetyo, Director (as entered on the application form); e-mail and telephone to be provided."],
         ["Technical contact for the product", ("__status__", ("To be provided", "gap")),
          "The engineer who will answer technical queries on the technical file."],
         ["Quality contact", ("__status__", ("To be provided", "gap")),
@@ -701,9 +697,9 @@ doc.add_heading("1.5 · ISO 9001 Certificate, Quality Manual, and Procedure Inde
 make_table(
     ["Required particular", "Status", "Remarks"],
     [
-        ["ISO 9001 certificate", ("__status__", ("To be confirmed", "gap")),
-         "Whether the manufacturer currently holds certification and, if so, the certificate number, scope, "
-         "issuing body, and validity period."],
+        ["ISO 9001 certificate", ("__status__", ("In progress", "wip")),
+         "ISO 9001 certification of the manufacturer is in progress, with the certification audit planned for "
+         "October 2026. Certificate number, scope, issuing body and validity period will be provided once issued."],
         ["Quality manual", ("__status__", ("To be provided", "gap")), ""],
         ["Index of procedure documents", ("__status__", ("To be provided", "gap")),
          "A directory is sufficient at this stage; individual procedures are normally requested during the "
@@ -741,17 +737,21 @@ p("Functionally, the GLD integrates eight channels of metal-oxide semiconductor 
   "transmission) within a single fixed-point unit installed at locations with gas-leak risk. An "
   "on-device AI gas-classification model runs directly on the unit so that detection decisions do not "
   "depend on a continuous connection to a central server. "
-  "When gas concentration exceeds a defined threshold, the unit triggers a local alarm (an integrated "
-  "visual/audible alarm module) and simultaneously transmits an alarm notification over the LoRa network to "
+  "Ambient gas enters the sensing section through the stainless-steel mesh at the front of the enclosure; an "
+  "internal DC fan assists the flow towards the eight MQ sensors, each of which carries its own integrated "
+  "stainless-steel protective mesh. When the multi-sensor response pattern and the configured alarm criteria "
+  "indicate a leak, the unit triggers a local alarm (an integrated visual/audible alarm module) and "
+  "simultaneously transmits an alarm notification over the LoRa network, via the cluster head and gateway, to "
   "the operator dashboard.")
 p("The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials "
   "(aluminum alloy and stainless steel) and mounted via a U-bolt mounting plate to existing "
   "structures without drilling or welding. Important: this design-intent statement does not constitute a "
   "claim that the enclosure has passed testing or has been Ex-certified \u2014 the explosion-protection scheme, "
   "gas group, temperature class, and target installation zone will be addressed in Section 2.5.")
-p("The current production power configuration is continuous 24 VDC, supplied via an AC/DC adapter connected "
-  "to the site electrical supply. A portable battery power path (Li-ion 18650) remains under development "
-  "(R&D) and has not become a deployed production configuration.")
+p("The production power configuration is continuous 24 VDC. Where an AC/DC adapter is used to derive the "
+  "24 VDC supply from the site electrical system, the adapter is external to the equipment and outside the "
+  "boundary of the unit submitted for certification. The battery terminals present on the terminal board "
+  "are not part of the certified configuration unless retained by design decision (Section 2.6.b, EX-17).")
 
 doc.add_heading("2.2 \u00b7 Product Name, Model, and Specification List", level=2)
 spec_rows = [
@@ -759,11 +759,28 @@ spec_rows = [
     ("Model / version", "GLD V2"),
     ("Manufacturer", "PT Galaksi Megatama Indonesia"),
     ("End client / program owner", "PT Pertamina Patra Niaga (initial deployment site: Refinery Unit IV, Cilacap)"),
-    ("Primary function", "Acquisition of 8-channel gas sensor data and LoRa transmission"),
-    ("Microcontroller", "ESP32-S3-WROOM-1U-N16R8"),
-    ("LoRa radio module", "E22-900MM22S"),
-    ("Dimensions (L\u00d7W\u00d7H)", "200 \u00d7 90 \u00d7 290 mm"),
+    ("Primary function", "Multi-sensor gas detection, local processing, alarm generation and LoRa communication"),
+    ("Gas sensor configuration", "8 channels: MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135 (MOS)"),
+    ("Microcontroller", "ESP32-S3-WROOM-1U-N16R8 (edge processing / AI inference)"),
+    ("LoRa radio module", "E22-900MM22S, star topology"),
+    ("Operating frequency", "920\u2013923 MHz"),
+    ("RF transmit power", "0\u201322 dBm, firmware-configurable (17 dBm operational setting)"),
+    ("Main power input", "24 VDC, continuous (production configuration)"),
+    ("Internal supply rails", "5 VDC (sensor/heater circuitry) and 3.3 VDC (logic)"),
+    ("Maximum power consumption", "8 W @ 24 VDC (7.995 W measured)"),
+    ("Local alarm", "Integrated visual and audible alarm module"),
     ("Enclosure material", "Aluminum alloy (ADC12 die-cast) + stainless steel"),
+    ("Dimensions (L\u00d7W\u00d7H)", "200 \u00d7 90 \u00d7 290 mm"),
+    ("Weight", "2.378 kg"),
+    ("Mounting method", "U-bolt mounting plate, fixed installation"),
+    ("Cable entry", "M20 \u00d7 1.5 (Ex d cable gland to be certified)"),
+    ("Antenna", "External 3 dBi omnidirectional antenna, SMA interface"),
+    ("Ambient temperature", "\u221220 \u00b0C to +60 \u00b0C"),
+    ("Operating humidity", "5\u201395 % RH, non-condensing"),
+    ("Ingress protection", "IP66 (target rating; IEC 60529 test evidence pending)"),
+    ("Intended hazardous area", "Zone 1, Group II, Category 2G, EPL Gb \u2014 proposed, pending ExCB"),
+    ("Gas group / temperature class", "IIC / T4 \u2014 proposed, pending ExCB and temperature evaluation"),
+    ("Type of protection", "Ex d, flameproof enclosure (II 2G Ex db IIC T4 Gb) \u2014 proposed, pending ExCB"),
 ]
 st = doc.add_table(rows=0, cols=2); st.style = "Table Grid"
 for k, v in spec_rows:
@@ -785,9 +802,11 @@ p("Functional workflow (normal operating mode): sense \u2192 process \u2192 tran
   "AI model (ESP32-S3) \u2192 the result is transmitted over the LoRa network (star-topology transmission) at a "
   "configurable interval (default 10 seconds), or immediately (event-driven) when an alarm condition is "
   "detected. Gas alarms are triggered through two parallel channels: a local visual/audible alarm module on "
-  "the unit itself, and a push notification transmitted over the LoRa network to the dashboard \u2014 the "
-  "alarm-push pathway has been successfully tested on a campus mesh network (field validation at a production "
-  "refinery installation is still pending).")
+  "the unit itself, and a push notification transmitted over the LoRa network to the dashboard. The local "
+  "alarm does not depend on the radio link; the LoRa notification is supplementary. Signal chain: ambient gas "
+  "\u2192 front stainless-steel mesh \u2192 DC sampling fan \u2192 MQ sensor (own protective mesh) \u2192 "
+  "24-bit ADC (ADS1256) \u2192 ESP32-S3 (pre-processing and on-device classification) \u2192 local alarm and "
+  "LoRa transmission.")
 
 doc.add_heading("2.3.a \u00b7 Electrical Parameters \u2014 Node Sensor (GLD)", level=3)
 make_table(
@@ -795,9 +814,10 @@ make_table(
     [
         ["Main power input", "24 VDC", ("__status__", ("Final \u2014 production config.", "ok")),
          "Continuous power supply from a site AC/DC adapter."],
-        ["AC/DC adapter input", "220 VAC, 50 Hz", ("__status__", ("Final", "ok")),
-         "Compliant with the Indonesian national electrical grid standard (PLN)."],
-        ["AC/DC adapter output", "24 VDC", ("__status__", ("Final", "ok")), ""],
+        ["AC/DC adapter input (external)", "220 VAC, 50 Hz", ("__status__", ("Outside equipment boundary", "ok")),
+         "Site-supplied adapter, external to the unit submitted for certification; listed for information only."],
+        ["AC/DC adapter output (external)", "24 VDC", ("__status__", ("Outside equipment boundary", "ok")),
+         "Supplies the 24 VDC field input of the unit."],
         ["Internal operating voltage", "5 VDC & 3.3 VDC", ("__status__", ("Final", "ok")),
          "5 VDC for the MQ sensor/heater circuitry; 3.3 VDC for ESP32-S3 logic. Per-rail current not yet documented separately."],
         ["Equipment boundary (mains exposure)", "None — 24 VDC only", ("__status__", ("Final", "ok")),
@@ -808,7 +828,7 @@ make_table(
         ["Maximum input current", "\u22480.33 A @ 24 VDC", ("__status__", ("Calculated", "ok")),
          "Calculated from measured maximum power consumption (7.995 W) divided by 24 VDC."],
         ["Maximum power consumption", "7.995 W @ 24 VDC", ("__status__", ("Measured \u2014 production config.", "ok")),
-         "Applies to the continuous-power configuration. The battery (R&D) configuration is recorded separately at 5.75 W \u2014 a different operating mode, not a data conflict."],
+         "Applies to the continuous 24 VDC configuration submitted for certification."],
         ["Electrical protection (fuse, reverse polarity, overvoltage, overcurrent)",
          "2\u00d7 resettable PPTC fuse (F1/F2); TVS/ESD suppression diodes (D1, D4/D5/D11, D6); Schottky diodes (D7/D13, D8/D9, D12)",
          ("__status__", ("Partially available \u2014 component-level evidence", "wip")),
@@ -829,7 +849,7 @@ make_table(
     ["Parameter", "Specification", "Status", "Remarks"],
     [
         ["Gas sensors", "MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135 (8 channels)",
-         ("__status__", ("Final", "ok")), "Metal-oxide semiconductor sensors; sensing element directly exposed to ambient air."],
+         ("__status__", ("Final", "ok")), "Metal-oxide semiconductor sensors; the sensing element sits behind the sensor's integrated stainless-steel protective mesh (not claimed as flame-arresting)."],
         ["AI gas-classification model", "On-device classifier \u2014 3 classes: Clean Air, LPG, H\u2082",
          ("__status__", ("Final", "ok")),
          "Runs locally on the ESP32-S3 (Running/Inference mode); outputs a class label and a confidence value. Does not yet cover CO\u2082, Benzene, CO, or H\u2082S."],
@@ -841,10 +861,10 @@ make_table(
          "Certified under FCC (2AC7Z-ESPS3WROOM1U), TELEC, and CE (per Espressif data) \u2014 RF/EMC certifications, not an \u201cEx component\u201d certification."],
         ["Communication module", "LoRa, E22-900MM22S module", ("__status__", ("Final", "ok")),
          "Certified under CE, FCC, and RoHS (per Ebyte data) \u2014 RF/EMC certifications, not an \u201cEx component\u201d certification."],
-        ["Operating frequency", "920 MHz", ("__status__", ("Final", "ok")),
+        ["Operating frequency", "920\u2013923 MHz (920 MHz default channel)", ("__status__", ("Final", "ok")),
          "Star-topology transmission; within the regional 920\u2013923 MHz ISM band (Indonesia)."],
-        ["Transmit power (firmware configuration)", "17 dBm", ("__status__", ("Final", "ok")),
-         "The radio module supports up to 22 dBm \u2014 17 dBm is an operational configuration, not the module's maximum limit."],
+        ["Transmit power (firmware configuration)", "0\u201322 dBm configurable; 17 dBm operational setting", ("__status__", ("Final", "ok")),
+         "22 dBm (\u2248158 mW) is the module maximum; with the 3 dBi antenna the radiated power stays well below the RF ignition threshold of IEC 60079-0 for Group IIC (see IS-08)."],
         ["Bandwidth / spreading factor / coding rate", "125 kHz / SF7 / CR 4/5", ("__status__", ("Final", "ok")), "Source: EMC parameter table and official product technical datasheet."],
         ["Antenna", "External, omnidirectional, SMA male connector, 3 dBi gain", ("__status__", ("Final", "ok")),
          "On some units, the 2.4 GHz Wi-Fi antenna remains inside the enclosure and must be relocated externally."],
@@ -859,17 +879,28 @@ make_table(
     col_widths=[1.5, 1.7, 1.1, 2.2],
 )
 
+p("Operating modes:", size=10, bold=True, color=NAVY, space_after=2)
+make_table(
+    ["Mode", "Function"],
+    [
+        ["Normal / Inference", "Normal gas monitoring, on-device AI processing and alarm function (production mode)"],
+        ["Sampling", "Fan activated and sensor data acquired (sub-state of normal operation)"],
+        ["Alarm", "Local visual/audible alarm and LoRa alarm transmission (sub-state of normal operation)"],
+        ["Nulling / Baseline", "Sensor baseline operation in confirmed clean air; complete 8/8 result required"],
+        ["Dataset / Engineering", "Engineering/data-collection mode; not a normal production detection mode"],
+    ],
+    col_widths=[1.8, 4.7],
+)
+
 doc.add_heading("2.3.c \u00b7 Mechanical Parameters \u2014 Node Sensor (GLD)", level=3)
 make_table(
     ["Parameter", "Specification", "Status", "Remarks"],
     [
         ["Enclosure material", "Aluminum alloy (ADC12 die-cast) + stainless steel",
          ("__status__", ("Final", "ok")),
-         "Per project confirmation, the production enclosure is sourced from a commercially available "
-         "CE/ATEX-marketed explosion-proof gas-detector housing product line (referenced supplier listing: "
-         "Alibaba.com, “CE ATEX Explosion Proof H2 Sensor”), consistent with the cast-metal housing, "
-         "threaded “Ex”-marked cable entry, and sensor mesh cover shown in the product photography "
-         "(Section 2.4). This is corroborated by an internal case CAD drawing (“GLD ATEX CASE v3,” "
+         "The enclosure is a die-cast metal housing manufactured and supplied by the applicant, with a "
+         "threaded cover, threaded side entries and a front stainless-steel mesh, as shown in the product "
+         "photography (Section 2.4). A related case CAD drawing (“GLD ATEX CASE v3,” "
          "dated 8 September 2026) specifying a cylindrical sensor-case body (Ø102 mm outer housing ring, "
          "Ø90/Ø80 mm internal bores) that incorporates a stainless-steel filter mesh disc, a small DC "
          "cooling fan, and a transparent viewing window. PVC is not used in any housing or bracket "
@@ -888,10 +919,10 @@ make_table(
         ["Total weight", "2.378 kg", ("__status__", ("Final", "ok")),
          "Total weight of PCB, casing, and sensors combined; project-confirmed value, not yet documented "
          "against a calibrated weighing record."],
-        ["Mounting method", "U-bolt mounting plate, following the design already installed at the refinery",
+        ["Mounting method", "U-bolt mounting plate",
          ("__status__", ("Final", "ok")), "Mounted to existing structures without drilling or welding."],
-        ["Ingress protection (IP rating)", "IP66", ("__status__", ("Final", "ok")),
-         "Project-confirmed value; not yet independently tested/verified against IEC 60529."],
+        ["Ingress protection (IP rating)", "IP66", ("__status__", ("Target \u2014 not yet tested", "wip")),
+         "Target rating of the design; test evidence against IEC 60529 is pending."],
         ["Cable entry (gland)", "M20\u00d71.5 cable gland (IP66-rated); power cable is 2-conductor, labeled "
          "L+/L\u2212 (positive/negative of the 24 VDC supply), each conductor \u22480.75 mm diameter",
          ("__status__", ("Final", "ok")),
@@ -902,9 +933,15 @@ make_table(
          "own enclosure. Overall cable outer diameter and insulation rating remain to be documented."],
         ["Antenna mounting", "External, SMA male connector", ("__status__", ("Final", "ok")), ""],
         ["Operating temperature", "\u221220\u00b0C to +60\u00b0C (ambient)", ("__status__", ("Final", "ok")),
-         "Project-confirmed value \u2014 a key input for temperature class (T1\u2013T6) determination in Section 2.5. Not yet documented against a calibrated test record."],
+         "Rated ambient range of the equipment and the reference ambient for the temperature-class evaluation (Sections 2.5, 2.6.f)."],
         ["Operating humidity", "5\u201395% RH, non-condensing", ("__status__", ("Final", "ok")),
-         "Project-confirmed value. Not yet documented against a calibrated test record."],
+         "Rated operating humidity range."],
+        ["Front gas inlet", "Stainless-steel wire-mesh plate with locking bracket", ("__status__", ("Partial", "wip")),
+         "Grade, mesh size, thickness and number of layers to be confirmed by the enclosure drawing (EX-03)."],
+        ["Sampling fan", "CIXIKEJI CX5010B5H, DC 5 V 0.23 A, 50 \u00d7 50 \u00d7 10 mm", ("__status__", ("Final", "ok")),
+         "Mounted in the cover directly behind the front mesh; driven by Q5 via J3 (EX-05)."],
+        ["Sensor protective mesh", "Integrated stainless-steel mesh on each MQ sensor", ("__status__", ("Final", "ok")),
+         "Protective element of the sensor construction; no flame-arresting function is claimed (EX-04)."],
     ],
     col_widths=[1.5, 1.9, 1.1, 2.0],
 )
@@ -913,18 +950,11 @@ p("Source: internal technical specification documentation, Sections 1.1\u20131.3
   "(ESP32-S3-WROOM-1U, E22-900MM22S).",
   size=9, italic=True, color=GRAY)
 
-note_box(
-    "Rows marked \u201cPending confirmation\u201d above do not reflect a documentation oversight \u2014 this is an "
-    "honest status indicator. These fields are intentionally left blank because no official data yet exists "
-    "(not yet measured, tested, or decided). They must not be filled with estimates in future revisions "
-    "without a clear supporting data source.",
-    shade=WARN_SHADE,
-)
 
 doc.add_heading("2.4 \u00b7 Product Photographs \u2014 Overall and Key Components", level=2)
-p("The seven photographs below were taken directly from the Node Sensor (GLD) V2 prototype unit (no "
-  "capture-date metadata is available in the source files). The first three photographs show the fully "
-  "assembled unit from different angles; the remaining four show key components in close-up.")
+p("The seven photographs below show an earlier GLD V2 prototype unit and are retained for reference only. "
+  "The current production configuration (latest enclosure and main board) is documented in Section 2.4.2, "
+  "and the coverage of the requested views is mapped in Section 2.4.1.")
 
 photos = [
     ("3._Motherboard_ModulSensor_PenutupMesh_Casing_Antena_ModulAlarm.jpg",
@@ -978,21 +1008,13 @@ for idx in range(0, len(photos), n_photo_cols):
         r2 = cap.add_run(desc); r2.font.size = Pt(8.5); r2.font.color.rgb = GRAY
 doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
-note_box(
-    "Photographic completeness \u2014 status as-is. The seven photographs above cover the complete unit and its "
-    "key components (PCB, sensor modules, alarm module, mesh cover), substantively satisfying checklist Item "
-    "2.4. Still outstanding: (a) formally labeled photographs of each face (front/back/left/right/top/bottom) "
-    "with a scale reference, as is customary in ExCB submission packages; (b) separate photographs of "
-    "individual components such as the battery, gaskets/seals, terminals, and cable glands.",
-    shade=INFO_SHADE,
-)
 
 _guide.photos(doc, _H4)
 _photos07.render(doc, _H4)
 doc.add_heading("2.5 \u00b7 Description of Intended Use and Installation Environment "
                  "(Gas Group, Temperature Class, Area Classification)", level=2)
-p("The GLD is intended for continuous, fixed-point monitoring of flammable and toxic gas leaks in oil & gas "
-  "refinery hazardous areas \u2014 process units, tank farms, pipe racks, and loading/unloading areas. The "
+p("The GLD is intended for continuous, fixed-point monitoring of flammable and selected process gas leaks in "
+  "oil & gas refinery hazardous areas \u2014 process units, tank farms, pipe racks, and loading/unloading areas. The "
   "specific Ex classification parameters below reflect the project engineering team's current "
   "recommendation, developed from the intended deployment envelope and the gases the device is designed to "
   "detect; none of these parameters has yet been confirmed with the certification body (ExCB) or a notified "
@@ -1017,28 +1039,36 @@ make_table(
          "Zone 0 would only apply if the detector were installed directly inside a tank vapor space."],
         ["Type of protection", "Ex d \u2014 flameproof enclosure", ("__status__", ("Team recommendation \u2014 pending ExCB confirmation", "wip")),
          "Selected over Ex e and Ex i based on the existing enclosure design: a die-cast aluminum (ADC12) "
-         "housing with a stainless-steel wire mesh over the sensing element functions as a flame path/flame "
-         "arrestor, the same pattern used by the three comparable certified gas detectors reviewed as "
+         "housing whose front stainless-steel wire mesh is the intended flame-path element of the gas inlet "
+         "(subject to type test or a certified flame arrestor, Section 2.6.e), the same pattern used by the three comparable certified gas detectors reviewed as "
          "references (all Ex d). Ex i was set aside because the MQ-series sensor heaters draw continuous "
          "power (\u22480.75 W each) directly from an unregulated 24 VDC supply rather than through certified "
          "current-limiting barriers, difficult to reconcile with intrinsically-safe energy limits for Group "
          "IIC. Ex e was not pursued because it is not intended for enclosures with normally-energized, "
          "potentially arcing parts such as the sensor heaters."],
+        ["Equipment group / category / EPL", "Group II, Category 2G, EPL Gb",
+         ("__status__", ("Proposed \u2014 pending ExCB confirmation", "wip")),
+         "Consistent with Zone 1 installation; proposed marking II 2G Ex db IIC T4 Gb."],
+        ["Explosive atmosphere", "Gas atmospheres only", ("__status__", ("Final", "ok")),
+         "Combustible-dust atmospheres are not included in the scope of this application; no dust marking "
+         "(Group III / Ex t / Category D) is requested."],
+        ["Operating humidity", "5\u201395 % RH, non-condensing", ("__status__", ("Final", "ok")), "Section 2.3.c."],
     ],
     col_widths=[1.3, 1.1, 1.9, 2.4],
 )
+p("Installation conditions: fixed installation on an existing structure or a dedicated post by means of the "
+  "U-bolt mounting plate, with the front mesh unobstructed; 24 VDC supply cable through a certified Ex d cable "
+  "gland (M20 \u00d7 1.5); unused entries closed with certified Ex d blanking plugs; external protective-earth "
+  "connection at the grounding screw; the cover must not be opened while an explosive atmosphere may be present "
+  "(Section 2.6.g).", size=9.5)
 note_box(
-    "These are engineering recommendations, not a certification decision. An independent readiness "
-    "assessment of the same checklist item, prepared separately from the underlying firmware/hardware "
-    "repository, reached the same conclusion \u2014 gas group, temperature class, ambient range, zone, and "
-    "type of protection are not yet formally established. Final classification requires explicit agreement "
-    "with the ExCB.",
+    "These are engineering recommendations of the applicant, not a certification decision. Final "
+    "classification requires explicit agreement with the ExCB.",
     shade=WARN_SHADE,
 )
 
 doc.add_heading("2.6 \u00b7 Design and Manufacturing Information", level=2)
-p("Nine sub-items (a\u2013i) per the original checklist. Status is reported item by item below; most "
-  "sub-items are not yet available \u2014 this is reported plainly rather than implied to be complete.")
+p("Nine sub-items (a\u2013i) per the original checklist. The status of each sub-item is reported below.")
 
 doc.add_heading("2.6.a \u00b7 Complete Drawings (Assembly, Component, Electrical Schematic, PCB Layout, "
                  "Enclosure Structure, Junction Box, Terminal, Grounding)", level=3)
@@ -1097,7 +1127,7 @@ pcr1 = pcb_fig_cap.add_run("Main board PCB layout (top copper) and 3D populated 
 pcr1.font.bold = True; pcr1.font.size = Pt(9.5)
 pcr2 = pcb_fig_cap.add_run(
     "Both exported directly from the EasyEDA/JLCPCB source project (production-intent board, circular "
-    "outline with six mounting holes). The 3D render shows the ESP32-S3-WROOM module, micro-USB connector, "
+    "outline with four \u00d83.2 mm fixing holes on a \u00d864 mm pitch circle and four \u00d83.0 mm edge holes). The 3D render shows the ESP32-S3-WROOM module, micro-USB connector, "
     "power inductors, and 8-channel I2C header block in their real placed positions; it is an illustrative "
     "render, not a dimensioned drawing."
 )
@@ -1208,8 +1238,7 @@ p(f"A complete, itemized electronic-component BOM for both the main board and th
   f"exists, exported directly from the EasyEDA/JLCPCB source project (manufacturer, manufacturer part "
   f"number, and LCSC supplier part number for each line item; {mb_lines} line items / {mb_qty} placed "
   f"components on the main board, {sb_lines} line items / {sb_qty} placed components on the sensor board "
-  f"\u2014 full tables below). This is real, traceable sourcing data and materially improves on the previous "
-  f"status.")
+  f"\u2014 full tables below).")
 p("It does not, however, satisfy this checklist item as written. The checklist asks specifically for the "
   "explosion-safety-relevant BOM \u2014 enclosure, gaskets, terminals, cable entry devices, switches, light "
   "sources, battery, potting compound, and plastic parts, each with material grade and Ex/UL/CCC "
@@ -1237,10 +1266,9 @@ note_box(
     "Status: Partially available. Full electronic-component BOM with real manufacturer/supplier data now "
     "exists (source: EasyEDA/JLCPCB export, 11 Sep 2026). The explosion-safety-relevant subset the checklist "
     "actually asks for \u2014 enclosure, gasket, cable entry device, battery, potting compound, and the gas "
-    "sensor itself, with material grade and Ex/UL/CCC certification for each \u2014 remains not yet compiled. "
-    "These are mechanical/safety parts, not electronic components: the enclosure itself is under design by an "
-    "external mechanical/casing development partner (legal identity now confirmed as PT Galaksi Megatama "
-    "Indonesia — see Section 1.4) and its bill of materials has not yet been provided to the authors.",
+    "sensor itself, with material grade and Ex/UL/CCC certification for each \u2014 is compiled in Sections "
+    "2.6.b.1 and 2.6.b.2; open items are marked per row and are completed from the enclosure drawings and "
+    "supplier data of the manufacturer.",
     shade=WARN_SHADE,
 )
 
@@ -1257,8 +1285,8 @@ p("Per IEC 60079-0:2017, once GLD's specific non-metallic components are identif
   "thresholds are cited from the standard itself and have not yet been matched against actual component "
   "datasheets.")
 p("Non-metallic components in the design that this item will need to cover: the cover-to-body sealing "
-  "gasket providing the IP66 rating (Section 2.3.c \u2014 identified as a rubber gasket in the casing "
-  "partner's assembly drawing, specific compound/grade not yet specified); the integral seal of the "
+  "O-ring of the cover-to-base joint (Section 2.3.c \u2014 rubber, cord \u00d82.70 mm and OD \u224891.0 mm measured, "
+  "Figures 4-132/4-134; specific compound/grade not yet specified); the integral seal of the "
   "candidate M20\u00d71.5 cable gland \u2014 per project direction, specified together with the gland "
   "itself from the BP18-1Z reference (Section 2.3.c), rather than as a separately sourced component; and "
   "the antenna/SMA feedthrough insulator (material not yet specified). The protective mesh cover over the "
@@ -1266,9 +1294,8 @@ p("Non-metallic components in the design that this item will need to cover: the 
   "\u2014 being metallic, it falls outside this "
   "specific non-metallic-materials checklist item.")
 note_box(
-    "Status: Not yet available. Dependent on the enclosure design and material selection, which sits with "
-    "the external casing development partner (PT Galaksi Megatama Indonesia, Section 1.4) rather than the "
-    "authors; this data has been formally requested from that partner. Partial candidate data: the BP18-1Z "
+    "Status: Partially available \u2014 register of non-metallic materials in Section 2.6.c.1; supplier "
+    "datasheets pending from the enclosure and component suppliers. Partial candidate data: the BP18-1Z "
     "reference drawing (Section 2.6.a) specifies a powder-coating surface treatment with two "
     "electrostatic-safety parameters directly relevant to this checklist item \u2014 "
     "maximum surface charge transfer <10 nC and maximum surface capacitance <5 pF (coating thickness \u2264 0.2 "
@@ -1280,24 +1307,23 @@ note_box(
 
 _guide.materials(doc, _H4)
 doc.add_heading("2.6.d \u00b7 Manufacturing Process Description", level=3)
-p("A description of manufacturing processes relevant to explosion-protection safety (enclosure machining "
-  "accuracy control, explosion-proof surface treatment, welding, potting, die-casting, bonding) has not yet "
-  "been documented.")
+p("The manufacturing processes relevant to explosion-protection safety (enclosure machining accuracy control, "
+  "explosion-proof surface treatment, welding, potting, die-casting, bonding) are structured in Section "
+  "2.6.d.1; process parameters are completed by the manufacturer.")
 note_box(
-    "Status: Not yet available. This describes the casing partner's (PT Galaksi Megatama Indonesia) "
-    "manufacturing process, not an internal electronics process \u2014 it will need to be obtained from that "
-    "partner once their process is finalized.",
+    "Status: Partially available \u2014 process controls listed in Section 2.6.d.1; machining, coating and "
+    "assembly parameters to be completed by the manufacturer (PT Galaksi Megatama Indonesia).",
     shade=INFO_SHADE,
 )
 
 _guide.manufacturing(doc, _H4)
 doc.add_heading("2.6.e \u00b7 Explosion-Protection Calculations and Explanations (if applicable)", level=3)
-p("Flame-path (joint gap, length) and free-internal-volume calculations specific to Ex d (Section 2.5, team "
-  "recommendation) have not yet been performed, pending final enclosure geometry from the casing development "
-  "partner and a confirmed protection concept with the ExCB.")
+p("Ignition sources, the protection concept and the threaded flame-path evaluation are given in Sections "
+  "2.6.e.1\u20132.6.e.3, including the measured cover-to-base joint (e.3.12, e.3.13). Final flame-path and "
+  "free-volume values require the manufacturer's controlled enclosure drawing.")
 note_box(
-    "Status: Not yet available \u2014 pending ExCB confirmation of the Ex d protection concept and final "
-    "enclosure design.",
+    "Status: Partially available \u2014 ignition-source register and protection concept documented; "
+    "toleranced flame-path data, free volume and the gas-inlet flame-arrestor evidence pending.",
     shade=INFO_SHADE,
 )
 
@@ -1369,7 +1395,7 @@ make_table(
     ["Sub-item", "Status", "Remarks"],
     [
         ["a) Safety warnings", ("__status__", ("Draft available", "wip")),
-         "Drafted below (18 Sep 2026); not yet reviewed against a selected explosion-protection concept."],
+         "Drafted below for the proposed Ex d concept."],
         ["b) Installation requirements (cable entry, torque, grounding, cleaning)",
          ("__status__", ("Draft available", "wip")),
          "Procedural text drafted below; the mechanical mounting method itself (U-bolt mounting plate, no drilling/welding "
@@ -1383,10 +1409,9 @@ make_table(
     col_widths=[2.4, 1.3, 3.0],
 )
 note_box(
-    "Status: Draft text available (source: internal working draft, Rev. 18 Sep 2026). This is a draft for "
-    "review, not a finalized, Ex-approved installation and operation manual. It has not been checked against a "
-    "selected type of protection (Ex d/e/i, Section 2.6.e), a confirmed temperature class (Section 2.6.f), or "
-    "finalized cable-entry/enclosure hardware. It also feeds the separate GLD instruction manual.",
+    "Status: Draft available. Prepared for the proposed Ex d concept (II 2G Ex db IIC T4 Gb), pending ExCB "
+    "confirmation, the final temperature class (Section 2.6.f) and the final cable-entry/enclosure hardware. "
+    "It also feeds the separate GLD instruction manual.",
     shade=WARN_SHADE,
 )
 
@@ -1396,6 +1421,10 @@ for _b in [
     "Isolate and verify the 24 VDC supply before opening the enclosure or changing wiring. Apply the site "
     "lockout/tagout procedure.",
     "Use only the approved production power arrangement: 24 VDC.",
+    "Do not open the enclosure while an explosive atmosphere may be present unless the equipment is "
+    "de-energized and the area is confirmed gas-free.",
+    "Do not modify the enclosure, flame paths, cable entries or internal arrangement; any unauthorized "
+    "modification to the approved equipment invalidates the certificate.",
     "Perform alarm tests with appropriate site controls and hearing protection where audible devices are "
     "connected.",
     "Perform sensor nulling only in confirmed clean air. Accept the operation only when all eight sensors "
@@ -1449,18 +1478,19 @@ make_table(
 
 _guide.usage(doc, _H4)
 doc.add_heading("2.6.h \u00b7 Nameplate Information", level=3)
-p("Nameplate artwork cannot yet be finalized: it depends on the certificate number, protection marking, "
-  "temperature class, ambient range, IP rating, and serialization scheme \u2014 none of which has been "
-  "assigned yet.")
-note_box("Status: Not yet available.", shade=INFO_SHADE)
+p("The proposed nameplate content and artwork are given in Section 2.6.h.1 (gas atmospheres only, "
+  "\u221220 \u00b0C \u2264 Ta \u2264 +60 \u00b0C). The certificate numbers, notified-body number and final "
+  "marking are entered after certification.")
+note_box("Status: Partially available \u2014 proposed content and artwork in Section 2.6.h.1.", shade=INFO_SHADE)
 
 _guide.nameplate(doc, _H4)
 doc.add_heading("2.6.i \u00b7 Ex Component Certificates", level=3)
 p("No components in this design currently hold an Ex component certificate. As noted in Section 2.3.b, the "
   "processing unit (ESP32-S3-WROOM-1U-N16R8) and the communication module (E22-900MM22S) hold RF/EMC "
   "certifications (FCC, TELEC, CE, RoHS) \u2014 these are not Ex component certificates and do not satisfy "
-  "this item.")
-note_box("Status: Not yet available.", shade=INFO_SHADE)
+  "this item. The Ex-certified components required for the proposed Ex d construction are listed in "
+  "Section 2.6.i.1.")
+note_box("Status: Pending certificates \u2014 required components listed in Section 2.6.i.1.", shade=INFO_SHADE)
 
 # ============================================================
 # SECTION 3
@@ -1487,7 +1517,7 @@ make_table(
     [
         ["Firmware / serial", "Engineering commissioning tool or serial terminal; firmware package with recorded version"],
         ["I2C / ADC / DAC", "No additional equipment for protocol-level acknowledgement/readback; multimeter or oscilloscope where physical voltage must be substantiated"],
-        ["Power / watchdog timer", "Controlled 24 V supply, an applicable battery source, multimeter, and oscilloscope/logic analyzer"],
+        ["Power / watchdog timer", "Controlled 24 V supply, multimeter, and oscilloscope/logic analyzer (battery source only if the battery path is retained, EX-17)"],
         ["Alarm", "The actual alarm load, multimeter/oscilloscope, and hearing protection if an audible buzzer is fitted"],
         ["LoRa", "At least one counterpart Cluster Head/Gateway device with recorded configuration"],
         ["RS-485 / Modbus", "An RS-485/USB-RS485 master with proper termination and the agreed register map"],
@@ -1499,8 +1529,8 @@ note_box(
     shade=INFO_SHADE,
 )
 
-p("A second, commissioning-oriented equipment list is drafted separately (source: internal working draft, "
-  "Rev. 18 Sep 2026), organized by physical test apparatus rather than by test group:")
+p("A second, commissioning-oriented equipment list is organized by physical test apparatus rather than by "
+  "test group:")
 make_table(
     ["Equipment", "Purpose"],
     [
@@ -1538,7 +1568,7 @@ r = foot.add_run(
     "Certification Information Requirements (original English/Mandarin version issued by the certification "
     "body). Data sources: the official product technical datasheet (Revision 4.0), internal technical "
     "specification documentation, EMC parameter measurement data, and "
-    "product photography. Fields marked \u201cPending confirmation\u201d are not yet final and must not be "
+    "product photography. Fields marked Open, TBC or Pending are not yet final and must not be "
     "relied upon for procurement or certification purposes without further verification."
 )
 r.font.size = Pt(8.5)

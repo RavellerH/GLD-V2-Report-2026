@@ -141,9 +141,9 @@ GROUP_E = [
 ]
 
 GROUP_F = [
-    ("M-F1", "pkg_29.jpg", "MQ-2 and MQ-3 — sensor parameters and dimension drawings", "", "Sensor data sheet"),
+    ("M-F1", "pkg_29.jpg", "MQ-2 and MQ-3 — sensor parameters and dimension drawings", "Data sheet shows MQ-3; the fitted part is MQ-3B (BOM) — data sheet of the B-variant to be confirmed.", "Sensor data sheet"),
     ("M-F2", "pkg_30.jpg", "MQ-4 and MQ-5 — sensor parameters and dimension drawings", "", "Sensor data sheet"),
-    ("M-F3", "pkg_31.jpg", "MQ-6 and MQ-7 — sensor parameters and dimension drawings", "", "Sensor data sheet"),
+    ("M-F3", "pkg_31.jpg", "MQ-6 and MQ-7 — sensor parameters and dimension drawings", "Data sheet shows MQ-7; the fitted part is MQ-7B (BOM) — data sheet of the B-variant to be confirmed.", "Sensor data sheet"),
     ("M-F4", "pkg_32.jpg", "MQ-8 and MQ-135 — sensor parameters and dimension drawings", "",
      "Sensor data sheet"),
 ]

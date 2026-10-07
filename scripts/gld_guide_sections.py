@@ -474,8 +474,9 @@ def ex_calc(d, h=None):
          "Obtain module construction/certification data", "Open"),
         ("IS-07", "ESP32-S3 / LoRa / digital electronics", "Overheating, electrical fault", "Depends on IS-03",
          "Assess maximum component temperatures", "Open"),
-        ("IS-08", "RF transmitter / antenna", "RF energy", "External antenna", "Max. 22 dBm into a 3 dBi antenna; assess "
-         "against IEC 60079-0 RF threshold", "Open"),
+        ("IS-08", "RF transmitter / antenna", "RF energy", "External antenna", "22 dBm (≈158 mW) conducted max.; with the 3 dBi "
+         "antenna ≈0.32 W, below the 2 W RF threshold power of IEC 60079-0 for Group IIC (17 dBm operational)",
+         "Preliminary"),
         ("IS-09", "Power inductors", "Surface heating", "Depends on IS-03", "Measure worst-case ΔT", "Open"),
         ("IS-10", "MOSFETs, diodes, protection devices", "Local overheating on overload/surge", "Depends on IS-03",
          "Verify ratings and protective-device coordination (F1/F2 voltage rating)", "Open"),
@@ -635,25 +636,26 @@ def temperature(d, h=None):
        "Use of this method is subject to ExCB acceptance; confirmation at maximum ambient is part of type testing.",
        size=9.5)
     _sub("f.11 Results table")
+    _p("Reference numbers follow the candidate hottest points of f.3.", size=9)
     _table(["Ref.", "Point", "Condition", "Test ambient", "Measured", "Rise", "Est. at +60 °C", "Status"], [
         ("T-01", "MQ sensor body", "Normal", "24.9 °C", "44.2 °C", "19.3 K", "≈79 °C", "Measured"),
         ("T-01", "MQ sensor body", "Maximum load", "24.2 °C", "55.0 °C", "30.8 K", "≈91 °C", "Measured"),
         ("T-01", "MQ sensor body", "Fan stalled", "24.8 °C", "78.4 °C", "53.6 K", "≈114 °C", "Measured"),
         ("T-02", "Fan motor", "Normal / stalled", "24.9 / 24.8 °C", "36.3 °C", "11.4 / 11.5 K", "≈71 °C", "Measured"),
-        ("T-03", "5 V converter IC", "Maximum load", "—", "—", "—", "—", "Not measured"),
-        ("T-04", "Power inductor", "Maximum load", "—", "—", "—", "—", "Not measured"),
-        ("T-05", "PCB hottest area (incl. ESP32-S3)", "Fan stalled", "24.8 °C", "63.4 °C", "38.6 K", "≈99 °C",
+        ("T-03", "5 V converter IC (U36)", "Maximum load", "—", "—", "—", "—", "Not measured"),
+        ("T-06", "Power inductor", "Maximum load", "—", "—", "—", "—", "Not measured"),
+        ("T-08", "PCB hottest area (incl. ESP32-S3)", "Fan stalled", "24.8 °C", "63.4 °C", "38.6 K", "≈99 °C",
          "Measured"),
-        ("T-05", "PCB hottest area", "Maximum load", "24.2 °C", "58.3 °C", "34.1 K", "≈94 °C",
+        ("T-08", "PCB hottest area", "Maximum load", "24.2 °C", "58.3 °C", "34.1 K", "≈94 °C",
          "Preliminary — not stable"),
-        ("T-06", "LoRa module", "Maximum TX", "—", "—", "—", "—", "Not measured"),
-        ("T-07", "Alarm module", "Alarm active", "—", "—", "—", "—", "Not measured"),
-        ("T-08", "External enclosure", "Fan stalled", "24.8 °C", "43.9 °C", "19.1 K", "≈79 °C",
+        ("T-09", "LoRa module", "Maximum TX", "—", "—", "—", "—", "Not measured"),
+        ("T-10", "Alarm module", "Alarm active", "—", "—", "—", "—", "Not measured"),
+        ("T-11", "External enclosure", "Fan stalled", "24.8 °C", "43.9 °C", "19.1 K", "≈79 °C",
          "Preliminary — check TC-7 contact"),
     ], widths=(0.45, 1.35, 0.9, 0.75, 0.65, 0.65, 0.75, 1.1), status_col=7, size=7.5)
     _sub("f.12 Preliminary temperature-class statement")
     _p("The GLD is proposed for temperature class T4. The final classification remains open pending the remaining "
-       "hot-spot measurements (T-03, T-04, T-06, T-07, T-09, T-10, T-12), thermal stabilization at maximum load, "
+       "hot-spot measurements (T-03 to T-07, T-09, T-10, T-12), thermal stabilization at maximum load, "
        "maximum-ambient confirmation and the relevant fault conditions. The highest extrapolated value so far, "
        "≈114 °C, is below the effective T4 limit of 130 °C.", size=9.5)
 
@@ -702,16 +704,16 @@ def nameplate(d, h=None):
     _table(["Field", "Proposed content", "Status"], [
         ("Nameplate location", "Flat top face of the base enclosure beside the antenna (Figure 4-124); plate size "
          "and fixing method (rivets/adhesive) TBC", "Final (location)"),
-        ("Manufacturer", "PT Galaksi Megatama Indonesia, Bekasi, Indonesia", "Final"),
+        ("Manufacturer", "PT Galaksi Megatama Indonesia, Plaza Summarecon Bekasi, Jl. Bulevar Ahmad Yani Kav. K.01, Level 7, Bekasi City, West Java 17143, Indonesia", "Final"),
         ("Product / model", "Gas Leak Detector — GLD V2", "Final"),
         ("Serial number", "Per unit (sample: GLD2-0x1001)", "Final"),
         ("Year of manufacture", "Per unit", "Final"),
-        ("ATEX equipment group / category", "II 2G", "Proposed — pending ExCB"),
+        ("Specific marking of explosion protection (ATEX)", "⟨Ex⟩ hexagon, II 2G", "Proposed — pending ExCB"),
         ("Ex marking", "Ex db IIC T4 Gb", "Proposed — pending ExCB"),
         ("Ambient temperature", "−20 °C ≤ Ta ≤ +60 °C", "Final (rated range)"),
         ("IP rating", "IP66", "Proposed — test evidence pending"),
         ("Electrical rating", "24 VDC, 8 W max.", "Final"),
-        ("Cable entry", "M20×1.5", "TBC"),
+        ("Cable entry", "M20×1.5 entry thread (certified Ex d gland model TBC)", "Final (thread)"),
         ("Certificate numbers", "ATEX / IECEx certificate numbers", "Pending certificate"),
         ("CE marking + notified-body number", "CE xxxx", "Pending certificate"),
         ("Warnings", "“WARNING – DO NOT OPEN WHEN AN EXPLOSIVE ATMOSPHERE MAY BE PRESENT”; additional warnings "
@@ -784,7 +786,7 @@ def matrix(d, h=None):
         ("2.5", "Intended use and environment (IIC, T4, Zone 1, −20…+60 °C)", "2.5", "Final (proposed classification)"),
         ("6(a).1–6(a).6", "Assembly, section, enclosure, mesh, MQ arrangement, fan drawings", "2.6.a, 2.6.a.1",
          "Partial — controlled toleranced drawings to issue"),
-        ("6(a).7", "Main PCB schematic", "2.6.a.7", "Final (main board); sensor module open"),
+        ("6(a).7", "Main PCB schematic", "2.6.a.7", "Partial — main board available, schematic findings 1–3 open; sensor-module schematic missing"),
         ("6(a).8", "PCB layout", "2.6.a.8", "Partial — rev/date, laminate data, sensor module"),
         ("6(a).9–6(a).13", "Terminal, grounding, cable entry, antenna, alarm drawings", "2.6.a.1 (M-D14, M-D15, M-D5); MS-06 in 2.6.g.1",
          "Partial — dimensioned drawings to issue"),
@@ -796,7 +798,7 @@ def matrix(d, h=None):
         ("6.g", "Usage and installation instructions g.1–g.20", "2.6.g, 2.6.g.1", "Draft available"),
         ("6.h", "Nameplate (gas only, −20…+60 °C; artwork MS-05)", "2.6.h, 2.6.h.1", "Proposed"),
         ("6.i", "Ex component certificates", "2.6.i, 2.6.i.1", "Pending certificate"),
-        ("3.1–3.2", "Sample and fixtures", "3.1–3.4", "Final"),
+        ("3.1–3.2", "Sample and fixtures", "3.1–3.4", "Partial — sample identified; fixture/test plan not yet executed"),
     ]
     _table(["Guide item", "Requirement", "Section", "Status"], rows, widths=(0.9, 2.8, 1.3, 1.6), status_col=3,
            size=8)

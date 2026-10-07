@@ -201,7 +201,7 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "2.0"
+REVISION = "2.1"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -226,9 +226,8 @@ title2.paragraph_format.space_after = Pt(10)
 tr2 = title2.add_run("Gas Leak Detector (GLD) V2")
 tr2.font.size = Pt(15); tr2.font.bold = True; tr2.font.color.rgb = GRAY
 
-p("This document follows, item by item, the section order of the ExCB checklist as it appears in the "
-  "internal working-draft template (source file below), filled in with GLD's confirmed design data. Task-style "
-  "annotations from that working draft have been rewritten here as professional status notes.", size=10.5)
+p("This document follows, item by item, the section order of the ExCB information-requirements checklist, "
+  "filled in with the confirmed design data of the GLD and a status note for each item.", size=10.5)
 
 p("Document Control", size=11.5, bold=True, color=NAVY, space_after=4)
 meta_rows = [
@@ -238,11 +237,10 @@ meta_rows = [
     ("Date", DOC_DATE),
     ("Status", "Working Document — Draft for Internal Review"),
     ("Classification", "Confidential — prepared for ATEX/IECEx certification body (ExCB) submission"),
-    ("Based on (source template)", "IECEx ATEX Certification Information Requirements_Rev18092026.docx "
-     "(internal working draft, 18 Sep 2026)"),
+    ("Based on", "IECEx/ATEX Certification Information Requirements checklist (ExCB)"),
     ("Applicant / Manufacturer", "PT Galaksi Megatama Indonesia"),
-    ("Companion document", "Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX (exhaustive item-by-item status "
-     "tracking) — authoritative for item-level status where the two documents differ"),
+    ("Companion document", "Technical documentation file GMI/GLD/IECEX-TDF/2026-001 (exhaustive item-by-item "
+     "status) — authoritative for item-level status where the two documents differ"),
 ]
 mt = doc.add_table(rows=0, cols=2)
 mt.style = "Table Grid"
@@ -277,9 +275,8 @@ for i, h in enumerate(["Revision", "Date", "Description"]):
     r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = GRAY
 for rev, rev_date, rev_desc in [
     ("0.1", "22 September 2026",
-     "Initial issue — filled in against the internal working-draft template "
-     "(IECEx ATEX Certification Information Requirements_Rev18092026.docx), covering all three sections "
-     "of the checklist."),
+     "Initial issue — filled in against the ExCB information-requirements checklist, covering all three "
+     "sections of the checklist."),
     ("0.2", "22 September 2026",
      "Total weight corrected to 2.3 kg; IP rating confirmed as IP66; operating humidity confirmed as "
      "10–90% RH non-condensing; cable gland confirmed as M20×1.5 (IP66-rated) — all raised to Final "
@@ -340,8 +337,10 @@ for rev, rev_date, rev_desc in [
      "Measured sketches MS-01\u2026MS-04 of the cover-to-base joint added (e.3.13), illustrative, from caliper measurements."),
     ("1.9", "7 October 2026",
      "Proposed nameplate artwork MS-05 (2.6.h.1) and terminal/field-wiring diagram MS-06 (2.6.g.1) added (drafts)."),
-    (REVISION, DOC_DATE,
+    ("2.0", "7 October 2026",
      "Navigation: five-level Table of Contents, List of Drawings/Figures with page numbers, PDF bookmarks to individual drawings and photographs; photo groups added. No technical content changed."),
+    (REVISION, DOC_DATE,
+     "Audit against the reviewer's revision guide: application form received and completed; ISO 9001 in progress; internal file names and working-draft references removed; product description and 2.5 completed (gas path, EPL Gb, Tamb, humidity, gas-only scope, installation conditions); shared sections updated as in the technical documentation file rev. 2.8."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -428,8 +427,9 @@ p("Application form (provided by ExCB as a template). Manufacturer's business li
   "directory of procedure documents (for QAR/QAN review).", size=9.5, italic=True, color=GRAY)
 
 doc.add_heading("1.1 · Application Form", level=2)
-p("Issued by the ExCB as a template; not yet received.")
-status_line("Template not yet received from the ExCB.")
+p("Issued by the ExCB as a template (application form A0); the template has been received, completed by the "
+  "applicant and submitted together with this dossier.")
+status_line("Template received from the ExCB; completed form submitted with the dossier.")
 
 doc.add_heading("1.2 · Manufacturer's Business License / Company Registration Certificate", level=2)
 p("The Applicant and Manufacturer named in this application is PT Galaksi Megatama Indonesia, which holds "
@@ -488,10 +488,10 @@ status_line("Partially available — registered addresses on file (general metal
             "fixed — the product is at prototype stage.")
 
 doc.add_heading("1.5 · ISO 9001 Certificate, Quality Manual, and Directory of Procedure Documents (for QAR/QAN review)", level=2)
-p("Whether the manufacturer currently holds ISO 9001 certification, and if so its certificate number, scope, "
-  "issuing body, and validity period, is to be confirmed. Quality manual and procedure-document index not yet "
-  "provided.")
-status_line("To be confirmed / to be provided. Under both IECEx and ATEX schemes, a quality system covering Ex "
+p("ISO 9001 certification of the manufacturer is currently in progress, with the certification audit planned "
+  "for October 2026. The certificate, quality manual, and procedure-document index will be submitted once "
+  "available.")
+status_line("Open — certification and supporting documents in progress. Under both IECEx and ATEX schemes, a quality system covering Ex "
             "production is expected before certificates are issued (IECEx Quality Assessment Report, or the "
             "corresponding production-quality/product-verification route under ATEX) whether or not ISO 9001 "
             "is held; the applicable route is to be confirmed with the ExCB.")
@@ -511,9 +511,11 @@ p("Functionally, the GLD integrates eight channels of metal-oxide semiconductor 
   "edge-AI microcontroller/processor (ESP32-S3), and a LoRa radio module (star-topology wireless transmission) "
   "within a single fixed-point unit installed at locations with gas-leak risk. An on-device AI gas-"
   "classification model runs directly on the unit so that detection decisions do not depend on a continuous "
-  "connection to a central server. When gas concentration exceeds a defined threshold, the unit triggers a "
-  "local alarm (an integrated visual/audible alarm module) and simultaneously transmits an alarm notification "
-  "over the LoRa network to the operator dashboard.")
+  "connection to a central server. Ambient gas enters through the front stainless-steel mesh; an internal DC "
+  "fan assists the flow towards the eight MQ sensors, each with its own integrated stainless-steel protective "
+  "mesh. When the multi-sensor response pattern and the configured alarm criteria indicate a leak, the unit "
+  "triggers a local alarm (an integrated visual/audible alarm module) and simultaneously transmits an alarm "
+  "notification over the LoRa network, via the cluster head and gateway, to the operator dashboard.")
 p("The enclosure is designed for hazardous-area deployment at refinery sites, using metal materials (aluminum "
   "alloy — ADC12 die-cast grade — and stainless steel) and mounted via a U-bolt mounting plate "
   "to existing structures without drilling or welding. The current production power configuration is "
@@ -646,28 +648,34 @@ for fn, cap in [
 _guide.photos(doc, _H4)
 _photos07.render(doc, _H4)
 doc.add_heading("2.5 · Description of Intended Use and Installation Environment", level=2)
-p("The GLD is intended for continuous, fixed-point monitoring of flammable and toxic gas leaks in oil & gas "
-  "refinery hazardous areas: process units, tank farms, pipe racks, and loading/unloading areas.")
+p("The GLD is intended for continuous, fixed-point monitoring of flammable and selected process gas leaks in "
+  "oil & gas refinery hazardous areas: process units, tank farms, pipe racks, and loading/unloading areas.")
 make_table(
     ["Parameter", "Value", "Status"],
     [
         ["Gas group", "IIC", "Internal recommendation, not an ExCB decision"],
         ["Temperature class", "T4 (≤135°C)", "Target — preliminary internal measurement supports it (Section 2.6.f); formal verification outstanding"],
         ["Area classification", "Zone 1, Equipment Category 2G, Group II", "Requested — subject to ExCB assessment"],
-        ["Type of protection", "Ex d — flameproof enclosure", "Internal recommendation, not an ExCB decision"],
+        ["Type of protection", "Ex d — flameproof enclosure (II 2G Ex db IIC T4 Gb)", "Internal recommendation, not an ExCB decision"],
+        ["Equipment protection level", "EPL Gb", "Proposed — subject to ExCB assessment"],
+        ["Ambient temperature", "−20 °C to +60 °C", "Rated range"],
+        ["Operating humidity", "5–95 % RH, non-condensing", "Rated range"],
+        ["Explosive atmosphere", "Gas atmospheres only — combustible dust not included; no dust marking requested", "Final"],
     ],
     col_widths=[1.8, 2.9, 2.0],
 )
 p("Type of protection selected over Ex e and Ex i based on the existing enclosure design: a die-cast "
-  "aluminum (ADC12) housing with a stainless-steel mesh cover over the sensing element, functioning as a "
-  "flame path/flame arrestor — the same pattern used by the three comparable certified gas detectors "
+  "aluminum (ADC12) housing whose front stainless-steel mesh is the intended flame-path element of the gas "
+  "inlet (subject to type test or a certified flame arrestor) — the same pattern used by the three comparable certified gas detectors "
   "reviewed as references (all Ex d). Ex i was set aside because the MQ-series sensor heaters draw "
   "continuous power (≈0.75 W each) directly from an unregulated 24 VDC supply rather than through "
   "certified current-limiting barriers, difficult to reconcile with intrinsically-safe energy limits for "
   "Group IIC.", size=9.5, italic=True)
 p("These classification parameters are the applicant's proposal, recorded here as a request, not as an agreed "
-  "or granted classification. Cluster Head and Gateway devices are assumed to always sit in a safe area "
-  "(project assumption, not the result of a formal area-classification study by Pertamina).", size=9.5, italic=True)
+  "or granted classification. Installation: fixed mounting by the U-bolt mounting plate with the front mesh "
+  "unobstructed; 24 VDC cable through a certified Ex d gland (M20 × 1.5); unused entries closed with certified "
+  "Ex d plugs; external protective-earth connection; the cover must not be opened while an explosive "
+  "atmosphere may be present.", size=9.5, italic=True)
 
 doc.add_heading("2.6 · Design and Manufacturing Information", level=2)
 
@@ -686,7 +694,7 @@ figure(os.path.join(DRAWING_DIR, "bracket-mounting-drawing.png"), max_w=6.2, max
 p("A separate, internal contingency/alternate enclosure design (“GLD ATEX CASE v3”) exists in "
   "parallel with the primary commercial-enclosure sourcing path referenced in Section 2.3:")
 figure(os.path.join(IM_CAD_DIR, "gld_atex_case_v3_dimensioned.png"), max_w=6.2, max_h=4.6,
-       cap="“GLD ATEX CASE v3” dimensioned drawing sheet (Farhan Budiman, 8 Sep 2026) — "
+       cap="“GLD ATEX CASE v3” dimensioned drawing sheet (8 Sep 2026) — "
            "internal contingency/alternate enclosure design, not the confirmed production enclosure.")
 p("A candidate junction-box/terminal sub-component drawing has also been received via the casing partner's "
   "supply chain (Chinese enclosure-component manufacturer):")
@@ -726,13 +734,13 @@ p_26b = p(f"A complete, itemized electronic-component BOM exists for both boards
   f"EasyEDA/JLCPCB source project (manufacturer, manufacturer part number, and LCSC supplier part number per "
   f"line item): {mb_lines} line items / {mb_qty} placed components on the main board, {sb_lines} line items / "
   f"{sb_qty} placed components on the sensor board. Full listing maintained in "
-  f"Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX, Section 2.6.b.")
+  f"the technical documentation file GMI/GLD/IECEX-TDF/2026-001, Section 2.6.b.")
 p_26b.paragraph_format.keep_together = True
 p_26b.paragraph_format.keep_with_next = True
 sl_26b = status_line("Partially available. The explosion-safety-relevant subset the checklist actually asks for "
             "(enclosure, gasket, cable entry device, battery, potting compound, and the gas sensor itself, "
-            "with material grade and Ex/UL/CCC certification for each) remains not yet compiled — these "
-            "are mechanical/safety parts, not electronic components, and sit with the Manufacturer, PT "
+            "with material grade and Ex/UL/CCC certification for each) is compiled in Sections 2.6.b.1–2.6.b.2 "
+            "with open items marked per row — these are mechanical/safety parts, not electronic components, and sit with the Manufacturer, PT "
             "Galaksi Megatama Indonesia. The gas sensor itself (MQ2) is sourced outside the LCSC supply chain, "
             "without a manufacturer/LCSC part reference; its Ex status is not yet verified.")
 sl_26b.paragraph_format.keep_together = True
@@ -889,10 +897,9 @@ status_line("Draft plan only — not yet executed, and not evidence of ExCB/labo
 doc.add_paragraph().paragraph_format.space_before = Pt(10)
 foot = doc.add_paragraph()
 r = foot.add_run(
-    "This is a working document, filled in against the internal working-draft template (IECEx ATEX "
-    "Certification Information Requirements_Rev18092026.docx) supplied for this purpose. It follows that "
-    "template's own section order rather than the more exhaustive item-by-item status tracking maintained in "
-    "Dokumen_Teknis_Sertifikasi_GLD_IECEx_ATEX — the two documents are maintained in parallel and should "
+    "This is a working document, filled in against the ExCB information-requirements checklist. It follows "
+    "the checklist's own section order rather than the more exhaustive item-by-item status tracking of the "
+    "technical documentation file GMI/GLD/IECEX-TDF/2026-001 — the two documents are maintained in parallel and should "
     "stay consistent; treat the exhaustive tracking document as authoritative for item-level status where "
     "they differ. Data sources: the official product technical datasheet (Revision 4.0), internal technical "
     "specification documentation, EMC parameter measurement data, EasyEDA/"

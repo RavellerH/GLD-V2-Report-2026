@@ -147,6 +147,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — ukuran tambahan tutup/base (dec:198)**: kedalaman base ≈45 mm, ulir dalam tutup ≈18,9 mm, kedalaman tutup ≈47,5 mm, OD O-ring ≈91,0 mm, leher dari bahu body ≈20,2 mm (Fig. 4-133…4-137); volume bebas indikatif ≈0,4 L. Cert doc rev **2.4** (152 hlm), narrative rev **1.7** (130 hlm).
 
+- 🆕 **7 Okt — sketsa teknis MS-01…MS-04 dari foto ukur (dec:199)**: potongan leher base, tutup, sambungan ulir, O-ring — ilustrasi, bukan gambar terkendali (`scripts/build_measured_sketches.py`). Cert doc rev **2.5** (155 hlm), narrative rev **1.8** (133 hlm).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

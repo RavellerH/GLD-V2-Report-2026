@@ -508,6 +508,29 @@ def ex_calc(d, h=None):
         ("Antenna bulkhead", "SMA 1/4″-36 UNS (standard)", "TBC", "Flame path through the wall must be assessed or "
          "a certified Ex d bushing used", "Bushing not certified", "Open — estimate"),
     ], widths=(1.05, 1.1, 0.9, 1.6, 1.4, 0.6), status_col=5, size=7.5)
+    _sub("e.3.13 Measured sketches of the cover-to-base joint (MS-01 to MS-04)")
+    _p("The four sketches below redraw the caliper and steel-rule measurements of Figures 4-127 to 4-137 as "
+       "dimensioned half-sections, so that the threaded flame path can be read in drawing form. They are "
+       "illustrations of measured values on one production unit, not controlled manufacturing drawings: features "
+       "that were not measured are drawn dashed, and the thread size is derived, not measured. They are to be "
+       "superseded by the enclosure manufacturer's toleranced drawing.", size=9.5)
+    from PIL import Image as _Img
+    sk = os.path.join(REPO, "scripts", "assets", "measured_sketches")
+    for fn, cap in [
+        ("MS-01_base_neck_half_section.png", "MS-01 — Base enclosure, threaded neck, half section."),
+        ("MS-02_cover_half_section.png", "MS-02 — Enclosure cover, internal thread and depth, half section."),
+        ("MS-03_threaded_joint_detail.png", "MS-03 — Cover-to-base threaded flameproof joint, assembled detail."),
+        ("MS-04_O-ring.png", "MS-04 — Cover-to-base O-ring."),
+    ]:
+        path = os.path.join(sk, fn)
+        w, hgt = _Img.open(path).size
+        width = min(6.2, 7.4 * w / hgt)
+        para = _doc.add_paragraph()
+        para.alignment = 1
+        para.paragraph_format.keep_with_next = True
+        para.add_run().add_picture(path, width=Inches(width))
+        cp = _p(cap, size=8.5, bold=True, color=NAVY, space_after=8)
+        cp.alignment = 1
 
 
 # ===================================================================================== 2.6.f temperature
@@ -707,7 +730,7 @@ def matrix(d, h=None):
         ("6.b", "Ex-critical BOM (EX-01…17, EL-01…13)", "2.6.b, 2.6.b.1–2", "Partial"),
         ("6.c", "Non-metallic materials (MAT register)", "2.6.c, 2.6.c.1", "Open — supplier datasheets"),
         ("6.d", "Manufacturing process (d.1–d.13)", "2.6.d, 2.6.d.1", "Partial — parameters TBC"),
-        ("6.e", "Ignition sources IS-01…17 and protection concept e.3", "2.6.e, 2.6.e.1–3", "Partial"),
+        ("6.e", "Ignition sources IS-01…17 and protection concept e.3 (incl. measured joint sketches MS-01…04)", "2.6.e, 2.6.e.1–3", "Partial"),
         ("6.f", "Temperature class f.1–f.12", "2.6.f, 2.6.f.1", "Partial — measurements outstanding"),
         ("6.g", "Usage and installation instructions g.1–g.20", "2.6.g, 2.6.g.1", "Draft available"),
         ("6.h", "Nameplate (gas only, −20…+60 °C)", "2.6.h, 2.6.h.1", "Proposed"),

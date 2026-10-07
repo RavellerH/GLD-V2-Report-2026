@@ -208,7 +208,7 @@ _H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "1.9"
+REVISION = "2.0"
 DOC_DATE = "7 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
@@ -368,8 +368,10 @@ for rev, rev_date, rev_desc in [
      "register (GLD2-0x1001) and fixtures; Annex compliance matrix."),
     ("1.8", "7 October 2026",
      "Section 2.4.2 added: photo set of the current production configuration (23 photographs, complete assembly sequence, Figures 4-101\u20134-123). Audit tables updated from the photographs: DC fan identified as CIXIKEJI CX5010B5H, 5 V 0.23 A (EX-05); prototype cable gland is a general-purpose polymer type to be replaced by a certified Ex d gland (EX-07, MAT-02, IS-13); blanking plug, grounding screw and BAT terminal located (EX-08, EX-12, EX-17); photo-coverage table 2.4.1 updated."),
-    (REVISION, DOC_DATE,
+    ("1.9", "7 October 2026",
      "Section 2.6.a.8: top/bottom renders of the GLD V4 main board and of the separate PCB cover (terminal board) added (Figure 8-11), with terminal designations and the changes from V3 (motherboard mounting holes to the PCB cover; separate PCB cover terminating the field connections)."),
+    (REVISION, DOC_DATE,
+     "Nameplate location added: flat top face of the base enclosure beside the antenna (Figure 4-124, Section 2.4.2; Section 2.6.h.1); photo-coverage table updated."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):

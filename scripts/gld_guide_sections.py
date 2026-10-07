@@ -158,8 +158,8 @@ def photos(d, h=None):
         ("1", "Overall external view — front, rear, left, right, top, bottom", "Available",
          "Current production unit: Figures 4-118 (front), 4-119…4-122 (sides), 4-123 (rear), 4-116 (closed, top); "
          "CAD views M-A2 and M-B1…M-B4."),
-        ("2", "Product identification / nameplate area", "Open",
-         "To be photographed once the nameplate position is fixed; caption to state that the marking is draft."),
+        ("2", "Product identification / nameplate area", "Available",
+         "Figure 4-124: flat top face of the base beside the antenna; marking draft, plate not yet fitted."),
         ("3", "Front sensing area (mesh, cover, fan behind it)", "Available",
          "Figure 4-115 (fan behind the mesh in the cover), 4-118 (mesh face); M-D4."),
         ("4", "Internal sensing section (8 MQ sensors, fan, chamber)", "Available",
@@ -585,6 +585,8 @@ def nameplate(d, h=None):
        "for gas atmospheres only; no dust marking (category D / Ex t) is proposed, and the ambient range is the rated "
        "−20 °C to +60 °C.", size=9.5)
     _table(["Field", "Proposed content", "Status"], [
+        ("Nameplate location", "Flat top face of the base enclosure beside the antenna (Figure 4-124); plate size "
+         "and fixing method (rivets/adhesive) TBC", "Final (location)"),
         ("Manufacturer", "PT Galaksi Megatama Indonesia, Bekasi, Indonesia", "Final"),
         ("Product / model", "Gas Leak Detector — GLD V2", "Final"),
         ("Serial number", "Per unit (sample: GLD2-0x1001)", "Final"),
@@ -657,7 +659,7 @@ def matrix(d, h=None):
         ("1.4", "Plant address and facilities", "1.4", "Partial — PCB assembler to add"),
         ("1.5", "ISO 9001", "1.5", "Open — audit planned Oct 2026"),
         ("2.1–2.3", "Product description, specification, technical parameters", "2.1–2.3", "Final"),
-        ("2.4", "Photo set (12 views)", "2.4, 2.4.1, 2.4.2", "Partial — 8/12 available, 3 partial (PCB underside, grounding lug, antenna bulkhead), 1 open (nameplate area)"),
+        ("2.4", "Photo set (12 views)", "2.4, 2.4.1, 2.4.2", "Partial — 9/12 available, 3 partial (PCB underside photo, grounding lug, antenna bulkhead)"),
         ("2.5", "Intended use and environment (IIC, T4, Zone 1, −20…+60 °C)", "2.5", "Final (proposed classification)"),
         ("6(a).1–6(a).6", "Assembly, section, enclosure, mesh, MQ arrangement, fan drawings", "2.6.a, 2.6.a.1",
          "Partial — controlled toleranced drawings to issue"),

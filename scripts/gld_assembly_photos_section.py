@@ -59,6 +59,9 @@ PHOTOS = [
      "Beacon entry (left), cable gland (right) and antenna."),
     ("IMG_14.38.01.jpg", "Assembled unit — rear view",
      "Rear face of the base with mounting lugs; antenna (top), beacon (left), cable gland (right)."),
+    ("Nameplate_position_beside_antenna.jpg", "Nameplate position",
+     "Flat top face of the base enclosure beside the antenna, between the antenna and the mounting lug — the "
+     "intended location of the nameplate (marking still draft; not yet fitted)."),
 ]
 
 

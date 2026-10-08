@@ -155,6 +155,9 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — audit ulang vs Panduan Revisi + perbaikan teks (dec:202)**: form aplikasi diterima/diisi, ISO 9001 in progress, 2.2 spek lengkap, 2.5 EPL Gb/gas-only, IP66 = target belum diuji, catatan internal dihapus, g.7/g-meta dibersihkan. Cert doc rev **2.8** (166 hlm), narrative rev **2.1** (141 hlm). Sisa = butuh data/gambar/uji dari user/PT Galaksi.
 
+- 🆕 **8 Okt — MoM koordinasi persiapan pemasangan 2 Okt diterima** (dec:204): titik final lewat survei teknis + pemetaan LoRa; GW di control room; kontrak jasa/material RU IV ±1–2 minggu rekomendasi s/d ±2 bulan ke pelaksanaan. Penilaian: cukup sbg dasar persiapan, **belum cukup utk mobilisasi** (surat jalan, tanda terima perangkat, izin alat kerja, rencana survei LoRa, daftar jenis gas belum ada); jumlah CH tidak konsisten antar-dokumen (MoM 6 / Daftar Perangkat 2 / layout Pertamina 3).
+- 🆕 **8 Okt — cable entry daya GLD** (dec:205): antena dipindah ke atas; kabel 24 VDC masuk lewat lubang samping base (bekas antena), **M20×1,5-6H terkonfirmasi gambar pabrik BP18-1Z** (ulir tutup M95×1,5-6g). Lubang samping kedua wajib stopping plug Ex d; gland polimer prototipe wajib diganti gland Ex d. Gambar CAD v2 belum diupdate; belum diterapkan ke dokumen.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

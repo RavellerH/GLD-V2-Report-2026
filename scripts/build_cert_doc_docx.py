@@ -209,8 +209,8 @@ _H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "2.8"
-DOC_DATE = "7 October 2026"
+REVISION = "2.9"
+DOC_DATE = "8 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -387,8 +387,10 @@ for rev, rev_date, rev_desc in [
      "Proposed nameplate artwork MS-05 (Section 2.6.h.1: 80 \u00d7 55 mm stainless plate proposal, gas-only marking II 2G Ex db IIC T4 Gb, \u221220 \u00b0C \u2264 Ta \u2264 +60 \u00b0C, IP66, 24 VDC 8 W) and terminal block / field wiring diagram MS-06 (Section 2.6.g.1: RS485, FAN, ALARM, BAT, 24V and PE, BAT flagged as decision required) added. Both are drafts, not controlled drawings."),
     ("2.7", "7 October 2026",
      "Navigation: all numbered subsections (d.1\u2013d.13, e.3.1\u2013e.3.13, f.1\u2013f.12, g.2\u2013g.20, EX/EL BOM, drawing groups A\u2013F, schematic/layout subsections, photo groups) promoted to headings; Table of Contents extended to five levels; new List of Drawings, Schematic Sheets, Sketches and Photographs with page numbers; PDF bookmarks down to individual drawings and photographs. Photo-coverage table 2.4.1 now precedes photo set 2.4.2. No technical content changed."),
-    (REVISION, DOC_DATE,
+    ("2.8", "7 October 2026",
      "Audit against the reviewer's revision guide (text corrections, no new test data): application form recorded as received and completed; ISO 9001 in progress (audit Oct 2026); certification contact named; product description completed with the gas path and alarm chain; specification list 2.2 extended to the full guide list; operating-modes table added to 2.3; MQ sensor described behind its own protective mesh; RF power 0\u201322 dBm with IS-08 RF-threshold check; AC/DC adapter marked outside the equipment boundary; IP66 marked as target pending test; supplier-listing and internal remarks removed; 2.5 completed with Group II/2G/EPL Gb, humidity, gas-only scope and installation conditions; status boxes of 2.6.c\u20132.6.i aligned with their content; two safety warnings added to 2.6.g.a; grounding requirements of g.7 rewritten in English; draft-review remarks removed from g.6\u2013g.14; f.11 references aligned with f.3; nameplate gains the ATEX specific marking and full manufacturer address; battery item in 3.2 made conditional; compliance-matrix statuses corrected."),
+    (REVISION, DOC_DATE,
+     "Antenna row of 2.3.b: confirmed that the certified configuration (sample GLD2-0x1001) has no internal 2.4 GHz antenna; superseded remark removed."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -867,7 +869,7 @@ make_table(
          "22 dBm (\u2248158 mW) is the module maximum; with the 3 dBi antenna the radiated power stays well below the RF ignition threshold of IEC 60079-0 for Group IIC (see IS-08)."],
         ["Bandwidth / spreading factor / coding rate", "125 kHz / SF7 / CR 4/5", ("__status__", ("Final", "ok")), "Source: EMC parameter table and official product technical datasheet."],
         ["Antenna", "External, omnidirectional, SMA male connector, 3 dBi gain", ("__status__", ("Final", "ok")),
-         "On some units, the 2.4 GHz Wi-Fi antenna remains inside the enclosure and must be relocated externally."],
+         "Single external LoRa antenna; no internal 2.4 GHz antenna in the certified configuration (sample GLD2-0x1001)."],
         ["Data transmission interval", "Configurable, default 10 seconds", ("__status__", ("Final", "ok")),
          "Alarm events are transmitted immediately, independent of the periodic interval."],
         ["Other interfaces", "SPI, LoRa", ("__status__", ("Final", "ok")),

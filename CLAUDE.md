@@ -156,6 +156,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - 🆕 **7 Okt — audit ulang vs Panduan Revisi + perbaikan teks (dec:202)**: form aplikasi diterima/diisi, ISO 9001 in progress, 2.2 spek lengkap, 2.5 EPL Gb/gas-only, IP66 = target belum diuji, catatan internal dihapus, g.7/g-meta dibersihkan. Cert doc rev **2.8** (166 hlm), narrative rev **2.1** (141 hlm). Sisa = butuh data/gambar/uji dari user/PT Galaksi.
 
 - 🆕 **9 Okt — dokumen instalasi Cilacap disinkronkan ke block diagram final 8 Okt** (dec:207): Spesifikasi Material rev **1.6** (Gateway 5 VDC via adaptor dari UPS, router LGU, PSU di JB SS316 per GLD + kabel 16 AWG, Gambar 2.1 block diagram) & Daftar Perangkat rev **1.3** → `Paket Pertamina/10_Update_Instalasi_RU-IV_9Oktober2026/`. Masih terbuka: konfirmasi HSE non-ATEX, penyedia adaptor, mast antena GW, jumlah titik final (2 GLD/3 CH vs basis 3/6). Belum dikirim.
+- 🆕 **9 Okt — `Laporan_Progres_Instalasi_GLD_RU-IV_Cilacap_9Oktober2026.{docx,pdf}` dibuat** (dec:208, 5 hlm): laporan progres pekerjaan Cilacap (kronologi, desain lingkup final, status per pihak, butir konfirmasi, langkah berikutnya) — dokumen utama paket 10.
 
 ## 4. Deliverable utama (`Deliverables/`)
 

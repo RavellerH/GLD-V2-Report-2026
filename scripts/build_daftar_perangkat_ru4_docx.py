@@ -19,8 +19,8 @@ from build_persiapan_instalasi_corporate_docx import (
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Daftar_Perangkat_dan_Kebutuhan_Pemasangan_GLD_RU-IV_Cilacap.docx")
 DOC_NO = "LGU/GLD/INSTALASI-PERANGKAT/2026-001"
-REVISION = "1.2"
-DOC_DATE = "2 Oktober 2026"
+REVISION = "1.3"
+DOC_DATE = "9 Oktober 2026"
 
 doc, sec = make_doc()
 
@@ -185,15 +185,16 @@ table(["Perangkat", "Jumlah", "Spesifikasi utama", "Penempatan"], [
      "CH besar: enclosure aluminium silinder ± Ø76 × 104 mm (+ konektor ± 15 mm)\nAntena 3 dBi (star) dan 8 dBi (mesh)",
      "Outdoor, area aman, terpapar sinar matahari"],
     ["Gateway", "1 unit",
-     "Jembatan LoRa mesh ke MQTT (ESP32-S3)\n5 V via adaptor; maks 0,73 W\nEnclosure metal (dimensi dikonfirmasi tim LGU)\n"
-     "Antena omni 8 dBi; uplink Wi-Fi ke PC server",
+     "Jembatan LoRa mesh ke MQTT (ESP32-S3)\n5 VDC via adaptor, dicatu dari UPS; maks 0,73 W\nEnclosure metal (dimensi dikonfirmasi tim LGU)\n"
+     "Antena omni 8 dBi; uplink Wi-Fi 2,4 GHz ke router LGU",
      "Unit di dalam ruangan (safe area); antena di luar/atap"],
     ["PC server site", "1 unit",
      "Minimum 4 vCore, RAM 8 GB, SSD 100 GB (disarankan 8 vCore/16 GB/250 GB)\nUbuntu Server 22.04 LTS, Docker\n"
      "NIC Gigabit; NIC kedua bila dashboard diakses dari intranet kantor",
      "Ruangan dekat Gateway"],
-    ["Router jaringan field", "1 unit", "Jaringan lokal Gateway ↔ PC server (independen dari jaringan kilang)",
-     "Bersama PC server"],
+    ["Router Wi-Fi 2,4 GHz", "1 unit", "Jaringan lokal Gateway ↔ PC server tanpa internet (independen dari jaringan kilang)\n"
+     "Gateway → router Wi-Fi 2,4 GHz; router → PC server LAN Cat6; adaptor dicatu dari UPS",
+     "Satu ruangan dengan Gateway"],
     ["Gas test chamber portable", "1 set",
      "Chamber akrilik dengan pompa, solenoid valve, sensor pembanding; untuk pengambilan dataset dan "
      "pelatihan model AI di lokasi", "Kantor kilang (non-area proses)"],
@@ -206,7 +207,8 @@ doc.add_heading("3. Yang Perlu Disiapkan di Lokasi (Pertamina RU IV & Vendor Ins
 table(["Perangkat", "Kebutuhan di lokasi", "Pihak"], [
     ["GLD (per titik)",
      "Titik catu daya 24 VDC ≥1 A per unit, termasuk kabel, PSU/adaptor AC-DC, proteksi & titik isolasi (LOTO)\n"
-     "Struktur pemasangan: pipa/handrail 2\" (DN50, OD 60,3 mm) di titik pasang\n"
+     "Junction box SS316 berisi PSU 220 VAC→24 VDC dari local receptacle; kabel 24 VDC 2C 16 AWG\n"
+     "Struktur pemasangan: stanchion/tiang 2\" HDG (DN50, OD 60,3 mm) di titik pasang\n"
      "Jalur kabel dari sumber daya ke titik pasang\nAkses kerja dan clearance di depan inlet gas sensor",
      "Pertamina RU IV"],
     ["Bracket GLD",
@@ -218,10 +220,10 @@ table(["Perangkat", "Kebutuhan di lokasi", "Pihak"], [
      "dudukan unit CH, bracket 2 panel surya (diklem ke tiang), dan antena di puncak tiang — konfigurasi "
      "seperti Gambar 1", "Pertamina RU IV & vendor"],
     ["Gateway",
-     "Ruang indoor di area aman + stopkontak untuk adaptor 5 V\nTitik antena di luar/atap dengan jalur kabel "
-     "antena ke unit", "Pertamina RU IV"],
+     "Ruang indoor di area aman + mounting support Gateway\nUPS yang mencatu adaptor 5 VDC Gateway, adaptor router, dan PC server\n"
+     "Titik antena di luar/atap dengan jalur kabel antena ke unit", "Pertamina RU IV"],
     ["PC server",
-     "Unit PC fisik sesuai spesifikasi minimum (bagian 2), ditempatkan dekat Gateway, dengan catu daya\n"
+     "Unit PC fisik sesuai spesifikasi minimum (bagian 2), ditempatkan dekat Gateway, dicatu dari UPS\n"
      "Akses ke intranet kantor melalui NIC kedua bila dashboard ingin dibuka dari kantor", "Pertamina RU IV"],
     ["Gas test chamber", "Ruang/meja di kantor kilang (non-area proses) + stopkontak listrik", "Pertamina RU IV"],
     ["Umum",

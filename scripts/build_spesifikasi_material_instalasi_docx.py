@@ -28,8 +28,10 @@ OUT = os.path.join(REPO, "Deliverables",
                    "Spesifikasi_Material_Instalasi_GLD_RU-IV_Cilacap.docx")
 
 DOC_NO = "LGU/GLD/INSTALASI-SPEK/2026-001"
-REV = "1.5"
-DATE = "2 Oktober 2026"
+REV = "1.6"
+DATE = "9 Oktober 2026"
+BLOCK_DIAGRAM = os.path.join(REPO, "Sumber Dokumen", "Pertamina RU IV 8Okt2026",
+                             "block_diagram_scope_final_router_LGU_8Okt2026.png")
 HEADER = "Spesifikasi Material Instalasi GLD — RU IV Cilacap"
 
 # Asumsi perencanaan (diganti begitu data lapangan tersedia)
@@ -167,7 +169,8 @@ def build():
     # document control
     rows = [
         ("Nomor dokumen", DOC_NO), ("Revisi", REV), ("Tanggal", DATE),
-        ("Status", "Draf kerja — bahan rapat koordinasi 2 Oktober 2026, bukan dokumen pengadaan final"),
+        ("Status", "Draf kerja — diperbarui mengikuti block diagram lingkup RU IV final 8 Oktober 2026 "
+                   "(rev 1.5 = bahan rapat 2 Oktober), bukan dokumen pengadaan final"),
         ("Disiapkan oleh", "PT LAPI Ganesha Utama, bersama Lab IoT & Fisika Institut Teknologi Bandung"),
         ("Ditujukan kepada", "PT Pertamina Patra Niaga — RU IV Cilacap (pelaksana instalasi, termasuk kontraktor yang ditunjuk RU IV)"),
     ]
@@ -240,13 +243,31 @@ def build():
     table(doc, ["Perangkat", "Jumlah", "Sumber daya", "Penempatan"], [
         ["GLD (Node Sensor)", f"{N_GLD} unit", "24 VDC melalui kabel", "Titik deteksi di area aman perimeter SRU"],
         ["Cluster Head (CH)", f">5 tersedia (rencana {N_CH})", "Panel surya (2 panel) + baterai, tanpa kabel", "Di antara GLD dan Gateway, membentuk jaringan LoRa mesh"],
-        ["Gateway (GW)", f"{N_GW} unit", "220 VAC via adaptor (rating dari tim LGU, lihat §5)", "Di dalam ruangan, dekat ruang server lokal; antena di luar pada mast tinggi"],
-        ["PC server", "1 unit", "220 VAC", "Ruang server lokal; disediakan Pertamina, dikonfigurasi LGU"],
-        ["Router lapangan", "1 unit", "220 VAC", "Satu ruangan dengan Gateway; disediakan LGU"],
+        ["Gateway (GW)", f"{N_GW} unit", "5 VDC via adaptor, dicatu dari UPS (maks. 0,73 W)", "Di dalam gedung, dekat server; mounting support oleh Pertamina; antena di luar pada mast tinggi"],
+        ["PC server", "1 unit", "220 VAC dari UPS", "Ruang server lokal; disediakan Pertamina, dikonfigurasi LGU"],
+        ["Router Wi-Fi 2,4 GHz", "1 unit", "Adaptor, dicatu dari UPS", "Satu ruangan dengan Gateway; disediakan LGU"],
     ], [1.4, 1.35, 1.95, 2.2])
     para(doc, "Alur data: GLD → (LoRa) → CH → (LoRa mesh) → antena Gateway di mast → (kabel koaksial) → Gateway "
          "di dalam ruangan → (Wi-Fi) → router LGU → (kabel Cat6) → PC server (MQTT broker + dashboard). PC server juga tersambung ke intranet kantor kilang lewat port LAN "
          "kedua agar dashboard dapat diakses dari kantor.", size=9.6)
+    pb = doc.add_paragraph()
+    pb.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    pb.paragraph_format.keep_with_next = True
+    pb.add_run().add_picture(BLOCK_DIAGRAM, width=Inches(6.9))
+    para(doc, "Gambar 2.1 Block diagram lingkup kerja RU IV versi final 8 Oktober 2026 (dari Pertamina RU IV, "
+              "dilengkapi router Wi-Fi LGU). Biru = disuplai LGU; kuning = disuplai Pertamina (instalasi, mounting "
+              "support, infrastruktur).", size=8.8, color=GRAY, italic=True)
+    para(doc, "Perubahan dibanding block diagram 2 Oktober yang sudah tercermin di dokumen ini:", bold=True,
+         color=NAVY, after=3, size=9.8)
+    table(doc, ["Butir", "Block diagram 2 Oktober", "Block diagram final 8 Oktober"], [
+        ["Hubungan GLD → CH", "Digambar sebagai kabel", "LoRa (wireless)"],
+        ["Jumlah Gateway di gedung", "Dua kotak Gateway", "Satu unit Gateway"],
+        ["Daya Gateway", "Tidak digambar", "5 VDC lewat adaptor, dicatu dari UPS"],
+        ["Gateway → server", "Kabel langsung", "Gateway → Wi-Fi 2,4 GHz → router LGU → LAN Cat6 lokal (tanpa internet) → server"],
+        ["Router", "Tidak ada", "Router Wi-Fi 2,4 GHz disuplai LGU, adaptor dari UPS"],
+        ["Cable entry GLD", "Tidak disebut", "Gland M20 × 1,5"],
+        ["Label area Field", "\"CL.I DV.I\"", "Label dihapus — perlu konfirmasi tertulis HSE bahwa lokasi non-ATEX (§8)"],
+    ], [1.6, 2.2, 3.1])
 
     # 3. tiang
     heading(doc, "3. Spesifikasi tiang besi (ditanam & dicor)")
@@ -355,11 +376,18 @@ def build():
                                                                                "tidak disambung berantai"],
     ], [1.0, 2.95, 2.95])
 
+    para(doc, "Block diagram final RU IV memakai **Opsi A**: PSU 220 VAC→24 VDC di dalam **junction box SS316** "
+         "per titik GLD, dicatu dari local receptacle terdekat, dengan kabel daya **24 VDC 2C 16 AWG** "
+         "(± 1,3 mm²) ke GLD — semuanya lingkup Pertamina. Kabel 16 AWG cukup untuk rute ≤ ± 45 m pada "
+         "kapasitas desain 1 A (≤ ± 135 m pada konsumsi aktual 0,33 A); rute lebih panjang memakai ukuran "
+         "kabel lebih besar sesuai Tabel 4.2.", size=9.6)
+
     heading(doc, "4.2 Ukuran kabel vs panjang maksimum", level=2)
     para(doc, "Panjang maksimum satu arah (PSU → GLD) agar drop tegangan ≤ 5 % (1,2 V dari 24 V). "
          "Kabel tembaga 2 inti, resistansi pada 20 °C; dihitung untuk kapasitas desain 1 A dan untuk konsumsi aktual 0,33 A.",
          size=9.6)
     table(doc, ["Luas penampang", "Resistansi (Ω/km)", "Maks. @ 1 A (desain)", "Maks. @ 0,33 A (aktual)"], [
+        ["2 × 16 AWG (± 1,3 mm²)", "13,2", "45 m", "135 m"],
         ["2 × 1,5 mm²", "12,1", "50 m", "150 m"],
         ["2 × 2,5 mm²", "7,41", "80 m", "245 m"],
         ["2 × 4 mm²", "4,61", "130 m", "390 m"],
@@ -394,9 +422,10 @@ def build():
 
     # 5. jaringan & server
     heading(doc, "5. Gateway, PC server & jaringan")
-    para(doc, "Tata letak: ruang Gateway (Gateway + router LGU) bersebelahan/dekat dengan ruang server lokal "
-         "(PC server). Gateway tersambung ke router lewat Wi-Fi, sehingga keduanya sebaiknya satu ruangan; "
-         "router ke PC server memakai kabel Cat6.", size=9.6)
+    para(doc, "Tata letak sesuai block diagram final 8 Oktober: Gateway dan router Wi-Fi LGU berada di dalam gedung, "
+         "dekat ruang server lokal (PC server). Gateway tersambung ke router lewat Wi-Fi 2,4 GHz, sehingga keduanya "
+         "sebaiknya satu ruangan; router ke PC server memakai kabel LAN Cat6 lokal tanpa internet. UPS (lingkup "
+         "Pertamina) mencatu ketiganya: server langsung 220 VAC, Gateway dan router masing-masing lewat adaptor.", size=9.6)
     heading(doc, "5.1 Ruang Gateway & ruang server", level=2)
     table(doc, ["Item", "Spesifikasi", "Penyedia", "Status"], [
         ["PC server", "PC fisik, 2 port LAN (NIC kedua bisa USB-LAN), di ruang server lokal. "
@@ -406,9 +435,14 @@ def build():
         ["Kabel router ↔ PC server", "Cat6 sesuai jarak antar-ruang (maks. 90 m per segmen), lewat jalur kabel/conduit gedung", "RU IV", "KONFIRMASI"],
         ["Kabel PC ↔ intranet kantor", "Cat6 ke titik jaringan kantor terdekat; panjang mengikuti lokasi (> 90 m → switch/fiber). "
                                        "Akses hanya untuk API/dashboard", "Pertamina (IT RU IV)", "KONFIRMASI"],
-        ["Daya Gateway", "Adaptor 220 VAC dari stop kontak ruang Gateway; tegangan & rating adaptor dikonfirmasi tim LGU", "LGU", "KONFIRMASI"],
-        ["Stop kontak 220 VAC", "Ruang Gateway: min. 2 (Gateway, router). Ruang server: min. 3 (PC, monitor, cadangan)", "RU IV", "USULAN"],
-        ["UPS", "Disarankan ≥ 1 kVA untuk PC + router + Gateway agar alarm tetap tercatat saat listrik padam", "Pertamina", "USULAN"],
+        ["Mounting Gateway", "Dudukan/rak di dalam ruangan (mounting support Gateway lingkup Pertamina)", "Pertamina", "FINAL"],
+        ["Daya Gateway", "5 VDC lewat adaptor (beban maks. 0,73 W), adaptor dicatu dari UPS", "—", "FINAL"],
+        ["Daya router", "Adaptor bawaan router, dicatu dari UPS", "—", "FINAL"],
+        ["Penyedia adaptor", "Usulan: adaptor 5 VDC Gateway dan adaptor router disertakan LGU bersama unitnya", "LGU", "KONFIRMASI"],
+        ["UPS", "Mencatu server (220 VAC), Gateway & router (via adaptor) agar alarm tetap tercatat saat listrik padam", "Pertamina", "FINAL"],
+        ["Kapasitas & outlet UPS", "Disarankan ≥ 1 kVA; outlet min. 4 (PC, monitor, adaptor Gateway, adaptor router). "
+                                   "Bila Gateway & router di ruang berbeda dari UPS, perlu jalur 220 VAC ber-UPS ke ruang tersebut",
+         "Pertamina", "USULAN"],
     ], [1.45, 3.2, 1.25, 1.0], status_col=3)
 
     heading(doc, "5.2 Skema jaringan lokal", level=2)
@@ -418,11 +452,13 @@ def build():
         ["PC server → intranet kantor (LAN 2)", "Port LAN kedua ke titik jaringan kantor; hanya untuk akses dashboard/API dari kantor. "
                                                 "PC tidak meneruskan (routing) lalu lintas antara jaringan GLD dan intranet", "FINAL"],
         ["Internet", "Tidak ada. Router tanpa WAN/SIM; seluruh sistem berjalan lokal", "FINAL"],
-        ["Spesifikasi minimum router", "Wi-Fi 2,4 GHz 802.11n, ≥ 1 port LAN gigabit, catu 220 VAC; disediakan & dikonfigurasi LGU", "FINAL"],
+        ["Spesifikasi minimum router", "Wi-Fi 2,4 GHz 802.11n, ≥ 1 port LAN gigabit, catu lewat adaptor dari UPS; disediakan & dikonfigurasi LGU", "FINAL"],
         ["Panjang Cat6 router ↔ PC", "Mengikuti jarak rute antar-ruang (≤ 90 m per segmen); diukur saat survey ruangan", "KONFIRMASI"],
     ], [1.85, 4.05, 1.0], status_col=2)
 
     heading(doc, "5.3 Kabel koaksial antena Gateway", level=2)
+    para(doc, "Catatan: block diagram final 8 Oktober belum menggambar mast antena Gateway dan kabel koaksialnya. "
+         "Usulan LGU di bawah tetap berlaku sampai dikonfirmasi RU IV (§8 no. 7).", size=9.2, color=GRAY, italic=True)
     table(doc, ["Parameter", "Spesifikasi", "Status"], [
         ["Jenis kabel", "Koaksial 50 Ω low-loss, LMR-400 atau setara (tahan UV untuk bagian luar)", "USULAN"],
         ["Panjang", "Sependek mungkin; target ≤ 15 m dari antena ke Gateway. Rumus: rute aktual × 1,10 + 1 m", "USULAN"],
@@ -479,20 +515,21 @@ def build():
         ["6", "U-bolt 2\" M10 + mur/ring", "Lihat §6 (GLD saja)", f"{2*n_pole} U-bolt, {4*n_pole} set mur", "RU IV"],
         ["7", "Pelat mounting 250×250 mm", "Sesuai gambar LGU", f"{n_pole} buah", "RU IV"],
         ["8", "Bracket panel surya CH", "Bracket baja 2 panel, klem ke tiang 2\" (Gambar 3.1)", f"{N_CH} set", "LGU"],
-        ["9", "PSU 24 VDC", "Opsi A: 3 × (≥1 A) · Opsi B: 1 × (≥5 A)", "3 atau 1 unit", "RU IV"],
-        ["10", "Box/panel PSU + MCB + terminal", "Untuk area aman", "3 atau 1 set", "RU IV"],
-        ["11", "Kabel daya 2 inti", "Ukuran & panjang per §4", "Σ per §4.4", "RU IV"],
+        ["9", "PSU 220 VAC → 24 VDC", "Opsi A (block diagram): ≥ 1 A per GLD, di junction box", f"{N_GLD} unit", "RU IV"],
+        ["10", "Junction box SS316 + MCB + terminal", "Untuk PSU per titik GLD (Opsi A, sesuai block diagram)", f"{N_GLD} set", "RU IV"],
+        ["11", "Kabel daya 24 VDC 2C", "16 AWG (block diagram) untuk rute ≤ 45 m; lebih panjang per Tabel 4.2", "Σ per §4.4", "RU IV"],
         ["12", "Kabel koaksial LMR-400 + konektor N", "Antena GW → Gateway, ≤ 15 m (§5.3)", "1 jalur", "RU IV"],
         ["13", "Penangkal petir koaksial", "50 Ω, 900 MHz, konektor N (§5.3)", "1 buah", "RU IV"],
         ["14", "Kabel grounding + klem", "Mengikuti standar RU IV (tiang, mast, penangkal petir)", f"{n_all} titik + 1", "RU IV"],
-        ["15", "PC server + UPS", "Lihat §5.1", "1 set", "Pertamina"],
+        ["15", "PC server + UPS", "Lihat §5.1 (UPS juga mencatu Gateway & router)", "1 set", "Pertamina"],
         ["16", "Kabel Cat6", "Router ↔ PC server, PC ↔ intranet kantor", "2 jalur", "RU IV / IT RU IV"],
-        ["17", "Router lapangan", "Lihat §5.2", "1 unit", "LGU"],
-        ["18", "Unit GLD, CH, Gateway + antena, panel surya CH", "Perangkat sistem", f"{N_GLD} / {N_CH} / {N_GW}", "LGU"],
+        ["17", "Router Wi-Fi 2,4 GHz + adaptor", "Lihat §5.2", "1 unit", "LGU"],
+        ["18", "Adaptor 5 VDC Gateway", "Lihat §5.1 (penyedia dikonfirmasi)", "1 unit", "LGU (usulan)"],
+        ["19", "Unit GLD, CH, Gateway + antena, panel surya CH", "Perangkat sistem", f"{N_GLD} / {N_CH} / {N_GW}", "LGU"],
     ], [0.4, 1.85, 2.5, 1.15, 1.0])
 
     # 8. pertanyaan rapat
-    heading(doc, "8. Yang perlu diputuskan di rapat 2 Oktober")
+    heading(doc, "8. Yang masih perlu dikonfirmasi RU IV")
     table(doc, ["No", "Pertanyaan untuk RU IV", "Dampak bila belum dijawab"], [
         ["1", "Titik/koordinat final 3 GLD di perimeter SRU, dan jarak rute ke sumber 220 VAC terdekat", "Panjang & ukuran kabel tidak bisa dipesan"],
         ["2", "Pilih Opsi A (PSU per titik) atau Opsi B (PSU pusat)", "Jumlah PSU & ukuran kabel"],
@@ -502,6 +539,11 @@ def build():
         ["6", "Ruang Gateway & ruang server lokal: lokasi, jarak antar-ruang, 220 VAC, UPS, titik intranet kantor", "Panjang Cat6 & penempatan router"],
         ["7", "Lokasi mast antena Gateway (berdiri sendiri vs di dinding/atap) & jarak rute koaksial ke ruang Gateway", "Panjang & tipe kabel koaksial"],
         ["8", "Tim/kontraktor pelaksana RU IV & jadwal fabrikasi/pemasangan", "Jadwal instalasi"],
+        ["9", "Konfirmasi tertulis HSE bahwa titik Field non-ATEX (label \"CL.I DV.I\" dihapus dari block diagram 8 Oktober)",
+         "Instalasi permanen hanya boleh di lokasi non-ATEX"],
+        ["10", "Penyedia adaptor 5 VDC Gateway & adaptor router (usulan: LGU), dan letak UPS terhadap ruang Gateway", "Item 18 BoQ & jalur 220 VAC ber-UPS"],
+        ["11", f"Jumlah titik final: layout RU IV 2 Oktober = 2 GLD, 3 CH, 1 Gateway, 2 junction box; dokumen ini masih memakai "
+               f"basis perencanaan {N_GLD} GLD + {N_CH} CH", "Qty BoQ (tiang, pondasi, PSU, kabel)"],
     ], [0.4, 4.0, 2.5])
 
     heading(doc, "9. Batasan dokumen")

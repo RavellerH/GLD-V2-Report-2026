@@ -155,6 +155,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **7 Okt — audit ulang vs Panduan Revisi + perbaikan teks (dec:202)**: form aplikasi diterima/diisi, ISO 9001 in progress, 2.2 spek lengkap, 2.5 EPL Gb/gas-only, IP66 = target belum diuji, catatan internal dihapus, g.7/g-meta dibersihkan. Cert doc rev **2.8** (166 hlm), narrative rev **2.1** (141 hlm). Sisa = butuh data/gambar/uji dari user/PT Galaksi.
 
+- 🆕 **9 Okt — gambar GLD antena-samping di-hide dari dokumen sertifikasi (dec:207)**: foto prototipe lama, CAD v2 (M-A), CAD v3 (M-B), M-E7/E9; saklar `scripts/gld_hide_flags.py`. Cert doc rev **3.0** (156 hlm), narrative rev **2.2** (130 hlm).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

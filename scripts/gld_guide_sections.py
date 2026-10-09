@@ -208,7 +208,7 @@ def photos(d, h=None):
     rows = [
         ("1", "Overall external view — front, rear, left, right, top, bottom", "Available",
          "Current production unit: Figures 4-118 (front), 4-119…4-122 (sides), 4-123 (rear), 4-116 (closed, top); "
-         "CAD views M-A2 and M-B1…M-B4."),
+         "CAD views D8/D9 (M-D8, M-D9)."),
         ("2", "Product identification / nameplate area", "Available",
          "Figure 4-124: flat top face of the base beside the antenna; marking draft, plate not yet fitted."),
         ("3", "Front sensing area (mesh, cover, fan behind it)", "Available",
@@ -243,14 +243,14 @@ def bom(d, h=None):
        "the revision guide. The electronic BOM above remains the full component list; this table is the Ex-critical "
        "subset and is controlled by part number or drawing number.", size=9.5)
     ex = [
-        ("EX-01", "Main enclosure body", "PT Galaksi Megatama Indonesia", "GLD ATEX CASE v3 / common base (M-B7, M-D7)",
+        ("EX-01", "Main enclosure body", "PT Galaksi Megatama Indonesia", "Common base (M-D7); controlled enclosure drawing TBC",
          "ADC12 die-cast aluminium alloy; threaded-neck wall 10.50 mm at the root / 5.80 mm at the top, bore ≈Ø84.7 mm (caliper, Figures 4-128–4-131); body wall thickness elsewhere and surface treatment TBC", "Flameproof enclosure (Ex d, proposed)",
-         "Drawings M-B7, M-D7", "Open"),
+         "Drawing M-D7; Figures 4-128–4-137", "Open"),
         ("EX-02", "Enclosure cover (threaded)", "PT Galaksi Megatama Indonesia", "TBC",
          "Aluminium alloy; internal thread length ≈18.9 mm, internal depth to the mesh ≈47.5 mm (Figures 4-135, 4-137); "
          "mating base-neck thread height ≈14.8 mm with ≈10 threads (caliper, Figure 4-130); "
          "thread size indicatively ≈M96 × 1.5 (derived from bore Ø84.7 mm + 2 × 5.80 mm wall and thread count) — "
-         "to be confirmed on drawing", "Flameproof joint", "Figures 4-127–4-137; assembly M-E9", "Open — measured/estimate"),
+         "to be confirmed on drawing", "Flameproof joint", "Figures 4-127–4-137; MS-01–MS-03", "Open — measured/estimate"),
         ("EX-03", "Front stainless-steel wire-mesh plate + locking bracket", "TBC", "TBC (M-D4, M-E1)",
          "Stainless steel; grade, mesh/pore size, thickness, layers TBC", "Gas inlet; flame-path element if certified",
          "Photograph, assembly illustration", "Open"),
@@ -280,8 +280,8 @@ def bom(d, h=None):
          "current TBC", "Local alarm; separate penetration", "M-D5", "Open"),
         ("EX-12", "Grounding stud", "TBC", "TBC", "External stud with PE symbol; size and material TBC",
          "Protective earth / bonding", "M-D15; Figures 4-116, 4-120", "Open"),
-        ("EX-13", "Mounting fasteners", "TBC", "U-bolt mounting plate (M-A1)", "U-bolt 2″/DN50, M10 thread; plate "
-         "250 × 250 mm; fastener grade TBC", "Mechanical retention", "Drawing M-A1", "Partial"),
+        ("EX-13", "Mounting fasteners", "TBC", "U-bolt mounting plate", "U-bolt 2″/DN50, M10 thread; plate "
+         "250 × 250 mm; fastener grade TBC", "Mechanical retention", "Plate drawing to be reissued", "Partial"),
         ("EX-14", "Internal insulating parts (PCB cover / terminal module)", "TBC", "M-D10, M-D11; Figure 8-11",
          "Material, flammability, CTI TBC", "Insulation of terminals", "CAD render", "Open"),
         ("EX-15", "PCB substrate", "TBC (PCB fabricator)", "Main board Ø84 mm (2.6.a.8)",
@@ -371,7 +371,7 @@ def materials(d, h=None):
         ("MAT-09", "Enclosure powder coating", "Powder coating ≤0.2 mm (BP18-1Z reference)", "Casing supply chain",
          "Charge transfer <10 nC; surface capacitance <5 pF", "Supplier drawing", "Partial"),
         ("MAT-10", "Transparent window (GLD ATEX CASE v3)", "Glass; type TBC", "TBC", "Impact and thermal-shock "
-         "tests for Ex d windows; temp. rating", "Drawing M-B7", "Open"),
+         "tests for Ex d windows; temp. rating", "Enclosure drawing TBC", "Open"),
         ("MAT-11", "Alarm beacon lens / dome", "TBC", "TBC", "UV, impact, electrostatic, flame rating", "Datasheet",
          "Open"),
     ]
@@ -403,7 +403,7 @@ def manufacturing(d, h=None):
          "fastening torque and any adhesive: TBC."),
         ("d.4 DC fan installation",
          "The DC fan is attached to the enclosure cover behind the stainless-steel mesh plate and its cable connected "
-         "to J3 (M-E9). Airflow direction, screw type, torque, clearance to the mesh and connector locking are to be "
+         "to J3 (Figure 4-109). Airflow direction, screw type, torque, clearance to the mesh and connector locking are to be "
          "defined on the assembly drawing (TBC)."),
         ("d.5 MQ sensor array installation",
          "Eight MQ sensors (MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135) are mounted on the sensor modules "

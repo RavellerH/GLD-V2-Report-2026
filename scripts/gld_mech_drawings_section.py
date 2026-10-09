@@ -299,6 +299,9 @@ def _figure(fid, fn, title, desc, max_w, max_h):
         r2.font.color.rgb = GRAY
 
 
+import gld_hide_flags as _hide  # noqa: E402
+
+
 def render(d, h1=None, content_w=6.2, num="2.6.a.1"):
     """Append the complete mechanical drawing set to document d."""
     global doc
@@ -320,6 +323,7 @@ def render(d, h1=None, content_w=6.2, num="2.6.a.1"):
             rows.append((fid, title, typ, g))
     rows.insert(1, ("M-A2", "ATEX CASING v2 — six orthographic CAD views (front, rear, left, right, top, bottom)",
                     "CAD render", "A"))
+    rows = [(r[0], r[1], ("Withheld in this issue" if _hide.hidden_ref(r[0]) else r[2]), r[3]) for r in rows]
     _table(["Ref.", "Title", "Type", "Group"], rows, widths=(0.6, 3.9, 1.5, 0.6))
 
     _note("Status of this drawing set: the CAD sheets (M-A1, M-B7, M-C1, M-D7) carry real dimensions and title "
@@ -330,9 +334,18 @@ def render(d, h1=None, content_w=6.2, num="2.6.a.1"):
           "as \"battery or 24 VDC\"; the production configuration is 24 VDC only. M-E8 records that the antenna "
           "has moved from the side to the top of the base enclosure.", fill=WARN_SHADE)
 
+    if _hide.HIDE_SIDE_ANTENNA:
+        _note(_hide.WITHHELD_NOTE + " Withheld references: " + ", ".join(sorted(_hide.SIDE_ANTENNA_MREFS)) + ".")
     for g, gtitle, items in GROUPS:
+        shown = [it for it in items if not _hide.hidden_ref(it[0])]
+        if g == "A" and _hide.hidden_ref("M-A2"):
+            shown = []
         doc.add_page_break()
         _sub(f"{g}. {gtitle}")
+        if not shown:
+            _note(_hide.WITHHELD_NOTE)
+            continue
+        items = shown
         if g == "A":
             fid, fn, title, desc, _ = items[0]
             _figure(fid, fn, title, desc, content_w, 6.5)

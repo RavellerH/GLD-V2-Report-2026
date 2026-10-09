@@ -201,8 +201,8 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "2.1"
-DOC_DATE = "7 October 2026"
+REVISION = "2.2"
+DOC_DATE = "9 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -339,8 +339,10 @@ for rev, rev_date, rev_desc in [
      "Proposed nameplate artwork MS-05 (2.6.h.1) and terminal/field-wiring diagram MS-06 (2.6.g.1) added (drafts)."),
     ("2.0", "7 October 2026",
      "Navigation: five-level Table of Contents, List of Drawings/Figures with page numbers, PDF bookmarks to individual drawings and photographs; photo groups added. No technical content changed."),
-    (REVISION, DOC_DATE,
+    ("2.1", "7 October 2026",
      "Audit against the reviewer's revision guide: application form received and completed; ISO 9001 in progress; internal file names and working-draft references removed; product description and 2.5 completed (gas path, EPL Gb, Tamb, humidity, gas-only scope, installation conditions); shared sections updated as in the technical documentation file rev. 2.8."),
+    (REVISION, DOC_DATE,
+     "Figures showing the superseded antenna position (antenna on the side of the base) withheld: earlier prototype photographs, ATEX CASING v2 and GLD ATEX CASE v3 drawings, assembly steps M-E7/M-E9; references repointed. Revised drawings to follow."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -637,12 +639,16 @@ make_table(
 )
 
 doc.add_heading("2.4 · Clear Product Photos (Overall and Key Components)", level=2)
-p("The photographs below were taken directly from the Node Sensor (GLD) V2 prototype unit.")
+import gld_hide_flags as _hide  # noqa: E402
+if not _hide.HIDE_SIDE_ANTENNA:
+    p("The photographs below were taken directly from the Node Sensor (GLD) V2 prototype unit.")
 for fn, cap in [
     ("3._Motherboard_ModulSensor_PenutupMesh_Casing_Antena_ModulAlarm.jpg",
      "Assembled unit — motherboard, sensor module, mesh cover, casing, external antenna, and local alarm module."),
     ("Casing_Belakang.jpg", "Enclosure, rear view — mounting flange and cable-entry area."),
 ]:
+    if _hide.hidden_file(fn):
+        continue
     figure(os.path.join(PHOTO_DIR, fn), max_w=4.8, max_h=3.6, cap=cap)
 
 _guide.photos(doc, _H4)
@@ -686,16 +692,17 @@ figure(os.path.join(SCHEMATIC_DIR, "02-diagram.png"), max_w=6.0, max_h=4.2,
        cap="Schematic block diagram, sheet 2 of 9 — main power distribution.")
 figure(os.path.join(SCHEMATIC_DIR, "10-pcb-layout.png"), max_w=4.6, max_h=4.6,
        cap="Main board PCB layout (top copper) — native EasyEDA/JLCPCB export, production-intent board.")
-p("A dimensioned mechanical drawing exists for the enclosure's external envelope and mounting hardware, "
-  "drafted from a solid CAD model (STEP format, millimeter units):")
-figure(os.path.join(DRAWING_DIR, "bracket-mounting-drawing.png"), max_w=6.2, max_h=4.6,
-       cap="Enclosure envelope & U-bolt mounting plate assembly — dimensioned drawing sheet "
-           "(drafted 31 Aug 2026, from a STEP solid model).")
-p("A separate, internal contingency/alternate enclosure design (“GLD ATEX CASE v3”) exists in "
-  "parallel with the primary commercial-enclosure sourcing path referenced in Section 2.3:")
-figure(os.path.join(IM_CAD_DIR, "gld_atex_case_v3_dimensioned.png"), max_w=6.2, max_h=4.6,
-       cap="“GLD ATEX CASE v3” dimensioned drawing sheet (8 Sep 2026) — "
-           "internal contingency/alternate enclosure design, not the confirmed production enclosure.")
+if not _hide.HIDE_SIDE_ANTENNA:
+    p("A dimensioned mechanical drawing exists for the enclosure's external envelope and mounting hardware, "
+      "drafted from a solid CAD model (STEP format, millimeter units):")
+    figure(os.path.join(DRAWING_DIR, "bracket-mounting-drawing.png"), max_w=6.2, max_h=4.6,
+           cap="Enclosure envelope & U-bolt mounting plate assembly — dimensioned drawing sheet "
+               "(drafted 31 Aug 2026, from a STEP solid model).")
+    p("A separate, internal contingency/alternate enclosure design (“GLD ATEX CASE v3”) exists in "
+      "parallel with the primary commercial-enclosure sourcing path referenced in Section 2.3:")
+    figure(os.path.join(IM_CAD_DIR, "gld_atex_case_v3_dimensioned.png"), max_w=6.2, max_h=4.6,
+           cap="“GLD ATEX CASE v3” dimensioned drawing sheet (8 Sep 2026) — "
+               "internal contingency/alternate enclosure design, not the confirmed production enclosure.")
 p("A candidate junction-box/terminal sub-component drawing has also been received via the casing partner's "
   "supply chain (Chinese enclosure-component manufacturer):")
 figure(os.path.join(IM_CAD_DIR, "bp18-1z_common_base_reference.png"), max_w=6.0, max_h=4.6,

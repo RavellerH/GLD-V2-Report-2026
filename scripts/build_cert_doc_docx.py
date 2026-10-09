@@ -209,8 +209,8 @@ _H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "2.9"
-DOC_DATE = "8 October 2026"
+REVISION = "3.0"
+DOC_DATE = "9 October 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -389,8 +389,10 @@ for rev, rev_date, rev_desc in [
      "Navigation: all numbered subsections (d.1\u2013d.13, e.3.1\u2013e.3.13, f.1\u2013f.12, g.2\u2013g.20, EX/EL BOM, drawing groups A\u2013F, schematic/layout subsections, photo groups) promoted to headings; Table of Contents extended to five levels; new List of Drawings, Schematic Sheets, Sketches and Photographs with page numbers; PDF bookmarks down to individual drawings and photographs. Photo-coverage table 2.4.1 now precedes photo set 2.4.2. No technical content changed."),
     ("2.8", "7 October 2026",
      "Audit against the reviewer's revision guide (text corrections, no new test data): application form recorded as received and completed; ISO 9001 in progress (audit Oct 2026); certification contact named; product description completed with the gas path and alarm chain; specification list 2.2 extended to the full guide list; operating-modes table added to 2.3; MQ sensor described behind its own protective mesh; RF power 0\u201322 dBm with IS-08 RF-threshold check; AC/DC adapter marked outside the equipment boundary; IP66 marked as target pending test; supplier-listing and internal remarks removed; 2.5 completed with Group II/2G/EPL Gb, humidity, gas-only scope and installation conditions; status boxes of 2.6.c\u20132.6.i aligned with their content; two safety warnings added to 2.6.g.a; grounding requirements of g.7 rewritten in English; draft-review remarks removed from g.6\u2013g.14; f.11 references aligned with f.3; nameplate gains the ATEX specific marking and full manufacturer address; battery item in 3.2 made conditional; compliance-matrix statuses corrected."),
-    (REVISION, DOC_DATE,
+    ("2.9", "8 October 2026",
      "Antenna row of 2.3.b: confirmed that the certified configuration (sample GLD2-0x1001) has no internal 2.4 GHz antenna; superseded remark removed."),
+    (REVISION, DOC_DATE,
+     "Figures showing the superseded antenna position (antenna on the side of the base) withheld from this issue: two earlier prototype photographs in 2.4, the ATEX CASING v2 drawing set (M-A1, M-A2, bracket sheet), the GLD ATEX CASE v3 sheets (M-B1\u2013M-B7 and dimensioned sheet) and assembly steps M-E7 and M-E9. Register entries kept and marked 'Withheld in this issue'; references in 2.4.1, EX-01/02/13, MAT-10 and d.4 repointed. Revised drawings to follow."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -954,7 +956,7 @@ p("Source: internal technical specification documentation, Sections 1.1\u20131.3
 
 
 doc.add_heading("2.4 \u00b7 Product Photographs \u2014 Overall and Key Components", level=2)
-p("The seven photographs below show an earlier GLD V2 prototype unit and are retained for reference only. "
+p("The photographs below show an earlier GLD V2 prototype unit and are retained for reference only. "
   "The current production configuration (latest enclosure and main board) is documented in Section 2.4.2, "
   "and the coverage of the requested views is mapped in Section 2.4.1.")
 
@@ -988,6 +990,9 @@ photos = [
      "The metal mesh cover that protects the gas sensing elements while serving as a diffusion path for gas "
      "to reach the sensors beneath."),
 ]
+
+import gld_hide_flags as _hide  # noqa: E402
+photos = [ph for ph in photos if not _hide.hidden_file(ph[0])]
 
 # 2-column photo grid via a borderless table
 n_photo_cols = 2
@@ -1134,26 +1139,28 @@ pcr2 = pcb_fig_cap.add_run(
     "render, not a dimensioned drawing."
 )
 pcr2.font.size = Pt(8.5); pcr2.font.color.rgb = GRAY
-p("A dimensioned mechanical drawing sheet also exists for the enclosure's external envelope and its "
-  "mounting hardware, drafted from a solid CAD model (STEP format, millimeter units) with a formal title "
-  "block, orthographic and isometric views, and a parts table \u2014 reproduced below.")
+if not _hide.hidden_file("bracket-mounting-drawing.png"):
+    p("A dimensioned mechanical drawing sheet also exists for the enclosure's external envelope and its "
+      "mounting hardware, drafted from a solid CAD model (STEP format, millimeter units) with a formal title "
+      "block, orthographic and isometric views, and a parts table \u2014 reproduced below.")
+    DRAWING_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_drawings")
+    bd_fig_para = doc.add_paragraph()
+    bd_fig_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    bd_fig_run = bd_fig_para.add_run()
+    bd_fig_run.add_picture(os.path.join(DRAWING_DIR, "bracket-mounting-drawing.png"), width=Inches(6.2))
+    bd_fig_cap = doc.add_paragraph()
+    bd_fig_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    bd_fig_cap.paragraph_format.space_after = Pt(12)
+    bdr1 = bd_fig_cap.add_run("Enclosure envelope & mounting bracket \u2014 dimensioned drawing sheet\n")
+    bdr1.font.bold = True; bdr1.font.size = Pt(9.5)
+    bdr2 = bd_fig_cap.add_run(
+        "Orthographic and isometric views with real dimensions (enclosure neck \u00d875 mm, overall probe height "
+        "191.51 mm, mounting plate 250\u00d7250 mm with toleranced hole pattern), a U-bolt parameter table "
+        "(2\u2033/DN50, M10 thread), and a title block (drafted 31 Aug 2026). Source: dimensioned CAD drawing "
+        "derived from a STEP solid model of the enclosure and bracket assembly."
+    )
+    bdr2.font.size = Pt(8.5); bdr2.font.color.rgb = GRAY
 DRAWING_DIR = os.path.join(REPO, "scripts", "assets", "cert_doc_drawings")
-bd_fig_para = doc.add_paragraph()
-bd_fig_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-bd_fig_run = bd_fig_para.add_run()
-bd_fig_run.add_picture(os.path.join(DRAWING_DIR, "bracket-mounting-drawing.png"), width=Inches(6.2))
-bd_fig_cap = doc.add_paragraph()
-bd_fig_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-bd_fig_cap.paragraph_format.space_after = Pt(12)
-bdr1 = bd_fig_cap.add_run("Enclosure envelope & mounting bracket \u2014 dimensioned drawing sheet\n")
-bdr1.font.bold = True; bdr1.font.size = Pt(9.5)
-bdr2 = bd_fig_cap.add_run(
-    "Orthographic and isometric views with real dimensions (enclosure neck \u00d875 mm, overall probe height "
-    "191.51 mm, mounting plate 250\u00d7250 mm with toleranced hole pattern), a U-bolt parameter table "
-    "(2\u2033/DN50, M10 thread), and a title block (drafted 31 Aug 2026). Source: dimensioned CAD drawing "
-    "derived from a STEP solid model of the enclosure and bracket assembly."
-)
-bdr2.font.size = Pt(8.5); bdr2.font.color.rgb = GRAY
 IM_CAD_DIR = os.path.join(REPO, "scripts", "assets", "instruction_manual_cad")
 for _fn, _title, _desc in [
     ("gld_atex_case_v3_dimensioned.png",
@@ -1166,6 +1173,8 @@ for _fn, _title, _desc in [
      "entries). Candidate junction-box/terminal sub-component under evaluation; footprint does not match the "
      "GLD main enclosure."),
 ]:
+    if _hide.hidden_file(_fn):
+        continue
     _fp = doc.add_paragraph()
     _fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
     add_picture_fit(_fp.add_run(), os.path.join(IM_CAD_DIR, _fn), 6.2, 7.0)

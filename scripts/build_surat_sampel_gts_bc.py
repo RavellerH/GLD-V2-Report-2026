@@ -138,8 +138,12 @@ def build_gts():
                         "2.4 kg. Supply 24 VDC, max. 8 W. Integrated LoRa radio "
                         "(920–923 MHz). Contains no gas, gas cylinders or chemical "
                         "substances."),
-        ("Battery", "[Confirm: the sample contains no lithium battery / OR state "
-                    "battery type and Wh rating]"),
+        ("Battery", "Lithium-ion, 7 × 18650 cells in parallel (1S7P, 3.7 V "
+                    "nominal), installed in the equipment (UN 3481, lithium ion "
+                    "batteries contained in equipment). Capacity: [… mAh per cell "
+                    "→ … Wh total]. The equipment is switched off and protected "
+                    "against short circuit and accidental activation during "
+                    "transport. UN 38.3 test summary: [attached / to be obtained]."),
         ("HS code (proposed)", "[9027.10 — to be confirmed with customs/forwarder]"),
         ("Declared customs value", "[USD … — value that can be justified, e.g. "
                                    "production cost of the prototype]"),
@@ -187,7 +191,7 @@ def build_gts():
             "undersigned.", align="j")
 
     para(d, "Enclosures: (1) photographs of the sample; (2) copy of the ATEX application "
-            "form; (3) [copy of the representative’s passport].", size=9.5)
+            "form; (3) [copy of the representative’s passport]; (4) [UN 38.3 test summary of the battery cells].", size=9.5)
 
     para(d, "Yours faithfully,", after=0)
     para(d, LGU_NAME, bold=True, after=40)
@@ -211,7 +215,7 @@ def build_bc():
     para(d, "Telepon: [●]  ·  E-mail: [●]", size=9.5, after=8)
 
     para(d, "Nomor\t: [Nomor Surat]", after=0)
-    para(d, "Lampiran\t: 3 (tiga) berkas", after=0)
+    para(d, "Lampiran\t: 4 (empat) berkas", after=0)
     para(d, "Perihal\t: Surat Keterangan dan Pengantar Sampel Alat untuk Pengujian "
             "dan Sertifikasi ATEX", after=10)
 
@@ -241,8 +245,12 @@ def build_bc():
                            "catu daya 24 VDC maks. 8 W, dilengkapi radio LoRa "
                            "(920–923 MHz). Tidak berisi gas, tabung gas, maupun bahan "
                            "kimia."),
-        ("Baterai", "[Konfirmasi: tidak berisi baterai litium / ATAU sebutkan jenis "
-                    "dan kapasitas Wh]"),
+        ("Baterai", "Litium-ion, 7 sel 18650 paralel (1S7P, nominal 3,7 V), "
+                    "terpasang di dalam alat (UN 3481, baterai litium-ion dalam "
+                    "peralatan). Kapasitas: [… mAh per sel → … Wh total]. Alat "
+                    "dalam keadaan mati dan terlindung dari hubung singkat serta "
+                    "aktivasi tidak sengaja selama perjalanan. Ringkasan uji "
+                    "UN 38.3: [dilampirkan / menyusul]."),
         ("Pos tarif HS (usulan)", "[9027.10 — dikonfirmasi ke petugas Bea Cukai/PPJK]"),
         ("Pemilik barang", "PT LAPI Ganesha Utama"),
         ("Nilai pabean", "[USD … — nilai yang dapat dipertanggungjawabkan, mis. biaya "
@@ -279,7 +287,7 @@ def build_bc():
     ])
 
     para(d, "Lampiran: (1) foto sampel alat; (2) salinan formulir aplikasi sertifikasi "
-            "ATEX; (3) salinan paspor pembawa barang.", size=9.5)
+            "ATEX; (3) salinan paspor pembawa barang; (4) [ringkasan uji UN 38.3 sel baterai].", size=9.5)
 
     para(d, "Demikian surat keterangan ini kami buat dengan sebenar-benarnya untuk "
             "digunakan sebagaimana mestinya.", align="j")

@@ -157,7 +157,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **9 Okt — gambar GLD antena-samping di-hide dari dokumen sertifikasi (dec:207)**: foto prototipe lama, CAD v2 (M-A), CAD v3 (M-B), M-E7/E9; saklar `scripts/gld_hide_flags.py`. Cert doc rev **3.0** (156 hlm), narrative rev **2.2** (130 hlm).
 
-- 🆕 **12 Okt — surat pengantar sampel GLD ke GTS Shanghai & surat keterangan Bea Cukai dilengkapi** (dec:208): `Deliverables/Surat_Pengantar_Sampel_GLD_ke_GTS_Shanghai.{docx,pdf}` (EN) & `Surat_Keterangan_Sampel_GLD_ke_Bea_Cukai.{docx,pdf}` (ID); data yg belum ada (alamat GTS, nilai pabean, penandatangan, paspor/penerbangan, status baterai) ditandai kuning, tidak ditebak. **Update (dec:209)**: sampel berisi baterai Li-ion 7×18650 (1S7P) — kapasitas per sel belum dikonfirmasi (>3860 mAh/sel ⇒ >100 Wh, perlu izin maskapai).
+- 🆕 **12 Okt — surat pengantar sampel GLD ke GTS Shanghai & surat keterangan Bea Cukai dilengkapi** (dec:208): `Deliverables/Surat_Pengantar_Sampel_GLD_ke_GTS_Shanghai.{docx,pdf}` (EN) & `Surat_Keterangan_Sampel_GLD_ke_Bea_Cukai.{docx,pdf}` (ID); data yg belum ada (alamat GTS, nilai pabean, penandatangan, paspor/penerbangan, status baterai) ditandai kuning, tidak ditebak. **Update (dec:209)**: sampel berisi baterai Li-ion 7×18650 (1S7P) — kapasitas per sel belum dikonfirmasi (>3860 mAh/sel ⇒ >100 Wh, perlu izin maskapai). **Final cetak (dec:210)**: `Deliverables/Paket_Bawa_Sampel_GTS_12Oktober2026/` — 2 surat KOP terkoreksi + Lampiran 1 foto + Lampiran 2 form aplikasi.
 
 ## 4. Deliverable utama (`Deliverables/`)
 

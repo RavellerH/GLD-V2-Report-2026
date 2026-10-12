@@ -157,6 +157,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **9 Okt — gambar GLD antena-samping di-hide dari dokumen sertifikasi (dec:207)**: foto prototipe lama, CAD v2 (M-A), CAD v3 (M-B), M-E7/E9; saklar `scripts/gld_hide_flags.py`. Cert doc rev **3.0** (156 hlm), narrative rev **2.2** (130 hlm).
 
+- 🆕 **12 Okt — surat pengantar sampel GLD ke GTS Shanghai & surat keterangan Bea Cukai dilengkapi** (dec:208): `Deliverables/Surat_Pengantar_Sampel_GLD_ke_GTS_Shanghai.{docx,pdf}` (EN) & `Surat_Keterangan_Sampel_GLD_ke_Bea_Cukai.{docx,pdf}` (ID); data yg belum ada (alamat GTS, nilai pabean, penandatangan, paspor/penerbangan, status baterai) ditandai kuning, tidak ditebak.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

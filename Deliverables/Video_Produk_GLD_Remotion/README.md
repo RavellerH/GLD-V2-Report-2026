@@ -3,6 +3,8 @@
 Video penjelasan produk GLD berdurasi 2 menit untuk **Digitalization Day**. Naskah dan storyboard ada di
 [`../Storyboard_Video_Produk_GLD_DigitalizationDay.md`](../Storyboard_Video_Produk_GLD_DigitalizationDay.md).
 
+> **Melanjutkan di PC?** Baca [`HANDOFF.md`](HANDOFF.md) dulu: status, urutan kerja, daftar shot Blender, dan langkah Gemini TTS.
+
 Dua versi dari satu kode (30 fps, 3600 frame = 120 dtk):
 
 | Komposisi | Ukuran | Untuk |
@@ -57,18 +59,19 @@ Subtitle bisa dimatikan lewat `SHOW_SUBTITLES` di `assets.ts`. Musik latar: `pub
 
 ### 2. Render Blender
 
-Tiga adegan memakai render Blender. Buat **dua kamera** di Blender, satu landscape dan satu portrait:
+Empat adegan memakai render Blender (detail shot lengkap di `HANDOFF.md` §5). Buat **dua kamera** di Blender, satu landscape dan satu portrait:
 
 | File landscape (1920×1080) | File portrait (1080×1920) | Adegan | Durasi |
 |---|---|---|---|
 | `public/blender/scene01_refinery.mp4` | `public/blender/portrait/scene01_refinery.mp4` | 01 Hook, kilang + kebocoran | 7 dtk |
 | `public/blender/scene03_hero_exploded.mp4` | `public/blender/portrait/scene03_hero_exploded.mp4` | 03 Hero shot + exploded view | 9 dtk |
+| `public/blender/scene05_chamber.mp4` | `public/blender/portrait/scene05_chamber.mp4` | 05 Gas test chamber, komponen disorot 1–4 | 16 dtk |
 | `public/blender/scene08_outro.mp4` | `public/blender/portrait/scene08_outro.mp4` | 08 GLD terpasang, kamera mundur | 10 dtk |
 
 - Format: MP4 H.264 (atau ProRes 4444/MOV bila butuh latar transparan), **30 fps**, durasi persis seperti tabel.
 - Area aman teks. Landscape: judul di kiri atas (adegan 3: label komponen di kanan). Portrait: judul di sepertiga atas,
   label komponen dan subtitle di sepertiga bawah. Letakkan objek GLD di tengah frame.
-- Model 3D: pakai CAD desain casing **terbaru** (bukan versi antena-samping lama).
+- Model 3D: CAD di repo masih antena samping; unit produksi antena di **atas** base (lihat `HANDOFF.md` §5.2).
 - Setelah file ada, ubah `ready: false` → `true` di `src/assets.ts`, lalu selaraskan waktu label exploded view
   di `Scene03Intro.tsx` (prop `from`) dengan animasi Blender.
 

@@ -15,9 +15,18 @@ const STATUS_COLOR: Record<GasStatus, string> = {
   extra: COLORS.muted,
 };
 
-// Landscape: foto kiri, kartu gas kanan. Portrait: foto atas, kartu gas bawah.
-const LANDSCAPE = {photo: {x: 120, y: 200, w: 640, h: 500}, flowY: 720, grid: {x: 820, y: 200, colW: 490, rowH: 126, gap: 16}};
-const PORTRAIT = {photo: {x: 64, y: 360, w: 952, h: 440}, flowY: 815, grid: {x: 64, y: 905, colW: 468, rowH: 112, gap: 16}};
+// Legenda komponen chamber (sumber: Laporan Progres Chamber Gas). `at` = frame relatif adegan;
+// animasi Blender harus menyorot komponen bernomor yang sama pada detik yang sama.
+const CHAMBER_PARTS = [
+  {at: 15, text: 'Tabung gas uji + solenoid valve: aliran gas presisi'},
+  {at: 90, text: 'Ruang uji akrilik berisi unit GLD: pengambilan dataset'},
+  {at: 165, text: 'BME280 ×2 + TGS2610: kondisi udara & gas acuan'},
+  {at: 240, text: 'Pompa hisap (duty cycle): sirkulasi & pembilasan'},
+];
+
+// Landscape: render chamber di kiri, kartu gas di kanan. Portrait: render di atas, kartu di bawah.
+const LANDSCAPE = {media: {x: 120, y: 200, w: 640, h: 420}, legendY: 640, legendGap: 44, grid: {x: 820, y: 200, colW: 490, rowH: 126, gap: 16}};
+const PORTRAIT = {media: {x: 64, y: 350, w: 952, h: 380}, legendY: 745, legendGap: 36, grid: {x: 64, y: 905, colW: 468, rowH: 112, gap: 16}};
 
 export const Scene05Trainable: React.FC = () => {
   const frame = useCurrentFrame();
@@ -25,7 +34,6 @@ export const Scene05Trainable: React.FC = () => {
   const {portrait, padX, title} = useLayout();
   const L = portrait ? PORTRAIT : LANDSCAPE;
   const GRID = L.grid;
-  const zoom = interpolate(frame, [0, 480], [1, 1.12]);
 
   return (
     <SceneFrame>
@@ -33,15 +41,23 @@ export const Scene05Trainable: React.FC = () => {
         <Caption text="Gas di kilang: dilatih di lokasi, sesuai kebutuhan" size={title(54)} />
       </AbsoluteFill>
 
-      {/* Foto asli chamber, Ken Burns pelan */}
-      <div style={{position: 'absolute', left: L.photo.x, top: L.photo.y, width: L.photo.w, height: L.photo.h, overflow: 'hidden', borderRadius: 20}}>
-        <div style={{width: '100%', height: '100%', transform: `scale(${zoom})`}}>
-          <AssetSlot asset={ASSETS.chamber} kind="image" />
-        </div>
+      {/* Render Blender gas test chamber */}
+      <div style={{position: 'absolute', left: L.media.x, top: L.media.y, width: L.media.w, height: L.media.h, overflow: 'hidden', borderRadius: 20}}>
+        <AssetSlot asset={ASSETS.chamber} kind="video" />
       </div>
-      <div style={{position: 'absolute', left: L.photo.x, top: L.flowY, width: L.photo.w, fontSize: 24, color: COLORS.muted, lineHeight: 1.4}}>
-        Chamber uji portabel → dataset on-site → latih ulang model → perbarui firmware GLD
-      </div>
+
+      {CHAMBER_PARTS.map((c, i) => {
+        const p = spring({frame: frame - c.at, fps, config: {damping: 200}});
+        return (
+          <div
+            key={c.text}
+            style={{position: 'absolute', left: L.media.x, top: L.legendY + i * L.legendGap, width: L.media.w, display: 'flex', gap: 12, alignItems: 'center', opacity: p, fontSize: portrait ? 22 : 21}}
+          >
+            <div style={{flex: '0 0 30px', height: 30, borderRadius: 15, backgroundColor: COLORS.blue, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{i + 1}</div>
+            <div>{c.text}</div>
+          </div>
+        );
+      })}
 
       {REFINERY_GASES.map((g, i) => {
         const col = i % 2;

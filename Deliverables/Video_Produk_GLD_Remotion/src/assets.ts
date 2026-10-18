@@ -18,6 +18,12 @@ export const ASSETS = {
     ready: false,
     note: 'Blender: hero shot GLD berputar lalu exploded view (9 dtk)',
   },
+  chamber: {
+    path: 'blender/scene05_chamber.mp4',
+    portraitPath: 'blender/portrait/scene05_chamber.mp4',
+    ready: false,
+    note: 'Blender: gas test chamber, komponen disorot berurutan 1–4 (16 dtk)',
+  },
   outro: {
     path: 'blender/scene08_outro.mp4',
     portraitPath: 'blender/portrait/scene08_outro.mp4',
@@ -26,7 +32,6 @@ export const ASSETS = {
   },
 
   // Gambar
-  chamber: {path: 'images/chamber_setup_lengkap.jpeg', ready: true, note: 'Foto asli gas test chamber'},
   dashboard: {path: 'images/dashboard.png', ready: true, note: 'Alarm Console dashboard RU4 asli (repo gasleakdetectionV2-April, data demo)'},
   logoLgu: {path: 'images/logo_lgu.png', ready: false, note: 'Logo LAPI Ganesha Utama (PNG transparan)'},
   logoItb: {path: 'images/logo_itb.png', ready: false, note: 'Logo ITB (PNG transparan)'},

@@ -57,7 +57,7 @@ Versi yang tetap kuat dan jujur: **"multi-gas yang bisa diajari"**. 8 sensor mem
 - **Mengapa ini lebih kaya** (poin untuk tanya-jawab): detektor konvensional mengandalkan selektivitas *satu* sensor terhadap *satu* gas. GLD memakai informasi gabungan dari delapan sensor yang saling tumpang-tindih sensitivitasnya, sehingga satu perangkat bisa membedakan beberapa gas. Cabang Conv1D menangkap dinamika respons terhadap waktu (bukan hanya nilai sesaat), sedangkan cabang kedua menyuntikkan pengetahuan fisik tentang karakter tiap sensor. Kuantisasi int8 membuat model cukup kecil untuk mikrokontroler, sehingga keputusan diambil di perangkat tanpa ketergantungan pada jaringan.
 
 ### Adegan 5 — Gas kilang & pelatihan ulang (0:55–1:11)
-- **Visual (Remotion + foto asli):** foto chamber + alur *chamber → dataset on-site → latih ulang → perbarui firmware*. Di kanan, kartu **8 gas kilang** dengan status jujur:
+- **Visual (Blender + Remotion):** render 3D gas test chamber (menggantikan foto) dengan komponen disorot berurutan, ditambah legenda bernomor: (1) tabung gas + solenoid valve, (2) ruang uji akrilik + GLD, (3) BME280 ×2 + TGS2610, (4) pompa hisap (duty cycle). Di kanan, kartu **8 gas kilang** dengan status jujur:
 
   | Gas | Sensor yang peka (datasheet) | Status di video |
   |---|---|---|

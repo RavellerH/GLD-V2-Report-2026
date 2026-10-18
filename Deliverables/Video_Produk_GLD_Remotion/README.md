@@ -33,7 +33,7 @@ src/
   data/
     fingerprints.json ← sidik jari gas dari DATASET ASLI (lihat bawah)
     mesh.ts           ← topologi node/route untuk adegan mesh
-    refineries.ts     ← 6 RU (rencana rollout)
+    refineryGases.ts  ← 8 gas kilang + status jujur per gas (adegan 5)
 tools/extract_fingerprints.py
 public/              ← aset statis (blender/, images/, audio/, fonts/)
 ```
@@ -45,8 +45,8 @@ public/              ← aset statis (blender/, images/, audio/, fonts/)
 
    | File | Adegan | Durasi |
    |---|---|---|
-   | `public/blender/scene01_refinery.mp4` | 01 Hook, kilang + kebocoran | 8 dtk |
-   | `public/blender/scene03_hero_exploded.mp4` | 03 Hero shot + exploded view | 10 dtk |
+   | `public/blender/scene01_refinery.mp4` | 01 Hook, kilang + kebocoran | 7 dtk |
+   | `public/blender/scene03_hero_exploded.mp4` | 03 Hero shot + exploded view | 9 dtk |
    | `public/blender/scene08_outro.mp4` | 08 GLD terpasang, kamera mundur | 10 dtk |
 
 2. Di `src/assets.ts`, ubah `ready: false` menjadi `true` untuk aset tersebut.

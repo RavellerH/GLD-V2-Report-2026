@@ -21,6 +21,7 @@ Versi yang tetap kuat dan jujur: **"multi-gas yang bisa diajari"**. 8 sensor mem
 | Rute otomatis berpindah saat Cluster Head mati (failover teruji) | Jarak dalam kilometer per hop |
 | Alarm dikirim otomatis (push), tanpa menunggu polling | Akurasi "99%" (angka model masih direkonsiliasi) |
 | Jaringan privat, tidak butuh internet atau jaringan IT kilang | Logo Pertamina tanpa izin humas/klien |
+| 8 gas kilang ditampilkan dengan status per gas (dikenali / data / target / perlu sensor) | "Mendeteksi metana, CO, amonia, benzena" sebagai kemampuan saat ini |
 | Arsitektur CNN dua cabang, int8, inferensi di ESP32-S3 | Pemulihan rute "seketika" / dalam X detik (belum diukur) |
 
 ---
@@ -35,30 +36,43 @@ Versi yang tetap kuat dan jujur: **"multi-gas yang bisa diajari"**. 8 sensor mem
 - *Mesh:* Cluster Head dua radio — STAR 920 MHz (sensor→CH) dan MESH 921 MHz (CH↔CH); pemilihan induk dinamis, ≤8 kandidat induk, margin pindah 15 dB, *loop guard*, cek jangkauan ke gateway — TDS Rev 4.0. Failover diuji pada mesh 8-CH di kampus ITB. Waktu pemulihan **tidak** disebut karena belum diukur (ambang induk kedaluwarsa di firmware bisa sampai belasan menit), jadi narasi tidak memakai kata "seketika".
 - *Alarm:* data normal disimpan di CH dan diambil berkala (*pull*), alarm dikirim *push* — TDS Rev 4.0, push alarm teruji 6–8 Agu.
 
-### Adegan 1 — Hook (0:00–0:08)
+### Adegan 1 — Hook (0:00–0:07)
 - **Visual (Blender):** kilang saat senja, gas keluar dari flange, nyaris tak terlihat.
 - **Teks:** *"Gas bocor tidak terlihat."*
 - **VO:** "Kebocoran gas di kilang tidak kasatmata, dan setiap detik keterlambatan deteksi memperbesar risiko keselamatan."
 
-### Adegan 2 — Masalah (0:08–0:18)
-- **Visual (Remotion):** detektor konvensional berlabel satu gas, kabel panjang ke ruang kontrol, lalu dicoret.
+### Adegan 2 — Masalah (0:07–0:17)
+- **Visual (Remotion):** lima detektor konvensional untuk lima gas kilang (LPG, CH₄, H₂, H₂S, CO), masing-masing dengan kabel ke ruang kontrol, lalu dicoret. Teks: *"5 gas = 5 detektor + 5 kabel data"*.
 - **VO:** "Detektor konvensional umumnya dirancang untuk satu jenis gas dan bergantung pada kabel data menuju ruang kontrol, sehingga mahal dan sulit diperluas."
 
-### Adegan 3 — Perkenalan GLD (0:18–0:28)
+### Adegan 3 — Perkenalan GLD (0:17–0:26)
 - **Visual (Blender):** hero shot lalu exploded view; label: *8 sensor gas oksida logam (MQ) · ADC 24-bit (ADS1256) · ESP32-S3 · inferensi AI · Radio LoRa 920 MHz*.
 - **VO:** "GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor ESP32-S3, dan radio LoRa dalam satu unit."
 
-### Adegan 4 — Sidik jari gas & model AI (0:28–0:58) ⭐ pesan inti 1
-- **Visual fase A (0:28–0:44, Remotion):** batang 8 sensor + radar chart dari **data chamber asli** berganti pola: udara bersih → LPG (*Klasifikasi AI: LPG*) → CO₂. Judul: *"8 sensor, sensitivitas berbeda → satu sidik jari gas"*, sub-judul: prinsip hidung elektronik.
-- **Visual fase B (0:44–0:58, Remotion):** diagram arsitektur: *Sinyal 8 sensor → Cabang 1 Conv1D (pola temporal)*; *Profil sensitivitas → Cabang 2 Dense*; keduanya → *Penggabungan* → *Softmax: Udara bersih / LPG / H₂*. Badge: *Kuantisasi int8 · Inferensi di ESP32-S3 · Tanpa server*.
+### Adegan 4 — Sidik jari gas & model AI (0:26–0:55) ⭐ pesan inti 1
+- **Visual fase A (0:26–0:42, Remotion):** batang 8 sensor + radar chart dari **data chamber asli** berganti pola: udara bersih → LPG (*Klasifikasi AI: LPG*) → CO₂. Judul: *"8 sensor, sensitivitas berbeda → satu sidik jari gas"*, sub-judul: prinsip hidung elektronik.
+- **Visual fase B (0:42–0:55, Remotion):** diagram arsitektur: *Sinyal 8 sensor → Cabang 1 Conv1D (pola temporal)*; *Profil sensitivitas → Cabang 2 Dense*; keduanya → *Penggabungan* → *Softmax: Udara bersih / LPG / H₂* + kotak putus-putus *"+ kelas per kilang"*. Badge: *Kuantisasi int8 · Inferensi di ESP32-S3 · Tanpa server*.
 - **VO:** "Sensor semikonduktor oksida logam tidak sepenuhnya selektif; satu sensor dapat bereaksi terhadap banyak gas. Keterbatasan ini justru kami manfaatkan. Delapan sensor dengan sensitivitas berbeda membentuk satu vektor respons, layaknya sidik jari kimia, sesuai prinsip hidung elektronik. Jaringan saraf konvolusional dua cabang mempelajari pola temporal sinyal sensor sekaligus profil sensitivitasnya, kemudian dikuantisasi ke delapan bit dan dijalankan langsung di mikrokontroler, tanpa bergantung pada server."
 - **Mengapa ini lebih kaya** (poin untuk tanya-jawab): detektor konvensional mengandalkan selektivitas *satu* sensor terhadap *satu* gas. GLD memakai informasi gabungan dari delapan sensor yang saling tumpang-tindih sensitivitasnya, sehingga satu perangkat bisa membedakan beberapa gas. Cabang Conv1D menangkap dinamika respons terhadap waktu (bukan hanya nilai sesaat), sedangkan cabang kedua menyuntikkan pengetahuan fisik tentang karakter tiap sensor. Kuantisasi int8 membuat model cukup kecil untuk mikrokontroler, sehingga keputusan diambil di perangkat tanpa ketergantungan pada jaringan.
 
-### Adegan 5 — Dapat dilatih ulang (0:58–1:10)
-- **Visual (Remotion + foto asli):** foto chamber → *Chamber di kilang → Dataset on-site → Latih model → Update GLD*; peta 6 RU (*Rencana rollout*).
-- **VO:** "Saat ini model mengenali udara bersih, LPG, dan hidrogen. Untuk gas lain, data dikumpulkan dengan chamber uji portabel di lokasi kilang, lalu model dilatih ulang."
+### Adegan 5 — Gas kilang & pelatihan ulang (0:55–1:11)
+- **Visual (Remotion + foto asli):** foto chamber + alur *chamber → dataset on-site → latih ulang → perbarui firmware*. Di kanan, kartu **8 gas kilang** dengan status jujur:
 
-### Adegan 6 — Private mesh LoRa & pemulihan rute (1:10–1:40) ⭐ pesan inti 2
+  | Gas | Sensor yang peka (datasheet) | Status di video |
+  |---|---|---|
+  | LPG (propana/butana) | MQ5 · MQ6 · MQ2 | Dikenali model |
+  | H₂ (hidrogen) | MQ8 | Dikenali model |
+  | CO₂ (karbon dioksida) | MQ135 | Data chamber terkumpul (`Dataset/`) |
+  | CH₄ (metana) | MQ4 | Target pelatihan di kilang |
+  | CO (karbon monoksida) | MQ7 | Target pelatihan di kilang |
+  | NH₃ (amonia) | MQ135 | Target pelatihan di kilang |
+  | C₆H₆ (benzena) | MQ135 | Target pelatihan di kilang |
+  | H₂S (hidrogen sulfida) | belum ada sensor khusus | Perlu sensor tambahan |
+
+- **VO:** "Saat ini model mengenali udara bersih, LPG, dan hidrogen. Larik sensor yang sama juga peka terhadap metana, karbon monoksida, amonia, dan benzena; model untuk gas tersebut dilatih ulang dengan chamber uji portabel di lokasi kilang."
+- **Catatan H₂S:** larik 8 sensor saat ini tidak memuat sensor khusus H₂S (mis. MQ136 atau sel elektrokimia). Karena H₂S termasuk requirement Pertamina, video menampilkannya apa adanya sebagai "perlu sensor tambahan", tidak diklaim bisa dilatih dengan sensor yang ada. Kepekaan sensor diambil dari datasheet MQ; kemampuan model membedakan gas-gas target baru terbukti setelah data dan pelatihan per kilang.
+
+### Adegan 6 — Private mesh LoRa & pemulihan rute (1:11–1:40) ⭐ pesan inti 2
 - **Visual (Remotion):** topologi GLD → CH → Gateway. Tautan STAR (oranye, putus-putus) dan MESH (biru) dibedakan. Panel kanan: *Dua lapis radio* (STAR 920 MHz / MESH 921 MHz). Saat CH-2 mati, panel menampilkan 4 langkah pemulihan: (1) induk tak terdengar → kedaluwarsa, (2) evaluasi hingga 8 kandidat induk, (3) pindah bila sinyal ≥ 15 dB lebih baik (histeresis), (4) *loop guard* & cek jalur ke gateway; lalu paket mengalir lewat CH-3. Catatan: *Failover diuji dengan 8 Cluster Head multi-hop di kampus ITB*.
 - **VO:** "Komunikasi menggunakan jaringan mesh LoRa privat dua lapis pada pita sembilan ratus dua puluh megahertz. Node sensor terhubung ke Cluster Head, dan antar-Cluster Head membentuk mesh multi-hop menuju gateway, tanpa internet dan terpisah dari jaringan TI kilang. Bila satu Cluster Head gagal, node tetangga memilih induk baru secara otomatis, dengan histeresis sinyal dan pencegahan loop agar rute tetap stabil."
 - **Mengapa histeresis dan loop guard penting** (poin untuk tanya-jawab): tanpa histeresis, node bisa bolak-balik berganti induk setiap kali sinyal berfluktuasi (*route flapping*). Margin 15 dB memastikan perpindahan hanya terjadi bila jalur baru jelas lebih baik. *Loop guard* mencegah paket berputar di antara dua CH yang saling menjadikan induk.

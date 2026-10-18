@@ -239,6 +239,26 @@ const ModelPhase: React.FC = () => {
         );
       })}
       <div style={{position: 'absolute', left: OUT_X, top: 280, fontSize: 24, color: COLORS.muted, opacity: appear(160)}}>Softmax · kelas gas</div>
+      {/* Kelas tambahan dilatih per kilang (CH₄, CO, NH₃, ...) */}
+      <div
+        style={{
+          position: 'absolute',
+          left: OUT_X,
+          top: 330 + OUTPUTS.length * 130,
+          width: 300,
+          height: 90,
+          borderRadius: 14,
+          border: `3px dashed ${COLORS.muted}`,
+          display: 'flex',
+          alignItems: 'center',
+          paddingLeft: 26,
+          fontSize: 26,
+          color: COLORS.muted,
+          opacity: appear(250),
+        }}
+      >
+        + kelas per kilang
+      </div>
 
       <div style={{position: 'absolute', left: 120, top: 800, display: 'flex', gap: 20}}>
         <Badge text="Kuantisasi int8" from={260} />

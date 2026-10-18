@@ -4,8 +4,8 @@ export type Asset = {path: string; ready: boolean; note: string};
 
 export const ASSETS = {
   // Render Blender: MP4/MOV (ProRes 4444 bila butuh alpha) 1920x1080, 30 fps, durasi = durasi adegan.
-  refinery: {path: 'blender/scene01_refinery.mp4', ready: false, note: 'Blender: kilang senja + kebocoran gas (8 dtk)'},
-  hero: {path: 'blender/scene03_hero_exploded.mp4', ready: false, note: 'Blender: hero shot GLD berputar lalu exploded view (10 dtk)'},
+  refinery: {path: 'blender/scene01_refinery.mp4', ready: false, note: 'Blender: kilang senja + kebocoran gas (7 dtk)'},
+  hero: {path: 'blender/scene03_hero_exploded.mp4', ready: false, note: 'Blender: hero shot GLD berputar lalu exploded view (9 dtk)'},
   outro: {path: 'blender/scene08_outro.mp4', ready: false, note: 'Blender: GLD terpasang, kamera mundur ke jaringan node (10 dtk)'},
 
   // Gambar

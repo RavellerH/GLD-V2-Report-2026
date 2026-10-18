@@ -5,11 +5,8 @@ import {DetectorIcon} from '../components/Icons';
 import {SceneFrame} from '../components/SceneFrame';
 import {COLORS} from '../theme';
 
-const DETECTORS = [
-  {gas: 'LPG', y: 300},
-  {gas: 'H₂S', y: 520},
-  {gas: 'CO', y: 740},
-];
+// Lima gas yang umum dipantau di kilang: masing-masing butuh detektor sendiri.
+const DETECTORS = ['LPG', 'CH₄', 'H₂', 'H₂S', 'CO'].map((gas, i) => ({gas, y: 240 + i * 145}));
 const CONTROL = {x: 1500, y: 520};
 
 export const Scene02Problem: React.FC = () => {
@@ -65,7 +62,7 @@ export const Scene02Problem: React.FC = () => {
       </div>
 
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 70}}>
-        <Caption text="1 detektor = 1 gas · kabel data panjang" from={130} size={56} />
+        <Caption text="5 gas = 5 detektor + 5 kabel data" from={130} size={56} />
       </AbsoluteFill>
     </SceneFrame>
   );

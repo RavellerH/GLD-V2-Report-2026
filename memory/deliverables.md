@@ -222,3 +222,7 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 
 ### Sisipan dossier 6(a).7 & 6(a).8 — GLD V4 main board (7 Okt 2026, dec:189)
 `Deliverables/Dossier_Section_6a7_6a8_Schematic_PCB_GLD_V4.{docx,pdf}` — English, 38 hlm, siap ditempel ke dossier IECEx/ATEX: skematik 26 lembar + register/cakupan/proteksi/grounding/8 temuan; layout PCB 10 tampilan + data papan + tabel gambar. Generator `scripts/build_section_6a7_6a8_gld_v4.py`. Sumber asli di `Sumber Dokumen/Schematic_PCB_GLD_V4/`.
+
+### Video produk GLD 2 menit — Digitalization Day (18 Okt 2026)
+`Deliverables/Storyboard_Video_Produk_GLD_DigitalizationDay.md` — storyboard 8 adegan + naskah VO + tabel klaim aman/terlarang. Fokus: **multi-gas yang bisa diajari** (bukan "semua gas": model tervalidasi baru Udara Bersih/LPG/H₂) + **private mesh LoRa self-healing**.
+`Deliverables/Video_Produk_GLD_Remotion/` — proyek Remotion 4 (React/TS): komposisi `GLD-Explainer` 3600 frame + tiap adegan terpisah; timing/naskah terpusat di `src/timeline.ts`, aset Blender/logo/audio via flag `ready` di `src/assets.ts` (placeholder berlabel selama belum ada). Radar chart Adegan 4 memakai **data chamber asli** `Dataset/` (Clean Air/LPG/CO₂) via `tools/extract_fingerprints.py`; H₂ belum ada dataset. Font Inter dibundel lokal. Render penuh sudah diuji.

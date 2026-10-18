@@ -1,0 +1,24 @@
+{
+  "name": "gld-video-digitalization-day",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Video penjelasan produk GLD (2 menit) untuk Digitalization Day",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render GLD-Explainer out/GLD_Explainer.mp4",
+    "still": "remotion still GLD-Explainer out/preview.png --frame=1200",
+    "fingerprints": "python3 tools/extract_fingerprints.py",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.536",
+    "@remotion/fonts": "4.0.536",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.536"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}

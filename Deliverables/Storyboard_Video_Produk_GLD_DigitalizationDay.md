@@ -91,6 +91,9 @@ Cocok untuk **b-roll suasana** (establishing shot kilang, pipa, senja). **Jangan
 
 ## 6. Yang perlu disiapkan tim
 
+Proyek Remotion: [`Video_Produk_GLD_Remotion/`](Video_Produk_GLD_Remotion/README.md).
+
+
 1. File CAD desain casing terbaru (`.step`/`.obj`) untuk Blender.
 2. Screenshot/rekaman dashboard aplikasi asli.
 3. Klip video demo LPG (jika ada).

@@ -20,7 +20,7 @@ const STATUS_COLOR: Record<GasStatus, string> = {
 const CHAMBER_PARTS = [
   {at: 15, text: 'Tabung gas uji + solenoid valve: aliran gas presisi'},
   {at: 90, text: 'Ruang uji akrilik berisi unit GLD: pengambilan dataset'},
-  {at: 165, text: 'BME280 ×2 + TGS2610: kondisi udara & gas acuan'},
+  {at: 165, text: 'Sensor acuan: suhu, tekanan, kelembapan & gas'},
   {at: 240, text: 'Pompa hisap (duty cycle): sirkulasi & pembilasan'},
 ];
 

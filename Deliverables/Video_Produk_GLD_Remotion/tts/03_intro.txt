@@ -1,3 +1,3 @@
 Bacakan dalam Bahasa Indonesia baku dengan nada formal, tenang, dan meyakinkan, seperti narator video teknologi industri. Tempo sedang, jeda singkat di setiap koma.
 
-GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor ESP32-S3, dan radio LoRa dalam satu unit.
+GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor AI tertanam, dan radio LoRa dalam satu unit.

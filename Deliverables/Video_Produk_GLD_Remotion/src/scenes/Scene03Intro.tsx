@@ -7,7 +7,8 @@ import {SceneFrame} from '../components/SceneFrame';
 import {useLayout} from '../layout';
 import {COLORS} from '../theme';
 
-const PARTS = ['8 sensor gas oksida logam (MQ)', 'ADC 24-bit (ADS1256)', 'ESP32-S3 · inferensi AI', 'Radio LoRa 920 MHz'];
+// Sebut spesifikasi, bukan nama/seri produk komponen.
+const PARTS = ['8 sensor gas semikonduktor oksida logam', 'Akuisisi data presisi 24-bit', 'Prosesor AI dual-core 240 MHz', 'Radio LoRa 920 MHz'];
 
 export const Scene03Intro: React.FC = () => {
   const {portrait, padX, title} = useLayout();

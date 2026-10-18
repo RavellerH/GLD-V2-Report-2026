@@ -32,7 +32,7 @@ export const SCENES: SceneDef[] = [
     title: '03 Perkenalan GLD',
     startSec: 17,
     endSec: 26,
-    vo: 'GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor ESP32-S3, dan radio LoRa dalam satu unit.',
+    vo: 'GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor AI tertanam, dan radio LoRa dalam satu unit.',
   },
   {
     id: 'fingerprint',

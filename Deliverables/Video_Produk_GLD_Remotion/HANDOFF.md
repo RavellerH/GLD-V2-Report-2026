@@ -113,7 +113,8 @@ Slot durasi saat ini:
 - ⚠️ **CAD v2 dan v3 masih menaruh antena di samping. Unit produksi sekarang antenanya di muka ATAS base.** Gambar antena samping sudah disembunyikan dari dokumen sertifikasi. Jangan tampilkan versi antena samping di video.
 - Acuan bentuk unit terbaru: foto di `Sumber Dokumen/Foto_Assembly_GLD_07Okt2026/` (mis. `Antenna_interface_outside.jpg`, `IMG_14.*.jpg`). Pakai CAD v2 sebagai dasar, pindahkan antena ke atas sesuai foto.
 - Mounting: pelat datar 250×250 mm dengan U-bolt ke pipa 2" (bukan bracket siku/L). Acuan: `GLD U-Bolt Bracket V2.png` dan render 6 sisi (`atas/bawah/depan/belakang/kiri/kanan.png`) di folder yang sama.
-- Isi untuk exploded view: papan sensor dengan **8 sensor MQ**, main board **ESP32-S3**, ADC **ADS1256**, modul radio **LoRa** + antena. Detail PCB: `Sumber Dokumen/EasyEDA Source/` (ada model 3D PCB).
+- Isi untuk exploded view (referensi internal): papan sensor dengan 8 sensor gas (seri MQ), main board (ESP32-S3), ADC (ADS1256), modul radio LoRa + antena.
+- ⚠️ **Jangan tampilkan nama/seri produk komponen.** Tulisan, logo, dan nomor seri pada chip/sensor/modul (mis. cetakan "MQ-x", logo Espressif) harus dihilangkan atau dibuat tidak terbaca di render. Video hanya menyebut spesifikasi. Detail PCB: `Sumber Dokumen/EasyEDA Source/` (ada model 3D PCB).
 
 ### 5.3 Daftar shot
 
@@ -130,7 +131,7 @@ Area teks: landscape **kiri-tengah**, portrait **sepertiga atas**. Jangan taruh 
 **Shot 2 — Hero + exploded view (Adegan 3, 9 dtk).**
 - 0–4 dtk: unit GLD berputar pelan (turntable).
 - 4–9 dtk: casing terbuka/exploded, memperlihatkan 4 komponen. Label Remotion muncul pada detik **4,0 · 4,7 · 5,3 · 6,0** berurutan:
-  (1) 8 sensor gas MQ, (2) ADC 24-bit ADS1256, (3) ESP32-S3, (4) radio LoRa.
+  (1) 8 sensor gas semikonduktor oksida logam, (2) akuisisi data presisi 24-bit, (3) prosesor AI dual-core 240 MHz, (4) radio LoRa 920 MHz.
   Kalau timing animasi berbeda, ubah prop `from` di `src/scenes/Scene03Intro.tsx` (frame = detik × 30).
 - Area teks: judul di **kiri atas**. Label komponen di **kanan** (landscape) atau **sepertiga bawah** (portrait). Letakkan unit di tengah-kiri (landscape) / tengah (portrait).
 
@@ -138,14 +139,15 @@ Area teks: landscape **kiri-tengah**, portrait **sepertiga atas**. Jangan taruh 
 - Ukuran tampil di layar: kotak **640×420** (landscape) dan **952×380** (portrait), memakai *object-fit: cover*. Render di 1920×1080 dan 1080×1920 tetap boleh, tapi **komposisi objek harus muat di tengah** dengan rasio ±3:2 (landscape) / ±5:2 (portrait).
 - Model chamber, dengan acuan `Sumber Dokumen/LAPORAN PROGRESS CHAMBER GAS.pdf` (Gambar 2 tampak samping/depan, Gambar 3 diagram blok, Gambar 4–5 rangkaian):
   kotak akrilik bening, unit GLD di dalam, tabung gas uji + **solenoid valve** di jalur masuk, **pompa hisap** di jalur buang,
-  **2× BME280** (satu di dalam, satu di luar), **TGS2610** di dalam, panel kontrol (ESP32, LM2596, driver BTS7960, kipas pendingin).
+  2 sensor suhu/tekanan/kelembapan (satu di dalam, satu di luar), 1 sensor gas acuan di dalam, panel kontrol (mikrokontroler, regulator, driver pompa, kipas pendingin).
+  Referensi internal: BME280 ×2, TGS2610, ESP32, LM2596, BTS7960. Sama seperti GLD, nama/logo komponen tidak boleh terbaca di render.
 - **Sorot komponen berurutan** (glow/outline biru `#2B5FCB`), selaras dengan legenda bernomor di Remotion:
 
   | Detik | # | Sorot |
   |---|---|---|
   | 0,5 | 1 | Tabung gas + solenoid valve (gas mengalir masuk) |
   | 3,0 | 2 | Ruang uji akrilik + unit GLD |
-  | 5,5 | 3 | BME280 ×2 + TGS2610 |
+  | 5,5 | 3 | Sensor acuan suhu, tekanan, kelembapan & gas |
   | 8,0 | 4 | Pompa hisap (udara keluar, pembilasan) |
   | 10–16 | – | Kamera mundur pelan, semua komponen terlihat |
 
@@ -186,6 +188,7 @@ atau draf setengah resolusi: `npx remotion render GLD-Explainer out/draft.mp4 --
 - [ ] Subtitle sama dengan ucapan narasi.
 - [ ] Tidak ada PLACEHOLDER tersisa (cek kedua versi).
 - [ ] Antena GLD di render Blender ada di **atas**, bukan di samping.
+- [ ] Tidak ada nama/seri/logo produk komponen yang terbaca (layar, narasi, render Blender).
 - [ ] Label exploded view (adegan 3) dan sorotan chamber (adegan 5) muncul bersamaan dengan animasi Blender.
 - [ ] Versi portrait: teks tidak tertutup area tombol aplikasi HP (bawah ±220 px).
 - [ ] Logo Pertamina hanya dipakai kalau sudah diizinkan.
@@ -199,7 +202,8 @@ Video ini akan ditonton pihak Pertamina, jadi klaim harus sesuai bukti:
 
 | ✅ Boleh | ❌ Jangan |
 |---|---|
-| 8 sensor gas dalam satu unit; AI on-device di ESP32-S3 | "Mendeteksi semua gas" |
+| 8 sensor gas dalam satu unit; AI on-device | "Mendeteksi semua gas" |
+| Spesifikasi: sensor semikonduktor oksida logam, akuisisi 24-bit, prosesor AI dual-core 240 MHz | Nama/seri produk komponen (MQ…, ESP32, ADS1256, BME280, TGS…) di layar, narasi, atau render |
 | Model mengenali udara bersih, LPG, H₂ | "Mendeteksi CH₄/CO/NH₃/benzena" sebagai kemampuan saat ini (statusnya target pelatihan) |
 | H₂S: "perlu sensor tambahan" (tak ada sensor khusus H₂S) | Klaim deteksi H₂S |
 | CNN dua cabang, kuantisasi int8 | Angka akurasi (masih direkonsiliasi) |

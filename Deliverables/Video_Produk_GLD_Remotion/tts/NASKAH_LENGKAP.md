@@ -14,11 +14,11 @@ Simpan hasil sebagai `public/audio/vo/02_problem.wav`
 
 Detektor konvensional umumnya dirancang untuk satu jenis gas dan bergantung pada kabel data menuju ruang kontrol, sehingga mahal dan sulit diperluas.
 
-## 03_intro — 03 Perkenalan GLD (9 dtk, 19 kata)
+## 03_intro — 03 Perkenalan GLD (9 dtk, 20 kata)
 
 Simpan hasil sebagai `public/audio/vo/03_intro.wav`
 
-GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor ESP32-S3, dan radio LoRa dalam satu unit.
+GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor AI tertanam, dan radio LoRa dalam satu unit.
 
 ## 04_fingerprint — 04 Sidik jari gas & model AI (29 dtk, 63 kata)
 

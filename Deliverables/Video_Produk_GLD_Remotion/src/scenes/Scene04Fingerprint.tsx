@@ -19,7 +19,8 @@ const STATES: {gas: GasKey; at: number; label: string; color: string}[] = [
   {gas: 'co2', at: 330, label: 'Pola CO₂', color: COLORS.blueLight},
 ];
 
-const SENSORS = fingerprints.sensors;
+// Label kanal di layar: S1–S8 (urutan sama dengan fingerprints.sensors). Nama seri sensor tidak ditampilkan.
+const SENSORS = fingerprints.sensors.map((_, i) => `S${i + 1}`);
 const N = SENSORS.length;
 
 const radiiFor = (gas: GasKey) => {
@@ -275,7 +276,7 @@ const ModelPhase: React.FC = () => {
 
       <div style={{position: 'absolute', left: g.badges.x, top: g.badges.y, display: 'flex', flexWrap: 'wrap', gap: 20, width: portrait ? 952 : undefined}}>
         <Badge text="Kuantisasi int8" from={260} />
-        <Badge text="Inferensi di ESP32-S3" from={280} />
+        <Badge text="Inferensi on-device" from={280} />
         <Badge text="Tanpa server" from={300} color={COLORS.ok} />
       </div>
     </AbsoluteFill>

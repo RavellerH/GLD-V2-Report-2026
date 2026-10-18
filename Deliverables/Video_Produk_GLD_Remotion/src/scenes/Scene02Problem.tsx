@@ -1,9 +1,11 @@
 import React from 'react';
-import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Caption} from '../components/Caption';
 import {DetectorIcon} from '../components/Icons';
 import {SceneFrame} from '../components/SceneFrame';
+import {Sfx} from '../components/Sfx';
 import {useLayout} from '../layout';
+import {progress, useNarration} from '../motion';
 import {COLORS} from '../theme';
 
 // Lima gas yang umum dipantau di kilang: masing-masing butuh detektor sendiri.
@@ -11,9 +13,19 @@ const GASES = ['LPG', 'CH₄', 'H₂', 'H₂S', 'CO'];
 
 export const Scene02Problem: React.FC = () => {
   const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
   const {portrait, width, height, title} = useLayout();
-  const cable = interpolate(frame, [30, 120], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const strike = interpolate(frame, [230, 260], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const at = useNarration('problem');
+  const tCable = at('kabel data');
+  const cable = (i: number) => progress(frame, tCable - 20 + i * 6, 45);
+  const strike = progress(frame, at('sulit diperluas', 6), 22);
+  const pop = (i: number) => spring({frame: frame - 6 - i * 5, fps, config: {damping: 20}});
+  // Tiga masalah muncul tepat saat diucapkan narasi.
+  const ISSUES = [
+    {text: 'Satu detektor untuk satu jenis gas', at: at('satu jenis gas')},
+    {text: 'Kabel data ke ruang kontrol', at: tCable},
+    {text: 'Mahal dan sulit diperluas', at: at('mahal')},
+  ];
 
   // Landscape: detektor berjajar vertikal di kiri, ruang kontrol di kanan.
   // Portrait: detektor berjajar horizontal di atas, ruang kontrol di bawah.
@@ -29,22 +41,22 @@ export const Scene02Problem: React.FC = () => {
   const strikeLen = Math.hypot(strikeLine.x2 - strikeLine.x1, strikeLine.y2 - strikeLine.y1);
 
   return (
-    <SceneFrame>
+    <SceneFrame theme="light">
       <svg width={width} height={height} style={{position: 'absolute'}}>
-        {detectors.map((d) => (
-          <path key={d.gas} d={cablePath(d)} fill="none" stroke={COLORS.muted} strokeWidth={6} strokeDasharray={1400} strokeDashoffset={1400 * (1 - cable)} />
+        {detectors.map((d, i) => (
+          <path key={d.gas} d={cablePath(d)} fill="none" stroke={COLORS.muted} strokeWidth={6} strokeDasharray={1400} strokeDashoffset={1400 * (1 - cable(i))} />
         ))}
         <line {...strikeLine} stroke={COLORS.alarm} strokeWidth={14} strokeLinecap="round" strokeDasharray={strikeLen} strokeDashoffset={strikeLen * (1 - strike)} />
       </svg>
 
-      {detectors.map((d) =>
+      {detectors.map((d, i) =>
         portrait ? (
-          <div key={d.gas} style={{position: 'absolute', left: d.x - 60, top: d.y - 40, width: 120, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10}}>
+          <div key={d.gas} style={{position: 'absolute', left: d.x - 60, top: d.y - 40, width: 120, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, opacity: pop(i), transform: `scale(${0.8 + 0.2 * pop(i)})`}}>
             <DetectorIcon />
             <span style={{fontSize: 36, fontWeight: 800}}>{d.gas}</span>
           </div>
         ) : (
-          <div key={d.gas} style={{position: 'absolute', left: d.x - 35, top: d.y - 35, display: 'flex', alignItems: 'center', gap: 20}}>
+          <div key={d.gas} style={{position: 'absolute', left: d.x - 35, top: d.y - 35, display: 'flex', alignItems: 'center', gap: 20, opacity: pop(i), transform: `translateX(${-30 * (1 - pop(i))}px)`}}>
             <DetectorIcon />
             <span style={{fontSize: 40, fontWeight: 800}}>{d.gas}</span>
           </div>
@@ -66,14 +78,31 @@ export const Scene02Problem: React.FC = () => {
           fontSize: 34,
           fontWeight: 600,
           textAlign: 'center',
+          backgroundColor: COLORS.surface,
+          opacity: progress(frame, tCable - 30, 20),
         }}
       >
         Ruang kontrol
       </div>
 
+      {/* Label masalah, muncul sesuai narasi */}
+      <div style={{position: 'absolute', left: portrait ? 64 : 1360, top: portrait ? 1420 : 680, width: portrait ? 952 : 480, display: 'flex', flexDirection: 'column', gap: portrait ? 12 : 16}}>
+        {ISSUES.map((it) => {
+          const p = progress(frame, it.at, 18);
+          return (
+            <div key={it.text} style={{opacity: p, transform: `translateY(${16 * (1 - p)}px)`, padding: '12px 18px', borderRadius: 12, backgroundColor: COLORS.surface, border: `1px solid ${COLORS.line}`, borderLeft: `6px solid ${COLORS.alarm}`, fontSize: portrait ? 28 : 26, fontWeight: 600, boxShadow: '0 6px 18px rgba(20,33,58,0.10)'}}>
+              {it.text}
+            </div>
+          );
+        })}
+      </div>
+
       <AbsoluteFill style={{alignItems: 'center', paddingTop: portrait ? 200 : 70, textAlign: 'center'}}>
-        <Caption text="Pendekatan konvensional: satu detektor per jenis gas" from={130} size={title(56)} />
+        <Caption text="Pendekatan konvensional: satu detektor per jenis gas" from={8} size={title(56)} />
       </AbsoluteFill>
+      {GASES.map((g, i) => <Sfx key={g} name="pop" at={6 + i * 5} volume={0.22} />)}
+      {ISSUES.map((it) => <Sfx key={it.text} name="tick" at={it.at} volume={0.35} />)}
+      <Sfx name="whoosh_short" at={at('sulit diperluas', 6)} volume={0.5} />
     </SceneFrame>
   );
 };

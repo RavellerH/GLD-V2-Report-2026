@@ -37,15 +37,16 @@ export const Caption: React.FC<Props> = ({text, from = 0, size = 64, color = COL
 export const Badge: React.FC<{text: string; color?: string; from?: number}> = ({text, color = COLORS.blue, from = 0}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const p = spring({frame: frame - from, fps, config: {damping: 14}});
+  const p = spring({frame: frame - from, fps, config: {damping: 18, mass: 0.7}});
   return (
     <div
       style={{
+        opacity: Math.min(1, p * 1.5),
         display: 'inline-block',
         padding: '10px 22px',
         borderRadius: 999,
         backgroundColor: color,
-        color: COLORS.text,
+        color: '#FFFFFF',
         fontSize: 28,
         fontWeight: 600,
         transform: `scale(${p})`,

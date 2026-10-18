@@ -2,21 +2,23 @@ import React from 'react';
 import {AbsoluteFill, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Badge, Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
+import {Sfx} from '../components/Sfx';
 import fingerprints from '../data/fingerprints.json';
 import {useLayout} from '../layout';
+import {progress, useNarration} from '../motion';
 import {COLORS} from '../theme';
 
 // Fase A: sidik jari gas (data chamber asli). Fase B: arsitektur model.
-const PHASE_B_AT = 480;
-const CROSSFADE = 20;
+// Fase B mulai saat narasi menyebut "Jaringan saraf" (dihitung di komponen, mengikuti durasi slot).
+const CROSSFADE = 24;
 
 type GasKey = keyof typeof fingerprints.gases;
 
 // Urutan pola yang ditampilkan (frame relatif fase A). Data dari tools/extract_fingerprints.py.
 const STATES: {gas: GasKey; at: number; label: string; color: string}[] = [
-  {gas: 'clean', at: 60, label: 'Udara bersih · kondisi normal', color: COLORS.ok},
-  {gas: 'lpg', at: 180, label: 'Hasil klasifikasi: LPG', color: COLORS.gas},
-  {gas: 'co2', at: 330, label: 'Pola respons CO₂', color: COLORS.blueLight},
+  {gas: 'clean', at: 80, label: 'Udara bersih · kondisi normal', color: COLORS.ok},
+  {gas: 'lpg', at: 250, label: 'Hasil klasifikasi: LPG', color: COLORS.gas},
+  {gas: 'co2', at: 450, label: 'Pola respons CO₂', color: COLORS.blueLight},
 ];
 
 // Label kanal di layar: S1–S8 (urutan sama dengan fingerprints.sensors). Nama seri sensor tidak ditampilkan.
@@ -81,7 +83,8 @@ const Bars: React.FC<{values: number[]; color: string}> = ({values, color}) => (
   <div style={{display: 'flex', alignItems: 'flex-end', gap: 18, height: 360}}>
     {values.map((v, i) => (
       <div key={SENSORS[i]} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10}}>
-        <div style={{width: 48, height: 320, display: 'flex', alignItems: 'flex-end', backgroundColor: COLORS.surface, borderRadius: 8}}>
+        <span style={{fontSize: 18, fontWeight: 600, color: COLORS.muted, fontVariantNumeric: 'tabular-nums'}}>{Math.round(Math.min(v, 1) * 100)}</span>
+        <div style={{width: 48, height: 320, display: 'flex', alignItems: 'flex-end', backgroundColor: COLORS.surface, border: `1px solid ${COLORS.line}`, borderRadius: 8}}>
           <div style={{width: '100%', height: `${Math.min(v, 1) * 100}%`, backgroundColor: color, borderRadius: 8}} />
         </div>
         <span style={{fontSize: 20, color: COLORS.muted}}>{SENSORS[i]}</span>
@@ -128,6 +131,7 @@ const FingerprintPhase: React.FC = () => {
         </AbsoluteFill>
       )}
 
+      {STATES.map((s) => <Sfx key={s.gas} name="blip" at={s.at} volume={0.3} />)}
       <div style={{position: 'absolute', left: padX, top: portrait ? 1510 : 880, fontSize: 22, color: COLORS.muted}}>
         Pola respons hasil pengukuran · {fingerprints.source}
       </div>
@@ -181,14 +185,23 @@ const GEOMETRY: Record<'landscape' | 'portrait', {boxes: Record<string, Rect>; o
   },
 };
 
-const ModelPhase: React.FC = () => {
+const ModelPhase: React.FC<{phaseStart: number}> = ({phaseStart}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const {portrait, padX, width, height, title} = useLayout();
   const g = GEOMETRY[portrait ? 'portrait' : 'landscape'];
-  const appear = (at: number) => spring({frame: frame - at, fps, config: {damping: 200}});
-  const draw = (at: number) => interpolate(frame, [at, at + 25], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const highlight = frame >= 230; // LPG menyala sebagai contoh keluaran
+  // Waktu kemunculan mengikuti narasi (frame relatif fase B).
+  const n = useNarration('fingerprint');
+  const at = (phrase: string, off = 0) => Math.max(0, n(phrase, off) - phaseStart);
+  const T = {
+    in: at('sinyal sensor', -10), b1: at('pola temporal'), ds: at('profil sensitivitas', -8), b2: at('profil sensitivitas', 8),
+    mg: at('kemudian', -14), out: at('kemudian'), lpg: at('dikuantisasi', -20),
+    q8: at('dikuantisasi'), edge: at('dijalankan langsung'), srv: at('tanpa bergantung'),
+  };
+  const boxAt: Record<string, number> = {in: T.in, ds: T.ds, b1: T.b1, b2: T.b2, mg: T.mg};
+  const appear = (t: number) => spring({frame: frame - t, fps, config: {damping: 200}});
+  const draw = (t: number) => progress(frame, t, 24);
+  const lpgOn = progress(frame, T.lpg, 14); // LPG menyala halus sebagai contoh keluaran
 
   // Titik keluar/masuk panah: sisi kanan→kiri (landscape) atau bawah→atas (portrait).
   const exitPt = (r: Rect) => (portrait ? {x: r.x + r.w / 2, y: r.y + r.h} : {x: r.x + r.w, y: r.y + r.h / 2});
@@ -198,7 +211,14 @@ const ModelPhase: React.FC = () => {
     const a = exitPt(from);
     const b = entryPt(to);
     const len = Math.hypot(b.x - a.x, b.y - a.y);
-    return <line key={key} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={color} strokeWidth={w} markerEnd="url(#arrow)" strokeDasharray={len} strokeDashoffset={len * (1 - draw(at))} />;
+    // Setelah panah tergambar, titik data mengalir berulang di sepanjang panah (arah aliran sinyal).
+    const flow = frame > at + 24 ? ((frame - at - 24) % 40) / 40 : -1;
+    return (
+      <g key={key}>
+        <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={color} strokeWidth={w} markerEnd="url(#arrow)" strokeDasharray={len} strokeDashoffset={len * (1 - draw(at))} />
+        {flow >= 0 && <circle cx={a.x + (b.x - a.x) * flow} cy={a.y + (b.y - a.y) * flow} r={7} fill={COLORS.blue} opacity={Math.sin(Math.PI * flow)} />}
+      </g>
+    );
   };
 
   return (
@@ -213,13 +233,13 @@ const ModelPhase: React.FC = () => {
             <path d="M0,0 L10,5 L0,10 z" fill={COLORS.blueLight} />
           </marker>
         </defs>
-        {ARROWS.map(([a, b], i) => arrow(g.boxes[a], g.boxes[b], `a${i}`, 40 + i * 25, COLORS.blueLight, 4))}
-        {g.outputs.slice(0, 3).map((o, i) => arrow(g.boxes.mg, o, `o${i}`, 160, COLORS.line, 3))}
+        {ARROWS.map(([a, b], i) => arrow(g.boxes[a], g.boxes[b], `a${i}`, Math.max(boxAt[a], boxAt[b]) + 6, COLORS.blueLight, 4))}
+        {g.outputs.slice(0, 3).map((o, i) => arrow(g.boxes.mg, o, `o${i}`, T.out + i * 4, COLORS.line, 3))}
       </svg>
 
       {BOXES.map((b) => {
         const r = g.boxes[b.id];
-        const p = appear(b.at);
+        const p = appear(boxAt[b.id] ?? b.at);
         return (
           <div
             key={b.id}
@@ -246,7 +266,7 @@ const ModelPhase: React.FC = () => {
       {OUTPUTS.map((o, i) => {
         const r = g.outputs[i];
         const extra = i === OUTPUTS.length - 1; // kelas tambahan dilatih per kilang (CH₄, CO, NH₃, ...)
-        const on = o === 'LPG' && highlight;
+        const on = o === 'LPG' ? lpgOn : 0;
         return (
           <div
             key={o}
@@ -262,22 +282,28 @@ const ModelPhase: React.FC = () => {
               paddingLeft: 26,
               fontSize: extra ? 26 : 32,
               fontWeight: extra ? 400 : 600,
-              opacity: appear(extra ? 250 : 170 + i * 10),
-              backgroundColor: on ? COLORS.gas : extra ? 'transparent' : COLORS.surface,
-              color: on ? COLORS.charcoal : extra ? COLORS.muted : COLORS.text,
-              border: extra ? `3px dashed ${COLORS.muted}` : `3px solid ${on ? COLORS.gas : COLORS.line}`,
+              opacity: appear(extra ? T.lpg + 20 : T.out + 8 + i * 5),
+              backgroundColor: extra ? 'transparent' : COLORS.surface,
+              color: extra ? COLORS.muted : COLORS.text,
+              border: extra ? `3px dashed ${COLORS.muted}` : `3px solid ${COLORS.line}`,
+              overflow: 'hidden',
             }}
           >
-            {o}
+            {/* Lapisan sorot memudar masuk, bukan berganti mendadak */}
+            {!extra && <div style={{position: 'absolute', inset: -3, backgroundColor: COLORS.gas, opacity: on, borderRadius: 14}} />}
+            <span style={{position: 'relative', color: on > 0.5 ? '#FFFFFF' : undefined}}>{o}</span>
           </div>
         );
       })}
-      <div style={{position: 'absolute', left: g.softmax.x, top: g.softmax.y, fontSize: 24, color: COLORS.muted, opacity: appear(160)}}>Softmax · keluaran kelas gas</div>
+      <div style={{position: 'absolute', left: g.softmax.x, top: g.softmax.y, fontSize: 24, color: COLORS.muted, opacity: appear(T.out)}}>Softmax · keluaran kelas gas</div>
 
+      {BOXES.map((b) => <Sfx key={b.id} name="pop" at={boxAt[b.id]} volume={0.18} />)}
+      <Sfx name="success" at={T.lpg} volume={0.35} />
+      {[T.q8, T.edge, T.srv].map((f) => <Sfx key={f} name="tick" at={f} volume={0.3} />)}
       <div style={{position: 'absolute', left: g.badges.x, top: g.badges.y, display: 'flex', flexWrap: 'wrap', gap: 20, width: portrait ? 952 : undefined}}>
-        <Badge text="Kuantisasi 8-bit" from={260} />
-        <Badge text="Inferensi pada perangkat" from={280} />
-        <Badge text="Independen dari server" from={300} color={COLORS.ok} />
+        <Badge text="Kuantisasi 8-bit" from={T.q8} />
+        <Badge text="Inferensi pada perangkat" from={T.edge} />
+        <Badge text="Independen dari server" from={T.srv} color={COLORS.ok} />
       </div>
     </AbsoluteFill>
   );
@@ -285,11 +311,12 @@ const ModelPhase: React.FC = () => {
 
 export const Scene04Fingerprint: React.FC = () => {
   const frame = useCurrentFrame();
-  const fadeA = interpolate(frame, [PHASE_B_AT - CROSSFADE, PHASE_B_AT], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const fadeB = interpolate(frame, [PHASE_B_AT, PHASE_B_AT + CROSSFADE], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const PHASE_B_AT = useNarration('fingerprint')('Jaringan saraf', -12);
+  const fadeA = 1 - progress(frame, PHASE_B_AT - CROSSFADE, CROSSFADE);
+  const fadeB = progress(frame, PHASE_B_AT - 6, CROSSFADE);
 
   return (
-    <SceneFrame>
+    <SceneFrame theme="light">
       <Sequence durationInFrames={PHASE_B_AT} name="A · Sidik jari">
         <AbsoluteFill style={{opacity: fadeA}}>
           <FingerprintPhase />
@@ -297,7 +324,7 @@ export const Scene04Fingerprint: React.FC = () => {
       </Sequence>
       <Sequence from={PHASE_B_AT} name="B · Arsitektur model">
         <AbsoluteFill style={{opacity: fadeB}}>
-          <ModelPhase />
+          <ModelPhase phaseStart={PHASE_B_AT} />
         </AbsoluteFill>
       </Sequence>
     </SceneFrame>

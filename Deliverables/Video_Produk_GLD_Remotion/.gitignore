@@ -1,2 +1,5 @@
 node_modules/
 out/
+
+# Narasi sementara (dibuat ulang dengan npm run vo:generate)
+public/audio/vo/

@@ -3,14 +3,19 @@
 // `portraitPath` dipakai komposisi portrait (HP); bila kosong, `path` dipakai di kedua orientasi.
 export type Asset = {path: string; portraitPath?: string; ready: boolean; note: string};
 
+// Sound effect sintetis (tools/sfx.py). Matikan dengan SFX_ENABLED = false; SFX_VOLUME = pengali global.
+export const SFX_ENABLED = true;
+export const SFX_VOLUME = 1.0;
+
 export const ASSETS = {
   // Render Blender: MP4/MOV (ProRes 4444 bila butuh alpha), 30 fps, durasi = durasi adegan.
   // Landscape 1920x1080, portrait 1080x1920 (render kamera terpisah di Blender).
+  // B-roll Seedance (720p, 24 fps, 8 dtk); prompt di seedance/PROMPT_SEEDANCE.md (B1).
   refinery: {
-    path: 'blender/scene01_refinery.mp4',
-    portraitPath: 'blender/portrait/scene01_refinery.mp4',
-    ready: false,
-    note: 'Blender: kilang senja + kebocoran gas (7 dtk)',
+    path: 'broll/b1_hook.mp4',
+    portraitPath: 'broll/portrait/b1_hook.mp4',
+    ready: true,
+    note: 'Seedance: kilang senja + kebocoran gas (8 dtk)',
   },
   hero: {
     path: 'blender/scene03_hero_exploded.mp4',

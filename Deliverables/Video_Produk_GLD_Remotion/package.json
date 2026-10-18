@@ -10,8 +10,10 @@
     "render:all": "npm run render && npm run render:portrait",
     "still": "remotion still GLD-Explainer out/preview.png --frame=1200",
     "fingerprints": "python3 tools/extract_fingerprints.py",
-    "vo:export": "python3 tools/vo.py export",
-    "vo:check": "python3 tools/vo.py check",
+    "vo:export": "python tools/vo.py export",
+    "vo:check": "python tools/vo.py check",
+    "vo:generate": "python tools/vo.py generate",
+    "vo:split": "python tools/vo.py split",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -10,13 +10,13 @@ Status per **18 Okt 2026**. Semua kode sudah ada di branch `main`.
 | Bagian | Status |
 |---|---|
 | Storyboard + naskah narasi formal-akademis | ✅ Selesai (`../Storyboard_Video_Produk_GLD_DigitalizationDay.md`) |
-| Proyek Remotion, 8 adegan, 120 dtk | ✅ Selesai, render penuh sudah diuji |
+| Proyek Remotion, 8 adegan, ±151 dtk | ✅ Selesai, render penuh sudah diuji |
 | Versi landscape 1920×1080 (`GLD-Explainer`) | ✅ Tata letak selesai |
 | Versi portrait/HP 1080×1920 (`GLD-Explainer-Portrait`) | ✅ Tata letak selesai |
 | Radar sidik jari gas (data chamber asli) | ✅ Selesai |
 | Screenshot dashboard RU4 asli (adegan 7) | ✅ Terpasang (data demo) |
 | **Render Blender: 4 shot × 2 orientasi** | ⏳ **Belum**: masih PLACEHOLDER |
-| **Narasi Gemini TTS: 8 file WAV** | ⏳ **Belum**: naskah siap di `tts/` |
+| **Narasi Gemini TTS: 8 file WAV** | 🔶 **4/8** (01–04, suara Erinome); 05–08 menunggu kuota |
 | Logo LGU & ITB | ⏳ Belum |
 | Musik latar | ⏳ Opsional |
 | Render final kedua versi | ⏳ Setelah semua di atas |
@@ -59,7 +59,15 @@ Draf tanpa Blender & suara bisa dirender kapan saja. Adegan yang belum punya ase
 Naskah per adegan sudah ada di `tts/01_hook.txt` … `tts/08_outro.txt`. Tiap file berisi instruksi gaya baca + naskahnya.
 Ringkasan semuanya ada di `tts/NASKAH_LENGKAP.md`. Kalau naskah di `src/timeline.ts` diubah, jalankan ulang `npm run vo:export`.
 
-Langkah:
+**Cara utama (otomatis, 1 panggilan API):**
+```bash
+npm run vo:generate
+```
+Kedelapan naskah dikirim dalam **satu** request (suara Erinome), rekaman utuh disimpan di `public/audio/vo/_full.wav`,
+lalu otomatis dipotong per adegan di 7 jeda terpanjang dan langsung dicek durasinya. Key dibaca dari file `env` di root repo.
+Kalau potongan meleset, coba `npm run vo:split` (tanpa API) atau generate ulang.
+
+**Cara manual (AI Studio):**
 1. Pilih **satu suara** Gemini TTS (nada formal, tenang). Pakai suara dan instruksi gaya yang sama untuk kedelapan file.
 2. Tempel isi tiap `tts/NN_xxx.txt`, generate, lalu simpan sebagai **WAV**:
    ```
@@ -83,16 +91,20 @@ Langkah:
 
 Slot durasi saat ini:
 
-| # | Adegan | Detik | Slot |
-|---|---|---|---|
-| 01 | Hook | 0–7 | 7 dtk |
-| 02 | Masalah | 7–17 | 10 dtk |
-| 03 | Perkenalan GLD | 17–26 | 9 dtk |
-| 04 | Sidik jari gas & model AI | 26–55 | 29 dtk |
-| 05 | Gas kilang & chamber | 55–71 | 16 dtk |
-| 06 | Private mesh LoRa | 71–100 | 29 dtk |
-| 07 | Alarm | 100–110 | 10 dtk |
-| 08 | Penutup | 110–120 | 10 dtk |
+| # | Adegan | Detik | Slot | Narasi Erinome |
+|---|---|---|---|---|
+| 01 | Hook | 0–8 | 8 dtk | 7,3 dtk ✅ |
+| 02 | Masalah | 8–21 | 13 dtk | 11,7 dtk ✅ |
+| 03 | Perkenalan GLD | 21–32 | 11 dtk | 10,5 dtk ✅ |
+| 04 | Sidik jari gas & model AI | 32–72 | 40 dtk | 38,6 dtk ✅ |
+| 05 | Gas kilang & chamber | 72–92 | 20 dtk | estimasi, belum direkam |
+| 06 | Private mesh LoRa | 92–124 | 32 dtk | estimasi, belum direkam |
+| 07 | Alarm | 124–137 | 13 dtk | estimasi, belum direkam |
+| 08 | Penutup | 137–151 | 14 dtk | estimasi, belum direkam |
+
+Suara terpilih: **Erinome** (Gemini TTS, `gemini-2.5-flash-preview-tts`). Slot diperpanjang mengikuti narasi (18 Okt), total ±151 dtk.
+Slot 05–08 masih estimasi; setelah WAV-nya ada, jalankan `npm run vo:check` dan sesuaikan.
+Kuota gratis: 3 permintaan/menit, 10/hari.
 
 ---
 
@@ -120,22 +132,22 @@ Slot durasi saat ini:
 
 | Aset | File landscape (1920×1080) | File portrait (1080×1920) | Durasi |
 |---|---|---|---|
-| Hook: kilang | `public/blender/scene01_refinery.mp4` | `public/blender/portrait/scene01_refinery.mp4` | 7 dtk |
-| Hero + exploded GLD | `public/blender/scene03_hero_exploded.mp4` | `public/blender/portrait/scene03_hero_exploded.mp4` | 9 dtk |
-| Gas test chamber | `public/blender/scene05_chamber.mp4` | `public/blender/portrait/scene05_chamber.mp4` | 16 dtk |
-| Penutup | `public/blender/scene08_outro.mp4` | `public/blender/portrait/scene08_outro.mp4` | 10 dtk |
+| Hook: kilang | `public/blender/scene01_refinery.mp4` | `public/blender/portrait/scene01_refinery.mp4` | 8 dtk |
+| Hero + exploded GLD | `public/blender/scene03_hero_exploded.mp4` | `public/blender/portrait/scene03_hero_exploded.mp4` | 11 dtk |
+| Gas test chamber | `public/blender/scene05_chamber.mp4` | `public/blender/portrait/scene05_chamber.mp4` | 20 dtk (estimasi) |
+| Penutup | `public/blender/scene08_outro.mp4` | `public/blender/portrait/scene08_outro.mp4` | 14 dtk (estimasi) |
 
-**Shot 1 — Hook (Adegan 1, 7 dtk).** Kilang saat senja, kamera pelan menyusuri pipa. Gas keluar dari flange sebagai distorsi transparan yang nyaris tak terlihat.
+**Shot 1 — Hook (Adegan 1, 8 dtk).** Kilang saat senja, kamera pelan menyusuri pipa. Gas keluar dari flange sebagai distorsi transparan yang nyaris tak terlihat.
 Area teks: landscape **kiri-tengah**, portrait **sepertiga atas**. Jangan taruh objek penting di sana.
 
-**Shot 2 — Hero + exploded view (Adegan 3, 9 dtk).**
+**Shot 2 — Hero + exploded view (Adegan 3, 11 dtk).**
 - 0–4 dtk: unit GLD berputar pelan (turntable).
-- 4–9 dtk: casing terbuka/exploded, memperlihatkan 4 komponen. Label Remotion muncul pada detik **4,0 · 4,7 · 5,3 · 6,0** berurutan:
+- 4–11 dtk: casing terbuka/exploded, memperlihatkan 4 komponen. Label Remotion muncul pada detik **4,0 · 4,7 · 5,3 · 6,0** berurutan:
   (1) 8 sensor gas semikonduktor oksida logam, (2) akuisisi data presisi 24-bit, (3) prosesor AI dual-core 240 MHz, (4) radio LoRa 920 MHz.
   Kalau timing animasi berbeda, ubah prop `from` di `src/scenes/Scene03Intro.tsx` (frame = detik × 30).
 - Area teks: judul di **kiri atas**. Label komponen di **kanan** (landscape) atau **sepertiga bawah** (portrait). Letakkan unit di tengah-kiri (landscape) / tengah (portrait).
 
-**Shot 3 — Gas test chamber (Adegan 5, 16 dtk).** Menggantikan foto chamber yang kurang informatif.
+**Shot 3 — Gas test chamber (Adegan 5, 20 dtk, estimasi).** Menggantikan foto chamber yang kurang informatif.
 - Ukuran tampil di layar: kotak **640×420** (landscape) dan **952×380** (portrait), memakai *object-fit: cover*. Render di 1920×1080 dan 1080×1920 tetap boleh, tapi **komposisi objek harus muat di tengah** dengan rasio ±3:2 (landscape) / ±5:2 (portrait).
 - Model chamber, dengan acuan `Sumber Dokumen/LAPORAN PROGRESS CHAMBER GAS.pdf` (Gambar 2 tampak samping/depan, Gambar 3 diagram blok, Gambar 4–5 rangkaian):
   kotak akrilik bening, unit GLD di dalam, tabung gas uji + **solenoid valve** di jalur masuk, **pompa hisap** di jalur buang,
@@ -149,11 +161,11 @@ Area teks: landscape **kiri-tengah**, portrait **sepertiga atas**. Jangan taruh 
   | 3,0 | 2 | Ruang uji akrilik + unit GLD |
   | 5,5 | 3 | Sensor acuan suhu, tekanan, kelembapan & gas |
   | 8,0 | 4 | Pompa hisap (udara keluar, pembilasan) |
-  | 10–16 | – | Kamera mundur pelan, semua komponen terlihat |
+  | 10–20 | – | Kamera mundur pelan, semua komponen terlihat |
 
   Kalau detik berbeda, ubah `CHAMBER_PARTS[].at` di `src/scenes/Scene05Trainable.tsx`.
 
-**Shot 4 — Penutup (Adegan 8, 10 dtk).** GLD terpasang di pipa kilang dengan pelat U-bolt, lalu kamera mundur memperlihatkan beberapa node yang terhubung garis cahaya (mesh).
+**Shot 4 — Penutup (Adegan 8, 14 dtk, estimasi).** GLD terpasang di pipa kilang dengan pelat U-bolt, lalu kamera mundur memperlihatkan beberapa node yang terhubung garis cahaya (mesh).
 Area teks: **sepertiga bawah** (tagline + logo). Bagian bawah frame akan digelapkan gradasi oleh Remotion.
 
 ---

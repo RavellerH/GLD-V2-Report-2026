@@ -4,6 +4,7 @@ import {ASSETS} from '../assets';
 import {AssetSlot} from '../components/AssetSlot';
 import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
+import {Sfx} from '../components/Sfx';
 import {GasStatus, REFINERY_GASES, STATUS_LABEL} from '../data/refineryGases';
 import {useLayout} from '../layout';
 import {COLORS} from '../theme';
@@ -95,6 +96,10 @@ export const Scene05Trainable: React.FC = () => {
           </div>
         );
       })}
+      {/* selaras sorotan Blender: katup 0,5 dtk, pompa 8 dtk */}
+      <Sfx name="tick" at={15} volume={0.45} />
+      {CHAMBER_PARTS.map((c) => <Sfx key={c.at} name="pop" at={c.at} volume={0.2} />)}
+      <Sfx name="hum" at={240} volume={0.22} loopFor={80} />
     </SceneFrame>
   );
 };

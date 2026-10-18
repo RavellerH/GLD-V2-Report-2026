@@ -1,0 +1,5 @@
+# File kerja Blender (besar, bisa dibangun ulang dari skrip build_*.py)
+*.blend
+*.blend1
+*.log
+preview/

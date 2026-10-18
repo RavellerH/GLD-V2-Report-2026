@@ -1,20 +1,31 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
-import {COLORS, FONT} from '../theme';
+import {EASE} from '../motion';
+import {COLORS, FONT, ThemeName, themeVars} from '../theme';
 
-const FADE = 10;
+// Panjang crossfade antar-adegan (frame). Explainer menumpangkan tiap adegan TRANSITION frame di atas
+// akhir adegan sebelumnya, jadi adegan baru cukup fade-in di atasnya -> tidak ada kedipan ke latar kosong.
+export const TRANSITION = 18;
 
-// Latar + fade masuk/keluar untuk setiap adegan.
-export const SceneFrame: React.FC<{children: React.ReactNode; background?: string}> = ({children, background}) => {
+export const SceneFrame: React.FC<{children: React.ReactNode; background?: string; theme?: ThemeName; drift?: boolean; last?: boolean}> = ({
+  children,
+  background,
+  theme = 'night',
+  drift,
+  last = false,
+}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
-  const opacity = interpolate(frame, [0, FADE, durationInFrames - FADE, durationInFrames], [0, 1, 1, 0], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  const opts = {easing: EASE, extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
+  const fadeIn = interpolate(frame, [0, TRANSITION], [0, 1], opts);
+  const fadeOut = last ? interpolate(frame, [durationInFrames - 20, durationInFrames], [1, 0], opts) : 1;
+  const enter = interpolate(frame, [0, TRANSITION + 12], [1.025, 1], opts);
+  // Drift: zoom sangat pelan sepanjang adegan agar layar informatif tidak terasa diam.
+  const useDrift = drift ?? theme === 'light';
+  const slow = useDrift ? interpolate(frame, [0, durationInFrames], [1, 1.03]) : 1;
   return (
-    <AbsoluteFill style={{backgroundColor: background ?? COLORS.bg, fontFamily: FONT, color: COLORS.text}}>
-      <AbsoluteFill style={{opacity}}>{children}</AbsoluteFill>
+    <AbsoluteFill style={{...themeVars(theme), opacity: fadeIn * fadeOut, backgroundColor: background ?? COLORS.bg, fontFamily: FONT, color: COLORS.text}}>
+      <AbsoluteFill style={{transform: `scale(${enter * slow})`}}>{children}</AbsoluteFill>
     </AbsoluteFill>
   );
 };

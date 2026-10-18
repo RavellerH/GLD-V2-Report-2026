@@ -5,7 +5,7 @@ Video penjelasan produk GLD berdurasi 2 menit untuk **Digitalization Day**. Nask
 
 > **Melanjutkan di PC?** Baca [`HANDOFF.md`](HANDOFF.md) dulu: status, urutan kerja, daftar shot Blender, dan langkah Gemini TTS.
 
-Dua versi dari satu kode (30 fps, 3600 frame = 120 dtk):
+Dua versi dari satu kode (30 fps, durasi dari `src/timeline.ts`, saat ini ±151 dtk):
 
 | Komposisi | Ukuran | Untuk |
 |---|---|---|
@@ -95,7 +95,7 @@ src/
   assets.ts          ← aset eksternal (Blender landscape/portrait, foto, logo, audio) + flag ready / VO_READY
   layout.ts          ← useLayout(): orientasi, padding, ukuran judul, posisi subtitle
   theme.ts           ← palet (#2B5FCB + #262321) & font
-  Explainer.tsx      ← komposisi 120 dtk: adegan + subtitle + narasi per adegan + musik
+  Explainer.tsx      ← komposisi utama: adegan + subtitle + narasi per adegan + musik
   Root.tsx           ← registrasi komposisi landscape & portrait
   scenes/            ← Scene01Hook … Scene08Outro (tiap adegan punya tata letak landscape & portrait)
   components/        ← SceneFrame (fade), Caption/Badge, AssetSlot, Subtitles, Icons

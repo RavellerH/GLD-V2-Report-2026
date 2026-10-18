@@ -62,7 +62,7 @@ export const SCENES: SceneDef[] = [
     title: '07 Alarm otomatis',
     startSec: 100,
     endSec: 110,
-    vo: 'Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan lokasi dan jenis gas.',
+    vo: 'Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan identitas sensor dan tingkat risikonya.',
   },
   {
     id: 'outro',

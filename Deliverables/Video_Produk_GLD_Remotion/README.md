@@ -54,7 +54,12 @@ public/              ← aset statis (blender/, images/, audio/, fonts/)
 
 Selama aset belum siap, video tetap bisa dirender dan menampilkan **PLACEHOLDER** berlabel nama file yang dibutuhkan.
 
-Aset lain yang ditunggu (semuanya di `assets.ts`): screenshot dashboard asli, logo LGU & ITB,
+Screenshot dashboard (`public/images/dashboard.png`) sudah diisi: Alarm Console dari aplikasi `ru-frontend`
+di repo `RavellerH/gasleakdetectionV2-April` (RU4, data demo hasil seed, 1920×1080). Kalau ingin diganti dengan
+tampilan data nyata, ambil screenshot baru di ukuran yang sama; posisi sorotan baris alarm diatur oleh `FIRST_ALERT`
+di `Scene07Alarm.tsx`.
+
+Aset lain yang ditunggu (semuanya di `assets.ts`): logo LGU & ITB,
 rekaman narasi, dan musik. Untuk logo Pertamina, tambahkan hanya kalau sudah ada izin.
 
 ## Mengubah timing atau naskah

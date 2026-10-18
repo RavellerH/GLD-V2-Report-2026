@@ -64,8 +64,8 @@ Versi yang tetap kuat dan jujur: **"multi-gas yang bisa diajari"**. 8 sensor mem
 - **Mengapa histeresis dan loop guard penting** (poin untuk tanya-jawab): tanpa histeresis, node bisa bolak-balik berganti induk setiap kali sinyal berfluktuasi (*route flapping*). Margin 15 dB memastikan perpindahan hanya terjadi bila jalur baru jelas lebih baik. *Loop guard* mencegah paket berputar di antara dua CH yang saling menjadikan induk.
 
 ### Adegan 7 — Alarm otomatis (1:40–1:50)
-- **Visual (Remotion):** dashboard (mock / screenshot asli), kartu alarm merah, dan dua kartu: *Data normal — disimpan di CH, diambil berkala (pull)* vs *Alarm — dikirim segera (push)*.
-- **VO:** "Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan lokasi dan jenis gas."
+- **Visual (Remotion):** screenshot asli **Alarm Console dashboard RU4** (repo `RavellerH/gasleakdetectionV2-April`, aplikasi `ru-frontend`, data demo dari seed) dengan baris alarm pertama disorot merah, ditambah dua kartu: *Data normal — disimpan di CH, diambil berkala (pull)* vs *Alarm — dikirim segera (push)*.
+- **VO:** "Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan identitas sensor dan tingkat risikonya."
 
 ### Adegan 8 — Penutup (1:50–2:00)
 - **Visual (Blender → Remotion):** GLD terpasang, kamera mundur ke jaringan node; tagline dan logo.
@@ -101,7 +101,7 @@ Proyek Remotion: [`Video_Produk_GLD_Remotion/`](Video_Produk_GLD_Remotion/README
 
 
 1. File CAD desain casing terbaru (`.step`/`.obj`) untuk Blender.
-2. Screenshot/rekaman dashboard aplikasi asli.
+2. ~~Screenshot dashboard aplikasi asli~~ — sudah: Alarm Console RU4 dari repo dashboard.
 3. Klip video demo LPG (jika ada).
 4. Izin penggunaan logo Pertamina.
 5. Pengisi suara (atau TTS), serta musik bebas royalti.

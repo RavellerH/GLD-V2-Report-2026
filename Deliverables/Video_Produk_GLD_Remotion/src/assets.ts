@@ -10,7 +10,7 @@ export const ASSETS = {
 
   // Gambar
   chamber: {path: 'images/chamber_setup_lengkap.jpeg', ready: true, note: 'Foto asli gas test chamber'},
-  dashboard: {path: 'images/dashboard.png', ready: false, note: 'Screenshot dashboard aplikasi asli (1920x1080)'},
+  dashboard: {path: 'images/dashboard.png', ready: true, note: 'Alarm Console dashboard RU4 asli (repo gasleakdetectionV2-April, data demo)'},
   logoLgu: {path: 'images/logo_lgu.png', ready: false, note: 'Logo LAPI Ganesha Utama (PNG transparan)'},
   logoItb: {path: 'images/logo_itb.png', ready: false, note: 'Logo ITB (PNG transparan)'},
 

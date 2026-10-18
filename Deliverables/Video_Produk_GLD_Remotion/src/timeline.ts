@@ -1,8 +1,6 @@
 // Satu-satunya sumber timing video. Detik mengikuti
 // Deliverables/Storyboard_Video_Produk_GLD_DigitalizationDay.md; ubah di sini saja.
 export const FPS = 30;
-export const WIDTH = 1920;
-export const HEIGHT = 1080;
 
 export type SceneId = 'hook' | 'problem' | 'intro' | 'fingerprint' | 'trainable' | 'mesh' | 'alarm' | 'outro';
 

@@ -1,6 +1,7 @@
 # Storyboard Video Penjelasan Produk GLD (2 menit)
 
-**Acara:** Digitalization Day · **Durasi:** 120 detik · **Rasio:** 16:9, 1920×1080, 30 fps
+**Acara:** Digitalization Day · **Durasi:** 120 detik · 30 fps · **Dua versi:** landscape 16:9 (1920×1080) dan portrait/HP 9:16 (1080×1920) dari satu proyek Remotion
+**Narasi:** Gemini TTS, satu file WAV per adegan (`npm run vo:export` / `npm run vo:check`, lihat README proyek)
 **Alat:** Blender (3D perangkat) + Remotion (motion graphic, teks, diagram, komposisi akhir)
 **Pesan inti (2 saja):** (1) **satu perangkat, banyak gas**; (2) **jaringan mesh LoRa privat**: tanpa internet, tanpa kabel data, dan tetap berjalan meski satu node mati.
 

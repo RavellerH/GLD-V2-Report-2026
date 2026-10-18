@@ -5,9 +5,13 @@
   "description": "Video penjelasan produk GLD (2 menit) untuk Digitalization Day",
   "scripts": {
     "dev": "remotion studio",
-    "render": "remotion render GLD-Explainer out/GLD_Explainer.mp4",
+    "render": "remotion render GLD-Explainer out/GLD_Explainer_Landscape.mp4",
+    "render:portrait": "remotion render GLD-Explainer-Portrait out/GLD_Explainer_Portrait.mp4",
+    "render:all": "npm run render && npm run render:portrait",
     "still": "remotion still GLD-Explainer out/preview.png --frame=1200",
     "fingerprints": "python3 tools/extract_fingerprints.py",
+    "vo:export": "python3 tools/vo.py export",
+    "vo:check": "python3 tools/vo.py check",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

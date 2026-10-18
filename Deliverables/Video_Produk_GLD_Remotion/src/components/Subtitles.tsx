@@ -1,18 +1,20 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
+import {useLayout} from '../layout';
 import {COLORS, FONT} from '../theme';
 
 const MAX_CHARS = 95;
+const MAX_CHARS_PORTRAIT = 60;
 
 // Pecah narasi per kalimat, lalu kalimat panjang dipecah lagi di koma/titik koma
 // supaya subtitle paling banyak dua baris.
-const chunk = (vo: string) => {
+const chunk = (vo: string, maxChars: number) => {
   const sentences = vo.match(/[^.!?;]+[.!?;]+/g)?.map((s) => s.trim()) ?? [vo];
   const out: string[] = [];
   for (const sentence of sentences) {
     let line = '';
     for (const clause of sentence.split(/(?<=,)\s+/)) {
-      if (line && line.length + clause.length + 1 > MAX_CHARS) {
+      if (line && line.length + clause.length + 1 > maxChars) {
         out.push(line);
         line = clause;
       } else {
@@ -28,7 +30,8 @@ const chunk = (vo: string) => {
 export const Subtitles: React.FC<{vo: string}> = ({vo}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
-  const parts = chunk(vo);
+  const {portrait, subtitleBottom} = useLayout();
+  const parts = chunk(vo, portrait ? MAX_CHARS_PORTRAIT : MAX_CHARS);
   const total = parts.reduce((n, s) => n + s.length, 0);
 
   let acc = 0;
@@ -42,16 +45,16 @@ export const Subtitles: React.FC<{vo: string}> = ({vo}) => {
   }
 
   return (
-    <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 48}}>
+    <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: subtitleBottom}}>
       <div
         style={{
-          maxWidth: 1500,
+          maxWidth: portrait ? 960 : 1500,
           padding: '12px 28px',
           borderRadius: 12,
           backgroundColor: 'rgba(20,18,16,0.78)',
           color: COLORS.text,
           fontFamily: FONT,
-          fontSize: 34,
+          fontSize: portrait ? 40 : 34,
           fontWeight: 400,
           textAlign: 'center',
           lineHeight: 1.35,

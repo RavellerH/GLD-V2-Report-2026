@@ -3,6 +3,7 @@ import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig} from
 import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {FAILED_NODE, FAILOVER_ROUTE, LINKS, NODES, PRIMARY_ROUTE, nodeById} from '../data/mesh';
+import {useLayout} from '../layout';
 import {COLORS} from '../theme';
 
 // Frame relatif adegan. FAIL_AT diselaraskan dengan kalimat ketiga narasi ("Bila satu Cluster Head gagal").
@@ -19,8 +20,20 @@ const RECOVERY_STEPS = [
   {at: FAIL_AT + 140, text: 'Loop guard & cek jalur ke gateway'},
 ];
 
-const pointOnRoute = (route: string[], t: number) => {
-  const pts = route.map(nodeById);
+// Koordinat node di data/mesh.ts dibuat untuk landscape (alur kiri→kanan).
+// Portrait memutar alurnya jadi atas→bawah dan memetakannya ke area 1080 lebar.
+type Pt = {x: number; y: number};
+const toPortrait = (p: Pt): Pt => ({x: 110 + ((p.y - 330) / 500) * 860, y: 380 + ((p.x - 150) / 1030) * 560});
+const usePos = () => {
+  const {portrait} = useLayout();
+  return (id: string): Pt => {
+    const n = nodeById(id);
+    return portrait ? toPortrait(n) : {x: n.x, y: n.y};
+  };
+};
+
+const pointOnRoute = (pos: (id: string) => Pt, route: string[], t: number) => {
+  const pts = route.map(pos);
   const seg = Math.min(Math.floor(t * (pts.length - 1)), pts.length - 2);
   const local = t * (pts.length - 1) - seg;
   return {x: pts[seg].x + (pts[seg + 1].x - pts[seg].x) * local, y: pts[seg].y + (pts[seg + 1].y - pts[seg].y) * local};
@@ -34,6 +47,7 @@ const isStarLink = (a: string, b: string) => nodeById(a).kind === 'gld' || nodeB
 const InfoPanel: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {portrait} = useLayout();
   const show = (at: number) => spring({frame: frame - at, fps, config: {damping: 200}});
   const row = (color: string, title: string, sub: string, at: number, dashed = false) => (
     <div style={{display: 'flex', gap: 18, alignItems: 'center', opacity: show(at), marginTop: 18}}>
@@ -48,14 +62,14 @@ const InfoPanel: React.FC = () => {
   );
 
   return (
-    <div style={{position: 'absolute', left: 1330, top: 250, width: 500}}>
+    <div style={{position: 'absolute', left: portrait ? 64 : 1330, top: portrait ? 1020 : 250, width: portrait ? 952 : 500}}>
       <div style={{fontSize: 24, fontWeight: 800, color: COLORS.blueLight, letterSpacing: 1, opacity: show(60)}}>DUA LAPIS RADIO</div>
       {row(COLORS.gas, 'STAR · 920 MHz', 'node sensor → Cluster Head', 80, true)}
       {row(COLORS.blueLight, 'MESH · 921 MHz', 'Cluster Head ↔ Cluster Head → gateway', 110)}
 
-      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.ok, letterSpacing: 1, marginTop: 48, opacity: show(FAIL_AT)}}>PEMULIHAN RUTE OTOMATIS</div>
+      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.ok, letterSpacing: 1, marginTop: portrait ? 28 : 48, opacity: show(FAIL_AT)}}>PEMULIHAN RUTE OTOMATIS</div>
       {RECOVERY_STEPS.map((s, i) => (
-        <div key={s.text} style={{display: 'flex', gap: 16, marginTop: 16, opacity: show(s.at), fontSize: 25, lineHeight: 1.3}}>
+        <div key={s.text} style={{display: 'flex', gap: 16, marginTop: portrait ? 10 : 16, opacity: show(s.at), fontSize: 25, lineHeight: 1.3}}>
           <div
             style={{
               flex: '0 0 40px',
@@ -81,6 +95,8 @@ const InfoPanel: React.FC = () => {
 export const Scene06Mesh: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {portrait, padX, width, height, title} = useLayout();
+  const pos = usePos();
   const failed = frame >= FAIL_AT;
   const rerouted = frame >= REROUTE_AT;
   const route = rerouted ? FAILOVER_ROUTE : PRIMARY_ROUTE;
@@ -94,15 +110,15 @@ export const Scene06Mesh: React.FC = () => {
     const usesPrimary = s + TRAVEL < FAIL_AT;
     const usesFailover = s >= REROUTE_AT;
     if (!usesPrimary && !usesFailover) continue;
-    packets.push({...pointOnRoute(usesPrimary ? PRIMARY_ROUTE : FAILOVER_ROUTE, t), key: s});
+    packets.push({...pointOnRoute(pos, usesPrimary ? PRIMARY_ROUTE : FAILOVER_ROUTE, t), key: s});
   }
 
   return (
     <SceneFrame>
-      <svg width={1920} height={1080} style={{position: 'absolute'}}>
+      <svg width={width} height={height} style={{position: 'absolute'}}>
         {LINKS.map(([a, b]) => {
-          const na = nodeById(a);
-          const nb = nodeById(b);
+          const na = pos(a);
+          const nb = pos(b);
           const active = onRoute(route, a, b);
           const dead = failed && (a === FAILED_NODE || b === FAILED_NODE);
           const star = isStarLink(a, b);
@@ -128,7 +144,7 @@ export const Scene06Mesh: React.FC = () => {
           const r = n.kind === 'gw' ? 34 : n.kind === 'ch' ? 24 : 16;
           const fill = isFailed ? COLORS.alarm : n.kind === 'gld' ? COLORS.gas : COLORS.blue;
           return (
-            <g key={n.id} transform={`translate(${n.x} ${n.y}) scale(${p})`} opacity={isFailed ? blink : 1}>
+            <g key={n.id} transform={`translate(${pos(n.id).x} ${pos(n.id).y}) scale(${p})`} opacity={isFailed ? blink : 1}>
               <circle r={r + 14} fill={fill} fillOpacity={0.18} />
               <circle r={r} fill={fill} />
               {isFailed && <path d="M -12 -12 L 12 12 M 12 -12 L -12 12" stroke={COLORS.text} strokeWidth={5} strokeLinecap="round" />}
@@ -144,9 +160,9 @@ export const Scene06Mesh: React.FC = () => {
         ))}
       </svg>
 
-      <AbsoluteFill style={{padding: '60px 120px'}}>
-        <Caption text="Private Mesh LoRa" size={70} />
-        <Caption text="tanpa internet · terpisah dari jaringan TI kilang · multi-hop" from={25} size={34} weight={400} color={COLORS.muted} style={{marginTop: 8}} />
+      <AbsoluteFill style={{padding: portrait ? `180px ${padX}px` : `60px ${padX}px`}}>
+        <Caption text="Private Mesh LoRa" size={title(70)} />
+        <Caption text="tanpa internet · terpisah dari jaringan TI kilang · multi-hop" from={25} size={title(34)} weight={400} color={COLORS.muted} style={{marginTop: 8}} />
       </AbsoluteFill>
 
       <InfoPanel />
@@ -154,8 +170,8 @@ export const Scene06Mesh: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          left: 1330,
-          top: 880,
+          left: portrait ? 64 : 1330,
+          top: portrait ? 1500 : 880,
           fontSize: 22,
           color: COLORS.muted,
           opacity: interpolate(frame, [REROUTE_AT + 60, REROUTE_AT + 90], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),

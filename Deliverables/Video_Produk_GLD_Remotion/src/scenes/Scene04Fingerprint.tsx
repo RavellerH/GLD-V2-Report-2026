@@ -101,7 +101,7 @@ const FingerprintPhase: React.FC = () => {
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : `70px ${padX}px`}}>
-        <Caption text="Larik delapan sensor membentuk sidik jari gas" size={title(56)} />
+        <Caption text="Delapan sensor bersama membentuk sidik jari gas" size={title(56)} />
         <Caption
           text="Prinsip hidung elektronik: sensor oksida logam tidak selektif, namun pola responsnya khas"
           from={20}
@@ -143,7 +143,7 @@ const BOXES: Box[] = [
   {id: 'ds', title: 'Profil sensitivitas', sub: 'karakteristik setiap sensor', at: 25},
   {id: 'b1', title: 'Cabang 1 · Conv1D', sub: 'ekstraksi pola temporal', at: 60, accent: COLORS.blue},
   {id: 'b2', title: 'Cabang 2 · Dense', sub: 'representasi sensitivitas', at: 80, accent: COLORS.blue},
-  {id: 'mg', title: 'Fusi fitur', sub: 'gabungan dua cabang', at: 130, accent: COLORS.blue},
+  {id: 'mg', title: 'Penggabungan', sub: 'fitur dari dua cabang', at: 130, accent: COLORS.blue},
 ];
 const OUTPUTS = ['Udara bersih', 'LPG', 'H₂', '+ kelas tambahan'];
 const ARROWS: [string, string][] = [

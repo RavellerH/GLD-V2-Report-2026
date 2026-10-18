@@ -46,7 +46,7 @@ export const SCENES: SceneDef[] = [
     title: '05 Dapat dilatih ulang',
     startSec: 55,
     endSec: 71,
-    vo: 'Saat ini, model telah mengklasifikasikan udara bersih, LPG, dan hidrogen. Larik sensor yang sama juga sensitif terhadap metana, karbon monoksida, amonia, dan benzena; model untuk gas tersebut dilatih ulang menggunakan chamber uji portabel di lokasi kilang.',
+    vo: 'Saat ini, model telah mengklasifikasikan udara bersih, LPG, dan hidrogen. Delapan sensor yang sama juga sensitif terhadap metana, karbon monoksida, amonia, dan benzena; model untuk gas tersebut dilatih ulang menggunakan chamber uji portabel di lokasi kilang.',
   },
   {
     id: 'mesh',

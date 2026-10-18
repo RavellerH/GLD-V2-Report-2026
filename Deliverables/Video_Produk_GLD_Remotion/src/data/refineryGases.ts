@@ -19,7 +19,7 @@ export const REFINERY_GASES: RefineryGas[] = [
   {formula: 'CO', name: 'Karbon monoksida', sensor: 'kanal spesifik CO', status: 'target'},
   {formula: 'NH₃', name: 'Amonia', sensor: 'kanal kualitas udara', status: 'target'},
   {formula: 'C₆H₆', name: 'Benzena', sensor: 'kanal kualitas udara', status: 'target'},
-  // Belum ada sensor khusus H2S (mis. sel elektrokimia) di larik 8 sensor saat ini.
+  // Belum ada sensor khusus H2S (mis. sel elektrokimia) di rangkaian 8 sensor saat ini.
   {formula: 'H₂S', name: 'Hidrogen sulfida', sensor: 'kanal spesifik belum tersedia', status: 'extra'},
 ];
 

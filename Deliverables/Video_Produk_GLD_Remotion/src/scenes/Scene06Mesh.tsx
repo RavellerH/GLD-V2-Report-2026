@@ -5,9 +5,19 @@ import {SceneFrame} from '../components/SceneFrame';
 import {FAILED_NODE, FAILOVER_ROUTE, LINKS, NODES, PRIMARY_ROUTE, nodeById} from '../data/mesh';
 import {COLORS} from '../theme';
 
-const FAIL_AT = 330; // frame relatif adegan saat Cluster Head mati
+// Frame relatif adegan. FAIL_AT diselaraskan dengan kalimat ketiga narasi ("Bila satu Cluster Head gagal").
+const FAIL_AT = 560;
+const REROUTE_AT = 680;
 const SPAWN_EVERY = 40;
 const TRAVEL = 80;
+
+// Langkah pemulihan rute; parameter dari Technical Datasheet Rev 4.0 (firmware Cluster Head).
+const RECOVERY_STEPS = [
+  {at: FAIL_AT + 20, text: 'Induk tak terdengar → dinyatakan kedaluwarsa'},
+  {at: FAIL_AT + 60, text: 'Evaluasi hingga 8 kandidat induk'},
+  {at: FAIL_AT + 100, text: 'Pindah bila sinyal ≥ 15 dB lebih baik'},
+  {at: FAIL_AT + 140, text: 'Loop guard & cek jalur ke gateway'},
+];
 
 const pointOnRoute = (route: string[], t: number) => {
   const pts = route.map(nodeById);
@@ -19,20 +29,70 @@ const pointOnRoute = (route: string[], t: number) => {
 const onRoute = (route: string[], a: string, b: string) =>
   route.some((n, i) => i < route.length - 1 && ((n === a && route[i + 1] === b) || (n === b && route[i + 1] === a)));
 
+const isStarLink = (a: string, b: string) => nodeById(a).kind === 'gld' || nodeById(b).kind === 'gld';
+
+const InfoPanel: React.FC = () => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const show = (at: number) => spring({frame: frame - at, fps, config: {damping: 200}});
+  const row = (color: string, title: string, sub: string, at: number, dashed = false) => (
+    <div style={{display: 'flex', gap: 18, alignItems: 'center', opacity: show(at), marginTop: 18}}>
+      <svg width={56} height={12}>
+        <line x1={0} y1={6} x2={56} y2={6} stroke={color} strokeWidth={6} strokeDasharray={dashed ? '10 8' : undefined} />
+      </svg>
+      <div>
+        <div style={{fontSize: 28, fontWeight: 600}}>{title}</div>
+        <div style={{fontSize: 22, color: COLORS.muted}}>{sub}</div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{position: 'absolute', left: 1330, top: 250, width: 500}}>
+      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.blueLight, letterSpacing: 1, opacity: show(60)}}>DUA LAPIS RADIO</div>
+      {row(COLORS.gas, 'STAR · 920 MHz', 'node sensor → Cluster Head', 80, true)}
+      {row(COLORS.blueLight, 'MESH · 921 MHz', 'Cluster Head ↔ Cluster Head → gateway', 110)}
+
+      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.ok, letterSpacing: 1, marginTop: 48, opacity: show(FAIL_AT)}}>PEMULIHAN RUTE OTOMATIS</div>
+      {RECOVERY_STEPS.map((s, i) => (
+        <div key={s.text} style={{display: 'flex', gap: 16, marginTop: 16, opacity: show(s.at), fontSize: 25, lineHeight: 1.3}}>
+          <div
+            style={{
+              flex: '0 0 40px',
+              height: 40,
+              borderRadius: 20,
+              backgroundColor: COLORS.ok,
+              color: COLORS.charcoal,
+              fontWeight: 800,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {i + 1}
+          </div>
+          <div>{s.text}</div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export const Scene06Mesh: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const failed = frame >= FAIL_AT;
-  const route = failed ? FAILOVER_ROUTE : PRIMARY_ROUTE;
+  const rerouted = frame >= REROUTE_AT;
+  const route = rerouted ? FAILOVER_ROUTE : PRIMARY_ROUTE;
   const blink = failed ? 0.5 + 0.5 * Math.sin((frame - FAIL_AT) / 3) : 1;
 
-  // Paket yang sedang berjalan. Paket primer yang akan melewati node gagal tidak lagi dikirim.
+  // Paket yang sedang berjalan. Selama pemulihan rute tidak ada paket baru yang dikirim.
   const packets: {x: number; y: number; key: number}[] = [];
   for (let s = 60; s <= frame; s += SPAWN_EVERY) {
     const t = (frame - s) / TRAVEL;
     if (t < 0 || t > 1) continue;
     const usesPrimary = s + TRAVEL < FAIL_AT;
-    const usesFailover = s > FAIL_AT + 30;
+    const usesFailover = s >= REROUTE_AT;
     if (!usesPrimary && !usesFailover) continue;
     packets.push({...pointOnRoute(usesPrimary ? PRIMARY_ROUTE : FAILOVER_ROUTE, t), key: s});
   }
@@ -45,6 +105,8 @@ export const Scene06Mesh: React.FC = () => {
           const nb = nodeById(b);
           const active = onRoute(route, a, b);
           const dead = failed && (a === FAILED_NODE || b === FAILED_NODE);
+          const star = isStarLink(a, b);
+          const base = star ? COLORS.gas : COLORS.line;
           return (
             <line
               key={`${a}-${b}`}
@@ -52,10 +114,10 @@ export const Scene06Mesh: React.FC = () => {
               y1={na.y}
               x2={nb.x}
               y2={nb.y}
-              stroke={dead ? COLORS.alarm : active ? COLORS.blueLight : COLORS.line}
-              strokeOpacity={dead ? 0.35 : 1}
+              stroke={dead ? COLORS.alarm : active ? COLORS.blueLight : base}
+              strokeOpacity={dead ? 0.35 : star && !active ? 0.5 : 1}
               strokeWidth={active ? 6 : 3}
-              strokeDasharray={dead ? '10 12' : undefined}
+              strokeDasharray={dead || star ? '10 10' : undefined}
             />
           );
         })}
@@ -84,26 +146,22 @@ export const Scene06Mesh: React.FC = () => {
 
       <AbsoluteFill style={{padding: '60px 120px'}}>
         <Caption text="Private Mesh LoRa" size={70} />
-        <Caption text="tanpa internet · tanpa kabel data · multi-hop" from={25} size={36} weight={400} color={COLORS.muted} style={{marginTop: 8}} />
+        <Caption text="tanpa internet · terpisah dari jaringan TI kilang · multi-hop" from={25} size={34} weight={400} color={COLORS.muted} style={{marginTop: 8}} />
       </AbsoluteFill>
 
-      {failed && (
-        <AbsoluteFill style={{alignItems: 'flex-end', padding: '70px 120px'}}>
-          <Caption text="Self-healing: rute berpindah otomatis" from={FAIL_AT + 20} size={44} color={COLORS.ok} />
-        </AbsoluteFill>
-      )}
+      <InfoPanel />
 
       <div
         style={{
           position: 'absolute',
-          left: 120,
-          bottom: 140,
-          fontSize: 24,
+          left: 1330,
+          top: 880,
+          fontSize: 22,
           color: COLORS.muted,
-          opacity: interpolate(frame, [500, 530], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
+          opacity: interpolate(frame, [REROUTE_AT + 60, REROUTE_AT + 90], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
         }}
       >
-        Diuji dengan 8 Cluster Head multi-hop di kampus ITB
+        Failover diuji dengan 8 Cluster Head multi-hop di kampus ITB
       </div>
     </SceneFrame>
   );

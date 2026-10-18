@@ -50,6 +50,21 @@ export const Scene07Alarm: React.FC = () => {
           <div style={{fontSize: 26, marginTop: 12}}>Node GLD-03 · Area: Unit Proses</div>
         </div>
       </div>
+      {/* Dua jalur data: normal (cache + pull berkala) vs alarm (push segera). */}
+      <div style={{position: 'absolute', left: 1220, top: 520, width: 500, display: 'flex', flexDirection: 'column', gap: 18}}>
+        {[
+          {label: 'Data normal', sub: 'disimpan di Cluster Head, diambil berkala (pull)', color: COLORS.ok, at: 120},
+          {label: 'Alarm', sub: 'dikirim segera (push), tanpa menunggu siklus pull', color: COLORS.alarm, at: 150},
+        ].map((r) => {
+          const p = spring({frame: frame - r.at, fps, config: {damping: 200}});
+          return (
+            <div key={r.label} style={{opacity: p, padding: '18px 22px', borderRadius: 14, backgroundColor: 'white', borderLeft: `8px solid ${r.color}`, color: COLORS.charcoal, boxShadow: '0 4px 16px rgba(0,0,0,0.12)'}}>
+              <div style={{fontSize: 28, fontWeight: 800}}>{r.label}</div>
+              <div style={{fontSize: 22, marginTop: 4}}>{r.sub}</div>
+            </div>
+          );
+        })}
+      </div>
       <AbsoluteFill style={{padding: '60px 160px'}}>
         <Caption text="Alarm langsung ke operator" size={60} />
       </AbsoluteFill>

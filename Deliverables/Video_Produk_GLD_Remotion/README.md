@@ -45,9 +45,9 @@ public/              ← aset statis (blender/, images/, audio/, fonts/)
 
    | File | Adegan | Durasi |
    |---|---|---|
-   | `public/blender/scene01_refinery.mp4` | 01 Hook, kilang + kebocoran | 10 dtk |
-   | `public/blender/scene03_hero_exploded.mp4` | 03 Hero shot + exploded view | 13 dtk |
-   | `public/blender/scene08_outro.mp4` | 08 GLD terpasang, kamera mundur | 12 dtk |
+   | `public/blender/scene01_refinery.mp4` | 01 Hook, kilang + kebocoran | 8 dtk |
+   | `public/blender/scene03_hero_exploded.mp4` | 03 Hero shot + exploded view | 10 dtk |
+   | `public/blender/scene08_outro.mp4` | 08 GLD terpasang, kamera mundur | 10 dtk |
 
 2. Di `src/assets.ts`, ubah `ready: false` menjadi `true` untuk aset tersebut.
 3. Selaraskan waktu label exploded view di `Scene03Intro.tsx` (prop `from`) dengan render Blender.

@@ -6,7 +6,7 @@ import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {COLORS} from '../theme';
 
-const PARTS = ['8 sensor gas', 'Prosesor AI (ESP32-S3)', 'Radio LoRa'];
+const PARTS = ['8 sensor gas oksida logam (MQ)', 'ADC 24-bit (ADS1256)', 'ESP32-S3 · inferensi AI', 'Radio LoRa 920 MHz'];
 
 export const Scene03Intro: React.FC = () => (
   <SceneFrame>
@@ -18,7 +18,7 @@ export const Scene03Intro: React.FC = () => (
     {/* Label exploded view; selaraskan waktu `from` dengan render Blender. */}
     <AbsoluteFill style={{justifyContent: 'center', alignItems: 'flex-end', paddingRight: 140, gap: 26}}>
       {PARTS.map((p, i) => (
-        <Caption key={p} text={p} from={180 + i * 25} size={40} weight={600} style={{borderLeft: `6px solid ${COLORS.blue}`, paddingLeft: 18}} />
+        <Caption key={p} text={p} from={120 + i * 20} size={40} weight={600} style={{borderLeft: `6px solid ${COLORS.blue}`, paddingLeft: 18}} />
       ))}
     </AbsoluteFill>
   </SceneFrame>

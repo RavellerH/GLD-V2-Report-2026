@@ -21,50 +21,56 @@ Versi yang tetap kuat dan jujur: **"multi-gas yang bisa diajari"**. 8 sensor mem
 | Rute otomatis berpindah saat Cluster Head mati (failover teruji) | Jarak dalam kilometer per hop |
 | Alarm dikirim otomatis (push), tanpa menunggu polling | Akurasi "99%" (angka model masih direkonsiliasi) |
 | Jaringan privat, tidak butuh internet atau jaringan IT kilang | Logo Pertamina tanpa izin humas/klien |
+| Arsitektur CNN dua cabang, int8, inferensi di ESP32-S3 | Pemulihan rute "seketika" / dalam X detik (belum diukur) |
 
 ---
 
 ## 2. Storyboard per adegan
 
-Narasi ±260 kata ≈ 120 detik dengan tempo presentasi santai.
+**Revisi 18 Okt — narasi formal-akademis.** ±250 kata dalam 120 detik (≈2 kata/detik, tempo presentasi formal). Porsi waktu digeser ke dua pesan inti: AI/ML (30 dtk) dan mesh *self-healing* (30 dtk). Naskah yang dipakai Remotion ada di `Video_Produk_GLD_Remotion/src/timeline.ts`; bila naskah diubah, ubah di sana.
 
-### Adegan 1 — Hook (0:00–0:10)
-- **Visual (Blender):** kilang saat senja, kamera pelan menyusuri pipa. Gelombang distorsi transparan (gas) mulai keluar dari flange, tidak terlihat jelas.
-- **Teks (Remotion):** *"Gas bocor tidak terlihat."*
-- **VO:** "Di kilang, kebocoran gas tidak terlihat dan tidak menunggu. Beberapa detik bisa menentukan segalanya."
+**Dasar teknis narasi** (agar bisa dipertanggungjawabkan saat tanya-jawab):
+- *Sensor & akuisisi:* 8 sensor MOX seri MQ (MQ8/MQ135/MQ3/MQ5/MQ4/MQ7/MQ6/MQ2), ADC ADS1256 24-bit, ESP32-S3 — TDS Rev 4.0.
+- *Model:* CNN dua cabang — Conv1D atas sinyal sensor + Dense atas profil sensitivitas sensor, dikuantisasi int8, inferensi di ESP32-S3 — presentasi model 6 Agu (lampiran FAT). Kelas yang disebut mengikuti TDS Rev 4.0: udara bersih, LPG, H₂. Angka akurasi sengaja tidak disebut.
+- *Mesh:* Cluster Head dua radio — STAR 920 MHz (sensor→CH) dan MESH 921 MHz (CH↔CH); pemilihan induk dinamis, ≤8 kandidat induk, margin pindah 15 dB, *loop guard*, cek jangkauan ke gateway — TDS Rev 4.0. Failover diuji pada mesh 8-CH di kampus ITB. Waktu pemulihan **tidak** disebut karena belum diukur (ambang induk kedaluwarsa di firmware bisa sampai belasan menit), jadi narasi tidak memakai kata "seketika".
+- *Alarm:* data normal disimpan di CH dan diambil berkala (*pull*), alarm dikirim *push* — TDS Rev 4.0, push alarm teruji 6–8 Agu.
 
-### Adegan 2 — Masalah (0:10–0:22)
-- **Visual (Remotion, 2D flat):** ikon detektor konvensional, masing-masing berlabel satu gas; garis kabel panjang menuju ruang kontrol, lalu di-*strike* merah.
-- **VO:** "Detektor konvensional umumnya hanya untuk satu jenis gas, dan perlu kabel data panjang ke ruang kontrol. Mahal, lambat dipasang, sulit diperluas."
+### Adegan 1 — Hook (0:00–0:08)
+- **Visual (Blender):** kilang saat senja, gas keluar dari flange, nyaris tak terlihat.
+- **Teks:** *"Gas bocor tidak terlihat."*
+- **VO:** "Kebocoran gas di kilang tidak kasatmata, dan setiap detik keterlambatan deteksi memperbesar risiko keselamatan."
 
-### Adegan 3 — Perkenalan GLD (0:22–0:35)
-- **Visual (Blender):** hero shot unit GLD berputar, lalu *exploded view*: casing terbuka, terlihat papan sensor 8× MQ, ESP32-S3, modul LoRa.
-- **Teks:** **GLD — Gas Leak Detection** · LAPI Ganesha Utama × ITB
-- **VO:** "Kami memperkenalkan GLD: satu unit dengan delapan sensor gas, prosesor AI, dan radio LoRa dalam satu casing."
+### Adegan 2 — Masalah (0:08–0:18)
+- **Visual (Remotion):** detektor konvensional berlabel satu gas, kabel panjang ke ruang kontrol, lalu dicoret.
+- **VO:** "Detektor konvensional umumnya dirancang untuk satu jenis gas dan bergantung pada kabel data menuju ruang kontrol, sehingga mahal dan sulit diperluas."
 
-### Adegan 4 — Multi-gas: sidik jari gas (0:35–0:58) ⭐ pesan inti 1
-- **Visual (Remotion):** 8 batang/kanal sensor (MQ8, MQ135, MQ3, MQ5, MQ4, MQ7, MQ6, MQ2) beranimasi menjadi **radar chart 8-sumbu**. Tiap gas membentuk pola berbeda: LPG → pola A, H₂ → pola B, udara bersih → pola kecil. Label klasifikasi muncul: `LPG ● terdeteksi`.
-- **Teks:** *"8 sensor → 1 sidik jari → AI mengenali gasnya"* · badge kecil **"AI on-device"**
-- **VO:** "Setiap gas meninggalkan pola unik pada delapan sensor, seperti sidik jari. Model AI yang berjalan langsung di dalam perangkat membaca pola itu dan mengenali jenis gasnya, tanpa perlu server untuk berpikir."
+### Adegan 3 — Perkenalan GLD (0:18–0:28)
+- **Visual (Blender):** hero shot lalu exploded view; label: *8 sensor gas oksida logam (MQ) · ADC 24-bit (ADS1256) · ESP32-S3 · inferensi AI · Radio LoRa 920 MHz*.
+- **VO:** "GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor ESP32-S3, dan radio LoRa dalam satu unit."
 
-### Adegan 5 — Bisa diajari gas baru (0:58–1:10)
-- **Visual (Remotion + foto asli):** foto gas test chamber (`scripts/assets/chamber_photos/`) → panah ke ikon "dataset" → "model" → masuk ke unit GLD. Peta kecil 6 titik RU menyala satu per satu.
-- **Teks:** *"Dilatih di lokasi, sesuai gas di setiap kilang"*
-- **VO:** "Dan GLD bisa terus belajar. Chamber uji portable kami bawa ke kilang, data diambil di tempat, lalu model diperbarui sesuai gas yang dibutuhkan di lokasi tersebut."
+### Adegan 4 — Sidik jari gas & model AI (0:28–0:58) ⭐ pesan inti 1
+- **Visual fase A (0:28–0:44, Remotion):** batang 8 sensor + radar chart dari **data chamber asli** berganti pola: udara bersih → LPG (*Klasifikasi AI: LPG*) → CO₂. Judul: *"8 sensor, sensitivitas berbeda → satu sidik jari gas"*, sub-judul: prinsip hidung elektronik.
+- **Visual fase B (0:44–0:58, Remotion):** diagram arsitektur: *Sinyal 8 sensor → Cabang 1 Conv1D (pola temporal)*; *Profil sensitivitas → Cabang 2 Dense*; keduanya → *Penggabungan* → *Softmax: Udara bersih / LPG / H₂*. Badge: *Kuantisasi int8 · Inferensi di ESP32-S3 · Tanpa server*.
+- **VO:** "Sensor semikonduktor oksida logam tidak sepenuhnya selektif; satu sensor dapat bereaksi terhadap banyak gas. Keterbatasan ini justru kami manfaatkan. Delapan sensor dengan sensitivitas berbeda membentuk satu vektor respons, layaknya sidik jari kimia, sesuai prinsip hidung elektronik. Jaringan saraf konvolusional dua cabang mempelajari pola temporal sinyal sensor sekaligus profil sensitivitasnya, kemudian dikuantisasi ke delapan bit dan dijalankan langsung di mikrokontroler, tanpa bergantung pada server."
+- **Mengapa ini lebih kaya** (poin untuk tanya-jawab): detektor konvensional mengandalkan selektivitas *satu* sensor terhadap *satu* gas. GLD memakai informasi gabungan dari delapan sensor yang saling tumpang-tindih sensitivitasnya, sehingga satu perangkat bisa membedakan beberapa gas. Cabang Conv1D menangkap dinamika respons terhadap waktu (bukan hanya nilai sesaat), sedangkan cabang kedua menyuntikkan pengetahuan fisik tentang karakter tiap sensor. Kuantisasi int8 membuat model cukup kecil untuk mikrokontroler, sehingga keputusan diambil di perangkat tanpa ketergantungan pada jaringan.
 
-### Adegan 6 — Private Mesh LoRa (1:10–1:35) ⭐ pesan inti 2
-- **Visual (Remotion, peta kilang top-down 2D):** titik-titik GLD → Cluster Head → Gateway. Paket data berupa titik cahaya yang melompat antar-node (multi-hop). Lalu satu Cluster Head "mati" (merah, berkedip), dan paket **otomatis berbelok** lewat rute lain.
-- **Teks:** *"Private Mesh LoRa · tanpa internet · tanpa kabel data"* → saat failover: *"Self-healing"*
-- **VO:** "Data dikirim lewat jaringan mesh LoRa privat. Setiap Cluster Head meneruskan data, lompat demi lompat, sampai ke gateway, tanpa internet dan tanpa bergantung pada jaringan IT kilang. Jika satu titik mati, data otomatis mencari jalur lain."
+### Adegan 5 — Dapat dilatih ulang (0:58–1:10)
+- **Visual (Remotion + foto asli):** foto chamber → *Chamber di kilang → Dataset on-site → Latih model → Update GLD*; peta 6 RU (*Rencana rollout*).
+- **VO:** "Saat ini model mengenali udara bersih, LPG, dan hidrogen. Untuk gas lain, data dikumpulkan dengan chamber uji portabel di lokasi kilang, lalu model dilatih ulang."
 
-### Adegan 7 — Alarm otomatis (1:35–1:48)
-- **Visual (Remotion):** mock dashboard (gunakan tampilan asli aplikasi bila ada screenshot) → kartu alarm merah muncul dengan lokasi area & jenis gas; ikon notifikasi.
-- **VO:** "Begitu kebocoran terdeteksi, alarm langsung dikirim ke dashboard operator, lengkap dengan lokasi dan jenis gasnya."
+### Adegan 6 — Private mesh LoRa & pemulihan rute (1:10–1:40) ⭐ pesan inti 2
+- **Visual (Remotion):** topologi GLD → CH → Gateway. Tautan STAR (oranye, putus-putus) dan MESH (biru) dibedakan. Panel kanan: *Dua lapis radio* (STAR 920 MHz / MESH 921 MHz). Saat CH-2 mati, panel menampilkan 4 langkah pemulihan: (1) induk tak terdengar → kedaluwarsa, (2) evaluasi hingga 8 kandidat induk, (3) pindah bila sinyal ≥ 15 dB lebih baik (histeresis), (4) *loop guard* & cek jalur ke gateway; lalu paket mengalir lewat CH-3. Catatan: *Failover diuji dengan 8 Cluster Head multi-hop di kampus ITB*.
+- **VO:** "Komunikasi menggunakan jaringan mesh LoRa privat dua lapis pada pita sembilan ratus dua puluh megahertz. Node sensor terhubung ke Cluster Head, dan antar-Cluster Head membentuk mesh multi-hop menuju gateway, tanpa internet dan terpisah dari jaringan TI kilang. Bila satu Cluster Head gagal, node tetangga memilih induk baru secara otomatis, dengan histeresis sinyal dan pencegahan loop agar rute tetap stabil."
+- **Mengapa histeresis dan loop guard penting** (poin untuk tanya-jawab): tanpa histeresis, node bisa bolak-balik berganti induk setiap kali sinyal berfluktuasi (*route flapping*). Margin 15 dB memastikan perpindahan hanya terjadi bila jalur baru jelas lebih baik. *Loop guard* mencegah paket berputar di antara dua CH yang saling menjadikan induk.
 
-### Adegan 8 — Penutup (1:48–2:00)
-- **Visual (Blender → Remotion):** unit GLD terpasang di tiang/pipa kilang, kamera mundur memperlihatkan banyak node terhubung garis cahaya. Fade ke logo.
-- **Teks:** **GLD — Satu perangkat. Banyak gas. Jaringan yang tak terputus.** · logo LGU, ITB (Pertamina hanya jika diizinkan)
-- **VO:** "GLD: satu perangkat, banyak gas, jaringan yang tak terputus. Teknologi deteksi kebocoran gas dari Indonesia, untuk kilang Indonesia."
+### Adegan 7 — Alarm otomatis (1:40–1:50)
+- **Visual (Remotion):** dashboard (mock / screenshot asli), kartu alarm merah, dan dua kartu: *Data normal — disimpan di CH, diambil berkala (pull)* vs *Alarm — dikirim segera (push)*.
+- **VO:** "Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan lokasi dan jenis gas."
+
+### Adegan 8 — Penutup (1:50–2:00)
+- **Visual (Blender → Remotion):** GLD terpasang, kamera mundur ke jaringan node; tagline dan logo.
+- **Teks:** **GLD — Satu perangkat. Banyak gas. Jaringan yang tak terputus.**
+- **VO:** "GLD: deteksi multigas berbasis kecerdasan buatan di tepi jaringan, dengan komunikasi yang memulihkan dirinya sendiri. Dikembangkan di Indonesia, untuk kilang Indonesia."
 
 ---
 

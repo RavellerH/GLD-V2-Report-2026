@@ -14,9 +14,9 @@ type GasKey = keyof typeof fingerprints.gases;
 
 // Urutan pola yang ditampilkan (frame relatif fase A). Data dari tools/extract_fingerprints.py.
 const STATES: {gas: GasKey; at: number; label: string; color: string}[] = [
-  {gas: 'clean', at: 60, label: 'Udara bersih · normal', color: COLORS.ok},
-  {gas: 'lpg', at: 180, label: 'Klasifikasi AI: LPG', color: COLORS.gas},
-  {gas: 'co2', at: 330, label: 'Pola CO₂', color: COLORS.blueLight},
+  {gas: 'clean', at: 60, label: 'Udara bersih · kondisi normal', color: COLORS.ok},
+  {gas: 'lpg', at: 180, label: 'Hasil klasifikasi: LPG', color: COLORS.gas},
+  {gas: 'co2', at: 330, label: 'Pola respons CO₂', color: COLORS.blueLight},
 ];
 
 // Label kanal di layar: S1–S8 (urutan sama dengan fingerprints.sensors). Nama seri sensor tidak ditampilkan.
@@ -101,9 +101,9 @@ const FingerprintPhase: React.FC = () => {
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : `70px ${padX}px`}}>
-        <Caption text="8 sensor, sensitivitas berbeda → satu sidik jari gas" size={title(56)} />
+        <Caption text="Larik delapan sensor membentuk sidik jari gas" size={title(56)} />
         <Caption
-          text="Prinsip hidung elektronik: sensor oksida logam tidak selektif, tetapi polanya khas"
+          text="Prinsip hidung elektronik: sensor oksida logam tidak selektif, namun pola responsnya khas"
           from={20}
           size={title(30)}
           weight={400}
@@ -116,7 +116,7 @@ const FingerprintPhase: React.FC = () => {
         <AbsoluteFill style={{alignItems: 'center', paddingTop: 470}}>
           <Bars values={values} color={color} />
           {label}
-          <Radar values={values} color={color} size={600} />
+          <Radar values={values} color={color} size={560} />
         </AbsoluteFill>
       ) : (
         <AbsoluteFill style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: `150px ${padX}px 140px`}}>
@@ -128,8 +128,8 @@ const FingerprintPhase: React.FC = () => {
         </AbsoluteFill>
       )}
 
-      <div style={{position: 'absolute', left: padX, top: portrait ? 1600 : 880, fontSize: 22, color: COLORS.muted}}>
-        Pola respons terukur · {fingerprints.source}
+      <div style={{position: 'absolute', left: padX, top: portrait ? 1510 : 880, fontSize: 22, color: COLORS.muted}}>
+        Pola respons hasil pengukuran · {fingerprints.source}
       </div>
     </AbsoluteFill>
   );
@@ -139,13 +139,13 @@ type Rect = {x: number; y: number; w: number; h: number};
 type Box = {id: string; title: string; sub: string; at: number; accent?: string};
 
 const BOXES: Box[] = [
-  {id: 'in', title: 'Sinyal 8 sensor', sub: 'deret waktu · 24-bit', at: 10},
-  {id: 'ds', title: 'Profil sensitivitas', sub: 'karakteristik tiap sensor', at: 25},
-  {id: 'b1', title: 'Cabang 1 · Conv1D', sub: 'pola temporal sinyal', at: 60, accent: COLORS.blue},
-  {id: 'b2', title: 'Cabang 2 · Dense', sub: 'fitur sensitivitas', at: 80, accent: COLORS.blue},
-  {id: 'mg', title: 'Penggabungan', sub: 'fitur dua cabang', at: 130, accent: COLORS.blue},
+  {id: 'in', title: 'Sinyal 8 sensor', sub: 'deret waktu, resolusi 24-bit', at: 10},
+  {id: 'ds', title: 'Profil sensitivitas', sub: 'karakteristik setiap sensor', at: 25},
+  {id: 'b1', title: 'Cabang 1 · Conv1D', sub: 'ekstraksi pola temporal', at: 60, accent: COLORS.blue},
+  {id: 'b2', title: 'Cabang 2 · Dense', sub: 'representasi sensitivitas', at: 80, accent: COLORS.blue},
+  {id: 'mg', title: 'Fusi fitur', sub: 'gabungan dua cabang', at: 130, accent: COLORS.blue},
 ];
-const OUTPUTS = ['Udara bersih', 'LPG', 'H₂', '+ kelas per kilang'];
+const OUTPUTS = ['Udara bersih', 'LPG', 'H₂', '+ kelas tambahan'];
 const ARROWS: [string, string][] = [
   ['in', 'b1'],
   ['ds', 'b2'],
@@ -157,11 +157,11 @@ const ARROWS: [string, string][] = [
 const GEOMETRY: Record<'landscape' | 'portrait', {boxes: Record<string, Rect>; outputs: Rect[]; softmax: {x: number; y: number}; badges: {x: number; y: number}}> = {
   landscape: {
     boxes: {
-      in: {x: 120, y: 250, w: 340, h: 150},
-      ds: {x: 120, y: 590, w: 340, h: 150},
-      b1: {x: 580, y: 250, w: 380, h: 150},
-      b2: {x: 580, y: 590, w: 380, h: 150},
-      mg: {x: 1080, y: 420, w: 300, h: 150},
+      in: {x: 120, y: 250, w: 390, h: 150},
+      ds: {x: 120, y: 590, w: 390, h: 150},
+      b1: {x: 600, y: 250, w: 390, h: 150},
+      b2: {x: 600, y: 590, w: 390, h: 150},
+      mg: {x: 1075, y: 420, w: 345, h: 150},
     },
     outputs: OUTPUTS.map((_, i) => ({x: 1500, y: 330 + i * 130, w: 300, h: 90})),
     softmax: {x: 1500, y: 280},
@@ -272,12 +272,12 @@ const ModelPhase: React.FC = () => {
           </div>
         );
       })}
-      <div style={{position: 'absolute', left: g.softmax.x, top: g.softmax.y, fontSize: 24, color: COLORS.muted, opacity: appear(160)}}>Softmax · kelas gas</div>
+      <div style={{position: 'absolute', left: g.softmax.x, top: g.softmax.y, fontSize: 24, color: COLORS.muted, opacity: appear(160)}}>Softmax · keluaran kelas gas</div>
 
       <div style={{position: 'absolute', left: g.badges.x, top: g.badges.y, display: 'flex', flexWrap: 'wrap', gap: 20, width: portrait ? 952 : undefined}}>
-        <Badge text="Kuantisasi int8" from={260} />
-        <Badge text="Inferensi on-device" from={280} />
-        <Badge text="Tanpa server" from={300} color={COLORS.ok} />
+        <Badge text="Kuantisasi 8-bit" from={260} />
+        <Badge text="Inferensi pada perangkat" from={280} />
+        <Badge text="Independen dari server" from={300} color={COLORS.ok} />
       </div>
     </AbsoluteFill>
   );

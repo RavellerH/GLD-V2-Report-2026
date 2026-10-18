@@ -63,8 +63,8 @@ export const Scene07Alarm: React.FC = () => {
       {/* Dua jalur data: normal (cache + pull berkala) vs alarm (push segera). */}
       <div style={{position: 'absolute', left: L.cards.x, top: L.cards.y, width: L.cards.w, display: 'flex', flexDirection: 'column', gap: 18}}>
         {[
-          {label: 'Data normal', sub: 'disimpan di Cluster Head, diambil berkala (pull)', color: COLORS.ok, at: 120},
-          {label: 'Alarm', sub: 'dikirim segera (push), tanpa menunggu siklus pull', color: COLORS.alarm, at: 150},
+          {label: 'Data normal', sub: 'disimpan pada Cluster Head, diambil secara berkala (pull)', color: COLORS.ok, at: 120},
+          {label: 'Alarm', sub: 'dikirim segera melalui mekanisme push, tanpa menunggu siklus pull', color: COLORS.alarm, at: 150},
         ].map((r) => {
           const p = spring({frame: frame - r.at, fps, config: {damping: 200}});
           return (
@@ -77,10 +77,10 @@ export const Scene07Alarm: React.FC = () => {
       </div>
 
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : '50px 192px'}}>
-        <Caption text="Alarm langsung ke operator" size={title(60)} />
+        <Caption text="Notifikasi alarm kepada operator" size={title(60)} />
       </AbsoluteFill>
       <div style={{position: 'absolute', right: portrait ? undefined : 192, left: portrait ? padX : undefined, top: portrait ? 365 : 82, fontSize: 22, color: COLORS.muted}}>
-        Dashboard GLD · RU IV · data demo
+        Dashboard GLD · RU IV · data demonstrasi
       </div>
     </SceneFrame>
   );

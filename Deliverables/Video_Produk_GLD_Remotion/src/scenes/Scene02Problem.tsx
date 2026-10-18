@@ -72,7 +72,7 @@ export const Scene02Problem: React.FC = () => {
       </div>
 
       <AbsoluteFill style={{alignItems: 'center', paddingTop: portrait ? 200 : 70, textAlign: 'center'}}>
-        <Caption text="5 gas = 5 detektor + 5 kabel data" from={130} size={title(56)} />
+        <Caption text="Pendekatan konvensional: satu detektor per jenis gas" from={130} size={title(56)} />
       </AbsoluteFill>
     </SceneFrame>
   );

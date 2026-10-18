@@ -18,10 +18,10 @@ const STATUS_COLOR: Record<GasStatus, string> = {
 // Legenda komponen chamber (sumber: Laporan Progres Chamber Gas). `at` = frame relatif adegan;
 // animasi Blender harus menyorot komponen bernomor yang sama pada detik yang sama.
 const CHAMBER_PARTS = [
-  {at: 15, text: 'Tabung gas uji + solenoid valve: aliran gas presisi'},
-  {at: 90, text: 'Ruang uji akrilik berisi unit GLD: pengambilan dataset'},
-  {at: 165, text: 'Sensor acuan: suhu, tekanan, kelembapan & gas'},
-  {at: 240, text: 'Pompa hisap (duty cycle): sirkulasi & pembilasan'},
+  {at: 15, text: 'Tabung gas uji dan katup solenoid: pengaturan aliran gas'},
+  {at: 90, text: 'Ruang uji akrilik berisi unit GLD: akuisisi dataset'},
+  {at: 165, text: 'Sensor acuan: suhu, tekanan, kelembapan, dan gas'},
+  {at: 240, text: 'Pompa isap (duty cycle): sirkulasi dan pembilasan'},
 ];
 
 // Landscape: render chamber di kiri, kartu gas di kanan. Portrait: render di atas, kartu di bawah.
@@ -38,7 +38,7 @@ export const Scene05Trainable: React.FC = () => {
   return (
     <SceneFrame>
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : `70px ${padX}px`}}>
-        <Caption text="Gas di kilang: dilatih di lokasi, sesuai kebutuhan" size={title(54)} />
+        <Caption text="Gas industri kilang: pelatihan model di lokasi" size={title(54)} />
       </AbsoluteFill>
 
       {/* Render Blender gas test chamber */}

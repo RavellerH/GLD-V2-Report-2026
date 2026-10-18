@@ -20,17 +20,17 @@ Simpan hasil sebagai `public/audio/vo/03_intro.wav`
 
 GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor AI tertanam, dan radio LoRa dalam satu unit.
 
-## 04_fingerprint — 04 Sidik jari gas & model AI (29 dtk, 63 kata)
+## 04_fingerprint — 04 Sidik jari gas & model AI (29 dtk, 64 kata)
 
 Simpan hasil sebagai `public/audio/vo/04_fingerprint.wav`
 
-Sensor semikonduktor oksida logam tidak sepenuhnya selektif; satu sensor dapat bereaksi terhadap banyak gas. Keterbatasan ini justru kami manfaatkan. Delapan sensor dengan sensitivitas berbeda membentuk satu vektor respons, layaknya sidik jari kimia, sesuai prinsip hidung elektronik. Jaringan saraf konvolusional dua cabang mempelajari pola temporal sinyal sensor sekaligus profil sensitivitasnya, kemudian dikuantisasi ke delapan bit dan dijalankan langsung di mikrokontroler, tanpa bergantung pada server.
+Sensor semikonduktor oksida logam tidak sepenuhnya selektif; satu sensor dapat bereaksi terhadap banyak gas. Keterbatasan tersebut justru dimanfaatkan sebagai keunggulan. Delapan sensor dengan sensitivitas berbeda membentuk satu vektor respons, layaknya sidik jari kimia, sesuai prinsip hidung elektronik. Jaringan saraf konvolusional dua cabang mempelajari pola temporal sinyal sensor sekaligus profil sensitivitasnya, kemudian dikuantisasi ke delapan bit dan dijalankan langsung di mikrokontroler, tanpa bergantung pada server.
 
-## 05_trainable — 05 Dapat dilatih ulang (16 dtk, 35 kata)
+## 05_trainable — 05 Dapat dilatih ulang (16 dtk, 36 kata)
 
 Simpan hasil sebagai `public/audio/vo/05_trainable.wav`
 
-Saat ini model mengenali udara bersih, LPG, dan hidrogen. Larik sensor yang sama juga peka terhadap metana, karbon monoksida, amonia, dan benzena; model untuk gas tersebut dilatih ulang dengan chamber uji portabel di lokasi kilang.
+Saat ini, model telah mengklasifikasikan udara bersih, LPG, dan hidrogen. Larik sensor yang sama juga sensitif terhadap metana, karbon monoksida, amonia, dan benzena; model untuk gas tersebut dilatih ulang menggunakan chamber uji portabel di lokasi kilang.
 
 ## 06_mesh — 06 Private mesh LoRa (29 dtk, 59 kata)
 
@@ -44,8 +44,8 @@ Simpan hasil sebagai `public/audio/vo/07_alarm.wav`
 
 Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan identitas sensor dan tingkat risikonya.
 
-## 08_outro — 08 Penutup (10 dtk, 21 kata)
+## 08_outro — 08 Penutup (10 dtk, 22 kata)
 
 Simpan hasil sebagai `public/audio/vo/08_outro.wav`
 
-GLD: deteksi multigas berbasis kecerdasan buatan di tepi jaringan, dengan komunikasi yang memulihkan dirinya sendiri. Dikembangkan di Indonesia, untuk kilang Indonesia.
+GLD: deteksi multigas berbasis kecerdasan buatan di tepi jaringan, dengan komunikasi yang memulihkan dirinya sendiri. Dikembangkan di Indonesia untuk industri kilang nasional.

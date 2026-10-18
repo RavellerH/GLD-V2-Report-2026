@@ -12,20 +12,20 @@ export type RefineryGas = {
 };
 
 export const REFINERY_GASES: RefineryGas[] = [
-  {formula: 'LPG', name: 'Propana/butana', sensor: '3 kanal peka LPG', status: 'validated'},
-  {formula: 'H₂', name: 'Hidrogen', sensor: 'kanal khusus hidrogen', status: 'validated'},
+  {formula: 'LPG', name: 'Propana/butana', sensor: 'tiga kanal sensitif LPG', status: 'validated'},
+  {formula: 'H₂', name: 'Hidrogen', sensor: 'kanal spesifik hidrogen', status: 'validated'},
   {formula: 'CO₂', name: 'Karbon dioksida', sensor: 'kanal kualitas udara', status: 'data'},
-  {formula: 'CH₄', name: 'Metana', sensor: 'kanal khusus metana', status: 'target'},
-  {formula: 'CO', name: 'Karbon monoksida', sensor: 'kanal khusus CO', status: 'target'},
+  {formula: 'CH₄', name: 'Metana', sensor: 'kanal spesifik metana', status: 'target'},
+  {formula: 'CO', name: 'Karbon monoksida', sensor: 'kanal spesifik CO', status: 'target'},
   {formula: 'NH₃', name: 'Amonia', sensor: 'kanal kualitas udara', status: 'target'},
   {formula: 'C₆H₆', name: 'Benzena', sensor: 'kanal kualitas udara', status: 'target'},
   // Belum ada sensor khusus H2S (mis. sel elektrokimia) di larik 8 sensor saat ini.
-  {formula: 'H₂S', name: 'Hidrogen sulfida', sensor: 'belum ada kanal khusus', status: 'extra'},
+  {formula: 'H₂S', name: 'Hidrogen sulfida', sensor: 'kanal spesifik belum tersedia', status: 'extra'},
 ];
 
 export const STATUS_LABEL: Record<GasStatus, string> = {
-  validated: 'Dikenali model',
-  data: 'Data chamber terkumpul',
-  target: 'Target pelatihan di kilang',
-  extra: 'Perlu sensor tambahan',
+  validated: 'Terklasifikasi oleh model',
+  data: 'Data chamber tersedia',
+  target: 'Sasaran pelatihan di kilang',
+  extra: 'Memerlukan sensor tambahan',
 };

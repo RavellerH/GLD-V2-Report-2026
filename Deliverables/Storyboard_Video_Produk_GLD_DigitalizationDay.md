@@ -40,11 +40,11 @@ Versi yang tetap kuat dan jujur: **"multi-gas yang bisa diajari"**. 8 sensor mem
 
 ### Adegan 1 — Hook (0:00–0:07)
 - **Visual (Blender):** kilang saat senja, gas keluar dari flange, nyaris tak terlihat.
-- **Teks:** *"Gas bocor tidak terlihat."*
+- **Teks:** *"Kebocoran gas bersifat tak kasatmata."* / *"Kecepatan deteksi menentukan tingkat risiko."*
 - **VO:** "Kebocoran gas di kilang tidak kasatmata, dan setiap detik keterlambatan deteksi memperbesar risiko keselamatan."
 
 ### Adegan 2 — Masalah (0:07–0:17)
-- **Visual (Remotion):** lima detektor konvensional untuk lima gas kilang (LPG, CH₄, H₂, H₂S, CO), masing-masing dengan kabel ke ruang kontrol, lalu dicoret. Teks: *"5 gas = 5 detektor + 5 kabel data"*.
+- **Visual (Remotion):** lima detektor konvensional untuk lima gas kilang (LPG, CH₄, H₂, H₂S, CO), masing-masing dengan kabel ke ruang kontrol, lalu dicoret. Teks: *"Pendekatan konvensional: satu detektor per jenis gas"*.
 - **VO:** "Detektor konvensional umumnya dirancang untuk satu jenis gas dan bergantung pada kabel data menuju ruang kontrol, sehingga mahal dan sulit diperluas."
 
 ### Adegan 3 — Perkenalan GLD (0:17–0:26)
@@ -52,9 +52,9 @@ Versi yang tetap kuat dan jujur: **"multi-gas yang bisa diajari"**. 8 sensor mem
 - **VO:** "GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor AI tertanam, dan radio LoRa dalam satu unit."
 
 ### Adegan 4 — Sidik jari gas & model AI (0:26–0:55) ⭐ pesan inti 1
-- **Visual fase A (0:26–0:42, Remotion):** batang 8 kanal sensor (berlabel S1–S8, tanpa nama seri) + radar chart dari **data chamber asli** berganti pola: udara bersih → LPG (*Klasifikasi AI: LPG*) → CO₂. Judul: *"8 sensor, sensitivitas berbeda → satu sidik jari gas"*, sub-judul: prinsip hidung elektronik.
-- **Visual fase B (0:42–0:55, Remotion):** diagram arsitektur: *Sinyal 8 sensor → Cabang 1 Conv1D (pola temporal)*; *Profil sensitivitas → Cabang 2 Dense*; keduanya → *Penggabungan* → *Softmax: Udara bersih / LPG / H₂* + kotak putus-putus *"+ kelas per kilang"*. Badge: *Kuantisasi int8 · Inferensi di ESP32-S3 · Tanpa server*.
-- **VO:** "Sensor semikonduktor oksida logam tidak sepenuhnya selektif; satu sensor dapat bereaksi terhadap banyak gas. Keterbatasan ini justru kami manfaatkan. Delapan sensor dengan sensitivitas berbeda membentuk satu vektor respons, layaknya sidik jari kimia, sesuai prinsip hidung elektronik. Jaringan saraf konvolusional dua cabang mempelajari pola temporal sinyal sensor sekaligus profil sensitivitasnya, kemudian dikuantisasi ke delapan bit dan dijalankan langsung di mikrokontroler, tanpa bergantung pada server."
+- **Visual fase A (0:26–0:42, Remotion):** batang 8 kanal sensor (berlabel S1–S8, tanpa nama seri) + radar chart dari **data chamber asli** berganti pola: udara bersih → LPG (*Hasil klasifikasi: LPG*) → CO₂. Judul: *"Larik delapan sensor membentuk sidik jari gas"*, sub-judul: prinsip hidung elektronik.
+- **Visual fase B (0:42–0:55, Remotion):** diagram arsitektur: *Sinyal 8 sensor → Cabang 1 Conv1D (pola temporal)*; *Profil sensitivitas → Cabang 2 Dense*; keduanya → *Penggabungan* → *Softmax: Udara bersih / LPG / H₂* + kotak putus-putus *"+ kelas tambahan"*. Badge: *Kuantisasi 8-bit · Inferensi pada perangkat · Independen dari server*.
+- **VO:** "Sensor semikonduktor oksida logam tidak sepenuhnya selektif; satu sensor dapat bereaksi terhadap banyak gas. Keterbatasan tersebut justru dimanfaatkan sebagai keunggulan. Delapan sensor dengan sensitivitas berbeda membentuk satu vektor respons, layaknya sidik jari kimia, sesuai prinsip hidung elektronik. Jaringan saraf konvolusional dua cabang mempelajari pola temporal sinyal sensor sekaligus profil sensitivitasnya, kemudian dikuantisasi ke delapan bit dan dijalankan langsung di mikrokontroler, tanpa bergantung pada server."
 - **Mengapa ini lebih kaya** (poin untuk tanya-jawab): detektor konvensional mengandalkan selektivitas *satu* sensor terhadap *satu* gas. GLD memakai informasi gabungan dari delapan sensor yang saling tumpang-tindih sensitivitasnya, sehingga satu perangkat bisa membedakan beberapa gas. Cabang Conv1D menangkap dinamika respons terhadap waktu (bukan hanya nilai sesaat), sedangkan cabang kedua menyuntikkan pengetahuan fisik tentang karakter tiap sensor. Kuantisasi int8 membuat model cukup kecil untuk mikrokontroler, sehingga keputusan diambil di perangkat tanpa ketergantungan pada jaringan.
 
 ### Adegan 5 — Gas kilang & pelatihan ulang (0:55–1:11)
@@ -62,16 +62,16 @@ Versi yang tetap kuat dan jujur: **"multi-gas yang bisa diajari"**. 8 sensor mem
 
   | Gas | Teks di layar (sensor internal) | Status di video |
   |---|---|---|
-  | LPG (propana/butana) | 3 kanal peka LPG (MQ5/MQ6/MQ2) | Dikenali model |
-  | H₂ (hidrogen) | kanal khusus hidrogen (MQ8) | Dikenali model |
-  | CO₂ (karbon dioksida) | kanal kualitas udara (MQ135) | Data chamber terkumpul (`Dataset/`) |
-  | CH₄ (metana) | kanal khusus metana (MQ4) | Target pelatihan di kilang |
-  | CO (karbon monoksida) | kanal khusus CO (MQ7) | Target pelatihan di kilang |
-  | NH₃ (amonia) | kanal kualitas udara (MQ135) | Target pelatihan di kilang |
-  | C₆H₆ (benzena) | kanal kualitas udara (MQ135) | Target pelatihan di kilang |
-  | H₂S (hidrogen sulfida) | belum ada kanal khusus | Perlu sensor tambahan |
+  | LPG (propana/butana) | tiga kanal sensitif LPG (MQ5/MQ6/MQ2) | Terklasifikasi oleh model |
+  | H₂ (hidrogen) | kanal spesifik hidrogen (MQ8) | Terklasifikasi oleh model |
+  | CO₂ (karbon dioksida) | kanal kualitas udara (MQ135) | Data chamber tersedia (`Dataset/`) |
+  | CH₄ (metana) | kanal spesifik metana (MQ4) | Sasaran pelatihan di kilang |
+  | CO (karbon monoksida) | kanal spesifik CO (MQ7) | Sasaran pelatihan di kilang |
+  | NH₃ (amonia) | kanal kualitas udara (MQ135) | Sasaran pelatihan di kilang |
+  | C₆H₆ (benzena) | kanal kualitas udara (MQ135) | Sasaran pelatihan di kilang |
+  | H₂S (hidrogen sulfida) | kanal spesifik belum tersedia | Memerlukan sensor tambahan |
 
-- **VO:** "Saat ini model mengenali udara bersih, LPG, dan hidrogen. Larik sensor yang sama juga peka terhadap metana, karbon monoksida, amonia, dan benzena; model untuk gas tersebut dilatih ulang dengan chamber uji portabel di lokasi kilang."
+- **VO:** "Saat ini, model telah mengklasifikasikan udara bersih, LPG, dan hidrogen. Larik sensor yang sama juga sensitif terhadap metana, karbon monoksida, amonia, dan benzena; model untuk gas tersebut dilatih ulang menggunakan chamber uji portabel di lokasi kilang."
 - **Catatan H₂S:** larik 8 sensor saat ini tidak memuat sensor khusus H₂S (mis. sel elektrokimia). Karena H₂S termasuk requirement Pertamina, video menampilkannya apa adanya sebagai "perlu sensor tambahan", tidak diklaim bisa dilatih dengan sensor yang ada. Kepekaan sensor diambil dari datasheet MQ; kemampuan model membedakan gas-gas target baru terbukti setelah data dan pelatihan per kilang.
 
 ### Adegan 6 — Private mesh LoRa & pemulihan rute (1:11–1:40) ⭐ pesan inti 2
@@ -85,8 +85,8 @@ Versi yang tetap kuat dan jujur: **"multi-gas yang bisa diajari"**. 8 sensor mem
 
 ### Adegan 8 — Penutup (1:50–2:00)
 - **Visual (Blender → Remotion):** GLD terpasang, kamera mundur ke jaringan node; tagline dan logo.
-- **Teks:** **GLD — Satu perangkat. Banyak gas. Jaringan yang tak terputus.**
-- **VO:** "GLD: deteksi multigas berbasis kecerdasan buatan di tepi jaringan, dengan komunikasi yang memulihkan dirinya sendiri. Dikembangkan di Indonesia, untuk kilang Indonesia."
+- **Teks:** **GLD — Deteksi multigas berbasis AI dengan jaringan yang memulihkan diri**
+- **VO:** "GLD: deteksi multigas berbasis kecerdasan buatan di tepi jaringan, dengan komunikasi yang memulihkan dirinya sendiri. Dikembangkan di Indonesia untuk industri kilang nasional."
 
 ---
 

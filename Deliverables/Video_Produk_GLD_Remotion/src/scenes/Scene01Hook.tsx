@@ -13,8 +13,8 @@ export const Scene01Hook: React.FC = () => {
       <AssetSlot asset={ASSETS.refinery} kind="video" />
       {/* Portrait: teks di sepertiga atas agar tidak menutupi objek utama render Blender. */}
       <AbsoluteFill style={{justifyContent: portrait ? 'flex-start' : 'center', padding: portrait ? `260px ${padX}px` : `0 ${padX}px`}}>
-        <Caption text="Gas bocor tidak terlihat." from={45} size={title(96)} />
-        <Caption text="Dan tidak menunggu." from={120} size={title(56)} weight={400} style={{marginTop: 20}} />
+        <Caption text="Kebocoran gas bersifat tak kasatmata." from={45} size={title(96)} />
+        <Caption text="Kecepatan deteksi menentukan tingkat risiko." from={120} size={title(56)} weight={400} style={{marginTop: 20}} />
       </AbsoluteFill>
     </SceneFrame>
   );

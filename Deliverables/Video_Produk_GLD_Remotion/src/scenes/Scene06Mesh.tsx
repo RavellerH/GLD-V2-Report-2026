@@ -14,10 +14,10 @@ const TRAVEL = 80;
 
 // Langkah pemulihan rute; parameter dari Technical Datasheet Rev 4.0 (firmware Cluster Head).
 const RECOVERY_STEPS = [
-  {at: FAIL_AT + 20, text: 'Induk tak terdengar → dinyatakan kedaluwarsa'},
-  {at: FAIL_AT + 60, text: 'Evaluasi hingga 8 kandidat induk'},
-  {at: FAIL_AT + 100, text: 'Pindah bila sinyal ≥ 15 dB lebih baik'},
-  {at: FAIL_AT + 140, text: 'Loop guard & cek jalur ke gateway'},
+  {at: FAIL_AT + 20, text: 'Induk tidak terdeteksi → dinyatakan kedaluwarsa'},
+  {at: FAIL_AT + 60, text: 'Evaluasi hingga delapan kandidat induk'},
+  {at: FAIL_AT + 100, text: 'Perpindahan bila sinyal ≥ 15 dB lebih baik'},
+  {at: FAIL_AT + 140, text: 'Pencegahan loop dan verifikasi jalur ke gateway'},
 ];
 
 // Koordinat node di data/mesh.ts dibuat untuk landscape (alur kiri→kanan).
@@ -63,9 +63,9 @@ const InfoPanel: React.FC = () => {
 
   return (
     <div style={{position: 'absolute', left: portrait ? 64 : 1330, top: portrait ? 1020 : 250, width: portrait ? 952 : 500}}>
-      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.blueLight, letterSpacing: 1, opacity: show(60)}}>DUA LAPIS RADIO</div>
+      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.blueLight, letterSpacing: 1, opacity: show(60)}}>ARSITEKTUR RADIO DUA LAPIS</div>
       {row(COLORS.gas, 'STAR · 920 MHz', 'node sensor → Cluster Head', 80, true)}
-      {row(COLORS.blueLight, 'MESH · 921 MHz', 'Cluster Head ↔ Cluster Head → gateway', 110)}
+      {row(COLORS.blueLight, 'MESH · 921 MHz', 'antar-Cluster Head → gateway', 110)}
 
       <div style={{fontSize: 24, fontWeight: 800, color: COLORS.ok, letterSpacing: 1, marginTop: portrait ? 28 : 48, opacity: show(FAIL_AT)}}>PEMULIHAN RUTE OTOMATIS</div>
       {RECOVERY_STEPS.map((s, i) => (
@@ -161,8 +161,8 @@ export const Scene06Mesh: React.FC = () => {
       </svg>
 
       <AbsoluteFill style={{padding: portrait ? `180px ${padX}px` : `60px ${padX}px`}}>
-        <Caption text="Private Mesh LoRa" size={title(70)} />
-        <Caption text="tanpa internet · terpisah dari jaringan TI kilang · multi-hop" from={25} size={title(34)} weight={400} color={COLORS.muted} style={{marginTop: 8}} />
+        <Caption text="Jaringan Mesh LoRa Privat" size={title(70)} />
+        <Caption text="multi-hop · independen dari internet dan jaringan TI kilang" from={25} size={title(34)} weight={400} color={COLORS.muted} style={{marginTop: 8}} />
       </AbsoluteFill>
 
       <InfoPanel />
@@ -177,7 +177,7 @@ export const Scene06Mesh: React.FC = () => {
           opacity: interpolate(frame, [REROUTE_AT + 60, REROUTE_AT + 90], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
         }}
       >
-        Failover diuji dengan 8 Cluster Head multi-hop di kampus ITB
+        Mekanisme failover telah diuji pada 8 Cluster Head di kampus ITB
       </div>
     </SceneFrame>
   );

@@ -132,6 +132,6 @@ tambahkan entri ke `RECORDINGS` di `tools/extract_fingerprints.py`, lalu tambahk
 ## Batasan klaim
 
 Ikuti tabel klaim di storyboard. Ringkasnya, jangan menulis "deteksi semua gas", "bersertifikat ATEX",
-"sudah terpasang di kilang", angka akurasi, atau waktu pemulihan rute. Label "Klasifikasi AI" hanya dipakai untuk LPG;
+"sudah terpasang di kilang", angka akurasi, atau waktu pemulihan rute. Label "Hasil klasifikasi" hanya dipakai untuk LPG;
 CO₂ ditampilkan sebagai "pola" respons sensor; status per gas di adegan 5 diatur di `refineryGases.ts`.
 Topologi mesh di Adegan 6 adalah ilustrasi, bukan layout kilang sebenarnya.

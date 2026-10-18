@@ -159,6 +159,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **12 Okt — surat pengantar sampel GLD ke GTS Shanghai & surat keterangan Bea Cukai dilengkapi** (dec:208): `Deliverables/Surat_Pengantar_Sampel_GLD_ke_GTS_Shanghai.{docx,pdf}` (EN) & `Surat_Keterangan_Sampel_GLD_ke_Bea_Cukai.{docx,pdf}` (ID); data yg belum ada (alamat GTS, nilai pabean, penandatangan, paspor/penerbangan, status baterai) ditandai kuning, tidak ditebak. **Update (dec:209)**: sampel berisi baterai Li-ion 7×18650 (1S7P) — kapasitas per sel belum dikonfirmasi (>3860 mAh/sel ⇒ >100 Wh, perlu izin maskapai). **Final cetak (dec:210)**: `Deliverables/Paket_Bawa_Sampel_GTS_12Oktober2026/` — 2 surat KOP terkoreksi + Lampiran 1 foto + Lampiran 2 form aplikasi.
 
+- 🆕 **18 Okt — uji EMC Node GLD + CH di chamber Telkom Test House selesai (16 Okt), tak ada emisi melewati ambang (laporan awal Beny); formulir permohonan TTH atas nama ITB diisi** (dec:211): `Deliverables/Permohonan_Uji_CT_TTH_EMC_GLD_ITB.{docx,pdf}` — field kontak/merek/no. seri/standar acuan disorot kuning utk Bu Nina.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

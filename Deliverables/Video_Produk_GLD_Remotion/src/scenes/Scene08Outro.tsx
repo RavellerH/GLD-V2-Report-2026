@@ -43,10 +43,7 @@ export const Scene08Outro: React.FC = () => {
             transform: `translateY(${20 * (1 - logos)}px)`,
           }}
         >
-          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6}}>
-            <Logo asset={ASSETS.logoPertamina} fallback="PT Pertamina Patra Niaga" h={portrait ? 64 : 58} />
-            <div style={{fontSize: 20, fontWeight: 600, color: '#55627A', letterSpacing: 0.5}}>Fungsi Reliability</div>
-          </div>
+          <Logo asset={ASSETS.logoPertamina} fallback="PT Pertamina Patra Niaga" h={portrait ? 70 : 64} />
           <Logo asset={ASSETS.logoLgu} fallback="LAPI Ganesha Utama" h={portrait ? 92 : 84} />
           <Logo asset={ASSETS.logoItb} fallback="Institut Teknologi Bandung" h={portrait ? 118 : 108} />
         </div>

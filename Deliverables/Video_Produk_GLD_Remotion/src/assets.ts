@@ -26,7 +26,7 @@ export const ASSETS = {
   chamber: {
     path: 'blender/scene05_chamber.mp4',
     portraitPath: 'blender/portrait/scene05_chamber.mp4',
-    ready: false,
+    ready: true,
     note: 'Blender: gas test chamber, komponen disorot berurutan 1–4 (16 dtk)',
   },
   leak: {
@@ -38,7 +38,7 @@ export const ASSETS = {
   outro: {
     path: 'blender/scene08_outro.mp4',
     portraitPath: 'blender/portrait/scene08_outro.mp4',
-    ready: false,
+    ready: true,
     note: 'Blender: GLD terpasang, kamera mundur ke jaringan node (10 dtk)',
   },
 

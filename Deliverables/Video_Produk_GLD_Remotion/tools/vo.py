@@ -175,6 +175,24 @@ def generate():
         split()
 
 
+def trim_tail(pcm, rate):
+    # Ujung rekaman TTS kadang berisi derau keras <0,3 dtk setelah hening: buang.
+    win = rate // 50
+    pk = [max(abs(v) for v in pcm[i:i + win]) / 32768 for i in range(0, len(pcm) - win + 1, win)]
+    i = len(pk) - 1
+    while i >= 0 and pk[i] < 0.02:
+        i -= 1
+    j = i
+    while j >= 0 and pk[j] >= 0.02:
+        j -= 1
+    k = j
+    while k >= 0 and pk[k] < 0.02:
+        k -= 1
+    if (i - j) * 0.02 < 0.3 and (j - k) * 0.02 >= 0.2 and max(pk[j + 1:i + 1]) > 0.9:
+        return pcm[:(j + 1) * win]
+    return pcm
+
+
 def split():
     # Potong rekaman utuh di (jumlah adegan - 1) jeda terpanjang.
     pcm, rate = read_pcm(FULL_TAKE)
@@ -249,7 +267,7 @@ def split():
         first = next((i for i, x in enumerate(seg_silent) if not x), 0)
         last = len(seg_silent) - next((i for i, x in enumerate(reversed(seg_silent)) if not x), 0)
         lo, hi = max(a, a + first * win - pad), min(b, a + last * win + pad)
-        seg = pcm[lo:hi]
+        seg = trim_tail(pcm[lo:hi], rate)
         write_pcm(VO_DIR / f"{name(s)}.wav", seg, rate)
         dur = len(seg) / rate
         expect = len(s["vo"]) / total_chars * total_sec

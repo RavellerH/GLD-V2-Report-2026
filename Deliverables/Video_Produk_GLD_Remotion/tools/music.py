@@ -39,7 +39,7 @@ R = np.zeros(n)
 
 def env(length, attack, release):
     e = np.ones(length)
-    a, r = int(attack * SR), int(release * SR)
+    a, r = min(int(attack * SR), length // 2), min(int(release * SR), length // 2)
     e[:a] = np.linspace(0, 1, a) ** 2
     e[-r:] *= np.linspace(1, 0, r) ** 2
     return e

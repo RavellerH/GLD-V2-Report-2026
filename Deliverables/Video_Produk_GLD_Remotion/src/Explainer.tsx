@@ -8,11 +8,14 @@ import {SCENE_COMPONENTS} from './scenes';
 import {COLORS, themeVars} from './theme';
 import {LangProvider} from './i18n';
 import {INTRO_FRAMES, Intro} from './Intro';
+import {ENDCARD_FRAMES, EndCard} from './EndCard';
 import {Lang, SCENES, TOTAL_FRAMES, sceneDuration, sceneFrom} from './timeline';
 
 // Intro motion graphic di depan; adegan 1 crossfade di atas akhir intro.
 export const INTRO_OFFSET = INTRO_FRAMES - TRANSITION;
-export const EXPLAINER_FRAMES = INTRO_OFFSET + TOTAL_FRAMES;
+// Kartu ringkasan menyusul adegan penutup (crossfade TRANSITION frame).
+const ENDCARD_FROM = INTRO_OFFSET + TOTAL_FRAMES - TRANSITION;
+export const EXPLAINER_FRAMES = ENDCARD_FROM + ENDCARD_FRAMES;
 
 // Komposisi utama (durasi dari timeline.ts): tiap adegan berjalan di Sequence-nya sendiri,
 // sehingga frame di dalam adegan selalu mulai dari 0. Dipakai untuk landscape maupun portrait.
@@ -36,6 +39,9 @@ export const Explainer: React.FC<{lang?: Lang}> = ({lang = 'id'}) => (
         </Sequence>
       );
     })}
+    <Sequence name="11 Ringkasan" from={ENDCARD_FROM} durationInFrames={ENDCARD_FRAMES}>
+      <EndCard />
+    </Sequence>
     {ASSETS.music.ready && <Audio src={staticFile(ASSETS.music.path)} volume={0.07} />}
   </AbsoluteFill>
   </LangProvider>

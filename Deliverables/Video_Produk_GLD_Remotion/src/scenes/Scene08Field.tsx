@@ -15,6 +15,23 @@ import {COLORS} from '../theme';
 // Bukti pengujian. Klaim dijaga: uji lapangan = GLD generasi pertama (V1) di RU VII Kasim, Des 2025;
 // generasi kedua (V2) = FAT 7/7 di laboratorium + uji mesh/failover/push alarm 8 Cluster Head (kampus ITB).
 
+// Penanda unit GLD pada foto: lingkaran berdenyut + label.
+const FocusRing: React.FC<{x: number; y: number; local: number}> = ({x, y, local}) => {
+  const {fps} = useVideoConfig();
+  const p = spring({frame: local - 14, fps, config: {damping: 14}});
+  const pulse = (local % 36) / 36;
+  return (
+    <div style={{position: 'absolute', left: `${x * 100}%`, top: `${y * 100}%`, opacity: p}}>
+      {[0, 1].map((k) => {
+        const q = (pulse + k * 0.5) % 1;
+        return <div key={k} style={{position: 'absolute', width: 150 + q * 90, height: 150 + q * 90, left: -(75 + q * 45), top: -(75 + q * 45), borderRadius: '50%', border: `3px solid ${COLORS.gas}`, opacity: 1 - q}} />;
+      })}
+      <div style={{position: 'absolute', width: 150, height: 150, left: -75, top: -75, borderRadius: '50%', border: `5px solid ${COLORS.gas}`, transform: `scale(${0.6 + 0.4 * p})`, boxShadow: '0 0 18px rgba(0,0,0,0.45)'}} />
+      <div style={{position: 'absolute', left: 82, top: -96, padding: '4px 12px', borderRadius: 8, backgroundColor: COLORS.gas, color: '#14213A', fontSize: 24, fontWeight: 800, whiteSpace: 'nowrap'}}>GLD</div>
+    </div>
+  );
+};
+
 // Rangkaian foto dokumentasi sebagai tumpukan kartu beranimasi: tiap foto meluncur masuk sambil
 // berputar sedikit lalu mendarat; foto sebelumnya terdorong ke belakang (mengecil, miring, meredup).
 const PhotoReel: React.FC = () => {
@@ -57,7 +74,10 @@ const PhotoReel: React.FC = () => {
             }}
           >
             <div style={{position: 'relative', width: '100%', height: '100%', overflow: 'hidden', borderRadius: 6}}>
-              <Img src={staticFile(ph.file)} style={{width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${kb})`}} />
+              <div style={{position: 'absolute', inset: 0, transform: `scale(${kb})`, transformOrigin: ph.focus ? `${ph.focus.x * 100}% ${ph.focus.y * 100}%` : '50% 50%'}}>
+                <Img src={staticFile(ph.file)} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+                {ph.focus && <FocusRing x={ph.focus.x} y={ph.focus.y} local={local} />}
+              </div>
               <div
                 style={{
                   position: 'absolute',

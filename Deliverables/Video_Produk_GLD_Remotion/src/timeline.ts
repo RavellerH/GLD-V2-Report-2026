@@ -102,8 +102,8 @@ export const SCENES: SceneDef[] = [
     title: '10 Penutup',
     startSec: 164,
     endSec: 178,
-    vo: 'GLD: deteksi multigas berbasis edge AI dengan komunikasi self-healing. Dikembangkan di Indonesia untuk industri kilang nasional.',
-    voEn: 'GLD: multi-gas detection powered by edge AI, with self-healing communication. Developed in Indonesia for the national refining industry.',
+    vo: 'GLD: deteksi multigas berbasis edge AI dengan komunikasi self-healing. Dikembangkan oleh Lab Internet of Things, Institut Teknologi Bandung.',
+    voEn: 'GLD: multi-gas detection powered by edge AI, with self-healing communication. Developed by the Internet of Things Laboratory, Institut Teknologi Bandung.',
   },
 ];
 

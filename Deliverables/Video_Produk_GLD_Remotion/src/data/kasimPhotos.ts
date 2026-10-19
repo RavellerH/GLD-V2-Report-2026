@@ -1,7 +1,8 @@
 // Foto dokumentasi uji lapangan GLD generasi pertama di RU VII Kasim, di public/footage/kasim/.
 // Sumber: foto tim (arsip lengkap: Sumber Dokumen/Foto_Uji_Lapangan_RU7_Kasim_2025/) + foto udara deck Kick-Off.
 // Urutan = urutan tampil. Keterangan wajib faktual (hanya yang terlihat di foto).
-export type KasimPhoto = {file: string; id: string; en: string};
+// focus: posisi unit GLD di foto (0..1 dari kiri/atas) untuk penanda lingkaran.
+export type KasimPhoto = {file: string; id: string; en: string; focus?: {x: number; y: number}};
 
 export const KASIM_PHOTOS: KasimPhoto[] = [
   {
@@ -28,6 +29,12 @@ export const KASIM_PHOTOS: KasimPhoto[] = [
     file: 'footage/kasim/04_node_terpasang.jpg',
     id: 'Node bertenaga surya terpasang di tiang',
     en: 'Solar-powered node installed on a pole',
+  },
+  {
+    file: 'footage/kasim/07_gld_terpasang.jpg',
+    id: 'Unit GLD generasi pertama (kotak abu-abu, antena bersilikon merah) terpasang di area tangki, berdampingan dengan detektor eksisting',
+    en: 'First-generation GLD unit (grey enclosure, red-sleeved antenna) installed in the tank area, alongside existing detectors',
+    focus: {x: 0.475, y: 0.5},
   },
   {
     file: 'footage/kasim/05_pemantauan_nodered.jpg',

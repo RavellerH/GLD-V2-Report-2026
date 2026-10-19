@@ -46,6 +46,12 @@ Buka `Demo_Dashboard_GLD.html` di Chrome/Edge. Tombol **Langkah berikutnya** ata
 - **Heatmap & Analytics terisi**: `reset-db.js` membuat riwayat simulasi 7 hari (udara bersih tiap 10 menit per GLD) + 3 kejadian lampau yang sudah diselesaikan operator (H2 di GLD 3 lima hari lalu, alarm LPG di GLD 1 dua hari lalu, LPG MIDDLE di GLD 2 enam jam lalu). Grafik 24 jam dan 7 hari, heatmap, dan log kejadian langsung berisi saat demo dibuka.
 - **Tema terang & gelap berpalet Pertamina Patra Niaga** (biru, merah, hijau logo) + logo di sidebar dan halaman login. Ganti tema dengan tombol **Terang/Gelap** di header (juga ada di halaman login dan di HTML mandiri); pilihan diingat browser.
 
+## Menampilkan peta dengan benar
+
+- **Peta jalan (OSM)** tampil otomatis bila laptop terhubung internet. Jalankan `start-demo.bat` sekali dengan internet: tile peta RU4 diunduh dan setelah itu peta tetap tampil **offline**.
+- **Citra satelit**: klik tombol **PETA** di kanan atas peta (berubah jadi **SATELIT**). Hanya bisa online; tampil dengan atribusi Esri.
+- **Taruh sensor di posisi sebenarnya** sebelum hari H: geser pin tiap perangkat di Map View, lalu jalankan `node save-positions.js` di folder `demo\digitalization-day`. Posisi disimpan dan dipakai lagi setiap demo direset. Koordinat bawaan hanya contoh di sekitar titik tengah RU4, jadi tanpa langkah ini pin bisa tampak di lokasi yang salah di peta asli.
+
 ## Yang perlu dicek sebelum hari H
 
 - [ ] Jalankan `start-demo.bat` sekali **saat ada internet** supaya tile peta RU4 terunduh (±560 tile). Setelah itu peta bisa offline. Tanpa itu, peta tetap jalan tapi latarnya polos.

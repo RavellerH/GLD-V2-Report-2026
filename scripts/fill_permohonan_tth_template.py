@@ -70,6 +70,9 @@ def page2(c):
     # placeholder nama TTH dikosongkan (diisi TTH)
     white_out(c, 236.8, 341.8, 345.1, 353.6)
     white_out(c, 398.9, 341.8, 479.9, 353.6)
+    # label "Tanda tangan" kolom TTH dikosongkan
+    white_out(c, 262.8, 302.7, 319.1, 313.1)
+    white_out(c, 411.3, 302.7, 467.6, 313.1)
 
 
 def main():

@@ -33,11 +33,11 @@ export const Scene08Outro: React.FC = () => {
         <div
           style={{
             display: 'flex',
-            flexDirection: portrait ? 'column' : 'row',
-            gap: portrait ? 26 : 70,
+            flexDirection: 'row',
+            gap: portrait ? 34 : 70,
             marginTop: 40,
             alignItems: 'center',
-            padding: portrait ? '26px 40px' : '22px 56px',
+            padding: portrait ? '18px 30px' : '22px 56px',
             borderRadius: 18,
             backgroundColor: '#FFFFFF',
             boxShadow: '0 12px 36px rgba(0,0,0,0.35)',
@@ -45,9 +45,9 @@ export const Scene08Outro: React.FC = () => {
             transform: `translateY(${20 * (1 - logos)}px)`,
           }}
         >
-          <Logo asset={ASSETS.logoPertamina} fallback="PT Pertamina Patra Niaga" h={portrait ? 70 : 64} />
-          <Logo asset={ASSETS.logoLgu} fallback="LAPI Ganesha Utama" h={portrait ? 92 : 84} />
-          <Logo asset={ASSETS.logoItb} fallback="Institut Teknologi Bandung" h={portrait ? 118 : 108} />
+          <Logo asset={ASSETS.logoPertamina} fallback="PT Pertamina Patra Niaga" h={portrait ? 46 : 64} />
+          <Logo asset={ASSETS.logoLgu} fallback="LAPI Ganesha Utama" h={portrait ? 62 : 84} />
+          <Logo asset={ASSETS.logoItb} fallback="Institut Teknologi Bandung" h={portrait ? 80 : 108} />
         </div>
       </AbsoluteFill>
       {/* selaras render Blender: tautan STAR mulai 4,5 dtk, mesh mencapai gateway ~10 dtk */}

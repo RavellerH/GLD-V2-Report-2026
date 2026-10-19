@@ -34,7 +34,7 @@ Naskah narasi tiap langkah tampil di jendela skenario (A) dan di bilah atas hala
 2. Dobel-klik `demo\digitalization-day\start-demo.bat`. Pertama kali: install + build ±3 menit.
 3. Browser terbuka ke `http://localhost:3002`. Login **demo@gld.local / demo-gld-2026** (akun lokal database demo).
 4. Di jendela **GLD Demo - Skenario**: tekan **Enter** untuk langkah berikutnya, angka **1–5** untuk loncat.
-5. Mengulang dari awal (mis. setelah latihan): tutup semua jendela, jalankan ulang `start-demo.bat` (database direset otomatis).
+5. Mengulang dari awal (mis. setelah latihan): **tutup dulu semua jendela demo** (Backend, Dashboard, Broker, Skenario), lalu jalankan ulang `start-demo.bat` (database direset otomatis). Kalau jendela Backend lama masih terbuka, launcher berhenti dengan pesan — tutup jendelanya lalu ulangi.
 
 ## Cara menjalankan B
 
@@ -44,7 +44,7 @@ Buka `Demo_Dashboard_GLD.html` di Chrome/Edge. Tombol **Langkah berikutnya** ata
 
 - **Map View tanpa token**: peta MapLibre. Basemap diambil dari tile lokal (`public/tiles`, diunduh otomatis oleh `start-demo.bat` saat pertama kali ada internet), atau OSM online, atau latar polos sesuai tema bila offline total. Perangkat, garis topologi, dan panel tren 24 jam tetap tampil di ketiga kondisi.
 - **Heatmap & Analytics terisi**: `reset-db.js` membuat riwayat simulasi 7 hari (udara bersih tiap 10 menit per GLD) + 3 kejadian lampau yang sudah diselesaikan operator (H2 di GLD 3 lima hari lalu, alarm LPG di GLD 1 dua hari lalu, LPG MIDDLE di GLD 2 enam jam lalu). Grafik 24 jam dan 7 hari, heatmap, dan log kejadian langsung berisi saat demo dibuka.
-- **Tema terang & gelap berpalet Pertamina Patra Niaga** (biru, merah, hijau logo) + logo di sidebar dan halaman login. Ganti tema dari tombol Light/Dark di kiri bawah.
+- **Tema terang & gelap berpalet Pertamina Patra Niaga** (biru, merah, hijau logo) + logo di sidebar dan halaman login. Ganti tema dengan tombol **Terang/Gelap** di header (juga ada di halaman login dan di HTML mandiri); pilihan diingat browser.
 
 ## Yang perlu dicek sebelum hari H
 

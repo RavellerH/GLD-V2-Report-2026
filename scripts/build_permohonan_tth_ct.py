@@ -134,7 +134,7 @@ def build():
          ["LoRa 920 MHz, maks. 22 dBm, BW 125 kHz; catu 24 VDC, konsumsi maks. ±8 W"],
          ["LoRa dual 920 MHz (star) / 921 MHz (mesh), maks. 22 dBm, BW 125 kHz; "
           "catu 5 VDC, konsumsi maks. 0,73 W"]),
-        ("Nomor Seri", ["Prototipe — belum bernomor seri"],
+        ("Nomor Seri", ["GLD-V2-001"],
          ["Prototipe — belum bernomor seri"]),
         ("Negara Pembuat", ["Indonesia"], ["Indonesia"]),
     ]

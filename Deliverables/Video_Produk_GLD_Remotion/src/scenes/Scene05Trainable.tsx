@@ -5,7 +5,8 @@ import {AssetSlot} from '../components/AssetSlot';
 import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
-import {GasStatus, REFINERY_GASES, STATUS_LABEL} from '../data/refineryGases';
+import {GasStatus, REFINERY_GASES, STATUS_LABEL, STATUS_LABEL_EN} from '../data/refineryGases';
+import {useLang, useT} from '../i18n';
 import {useLayout} from '../layout';
 import {COLORS} from '../theme';
 
@@ -19,10 +20,10 @@ const STATUS_COLOR: Record<GasStatus, string> = {
 // Legenda komponen chamber (sumber: Laporan Progres Chamber Gas). `at` = frame relatif adegan;
 // animasi Blender harus menyorot komponen bernomor yang sama pada detik yang sama.
 const CHAMBER_PARTS = [
-  {at: 15, text: 'Tabung gas uji dan katup solenoid: pengaturan aliran gas'},
-  {at: 90, text: 'Ruang uji akrilik berisi unit GLD: akuisisi dataset'},
-  {at: 165, text: 'Sensor acuan: suhu, tekanan, kelembapan, dan gas'},
-  {at: 240, text: 'Pompa isap (duty cycle): sirkulasi dan pembilasan'},
+  {at: 15, text: ['Tabung gas uji dan solenoid valve: pengaturan aliran gas', 'Test gas cylinder and solenoid valve: gas flow control']},
+  {at: 90, text: ['Ruang uji akrilik berisi unit GLD: akuisisi dataset', 'Acrylic test chamber with GLD unit: dataset acquisition']},
+  {at: 165, text: ['Sensor acuan: suhu, tekanan, kelembapan, dan gas', 'Reference sensors: temperature, pressure, humidity, and gas']},
+  {at: 240, text: ['Pompa isap (duty cycle): sirkulasi dan pembilasan', 'Suction pump (duty cycle): circulation and purging']},
 ];
 
 // Landscape: render chamber di kiri, kartu gas di kanan. Portrait: render di atas, kartu di bawah.
@@ -34,12 +35,14 @@ export const Scene05Trainable: React.FC = () => {
   const {fps} = useVideoConfig();
   const {portrait, padX, title} = useLayout();
   const L = portrait ? PORTRAIT : LANDSCAPE;
+  const t = useT();
+  const lang = useLang();
   const GRID = L.grid;
 
   return (
     <SceneFrame>
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : `70px ${padX}px`}}>
-        <Caption text="Gas industri kilang: pelatihan model di lokasi" size={title(54)} />
+        <Caption text={t('Gas industri kilang: pelatihan model di lokasi', 'Refinery gases: on-site model training')} size={title(54)} />
       </AbsoluteFill>
 
       {/* Render Blender gas test chamber */}
@@ -51,11 +54,11 @@ export const Scene05Trainable: React.FC = () => {
         const p = spring({frame: frame - c.at, fps, config: {damping: 200}});
         return (
           <div
-            key={c.text}
+            key={c.at}
             style={{position: 'absolute', left: L.media.x, top: L.legendY + i * L.legendGap, width: L.media.w, display: 'flex', gap: 12, alignItems: 'center', opacity: p, fontSize: portrait ? 22 : 21}}
           >
             <div style={{flex: '0 0 30px', height: 30, borderRadius: 15, backgroundColor: COLORS.blue, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{i + 1}</div>
-            <div>{c.text}</div>
+            <div>{t(c.text[0], c.text[1])}</div>
           </div>
         );
       })}
@@ -88,9 +91,9 @@ export const Scene05Trainable: React.FC = () => {
           >
             <div style={{width: portrait ? 96 : 110, fontSize: portrait ? 38 : 44, fontWeight: 800, color}}>{g.formula}</div>
             <div>
-              <div style={{fontSize: portrait ? 25 : 28, fontWeight: 600}}>{g.name}</div>
+              <div style={{fontSize: portrait ? 25 : 28, fontWeight: 600}}>{lang === 'en' ? g.nameEn : g.name}</div>
               <div style={{fontSize: portrait ? 19 : 21, color: COLORS.muted, marginTop: 4}}>
-                {STATUS_LABEL[g.status]} · {g.sensor}
+                {(lang === 'en' ? STATUS_LABEL_EN : STATUS_LABEL)[g.status]} · {lang === 'en' ? g.sensorEn : g.sensor}
               </div>
             </div>
           </div>

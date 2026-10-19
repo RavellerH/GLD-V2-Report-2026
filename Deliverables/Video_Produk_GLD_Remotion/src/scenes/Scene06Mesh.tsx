@@ -4,6 +4,7 @@ import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
 import {FAILED_NODE, FAILOVER_ROUTE, LINKS, NODES, PRIMARY_ROUTE, nodeById} from '../data/mesh';
+import {useLang, useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress, useNarration} from '../motion';
 import {COLORS} from '../theme';
@@ -15,18 +16,19 @@ const TRAVEL = 80;
 // "memilih induk baru". Langkah pemulihan (Technical Datasheet Rev 4.0) tersebar mengikuti kalimat.
 const useTimes = () => {
   const at = useNarration('mesh');
-  const FAIL_AT = at('Bila satu Cluster Head gagal');
-  const REROUTE_AT = at('memilih induk baru');
-  const gap = Math.max(18, Math.round((at('histeresis') - FAIL_AT) / 3));
+  const FAIL_AT = at(['Bila satu Cluster Head gagal', 'If a Cluster Head fails']);
+  const REROUTE_AT = at(['memilih parent baru', 'select a new parent']);
+  const HYS = at(['hysteresis', 'hysteresis']);
+  const gap = Math.max(18, Math.round((HYS - FAIL_AT) / 3));
   return {
     at,
     FAIL_AT,
     REROUTE_AT,
     STEPS: [
-      {at: FAIL_AT + 10, text: 'Induk tidak terdeteksi → dinyatakan kedaluwarsa'},
-      {at: FAIL_AT + 10 + gap, text: 'Evaluasi hingga delapan kandidat induk'},
-      {at: at('histeresis'), text: 'Perpindahan bila sinyal ≥ 15 dB lebih baik'},
-      {at: at('pencegahan loop'), text: 'Pencegahan loop dan verifikasi jalur ke gateway'},
+      {at: FAIL_AT + 10, text: ['Parent tidak terdeteksi → dinyatakan kedaluwarsa', 'Parent not heard → marked as stale'] as [string, string]},
+      {at: FAIL_AT + 10 + gap, text: ['Evaluasi hingga delapan kandidat parent', 'Evaluation of up to eight parent candidates'] as [string, string]},
+      {at: HYS, text: ['Berpindah bila sinyal ≥ 15 dB lebih baik (hysteresis)', 'Switch only if the signal is ≥ 15 dB better (hysteresis)'] as [string, string]},
+      {at: at(['loop prevention', 'loop prevention']), text: ['Loop prevention dan verifikasi jalur ke gateway', 'Loop prevention and gateway path verification'] as [string, string]},
     ],
   };
 };
@@ -60,6 +62,7 @@ const InfoPanel: React.FC = () => {
   const {fps} = useVideoConfig();
   const {portrait} = useLayout();
   const {at, FAIL_AT, STEPS} = useTimes();
+  const t = useT();
   const show = (t: number) => spring({frame: frame - t, fps, config: {damping: 200}});
   const row = (color: string, title: string, sub: string, t: number, dashed = false) => (
     <div style={{display: 'flex', gap: 18, alignItems: 'center', opacity: show(t), transform: `translateX(${16 * (1 - show(t))}px)`, marginTop: 18}}>
@@ -75,14 +78,14 @@ const InfoPanel: React.FC = () => {
 
   return (
     <div style={{position: 'absolute', left: portrait ? 64 : 1330, top: portrait ? 1020 : 250, width: portrait ? 952 : 500}}>
-      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.blueLight, letterSpacing: 1, opacity: show(at('dua lapis', -10))}}>ARSITEKTUR RADIO DUA LAPIS</div>
-      {row(COLORS.gas, 'STAR · 920 MHz', 'node sensor → Cluster Head', at('Node sensor terhubung'), true)}
-      {row(COLORS.blueLight, 'MESH · 921 MHz', 'antar-Cluster Head → gateway', at('antar-Cluster Head'))}
+      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.blueLight, letterSpacing: 1, opacity: show(at(['dua lapis', 'two-layer'], -10))}}>{t('ARSITEKTUR RADIO DUA LAPIS', 'TWO-LAYER RADIO ARCHITECTURE')}</div>
+      {row(COLORS.gas, 'STAR · 920 MHz', t('node sensor → Cluster Head', 'sensor node → Cluster Head'), at(['Node sensor terhubung', 'Sensor nodes connect']), true)}
+      {row(COLORS.blueLight, 'MESH · 921 MHz', t('antar-Cluster Head → gateway', 'Cluster Head to Cluster Head → gateway'), at(['antar-Cluster Head', 'the Cluster Heads form']))}
 
-      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.ok, letterSpacing: 1, marginTop: portrait ? 28 : 48, opacity: show(FAIL_AT)}}>PEMULIHAN RUTE OTOMATIS</div>
+      <div style={{fontSize: 24, fontWeight: 800, color: COLORS.ok, letterSpacing: 1, marginTop: portrait ? 28 : 48, opacity: show(FAIL_AT)}}>{t('PEMULIHAN RUTE OTOMATIS', 'AUTOMATIC ROUTE RECOVERY')}</div>
       {STEPS.map((s, i) => (
         <div
-          key={s.text}
+          key={s.text[0]}
           style={{display: 'flex', gap: 16, marginTop: portrait ? 10 : 16, opacity: show(s.at), transform: `translateX(${16 * (1 - show(s.at))}px)`, fontSize: 25, lineHeight: 1.3}}
         >
           <div
@@ -100,7 +103,7 @@ const InfoPanel: React.FC = () => {
           >
             {i + 1}
           </div>
-          <div>{s.text}</div>
+          <div>{t(s.text[0], s.text[1])}</div>
         </div>
       ))}
     </div>
@@ -113,6 +116,7 @@ export const Scene06Mesh: React.FC = () => {
   const {portrait, padX, width, height, title} = useLayout();
   const pos = usePos();
   const {FAIL_AT, REROUTE_AT} = useTimes();
+  const t = useT();
   const failP = progress(frame, FAIL_AT, 12); // CH gagal memudar ke merah
   const rerouteP = progress(frame, REROUTE_AT, 36); // rute baru digambar bertahap
   const blink = failP > 0 ? 0.6 + 0.4 * Math.cos((frame - FAIL_AT) / 4) : 1;
@@ -186,8 +190,8 @@ export const Scene06Mesh: React.FC = () => {
       </svg>
 
       <AbsoluteFill style={{padding: portrait ? `180px ${padX}px` : `60px ${padX}px`}}>
-        <Caption text="Jaringan Mesh LoRa Privat" size={title(70)} />
-        <Caption text="multi-hop · independen dari internet dan jaringan TI kilang" from={25} size={title(34)} weight={400} color={COLORS.muted} style={{marginTop: 8}} />
+        <Caption text={t('Jaringan Private Mesh LoRa', 'Private LoRa Mesh Network')} size={title(70)} />
+        <Caption text={t('multi-hop · independen dari internet dan jaringan TI kilang', 'multi-hop · independent of the internet and the refinery IT network')} from={25} size={title(34)} weight={400} color={COLORS.muted} style={{marginTop: 8}} />
       </AbsoluteFill>
 
       <InfoPanel />
@@ -204,7 +208,7 @@ export const Scene06Mesh: React.FC = () => {
           opacity: progress(frame, REROUTE_AT + 50, 24),
         }}
       >
-        Mekanisme failover telah diuji pada 8 Cluster Head di kampus ITB
+        {t('Mekanisme failover telah diuji pada 8 Cluster Head di kampus ITB', 'Failover mechanism tested on 8 Cluster Heads at the ITB campus')}
       </div>
     </SceneFrame>
   );

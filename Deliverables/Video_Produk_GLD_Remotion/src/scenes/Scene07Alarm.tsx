@@ -5,6 +5,7 @@ import {AssetSlot} from '../components/AssetSlot';
 import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
+import {useLang, useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress, useNarration} from '../motion';
 import {COLORS} from '../theme';
@@ -76,8 +77,9 @@ export const Scene07Alarm: React.FC = () => {
   const leakOut = 1 - progress(frame, LEAK_END - 14, 20);
   const {portrait, padX, title} = useLayout();
   const at = useNarration('alarm');
+  const t = useT();
   const L = portrait ? LAYOUTS.portrait : LAYOUTS.landscape;
-  const ALARM_AT = at('alarm dikirim segera');
+  const ALARM_AT = at(['alarm dikirim segera', 'alarms are pushed']);
   const ring = spring({frame: frame - (ALARM_AT + 26), fps, config: {damping: 16}});
   const pulse = 0.5 + 0.5 * Math.abs(Math.sin((frame - ALARM_AT) / 8));
   const shot = progress(frame, LEAK_END - 6, 26);
@@ -147,8 +149,8 @@ export const Scene07Alarm: React.FC = () => {
       {/* Dua jalur data: normal (cache + pull berkala) vs alarm (push segera). */}
       <div style={{position: 'absolute', left: L.cards.x, top: L.cards.y, width: L.cards.w, display: 'flex', flexDirection: 'column', gap: 18}}>
         {[
-          {label: 'Data normal', sub: 'disimpan pada Cluster Head, diambil secara berkala (pull)', color: COLORS.ok, at: at('Data normal')},
-          {label: 'Alarm', sub: 'dikirim segera melalui mekanisme push, tanpa menunggu siklus pull', color: COLORS.alarm, at: ALARM_AT},
+          {label: t('Data normal', 'Normal data'), sub: t('disimpan pada Cluster Head, diambil secara berkala (pull)', 'stored on the Cluster Head, polled periodically (pull)'), color: COLORS.ok, at: at(['Data normal', 'Normal data'])},
+          {label: 'Alarm', sub: t('dikirim segera melalui mekanisme push, tanpa menunggu siklus pull', 'sent immediately via push, without waiting for the pull cycle'), color: COLORS.alarm, at: ALARM_AT},
         ].map((r) => {
           const p = spring({frame: frame - r.at, fps, config: {damping: 200}});
           return (
@@ -173,10 +175,10 @@ export const Scene07Alarm: React.FC = () => {
       </div>
 
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : `56px 120px`}}>
-        <Caption text="Notifikasi alarm kepada operator" from={LEAK_END} size={title(60)} />
+        <Caption text={t('Notifikasi alarm kepada operator', 'Alarm notification to the operator')} from={LEAK_END} size={title(60)} />
       </AbsoluteFill>
       <div style={{position: 'absolute', right: portrait ? undefined : 120, left: portrait ? padX : undefined, top: portrait ? 365 : 88, fontSize: 22, color: COLORS.muted}}>
-        Dashboard GLD · RU IV · data demonstrasi
+        {t('Dashboard GLD · RU IV · data demonstrasi', 'GLD dashboard · RU IV · demonstration data')}
       </div>
       {/* Simulasi kebocoran: layar penuh di atas semua elemen, memudar keluar ke dashboard */}
       {frame < LEAK_END + 8 && (
@@ -184,10 +186,10 @@ export const Scene07Alarm: React.FC = () => {
           <AssetSlot asset={ASSETS.leak} kind="video" />
           <AbsoluteFill style={{background: 'linear-gradient(transparent 55%, rgba(10,18,32,0.75))'}} />
           <div style={{position: 'absolute', left: padX, top: portrait ? 200 : 70, color: '#F2F5FA', maxWidth: portrait ? 952 : 900}}>
-            <Caption text="Kebocoran terdeteksi, alarm lokal menyala" from={20} size={title(56)} color="#F2F5FA" />
+            <Caption text={t('Kebocoran terdeteksi, alarm lokal menyala', 'Leak detected, local alarm activated')} from={20} size={title(56)} color="#F2F5FA" />
           </div>
           <div style={{position: 'absolute', left: padX, bottom: portrait ? 300 : 130, fontSize: 22, color: '#C9D2E0', opacity: progress(frame, 10, 20)}}>
-            Ilustrasi — gas sebenarnya tidak kasatmata
+            {t('Ilustrasi — gas sebenarnya tidak kasatmata', 'Illustration — actual gas is invisible')}
           </div>
         </AbsoluteFill>
       )}

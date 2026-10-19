@@ -22,8 +22,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 TIMELINE = ROOT / "src" / "timeline.ts"
 TTS_DIR = ROOT / "tts"
-VO_DIR = ROOT / "public" / "audio" / "vo"
+# VO_LANG=id (default) atau en -> narasi Indonesia (public/audio/vo) atau Inggris (public/audio/vo_en).
+LANG = os.environ.get("VO_LANG", "id")
+VO_DIR = ROOT / "public" / "audio" / ("vo_en" if LANG == "en" else "vo")
 FULL_TAKE = VO_DIR / "_full.wav"
+DURATIONS = ROOT / "src" / "data" / "voDurations.json"
 
 VOICE = "Erinome"
 MODEL = os.environ.get("VO_MODEL", "gemini-2.5-flash-preview-tts")  # model lain punya kuota terpisah
@@ -31,20 +34,25 @@ GAP_SEC = 2
 
 # Instruksi gaya untuk Gemini TTS (ditempel sebelum naskah tiap adegan).
 STYLE = (
+    "Read in clear international English with a formal, calm, and confident tone, "
+    "like the narrator of an industrial technology documentary. Moderate pace, short pauses at commas."
+    if LANG == "en" else
     "Bacakan dalam Bahasa Indonesia baku dengan nada formal, tenang, dan meyakinkan, "
-    "seperti narator video teknologi industri. Tempo sedang, jeda singkat di setiap koma."
+    "seperti narator video teknologi industri. Tempo sedang, jeda singkat di setiap koma. "
+    "Istilah bahasa Inggris dibaca dengan pelafalan bahasa Inggris."
 )
+READ_ALL = " Read the entire text below to the end." if LANG == "en" else " Bacakan seluruh teks berikut sampai selesai."
 
 
 def scenes():
     src = TIMELINE.read_text(encoding="utf-8")
     pattern = re.compile(
-        r"id: '(\w+)',\s+title: '([^']*)',\s+startSec: (\d+),\s+endSec: (\d+),\s+vo: '([^']*)'"
+        r"id: '(\w+)',\s+title: '([^']*)',\s+startSec: (\d+),\s+endSec: (\d+),\s+vo: '([^']*)',\s+voEn: '([^']*)'"
     )
     out = []
     for i, m in enumerate(pattern.finditer(src)):
-        sid, title, start, end, vo = m.groups()
-        out.append({"n": i + 1, "id": sid, "title": title, "dur": int(end) - int(start), "vo": vo})
+        sid, title, start, end, vo, vo_en = m.groups()
+        out.append({"n": i + 1, "id": sid, "title": title, "dur": int(end) - int(start), "vo": vo_en if LANG == "en" else vo})
     if not out:
         sys.exit("Tidak menemukan adegan di src/timeline.ts")
     return out
@@ -70,7 +78,20 @@ def export():
     print(f"Naskah ditulis ke {TTS_DIR}")
 
 
+def save_durations():
+    data = json.loads(DURATIONS.read_text(encoding="utf-8")) if DURATIONS.exists() else {}
+    cur = {}
+    for s in scenes():
+        wav = VO_DIR / f"{name(s)}.wav"
+        if wav.exists():
+            with wave.open(str(wav)) as w:
+                cur[s["id"]] = round(w.getnframes() / w.getframerate(), 2)
+    data[LANG] = cur
+    DURATIONS.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+
 def check():
+    save_durations()
     ok = True
     for s in scenes():
         wav = VO_DIR / f"{name(s)}.wav"
@@ -120,15 +141,15 @@ def full_prompt():
     # Satu teks untuk semua adegan; dipakai generate() dan tts/SEKALIGUS.txt (AI Studio manual).
     sc = scenes()
     # Tanpa instruksi jeda: model kadang berhenti di tengah; pemotongan memakai proporsi teks.
-    return f"{STYLE} Bacakan seluruh teks berikut sampai selesai.\n\n" + "\n\n".join(s["vo"] for s in sc)
+    return f"{STYLE}{READ_ALL}\n\n" + "\n\n".join(s["vo"] for s in sc)
 
 
 def generate():
     # Satu panggilan API untuk kedelapan adegan, lalu dipotong per adegan (split).
     body = {
-        # Gaya baca lewat systemInstruction agar tidak ikut dibacakan; konten = naskah saja.
-        "systemInstruction": {"parts": [{"text": STYLE}]},
-        "contents": [{"parts": [{"text": "\n\n".join(s["vo"] for s in scenes())}]}],
+        # Model TTS tidak mendukung systemInstruction; instruksi gaya ikut di teks dan biasanya ikut terbaca,
+        # sehingga split dijalankan dengan VO_SPOKEN_PREFIX=1 (lihat split()).
+        "contents": [{"parts": [{"text": full_prompt()}]}],
         "generationConfig": {
             "responseModalities": ["AUDIO"],
             "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": VOICE}}},
@@ -173,7 +194,7 @@ def split():
     sc = scenes()
     # VO_SPOKEN_PREFIX=1: model ikut membacakan instruksi gaya di awal; jadikan "adegan nol" lalu buang.
     if os.environ.get("VO_SPOKEN_PREFIX"):
-        sc = [{"n": 0, "id": "prefix", "dur": 99, "vo": STYLE + " Bacakan seluruh teks berikut sampai selesai."}] + sc
+        sc = [{"n": 0, "id": "prefix", "dur": 99, "vo": STYLE + READ_ALL}] + sc
     if len(gaps) < len(sc) - 1:
         sys.exit(f"Hanya {len(gaps)} jeda ditemukan, butuh {len(sc) - 1}. Generate ulang.")
     longest = sorted(gaps, reverse=True)[: len(sc) - 1]

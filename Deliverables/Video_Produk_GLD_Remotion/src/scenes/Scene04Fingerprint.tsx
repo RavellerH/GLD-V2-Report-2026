@@ -4,6 +4,7 @@ import {Badge, Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
 import fingerprints from '../data/fingerprints.json';
+import {useLang, useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress, useNarration} from '../motion';
 import {COLORS} from '../theme';
@@ -15,10 +16,10 @@ const CROSSFADE = 24;
 type GasKey = keyof typeof fingerprints.gases;
 
 // Urutan pola yang ditampilkan (frame relatif fase A). Data dari tools/extract_fingerprints.py.
-const STATES: {gas: GasKey; at: number; label: string; color: string}[] = [
-  {gas: 'clean', at: 80, label: 'Udara bersih · kondisi normal', color: COLORS.ok},
-  {gas: 'lpg', at: 250, label: 'Hasil klasifikasi: LPG', color: COLORS.gas},
-  {gas: 'co2', at: 450, label: 'Pola respons CO₂', color: COLORS.blueLight},
+const STATES: {gas: GasKey; at: number; label: [string, string]; color: string}[] = [
+  {gas: 'clean', at: 80, label: ['Udara bersih · kondisi normal', 'Clean air · normal condition'], color: COLORS.ok},
+  {gas: 'lpg', at: 250, label: ['Hasil klasifikasi: LPG', 'Classification result: LPG'], color: COLORS.gas},
+  {gas: 'co2', at: 450, label: ['Pola respons CO₂', 'CO₂ response pattern'], color: COLORS.blueLight},
 ];
 
 // Label kanal di layar: S1–S8 (urutan sama dengan fingerprints.sensors). Nama seri sensor tidak ditampilkan.
@@ -97,16 +98,17 @@ const FingerprintPhase: React.FC = () => {
   const frame = useCurrentFrame();
   const {portrait, padX, title} = useLayout();
   const {values, state} = useMorph();
+  const t = useT();
   const color = state?.color ?? COLORS.blue;
   const labelOpacity = state ? interpolate(frame - state.at, [10, 25], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}) : 0;
-  const label = <div style={{marginTop: portrait ? 24 : 50, fontSize: title(52), fontWeight: 800, color, opacity: labelOpacity}}>{state?.label}</div>;
+  const label = <div style={{marginTop: portrait ? 24 : 50, fontSize: title(52), fontWeight: 800, color, opacity: labelOpacity}}>{state ? t(state.label[0], state.label[1]) : ''}</div>;
 
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : `70px ${padX}px`}}>
-        <Caption text="Delapan sensor bersama membentuk sidik jari gas" size={title(56)} />
+        <Caption text={t('Delapan sensor bersama membentuk sidik jari gas', 'Eight sensors together form a gas fingerprint')} size={title(56)} />
         <Caption
-          text="Prinsip hidung elektronik: sensor oksida logam tidak selektif, namun pola responsnya khas"
+          text={t('Prinsip electronic nose: sensor metal-oxide tidak selektif, namun pola responsnya khas', 'Electronic-nose principle: metal-oxide sensors are not selective, yet their response pattern is distinctive')}
           from={20}
           size={title(30)}
           weight={400}
@@ -133,23 +135,23 @@ const FingerprintPhase: React.FC = () => {
 
       {STATES.map((s) => <Sfx key={s.gas} name="blip" at={s.at} volume={0.3} />)}
       <div style={{position: 'absolute', left: padX, top: portrait ? 1510 : 880, fontSize: 22, color: COLORS.muted}}>
-        Pola respons hasil pengukuran · {fingerprints.source}
+        {t('Pola respons hasil pengukuran', 'Measured response patterns')} · {fingerprints.source}
       </div>
     </AbsoluteFill>
   );
 };
 
 type Rect = {x: number; y: number; w: number; h: number};
-type Box = {id: string; title: string; sub: string; at: number; accent?: string};
+type Box = {id: string; title: [string, string]; sub: [string, string]; at: number; accent?: string};
 
 const BOXES: Box[] = [
-  {id: 'in', title: 'Sinyal 8 sensor', sub: 'deret waktu, resolusi 24-bit', at: 10},
-  {id: 'ds', title: 'Profil sensitivitas', sub: 'karakteristik setiap sensor', at: 25},
-  {id: 'b1', title: 'Cabang 1 · Conv1D', sub: 'ekstraksi pola temporal', at: 60, accent: COLORS.blue},
-  {id: 'b2', title: 'Cabang 2 · Dense', sub: 'representasi sensitivitas', at: 80, accent: COLORS.blue},
-  {id: 'mg', title: 'Penggabungan', sub: 'fitur dari dua cabang', at: 130, accent: COLORS.blue},
+  {id: 'in', title: ['Sinyal 8 sensor', '8-sensor signals'], sub: ['deret waktu, resolusi 24-bit', 'time series, 24-bit resolution'], at: 10},
+  {id: 'ds', title: ['Profil sensitivitas', 'Sensitivity profile'], sub: ['karakteristik setiap sensor', 'characteristics of each sensor'], at: 25},
+  {id: 'b1', title: ['Cabang 1 · Conv1D', 'Branch 1 · Conv1D'], sub: ['ekstraksi pola temporal', 'temporal pattern extraction'], at: 60, accent: COLORS.blue},
+  {id: 'b2', title: ['Cabang 2 · Dense', 'Branch 2 · Dense'], sub: ['representasi sensitivitas', 'sensitivity representation'], at: 80, accent: COLORS.blue},
+  {id: 'mg', title: ['Fusi fitur', 'Feature fusion'], sub: ['fitur dari dua cabang', 'features from both branches'], at: 130, accent: COLORS.blue},
 ];
-const OUTPUTS = ['Udara bersih', 'LPG', 'H₂', '+ kelas tambahan'];
+const OUTPUTS: [string, string][] = [['Udara bersih', 'Clean air'], ['LPG', 'LPG'], ['H₂', 'H₂'], ['+ kelas tambahan', '+ additional classes']];
 const ARROWS: [string, string][] = [
   ['in', 'b1'],
   ['ds', 'b2'],
@@ -192,11 +194,13 @@ const ModelPhase: React.FC<{phaseStart: number}> = ({phaseStart}) => {
   const g = GEOMETRY[portrait ? 'portrait' : 'landscape'];
   // Waktu kemunculan mengikuti narasi (frame relatif fase B).
   const n = useNarration('fingerprint');
-  const at = (phrase: string, off = 0) => Math.max(0, n(phrase, off) - phaseStart);
+  const t = useT();
+  const at = (phrase: string | [string, string], off = 0) => Math.max(0, n(phrase, off) - phaseStart);
   const T = {
-    in: at('sinyal sensor', -10), b1: at('pola temporal'), ds: at('profil sensitivitas', -8), b2: at('profil sensitivitas', 8),
-    mg: at('kemudian', -14), out: at('kemudian'), lpg: at('dikuantisasi', -20),
-    q8: at('dikuantisasi'), edge: at('dijalankan langsung'), srv: at('tanpa bergantung'),
+    in: at(['sinyal sensor', 'sensor signals'], -10), b1: at(['pola temporal', 'temporal pattern']),
+    ds: at(['profil sensitivitas', 'sensitivity profile'], -8), b2: at(['profil sensitivitas', 'sensitivity profile'], 8),
+    mg: at(['kemudian', 'the model is then'], -14), out: at(['kemudian', 'the model is then']), lpg: at(['dikuantisasi', 'quantized'], -20),
+    q8: at(['dikuantisasi', 'quantized']), edge: at(['dijalankan langsung', 'runs directly']), srv: at(['tanpa bergantung', 'no dependence']),
   };
   const boxAt: Record<string, number> = {in: T.in, ds: T.ds, b1: T.b1, b2: T.b2, mg: T.mg};
   const appear = (t: number) => spring({frame: frame - t, fps, config: {damping: 200}});
@@ -224,7 +228,7 @@ const ModelPhase: React.FC<{phaseStart: number}> = ({phaseStart}) => {
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : `70px ${padX}px`}}>
-        <Caption text="Jaringan saraf konvolusional dua cabang" size={title(56)} />
+        <Caption text={t('Convolutional Neural Network dua cabang', 'Dual-branch Convolutional Neural Network')} size={title(56)} />
       </AbsoluteFill>
 
       <svg width={width} height={height} style={{position: 'absolute'}}>
@@ -257,13 +261,14 @@ const ModelPhase: React.FC<{phaseStart: number}> = ({phaseStart}) => {
               transform: `scale(${interpolate(p, [0, 1], [0.9, 1])})`,
             }}
           >
-            <div style={{fontSize: 32, fontWeight: 800}}>{b.title}</div>
-            <div style={{fontSize: 24, color: COLORS.muted, marginTop: 8}}>{b.sub}</div>
+            <div style={{fontSize: 32, fontWeight: 800}}>{t(b.title[0], b.title[1])}</div>
+            <div style={{fontSize: 24, color: COLORS.muted, marginTop: 8}}>{t(b.sub[0], b.sub[1])}</div>
           </div>
         );
       })}
 
-      {OUTPUTS.map((o, i) => {
+      {OUTPUTS.map(([oid, oen], i) => {
+        const o = oid;
         const r = g.outputs[i];
         const extra = i === OUTPUTS.length - 1; // kelas tambahan dilatih per kilang (CH₄, CO, NH₃, ...)
         const on = o === 'LPG' ? lpgOn : 0;
@@ -291,19 +296,19 @@ const ModelPhase: React.FC<{phaseStart: number}> = ({phaseStart}) => {
           >
             {/* Lapisan sorot memudar masuk, bukan berganti mendadak */}
             {!extra && <div style={{position: 'absolute', inset: -3, backgroundColor: COLORS.gas, opacity: on, borderRadius: 14}} />}
-            <span style={{position: 'relative', color: on > 0.5 ? '#FFFFFF' : undefined}}>{o}</span>
+            <span style={{position: 'relative', color: on > 0.5 ? '#FFFFFF' : undefined}}>{t(oid, oen)}</span>
           </div>
         );
       })}
-      <div style={{position: 'absolute', left: g.softmax.x, top: g.softmax.y, fontSize: 24, color: COLORS.muted, opacity: appear(T.out)}}>Softmax · keluaran kelas gas</div>
+      <div style={{position: 'absolute', left: g.softmax.x, top: g.softmax.y, fontSize: 24, color: COLORS.muted, opacity: appear(T.out)}}>{t('Softmax · keluaran kelas gas', 'Softmax · gas class output')}</div>
 
       {BOXES.map((b) => <Sfx key={b.id} name="pop" at={boxAt[b.id]} volume={0.18} />)}
       <Sfx name="success" at={T.lpg} volume={0.35} />
       {[T.q8, T.edge, T.srv].map((f) => <Sfx key={f} name="tick" at={f} volume={0.3} />)}
       <div style={{position: 'absolute', left: g.badges.x, top: g.badges.y, display: 'flex', flexWrap: 'wrap', gap: 20, width: portrait ? 952 : undefined}}>
-        <Badge text="Kuantisasi 8-bit" from={T.q8} />
-        <Badge text="Inferensi pada perangkat" from={T.edge} />
-        <Badge text="Independen dari server" from={T.srv} color={COLORS.ok} />
+        <Badge text={t('Kuantisasi 8-bit', '8-bit quantization')} from={T.q8} />
+        <Badge text={t('Inferensi pada perangkat', 'On-device inference')} from={T.edge} />
+        <Badge text={t('Independen dari server', 'Server-independent')} from={T.srv} color={COLORS.ok} />
       </div>
     </AbsoluteFill>
   );
@@ -311,7 +316,7 @@ const ModelPhase: React.FC<{phaseStart: number}> = ({phaseStart}) => {
 
 export const Scene04Fingerprint: React.FC = () => {
   const frame = useCurrentFrame();
-  const PHASE_B_AT = useNarration('fingerprint')('Jaringan saraf', -12);
+  const PHASE_B_AT = useNarration('fingerprint')(['Convolutional Neural Network', 'A dual-branch'], -12);
   const fadeA = 1 - progress(frame, PHASE_B_AT - CROSSFADE, CROSSFADE);
   const fadeB = progress(frame, PHASE_B_AT - 6, CROSSFADE);
 

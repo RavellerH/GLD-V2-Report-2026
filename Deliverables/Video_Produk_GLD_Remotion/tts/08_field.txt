@@ -1,0 +1,3 @@
+Bacakan dalam Bahasa Indonesia baku dengan nada formal, tenang, dan meyakinkan, seperti narator video teknologi industri. Tempo sedang, jeda singkat di setiap koma. Istilah bahasa Inggris dibaca dengan pelafalan bahasa Inggris.
+
+GLD telah melalui pengujian lapangan: generasi pertama diuji di RU VII Kasim pada Desember 2025. Generasi kedua lulus seluruh tujuh butir Factory Acceptance Test di laboratorium, serta pengujian multi-hop mesh, failover, dan push alarm pada delapan Cluster Head.

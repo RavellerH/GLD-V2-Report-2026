@@ -1,0 +1,3 @@
+Bacakan dalam Bahasa Indonesia baku dengan nada formal, tenang, dan meyakinkan, seperti narator video teknologi industri. Tempo sedang, jeda singkat di setiap koma. Istilah bahasa Inggris dibaca dengan pelafalan bahasa Inggris.
+
+Tahap pengembangan berikutnya adalah integrasi kamera thermal untuk pemantauan area, sebagai pelengkap deteksi titik GLD dalam satu dashboard terpadu.

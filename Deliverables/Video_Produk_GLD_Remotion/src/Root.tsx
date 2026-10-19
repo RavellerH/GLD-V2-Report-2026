@@ -8,12 +8,28 @@ const FORMATS = [
   {id: 'GLD-Explainer', label: 'Landscape', width: 1920, height: 1080},
   {id: 'GLD-Explainer-Portrait', label: 'Portrait', width: 1080, height: 1920},
 ];
+// Versi bahasa: ID (istilah teknis bahasa Inggris) dan EN.
+const LANGS = [
+  {suffix: '', lang: 'id' as const},
+  {suffix: '-EN', lang: 'en' as const},
+];
 
 export const RemotionRoot: React.FC = () => (
   <>
-    {FORMATS.map((f) => (
-      <Composition key={f.id} id={f.id} component={Explainer} durationInFrames={TOTAL_FRAMES} fps={FPS} width={f.width} height={f.height} />
-    ))}
+    {LANGS.flatMap((l) =>
+      FORMATS.map((f) => (
+        <Composition
+          key={f.id + l.suffix}
+          id={f.id + l.suffix}
+          component={Explainer}
+          defaultProps={{lang: l.lang}}
+          durationInFrames={TOTAL_FRAMES}
+          fps={FPS}
+          width={f.width}
+          height={f.height}
+        />
+      )),
+    )}
     {/* Tiap adegan juga tersedia terpisah per orientasi supaya cepat di-preview di Studio. */}
     {FORMATS.map((f) => (
       <Folder key={f.label} name={`Adegan-${f.label}`}>

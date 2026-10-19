@@ -35,6 +35,12 @@ export const ASSETS = {
     ready: true,
     note: 'Blender: simulasi kebocoran -> GLD -> beacon alarm (6,5 dtk, ilustrasi)',
   },
+  // Footage uji lapangan GLD generasi pertama di RU VII Kasim (Des 2025). Taruh di public/footage/.
+  kasim: {
+    path: 'footage/kasim_field_test.mp4',
+    ready: false,
+    note: 'Footage uji lapangan GLD V1 di RU VII Kasim, Desember 2025',
+  },
   outro: {
     path: 'blender/scene08_outro.mp4',
     portraitPath: 'blender/portrait/scene08_outro.mp4',
@@ -56,7 +62,8 @@ export const ASSETS = {
 // Narasi per adegan: public/audio/vo/<nn>_<id>.wav (mis. 04_fingerprint.wav), hasil Gemini TTS.
 // Nama file dibuat oleh tools/export_vo.py. Set true setelah kedelapan file tersedia.
 export const VO_READY = true;
-export const voPath = (index: number, id: string) => `audio/vo/${String(index + 1).padStart(2, '0')}_${id}.wav`;
+export const voPath = (index: number, id: string, lang: 'id' | 'en' = 'id') =>
+  `audio/${lang === 'en' ? 'vo_en' : 'vo'}/${String(index + 1).padStart(2, '0')}_${id}.wav`;
 
 // Matikan bila narasi sudah direkam dan subtitle tidak diinginkan.
 export const SHOW_SUBTITLES = true;

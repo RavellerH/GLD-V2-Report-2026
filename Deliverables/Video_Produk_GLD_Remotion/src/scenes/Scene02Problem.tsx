@@ -4,6 +4,7 @@ import {Caption} from '../components/Caption';
 import {DetectorIcon} from '../components/Icons';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
+import {useLang, useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress, useNarration} from '../motion';
 import {COLORS} from '../theme';
@@ -16,15 +17,16 @@ export const Scene02Problem: React.FC = () => {
   const {fps} = useVideoConfig();
   const {portrait, width, height, title} = useLayout();
   const at = useNarration('problem');
-  const tCable = at('kabel data');
+  const t = useT();
+  const tCable = at(['kabel data', 'data cables']);
   const cable = (i: number) => progress(frame, tCable - 20 + i * 6, 45);
-  const strike = progress(frame, at('sulit diperluas', 6), 22);
+  const strike = progress(frame, at(['sulit diperluas', 'difficult to scale'], 6), 22);
   const pop = (i: number) => spring({frame: frame - 6 - i * 5, fps, config: {damping: 20}});
   // Tiga masalah muncul tepat saat diucapkan narasi.
   const ISSUES = [
-    {text: 'Satu detektor untuk satu jenis gas', at: at('satu jenis gas')},
-    {text: 'Kabel data ke ruang kontrol', at: tCable},
-    {text: 'Mahal dan sulit diperluas', at: at('mahal')},
+    {text: t('Satu detektor untuk satu jenis gas', 'One detector per gas type'), at: at(['satu jenis gas', 'single gas'])},
+    {text: t('Kabel data ke ruang kontrol', 'Data cabling to the control room'), at: tCable},
+    {text: t('Mahal dan sulit diperluas', 'Costly and difficult to scale'), at: at(['mahal', 'costly'])},
   ];
 
   // Landscape: detektor berjajar vertikal di kiri, ruang kontrol di kanan.
@@ -82,7 +84,7 @@ export const Scene02Problem: React.FC = () => {
           opacity: progress(frame, tCable - 30, 20),
         }}
       >
-        Ruang kontrol
+        {t('Ruang kontrol', 'Control room')}
       </div>
 
       {/* Label masalah, muncul sesuai narasi */}
@@ -98,11 +100,11 @@ export const Scene02Problem: React.FC = () => {
       </div>
 
       <AbsoluteFill style={{alignItems: 'center', paddingTop: portrait ? 200 : 70, textAlign: 'center'}}>
-        <Caption text="Pendekatan konvensional: satu detektor per jenis gas" from={8} size={title(56)} />
+        <Caption text={t('Pendekatan konvensional: satu detektor per jenis gas', 'Conventional approach: one detector per gas type')} from={8} size={title(56)} />
       </AbsoluteFill>
       {GASES.map((g, i) => <Sfx key={g} name="pop" at={6 + i * 5} volume={0.22} />)}
       {ISSUES.map((it) => <Sfx key={it.text} name="tick" at={it.at} volume={0.35} />)}
-      <Sfx name="whoosh_short" at={at('sulit diperluas', 6)} volume={0.5} />
+      <Sfx name="whoosh_short" at={at(['sulit diperluas', 'difficult to scale'], 6)} volume={0.5} />
     </SceneFrame>
   );
 };

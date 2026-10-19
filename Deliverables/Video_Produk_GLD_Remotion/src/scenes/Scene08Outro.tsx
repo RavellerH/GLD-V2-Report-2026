@@ -5,6 +5,7 @@ import {AssetSlot} from '../components/AssetSlot';
 import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
+import {useLang, useT} from '../i18n';
 import {useLayout} from '../layout';
 import {COLORS} from '../theme';
 
@@ -20,6 +21,7 @@ export const Scene08Outro: React.FC = () => {
   const {portrait, padX, title} = useLayout();
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const t = useT();
   const logos = spring({frame: frame - 205, fps, config: {damping: 200}});
   return (
     <SceneFrame last>
@@ -27,7 +29,7 @@ export const Scene08Outro: React.FC = () => {
       <AbsoluteFill style={{background: `linear-gradient(transparent 40%, ${COLORS.overlay} 75%)`}} />
       <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', padding: `0 ${padX}px ${portrait ? 400 : 170}px`, textAlign: 'center'}}>
         <Caption text="GLD" from={150} size={title(120)} color={COLORS.blueLight} />
-        <Caption text="Deteksi multigas berbasis AI dengan jaringan yang memulihkan diri" from={175} size={portrait ? title(52) : 46} />
+        <Caption text={t('Deteksi multigas berbasis edge AI dengan jaringan self-healing', 'Edge-AI multi-gas detection with a self-healing network')} from={175} size={portrait ? title(52) : 46} />
         <div
           style={{
             display: 'flex',

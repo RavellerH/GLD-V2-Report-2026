@@ -2,7 +2,8 @@ import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
 import {useLayout} from '../layout';
 import voDurations from '../data/voDurations.json';
-import {SCENES} from '../timeline';
+import {useLang} from '../i18n';
+import {SCENES, voOf} from '../timeline';
 import {COLORS, FONT} from '../theme';
 
 const MAX_CHARS = 95;
@@ -29,12 +30,14 @@ const chunk = (vo: string, maxChars: number) => {
 };
 
 // Tiap potongan tampil sebanding panjang hurufnya.
-export const Subtitles: React.FC<{vo: string}> = ({vo}) => {
+export const Subtitles: React.FC<{id: string}> = ({id}) => {
   const frame = useCurrentFrame();
   const {durationInFrames, fps} = useVideoConfig();
+  const lang = useLang();
+  const scene = SCENES.find((sc) => sc.id === id);
+  const vo = scene ? voOf(scene, lang) : '';
   // Subtitle mengikuti lama narasi sebenarnya (data/voDurations.json), bukan panjang slot.
-  const id = SCENES.find((sc) => sc.vo === vo)?.id;
-  const voSec = id ? (voDurations as Record<string, number>)[id] : undefined;
+  const voSec = (voDurations as Record<string, Record<string, number>>)[lang]?.[id];
   const span = voSec ? Math.min(durationInFrames, Math.round(voSec * fps)) : durationInFrames;
   const {portrait, subtitleBottom} = useLayout();
   const parts = chunk(vo, portrait ? MAX_CHARS_PORTRAIT : MAX_CHARS);

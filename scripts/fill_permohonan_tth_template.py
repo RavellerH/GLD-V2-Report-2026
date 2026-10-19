@@ -42,7 +42,7 @@ def page1(c):
     text(c, 168, 270, "GLD (prototipe)", 8)
     text(c, 398, 270, "(1) GLD V2  /  (2) CH V2", 8)
     text(c, 168, 285.5, "LoRa 920/921 MHz, maks. 22 dBm", 7)
-    text(c, 398, 285.5, "(1) GLD-V2-001  /  (2) CH prototipe", 7)
+    text(c, 398, 285.5, "(1) GLD-V2-001  /  (2) CH-V3-003", 7)
     text(c, 168, 301.5, "Indonesia", 8)
     text(c, 398, 301.5, "EMC: emisi radiasi & konduksi", 7)
     # Agenda CT: Lainnya

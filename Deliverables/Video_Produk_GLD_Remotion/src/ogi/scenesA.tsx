@@ -9,7 +9,7 @@ import {useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress, useNarration} from '../motion';
 import {COLORS} from '../theme';
-import {ConceptBadge, InfoCard, SceneTitle} from './common';
+import {InfoCard, SceneTitle} from './common';
 
 // 01 — Pembuka: b-roll kilang malam + judul.
 export const OgiHook: React.FC = () => {
@@ -36,7 +36,6 @@ export const OgiHook: React.FC = () => {
           style={{marginTop: 26, maxWidth: 900}}
         />
       </AbsoluteFill>
-      <ConceptBadge />
       <Sfx name="rise" at={0} volume={0.3} />
     </SceneFrame>
   );
@@ -122,7 +121,6 @@ export const OgiStakes: React.FC = () => {
         ))}
         <div style={{fontSize: 18, color: COLORS.muted, marginTop: 6}}>{t('Sumber: IPCC AR6 (2021), GWP100 metana fosil ≈ 29,8', 'Source: IPCC AR6 (2021), fossil methane GWP100 ≈ 29.8')}</div>
       </div>
-      <ConceptBadge />
       {RISKS.map((r) => (
         <Sfx key={r.kind} name="pop" at={r.at} volume={0.22} />
       ))}
@@ -201,7 +199,6 @@ export const OgiToday: React.FC = () => {
           <span style={{color: COLORS.blue, fontWeight: 800}}>●</span> {t('GLD + radius deteksi', 'GLD + detection radius')}
         </div>
       </div>
-      <ConceptBadge />
       <Sfx name="error" at={gapAt + 40} volume={0.15} />
     </SceneFrame>
   );
@@ -239,7 +236,7 @@ export const OgiPhysics: React.FC = () => {
   ];
   return (
     <SceneFrame theme="night">
-      <SceneTitle kicker={t('PRINSIP FISIKA', 'PHYSICAL PRINCIPLE')} title={t('Ikatan C–H menyerap inframerah di ±3,3 µm', 'C–H bonds absorb infrared at ≈3.3 µm')} />
+      <SceneTitle kicker={t('PRINSIP FISIKA', 'PHYSICAL PRINCIPLE')} title={t('Ikatan C–H menyerap inframerah di ≈3,3 µm', 'C–H bonds absorb infrared at ≈3.3 µm')} />
       <div style={{position: 'absolute', left: padX, top, width: W, height: chartH}}>
         <svg width={W} height={chartH}>
           {bands.map((b) => (
@@ -277,12 +274,11 @@ export const OgiPhysics: React.FC = () => {
           </g>
         </svg>
         <div style={{fontSize: 17, color: COLORS.muted, marginTop: 6}}>
-          {t('Kurva serapan ilustratif hidrokarbon (bukan data ukur).', 'Illustrative hydrocarbon absorption curve (not measured data).')}
+          {t('Kurva serapan hidrokarbon (ilustratif, bukan data ukur).', 'Hydrocarbon absorption curve (illustrative, not measured data).')}
         </div>
       </div>
       <Sfx name="whoosh_short" at={tBand - 10} volume={0.25} />
       <Sfx name="blip" at={tFilter} volume={0.25} />
-      <ConceptBadge />
     </SceneFrame>
   );
 };
@@ -330,7 +326,7 @@ export const OgiCooled: React.FC = () => {
           </text>
           <rect x={360} y={120} width={200} height={100} rx={14} fill="#1B2A44" stroke={COLORS.line} strokeWidth={3} />
           <text x={460} y={176} textAnchor="middle" fontSize={22} fill="#F2F5FA" fontWeight={700}>
-            {t('Cooler Stirling', 'Stirling cooler')}
+            {t('Pendingin Stirling', 'Stirling cooler')}
           </text>
           <line x1={340} y1={170} x2={360} y2={170} stroke={COLORS.blueLight} strokeWidth={6} />
           {/* termometer */}
@@ -357,7 +353,6 @@ export const OgiCooled: React.FC = () => {
         </div>
       </div>
       <Sfx name="hum" at={tCool} volume={0.2} />
-      <ConceptBadge />
     </SceneFrame>
   );
 };

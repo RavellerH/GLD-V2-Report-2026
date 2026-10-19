@@ -1,35 +1,9 @@
 import React from 'react';
 import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Caption} from '../components/Caption';
-import {useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress} from '../motion';
 import {COLORS} from '../theme';
-
-// Label permanen: seluruh video OGI adalah konsep pengembangan, bukan sistem terpasang.
-export const ConceptBadge: React.FC = () => {
-  const t = useT();
-  const {portrait} = useLayout();
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        right: portrait ? 40 : 48,
-        top: portrait ? 120 : 36,
-        padding: '6px 14px',
-        borderRadius: 8,
-        border: `2px solid ${COLORS.gas}`,
-        color: COLORS.gas,
-        backgroundColor: 'rgba(10,18,32,0.55)',
-        fontSize: 20,
-        fontWeight: 800,
-        letterSpacing: 2,
-      }}
-    >
-      {t('KONSEP PENGEMBANGAN', 'DEVELOPMENT CONCEPT')}
-    </div>
-  );
-};
 
 // Judul adegan dengan label kecil di atasnya (nomor/tema).
 export const SceneTitle: React.FC<{kicker: string; title: string; from?: number; color?: string}> = ({kicker, title, from = 4, color}) => {

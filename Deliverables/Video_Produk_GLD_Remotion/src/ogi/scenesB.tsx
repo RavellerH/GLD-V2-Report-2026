@@ -9,7 +9,7 @@ import {useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress, useNarration} from '../motion';
 import {COLORS, FONT, PALETTES, themeVars} from '../theme';
-import {ConceptBadge, InfoCard, SceneTitle} from './common';
+import {InfoCard, SceneTitle} from './common';
 
 // 06 — Sistem di lapangan: render 3D (14 dtk) diperlambat mengisi slot + kartu spesifikasi + HUD preset.
 const OGI_3D_SEC = 14;
@@ -27,11 +27,11 @@ export const OgiField: React.FC = () => {
   ];
   const det = at3d(10.6);
   const SPECS = [
-    {k: t('Pita spektral', 'Spectral band'), v: t('MWIR 3–5 µm · filter ±3,3 µm', 'MWIR 3–5 µm · ±3.3 µm filter')},
+    {k: t('Pita spektral', 'Spectral band'), v: t('MWIR 3–5 µm · filter ≈3,3 µm', 'MWIR 3–5 µm · ≈3.3 µm filter')},
     {k: t('Detektor', 'Detector'), v: 'Cooled MCT 640×512'},
     {k: 'Frame rate · NETD', v: '100 Hz · ≤25 mK'},
-    {k: t('Pemasangan', 'Mounting'), v: t('Tiang ±10 m · pan-tilt ±60°', '≈10 m pole · pan-tilt ±60°')},
-    {k: t('Target jangkauan', 'Target range'), v: t('±100 m (divalidasi uji lapangan)', '≈100 m (to be field-validated)')},
+    {k: t('Pemasangan', 'Mounting'), v: t('Tiang ≈10 m · pan-tilt ±60°', '≈10 m pole · pan-tilt ±60°')},
+    {k: t('Target jangkauan', 'Target range'), v: t('≈100 m (divalidasi uji lapangan)', '≈100 m (to be field-validated)')},
   ];
   return (
     <SceneFrame theme="night">
@@ -83,7 +83,6 @@ export const OgiField: React.FC = () => {
         <Sfx key={p.k} name="tick" at={p.a} volume={0.25} />
       ))}
       <Sfx name="alarm" at={det} volume={0.18} />
-      <ConceptBadge />
     </SceneFrame>
   );
 };
@@ -191,7 +190,6 @@ export const OgiEdgeAI: React.FC = () => {
       </div>
       <Sfx name="blip" at={tSeg} volume={0.25} />
       <Sfx name="alarm" at={alarmAt} volume={0.2} />
-      <ConceptBadge />
     </SceneFrame>
   );
 };
@@ -259,7 +257,6 @@ export const OgiFusion: React.FC = () => {
       <Sfx name="pop" at={tGld} volume={0.22} />
       <Sfx name="pop" at={tOgi} volume={0.22} />
       <Sfx name="alarm" at={tBoth + 20} volume={0.18} />
-      <ConceptBadge />
     </SceneFrame>
   );
 };
@@ -282,7 +279,7 @@ export const OgiLimits: React.FC = () => {
   ];
   return (
     <SceneFrame theme="light">
-      <SceneTitle kicker={t('BATASAN', 'LIMITATIONS')} title={t('Kamera melengkapi GLD, bukan menggantikan', 'The camera complements GLD, not replaces it')} />
+      <SceneTitle kicker={t('BATASAN', 'LIMITATIONS')} title={t('Kamera melengkapi GLD, bukan menggantikannya', 'The camera complements GLD rather than replacing it')} />
       <div style={{position: 'absolute', left: padX, top: portrait ? 420 : 240, width: W, display: 'grid', gridTemplateColumns: portrait ? '1fr 1fr' : 'repeat(4, 1fr)', gap: 16}}>
         {FACTORS.map((f) => (
           <InfoCard key={f.k} at={f.a} k={t('Faktor', 'Factor')} v={f.k} color={COLORS.gas} />
@@ -290,8 +287,8 @@ export const OgiLimits: React.FC = () => {
       </div>
       <div style={{position: 'absolute', left: padX, top: portrait ? 760 : 440, width: W, display: 'grid', gridTemplateColumns: portrait ? '1fr' : '1fr 1fr', gap: 22}}>
         {[
-          {h: t('Tampak pada pita ±3,3 µm', 'Visible in the ≈3.3 µm band'), items: ['CH₄', 'C₃H₈', 'C₄H₁₀', 'VOC'], c: COLORS.ok, a: tGas - 20},
-          {h: t('Tidak tampak → tetap GLD', 'Not visible → GLD remains essential'), items: ['H₂', 'CO', 'H₂S'], c: COLORS.alarm, a: tGas},
+          {h: t('Tampak pada pita ≈3,3 µm', 'Visible in the ≈3.3 µm band'), items: ['CH₄', 'C₃H₈', 'C₄H₁₀', 'VOC'], c: COLORS.ok, a: tGas - 20},
+          {h: t('Tidak tampak → tetap andalkan GLD', 'Not visible → GLD remains essential'), items: ['H₂', 'CO', 'H₂S'], c: COLORS.alarm, a: tGas},
         ].map((col) => {
           const p = spring({frame: frame - col.a, fps, config: {damping: 200}});
           return (
@@ -311,7 +308,6 @@ export const OgiLimits: React.FC = () => {
       <div style={{position: 'absolute', left: padX, top: portrait ? 1240 : 760, fontSize: 30, fontWeight: 800, color: COLORS.blue, opacity: progress(frame, tComp, 16)}}>
         {t('GLD: identifikasi jenis gas · OGI: visualisasi spasial', 'GLD: gas identification · OGI: spatial visualisation')}
       </div>
-      <ConceptBadge />
     </SceneFrame>
   );
 };
@@ -370,12 +366,11 @@ export const OgiStrategy: React.FC = () => {
           at={tPdm - 20}
           big
           k={t('Potensi pengembangan', 'Potential development')}
-          v={t('Predictive maintenance: hot spot heater, isolasi rusak, steam trap', 'Predictive maintenance: heater hot spots, damaged insulation, steam traps')}
+          v={t('Predictive maintenance: hot spot pada heater, isolasi rusak, steam trap', 'Predictive maintenance: heater hot spots, damaged insulation, steam traps')}
           color={COLORS.gas}
           style={{backgroundColor: '#111C2E', color: '#F2F5FA', border: `1px dashed ${COLORS.gas}`}}
         />
       </div>
-      <ConceptBadge />
     </SceneFrame>
   );
 };
@@ -392,7 +387,7 @@ export const OgiOutro: React.FC = () => {
   const logoIn = spring({frame: frame - logoAt, fps, config: {damping: 200}});
   const out = 1 - progress(frame, durationInFrames - 24, 24);
   const ITEMS = [
-    t('MWIR ±3,3 µm: plume hidrokarbon tampak', 'MWIR ≈3.3 µm: hydrocarbon plumes made visible'),
+    t('MWIR ≈3,3 µm: plume hidrokarbon tampak', 'MWIR ≈3.3 µm: hydrocarbon plumes made visible'),
     t('Edge AI: segmentasi plume & logika persistensi', 'Edge AI: plume segmentation & persistence logic'),
     t('GLD + OGI: jenis gas dan lokasi dalam satu dashboard', 'GLD + OGI: gas type and location in one dashboard'),
     t('Modular untuk seluruh kilang Pertamina', 'Modular for all Pertamina refineries'),
@@ -411,9 +406,6 @@ export const OgiOutro: React.FC = () => {
               </div>
             );
           })}
-        </div>
-        <div style={{marginTop: 30, fontSize: 24, color: P.muted, opacity: progress(frame, 80, 16)}}>
-          {t('Konsep pengembangan · spesifikasi dan kinerja akan divalidasi melalui uji lapangan', 'Development concept · specifications and performance to be validated through field tests')}
         </div>
       </AbsoluteFill>
       <AbsoluteFill style={{backgroundColor: '#FFFFFF', opacity: toLogo, alignItems: 'center', justifyContent: 'center'}}>

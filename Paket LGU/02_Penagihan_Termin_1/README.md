@@ -20,3 +20,6 @@ Sumber: `scripts/build_cover_laporan_lgu.py` (halaman depan digabung ke PDF lapo
 Pada laporan Sertifikasi (03), status syarat ditulis **Tersedia / Sebagian / Dalam Penyiapan** — tidak memakai label "belum tersedia" / "belum ada" (arahan 2 Okt 2026). Rev 0.2 memperbarui bukti ke status 2 Okt 2026; sumber varian ini `scripts/build_termin1_certification_report_lgu.py` (output antara di `src/`).
 
 Versi Word (`.docx`) dibangun oleh `scripts/build_word_penagihan_lgu.py` (halaman depan dapat diedit: No. Kontrak, tanggal, nama penandatangan). Folder `src/` berisi berkas antara.
+
+## Tanda tangan LGU di lampiran (19 Okt 2026, SP-002/KPI43400/2026-S0 Field Testing)
+`01_Laporan_Termin_1_Field_Testing_20Persen_TTD_LGU.pdf` — kolom LGU pada lembar pengesahan Lampiran A (FAT hlm 21 "Disiapkan oleh"; Laporan Uji Lab 01/02/03 hlm 129/134/140 "Diperiksa oleh") diisi **Dr. Maman Budiman / Team Leader / 5 Oktober 2026**. Kotak tanda tangan masih kosong: taruh scan tanda tangan (PNG) di `scripts/assets/ttd_lgu/ttd_lgu.png` (opsional stempel `stempel_lgu.png`) lalu jalankan `scripts/bubuhkan_ttd_lgu_lampiran_ft.py`, atau tanda tangan basah setelah dicetak.

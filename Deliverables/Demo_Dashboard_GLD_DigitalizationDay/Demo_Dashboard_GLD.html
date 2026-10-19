@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo Dashboard GLD</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: control-room console — scenario bar on top, mesh map + alarm console side by side, fleet table and event log below. */
+:root {
+  --bg: #F3F4F7;
+  --panel: #FFFFFF;
+  --panel-2: #F7F8FB;
+  --line: #DCDFE7;
+  --ink: #262321;
+  --ink-2: #4E4A47;
+  --ink-3: #7C7874;
+  --accent: #2B5FCB;
+  --accent-soft: rgba(43, 95, 203, 0.10);
+  --gas: #D98A0B;
+  --gas-soft: rgba(245, 165, 36, 0.16);
+  --ok: #1E8A5A;
+  --ok-soft: rgba(30, 138, 90, 0.12);
+  --crit: #C8332B;
+  --crit-soft: rgba(200, 51, 43, 0.11);
+  --off: #9A958F;
+  --font-ui: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17171A; --panel: #212024; --panel-2: #1B1B1E; --line: #34323A;
+    --ink: #EEECE9; --ink-2: #C3BFBA; --ink-3: #8D8984;
+    --accent: #6F97F0; --accent-soft: rgba(111, 151, 240, 0.14);
+    --gas: #F5A524; --gas-soft: rgba(245, 165, 36, 0.16);
+    --ok: #46C08A; --ok-soft: rgba(70, 192, 138, 0.13);
+    --crit: #F0625A; --crit-soft: rgba(240, 98, 90, 0.15);
+    --off: #6E6A66;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17171A; --panel: #212024; --panel-2: #1B1B1E; --line: #34323A;
+  --ink: #EEECE9; --ink-2: #C3BFBA; --ink-3: #8D8984;
+  --accent: #6F97F0; --accent-soft: rgba(111, 151, 240, 0.14);
+  --gas: #F5A524; --gas-soft: rgba(245, 165, 36, 0.16);
+  --ok: #46C08A; --ok-soft: rgba(70, 192, 138, 0.13);
+  --crit: #F0625A; --crit-soft: rgba(240, 98, 90, 0.15);
+  --off: #6E6A66;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 14px/1.5 var(--font-ui);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 16px 32px;
+}
+.wrap { max-width: 1440px; margin: 0 auto; display: grid; gap: 16px; }
+.mono { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+h1, h2 { margin: 0; text-wrap: balance; }
+h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* header */
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.mark { width: 40px; height: 40px; border-radius: 10px; background: var(--accent); display: grid; place-items: center; flex: none; }
+.brand h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+.brand p { margin: 0; font-size: 12px; color: var(--ink-3); }
+.badge-demo { font: 600 11px var(--font-data); letter-spacing: 0.06em; color: var(--gas); background: var(--gas-soft); border: 1px solid var(--gas); padding: 3px 10px; border-radius: 999px; }
+.top-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.clock { font-size: 13px; color: var(--ink-2); }
+
+/* scenario bar */
+.scenario { background: var(--ink); color: #F3F1EE; border-radius: 14px; padding: 16px 18px; display: grid; gap: 12px; }
+:root[data-theme="dark"] .scenario { background: #0E0E10; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .scenario { background: #0E0E10; } }
+.steps { display: flex; flex-wrap: wrap; gap: 8px; }
+.step { border: 1px solid rgba(255,255,255,0.18); background: transparent; color: #CFCBC6; border-radius: 999px; padding: 6px 12px; font-size: 12px; display: flex; gap: 8px; align-items: center; }
+.step .n { font-family: var(--font-data); opacity: 0.7; }
+.step[aria-current="step"] { background: #2B5FCB; border-color: #2B5FCB; color: #fff; }
+.step.is-alarm[aria-current="step"] { background: #C8332B; border-color: #C8332B; }
+.say { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: start; }
+.say h3 { margin: 0 0 4px; font-size: 17px; }
+.say p { margin: 0; color: #D9D5D0; max-width: 90ch; }
+.say .hint { margin-top: 6px; font-size: 12px; color: #A9A49F; }
+.say .hint b { color: #F5A524; font-weight: 600; }
+.controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.btn { border-radius: 8px; padding: 7px 14px; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #F3F1EE; font-size: 13px; font-weight: 500; }
+.btn.primary { background: #2B5FCB; border-color: #2B5FCB; }
+.btn[aria-pressed="true"] { background: #F5A524; border-color: #F5A524; color: #262321; }
+@media (max-width: 720px) { .say { grid-template-columns: 1fr; } .controls { justify-content: flex-start; } }
+
+/* kpis */
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 4px; }
+.kpi .lbl { font-size: 12px; color: var(--ink-3); }
+.kpi .val { font: 600 26px/1.1 var(--font-data); font-variant-numeric: tabular-nums; }
+.kpi .sub { font-size: 12px; color: var(--ink-3); }
+.kpi.crit { border-color: var(--crit); background: var(--crit-soft); }
+.kpi.crit .val { color: var(--crit); }
+.kpi.warn .val { color: var(--gas); }
+
+/* main grid */
+.main { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 1000px) { .main { grid-template-columns: 1fr; } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.panel-head .meta { font-size: 12px; color: var(--ink-3); }
+
+/* mesh map */
+.mesh { width: 100%; height: auto; display: block; background: var(--panel-2); border-radius: 10px; }
+.mesh-wrap { overflow-x: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--ink-3); }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+/* alarms */
+.alarms { display: grid; gap: 10px; }
+.alarm { border: 1px solid var(--line); border-left: 4px solid var(--gas); border-radius: 10px; padding: 12px; display: grid; gap: 8px; background: var(--panel-2); }
+.alarm.CRITICAL { border-left-color: var(--crit); }
+.alarm.done { opacity: 0.6; }
+.alarm .row1 { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: center; }
+.alarm .who { font-weight: 600; }
+.alarm .msg { color: var(--ink-2); font-size: 13px; }
+.alarm .acts { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.pill { font: 600 11px var(--font-data); letter-spacing: 0.04em; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.ok { color: var(--ok); background: var(--ok-soft); }
+.pill.off { color: var(--off); background: var(--panel-2); border: 1px solid var(--line); }
+.pill.warn { color: var(--gas); background: var(--gas-soft); }
+.pill.crit { color: var(--crit); background: var(--crit-soft); }
+.pill.info { color: var(--accent); background: var(--accent-soft); }
+.act { border: 1px solid var(--line); background: var(--panel); color: var(--accent); border-radius: 7px; padding: 4px 12px; font-size: 12px; font-weight: 600; }
+.empty { padding: 28px 12px; text-align: center; color: var(--ink-3); border: 1px dashed var(--line); border-radius: 10px; font-size: 13px; }
+
+/* table */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 760px; }
+th { text-align: left; font: 600 11px var(--font-data); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); padding: 8px 10px; border-bottom: 1px solid var(--line); }
+td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+tr.hl td { background: var(--crit-soft); }
+td .name { font-weight: 600; }
+td .id { font-size: 12px; color: var(--ink-3); }
+
+/* events */
+.events { display: grid; gap: 0; max-height: 300px; overflow-y: auto; }
+.ev { display: grid; grid-template-columns: 74px 120px minmax(0, 1fr); gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.ev .t { color: var(--ink-3); }
+@media (max-width: 560px) { .ev { grid-template-columns: 64px minmax(0, 1fr); } .ev .ty { grid-column: 2; } .ev .m { grid-column: 1 / -1; } }
+
+.flow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 700px) { .flow { grid-template-columns: 1fr; } }
+.flow div { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--panel); }
+.flow b { display: block; margin-bottom: 2px; }
+.flow p { margin: 0; color: var(--ink-2); font-size: 13px; }
+.foot { font-size: 12px; color: var(--ink-3); max-width: 110ch; }
+
+@keyframes blink { 50% { opacity: 0.35; } }
+.blink { animation: blink 1s step-end infinite; }
+@media (prefers-reduced-motion: reduce) { .blink { animation: none; } .packet { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2c3 4 6 7 6 11a6 6 0 1 1-12 0c0-2 1-4 2-5 0 2 1 3 2 3 0-3 0-6 2-9Z" fill="#fff"/></svg>
+      </div>
+      <div>
+        <h1>Gas Leak Detection — RU IV Cilacap</h1>
+        <p>Dashboard operator · 3 GLD · 6 Cluster Head · 1 Gateway</p>
+      </div>
+    </div>
+    <div class="top-right">
+      <span class="badge-demo">DEMO — DATA SIMULASI</span>
+      <span class="clock mono" id="clock">--:--:-- WIB</span>
+    </div>
+  </header>
+
+  <section class="scenario" aria-label="Skenario demo">
+    <div class="steps" id="steps"></div>
+    <div class="say">
+      <div>
+        <h3 id="step-title">Operasi normal</h3>
+        <p id="step-say"></p>
+        <p class="hint" id="step-hint"></p>
+      </div>
+      <div class="controls">
+        <button class="btn" id="btn-prev" type="button">‹ Sebelumnya</button>
+        <button class="btn primary" id="btn-next" type="button">Langkah berikutnya ›</button>
+        <button class="btn" id="btn-auto" type="button" aria-pressed="false">Putar otomatis</button>
+        <button class="btn" id="btn-reset" type="button">Ulang</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="kpis" aria-label="Ringkasan">
+    <div class="kpi" id="kpi-online"><span class="lbl">Perangkat online</span><span class="val">10/10</span><span class="sub">GLD, Cluster Head, Gateway</span></div>
+    <div class="kpi" id="kpi-alarm"><span class="lbl">Alarm aktif</span><span class="val">0</span><span class="sub">Belum ditindaklanjuti</span></div>
+    <div class="kpi" id="kpi-gas"><span class="lbl">Deteksi gas saat ini</span><span class="val">Udara bersih</span><span class="sub">Hasil model AI di dalam GLD</span></div>
+    <div class="kpi" id="kpi-mesh"><span class="lbl">Rute mesh LoRa</span><span class="val">Normal</span><span class="sub">Semua CH punya jalur ke Gateway</span></div>
+  </section>
+
+  <div class="main">
+    <section class="panel" aria-label="Peta jaringan">
+      <div class="panel-head">
+        <h2>Peta jaringan mesh</h2>
+        <span class="meta">Area SRU perimeter · posisi skematis</span>
+      </div>
+      <div class="mesh-wrap"><svg class="mesh" id="mesh" viewBox="0 0 760 420" role="img" aria-label="Topologi Gateway, Cluster Head dan GLD"></svg></div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--accent)"></i>Gateway</span>
+        <span><i class="dot" style="background:var(--ink-2)"></i>Cluster Head</span>
+        <span><i class="dot" style="background:var(--ok)"></i>GLD normal</span>
+        <span><i class="dot" style="background:var(--crit)"></i>GLD alarm</span>
+        <span><i class="dot" style="background:var(--gas)"></i>Rute dialihkan</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Konsol alarm">
+      <div class="panel-head">
+        <h2>Konsol alarm</h2>
+        <span class="meta" id="alarm-meta">0 aktif</span>
+      </div>
+      <div class="alarms" id="alarms"></div>
+      <div class="flow">
+        <div><b>Data normal — pull</b><p>Disimpan di Cluster Head, diambil server secara berkala.</p></div>
+        <div><b>Alarm — push</b><p>Dikirim GLD seketika, tidak menunggu jadwal polling.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel" aria-label="Daftar perangkat">
+    <div class="panel-head">
+      <h2>Perangkat</h2>
+      <span class="meta">Diperbarui tiap 2 detik</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Perangkat</th><th>Tipe</th><th>Area</th><th>Induk</th><th>Gas terakhir</th><th>Keyakinan</th><th>Risiko</th><th>Status</th></tr></thead>
+        <tbody id="devices"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Log kejadian">
+    <div class="panel-head">
+      <h2>Log kejadian</h2>
+      <span class="meta">Terbaru di atas</span>
+    </div>
+    <div class="events" id="events"></div>
+  </section>
+
+  <p class="foot">Halaman ini memutar skenario demonstrasi dengan data simulasi; tidak terhubung ke perangkat lapangan. Kelas gas, ambang risiko (MIDDLE ≥ 0,70 · HIGH ≥ 0,80), identitas perangkat (format ID 0x1001), dan alur pull/push mengikuti sistem GLD yang sebenarnya. Waktu dipercepat untuk panggung: data normal tiap 2 detik (lapangan ±90 detik), alarm tiap 2 detik (lapangan ±10 detik). Tombol: → / spasi = langkah berikutnya, ← = sebelumnya.</p>
+</div>
+
+<script>
+(() => {
+  const GW = '0x0001';
+  const CHS = ['0x0010', '0x0011', '0x0012', '0x0013', '0x0014', '0x0015'];
+  const GLDS = ['0x1001', '0x1002', '0x1003'];
+  const NAMES = {
+    '0x0001': 'Gateway 1',
+    '0x0010': 'Cluster Head 1', '0x0011': 'Cluster Head 2', '0x0012': 'Cluster Head 3',
+    '0x0013': 'Cluster Head 4', '0x0014': 'Cluster Head 5', '0x0015': 'Cluster Head 6',
+    '0x1001': 'GLD 1', '0x1002': 'GLD 2', '0x1003': 'GLD 3',
+  };
+  const POS = {
+    '0x0001': [380, 52],
+    '0x0010': [150, 160], '0x0011': [380, 160], '0x0012': [610, 160],
+    '0x0013': [70, 290], '0x0014': [380, 290], '0x0015': [690, 290],
+    '0x1001': [220, 360], '0x1002': [470, 372], '0x1003': [600, 360],
+  };
+  const NORMAL_PARENT = {
+    '0x0010': GW, '0x0011': GW, '0x0012': GW,
+    '0x0013': '0x0010', '0x0014': '0x0011', '0x0015': '0x0012',
+    '0x1001': '0x0010', '0x1002': '0x0011', '0x1003': '0x0012',
+  };
+  const GAS = { 0: 'Udara bersih', 1: 'LPG', 7: 'H2' };
+  const WARN = 0.70, CRIT = 0.80;
+
+  const STEPS = [
+    { title: 'Operasi normal', alarm: false,
+      say: 'Ketiga GLD membaca udara bersih. Data normal disimpan di Cluster Head dan diambil server secara berkala. CH 1–3 terhubung langsung ke Gateway, CH 4–6 lewat multi-hop.',
+      hint: 'Tunjukkan: semua perangkat online, kolom Gas terakhir = Udara bersih.' },
+    { title: 'Indikasi awal LPG di GLD 2', alarm: false,
+      say: 'Model AI di dalam GLD 2 mengenali pola LPG dengan keyakinan 74%. Risiko MIDDLE: belum alarm, tetapi operator sudah mendapat peringatan.',
+      hint: 'Tunjukkan: baris GLD 2 berubah oranye, peringatan muncul di konsol alarm.' },
+    { title: 'Alarm: kebocoran LPG dikonfirmasi', alarm: true,
+      say: 'Keyakinan naik ke 93%. GLD mengirim alarm secara push, tanpa menunggu jadwal polling. Alarm tampil lengkap dengan identitas sensor, area, jenis gas, dan tingkat risiko.',
+      hint: 'Klik Tindak lanjuti pada alarm GLD 2 di depan audiens.' },
+    { title: 'Gangguan jaringan: CH 2 mati', alarm: true,
+      say: 'Cluster Head 2 berhenti bekerja. Mesh LoRa privat memilih rute baru: GLD 2 dan CH 5 kini lewat CH 3, sehingga data dan alarm tetap sampai ke server.',
+      hint: 'Tunjukkan: CH 2 abu-abu (offline), garis oranye = rute pengganti.' },
+    { title: 'Pulih: area aman kembali', alarm: false,
+      say: 'Sumber kebocoran ditangani. GLD 2 kembali membaca udara bersih, CH 2 kembali online, dan mesh kembali ke rute normal.',
+      hint: 'Klik Selesaikan pada alarm. Semua perangkat kembali hijau.' },
+  ];
+  const AUTO_SEC = [12, 12, 18, 20, 16];
+
+  let state, stepIdx = 0, autoTimer = null, alarmSeq = 0;
+
+  function freshState() {
+    return {
+      parent: { ...NORMAL_PARENT },
+      down: new Set(),
+      gas: {},          // id -> { cls, conf, alarm }
+      readings: {},     // id -> { cls, conf }
+      alarms: [],       // { id, dev, sev, msg, time, status }
+      events: [],
+      rerouted: new Set(),
+    };
+  }
+
+  const $ = id => document.getElementById(id);
+  const hhmmss = d => d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).replace(/\./g, ':');
+  const risk = (cls, conf) => cls === 0 ? 'LOW' : conf >= CRIT ? 'HIGH' : conf >= WARN ? 'MIDDLE' : 'LOW';
+
+  function logEvent(type, cls, msg) {
+    state.events.unshift({ t: hhmmss(new Date()), type, cls, msg });
+    state.events = state.events.slice(0, 40);
+  }
+
+  function raise(dev, sev, msg) {
+    const open = state.alarms.find(a => a.dev === dev && a.sev === sev && a.status !== 'SELESAI');
+    if (open) return;
+    state.alarms.unshift({ id: ++alarmSeq, dev, sev, msg, time: new Date(), status: 'AKTIF' });
+    logEvent(sev === 'CRITICAL' ? 'Alarm GLD' : 'Lewat ambang', sev === 'CRITICAL' ? 'crit' : 'warn', `${NAMES[dev]} (${dev}): ${msg}`);
+  }
+
+  function applyStep(i) {
+    const prevDown = new Set(state.down);
+    state.down = new Set();
+    state.parent = { ...NORMAL_PARENT };
+    state.rerouted = new Set();
+    state.gas = {};
+    if (i >= 1 && i <= 3) state.gas['0x1002'] = i === 1 ? { cls: 1, conf: 0.74, alarm: false } : { cls: 1, conf: 0.93, alarm: true };
+    if (i === 3) {
+      state.down.add('0x0011');
+      state.parent['0x1002'] = '0x0012';
+      state.parent['0x0014'] = '0x0012';
+      state.rerouted = new Set(['0x1002', '0x0014']);
+    }
+    for (const id of prevDown) if (!state.down.has(id)) logEvent('Online', 'ok', `${NAMES[id]} (${id}) kembali online, rute normal dipulihkan`);
+    for (const id of state.down) if (!prevDown.has(id)) {
+      logEvent('Offline', 'off', `${NAMES[id]} (${id}) tidak merespons`);
+      logEvent('Rute mesh', 'warn', 'GLD 2 dan CH 5 dialihkan lewat CH 3 (0x0012)');
+    }
+    if (i === 4) logEvent('Normal', 'ok', 'GLD 2 (0x1002): kembali membaca udara bersih');
+    tick();
+  }
+
+  function tick() {
+    for (const id of GLDS) {
+      const g = state.gas[id];
+      const r = g ? { cls: g.cls, conf: Math.min(0.99, g.conf + (Math.random() - 0.5) * 0.02) } : { cls: 0, conf: 0.95 + Math.random() * 0.04 };
+      state.readings[id] = r;
+      const lvl = risk(r.cls, g ? g.conf : 0);
+      if (g && g.alarm) raise(id, 'CRITICAL', `alarm GLD — ${GAS[r.cls]}, keyakinan ${(g.conf * 100).toFixed(0)}%`);
+      else if (lvl !== 'LOW') raise(id, 'WARNING', `risiko ${lvl} — ${GAS[r.cls]}, keyakinan ${(g.conf * 100).toFixed(0)}%`);
+    }
+    render();
+  }
+
+  /* ---------- rendering ---------- */
+  function renderSteps() {
+    $('steps').innerHTML = STEPS.map((s, i) =>
+      `<button class="step${s.alarm ? ' is-alarm' : ''}" type="button" data-i="${i}" ${i === stepIdx ? 'aria-current="step"' : ''}><span class="n">${i + 1}</span>${s.title}</button>`).join('');
+    const s = STEPS[stepIdx];
+    $('step-title').textContent = `${stepIdx + 1}. ${s.title}`;
+    $('step-say').textContent = s.say;
+    $('step-hint').innerHTML = `<b>Presenter:</b> ${s.hint}`;
+    $('btn-prev').disabled = stepIdx === 0;
+    $('btn-next').disabled = stepIdx === STEPS.length - 1;
+  }
+
+  function renderKpis() {
+    const total = 1 + CHS.length + GLDS.length, online = total - state.down.size;
+    const active = state.alarms.filter(a => a.status === 'AKTIF').length;
+    const gasNow = GLDS.map(id => state.gas[id]).find(Boolean);
+    const set = (id, val, sub, cls) => { const el = $(id); el.querySelector('.val').textContent = val; if (sub) el.querySelector('.sub').textContent = sub; el.className = 'kpi' + (cls ? ' ' + cls : ''); };
+    set('kpi-online', `${online}/${total}`, state.down.size ? `${[...state.down].map(d => NAMES[d]).join(', ')} offline` : 'GLD, Cluster Head, Gateway', state.down.size ? 'warn' : '');
+    set('kpi-alarm', String(active), active ? 'Perlu tindak lanjut operator' : 'Belum ditindaklanjuti', active ? 'crit' : '');
+    set('kpi-gas', gasNow ? `${GAS[gasNow.cls]} ${(gasNow.conf * 100).toFixed(0)}%` : 'Udara bersih', gasNow ? 'GLD 2 · area SRU perimeter' : 'Hasil model AI di dalam GLD', gasNow ? (gasNow.alarm ? 'crit' : 'warn') : '');
+    set('kpi-mesh', state.rerouted.size ? 'Dialihkan' : 'Normal', state.rerouted.size ? 'Rute pengganti lewat CH 3 aktif' : 'Semua CH punya jalur ke Gateway', state.rerouted.size ? 'warn' : '');
+  }
+
+  function renderMesh() {
+    const css = getComputedStyle(document.documentElement);
+    const c = n => css.getPropertyValue(n).trim();
+    let s = '';
+    // links
+    for (const [child, parent] of Object.entries(state.parent)) {
+      const [x1, y1] = POS[child], [x2, y2] = POS[parent];
+      const dead = state.down.has(child) || state.down.has(parent);
+      const re = state.rerouted.has(child);
+      const col = dead ? c('--off') : re ? c('--gas') : c('--line');
+      const w = re ? 3 : 2;
+      s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="${w}" ${dead ? 'stroke-dasharray="4 6"' : ''} stroke-linecap="round"/>`;
+      if (!dead) {
+        const alarming = state.gas[child] && state.gas[child].alarm;
+        const pc = alarming ? c('--crit') : re ? c('--gas') : c('--accent');
+        const dur = alarming ? 1.2 : 2.6;
+        s += `<circle class="packet" r="${alarming ? 4 : 3}" fill="${pc}"><animateMotion dur="${dur}s" repeatCount="indefinite" path="M${x1},${y1} L${x2},${y2}"/></circle>`;
+      }
+    }
+    // old CH2 links shown dashed when down
+    if (state.down.has('0x0011')) {
+      for (const child of ['0x1002', '0x0014']) {
+        const [x1, y1] = POS[child], [x2, y2] = POS['0x0011'];
+        s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c('--off')}" stroke-width="1.5" stroke-dasharray="3 6"/>`;
+      }
+      const [x, y] = POS['0x0011'];
+      s += `<line x1="${x}" y1="${y}" x2="${POS[GW][0]}" y2="${POS[GW][1]}" stroke="${c('--off')}" stroke-width="1.5" stroke-dasharray="3 6"/>`;
+    }
+    // nodes
+    const node = (id) => {
+      const [x, y] = POS[id];
+      const down = state.down.has(id);
+      const isGw = id === GW, isGld = id.startsWith('0x1');
+      const g = state.gas[id];
+      let fill = isGw ? c('--accent') : isGld ? c('--ok') : c('--ink-2');
+      if (isGld && g) fill = g.alarm ? c('--crit') : c('--gas');
+      if (down) fill = c('--off');
+      const r = isGw ? 20 : isGld ? 13 : 16;
+      let out = '';
+      if (isGld && g && g.alarm) out += `<circle cx="${x}" cy="${y}" r="${r + 10}" fill="none" stroke="${c('--crit')}" stroke-width="2" class="blink"/>`;
+      if (isGld) out += `<rect x="${x - r}" y="${y - r}" width="${r * 2}" height="${r * 2}" rx="5" fill="${fill}"/>`;
+      else out += `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}"/>`;
+      const label = isGw ? 'GW' : isGld ? 'GLD' + id.slice(-1) : 'CH' + (parseInt(id, 16) - 15);
+      out += `<text x="${x}" y="${y + 4}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600" fill="#fff">${label}</text>`;
+      out += `<text x="${x}" y="${y + r + 15}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="${c('--ink-3')}">${id}${down ? ' · offline' : ''}</text>`;
+      return out;
+    };
+    for (const id of [GW, ...CHS, ...GLDS]) s += node(id);
+    s += `<text x="16" y="24" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="${c('--ink-3')}">LoRa mesh privat · tanpa internet</text>`;
+    $('mesh').innerHTML = s;
+  }
+
+  function renderAlarms() {
+    const list = state.alarms;
+    const active = list.filter(a => a.status === 'AKTIF').length;
+    $('alarm-meta').textContent = `${active} aktif`;
+    if (!list.length) { $('alarms').innerHTML = '<div class="empty">Sistem aman. Tidak ada alarm.</div>'; return; }
+    $('alarms').innerHTML = list.slice(0, 5).map(a => {
+      const pill = a.status === 'AKTIF' ? (a.sev === 'CRITICAL' ? '<span class="pill crit">AKTIF</span>' : '<span class="pill warn">AKTIF</span>') : a.status === 'DITINDAKLANJUTI' ? '<span class="pill info">DITINDAKLANJUTI</span>' : '<span class="pill ok">SELESAI</span>';
+      const acts = a.status === 'SELESAI' ? '' :
+        (a.status === 'AKTIF' ? `<button class="act" type="button" data-ack="${a.id}">Tindak lanjuti</button>` : '') + `<button class="act" type="button" data-res="${a.id}">Selesaikan</button>`;
+      return `<div class="alarm ${a.sev}${a.status === 'SELESAI' ? ' done' : ''}">
+        <div class="row1"><span class="who">RU4 · ${NAMES[a.dev]} <span class="mono id">${a.dev}</span></span>${pill}</div>
+        <div class="msg">${a.msg} · SRU perimeter · <span class="mono">${hhmmss(a.time)}</span></div>
+        ${acts ? `<div class="acts">${acts}</div>` : ''}
+      </div>`;
+    }).join('');
+  }
+
+  function renderDevices() {
+    const rows = [GW, ...CHS, ...GLDS].map(id => {
+      const down = state.down.has(id);
+      const type = id === GW ? 'Gateway' : id.startsWith('0x1') ? 'GLD' : 'Cluster Head';
+      const area = id === GW ? 'Ruang server' : 'SRU perimeter';
+      const parent = id === GW ? '—' : `<span class="mono">${state.parent[id]}</span>${state.rerouted.has(id) ? ' <span class="pill warn">dialihkan</span>' : ''}`;
+      let gas = '—', conf = '—', rk = '—';
+      if (type === 'GLD') {
+        const r = state.readings[id] || { cls: 0, conf: 0.97 };
+        const g = state.gas[id];
+        gas = GAS[r.cls];
+        conf = `<span class="mono">${(r.conf * 100).toFixed(0)}%</span>`;
+        const lvl = risk(r.cls, g ? g.conf : 0);
+        rk = lvl === 'HIGH' ? '<span class="pill crit">HIGH</span>' : lvl === 'MIDDLE' ? '<span class="pill warn">MIDDLE</span>' : '<span class="pill ok">LOW</span>';
+      }
+      const st = down ? '<span class="pill off">OFFLINE</span>' : '<span class="pill ok">ONLINE</span>';
+      const hl = state.gas[id] && state.gas[id].alarm ? ' class="hl"' : '';
+      return `<tr${hl}><td><div class="name">${NAMES[id]}</div><div class="id mono">${id}</div></td><td>${type}</td><td>${area}</td><td>${parent}</td><td>${gas}</td><td>${conf}</td><td>${rk}</td><td>${st}</td></tr>`;
+    });
+    $('devices').innerHTML = rows.join('');
+  }
+
+  function renderEvents() {
+    $('events').innerHTML = state.events.length ? state.events.map(e =>
+      `<div class="ev"><span class="t mono">${e.t}</span><span class="ty"><span class="pill ${e.cls}">${e.type}</span></span><span class="m">${e.msg}</span></div>`).join('')
+      : '<div class="empty">Belum ada kejadian.</div>';
+  }
+
+  function render() { renderSteps(); renderKpis(); renderMesh(); renderAlarms(); renderDevices(); renderEvents(); }
+
+  /* ---------- controls ---------- */
+  function goTo(i) {
+    stepIdx = Math.max(0, Math.min(STEPS.length - 1, i));
+    applyStep(stepIdx);
+  }
+  function stopAuto() { clearTimeout(autoTimer); autoTimer = null; $('btn-auto').setAttribute('aria-pressed', 'false'); $('btn-auto').textContent = 'Putar otomatis'; }
+  function runAuto() {
+    $('btn-auto').setAttribute('aria-pressed', 'true'); $('btn-auto').textContent = 'Jeda';
+    autoTimer = setTimeout(() => {
+      if (stepIdx === 2) actOn(state.alarms.find(a => a.sev === 'CRITICAL' && a.status === 'AKTIF'), 'DITINDAKLANJUTI');
+      if (stepIdx >= STEPS.length - 1) { stopAuto(); return; }
+      goTo(stepIdx + 1);
+      if (stepIdx === STEPS.length - 1) state.alarms.forEach(a => actOn(a, 'SELESAI'));
+      runAuto();
+    }, AUTO_SEC[stepIdx] * 1000);
+  }
+  function actOn(a, status) {
+    if (!a || a.status === 'SELESAI') return;
+    a.status = status;
+    logEvent(status === 'SELESAI' ? 'Selesai' : 'Tindak lanjut', status === 'SELESAI' ? 'ok' : 'info', `Operator: ${NAMES[a.dev]} — ${status === 'SELESAI' ? 'alarm diselesaikan' : 'alarm ditindaklanjuti'}`);
+    render();
+  }
+  function reset() {
+    stopAuto(); state = freshState(); stepIdx = 0; alarmSeq = 0;
+    logEvent('Sistem', 'info', 'Dashboard RU IV aktif — 10 perangkat terdaftar');
+    applyStep(0);
+  }
+
+  $('btn-next').addEventListener('click', () => { stopAuto(); goTo(stepIdx + 1); });
+  $('btn-prev').addEventListener('click', () => { stopAuto(); goTo(stepIdx - 1); });
+  $('btn-reset').addEventListener('click', reset);
+  $('btn-auto').addEventListener('click', () => autoTimer ? stopAuto() : runAuto());
+  $('steps').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) { stopAuto(); goTo(Number(b.dataset.i)); } });
+  $('alarms').addEventListener('click', e => {
+    const ack = e.target.closest('[data-ack]'), res = e.target.closest('[data-res]');
+    if (ack) actOn(state.alarms.find(a => a.id === Number(ack.dataset.ack)), 'DITINDAKLANJUTI');
+    if (res) actOn(state.alarms.find(a => a.id === Number(res.dataset.res)), 'SELESAI');
+  });
+  document.addEventListener('keydown', e => {
+    if (e.target.closest('input, textarea, select')) return;
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); stopAuto(); goTo(stepIdx + 1); }
+    if (e.key === 'ArrowLeft') { stopAuto(); goTo(stepIdx - 1); }
+  });
+  const themeMq = window.matchMedia('(prefers-color-scheme: dark)');
+  themeMq.addEventListener && themeMq.addEventListener('change', renderMesh);
+  new MutationObserver(renderMesh).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  const clock = () => { $('clock').textContent = `${hhmmss(new Date())} WIB`; };
+  setInterval(clock, 1000); clock();
+  setInterval(tick, 2000);
+  reset();
+})();
+</script>
+</body>
+</html>

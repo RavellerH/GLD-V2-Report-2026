@@ -31,6 +31,7 @@ def white_out(c, x0, y0, x1, y1):
 
 
 def page1(c):
+    white_out(c, 465.4, 96.8, 511.9, 107.2)  # RCT-YYXXX dikosongkan (diisi TTH)
     # Data Pelanggan (baseline sedikit di atas garis isian)
     text(c, 168, 149, "PT LAPI Ganesha Utama")
     text(c, 168, 164, "Jl. Dederuk No. 30, Kel. Sadang Serang, Kec. Coblong, Kota Bandung 40133", 8)
@@ -66,6 +67,9 @@ def page2(c):
     c.drawImage(img, 131.2 - w / 2, H - 336, w, h, mask="auto")
     white_out(c, 92.7, 341.8, 169.7, 352.2)
     text(c, 131.2, 350.5, "Dr. Nina Siti Aminah", 9, center=True)
+    # placeholder nama TTH dikosongkan (diisi TTH)
+    white_out(c, 236.8, 341.8, 345.1, 353.6)
+    white_out(c, 398.9, 341.8, 479.9, 353.6)
 
 
 def main():

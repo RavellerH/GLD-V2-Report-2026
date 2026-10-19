@@ -3,7 +3,7 @@ import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
 import {useLayout} from '../layout';
 import voDurations from '../data/voDurations.json';
 import {useLang} from '../i18n';
-import {SCENES, voOf} from '../timeline';
+import {ALL_SCENES} from '../motion';
 import {COLORS, FONT} from '../theme';
 
 const MAX_CHARS = 95;
@@ -34,8 +34,8 @@ export const Subtitles: React.FC<{id: string}> = ({id}) => {
   const frame = useCurrentFrame();
   const {durationInFrames, fps} = useVideoConfig();
   const lang = useLang();
-  const scene = SCENES.find((sc) => sc.id === id);
-  const vo = scene ? voOf(scene, lang) : '';
+  const scene = ALL_SCENES.find((sc) => sc.id === id);
+  const vo = scene ? (lang === 'en' ? scene.voEn : scene.vo) : '';
   // Subtitle mengikuti lama narasi sebenarnya (data/voDurations.json), bukan panjang slot.
   const voSec = (voDurations as Record<string, Record<string, number>>)[lang]?.[id];
   const span = voSec ? Math.min(durationInFrames, Math.round(voSec * fps)) : durationInFrames;

@@ -9,7 +9,18 @@
     "alarm": 17.62,
     "field": 19.18,
     "roadmap": 9.62,
-    "outro": 10.2
+    "outro": 10.2,
+    "ogi_hook": 8.45,
+    "ogi_stakes": 18.3,
+    "ogi_today": 19.38,
+    "ogi_physics": 22.32,
+    "ogi_cooled": 14.94,
+    "ogi_field": 17.36,
+    "ogi_edgeai": 14.32,
+    "ogi_fusion": 14.3,
+    "ogi_limits": 15.12,
+    "ogi_strategy": 15.94,
+    "ogi_outro": 6.9
   },
   "en": {
     "hook": 6.64,
@@ -21,6 +32,17 @@
     "alarm": 17.32,
     "field": 19.32,
     "roadmap": 8.36,
-    "outro": 11.9
+    "outro": 11.9,
+    "ogi_hook": 6.57,
+    "ogi_stakes": 15.12,
+    "ogi_today": 17.96,
+    "ogi_physics": 19.7,
+    "ogi_cooled": 12.32,
+    "ogi_field": 16.24,
+    "ogi_edgeai": 12.68,
+    "ogi_fusion": 13.62,
+    "ogi_limits": 14.78,
+    "ogi_strategy": 17.6,
+    "ogi_outro": 7.38
   }
 }

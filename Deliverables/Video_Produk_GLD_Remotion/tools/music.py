@@ -11,9 +11,9 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "public" / "audio" / "music.wav"
 SR = 44100
 DUR = float(sys.argv[1]) if len(sys.argv) > 1 else 185.0
+OUT = ROOT / "public" / "audio" / (sys.argv[2] if len(sys.argv) > 2 else "music.wav")
 BAR = 60 / 100 * 4  # 2,4 dtk
 rng = np.random.default_rng(7)
 

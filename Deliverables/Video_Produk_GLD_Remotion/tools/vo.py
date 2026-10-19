@@ -20,11 +20,13 @@ import wave
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TIMELINE = ROOT / "src" / "timeline.ts"
+# VO_VIDEO=ogi -> video OGI (src/ogi/timeline.ts, public/audio/vo_ogi[_en]).
+VIDEO = os.environ.get("VO_VIDEO", "")
+TIMELINE = ROOT / "src" / (f"{VIDEO}/timeline.ts" if VIDEO else "timeline.ts")
 TTS_DIR = ROOT / "tts"
 # VO_LANG=id (default) atau en -> narasi Indonesia (public/audio/vo) atau Inggris (public/audio/vo_en).
 LANG = os.environ.get("VO_LANG", "id")
-VO_DIR = ROOT / "public" / "audio" / ("vo_en" if LANG == "en" else "vo")
+VO_DIR = ROOT / "public" / "audio" / (("vo_" + VIDEO if VIDEO else "vo") + ("_en" if LANG == "en" else ""))
 # VO_ONLY=<id adegan>: rekam ulang satu adegan saja (satu panggilan kecil), file utuh terpisah.
 ONLY = os.environ.get("VO_ONLY")
 FULL_TAKE = VO_DIR / (f"_full_{ONLY}.wav" if ONLY else "_full.wav")

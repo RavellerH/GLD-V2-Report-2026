@@ -20,7 +20,7 @@ export const Scene03Intro: React.FC = () => {
       <AssetSlot asset={ASSETS.hero} kind="video" />
       <AbsoluteFill style={{justifyContent: 'flex-start', padding: portrait ? `200px ${padX}px` : `90px ${padX}px`}}>
         <Caption text="GLD — Gas Leak Detection" from={20} size={title(88)} />
-        <Caption text="LAPI Ganesha Utama × Institut Teknologi Bandung" from={45} size={title(36)} weight={400} color={COLORS.muted} style={{marginTop: 14}} />
+        <Caption text="PT Pertamina Patra Niaga (Fungsi Reliability) × LAPI Ganesha Utama × Institut Teknologi Bandung" from={45} size={title(portrait ? 32 : 34)} weight={400} color={COLORS.muted} style={{marginTop: 14}} />
       </AbsoluteFill>
       {/* Label exploded view, selaras render Blender: tutup lepas 4,0 dtk, kabel dicabut 4,9 dtk,
           bagian lain terurai mulai 5,7 dtk (papan sensor & motherboard keluar ~6,6-7,6 dtk).

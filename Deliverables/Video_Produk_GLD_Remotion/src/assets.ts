@@ -44,8 +44,10 @@ export const ASSETS = {
 
   // Gambar
   dashboard: {path: 'images/dashboard.png', ready: true, note: 'Alarm Console dashboard RU4 asli (repo gasleakdetectionV2-April, data demo)'},
-  logoLgu: {path: 'images/logo_lgu.png', ready: false, note: 'Logo LAPI Ganesha Utama (PNG transparan)'},
-  logoItb: {path: 'images/logo_itb.png', ready: false, note: 'Logo ITB (PNG transparan)'},
+  // Logo mitra (izin pemakaian sudah ada, 19 Okt). Latar putih -> ditampilkan di kartu putih.
+  logoPertamina: {path: 'images/logo_pertamina.png', ready: true, note: 'Logo PT Pertamina Patra Niaga'},
+  logoLgu: {path: 'images/logo_lgu.png', ready: true, note: 'Logo LAPI Ganesha Utama'},
+  logoItb: {path: 'images/logo_itb.png', ready: true, note: 'Logo ITB (PNG transparan)'},
 
   // Musik latar (narasi per adegan diatur oleh VO_READY di bawah)
   music: {path: 'audio/music.mp3', ready: false, note: 'Musik latar bebas royalti'},

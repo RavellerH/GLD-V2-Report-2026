@@ -159,7 +159,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **12 Okt — surat pengantar sampel GLD ke GTS Shanghai & surat keterangan Bea Cukai dilengkapi** (dec:208): `Deliverables/Surat_Pengantar_Sampel_GLD_ke_GTS_Shanghai.{docx,pdf}` (EN) & `Surat_Keterangan_Sampel_GLD_ke_Bea_Cukai.{docx,pdf}` (ID); data yg belum ada (alamat GTS, nilai pabean, penandatangan, paspor/penerbangan, status baterai) ditandai kuning, tidak ditebak. **Update (dec:209)**: sampel berisi baterai Li-ion 7×18650 (1S7P) — kapasitas per sel belum dikonfirmasi (>3860 mAh/sel ⇒ >100 Wh, perlu izin maskapai). **Final cetak (dec:210)**: `Deliverables/Paket_Bawa_Sampel_GTS_12Oktober2026/` — 2 surat KOP terkoreksi + Lampiran 1 foto + Lampiran 2 form aplikasi.
 
-- 🆕 **19 Okt — dokumen untuk ttd Pak Pindoan** (dec:211): `Paket LGU/03_Pemenuhan_Klausul_Termin_SP-001_Sertifikasi/` (pemenuhan klausul SP-001 Sertifikasi, 5 hlm — **foto kunjungan ITB 6 Agu masih kosong**) & `Paket LGU/02_Penagihan_Termin_1/01_..._TTD_LGU.pdf` (SP-002 Field Testing: nama/jabatan/tanggal LGU di lampiran terisi, **gambar ttd menunggu scan asli**).
+- 🆕 **19 Okt — dokumen untuk ttd Pak Pindoan** (dec:211): `Paket LGU/03_Pemenuhan_Klausul_Termin_SP-001_Sertifikasi/` (pemenuhan klausul SP-001 Sertifikasi, 6 hlm, termasuk 10 foto kunjungan ITB 6 Agu — dec:212) & `Paket LGU/02_Penagihan_Termin_1/01_..._TTD_LGU.pdf` (SP-002 Field Testing: nama/jabatan/tanggal LGU di lampiran terisi, **gambar ttd menunggu scan asli**).
 
 ## 4. Deliverable utama (`Deliverables/`)
 

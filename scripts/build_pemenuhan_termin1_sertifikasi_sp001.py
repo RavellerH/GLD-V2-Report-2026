@@ -398,8 +398,12 @@ def lampiran(doc):
     fotos = sorted(p for p in glob.glob(os.path.join(FOTO_KUNJUNGAN, "*"))
                    if p.lower().endswith((".jpg", ".jpeg", ".png")))
     if fotos:
-        items = [(p, f"Foto {i + 9} — Kunjungan Pertamina ke Lab IoT ITB, 6 Agustus 2026")
-                 for i, p in enumerate(fotos)]
+        def judul(p):  # "04_Paparan_data_..._a.jpg" -> "Paparan data ..."
+            kata = os.path.splitext(os.path.basename(p))[0].split("_")[1:]
+            if len(kata[-1]) == 1:
+                kata = kata[:-1]
+            return " ".join(kata).replace("Lab IoT", "Lab IoT ITB")
+        items = [(p, f"Foto {i + 9} — {judul(p)}") for i, p in enumerate(fotos)]
     else:
         items = [(None, f"Foto {i} — Kunjungan Pertamina ke Lab IoT ITB, 6 Agustus 2026") for i in range(9, 13)]
     foto_grid(doc, items)

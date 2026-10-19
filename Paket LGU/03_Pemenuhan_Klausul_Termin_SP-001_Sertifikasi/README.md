@@ -6,10 +6,10 @@ Klausul: *"Tersedia prototype GLD yang telah diuji dan diperbaiki desainnya. Dil
 
 | File | Isi |
 |---|---|
-| `Dokumen_Pemenuhan_Klausul_Termin_SP-001_Sertifikasi_GLD.{docx,pdf}` | 5 hlm: kop LGU–Pertamina, klausul, matriks pemenuhan 5 unsur, uraian uji (FAT 7/7, uji termal 30 Sep, ukur dimensi 7 Okt) & perbaikan desain (PCB V1–V5, casing v2→v3, antena ke atas, Ex d), pernyataan, lembar pengesahan (LGU: Team Leader + Dirut; Pertamina: Agustinus Pindoan Panjaitan), Lampiran 1 foto perangkat (8 foto), Lampiran 2 foto kunjungan ITB 6 Agu 2026 |
+| `Dokumen_Pemenuhan_Klausul_Termin_SP-001_Sertifikasi_GLD.{docx,pdf}` | 5 hlm: kop LGU–Pertamina, klausul, matriks pemenuhan 5 unsur, uraian uji (FAT 7/7, uji termal 30 Sep, ukur dimensi 7 Okt) & perbaikan desain (PCB V1–V5, casing v2→v3, antena ke atas, Ex d), pernyataan, lembar pengesahan (LGU: Team Leader + Dirut; Pertamina: Agustinus Pindoan Panjaitan), Lampiran 1 foto perangkat (8 foto), Lampiran 2 foto kunjungan ITB 6 Agu 2026 (10 foto) — total 6 hlm |
 
 ## Masih perlu dilengkapi
-- **Foto kunjungan Pertamina ke Lab IoT ITB (6 Agu 2026)** — belum ada di repo/Drive; Lampiran 2 masih bingkai kosong. Taruh foto di `Sumber Dokumen/Foto_Kunjungan_Pertamina_Lab_IoT_ITB_6Agustus2026/` lalu jalankan ulang `scripts/build_pemenuhan_termin1_sertifikasi_sp001.py`.
+- ✅ Foto kunjungan Pertamina ke ITB (10 foto dari user, 19 Okt) sudah masuk Lampiran 2 — sumber `Sumber Dokumen/Foto_Kunjungan_Pertamina_Lab_IoT_ITB_6Agustus2026/` (keterangan foto diambil dari nama file).
 - Tanggal pengesahan ("........ Oktober 2026").
 
 Generator: `scripts/build_pemenuhan_termin1_sertifikasi_sp001.py` (python-docx → PDF via LibreOffice).

@@ -167,7 +167,7 @@ def build():
     heading(doc, "Periode CT:")
     kv_table(doc, [
         ("Durasi dalam hari kerja", ["1 (satu) hari kerja"]),
-        ("Tanggal pelaksanaan", ["16 Oktober 2026"]),
+        ("Tanggal pelaksanaan", ["Kamis, 15 Oktober 2026"]),
     ])
 
     doc.add_page_break()

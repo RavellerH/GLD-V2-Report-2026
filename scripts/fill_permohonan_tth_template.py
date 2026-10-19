@@ -52,7 +52,7 @@ def page1(c):
     text(c, 93, 462, "pada prototipe Node Sensor GLD dan LoRa Cluster Head (2 unit), sebagai data pendukung sertifikasi.", 8)
     # Periode CT
     text(c, 168, 532, "1 (satu) hari kerja")
-    text(c, 168, 546.5, "16 Oktober 2026")
+    text(c, 168, 546.5, "Kamis, 15 Oktober 2026")
 
 
 def page2(c):

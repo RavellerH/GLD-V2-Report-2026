@@ -63,7 +63,7 @@ export const ASSETS = {
   logoItb: {path: 'images/logo_itb.png', ready: true, note: 'Logo ITB (PNG transparan)'},
 
   // Musik latar (narasi per adegan diatur oleh VO_READY di bawah)
-  music: {path: 'audio/music.mp3', ready: false, note: 'Musik latar bebas royalti'},
+  music: {path: 'audio/music.wav', ready: true, note: 'Musik latar ambient, disintesis sendiri (tools/music.py), bebas lisensi'},
 } satisfies Record<string, Asset>;
 
 // Narasi per adegan: public/audio/vo/<nn>_<id>.wav (mis. 04_fingerprint.wav), hasil Gemini TTS.

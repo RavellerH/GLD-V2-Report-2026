@@ -86,8 +86,8 @@ export const SCENES: SceneDef[] = [
     title: '08 Teruji lapangan',
     startSec: 132,
     endSec: 153,
-    vo: 'GLD telah melalui pengujian lapangan: generasi pertama diuji di RU VII Kasim pada Desember 2025. Generasi kedua lulus seluruh tujuh butir Factory Acceptance Test di laboratorium, serta pengujian multi-hop mesh, failover, dan push alarm pada delapan Cluster Head.',
-    voEn: 'GLD has undergone field testing: the first generation was tested at RU VII Kasim in December 2025. The second generation passed all seven Factory Acceptance Test items in the laboratory, together with multi-hop mesh, failover, and push-alarm tests on eight Cluster Heads.',
+    vo: 'GLD telah melalui pengujian lapangan: generasi pertama diuji di RU VII Kasim pada November hingga Desember 2025. Generasi kedua lulus seluruh tujuh butir Factory Acceptance Test di laboratorium, serta pengujian multi-hop mesh, failover, dan push alarm pada delapan Cluster Head.',
+    voEn: 'GLD has undergone field testing: the first generation was tested at RU VII Kasim in November and December 2025. The second generation passed all seven Factory Acceptance Test items in the laboratory, together with multi-hop mesh, failover, and push-alarm tests on eight Cluster Heads.',
   },
   {
     id: 'roadmap',

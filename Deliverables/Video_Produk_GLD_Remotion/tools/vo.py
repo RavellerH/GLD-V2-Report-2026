@@ -25,7 +25,9 @@ TTS_DIR = ROOT / "tts"
 # VO_LANG=id (default) atau en -> narasi Indonesia (public/audio/vo) atau Inggris (public/audio/vo_en).
 LANG = os.environ.get("VO_LANG", "id")
 VO_DIR = ROOT / "public" / "audio" / ("vo_en" if LANG == "en" else "vo")
-FULL_TAKE = VO_DIR / "_full.wav"
+# VO_ONLY=<id adegan>: rekam ulang satu adegan saja (satu panggilan kecil), file utuh terpisah.
+ONLY = os.environ.get("VO_ONLY")
+FULL_TAKE = VO_DIR / (f"_full_{ONLY}.wav" if ONLY else "_full.wav")
 DURATIONS = ROOT / "src" / "data" / "voDurations.json"
 
 VOICE = "Erinome"
@@ -55,7 +57,7 @@ def scenes():
         out.append({"n": i + 1, "id": sid, "title": title, "dur": int(end) - int(start), "vo": vo_en if LANG == "en" else vo})
     if not out:
         sys.exit("Tidak menemukan adegan di src/timeline.ts")
-    return out
+    return [s for s in out if s["id"] == ONLY] if ONLY else out
 
 
 def name(s):
@@ -86,7 +88,7 @@ def save_durations():
         if wav.exists():
             with wave.open(str(wav)) as w:
                 cur[s["id"]] = round(w.getnframes() / w.getframerate(), 2)
-    data[LANG] = cur
+    data.setdefault(LANG, {}).update(cur)
     DURATIONS.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
@@ -169,7 +171,8 @@ def generate():
     pcm = array.array("h", base64.b64decode(data))
     write_pcm(FULL_TAKE, pcm, 24000)
     print(f"Rekaman utuh: {FULL_TAKE.relative_to(ROOT)} ({len(pcm) / 24000:.1f} dtk, suara {VOICE})")
-    split()
+    if not ONLY:  # satu adegan: cek dulu apakah instruksi gaya ikut terbaca, lalu split manual
+        split()
 
 
 def split():

@@ -1,8 +1,9 @@
 import React from 'react';
 import {Composition, Folder} from 'remotion';
-import {Explainer} from './Explainer';
+import {EXPLAINER_FRAMES, Explainer} from './Explainer';
+import {INTRO_FRAMES, Intro} from './Intro';
 import {SCENE_COMPONENTS} from './scenes';
-import {FPS, SCENES, TOTAL_FRAMES, sceneDuration} from './timeline';
+import {FPS, SCENES, sceneDuration} from './timeline';
 
 const FORMATS = [
   {id: 'GLD-Explainer', label: 'Landscape', width: 1920, height: 1080},
@@ -23,7 +24,22 @@ export const RemotionRoot: React.FC = () => (
           id={f.id + l.suffix}
           component={Explainer}
           defaultProps={{lang: l.lang}}
-          durationInFrames={TOTAL_FRAMES}
+          durationInFrames={EXPLAINER_FRAMES}
+          fps={FPS}
+          width={f.width}
+          height={f.height}
+        />
+      )),
+    )}
+    {/* Intro motion graphic (berdiri sendiri) */}
+    {LANGS.flatMap((l) =>
+      FORMATS.map((f) => (
+        <Composition
+          key={'intro' + f.id + l.suffix}
+          id={f.id.replace('Explainer', 'Intro') + l.suffix}
+          component={Intro}
+          defaultProps={{lang: l.lang}}
+          durationInFrames={INTRO_FRAMES}
           fps={FPS}
           width={f.width}
           height={f.height}

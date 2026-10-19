@@ -7,9 +7,9 @@
     "trainable": 16.98,
     "mesh": 23.88,
     "alarm": 17.62,
-    "field": 19.22,
+    "field": 19.18,
     "roadmap": 9.62,
-    "outro": 9.36
+    "outro": 9.22
   },
   "en": {
     "hook": 6.64,
@@ -19,8 +19,8 @@
     "trainable": 15.86,
     "mesh": 26.24,
     "alarm": 17.32,
-    "field": 15.8,
+    "field": 19.32,
     "roadmap": 8.36,
-    "outro": 8.98
+    "outro": 8.84
   }
 }

@@ -41,8 +41,6 @@ NO_DOK = "LGU-GLD-SP001-T1-2026-001"
 REV = "1.0"
 TGL = "Oktober 2026"
 TEMPAT = "Bandung, ........ Oktober 2026"
-KLAUSUL = ("Tersedia prototype GLD yang telah diuji dan diperbaiki desainnya. Dilampirkan foto "
-           "perangkatnya, dan foto-foto waktu kami kunjungan ke ITB.")
 LGU_TTD = [("Team Leader,", "Dr. Maman Budiman"), ("Direktur Utama,", "Ir. Harry Fardiman")]
 PPN_JAB = "Manager Domestic Product Content & Digitalization"
 PPN_NAMA = "Agustinus Pindoan Panjaitan"
@@ -193,7 +191,7 @@ def kop(doc):
     c.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
     c.paragraphs[0].add_run().add_picture(os.path.join(LOGO, "logo_lgu.png"), height=Cm(1.3))
     c.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-    ctext(t.cell(0, 1), "DOKUMEN PEMENUHAN KLAUSUL TERMIN 1", 11.5, True, WD_ALIGN_PARAGRAPH.CENTER)
+    ctext(t.cell(0, 1), "DOKUMEN PEMENUHAN KETENTUAN TERMIN 1", 10.5, True, WD_ALIGN_PARAGRAPH.CENTER)
     ctext(t.cell(1, 1), f"Program Sertifikasi Hazardous Area (ATEX/IECEx)\nGas Leak Detector (GLD) Tahap 2 — {NO_SP}",
           9, False, WD_ALIGN_PARAGRAPH.CENTER)
     c = t.cell(0, 2); c.merge(t.cell(1, 2))
@@ -303,44 +301,42 @@ def iterasi_tabel(doc, judul, rows):
 
 
 def isi(doc):
-    heading(doc, "1. Klausul Termin yang Dipenuhi")
-    para(doc, f"Ketentuan pembayaran Termin 1 pada Surat Pesanan {NO_SP} (Sertifikasi) berbunyi:")
-    t = doc.add_table(rows=1, cols=1)
-    t.alignment = WD_TABLE_ALIGNMENT.CENTER
-    borders(t)
-    fixed(t, [Cm(16.8)])
-    shade(t.cell(0, 0), "F3F6FC")
-    ctext(t.cell(0, 0), f"“{KLAUSUL}”", 10, True)
-    t.cell(0, 0).paragraphs[0].paragraph_format.space_before = Pt(4)
-    t.cell(0, 0).paragraphs[0].paragraph_format.space_after = Pt(4)
-    para(doc, "Dokumen ini menguraikan pemenuhan setiap unsur klausul tersebut beserta buktinya. "
-              "Penilaian akhir pemenuhan dan persetujuan pembayaran merupakan kewenangan "
-              "PT Pertamina Patra Niaga.", before=6)
+    heading(doc, "1. Pendahuluan")
+    para(doc, f"Dokumen ini disampaikan oleh PT LAPI Ganesha Utama kepada PT Pertamina Patra Niaga sebagai "
+              f"bukti pemenuhan ketentuan pembayaran Termin 1 pada Surat Pesanan {NO_SP} untuk pekerjaan "
+              f"Sertifikasi Hazardous Area (ATEX/IECEx) Gas Leak Detector (GLD) Tahap 2.")
+    para(doc, "Ketentuan Termin 1 mencakup ketersediaan prototipe GLD yang telah diuji dan diperbaiki "
+              "desainnya, disertai dokumentasi foto perangkat serta dokumentasi kunjungan PT Pertamina Patra "
+              "Niaga ke Institut Teknologi Bandung. Bagian 2 menyajikan matriks pemenuhan setiap ketentuan, "
+              "Bagian 3 menguraikan pengujian dan perbaikan desain yang telah dilaksanakan, sedangkan "
+              "dokumentasi foto disajikan pada Lampiran 1 dan Lampiran 2.")
+    para(doc, "Penilaian atas pemenuhan ketentuan dan persetujuan pembayaran merupakan kewenangan "
+              "PT Pertamina Patra Niaga.")
 
     heading(doc, "2. Matriks Pemenuhan")
     rows = [
-        ("1", "Tersedia prototype GLD",
+        ("1", "Prototipe GLD tersedia",
          "Prototipe Node Sensor GLD V2 telah terakit lengkap: casing die-cast aluminium dengan tutup "
          "ber-mesh stainless steel, 8 sensor gas (MQ-2/3B/4/5/6/7B/8/135), kipas DC, motherboard ESP32-S3 "
          "dengan PCB cover terminal (V4), radio LoRa, catu 24 VDC. Unit yang diajukan untuk sertifikasi "
-         "ber-S/N GLD2-0x1001; total 4 unit GLD tersedia (3 untuk RU IV + 1 cadangan).",
+         "dengan nomor seri GLD2-0x1001; sebanyak 4 unit GLD tersedia (3 untuk RU IV + 1 cadangan).",
          "Lampiran 1 (Foto 1–8)", "Tersedia"),
-        ("2", "Telah diuji",
+        ("2", "Prototipe telah diuji",
          "(a) Factory Acceptance Test laboratorium FAT-01 s.d. FAT-07, 7 dari 7 item lulus "
          "(Laporan FAT No. LGU/GLD/FAT/2026-001 Rev 1.4). (b) Uji termal internal 30 Sep 2026: "
          "8 kanal thermocouple, 3 kondisi (normal, beban maksimum, kipas mati), 180 menit. "
          "(c) Pengukuran dimensi enclosure dengan jangka sorong, 7 Okt 2026.",
          "Bagian 3.1; Laporan FAT", "Tersedia"),
-        ("3", "Diperbaiki desainnya",
+        ("3", "Desain telah diperbaiki",
          "PCB Node Sensor GLD diiterasi V1 s.d. V5 dengan catatan perubahan per versi; casing berkembang "
          "dari ATEX Casing v2 ke GLD ATEX Case v3; antena dipindah ke muka atas base; PCB cover terminal "
          "kabel & lubang baut motherboard ditambahkan; konsep proteksi diarahkan ke Ex d (flameproof).",
          "Bagian 3.2; Gambar 1; Lampiran 1 (Foto 7–8)", "Tersedia"),
-        ("4", "Dilampirkan foto perangkat",
+        ("4", "Dokumentasi foto perangkat",
          "Foto prototipe terkini (tampak depan, belakang, samping, bagian dalam, motherboard, tutup "
          "ber-mesh) serta foto iterasi sebelumnya sebagai pembanding perbaikan desain.",
          "Lampiran 1", "Terlampir"),
-        ("5", "Dilampirkan foto kunjungan ke ITB",
+        ("5", "Dokumentasi kunjungan ke ITB",
          "Dokumentasi kunjungan PT Pertamina Patra Niaga ke Lab IoT, Instrumentation and Computations, "
          "Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung, 6 Agustus 2026 (peninjauan "
          "prototipe dan demonstrasi integrasi sistem).",
@@ -350,7 +346,7 @@ def isi(doc):
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     borders(t)
     widths = [Cm(0.9), Cm(3.0), Cm(8.2), Cm(2.6), Cm(2.1)]
-    for i, h in enumerate(["No", "Unsur klausul", "Bukti pemenuhan", "Rujukan", "Status"]):
+    for i, h in enumerate(["No", "Ketentuan Termin 1", "Bukti pemenuhan", "Rujukan", "Status"]):
         ctext(t.cell(0, i), h, 9, True, WD_ALIGN_PARAGRAPH.CENTER); shade(t.cell(0, i), "D9E2F3")
     for r in rows:
         cells = t.add_row().cells
@@ -405,16 +401,14 @@ def isi(doc):
     fixed(t, [Cm(16.8 / len(CASING_FOTO))] * len(CASING_FOTO))
     for i, (path, cap) in enumerate(CASING_FOTO):
         p = t.cell(0, i).paragraphs[0]; p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        p.add_run().add_picture(img_stream(path), height=Cm(4.0))
+        p.add_run().add_picture(img_stream(path), height=Cm(3.0))
         ctext(t.cell(1, i), cap, 8, align=WD_ALIGN_PARAGRAPH.CENTER)
     para(doc, "Gambar 2. Perkembangan casing GLD dari prototipe awal hingga unit sampel sertifikasi", 8.5,
          align=WD_ALIGN_PARAGRAPH.CENTER, italic=True, before=4)
-    para(doc, "Catatan. Perbaikan di atas adalah langkah desain menuju sertifikasi, bukan bukti kelulusan. "
-              "Penilaian kesesuaian tetap dilakukan oleh laboratorium/badan sertifikasi. Butir yang masih "
-              "ditindaklanjuti: penggantian cable gland prototipe dengan gland Ex d bersertifikat, verifikasi "
-              "mesh depan sebagai penahan api, uji IP66, kelengkapan titik ukur termal komponen daya, rating "
-              "fuse PTC pada jalur 24 V, proteksi polaritas terbalik, dan keputusan jalur baterai (terminal BAT).",
-         9, before=4)
+    para(doc, "Catatan: penilaian kesesuaian dilakukan oleh laboratorium dan lembaga sertifikasi. Tindak "
+              "lanjut berjalan: gland Ex d bersertifikat, verifikasi mesh penahan api, uji IP66, titik ukur "
+              "termal komponen daya, rating PTC 24 V, proteksi polaritas terbalik, dan keputusan terminal BAT.",
+         8.5, before=2)
 
     heading(doc, "4. Pernyataan").paragraph_format.page_break_before = True
     para(doc, f"Berdasarkan uraian dan lampiran di atas, PT LAPI Ganesha Utama menyatakan bahwa ketentuan "

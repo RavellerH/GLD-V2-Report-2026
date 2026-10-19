@@ -10,21 +10,21 @@
 <style>
 /* Layout: control-room console — scenario bar on top, mesh map + alarm console side by side, fleet table and event log below. */
 :root {
-  --bg: #F3F4F7;
+  --bg: #F2F5FA;
   --panel: #FFFFFF;
   --panel-2: #F7F8FB;
   --line: #DCDFE7;
-  --ink: #262321;
+  --ink: #0A1A30;
   --ink-2: #4E4A47;
   --ink-3: #7C7874;
-  --accent: #2B5FCB;
-  --accent-soft: rgba(43, 95, 203, 0.10);
+  --accent: #0055B8;
+  --accent-soft: rgba(0, 85, 184, 0.10);
   --gas: #D98A0B;
   --gas-soft: rgba(245, 165, 36, 0.16);
-  --ok: #1E8A5A;
-  --ok-soft: rgba(30, 138, 90, 0.12);
-  --crit: #C8332B;
-  --crit-soft: rgba(200, 51, 43, 0.11);
+  --ok: #5E8A12;
+  --ok-soft: rgba(94, 138, 18, 0.12);
+  --crit: #D71F27;
+  --crit-soft: rgba(215, 31, 39, 0.10);
   --off: #9A958F;
   --font-ui: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-data: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
@@ -32,23 +32,23 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #17171A; --panel: #212024; --panel-2: #1B1B1E; --line: #34323A;
+    --bg: #0B1220; --panel: #111C2F; --panel-2: #0D1626; --line: #22324D;
     --ink: #EEECE9; --ink-2: #C3BFBA; --ink-3: #8D8984;
-    --accent: #6F97F0; --accent-soft: rgba(111, 151, 240, 0.14);
+    --accent: #3D8BEA; --accent-soft: rgba(61, 139, 234, 0.16);
     --gas: #F5A524; --gas-soft: rgba(245, 165, 36, 0.16);
-    --ok: #46C08A; --ok-soft: rgba(70, 192, 138, 0.13);
-    --crit: #F0625A; --crit-soft: rgba(240, 98, 90, 0.15);
+    --ok: #A9CB3C; --ok-soft: rgba(169, 203, 60, 0.14);
+    --crit: #EE3A40; --crit-soft: rgba(238, 58, 64, 0.15);
     --off: #6E6A66;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #17171A; --panel: #212024; --panel-2: #1B1B1E; --line: #34323A;
+  --bg: #0B1220; --panel: #111C2F; --panel-2: #0D1626; --line: #22324D;
   --ink: #EEECE9; --ink-2: #C3BFBA; --ink-3: #8D8984;
-  --accent: #6F97F0; --accent-soft: rgba(111, 151, 240, 0.14);
+  --accent: #3D8BEA; --accent-soft: rgba(61, 139, 234, 0.16);
   --gas: #F5A524; --gas-soft: rgba(245, 165, 36, 0.16);
-  --ok: #46C08A; --ok-soft: rgba(70, 192, 138, 0.13);
-  --crit: #F0625A; --crit-soft: rgba(240, 98, 90, 0.15);
+  --ok: #A9CB3C; --ok-soft: rgba(169, 203, 60, 0.14);
+  --crit: #EE3A40; --crit-soft: rgba(238, 58, 64, 0.15);
   --off: #6E6A66;
   color-scheme: dark;
 }
@@ -60,6 +60,8 @@ body {
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 16px 32px;
 }
+.brandband { display: flex; height: 4px; border-radius: 2px; overflow: hidden; }
+.brandband i { display: block; }
 .wrap { max-width: 1440px; margin: 0 auto; display: grid; gap: 16px; }
 .mono { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
 h1, h2 { margin: 0; text-wrap: balance; }
@@ -70,7 +72,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* header */
 .top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.mark { width: 40px; height: 40px; border-radius: 10px; background: var(--accent); display: grid; place-items: center; flex: none; }
+.mark { width: 40px; height: 40px; border-radius: 10px; background: #0055B8; display: grid; place-items: center; flex: none; }
 .brand h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
 .brand p { margin: 0; font-size: 12px; color: var(--ink-3); }
 .badge-demo { font: 600 11px var(--font-data); letter-spacing: 0.06em; color: var(--gas); background: var(--gas-soft); border: 1px solid var(--gas); padding: 3px 10px; border-radius: 999px; }
@@ -78,14 +80,14 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .clock { font-size: 13px; color: var(--ink-2); }
 
 /* scenario bar */
-.scenario { background: var(--ink); color: #F3F1EE; border-radius: 14px; padding: 16px 18px; display: grid; gap: 12px; }
+.scenario { background: #0A1A30; color: #F3F1EE; border-radius: 14px; padding: 16px 18px; display: grid; gap: 12px; }
 :root[data-theme="dark"] .scenario { background: #0E0E10; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .scenario { background: #0E0E10; } }
 .steps { display: flex; flex-wrap: wrap; gap: 8px; }
 .step { border: 1px solid rgba(255,255,255,0.18); background: transparent; color: #CFCBC6; border-radius: 999px; padding: 6px 12px; font-size: 12px; display: flex; gap: 8px; align-items: center; }
 .step .n { font-family: var(--font-data); opacity: 0.7; }
-.step[aria-current="step"] { background: #2B5FCB; border-color: #2B5FCB; color: #fff; }
-.step.is-alarm[aria-current="step"] { background: #C8332B; border-color: #C8332B; }
+.step[aria-current="step"] { background: #0055B8; border-color: #0055B8; color: #fff; }
+.step.is-alarm[aria-current="step"] { background: #E8202A; border-color: #E8202A; }
 .say { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: start; }
 .say h3 { margin: 0 0 4px; font-size: 17px; }
 .say p { margin: 0; color: #D9D5D0; max-width: 90ch; }
@@ -93,7 +95,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .say .hint b { color: #F5A524; font-weight: 600; }
 .controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 .btn { border-radius: 8px; padding: 7px 14px; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #F3F1EE; font-size: 13px; font-weight: 500; }
-.btn.primary { background: #2B5FCB; border-color: #2B5FCB; }
+.btn.primary { background: #0055B8; border-color: #0055B8; }
 .btn[aria-pressed="true"] { background: #F5A524; border-color: #F5A524; color: #262321; }
 @media (max-width: 720px) { .say { grid-template-columns: 1fr; } .controls { justify-content: flex-start; } }
 
@@ -170,6 +172,7 @@ td .id { font-size: 12px; color: var(--ink-3); }
 <body>
 <div class="wrap">
 
+  <div class="brandband" aria-hidden="true"><i style="flex:5;background:#0055B8"></i><i style="flex:2;background:#E8202A"></i><i style="flex:3;background:#C4D530"></i></div>
   <header class="top">
     <div class="brand">
       <div class="mark" aria-hidden="true">

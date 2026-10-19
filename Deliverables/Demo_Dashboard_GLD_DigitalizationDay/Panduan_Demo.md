@@ -1,6 +1,6 @@
 # Panduan Demo Dashboard GLD — Digitalization Day
 
-Status: **siap latihan** (19 Okt 2026). Semua data di demo adalah **DATA SIMULASI** dan diberi label begitu di layar.
+Status: **siap latihan** (19 Okt 2026, diperbarui: peta tanpa token, riwayat 7 hari, tema Pertamina). Semua data di demo adalah **DATA SIMULASI** dan diberi label begitu di layar.
 
 Ada dua cara mendemokan skenario yang sama. Pilih sesuai kondisi di lokasi.
 
@@ -40,12 +40,18 @@ Naskah narasi tiap langkah tampil di jendela skenario (A) dan di bilah atas hala
 
 Buka `Demo_Dashboard_GLD.html` di Chrome/Edge. Tombol **Langkah berikutnya** atau panah kanan / spasi. **Putar otomatis** menjalankan kelima langkah sendiri (±80 detik).
 
+## Yang sudah tersedia di dashboard demo (A)
+
+- **Map View tanpa token**: peta MapLibre. Basemap diambil dari tile lokal (`public/tiles`, diunduh otomatis oleh `start-demo.bat` saat pertama kali ada internet), atau OSM online, atau latar polos sesuai tema bila offline total. Perangkat, garis topologi, dan panel tren 24 jam tetap tampil di ketiga kondisi.
+- **Heatmap & Analytics terisi**: `reset-db.js` membuat riwayat simulasi 7 hari (udara bersih tiap 10 menit per GLD) + 3 kejadian lampau yang sudah diselesaikan operator (H2 di GLD 3 lima hari lalu, alarm LPG di GLD 1 dua hari lalu, LPG MIDDLE di GLD 2 enam jam lalu). Grafik 24 jam dan 7 hari, heatmap, dan log kejadian langsung berisi saat demo dibuka.
+- **Tema terang & gelap berpalet Pertamina Patra Niaga** (biru, merah, hijau logo) + logo di sidebar dan halaman login. Ganti tema dari tombol Light/Dark di kiri bawah.
+
 ## Yang perlu dicek sebelum hari H
 
-- [ ] **Peta (Map View) dashboard asli butuh token Mapbox dan internet.** Tanpa token, tab Map View menampilkan pesan "Set NEXT_PUBLIC_MAPBOX_TOKEN". Hindari tab ini atau isi token di `apps/ru-frontend/.env.local` sebelum build. Tab lain tidak butuh internet.
+- [ ] Jalankan `start-demo.bat` sekali **saat ada internet** supaya tile peta RU4 terunduh (±560 tile). Setelah itu peta bisa offline. Tanpa itu, peta tetap jalan tapi latarnya polos.
 - [ ] Kolom **Signal** GLD tampil −100 dBm / Weak. Node-RED belum mengirim RSSI per GLD, jadi nilainya belum ada. Jangan disorot.
 - [ ] Coba sekali penuh di laptop yang dipakai di lokasi.
-- [ ] Untuk tim video: `screenshots/` berisi 14 tangkapan dashboard asli per langkah (2400×1350).
+- [ ] Untuk tim video: `screenshots/` berisi 14 tangkapan per langkah skenario, `screenshots/tema_peta_analytics/` berisi 10 tangkapan peta, Analytics 24 jam/7 hari, dan tema terang/gelap (2400×1350). Peta di tangkapan ini berlatar polos karena dibuat tanpa akses tile.
 
 ## Screenshot
 

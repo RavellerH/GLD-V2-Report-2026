@@ -241,18 +241,18 @@ def isi(doc):
          "ber-mesh stainless steel, 8 sensor gas (MQ-2/3B/4/5/6/7B/8/135), kipas DC, motherboard ESP32-S3 "
          "dengan PCB cover terminal (V4), radio LoRa, catu 24 VDC. Unit yang diajukan untuk sertifikasi "
          "ber-S/N GLD2-0x1001; total 4 unit GLD tersedia (3 untuk RU IV + 1 cadangan).",
-         "Lampiran 1 (Foto 1–8)", "Terpenuhi"),
+         "Lampiran 1 (Foto 1–8)", "Tersedia"),
         ("2", "Telah diuji",
          "(a) Factory Acceptance Test laboratorium FAT-01 s.d. FAT-07, 7 dari 7 item lulus "
          "(Laporan FAT No. LGU/GLD/FAT/2026-001 Rev 1.4). (b) Uji termal internal 30 Sep 2026: "
          "8 kanal thermocouple, 3 kondisi (normal, beban maksimum, kipas mati), 180 menit. "
          "(c) Pengukuran dimensi enclosure dengan jangka sorong, 7 Okt 2026.",
-         "Bagian 3.1; Laporan FAT", "Terpenuhi"),
+         "Bagian 3.1; Laporan FAT", "Tersedia"),
         ("3", "Diperbaiki desainnya",
          "PCB Node Sensor GLD diiterasi V1 s.d. V5 dengan catatan perubahan per versi; casing berkembang "
          "dari ATEX Casing v2 ke GLD ATEX Case v3; antena dipindah ke muka atas base; PCB cover terminal "
          "kabel & lubang baut motherboard ditambahkan; konsep proteksi diarahkan ke Ex d (flameproof).",
-         "Bagian 3.2; Gambar 1; Lampiran 1 (Foto 7–8)", "Terpenuhi"),
+         "Bagian 3.2; Gambar 1; Lampiran 1 (Foto 7–8)", "Tersedia"),
         ("4", "Dilampirkan foto perangkat",
          "Foto prototipe terkini (tampak depan, belakang, samping, bagian dalam, motherboard, tutup "
          "ber-mesh) serta foto iterasi sebelumnya sebagai pembanding perbaikan desain.",
@@ -282,7 +282,7 @@ def isi(doc):
         ("Factory Acceptance Test (FAT) laboratorium",
          "Lab IoT ITB, Mei–Agustus 2026; disaksikan PT Pertamina Patra Niaga 6 Agustus 2026",
          "7/7 item lulus: pembacaan 8 kanal sensor, klasifikasi gas AI di perangkat (ESP32-S3), "
-         "komunikasi LoRa, mesh & failover Cluster Head, integrasi end-to-end, alarm otomatis, catu daya."),
+         "komunikasi LoRa, mesh & failover Cluster Head, integrasi end-to-end, alarm otomatis, serta monitoring data dan alarm di dashboard."),
         ("Uji termal internal (persiapan kelas suhu T4)",
          "30 September 2026",
          "8 kanal thermocouple; kondisi normal, beban maksimum, dan kipas mati; 180 menit. Ekstrapolasi "
@@ -359,11 +359,11 @@ def pengesahan(doc):
         inner.rows[1].height = Cm(2.4)
         p = inner.cell(2, i).paragraphs[0]; p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         run(p, nama, 9, True, underline=True)
-    ctext(row[1], PPN_JAB + ",", 9, align=WD_ALIGN_PARAGRAPH.CENTER)
-    row[1].vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.TOP
-    for _ in range(4):
-        row[1].add_paragraph()
-    p = row[1].add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    inner2 = row[1].add_table(rows=3, cols=1)
+    fixed(inner2, [Cm(7.8)])
+    ctext(inner2.cell(0, 0), PPN_JAB + ",", 9, align=WD_ALIGN_PARAGRAPH.CENTER)
+    inner2.rows[1].height = Cm(2.4)
+    p = inner2.cell(2, 0).paragraphs[0]; p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run(p, PPN_NAMA, 9, True, underline=True)
     fixed(t, [Cm(8.4), Cm(8.4)])
     para(doc, "Catatan pemeriksaan PT Pertamina Patra Niaga:", 9, True, WD_ALIGN_PARAGRAPH.LEFT, before=10, after=2)

@@ -1,8 +1,8 @@
 """Isi formulir TTH TLKM02/F/013 v02 (Permohonan Uji Conformance Test) untuk
-sewa chamber EMC uji GLD Node Sensor & Cluster Head, atas nama ITB.
+sewa chamber EMC uji GLD Node Sensor & Cluster Head, atas nama PT LAPI Ganesha Utama.
 
-Field yang datanya belum ada di repo ditandai sorotan kuning, tidak ditebak.
-Output: Deliverables/Permohonan_Uji_CT_TTH_EMC_GLD_ITB.docx
+Final: isian kontak, tanggal & pemohon dari Bu Nina (19 Okt 2026).
+Output: Deliverables/Permohonan_Uji_CT_TTH_EMC_GLD_LGU.docx
 """
 from pathlib import Path
 
@@ -14,7 +14,7 @@ from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "Deliverables" / "Permohonan_Uji_CT_TTH_EMC_GLD_ITB.docx"
+OUT = ROOT / "Deliverables" / "Permohonan_Uji_CT_TTH_EMC_GLD_LGU.docx"
 
 FOOTER = "TLKM02/F/013 Versi 02"
 
@@ -107,20 +107,14 @@ def build():
     run(p, "Nomor Registrasi: ", size=9.5)
     run(p, "RCT-YYXXX (diisi TTH)", size=9.5, italic=True)
 
-    note = doc.add_paragraph()
-    run(note, "Catatan pengisi (hapus sebelum dikirim): ", bold=True, size=8.5, hl=True)
-    run(note, "isian bersorot kuning belum ada datanya di dokumen proyek dan perlu "
-        "dilengkapi/dikonfirmasi Bu Nina sebelum ditandatangani.", size=8.5, hl=True)
-
     heading(doc, "Data Pelanggan:")
     kv_table(doc, [
-        ("Nama Perusahaan", ["Institut Teknologi Bandung (ITB) — Program Studi Fisika, "
-                             "Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA)"]),
-        ("Alamat Perusahaan", ["Jl. Ganesa No. 10, Lebak Siliwangi, Coblong, Bandung, "
-                               "Jawa Barat 40132"]),
-        ("Nama Kontak", [("[Nama kontak — mis. Dr. Nina Siti Aminah]", True)]),
-        ("Nomor Kontak", [("[Nomor HP/telepon]", True)]),
-        ("Surel Kontak", [("[Alamat surel]", True)]),
+        ("Nama Perusahaan", ["PT LAPI Ganesha Utama"]),
+        ("Alamat Perusahaan", ["Jl. Dederuk No. 30, Kelurahan Sadang Serang, Kecamatan Coblong, "
+                               "Kota Bandung, Jawa Barat 40133"]),
+        ("Nama Kontak", ["Dr. Nina Siti Aminah"]),
+        ("Nomor Kontak", ["081214295251"]),
+        ("Surel Kontak", ["nina@itb.ac.id"]),
     ])
 
     heading(doc, "Data Perangkat:")
@@ -133,14 +127,14 @@ def build():
         ("Nama Perangkat",
          ["Gas Leak Detection (GLD) — Node Sensor"],
          ["Gas Leak Detection (GLD) — LoRa Cluster Head"]),
-        ("Merek", [("[Merek — mis. GLD / ITB]", True)], [("[Merek — mis. GLD / ITB]", True)]),
+        ("Merek", ["GLD (prototipe)"], ["GLD (prototipe)"]),
         ("Tipe/Model", ["GLD V2 (Node Sensor, versi 2)"], ["CH V2 (Cluster Head, versi 2)"]),
         ("Kapasitas",
          ["LoRa 920 MHz, maks. 22 dBm, BW 125 kHz; catu 24 VDC, konsumsi maks. ±8 W"],
          ["LoRa dual 920 MHz (star) / 921 MHz (mesh), maks. 22 dBm, BW 125 kHz; "
           "catu 5 VDC, konsumsi maks. 0,73 W"]),
-        ("Nomor Seri", [("[No. seri unit yang diuji]", True)],
-         [("[No. seri unit yang diuji]", True)]),
+        ("Nomor Seri", ["Prototipe — belum bernomor seri"],
+         ["Prototipe — belum bernomor seri"]),
         ("Negara Pembuat", ["Indonesia"], ["Indonesia"]),
     ]
     for k, a, b in rows:
@@ -155,8 +149,7 @@ def build():
     run(p, "Referensi Uji: ", bold=True, size=9.5)
     run(p, "Uji EMC — emisi radiasi (radiated emission) dan emisi konduksi "
         "(conducted emission). ", size=9.5)
-    run(p, "[Standar acuan yang dipakai, mis. CISPR 32 / SNI CISPR 32 — konfirmasi "
-        "dengan Test Engineer TTH]", size=9.5, hl=True)
+    run(p, "Metode dan batas ambang sesuai prosedur uji Telkom Test House.", size=9.5)
 
     heading(doc, "Agenda CT:")
     for mark, txt in (("☐", "Uji Petik"), ("☐", "Uji Verifikasi (UV)"),
@@ -172,9 +165,8 @@ def build():
 
     heading(doc, "Periode CT:")
     kv_table(doc, [
-        ("Durasi dalam hari kerja", ["1 (satu) hari kerja ",
-                                     ("[konfirmasi]", True)]),
-        ("Tanggal pelaksanaan", ["16 Oktober 2026 ", ("[konfirmasi]", True)]),
+        ("Durasi dalam hari kerja", ["1 (satu) hari kerja"]),
+        ("Tanggal pelaksanaan", ["16 Oktober 2026"]),
     ])
 
     doc.add_page_break()
@@ -203,12 +195,12 @@ def build():
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_before = Pt(18)
     run(p, "Bandung, ", size=10)
-    run(p, "[ddmmyyyy]", size=10, hl=True)
+    run(p, "19 Oktober 2026", size=10)
 
     t = doc.add_table(rows=4, cols=3)
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     heads = ("Pemohon", "Mengetahui", "Menyetujui")
-    names = ([("[Nama pemohon — ITB]", True)], ["[Nama Test Engineer TTH]"],
+    names = (["Dr. Nina Siti Aminah"], ["[Nama Test Engineer TTH]"],
              ["[Nama Officer TTH]"])
     roles = ("Pelanggan", "Test Engineer TTH", "Officer TTH")
     for j in range(3):

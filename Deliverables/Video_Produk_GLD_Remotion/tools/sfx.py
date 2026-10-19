@@ -125,6 +125,11 @@ def build():
     fade = int(0.05 * SR)
     hum = [v * min(1, i / fade, (n - i) / fade) for i, v in enumerate(hum)]
     save("hum", hum, 0.35)
+    # desis gas bocor (lembut, 4 dtk, masuk & keluar perlahan)
+    n = 4 * SR
+    hiss = highpass(lowpass(noise(n), 6000), 1800)
+    hiss = [v * min(1, i / (0.8 * SR), (n - i) / (0.8 * SR)) * (0.85 + 0.15 * math.sin(i / SR * 9)) for i, v in enumerate(hiss)]
+    save("hiss", hiss, 0.4)
     # riser: membangun ke penutup
     n = int(2.6 * SR)
     sweep = [400 + 5000 * (i / n) ** 2 for i in range(n)]

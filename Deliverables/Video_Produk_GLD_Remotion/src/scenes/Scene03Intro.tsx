@@ -34,7 +34,7 @@ export const Scene03Intro: React.FC = () => {
         }}
       >
         {PARTS.map((p, i) => (
-          <Caption key={p} text={p} from={LABEL_AT[i]} size={title(40)} weight={600} style={{borderLeft: `6px solid ${COLORS.blue}`, paddingLeft: 18}} />
+          <Caption key={p} text={p} from={LABEL_AT[i]} size={title(40)} weight={600} style={{borderLeft: `6px solid ${COLORS.blue}`, padding: '8px 18px', backgroundColor: 'rgba(10,18,32,0.62)', borderRadius: '0 10px 10px 0'}} />
         ))}
       </AbsoluteFill>
       {/* selaras render Blender: tutup lepas 4,0 dtk, kabel dicabut 4,9 dtk, terurai 5,7 dtk */}

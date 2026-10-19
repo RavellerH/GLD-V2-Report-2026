@@ -5,7 +5,7 @@
 # Battery case di dossier tidak dimodelkan (unit produksi 7 Okt tidak memakainya).
 # Ukuran dalam mm dari gambar BP18-1Z + ukur jangka sorong unit nyata; tanpa tulisan/logo komponen.
 #
-#   blender -b -P build_gld_model.py -- <out_dir> [assembled|exploded|both|anim] [samples]
+#   blender -b -P build_gld_model.py -- <out_dir> [assembled|exploded|both|anim|final|frame:<dtk>] [samples] [landscape|portrait]
 #   anim = pratinjau Shot 2 (11 dtk, EEVEE, setengah resolusi): putar 0-4 dtk, terurai 4-7 dtk
 import math
 import random
@@ -759,6 +759,20 @@ if MODE.startswith("frame"):  # frame:<detik> = satu frame Shot 2 dengan Cycles 
     scene.frame_set(int(float(MODE.split(":")[1]) * scene.render.fps) + 1)
     scene.render.filepath = str(OUT / f"shot2_cycles_{MODE.split(':')[1]}s.png")
     bpy.ops.render.render(write_still=True)
+if MODE == "final":  # render final Shot 2 (Cycles, resolusi penuh) -> <out_dir>/scene03_hero_exploded.mp4
+    animate_shot2()
+    aim((-1080, -980, 700), (10, -110, 110))
+    cam_d.lens = 74
+    cam_d.dof.use_dof = False
+    if len(ARGS) > 3 and ARGS[3] == "portrait":
+        scene.render.resolution_x, scene.render.resolution_y = 1080, 1920
+        cam_d.lens = 52
+    scene.render.image_settings.file_format = "FFMPEG"
+    scene.render.ffmpeg.format = "MPEG4"
+    scene.render.ffmpeg.codec = "H264"
+    scene.render.ffmpeg.constant_rate_factor = "PERC_LOSSLESS"
+    scene.render.filepath = str(OUT / "scene03_hero_exploded.mp4")
+    bpy.ops.render.render(animation=True)
 if MODE == "anim":
     animate_shot2()
     aim((-1080, -980, 700), (10, -110, 110))

@@ -20,7 +20,7 @@ export const ASSETS = {
   hero: {
     path: 'blender/scene03_hero_exploded.mp4',
     portraitPath: 'blender/portrait/scene03_hero_exploded.mp4',
-    ready: false,
+    ready: true,
     note: 'Blender: hero shot GLD berputar lalu exploded view (9 dtk)',
   },
   chamber: {
@@ -28,6 +28,12 @@ export const ASSETS = {
     portraitPath: 'blender/portrait/scene05_chamber.mp4',
     ready: false,
     note: 'Blender: gas test chamber, komponen disorot berurutan 1–4 (16 dtk)',
+  },
+  leak: {
+    path: 'blender/scene07_leak.mp4',
+    portraitPath: 'blender/portrait/scene07_leak.mp4',
+    ready: true,
+    note: 'Blender: simulasi kebocoran -> GLD -> beacon alarm (6,5 dtk, ilustrasi)',
   },
   outro: {
     path: 'blender/scene08_outro.mp4',
@@ -47,7 +53,7 @@ export const ASSETS = {
 
 // Narasi per adegan: public/audio/vo/<nn>_<id>.wav (mis. 04_fingerprint.wav), hasil Gemini TTS.
 // Nama file dibuat oleh tools/export_vo.py. Set true setelah kedelapan file tersedia.
-export const VO_READY = false;
+export const VO_READY = true;
 export const voPath = (index: number, id: string) => `audio/vo/${String(index + 1).padStart(2, '0')}_${id}.wav`;
 
 // Matikan bila narasi sudah direkam dan subtitle tidak diinginkan.

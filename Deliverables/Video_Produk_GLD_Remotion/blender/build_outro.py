@@ -4,7 +4,7 @@
 # node GLD lain di area pipe rack yang terhubung garis cahaya biru (mesh LoRa) menuju gateway.
 # Render EEVEE (tanpa kaca/akrilik, jauh lebih cepat dari Cycles).
 #
-#   blender -b -P build_outro.py -- <out_dir> [still|anim|alarm|alarm_still|none] [landscape|portrait]
+#   blender -b -P build_outro.py -- <out_dir> [still|anim|leak|leak_still|alarm|alarm_still|none] [landscape|portrait] [--preview]
 import math
 import random
 import runpy
@@ -460,6 +460,173 @@ def animate_alarm(fps=30, seconds=4):
     cam_d.dof.aperture_fstop = 2.8
 
 
+
+# ------------------------------------------------------------------ simulasi kebocoran (Adegan 7, ilustrasi)
+# Gas digambarkan sebagai kabut oranye tembus pandang (ilustrasi; gas sebenarnya tidak kasatmata) yang keluar
+# dari flange pipa di dekat GLD, terbawa angin ke muka sensor, lalu beacon berkedip dan denyut sinyal keluar
+# dari antena menuju Cluster Head. Tanpa angka waktu deteksi (belum diukur).
+LEAK_SECONDS = 6.5
+
+
+def build_leak(fps=30):
+    scene.render.fps = fps
+    scene.frame_start, scene.frame_end = 1, int(LEAK_SECONDS * fps)
+    m_pipe = add_bump(principled("leak_pipe", (0.32, 0.33, 0.34), 0.9, 0.4), "noise", 400, 0.15)
+    # pipa 4" horizontal + flange berbaut, di depan-kiri GLD, sedikit di bawah tinggi sensor
+    py, pz = -650, -180
+    cyl("leak_pipe", 57, 2600, (-700, py, pz), "X", 64).data.materials.append(m_pipe)
+    for dx in (-8, 8):
+        cyl(f"leak_flange{dx}", 115, 18, (-460 + dx, py, pz), "X", 64).data.materials.append(m_pipe)
+    for k in range(8):
+        a = k * math.pi / 4
+        G["hexagon"](f"leak_bolt{k}", 24, 50, (-460, py + 90 * math.cos(a), pz + 90 * math.sin(a)), "X"
+                     ).data.materials.append(M_STEEL)
+    # material kabut: oranye gas, alpha dari noise + falloff radial, dianimasikan lewat "fade"
+    mat = bpy.data.materials.new("gas_plume")
+    mat.use_nodes = True
+    if hasattr(mat, "surface_render_method"):
+        mat.surface_render_method = "BLENDED"
+    else:
+        mat.blend_method = "BLEND"
+    nt = mat.node_tree
+    for n in list(nt.nodes):
+        nt.nodes.remove(n)
+    out = nt.nodes.new("ShaderNodeOutputMaterial")
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    tr = nt.nodes.new("ShaderNodeBsdfTransparent")
+    em = nt.nodes.new("ShaderNodeEmission")
+    em.inputs["Color"].default_value = (0.96, 0.62, 0.14, 1)
+    em.inputs["Strength"].default_value = 1.1
+    lw = nt.nodes.new("ShaderNodeLayerWeight")
+    lw.inputs["Blend"].default_value = 0.45
+    inv = nt.nodes.new("ShaderNodeMath")
+    inv.operation = "SUBTRACT"
+    inv.inputs[0].default_value = 1.0
+    nz = nt.nodes.new("ShaderNodeTexNoise")
+    nz.inputs["Scale"].default_value = 10.0
+    nz.inputs["Detail"].default_value = 6
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    m1 = nt.nodes.new("ShaderNodeMath")
+    m1.operation = "MULTIPLY"
+    m2 = nt.nodes.new("ShaderNodeMath")
+    m2.operation = "MULTIPLY"
+    m2.use_clamp = True
+    fade = nt.nodes.new("ShaderNodeValue")
+    fade.name = "fade"
+    fade.outputs[0].default_value = 0.0
+    nt.links.new(tc.outputs["Object"], nz.inputs["Vector"])
+    nt.links.new(lw.outputs["Facing"], inv.inputs[1])
+    nt.links.new(inv.outputs[0], m1.inputs[0])
+    nt.links.new(nz.outputs["Fac"], m1.inputs[1])
+    oi = nt.nodes.new("ShaderNodeObjectInfo")
+    m3 = nt.nodes.new("ShaderNodeMath")
+    m3.operation = "MULTIPLY"
+    nt.links.new(m1.outputs[0], m3.inputs[0])
+    nt.links.new(oi.outputs["Alpha"], m3.inputs[1])
+    nt.links.new(m3.outputs[0], m2.inputs[0])
+    nt.links.new(fade.outputs[0], m2.inputs[1])
+    nt.links.new(m2.outputs[0], mix.inputs["Fac"])
+    nt.links.new(tr.outputs[0], mix.inputs[1])
+    nt.links.new(em.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], out.inputs["Surface"])
+    # gumpalan gas: berangkat dari celah flange, mengembang, terbawa angin ke muka GLD (y=-52) lalu melewatinya
+    rnd = random.Random(5)
+    src = Vector((-460, py, pz + 40))
+    dst = Vector((420, -40, 40))  # melewati muka GLD (x=0) lalu terus ke kanan
+    for i in range(60):
+        bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=3, radius=1.0)
+        b = bpy.context.active_object
+        b.name = f"gas_puff{i}"
+        b.data.materials.append(mat)
+        for poly in b.data.polygons:
+            poly.use_smooth = True
+        b.visible_shadow = False
+        t0 = 0.3 + i * 0.065
+        life = 2.6 + rnd.uniform(-0.3, 0.4)
+        jitter = Vector((rnd.uniform(-60, 60), rnd.uniform(-90, 90), rnd.uniform(-50, 80)))
+        for t, u, a in ((t0, 0.0, 0.0), (t0 + life * 0.15, 0.15, 1.0), (t0 + life * 0.55, 0.55, 0.9), (t0 + life, 1.0, 0.0)):
+            via = Vector((0, -95, 0))  # tepat di depan mesh sensor
+            pos = (src.lerp(via, u / 0.6) if u <= 0.6 else via.lerp(dst, (u - 0.6) / 0.4)) + jitter * u * 0.5
+            b.location = pos * MM
+            r = (14 + 90 * u) * MM
+            b.scale = (r, r * 0.8, r * 0.75)
+            b.color = (1, 1, 1, a)
+            f = int(t * fps) + 1
+            b.keyframe_insert("location", frame=f)
+            b.keyframe_insert("scale", frame=f)
+            b.keyframe_insert("color", frame=f)
+        b.hide_render = True
+        b.keyframe_insert("hide_render", frame=1)
+        b.hide_render = False
+        b.keyframe_insert("hide_render", frame=int(t0 * fps) + 1)
+    # kabut terlihat makin pekat lalu stabil
+    sock = fade.outputs[0]
+    for t, v in ((0, 0.0), (0.4, 0.0), (1.4, 0.22), (LEAK_SECONDS, 0.22)):
+        sock.default_value = v
+        sock.keyframe_insert("default_value", frame=int(t * fps) + 1)
+    # beacon berkedip merah setelah gas mencapai sensor (ilustrasi, tanpa klaim waktu)
+    led = M_LED.node_tree.nodes["Principled BSDF"].inputs["Emission Strength"]
+    pl = bpy.data.lights.new("leak_alarm_light", "POINT")
+    pl.color = (1, 0.1, 0.05)
+    pl.shadow_soft_size = 0.01
+    plo = bpy.data.objects.new("leak_alarm_light", pl)
+    plo.location = Vector((109, 20, 94)) * MM
+    scene.collection.objects.link(plo)
+    start = 3.3
+    led.default_value = 0
+    led.keyframe_insert("default_value", frame=1)
+    pl.energy = 0
+    pl.keyframe_insert("energy", frame=1)
+    k = 0
+    while start + k / 2.5 < LEAK_SECONDS:
+        f0 = int((start + k / 2.5) * fps) + 1
+        for df, v, e in ((0, 0, 0), (2, 250, 120), (int(fps / 5), 250, 120), (int(fps / 5) + 2, 0, 0)):
+            led.default_value = v
+            led.keyframe_insert("default_value", frame=f0 + df)
+            pl.energy = e
+            pl.keyframe_insert("energy", frame=f0 + df)
+        k += 1
+    # denyut sinyal dari ujung antena (cincin biru membesar & memudar)
+    ring_mat = principled("signal_ring", (0.2, 0.45, 1.0), 0, 0.3,
+                          **{"Emission Color": (0.25, 0.5, 1.0, 1), "Emission Strength": 8, "Alpha": 1.0})
+    if hasattr(ring_mat, "surface_render_method"):
+        ring_mat.surface_render_method = "BLENDED"
+    alpha = ring_mat.node_tree.nodes["Principled BSDF"].inputs["Alpha"]
+    tip = Vector((-28, 20, 255))
+    for j in range(4):
+        rr = torus(f"signal_ring{j}", 1.0, 0.03, tuple(tip), "Y")  # tegak menghadap kamera: gelombang radio
+        rr.data.materials.append(ring_mat)
+        rr.visible_shadow = False
+        t0 = 3.8 + j * 0.55
+        for t, sc in ((0, 0.0), (t0, 0.0), (t0 + 0.03, 40), (t0 + 1.1, 650), (t0 + 1.13, 0.0)):
+            rr.scale = (sc, sc, sc)
+            rr.keyframe_insert("scale", frame=int(t * fps) + 1)
+        if rr.animation_data:
+            for fc in rr.animation_data.action.fcurves:
+                for kp in fc.keyframe_points:
+                    kp.interpolation = "LINEAR"
+    for t, v in ((0, 1.0), (LEAK_SECONDS, 1.0)):
+        alpha.default_value = v
+        alpha.keyframe_insert("default_value", frame=int(t * fps) + 1)
+    # kamera: 3/4 dari depan-kiri, flange di kiri depan, GLD di kanan, dorong pelan
+    if ORIENT == "portrait":
+        keys = [(0, (-1150, -1900, 180), (-230, -300, 40), 28), (LEAK_SECONDS, (-1000, -1650, 170), (-200, -260, 50), 28)]
+    else:
+        keys = [(0, (-1000, -1650, 140), (-230, -300, 40), 36), (LEAK_SECONDS, (-880, -1450, 130), (-200, -260, 50), 36)]
+    for t, loc, tgt, lens in keys:
+        f = int(t * fps) + 1
+        cam.location = Vector(loc) * MM
+        TGT.location = Vector(tgt) * MM
+        cam_d.lens = lens
+        cam.keyframe_insert("location", frame=f)
+        TGT.keyframe_insert("location", frame=f)
+        cam_d.keyframe_insert("lens", frame=f)
+    cam_d.dof.use_dof = False
+    # sembunyikan tautan mesh & denyut shot penutup
+    for o in list(LINK_OBJS) + [p_[0] for p_ in PULSES]:
+        o.hide_render = True
+
+
 # ------------------------------------------------------------------ render (EEVEE)
 for eng in ("BLENDER_EEVEE_NEXT", "BLENDER_EEVEE"):
     try:
@@ -491,7 +658,7 @@ def ffmpeg(path):
     scene.render.image_settings.file_format = "FFMPEG"
     scene.render.ffmpeg.format = "MPEG4"
     scene.render.ffmpeg.codec = "H264"
-    scene.render.ffmpeg.constant_rate_factor = "HIGH"
+    scene.render.ffmpeg.constant_rate_factor = "PERC_LOSSLESS" if "--final" in ARGS else "HIGH"
     scene.render.filepath = str(path)
 
 
@@ -509,7 +676,21 @@ if MODE in ("still", "anim"):
         if "--preview" in ARGS:
             scene.render.resolution_percentage = 50
             scene.eevee.taa_render_samples = 16
-        ffmpeg(OUT / f"outro{tag}{'_preview' if '--preview' in ARGS else ''}.mp4")
+        ffmpeg(OUT / ("scene08_outro.mp4" if "--final" in ARGS else f"outro{tag}{'_preview' if '--preview' in ARGS else ''}.mp4"))
+        bpy.ops.render.render(animation=True)
+elif MODE in ("leak", "leak_still"):
+    build_leak()
+    bpy.ops.wm.save_as_mainfile(filepath=str(HERE / f"leak_{ORIENT}.blend"))
+    if MODE == "leak_still":
+        for t in (1.0, 3.0, 4.5, 6.0):
+            scene.frame_set(int(t * 30) + 1)
+            scene.render.filepath = str(OUT / f"leak{tag}_{t:g}s.png")
+            bpy.ops.render.render(write_still=True)
+    else:
+        if "--preview" in ARGS:
+            scene.render.resolution_percentage = 50
+            scene.eevee.taa_render_samples = 16
+        ffmpeg(OUT / ("scene07_leak.mp4" if "--final" in ARGS else f"leak{tag}{'_preview' if '--preview' in ARGS else ''}.mp4"))
         bpy.ops.render.render(animation=True)
 elif MODE in ("alarm", "alarm_still"):
     animate_alarm()

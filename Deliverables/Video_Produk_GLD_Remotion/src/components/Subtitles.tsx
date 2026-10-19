@@ -1,6 +1,8 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
 import {useLayout} from '../layout';
+import voDurations from '../data/voDurations.json';
+import {SCENES} from '../timeline';
 import {COLORS, FONT} from '../theme';
 
 const MAX_CHARS = 95;
@@ -29,7 +31,11 @@ const chunk = (vo: string, maxChars: number) => {
 // Tiap potongan tampil sebanding panjang hurufnya.
 export const Subtitles: React.FC<{vo: string}> = ({vo}) => {
   const frame = useCurrentFrame();
-  const {durationInFrames} = useVideoConfig();
+  const {durationInFrames, fps} = useVideoConfig();
+  // Subtitle mengikuti lama narasi sebenarnya (data/voDurations.json), bukan panjang slot.
+  const id = SCENES.find((sc) => sc.vo === vo)?.id;
+  const voSec = id ? (voDurations as Record<string, number>)[id] : undefined;
+  const span = voSec ? Math.min(durationInFrames, Math.round(voSec * fps)) : durationInFrames;
   const {portrait, subtitleBottom} = useLayout();
   const parts = chunk(vo, portrait ? MAX_CHARS_PORTRAIT : MAX_CHARS);
   const total = parts.reduce((n, s) => n + s.length, 0);
@@ -38,7 +44,7 @@ export const Subtitles: React.FC<{vo: string}> = ({vo}) => {
   let current = parts[parts.length - 1];
   for (const p of parts) {
     acc += p.length;
-    if (frame < (acc / total) * durationInFrames) {
+    if (frame < (acc / total) * span) {
       current = p;
       break;
     }

@@ -455,7 +455,7 @@ elif MODE.startswith("frame"):
     scene.frame_set(int(t * 30) + 1)
     scene.render.filepath = str(OUT / f"chamber{tag}_cycles_{t:g}s.png")
     bpy.ops.render.render(write_still=True)
-elif MODE in ("anim", "animc"):  # animc = Cycles (akrilik tampil benar), anim = EEVEE (cepat, akrilik gelap)
+elif MODE in ("anim", "animc", "final"):  # final = Cycles resolusi penuh -> scene05_chamber.mp4  # animc = Cycles (akrilik tampil benar), anim = EEVEE (cepat, akrilik gelap)
     if MODE == "anim":
         for eng in ("BLENDER_EEVEE_NEXT", "BLENDER_EEVEE"):
             try:
@@ -463,12 +463,14 @@ elif MODE in ("anim", "animc"):  # animc = Cycles (akrilik tampil benar), anim =
                 break
             except TypeError:
                 continue
-    else:
+    elif MODE == "animc":
         scene.render.resolution_percentage = 50
     scene.render.image_settings.file_format = "FFMPEG"
     scene.render.ffmpeg.format = "MPEG4"
     scene.render.ffmpeg.codec = "H264"
     scene.render.ffmpeg.constant_rate_factor = "HIGH"
-    scene.render.filepath = str(OUT / f"chamber{tag}_preview.mp4")
+    scene.render.filepath = str(OUT / ("scene05_chamber.mp4" if MODE == "final" else f"chamber{tag}_preview.mp4"))
+    if MODE == "final":
+        scene.render.ffmpeg.constant_rate_factor = "PERC_LOSSLESS"
     bpy.ops.render.render(animation=True)
 print("SELESAI")

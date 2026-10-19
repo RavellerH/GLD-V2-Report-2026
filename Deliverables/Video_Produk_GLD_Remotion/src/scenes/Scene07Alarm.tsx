@@ -66,16 +66,21 @@ const Flow: React.FC<{alarmAt: number; w: number}> = ({alarmAt, w}) => {
   );
 };
 
+// Simulasi kebocoran (render Blender, ilustrasi) tampil penuh di awal adegan, lalu berganti ke dashboard.
+const LEAK_SEC = 6.5;
+
 export const Scene07Alarm: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const LEAK_END = Math.round(LEAK_SEC * fps);
+  const leakOut = 1 - progress(frame, LEAK_END - 14, 20);
   const {portrait, padX, title} = useLayout();
   const at = useNarration('alarm');
   const L = portrait ? LAYOUTS.portrait : LAYOUTS.landscape;
   const ALARM_AT = at('alarm dikirim segera');
   const ring = spring({frame: frame - (ALARM_AT + 26), fps, config: {damping: 16}});
   const pulse = 0.5 + 0.5 * Math.abs(Math.sin((frame - ALARM_AT) / 8));
-  const shot = progress(frame, 4, 24);
+  const shot = progress(frame, LEAK_END - 6, 26);
 
   return (
     <SceneFrame theme="light">
@@ -116,8 +121,11 @@ export const Scene07Alarm: React.FC = () => {
         }}
       />
 
+      {/* simulasi: desis gas, lalu alarm lokal saat beacon menyala (3,3 dtk); dashboard: notifikasi lembut */}
+      <Sfx name="hiss" at={9} volume={0.3} loopFor={120} />
+      <Sfx name="alarm" at={Math.round(3.3 * fps)} volume={0.4} />
       <Sfx name="blip" at={ALARM_AT} volume={0.35} />
-      <Sfx name="alarm" at={ALARM_AT + 26} volume={0.45} />
+      <Sfx name="success" at={ALARM_AT + 26} volume={0.3} />
       {/* Alur data GLD -> CH -> Gateway -> Dashboard */}
       <div
         style={{
@@ -130,7 +138,7 @@ export const Scene07Alarm: React.FC = () => {
           backgroundColor: COLORS.surface,
           border: `1px solid ${COLORS.line}`,
           boxShadow: '0 8px 24px rgba(20,33,58,0.12)',
-          opacity: progress(frame, 12, 20),
+          opacity: progress(frame, LEAK_END + 4, 20),
         }}
       >
         <Flow alarmAt={ALARM_AT} w={L.flow.w} />
@@ -165,11 +173,24 @@ export const Scene07Alarm: React.FC = () => {
       </div>
 
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : `56px 120px`}}>
-        <Caption text="Notifikasi alarm kepada operator" size={title(60)} />
+        <Caption text="Notifikasi alarm kepada operator" from={LEAK_END} size={title(60)} />
       </AbsoluteFill>
       <div style={{position: 'absolute', right: portrait ? undefined : 120, left: portrait ? padX : undefined, top: portrait ? 365 : 88, fontSize: 22, color: COLORS.muted}}>
         Dashboard GLD · RU IV · data demonstrasi
       </div>
+      {/* Simulasi kebocoran: layar penuh di atas semua elemen, memudar keluar ke dashboard */}
+      {frame < LEAK_END + 8 && (
+        <AbsoluteFill style={{opacity: leakOut}}>
+          <AssetSlot asset={ASSETS.leak} kind="video" />
+          <AbsoluteFill style={{background: 'linear-gradient(transparent 55%, rgba(10,18,32,0.75))'}} />
+          <div style={{position: 'absolute', left: padX, top: portrait ? 200 : 70, color: '#F2F5FA', maxWidth: portrait ? 952 : 900}}>
+            <Caption text="Kebocoran terdeteksi, alarm lokal menyala" from={20} size={title(56)} color="#F2F5FA" />
+          </div>
+          <div style={{position: 'absolute', left: padX, bottom: portrait ? 300 : 130, fontSize: 22, color: '#C9D2E0', opacity: progress(frame, 10, 20)}}>
+            Ilustrasi — gas sebenarnya tidak kasatmata
+          </div>
+        </AbsoluteFill>
+      )}
     </SceneFrame>
   );
 };

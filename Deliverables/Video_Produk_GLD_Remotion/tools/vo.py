@@ -26,7 +26,7 @@ VO_DIR = ROOT / "public" / "audio" / "vo"
 FULL_TAKE = VO_DIR / "_full.wav"
 
 VOICE = "Erinome"
-MODEL = "gemini-2.5-flash-preview-tts"
+MODEL = os.environ.get("VO_MODEL", "gemini-2.5-flash-preview-tts")  # model lain punya kuota terpisah
 GAP_SEC = 2
 
 # Instruksi gaya untuk Gemini TTS (ditempel sebelum naskah tiap adegan).
@@ -119,17 +119,16 @@ def write_pcm(path, pcm, rate):
 def full_prompt():
     # Satu teks untuk semua adegan; dipakai generate() dan tts/SEKALIGUS.txt (AI Studio manual).
     sc = scenes()
-    return (
-        f"{STYLE} Teks terdiri atas {len(sc)} paragraf. "
-        f"Setelah setiap paragraf, diam selama {GAP_SEC} detik sebelum paragraf berikutnya.\n\n"
-        + "\n\n".join(s["vo"] for s in sc)
-    )
+    # Tanpa instruksi jeda: model kadang berhenti di tengah; pemotongan memakai proporsi teks.
+    return f"{STYLE} Bacakan seluruh teks berikut sampai selesai.\n\n" + "\n\n".join(s["vo"] for s in sc)
 
 
 def generate():
     # Satu panggilan API untuk kedelapan adegan, lalu dipotong per adegan (split).
     body = {
-        "contents": [{"parts": [{"text": full_prompt()}]}],
+        # Gaya baca lewat systemInstruction agar tidak ikut dibacakan; konten = naskah saja.
+        "systemInstruction": {"parts": [{"text": STYLE}]},
+        "contents": [{"parts": [{"text": "\n\n".join(s["vo"] for s in scenes())}]}],
         "generationConfig": {
             "responseModalities": ["AUDIO"],
             "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": VOICE}}},
@@ -172,6 +171,9 @@ def split():
                 gaps.append((i - start, start, i))
             start = None
     sc = scenes()
+    # VO_SPOKEN_PREFIX=1: model ikut membacakan instruksi gaya di awal; jadikan "adegan nol" lalu buang.
+    if os.environ.get("VO_SPOKEN_PREFIX"):
+        sc = [{"n": 0, "id": "prefix", "dur": 99, "vo": STYLE + " Bacakan seluruh teks berikut sampai selesai."}] + sc
     if len(gaps) < len(sc) - 1:
         sys.exit(f"Hanya {len(gaps)} jeda ditemukan, butuh {len(sc) - 1}. Generate ulang.")
     longest = sorted(gaps, reverse=True)[: len(sc) - 1]
@@ -186,21 +188,39 @@ def split():
         for s in silent:
             speech_at.append(speech_at[-1] + (not s))
         total_chars = sum(len(s["vo"]) for s in sc)
+        # Pilih kombinasi jeda (>= 0,3 dtk) yang membuat waktu bicara tiap adegan paling sebanding
+        # dengan panjang naskahnya (DP): menghindari batas yang "meloncat" ke kalimat tetangga.
         cand = [(a + b) // 2 for n, a, b in gaps if n >= 15]
-        cuts, acc, prev = [], 0, 0
-        for s in sc[:-1]:
-            acc += len(s["vo"])
-            target = acc / total_chars * speech_at[-1]
-            t = next(i for i, v in enumerate(speech_at) if v >= target)
-            m = min((c for c in cand if c > prev), key=lambda c: abs(c - t))
-            cuts.append(m * win)
-            prev = m
+        per_char = speech_at[-1] / total_chars  # jendela bicara per huruf
+        chars = [len(s["vo"]) for s in sc]
+        pts = [0] + cand + [len(silent)]
+        cost = lambda i, j, k: ((speech_at[pts[j]] - speech_at[pts[i]]) - chars[k] * per_char) ** 2
+        n_seg = len(sc)
+        best = {(0, 0): (0.0, None)}  # (indeks titik, jumlah segmen) -> (biaya, titik sebelumnya)
+        for k in range(n_seg):
+            for (i, kk), (c0, _) in list(best.items()):
+                if kk != k:
+                    continue
+                rng = [len(pts) - 1] if k == n_seg - 1 else range(i + 1, len(pts) - 1)
+                for j in rng:
+                    c = c0 + cost(i, j, k)
+                    if (j, k + 1) not in best or c < best[(j, k + 1)][0]:
+                        best[(j, k + 1)] = (c, i)
+        j, cuts = len(pts) - 1, []
+        for k in range(n_seg, 0, -1):
+            i = best[(j, k)][1]
+            if k > 1:
+                cuts.append(pts[i] * win)
+            j = i
+        cuts.reverse()
     bounds = [0] + cuts + [len(pcm)]
 
     pad = int(rate * 0.15)
     total_chars = sum(len(s["vo"]) for s in sc)
     total_sec = len(pcm) / rate
     for s, a, b in zip(sc, bounds, bounds[1:]):
+        if s["id"] == "prefix":
+            continue
         seg_silent = silent[a // win: b // win]
         first = next((i for i, x in enumerate(seg_silent) if not x), 0)
         last = len(seg_silent) - next((i for i, x in enumerate(reversed(seg_silent)) if not x), 0)

@@ -1,6 +1,6 @@
 // Satu-satunya sumber timing video; ubah di sini saja.
 // Slot = durasi narasi Gemini TTS (suara Erinome) + jeda, dibulatkan ke atas.
-// 01-04 dari WAV final; 05-08 masih estimasi (±13,3 huruf/dtk), cek ulang dengan `npm run vo:check`.
+// Narasi final 19 Okt (gemini-3.8-flash-tts, Erinome); adegan 3/5/7/8 mengikuti panjang render 3D.
 export const FPS = 30;
 
 export type SceneId = 'hook' | 'problem' | 'intro' | 'fingerprint' | 'trainable' | 'mesh' | 'alarm' | 'outro';
@@ -25,49 +25,49 @@ export const SCENES: SceneDef[] = [
     id: 'problem',
     title: '02 Masalah',
     startSec: 8,
-    endSec: 21,
+    endSec: 18,
     vo: 'Detektor konvensional umumnya dirancang untuk satu jenis gas dan bergantung pada kabel data menuju ruang kontrol, sehingga mahal dan sulit diperluas.',
   },
   {
     id: 'intro',
     title: '03 Perkenalan GLD',
-    startSec: 21,
-    endSec: 32,
+    startSec: 18,
+    endSec: 29,
     vo: 'GLD mengintegrasikan delapan sensor gas, akuisisi data dua puluh empat bit, prosesor AI tertanam, dan radio LoRa dalam satu unit.',
   },
   {
     id: 'fingerprint',
     title: '04 Sidik jari gas & model AI',
-    startSec: 32,
-    endSec: 72,
+    startSec: 29,
+    endSec: 62,
     vo: 'Sensor semikonduktor oksida logam tidak sepenuhnya selektif; satu sensor dapat bereaksi terhadap banyak gas. Keterbatasan tersebut justru dimanfaatkan sebagai keunggulan. Delapan sensor dengan sensitivitas berbeda membentuk satu vektor respons, layaknya sidik jari kimia, sesuai prinsip hidung elektronik. Jaringan saraf konvolusional dua cabang mempelajari pola temporal sinyal sensor sekaligus profil sensitivitasnya, kemudian dikuantisasi ke delapan bit dan dijalankan langsung di mikrokontroler, tanpa bergantung pada server.',
   },
   {
     id: 'trainable',
     title: '05 Dapat dilatih ulang',
-    startSec: 72,
-    endSec: 92,
+    startSec: 62,
+    endSec: 82,
     vo: 'Saat ini, model telah mengklasifikasikan udara bersih, LPG, dan hidrogen. Delapan sensor yang sama juga sensitif terhadap metana, karbon monoksida, amonia, dan benzena; model untuk gas tersebut dilatih ulang menggunakan chamber uji portabel di lokasi kilang.',
   },
   {
     id: 'mesh',
     title: '06 Private mesh LoRa',
-    startSec: 92,
-    endSec: 124,
+    startSec: 82,
+    endSec: 107,
     vo: 'Komunikasi menggunakan jaringan mesh LoRa privat dua lapis pada pita sembilan ratus dua puluh megahertz. Node sensor terhubung ke Cluster Head, dan antar-Cluster Head membentuk mesh multi-hop menuju gateway, tanpa internet dan terpisah dari jaringan TI kilang. Bila satu Cluster Head gagal, node tetangga memilih induk baru secara otomatis, dengan histeresis sinyal dan pencegahan loop agar rute tetap stabil.',
   },
   {
     id: 'alarm',
     title: '07 Alarm otomatis',
-    startSec: 124,
-    endSec: 137,
-    vo: 'Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan identitas sensor dan tingkat risikonya.',
+    startSec: 107,
+    endSec: 126,
+    vo: 'Saat terjadi kebocoran, perubahan pola respons sensor langsung dikenali, dan GLD membunyikan alarm lokal. Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan identitas sensor dan tingkat risikonya.',
   },
   {
     id: 'outro',
     title: '08 Penutup',
-    startSec: 137,
-    endSec: 151,
+    startSec: 126,
+    endSec: 140,
     vo: 'GLD: deteksi multigas berbasis kecerdasan buatan di tepi jaringan, dengan komunikasi yang memulihkan dirinya sendiri. Dikembangkan di Indonesia untuk industri kilang nasional.',
   },
 ];

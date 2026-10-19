@@ -38,11 +38,11 @@ Simpan hasil sebagai `public/audio/vo/06_mesh.wav`
 
 Komunikasi menggunakan jaringan mesh LoRa privat dua lapis pada pita sembilan ratus dua puluh megahertz. Node sensor terhubung ke Cluster Head, dan antar-Cluster Head membentuk mesh multi-hop menuju gateway, tanpa internet dan terpisah dari jaringan TI kilang. Bila satu Cluster Head gagal, node tetangga memilih induk baru secara otomatis, dengan histeresis sinyal dan pencegahan loop agar rute tetap stabil.
 
-## 07_alarm — 07 Alarm otomatis (13 dtk, 22 kata)
+## 07_alarm — 07 Alarm otomatis (19 dtk, 36 kata)
 
 Simpan hasil sebagai `public/audio/vo/07_alarm.wav`
 
-Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan identitas sensor dan tingkat risikonya.
+Saat terjadi kebocoran, perubahan pola respons sensor langsung dikenali, dan GLD membunyikan alarm lokal. Data normal diambil secara berkala, sedangkan alarm dikirim segera melalui mekanisme push ke dashboard operator, lengkap dengan identitas sensor dan tingkat risikonya.
 
 ## 08_outro — 08 Penutup (14 dtk, 22 kata)
 

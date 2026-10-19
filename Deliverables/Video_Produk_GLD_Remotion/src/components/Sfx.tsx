@@ -3,7 +3,7 @@ import {Audio, Sequence, staticFile} from 'remotion';
 import {SFX_ENABLED, SFX_VOLUME} from '../assets';
 
 // Sound effect sintetis (tools/sfx.py -> public/audio/sfx). `at` = frame relatif adegan.
-export type SfxName = 'whoosh' | 'whoosh_short' | 'pop' | 'blip' | 'tick' | 'alarm' | 'error' | 'success' | 'unplug' | 'clank' | 'hum' | 'rise';
+export type SfxName = 'whoosh' | 'whoosh_short' | 'pop' | 'blip' | 'tick' | 'alarm' | 'error' | 'success' | 'unplug' | 'clank' | 'hum' | 'rise' | 'hiss';
 
 export const Sfx: React.FC<{name: SfxName; at: number; volume?: number; loopFor?: number}> = ({name, at, volume = 0.3, loopFor}) =>
   SFX_ENABLED ? (

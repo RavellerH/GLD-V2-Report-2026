@@ -14,6 +14,7 @@ from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
 
 ROOT = Path(__file__).resolve().parent.parent
+SIGNATURE = ROOT / "scripts" / "assets" / "ttd_nina_siti_aminah.png"
 OUT = ROOT / "Deliverables" / "Permohonan_Uji_CT_TTH_EMC_GLD_LGU.docx"
 
 FOOTER = "TLKM02/F/013 Versi 02"
@@ -213,6 +214,8 @@ def build():
                         run(c.paragraphs[0], part[0], hl=part[1], size=9.5, bold=True)
                     else:
                         run(c.paragraphs[0], part, size=9.5, italic=True)
+            elif i == 1 and j == 0 and SIGNATURE.exists():
+                c.paragraphs[0].add_run().add_picture(str(SIGNATURE), height=Cm(2.0))
             else:
                 run(c.paragraphs[0], content, size=9.5, bold=(i == 0))
     fixed(t, [Cm(5.6)] * 3)

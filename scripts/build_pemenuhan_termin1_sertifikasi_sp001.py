@@ -219,6 +219,89 @@ def kop(doc):
         ctext(t.cell(i, 1), v, 9)
 
 
+PCB_ITER = [
+    ("V1", "Baseline",
+     "ESP32, ADC ADS1256, multiplexer TCA9548, DAC MCP4725, jalur analog INA333/OPA333/LM321 serta bridge "
+     "sensor MQ berada pada satu motherboard. ULN2003 menggerakkan buzzer, alarm 5 V, dan kipas DC; "
+     "TPL5010 mengatur watchdog/wake-up.",
+     "Membuktikan fungsi dasar (akuisisi 8 sensor, AI, LoRa). Menjadi acuan identifikasi masalah: heater "
+     "sensor MQ (sumber panas utama) bercampur dengan elektronika digital di satu papan."),
+    ("V2", "Pemisahan sensor",
+     "Bridge sensor MQ, INA333, dan MCP4725 dipindah ke SensorBoardMQ terpisah dengan saklar daya TPS22919; "
+     "LM321 diganti OPA320; ditambah PCF8574 (ekspander I/O) dan SHT40 (suhu & kelembapan internal). Pin "
+     "alarm 24 V; pemilih catu 24 V/baterai/5 V tanpa jumper.",
+     "Sumber panas (heater MQ) dipisahkan dari logika dan dayanya dapat diputus terkendali, mendukung "
+     "pengendalian suhu permukaan (kelas suhu T4) dan pembatasan energi saat gangguan. SHT40 memberi "
+     "pemantauan suhu/kelembapan di dalam enclosure. Pemilih catu tanpa jumper mengurangi risiko salah "
+     "konfigurasi di lapangan."),
+    ("V3", "Perbaikan temuan V2",
+     "Jalur catu +5VA disambungkan dan diperbaiki; soket kipas DC 5 V dikembalikan. Konfigurasi sensor "
+     "module, OPA320, ADS1256, TCA9548, PCF8574, dan SHT40 dipertahankan.",
+     "Menutup temuan uji pada V2 (siklus uji → koreksi → uji ulang). Kipas DC diperlukan untuk aliran gas "
+     "ke sensor dan pendinginan; kondisi kipas mati menjadi kasus terburuk pada uji termal 30 Sep 2026."),
+    ("V4", "Kesiapan mekanik & terminal",
+     "Lubang baut untuk mengikat motherboard ke PCB cover; PCB cover terpisah sebagai modul terminal "
+     "(24V +/−, ALARM −/+, RS485 A/B, FAN 5V/0V, BAT −/+) yang sekaligus menutup motherboard. Versi ini "
+     "dipakai pada unit sampel S/N GLD2-0x1001.",
+     "Komponen internal terikat kuat (tahan getaran, jarak bebas terjaga) sebagaimana dituntut konstruksi "
+     "Ex d. Kabel lapangan hanya menyentuh terminal berlabel, terpisah dari elektronika, sehingga diagram "
+     "pengawatan dan instruksi instalasi untuk dossier dapat ditetapkan jelas."),
+    ("V5", "Modularisasi",
+     "MotherBoardAdapter hanya memuat ESP32 dan watchdog TPL5010; fungsi akuisisi (ADS1256, TCA9548, OPA320, "
+     "PCF8574, SHT40, +5VA) dipindah ke Sensor PCB melalui konektor 16-pin PHD2.0.",
+     "Jalur analog/akuisisi terpisah dari prosesor, memudahkan pengujian per modul, penelusuran komponen "
+     "kritis (BOM Ex-critical), dan penggantian modul tanpa mengubah papan utama. Disiapkan untuk iterasi "
+     "produksi berikutnya."),
+]
+
+CASING_ITER = [
+    ("Tahap 1\n(s/d Agu 2026)", "Prototipe awal",
+     "Kotak junction box dengan kepala sensor silinder aluminium di bagian bawah; antena LoRa di sisi samping; "
+     "beacon alarm terpisah (Foto 7–8).",
+     "Membuktikan fungsi sistem lengkap di lab dan saat disaksikan Pertamina 6 Agu 2026. Menjadi dasar "
+     "identifikasi kebutuhan enclosure tahan ledakan yang ringkas."),
+    ("Tahap 2\nATEX Casing v2\n(31 Agu 2026)", "Desain CAD berdimensi",
+     "Model solid STEP dengan dimensi terkendali (leher Ø75 mm, tinggi 191,51 mm) dan pelat pemasangan "
+     "U-bolt 250 × 250 mm untuk pipa 2″/DN50, baut M10.",
+     "Gambar teknik berdimensi menjadi syarat dossier (2.6.a). Metode pemasangan dengan klem U-bolt tanpa "
+     "las/bor sesuai ketentuan keselamatan kilang."),
+    ("Tahap 3\nGLD ATEX Case v3\n(8 Sep 2026)", "Desain cadangan ATEX",
+     "Kotak sensor dengan kipas DC, cakram mesh stainless steel, tutup dengan kaca transparan, lug pemasangan "
+     "dinding, dan boss cable entry; set 7 lembar gambar termasuk exploded view.",
+     "Disiapkan sebagai alternatif bila desain utama tidak lolos uji Ex d; mesh stainless steel pada "
+     "jalur masuk gas dirancang sebagai penahan api (flame arrestor)."),
+    ("Tahap 4\nUnit sampel\n(Okt 2026)", "Konfigurasi sertifikasi",
+     "Base die-cast aluminium ADC12 (dengan mitra casing PT Galaksi Megatama Indonesia); tutup berulir dengan "
+     "mesh stainless steel di muka depan; O-ring karet pada sambungan tutup; antena dipindah ke muka atas "
+     "base melalui bulkhead SMA; blanking plug pada entry yang tidak dipakai; sekrup grounding eksternal; "
+     "entry kabel M20×1,5; posisi nameplate ditetapkan.",
+     "Satu enclosure logam die-cast untuk konsep Ex d. Panjang ulir leher terukur ±14,8 mm, di atas batas "
+     "minimum 8 mm IEC 60079-1 untuk volume >100 cm³. O-ring mendukung target IP66; entry tak terpakai "
+     "ditutup; grounding eksternal tersedia. Unit ini diuji termal 30 Sep 2026 dan diukur dimensinya 7 Okt 2026."),
+]
+
+CASING_FOTO = [
+    (FOTO_LAMA, "Tahap 1 — prototipe awal"),
+    (os.path.join(HERE, "assets", "mech_drawings", "casing_v2_front.jpg"), "Tahap 2 — ATEX Casing v2"),
+    (os.path.join(HERE, "assets", "mech_drawings", "case_v3-1.jpg"), "Tahap 3 — GLD ATEX Case v3"),
+    (os.path.join(FOTO, "IMG_14.38.01.jpg"), "Tahap 4 — unit sampel"),
+]
+
+
+def iterasi_tabel(doc, judul, rows):
+    para(doc, judul, 9, True, WD_ALIGN_PARAGRAPH.LEFT, before=6, after=3)
+    t = doc.add_table(rows=1, cols=4)
+    t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    borders(t)
+    for i, h in enumerate(["Versi", "Fokus", "Perubahan yang dilakukan", "Peningkatan menuju sertifikasi"]):
+        ctext(t.cell(0, i), h, 9, True, WD_ALIGN_PARAGRAPH.CENTER); shade(t.cell(0, i), "D9E2F3")
+    for r in rows:
+        cells = t.add_row().cells
+        for i, v in enumerate(r):
+            ctext(cells[i], v, 8.5, i < 2, WD_ALIGN_PARAGRAPH.CENTER if i == 0 else WD_ALIGN_PARAGRAPH.LEFT)
+    fixed(t, [Cm(2.3), Cm(2.4), Cm(6.0), Cm(6.1)])
+
+
 def isi(doc):
     heading(doc, "1. Klausul Termin yang Dipenuhi")
     para(doc, f"Ketentuan pembayaran Termin 1 pada Surat Pesanan {NO_SP} (Sertifikasi) berbunyi:")
@@ -305,33 +388,35 @@ def isi(doc):
     fixed(t, [Cm(4.2), Cm(4.2), Cm(8.4)])
 
     heading(doc, "3.2 Desain telah diperbaiki", 10.5)
-    items = [
-        ("PCB Node Sensor GLD V1 → V5. ",
-         "V2 memisahkan rangkaian sensor MQ ke sensor board dengan saklar daya; V3 memperbaiki temuan V2 "
-         "(jalur catu +5VA, soket kipas 5 V); V4 menambahkan PCB cover dengan terminal kabel dan lubang "
-         "baut pemasangan motherboard; V5 memisahkan fungsi akuisisi ke Sensor PCB terhubung konektor "
-         "16-pin, motherboard mempertahankan ESP32 dan watchdog (Gambar 1)."),
-        ("Casing / enclosure. ",
-         "Berkembang dari ATEX Casing v2 ke GLD ATEX Case v3 (8 September 2026) dengan tutup ber-mesh "
-         "stainless steel, kipas DC, dan dimensi yang disesuaikan untuk konsep proteksi Ex d."),
-        ("Antena dan tata letak. ",
-         "Antena LoRa dipindah dari sisi samping ke muka atas base; posisi nameplate ditetapkan di samping "
-         "antena (bandingkan Foto 7–8 dengan Foto 1–2)."),
-        ("Arah sertifikasi. ",
-         "Konsep proteksi Ex d, marking usulan II 2G Ex db IIC T4 Gb; formulir aplikasi dan dossier teknis "
-         "telah diajukan ke GTS (agen sertifikasi) sekitar 29 September 2026, dan surat pengantar sampel "
-         "S/N GLD2-0x1001 ke GTS Shanghai diterbitkan 12 Oktober 2026."),
-    ]
-    for b, t_ in items:
-        rich(doc, [(b, True), (t_, False)], 10, style="List Bullet")
+    para(doc, "Perbaikan desain dilakukan bertahap pada dua komponen utama: papan elektronik (PCB) Node "
+              "Sensor GLD dan casing/enclosure. Tabel berikut merinci perubahan setiap versi dan kontribusinya "
+              "terhadap persyaratan sertifikasi hazardous area (konsep proteksi usulan Ex d, II 2G Ex db IIC "
+              "T4 Gb, mengacu IEC 60079-0 dan IEC 60079-1).")
+    iterasi_tabel(doc, "Tabel 1. Iterasi PCB Node Sensor GLD dan kontribusinya menuju sertifikasi", PCB_ITER)
     if os.path.exists(PCB_ITERASI):
         p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         p.paragraph_format.keep_with_next = True
         p.add_run().add_picture(img_stream(PCB_ITERASI, 2000), width=Cm(15.5))
         para(doc, "Gambar 1. Iterasi PCB Node Sensor GLD, versi V1 hingga V5", 8.5,
              align=WD_ALIGN_PARAGRAPH.CENTER, italic=True)
+    iterasi_tabel(doc, "Tabel 2. Iterasi casing/enclosure GLD dan kontribusinya menuju sertifikasi", CASING_ITER)
+    t = doc.add_table(rows=2, cols=len(CASING_FOTO))
+    t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    fixed(t, [Cm(16.8 / len(CASING_FOTO))] * len(CASING_FOTO))
+    for i, (path, cap) in enumerate(CASING_FOTO):
+        p = t.cell(0, i).paragraphs[0]; p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.add_run().add_picture(img_stream(path), height=Cm(4.0))
+        ctext(t.cell(1, i), cap, 8, align=WD_ALIGN_PARAGRAPH.CENTER)
+    para(doc, "Gambar 2. Perkembangan casing GLD dari prototipe awal hingga unit sampel sertifikasi", 8.5,
+         align=WD_ALIGN_PARAGRAPH.CENTER, italic=True, before=4)
+    para(doc, "Catatan. Perbaikan di atas adalah langkah desain menuju sertifikasi, bukan bukti kelulusan. "
+              "Penilaian kesesuaian tetap dilakukan oleh laboratorium/badan sertifikasi. Butir yang masih "
+              "ditindaklanjuti: penggantian cable gland prototipe dengan gland Ex d bersertifikat, verifikasi "
+              "mesh depan sebagai penahan api, uji IP66, kelengkapan titik ukur termal komponen daya, rating "
+              "fuse PTC pada jalur 24 V, proteksi polaritas terbalik, dan keputusan jalur baterai (terminal BAT).",
+         9, before=4)
 
-    heading(doc, "4. Pernyataan")
+    heading(doc, "4. Pernyataan").paragraph_format.page_break_before = True
     para(doc, f"Berdasarkan uraian dan lampiran di atas, PT LAPI Ganesha Utama menyatakan bahwa ketentuan "
               f"Termin 1 pada Surat Pesanan {NO_SP} (Sertifikasi) — tersedianya prototipe GLD yang telah "
               f"diuji dan diperbaiki desainnya, disertai foto perangkat dan foto kunjungan ke ITB — telah "
@@ -340,7 +425,6 @@ def isi(doc):
 
 
 def pengesahan(doc):
-    doc.add_page_break()
     heading(doc, "5. Lembar Pengesahan")
     para(doc, TEMPAT, align=WD_ALIGN_PARAGRAPH.LEFT, after=8)
     t = doc.add_table(rows=1, cols=2)

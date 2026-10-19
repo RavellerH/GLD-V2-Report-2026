@@ -1,10 +1,12 @@
 import React from 'react';
-import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ASSETS} from '../assets';
 import {AssetSlot} from '../components/AssetSlot';
 import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
+import {KASIM_PHOTOS} from '../data/kasimPhotos';
+import {useLang} from '../i18n';
 import {useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress, useNarration} from '../motion';
@@ -12,6 +14,37 @@ import {COLORS} from '../theme';
 
 // Bukti pengujian. Klaim dijaga: uji lapangan = GLD generasi pertama (V1) di RU VII Kasim, Des 2025;
 // generasi kedua (V2) = FAT 7/7 di laboratorium + uji mesh/failover/push alarm 8 Cluster Head (kampus ITB).
+
+// Rangkaian foto dokumentasi (zoom/pan halus + crossfade) bila video Kasim belum ada.
+const PhotoReel: React.FC = () => {
+  const frame = useCurrentFrame();
+  const {durationInFrames} = useVideoConfig();
+  const lang = useLang();
+  const n = KASIM_PHOTOS.length;
+  const per = durationInFrames / n;
+  const fade = 15;
+  return (
+    <AbsoluteFill>
+      {KASIM_PHOTOS.map((ph, i) => {
+        const start = i * per;
+        const local = frame - start;
+        if (local < -fade || local > per + fade) return null;
+        const o = i === 0 ? interpolate(local, [per, per + fade], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})
+          : interpolate(local, [-fade, 0, per, per + fade], [0, 1, 1, i === n - 1 ? 1 : 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+        const k = interpolate(local, [0, per], [1.0, 1.08], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+        const dx = (i % 2 ? -1 : 1) * interpolate(local, [0, per], [0, 2.5], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+        return (
+          <AbsoluteFill key={ph.file} style={{opacity: o}}>
+            <Img src={staticFile(ph.file)} style={{width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${k}) translateX(${dx}%)`}} />
+            <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, padding: '14px 20px', background: 'linear-gradient(transparent, rgba(10,18,32,0.85))', color: '#F2F5FA', fontSize: 22, fontWeight: 600}}>
+              {lang === 'en' ? ph.en : ph.id}
+            </div>
+          </AbsoluteFill>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
 export const Scene08Field: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -72,8 +105,8 @@ export const Scene08Field: React.FC = () => {
           transform: `translateY(${20 * (1 - shot)}px)`,
         }}
       >
-        <AssetSlot asset={ASSETS.kasim} kind="video" />
-        <div
+        {ASSETS.kasim.ready ? <AssetSlot asset={ASSETS.kasim} kind="video" /> : <PhotoReel />}
+        {ASSETS.kasim.ready && <div
           style={{
             position: 'absolute',
             left: 0,
@@ -87,7 +120,7 @@ export const Scene08Field: React.FC = () => {
           }}
         >
           {t('Dokumentasi uji lapangan · RU VII Kasim · Desember 2025 · GLD generasi pertama', 'Field test documentation · RU VII Kasim · December 2025 · first-generation GLD')}
-        </div>
+        </div>}
       </div>
 
       <div style={{position: 'absolute', left: cardsBox.x, top: cardsBox.y, width: cardsBox.w, display: 'grid', gridTemplateColumns: portrait ? '1fr 1fr' : '1fr', gap: portrait ? 14 : 18}}>

@@ -1,5 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {ASSETS} from '../assets';
+import {AssetSlot} from '../components/AssetSlot';
 import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
@@ -18,6 +20,7 @@ const GLDS = [
   {x: 640, y: 400},
 ];
 const CAM = {x: 760, y: 520};
+const INTRO_SEC = 3.4; // klip ilustrasi thermal layar penuh di awal adegan
 
 export const Scene09Roadmap: React.FC = () => {
   const frame = useCurrentFrame();
@@ -25,7 +28,8 @@ export const Scene09Roadmap: React.FC = () => {
   const {portrait, padX, title} = useLayout();
   const t = useT();
   const at = useNarration('roadmap');
-  const tCam = at(['kamera thermal', 'thermal cameras']);
+  const INTRO_END = Math.round(INTRO_SEC * fps);
+  const tCam = Math.max(at(['kamera thermal', 'thermal cameras']), INTRO_END);
   const tDash = at(['satu dashboard', 'single unified dashboard']);
   const area = portrait ? {x: 64, y: 400, w: 952, h: 640} : {x: 120, y: 230, w: 820, h: 560};
   const dash = portrait ? {x: 64, y: 1110, w: 952} : {x: 1060, y: 300, w: 740};
@@ -33,7 +37,7 @@ export const Scene09Roadmap: React.FC = () => {
   const sweep = Math.sin((frame - tCam) / 40) * 16; // kerucut menyapu area perlahan
 
   const ROWS = [
-    {k: t('Deteksi titik', 'Point detection'), v: t('GLD multigas + edge AI', 'Multi-gas GLD + edge AI'), c: COLORS.gas, at: 14},
+    {k: t('Deteksi titik', 'Point detection'), v: t('GLD multigas + edge AI', 'Multi-gas GLD + edge AI'), c: COLORS.gas, at: INTRO_END + 4},
     {k: t('Pemantauan area', 'Area monitoring'), v: t('Kamera thermal', 'Thermal camera'), c: COLORS.alarm, at: tCam},
     {k: t('Satu dashboard terpadu', 'Single unified dashboard'), v: t('Alarm titik & citra area terkorelasi', 'Correlated point alarms & area imagery'), c: COLORS.blue, at: tDash},
   ];
@@ -58,7 +62,7 @@ export const Scene09Roadmap: React.FC = () => {
         >
           ROADMAP
         </div>
-        <Caption text={t('Pengembangan berikutnya: integrasi kamera thermal', 'Next development: thermal camera integration')} from={8} size={title(54)} />
+        <Caption text={t('Pengembangan berikutnya: integrasi kamera thermal', 'Next development: thermal camera integration')} from={INTRO_END - 6} size={title(54)} />
       </AbsoluteFill>
 
       {/* Denah area: titik GLD (deteksi titik) + kerucut pandang kamera thermal (pemantauan area) */}
@@ -91,7 +95,7 @@ export const Scene09Roadmap: React.FC = () => {
             <path d={`M ${CAM.x} ${CAM.y} L ${CAM.x + 600} ${CAM.y - 210} A 640 640 0 0 1 ${CAM.x + 600} ${CAM.y + 210} Z`} fill="url(#thermal)" />
           </g>
           {GLDS.map((g, i) => {
-            const p = spring({frame: frame - 10 - i * 5, fps, config: {damping: 18}});
+            const p = spring({frame: frame - INTRO_END - i * 5, fps, config: {damping: 18}});
             return (
               <g key={i} transform={`translate(${g.x} ${g.y}) scale(${p})`}>
                 <circle r={36} fill={COLORS.gas} fillOpacity={0.15} />
@@ -142,6 +146,20 @@ export const Scene09Roadmap: React.FC = () => {
       <div style={{position: 'absolute', left: portrait ? 64 : dash.x, top: portrait ? 1560 : 860, fontSize: 21, color: COLORS.muted, opacity: progress(frame, tDash + 20, 20)}}>
         {t('Tahap pengembangan berikutnya · belum termasuk ruang lingkup unit saat ini', 'Next development stage · not part of the current unit scope')}
       </div>
+      {/* Klip ilustrasi konsep (layar penuh), memudar ke diagram */}
+      {frame < INTRO_END + 16 && (
+        <AbsoluteFill style={{opacity: 1 - progress(frame, INTRO_END - 8, 20)}}>
+          <AssetSlot asset={ASSETS.thermal} kind="video" />
+          <AbsoluteFill style={{background: 'linear-gradient(rgba(10,18,32,0.75), transparent 45%, transparent 60%, rgba(10,18,32,0.7))'}} />
+          <div style={{position: 'absolute', left: padX, top: portrait ? 200 : 70, maxWidth: portrait ? 952 : 1300}}>
+            <div style={{display: 'inline-flex', padding: '6px 16px', borderRadius: 999, border: '2px solid #F2F5FA', color: '#F2F5FA', fontSize: 22, fontWeight: 800, letterSpacing: 2, marginBottom: 14}}>ROADMAP</div>
+            <Caption text={t('Pengembangan berikutnya: integrasi kamera thermal', 'Next development: thermal camera integration')} from={6} size={title(54)} color="#F2F5FA" />
+          </div>
+          <div style={{position: 'absolute', right: padX, top: portrait ? 120 : 40, padding: '6px 14px', borderRadius: 8, backgroundColor: 'rgba(10,18,32,0.6)', fontSize: 22, color: '#E3E8F0', opacity: progress(frame, 8, 16)}}>
+            {t('Ilustrasi konsep — bukan rekaman produk', 'Concept illustration — not product footage')}
+          </div>
+        </AbsoluteFill>
+      )}
       <Sfx name="pop" at={tCam} volume={0.22} />
       <Sfx name="success" at={tDash} volume={0.25} />
     </SceneFrame>

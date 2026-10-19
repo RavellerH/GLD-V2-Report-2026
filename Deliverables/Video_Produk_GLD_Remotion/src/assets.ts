@@ -41,6 +41,13 @@ export const ASSETS = {
     ready: false,
     note: 'Footage uji lapangan GLD V1 di RU VII Kasim, Desember 2025',
   },
+  // Klip ilustrasi konsep kamera thermal (AI video, watermark dipotong). Roadmap, bukan rekaman produk.
+  thermal: {
+    path: 'broll/thermal_concept.mp4',
+    portraitPath: 'broll/portrait/thermal_concept.mp4',
+    ready: true,
+    note: 'Ilustrasi konsep kamera thermal (AI video)',
+  },
   outro: {
     path: 'blender/scene08_outro.mp4',
     portraitPath: 'blender/portrait/scene08_outro.mp4',

@@ -188,7 +188,7 @@ export const Scene07Alarm: React.FC = () => {
           <div style={{position: 'absolute', left: padX, top: portrait ? 200 : 70, color: '#F2F5FA', maxWidth: portrait ? 952 : 900}}>
             <Caption text={t('Kebocoran terdeteksi, alarm lokal menyala', 'Leak detected, local alarm activated')} from={20} size={title(56)} color="#F2F5FA" />
           </div>
-          <div style={{position: 'absolute', left: padX, bottom: portrait ? 300 : 130, fontSize: 22, color: '#C9D2E0', opacity: progress(frame, 10, 20)}}>
+          <div style={{position: 'absolute', right: padX, top: portrait ? 120 : 40, padding: '6px 14px', borderRadius: 8, backgroundColor: 'rgba(10,18,32,0.6)', fontSize: 22, color: '#E3E8F0', opacity: progress(frame, 10, 20)}}>
             {t('Ilustrasi — gas sebenarnya tidak kasatmata', 'Illustration — actual gas is invisible')}
           </div>
         </AbsoluteFill>

@@ -744,18 +744,19 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
       <div class="banner warn"><span class="ic">🔓</span><span><b>Konfigurasi saat ini hanya SSID + Password.</b> Belum ada lapisan keamanan tambahan (VLAN khusus OT, 802.1X, whitelist MAC, VPN). <span class="status gap">Perlu dari Pertamina</span>: apakah intranet kilang mewajibkan security tambahan di luar SSID/password? Jika ya, LGU/ITB akan menyesuaikan firmware Gateway.</span></div>
       <div class="banner warn"><span class="ic">🔌</span><span><b>gate:gw-ethernet — status disputed, bukan opsi siap pakai.</b> Spek EMC hardware sebut Gateway punya port <b>Ethernet</b> selain Wi-Fi (bagian 04), tapi TDS Gateway R4 menyatakan eksplisit interface native hanya <b>Wi-Fi STA</b> ("Ethernet native: tidak") — Wi-Fi→Ethernet hanya via aksesori eksternal, bukan port fisik native. Kabel Ethernet ke switch IT kilang <b>berpotensi</b> jadi opsi yang menghindari isu keamanan Wi-Fi, tapi jangan diasumsikan tersedia sampai konflik sumber ini diklarifikasi.</span></div>
 
-      <div class="subhead"><h3>Spesifikasi server/VM RU — rekomendasi minimum LGU</h3></div>
+      <div class="subhead"><h3>Spesifikasi PC server RU — usulan minimum LGU</h3></div>
       <div class="tbl-scroll"><table>
-        <tr><th>Komponen</th><th>Rekomendasi minimum</th></tr>
-        <tr><td>CPU</td><td>4 vCore (8 vCore disarankan utk headroom)</td></tr>
-        <tr><td>RAM</td><td>8 GB (16 GB disarankan)</td></tr>
-        <tr><td>Storage</td><td>100 GB SSD (250 GB disarankan utk retensi log/data time-series)</td></tr>
-        <tr><td>Network</td><td>1× NIC Gigabit Ethernet, IP statis, satu subnet dgn Gateway</td></tr>
+        <tr><th>Komponen</th><th>Usulan minimum</th></tr>
+        <tr><td>Bentuk</td><td>PC fisik (bukan VM), ditempatkan di ruang server lokal</td></tr>
+        <tr><td>CPU</td><td>4 core</td></tr>
+        <tr><td>RAM</td><td>8 GB</td></tr>
+        <tr><td>Storage</td><td>SSD 256 GB</td></tr>
+        <tr><td>Network</td><td>2 port LAN (NIC kedua boleh USB-LAN): LAN-1 ke router Wi-Fi LGU (jaringan field lokal, tanpa internet), LAN-2 ke intranet kantor</td></tr>
         <tr><td>OS</td><td>Linux (Ubuntu Server 22.04 LTS disarankan) — Windows Server dapat menyesuaikan bila jadi standar kilang</td></tr>
         <tr><td>Runtime</td><td>Docker / Docker Compose (mengikuti installer LGU)</td></tr>
         <tr><td>Database</td><td>PostgreSQL 14+ (dipakai backend/Prisma; TimescaleDB opsional utk data time-series)</td></tr>
       </table></div>
-      <div class="banner info"><span class="ic">📐</span><span>Ini <b>usulan LGU</b>, bukan angka final — <span class="status gap">perlu dari Pertamina</span>: spesifikasi komputer/VM aktual, OS, dan database yang akan disediakan, agar installer LGU disesuaikan.</span></div>
+      <div class="banner info"><span class="ic">📐</span><span>Usulan minimum ini sudah <b>diteruskan Pertamina Patra Niaga ke seluruh RU</b> (21 Okt 2026) sebagai kebutuhan persiapan field testing. <span class="status gap">Perlu dari Pertamina</span>: unit PC aktual dan OS yang disediakan tiap RU, agar installer LGU disesuaikan.</span></div>
 
       <div class="subhead"><h3>Kontrak topik MQTT — root <span class="kbd">gld/gateway</span></h3></div>
       <div class="topicflow">

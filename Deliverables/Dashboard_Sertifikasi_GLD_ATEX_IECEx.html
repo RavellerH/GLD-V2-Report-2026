@@ -383,8 +383,10 @@ footer{margin-top:42px;padding-top:17px;border-top:1px solid var(--line);font-si
         <tr><td>Standar acuan diidentifikasi</td><td><span class="status ok">Ya</span></td><td>EN61000-6-2 (immunity) &amp; -6-4 (emission)</td></tr>
         <tr><td>Tabel parameter EMC lengkap</td><td><span class="status ok">Ada</span></td><td><span class="mono">Parameter spesifikasi EMC_lengkap.docx</span> (19 Agu) — MCU, modul radio E22-900MM22S, TX power maks 22dBm, antena, dimensi, enclosure</td></tr>
         <tr><td>Review layout PCB (grounding/shielding/filtering)</td><td><span class="status gap">Belum ada</span></td><td>Bagian dari fase Redesign yg belum berjalan penuh</td></tr>
-        <tr><td>Pre-scan emisi/imunitas internal</td><td><span class="status gap">Belum dimulai</span></td><td>—</td></tr>
+        <tr class="hl"><td>Pre-scan emisi (EN 55032 Class A) di Telkom Test House</td><td><span class="status wip">Data mentah ada (Okt 2026)</span></td><td>GLD: radiasi 30 MHz–1 GHz, radiasi 1–6 GHz, konduksi AC L1/L2. Cluster Head besar: radiasi 30 MHz–1 GHz, 1–6 GHz, konduksi DC. Semua titik di bawah batas <b>kecuali puncak di 919,6–921 MHz</b> (ditandai <i>Failed</i> oleh software) — itu frekuensi kerja LoRa sendiri, bukan emisi liar. Belum ada laporan resmi lab.</td></tr>
+        <tr><td>Uji imunitas (EN 61000-6-2)</td><td><span class="status gap">Belum ada data</span></td><td>Data yang diterima hanya emisi</td></tr>
       </table></div>
+      <div class="banner warn"><span class="ic">📡</span><span><b>Pre-scan EMC Telkom Test House (data mentah, Okt 2026):</b> margin terkecil di luar band LoRa — GLD <b>0,5–0,95 dB</b> di 117–127 MHz (radiasi QP, polarisasi H) dan <b>6,0 dB</b> di 324 kHz (konduksi QP); Cluster Head <b>3,3 dB</b> di 978,9 MHz dan <b>5,6 dB</b> di 1,8425 GHz (≈ harmonik ke-2 LoRa 921 MHz). Pada standar EMC umumnya frekuensi pemancar yang disengaja dikeluarkan dari evaluasi dan dinilai lewat standar radio (ETSI EN 300 220) — <b>perlu dikonfirmasi ke lab</b>, idealnya ulang ukur dengan pemancar LoRa idle. Kolom model/serial/kondisi operasi di file kosong; Gateway dan CH kecil belum diuji.</span></div>
       <div class="subhead"><h3>RF (ETSI EN 300 220/301 489 + SDPPI)</h3></div>
       <div class="tbl-scroll"><table>
         <tr><th>Item</th><th>Status</th><th>Catatan</th></tr>

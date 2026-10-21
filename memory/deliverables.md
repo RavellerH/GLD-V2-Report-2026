@@ -229,3 +229,12 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 
 **Update 18 Okt (lanjutan):** narasi direvisi formal-akademis (CNN dua cabang, hidung elektronik, mesh dua lapis STAR 920/MESH 921 MHz + histeresis 15 dB/loop guard); adegan 5 menampilkan 8 gas kilang dgn status jujur (LPG/H₂ dikenali model, CO₂ data chamber, CH₄/CO/NH₃/benzena target pelatihan, H₂S perlu sensor tambahan — tak ada sensor khusus H₂S di larik 8 MQ); adegan 7 memakai screenshot asli Alarm Console RU4 dari `RavellerH/gasleakdetectionV2-April` (data demo). Dua komposisi: `GLD-Explainer` (1920×1080) & `GLD-Explainer-Portrait` (1080×1920). Narasi via Gemini TTS per adegan (`tools/vo.py export|check`). Dilanjutkan user di PC (Blender + Gemini TTS).
 **Aturan video (18 Okt, permintaan user):** jangan tampilkan/ucapkan **nama atau seri produk komponen** (MQ…, ESP32, ADS1256, BME280, TGS…) di video, supaya tidak terkesan murah. Sebut spesifikasinya: "sensor gas semikonduktor oksida logam", "akuisisi data presisi 24-bit", "prosesor AI dual-core 240 MHz". Kanal sensor di grafik dilabeli S1–S8. Chamber di adegan 5 kini render Blender (bukan foto); handoff ke PC di `Deliverables/Video_Produk_GLD_Remotion/HANDOFF.md`.
+
+### Video konsep OGI MWIR — pameran Cilacap (19–21 Okt 2026)
+`Deliverables/Video_OGI_MWIR_Naskah_Storyboard.md` + `Riset_Kamera_Thermal_OGI_dan_Predictive_Maintenance.md`; komposisi di proyek Remotion yg sama (11 adegan, 3D kamera PTZ, VO ID/EN, musik latar). Label "konsep" dihapus atas permintaan, "±" diganti "≈". Video demo HJKIR asli (dec:213) belum dipakai di video ini.
+
+### Update 21 Okt 2026
+- `Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.{html,pdf}` bag. 07: spek server → PC fisik, 2 LAN, 4 core/8 GB/SSD 256 GB (dec:212).
+- `Dashboard_Sertifikasi_GLD_ATEX_IECEx.{html,pdf}` track EMC: baris & banner pre-scan Telkom (dec:211).
+- `Dashboard_GLD_ProjectManagement.{html,pdf}`: 4 entri feed 18–21 Okt.
+- `Presentasi_Rapat_GLD_22Oktober2026.{html,pdf}` — deck HTML 12 slide rapat 22 Okt 09.00 (dec:215).

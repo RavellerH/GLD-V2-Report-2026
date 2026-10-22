@@ -238,3 +238,4 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 - `Dashboard_Sertifikasi_GLD_ATEX_IECEx.{html,pdf}` track EMC: baris & banner pre-scan Telkom (dec:211).
 - `Dashboard_GLD_ProjectManagement.{html,pdf}`: 4 entri feed 18–21 Okt.
 - `Dashboard_Rapat_GLD_22Oktober2026.html` — dashboard interaktif rapat 22 Okt 09.00: KPI, grafik/tabel 216 titik EMC berfilter, spek PC server, diagram lingkup, demo MWIR, 5 butir keputusan yg bisa diisi saat rapat (dec:215).
+- `Laporan_Uji_Lab_04_Pra-Uji_Emisi_EMC_GLD_CH.{docx,pdf}` — laporan pra-uji emisi EMC GLD & CH besar untuk Pertamina, 10 hlm (dec:216).

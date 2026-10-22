@@ -212,7 +212,7 @@ URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).
 - **Deviasi jadwal**: jangan over-claim. Selisih vs baseline = **sisi lab saja**; framing harus jujur & bersyarat.
 - **Tema HTML (baru)**: biru **#2B5FCB** + charcoal **#262321** (logo Korporasi Kinarya ITB), bukan navy lagi.
 - **Cilacap = RU IV** (bukan VI). Scope aktif hanya 1 RU.
-- **Git:** kerja di branch `claude/project-management-tracking-5l8ypx`; PR aktif = **PR #1**. Push = update PR.
+- **Git:** kerja di branch `video-gld-3d-sfx`; PR aktif = **PR #12** (https://github.com/RavellerH/GLD-V2-Report-2026/pull/12, sejak 22 Okt 2026; sebelumnya `claude/project-management-tracking-5l8ypx` / PR #1). Push = update PR.
 
 ## 6. Cara memelihara memory ini
 

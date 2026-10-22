@@ -159,6 +159,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **12 Okt — surat pengantar sampel GLD ke GTS Shanghai & surat keterangan Bea Cukai dilengkapi** (dec:208): `Deliverables/Surat_Pengantar_Sampel_GLD_ke_GTS_Shanghai.{docx,pdf}` (EN) & `Surat_Keterangan_Sampel_GLD_ke_Bea_Cukai.{docx,pdf}` (ID); data yg belum ada (alamat GTS, nilai pabean, penandatangan, paspor/penerbangan, status baterai) ditandai kuning, tidak ditebak. **Update (dec:209)**: sampel berisi baterai Li-ion 7×18650 (1S7P) — kapasitas per sel belum dikonfirmasi (>3860 mAh/sel ⇒ >100 Wh, perlu izin maskapai). **Final cetak (dec:210)**: `Deliverables/Paket_Bawa_Sampel_GTS_12Oktober2026/` — 2 surat KOP terkoreksi + Lampiran 1 foto + Lampiran 2 form aplikasi.
 
+- 🆕 **21 Okt — update minggu 13–21 Okt** (dec:211–214): (1) **Pre-scan EMC EN 55032 Class A di Telkom Test House** (data mentah, GLD + CH besar) — lulus kecuali frekuensi kerja LoRa 920–921 MHz (sinyal pancar sendiri, perlu konfirmasi lab dikecualikan); ⚠️ margin GLD **<1 dB di 117–127 MHz**; GLD diuji konduksi via AC (adaptor), belum ada imunitas/Gateway/laporan resmi. (2) **Pertamina teruskan kebutuhan field testing multi-modality ke setiap RU** + spek PC server (PC fisik, 2 LAN/USB-LAN, 4 core/8 GB/SSD 256 GB) — identik dgn Spesifikasi Material rev 1.5; Datasheet Sistem disinkronkan. Block diagram = versi final 8 Okt, tak berubah. (3) **Video demo kamera MWIR HJKIR** (20 Okt): n-butana & propana terlihat; gas ketiga belum terkonfirmasi; demo vendor, bukan uji LGU. (4) Video produk GLD & video konsep OGI (pameran Cilacap) selesai.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).
@@ -210,7 +212,7 @@ URL artifact & detail → [`memory/deliverables.md`](memory/deliverables.md).
 - **Deviasi jadwal**: jangan over-claim. Selisih vs baseline = **sisi lab saja**; framing harus jujur & bersyarat.
 - **Tema HTML (baru)**: biru **#2B5FCB** + charcoal **#262321** (logo Korporasi Kinarya ITB), bukan navy lagi.
 - **Cilacap = RU IV** (bukan VI). Scope aktif hanya 1 RU.
-- **Git:** kerja di branch `claude/project-management-tracking-5l8ypx`; PR aktif = **PR #1**. Push = update PR.
+- **Git:** kerja di branch `video-gld-3d-sfx`; PR aktif = **PR #12** (https://github.com/RavellerH/GLD-V2-Report-2026/pull/12, sejak 22 Okt 2026; sebelumnya `claude/project-management-tracking-5l8ypx` / PR #1). Push = update PR.
 
 ## 6. Cara memelihara memory ini
 

@@ -79,3 +79,9 @@ Integration test (Sep) · HSE/permit (Nov) · **Field installation = target impl
 - Konfirmasi PIC proyek: kunjungan PT Pertamina Patra Niaga ke **Lab IoT, Instrumentation and Computations, Gedung Laboratorium Fisika Terpadu, Institut Teknologi Bandung**, sebelum visit RU IV Cilacap merupakan witness perkembangan dan integrasi sistem untuk tahap FAT/FIT. Pihak yang terlibat adalah LAPI Ganesha Utama, Lab IoT/Instrumentation and Computation ITB, dan PT Pertamina Patra Niaga.
 - Bukti engineering/lab dikonsolidasikan ke laporan formal Termin 1 field testing 20%: detail engineering, kesiapan 4 GLD dan 16 CH, konfigurasi firmware, integrasi GLD–CH–Gateway–Server, mesh/failover, dan alarm push.
 - Rekomendasi: ajukan deliverable Termin 1 untuk evaluasi dan pembayaran 20%, dengan tanda tangan pengesahan laporan serta BAST sebagai penutupan administratif. Instalasi, commissioning, SAT, dan as-built lokasi tetap pada termin lapangan berikutnya.
+
+## Update 13–21 Oktober 2026
+- **18–21 Okt** — video produk GLD (Digitalization Day) & video konsep OGI MWIR (pameran Cilacap) dibuat (dec:214).
+- **Okt (tanggal pasti belum ada)** — pre-scan emisi EMC GLD & CH besar di Telkom Test House; data mentah diterima 21 Okt. Lulus kecuali band LoRa 920 MHz (perlu konfirmasi lab) (dec:211).
+- **20 Okt** — HJKIR kirim video demo kamera MWIR: n-butana & propana (dec:213).
+- **21 Okt** — Pertamina teruskan kebutuhan field testing multi-modality + spek PC server (4 core/8 GB/SSD 256 GB, 2 LAN) ke setiap RU (dec:212).

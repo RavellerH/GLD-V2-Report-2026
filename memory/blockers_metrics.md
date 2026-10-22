@@ -208,3 +208,15 @@ net 20 · ai 22 · power 15 · chamber 12 · sw 13 · integ 10 · ruprep 8 · (i
 - Uji star GLD di **CH1 & CH2**: data masuk saat direquest (pull) — OK.
 - Uji alarm real-time: GLD disemprot LPG → status server jadi **alarm otomatis tanpa pull request** — **push alarm berhasil** (lih. `decisions.md` dec:34, resolved di atas).
 - Urutan demo: **aktifkan server → pasang GW → pasang CH → pasang GLD 24V.**
+
+## Pre-scan EMC Telkom Test House (Okt 2026, dec:211)
+| Perangkat | Uji | Hasil | Margin terkecil di luar band LoRa |
+|---|---|---|---|
+| GLD | Radiasi 30 MHz–1 GHz QP | Lulus kecuali 919,6–920,4 MHz (LoRa) | **0,51 dB @117,9 MHz** (pol H) |
+| GLD | Radiasi 1–6 GHz Peak/AV | Lulus | 33,97 dB AV @1,81 GHz |
+| GLD | Konduksi AC L1/L2 | Lulus | 6,03 dB QP @324 kHz |
+| CH besar | Radiasi 30 MHz–1 GHz QP | Lulus kecuali 920,97 MHz (LoRa) | 3,28 dB @978,9 MHz |
+| CH besar | Radiasi 1–6 GHz | Lulus | 5,56 dB AV @1,8425 GHz (≈2× LoRa) |
+| CH besar | Konduksi DC | Lulus | >40 dB |
+- Gate baru **gate:emc-lora-exclusion** — konfirmasi lab bahwa band pemancar LoRa dikecualikan dari EN 55032 (atau ulang ukur TX idle). **gate:emc-margin-118mhz** — margin GLD <1 dB di 117–127 MHz, rawan gagal di uji resmi; cari sumber (clock/DC-DC) sebelum uji akreditasi.
+- Belum ada: uji imunitas (EN 61000-6-2), Gateway, CH kecil, laporan resmi.

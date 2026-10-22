@@ -237,4 +237,4 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 - `Datasheet_Sistem_GLD_Arsitektur_ServerJaringan.{html,pdf}` bag. 07: spek server → PC fisik, 2 LAN, 4 core/8 GB/SSD 256 GB (dec:212).
 - `Dashboard_Sertifikasi_GLD_ATEX_IECEx.{html,pdf}` track EMC: baris & banner pre-scan Telkom (dec:211).
 - `Dashboard_GLD_ProjectManagement.{html,pdf}`: 4 entri feed 18–21 Okt.
-- `Presentasi_Rapat_GLD_22Oktober2026.{html,pdf}` — deck HTML 12 slide rapat 22 Okt 09.00 (dec:215).
+- `Dashboard_Rapat_GLD_22Oktober2026.html` — dashboard interaktif rapat 22 Okt 09.00: KPI, grafik/tabel 216 titik EMC berfilter, spek PC server, diagram lingkup, demo MWIR, 5 butir keputusan yg bisa diisi saat rapat (dec:215).

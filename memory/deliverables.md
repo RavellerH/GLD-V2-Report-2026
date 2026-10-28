@@ -241,5 +241,5 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 
 ### Update 28 Okt 2026 (dec:216)
 - `Laporan_Teknis_Pengujian_EMC_GLD_CH.{docx,pdf}` — LGU/GLD/EMC/2026-001 rev 1.0, 17 hlm: isi draf tim (pre-scan EN 55032 Kelas A, Telkom Test House 15 Okt) + ringkasan, analisis E-1…E-7, checklist EMC, tindak lanjut, pengesahan. Generator `scripts/build_laporan_emc_docx.py`.
-- `Checklist_Instalasi_Block_Diagram_RU-IV.xlsx` — 26 item checklist dari block diagram lingkup final (Field/Building/Sistem, LGU vs PTMN), dropdown status + ringkasan otomatis + sheet diagram.
+- `Checklist_Instalasi_Block_Diagram_RU-IV.xlsx` — dari block diagram lingkup final; **dipisah 2 sheet: "Checklist LGU" (19 item L-01…L-19: suplai, konfigurasi, supervisi/QA, energize, commissioning) & "Checklist RU IV Pertamina" (18 item R-01…R-18: stanchion, mounting, JB, PSU, kabel, pemasangan, UPS, server, IT, izin/HSE, saksi/BA)**, kolom "Terkait pihak lain" saling merujuk ID; ringkasan otomatis per pihak + sheet diagram (28 Okt, revisi atas permintaan user).
 - `Checklist_Rencana_Sertifikasi_GLD_EMC_IP_RF_ATEX.xlsx` — Ringkasan, Checklist EMC, Rencana IP, Rencana RF, Monitor ATEX, Log ATEX. Generator `scripts/build_checklist_xlsx_okt2026.py`.

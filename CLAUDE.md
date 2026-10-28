@@ -161,6 +161,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **21 Okt — update minggu 13–21 Okt** (dec:211–214): (1) **Pre-scan EMC EN 55032 Class A di Telkom Test House** (data mentah, GLD + CH besar) — lulus kecuali frekuensi kerja LoRa 920–921 MHz (sinyal pancar sendiri, perlu konfirmasi lab dikecualikan); ⚠️ margin GLD **<1 dB di 117–127 MHz**; GLD diuji konduksi via AC (adaptor), belum ada imunitas/Gateway/laporan resmi. (2) **Pertamina teruskan kebutuhan field testing multi-modality ke setiap RU** + spek PC server (PC fisik, 2 LAN/USB-LAN, 4 core/8 GB/SSD 256 GB) — identik dgn Spesifikasi Material rev 1.5; Datasheet Sistem disinkronkan. Block diagram = versi final 8 Okt, tak berubah. (3) **Video demo kamera MWIR HJKIR** (20 Okt): n-butana & propana terlihat; gas ketiga belum terkonfirmasi; demo vendor, bukan uji LGU. (4) Video produk GLD & video konsep OGI (pameran Cilacap) selesai.
 
+- 🆕 **28 Okt — Laporan EMC rev 1.0 + checklist Excel instalasi & sertifikasi** (dec:216): `Deliverables/Laporan_Teknis_Pengujian_EMC_GLD_CH.{docx,pdf}` (draf tim + analisis temuan E-1…E-7 + checklist EMC), `Checklist_Instalasi_Block_Diagram_RU-IV.xlsx` (26 item dari block diagram final), `Checklist_Rencana_Sertifikasi_GLD_EMC_IP_RF_ATEX.xlsx` (Checklist EMC, Rencana IP, Rencana RF, Monitor ATEX + log). ⚠️ Dua temuan baru: **EIRP LoRa (GLD ≈25 dBm, CH mesh ≈30 dBm) perlu dicek ke batas SDPPI** (acuan umum 16 dBm), dan **inlet gas + fan terbuka berisiko utk IP66**.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

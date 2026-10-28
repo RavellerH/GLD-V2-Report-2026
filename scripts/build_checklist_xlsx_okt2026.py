@@ -109,96 +109,131 @@ def summary(ws, row, label, sheet, col, first, last, statuses):
 
 
 # ======================================================================= 1. block diagram
-BD_STATUS = ["Belum", "Proses", "Selesai", "N.A."]
+BD_STATUS = ["Belum", "Proses", "Menunggu", "Selesai", "N.A."]
 BD_HEAD = ["No", "Area", "Komponen / jalur", "Spesifikasi (dari diagram)", "Item yang dicek",
            "Terkait pihak lain", "Status", "PIC", "Tanggal cek", "Bukti (foto / dokumen)", "Catatan"]
+FAT = "Laporan FAT GLD Tahap 2 (LGU/GLD/FAT/2026-001)"
+SPEK = "Spesifikasi Material Instalasi rev 1.5"
+PERANGKAT = "Daftar Perangkat & Kebutuhan Pemasangan rev 1.2"
+WAIT = "Dilakukan di lokasi setelah pekerjaan RU IV selesai"
+# (area, komponen, spesifikasi, item cek, terkait, status, bukti, catatan)
 LGU_ROWS = [
-    # (area, komponen, spesifikasi, item cek, terkait)
     ("Field", "GL Detector", "Node GLD V2, catu 24 VDC (disuplai LGU)",
-     "Unit tersedia; nomor seri tercatat; uji fungsi sebelum kirim (sensor, alarm, LoRa)", "—"),
+     "Unit tersedia; nomor seri tercatat; uji fungsi (sensor, AI, alarm, LoRa)", "—", "Selesai",
+     f"{FAT} FAT-01, FAT-02, FAT-06; {PERANGKAT}", "FAT 7/7 lulus (lab)"),
     ("Field", "GL Detector — cable entry", "Gland M20×1,5 (butir 5)",
-     "Gland sesuai kabel 2C 16AWG tersedia; blanking plug untuk entry tak terpakai", "RU IV memasukkan kabel (R-07)"),
+     "Gland sesuai kabel 2C 16AWG tersedia di unit", "RU IV memasukkan kabel (R-07)", "Selesai",
+     f"{SPEK} (terminasi L+/L−); {PERANGKAT}", ""),
     ("Field", "GL Detector — antena & konfigurasi", "LoRa 920 MHz ke CH",
-     "Antena terpasang kencang; ID node & frekuensi terkonfigurasi", "—"),
+     "Antena terpasang; ID node & frekuensi terkonfigurasi", "—", "Selesai", f"{FAT} FAT-03", ""),
     ("Field", "Cluster Head (CH)", "CH, LoRa dari GLD dan ke Gateway",
-     "Unit tersedia & teruji; konfigurasi star/mesh; nomor seri tercatat", "RU IV memasang (R-08)"),
-    ("Field", "Solar cell CH", "Solar cell → CH",
-     "Panel & kabel ke CH tersedia; tegangan pengisian diuji di lab", "RU IV memasang (R-08)"),
+     "Unit tersedia & teruji; konfigurasi star/mesh", "RU IV memasang (R-08)", "Selesai",
+     f"{FAT} FAT-04; {PERANGKAT}", "CH tersedia > 5 unit"),
+    ("Field", "Solar cell & bracket CH", "Solar cell → CH",
+     "Panel, bracket 2 panel & klem CH ke tiang 2\" disiapkan LGU", "Tiang CH dari RU IV (R-09)", "Selesai",
+     f"{SPEK} BoQ no. 8 & Gambar 3.1 (foto uji)", ""),
     ("Building", "Gateway", "Gateway (Provided by LGU), 5 VDC (butir 6)",
-     "Unit tersedia; konfigurasi frekuensi 921 MHz; menerima data CH di lab", "RU IV memasang (R-10)"),
+     "Unit tersedia; frekuensi 921 MHz; menerima data CH", "RU IV memasang (R-10)", "Selesai",
+     f"{FAT} FAT-05; {PERANGKAT}", "Antena fiber omni 8 dBi"),
     ("Building", "Adaptor Gateway", "Adaptor 5 VDC, catu dari UPS",
-     "Adaptor tersedia; tegangan keluaran terukur", "Outlet UPS dari RU IV (R-12)"),
+     "Adaptor tersedia; tegangan keluaran sesuai", "Outlet UPS dari RU IV (R-12)", "Selesai", SPEK, ""),
     ("Building", "WiFi Router 2,4 GHz", "WiFi Router 2.4 GHz (Provided by LGU) (butir 7)",
-     "Router tersedia & dikonfigurasi (SSID lokal, tanpa internet); berlabel sertifikat SDPPI", "—"),
+     "Router tersedia & dikonfigurasi (SSID GLD, WPA2, tanpa internet)", "—", "Selesai", f"{SPEK} §5.2", ""),
     ("Building", "Adaptor Router", "Adaptor router, catu dari UPS",
-     "Adaptor tersedia & sesuai router", "Outlet UPS dari RU IV (R-12)"),
-    ("Building", "LAN Cat6 Router → Server", "LAN Cable Cat6 lokal, tanpa internet (butir 8)",
-     "Kabel Cat6 tersedia & berlabel; ping router ↔ server berhasil", "Penyedia kabel perlu dikonfirmasi"),
-    ("Building", "Aplikasi di server", "Server (disediakan RU IV)",
-     "Broker MQTT, backend & dashboard GLD terpasang di PC server", "Server dari RU IV (R-13)"),
-    ("Field", "Supervisi pemasangan", "Pekerjaan instalasi oleh RU IV",
-     "QA posisi, orientasi & kekencangan GLD/CH/antena; foto setiap titik", "R-01…R-10"),
-    ("Field", "Terminasi & energize GLD", "24 VDC dari PSU di junction box",
-     "Polaritas +/− di terminal GLD benar; tegangan terukur; GLD menyala normal", "Kabel & PSU dari RU IV (R-04…R-06)"),
-    ("Sistem", "Link LoRa GLD → CH", "Sinyal LoRa (wireless)", "Data GLD diterima CH; RSSI/SNR tercatat", "—"),
-    ("Sistem", "Link LoRa CH → Gateway", "Sinyal LoRa (wireless), field → building",
-     "Data CH diterima Gateway; RSSI/SNR tercatat", "—"),
-    ("Sistem", "Link WiFi Gateway → Router", "WiFi 2,4 GHz", "Gateway terhubung ke router; IP tercatat; stabil", "—"),
-    ("Sistem", "Uji end-to-end & alarm", "GLD → CH → Gateway → Router → Server → Dashboard",
-     "Data normal tampil; uji gas → alarm otomatis; waktu respons dicatat", "Disaksikan RU IV (R-17)"),
-    ("Sistem", "Dokumen serah terima", "Commissioning",
-     "Foto as-built, daftar nomor seri, hasil uji, draf berita acara", "Ditandatangani RU IV (R-18)"),
+     "Adaptor tersedia & sesuai router", "Outlet UPS dari RU IV (R-12)", "Selesai", f"{SPEK} §5", ""),
+    ("Building", "Spesifikasi jaringan lokal", "LAN Cat6 lokal tanpa internet (butir 8)",
+     "Skema GW → router → PC server & kebutuhan kabel Cat6 diserahkan ke RU IV", "Kabel Cat6 dari RU IV (R-16)",
+     "Selesai", f"{SPEK} §5.2 (dikirim ke grup Pertamina 1 Okt)", ""),
+    ("Building", "Paket aplikasi server", "Server (disediakan RU IV)",
+     "Broker MQTT, backend & dashboard GLD siap dipasang", "Server dari RU IV (R-13)", "Selesai",
+     f"{FAT} FAT-05, FAT-07", ""),
+    ("Field", "Dokumen supervisi/QA pemasangan", "Pekerjaan instalasi oleh RU IV",
+     "Pembagian tugas, daftar persiapan pelaksana & spesifikasi material diserahkan", "R-01…R-10", "Selesai",
+     "Pembagian Persiapan Instalasi rev 1.5; Daftar Persiapan Pelaksana Instalasi rev 1.2", ""),
+    ("Field", "Prosedur terminasi & energize GLD", "24 VDC dari PSU di junction box",
+     "Prosedur terminasi L+/L−, cek polaritas & tegangan tertulis", "R-04…R-06", "Selesai",
+     f"{SPEK}; Instruction Manual GLD", ""),
+    ("Sistem", "Uji link LoRa GLD → CH (lab)", "Sinyal LoRa (wireless)", "PDR & RSSI terukur", "—", "Selesai",
+     f"{FAT} FAT-03; Laporan Uji Lab 02", "PDR 100% pada 177 m & 243 m"),
+    ("Sistem", "Uji link LoRa CH → Gateway & mesh (lab)", "Sinyal LoRa (wireless)",
+     "Mesh, failover & downlink teruji", "—", "Selesai", f"{FAT} FAT-04; Laporan Uji Lab 03", ""),
+    ("Sistem", "Uji link WiFi Gateway → Router (lab)", "WiFi 2,4 GHz", "Gateway terhubung ke router", "—",
+     "Selesai", f"{FAT} FAT-05", ""),
+    ("Sistem", "Uji end-to-end & alarm (lab)", "GLD → CH → Gateway → Router → Server → Dashboard",
+     "Data normal tampil; uji gas → alarm otomatis", "—", "Selesai", f"{FAT} FAT-05…FAT-07", ""),
+    ("Sistem", "Kesiapan persiapan LGU", "Persiapan instalasi",
+     "Seluruh item persiapan sisi LGU & ITB", "—", "Selesai",
+     "Kurva-S Persiapan Instalasi RU IV: LGU & ITB 100%", "Tidak termasuk izin masuk kilang (sisi RU IV)"),
     ("Field", "Mounting CH", "Tidak digambarkan di diagram",
-     "Konfirmasi ke RU IV siapa menyediakan tiang/bracket CH", "R-09"),
+     "Pembagian mounting CH ditetapkan", "R-09", "Selesai",
+     f"{SPEK} BoQ no. 2 & 8", "Tiang 2\" Sch40 4,0 m = RU IV; bracket panel & klem CH = LGU"),
+    # --- pelaksanaan di lokasi
+    ("Lokasi", "Supervisi/QA saat pemasangan", "Pekerjaan RU IV",
+     "QA posisi, orientasi & kekencangan GLD/CH/antena; foto tiap titik", "R-01…R-10", "Menunggu", "", WAIT),
+    ("Lokasi", "Terminasi & energize GLD", "24 VDC dari PSU",
+     "Polaritas & tegangan terukur di terminal GLD; GLD menyala normal", "R-04…R-07", "Menunggu", "", WAIT),
+    ("Lokasi", "Pasang aplikasi di PC server RU IV", "Server", "Aplikasi berjalan di PC server", "R-13", "Menunggu",
+     "", WAIT),
+    ("Lokasi", "Commissioning (link & alarm di lokasi)", "End-to-end",
+     "RSSI/SNR tiap link tercatat; uji gas → alarm; waktu respons dicatat", "Disaksikan RU IV (R-18)", "Menunggu",
+     "", WAIT),
+    ("Lokasi", "Berita acara instalasi", "Serah terima", "Foto as-built, nomor seri, hasil uji",
+     "Ditandatangani RU IV (R-19)", "Menunggu", "", WAIT),
 ]
 RU_ROWS = [
     ("Field", "Stanchion GLD", "Stanchion support 2\" HDG (butir 1)",
      "Stanchion berdiri tegak & kokoh di titik sesuai layout", "—"),
     ("Field", "Mounting support & pemasangan GLD", "Mounting support by PTMN",
-     "GLD terpasang dengan plat U-bolt; tinggi sensor sesuai rencana", "QA oleh LGU (L-12)"),
+     "GLD terpasang dengan plat U-bolt; tinggi sensor sesuai rencana", "QA oleh LGU (L-20)"),
     ("Field", "Junction box", "Junction box SS316 (butir 2)",
      "JB terpasang; entry kabel rapat; grounding JB tersambung", "—"),
     ("Field", "PSU", "PSU 220VAC in, 24VDC out (butir 3), di dalam JB",
-     "Merek/model tercatat; rating ≥ 1 A per GLD; keluaran 24 VDC terukur", "Energize oleh LGU (L-13)"),
+     "Merek/model tercatat; rating ≥ 1 A per GLD; keluaran 24 VDC terukur", "Energize oleh LGU (L-21)"),
     ("Field", "Local receptacle", "220 VAC ke PSU",
      "Sumber 220 VAC tersedia; dilindungi MCB; L/N/PE benar", "—"),
     ("Field", "Kabel daya 24 VDC", "Power cable 24VDC, 2C, 16AWG (butir 4)",
      "Kabel tergelar & terlindung; terminasi di JB; panjang tercatat", "—"),
     ("Field", "Kabel masuk GLD", "Melalui gland M20×1,5",
-     "Kabel dimasukkan lewat gland & dikencangkan; tidak ada entry terbuka", "Gland dari LGU (L-02)"),
+     "Kabel dimasukkan lewat gland & dikencangkan", "Gland dari LGU (L-02)"),
     ("Field", "Pemasangan CH & solar cell", "CH + solar cell (disuplai LGU)",
-     "CH & panel terpasang; panel menghadap utara; line-of-sight ke GLD & Gateway", "QA oleh LGU (L-12)"),
-    ("Field", "Mounting CH", "Tidak digambarkan di diagram",
-     "Konfirmasi penyedia tiang/bracket CH", "L-19"),
+     "CH & panel terpasang di atas tiang; line-of-sight ke GLD & Gateway", "QA oleh LGU (L-20)"),
+    ("Field", "Tiang CH", "Tidak digambarkan di diagram",
+     "Tiang galvanis 2\" Sch40 4,0 m terpasang & dicor (Spesifikasi BoQ no. 2)", "Bracket & klem dari LGU (L-05)"),
     ("Building", "Mounting support Gateway", "Mounting support by PTMN",
      "Lokasi Gateway disetujui; dudukan terpasang; antena dapat menjangkau CH", "Gateway dari LGU (L-06)"),
     ("Building", "UPS", "UPS mencatu Gateway, Router & Server",
      "Kapasitas cukup untuk 3 beban; waktu cadangan tercatat", "—"),
     ("Building", "Outlet UPS", "Untuk adaptor Gateway & Router + Server 220 VAC",
-     "Minimal 3 outlet UPS tersedia di dekat Gateway, router & server", "Adaptor dari LGU (L-07, L-09)"),
+     "Outlet UPS tersedia di dekat Gateway, router & server", "Adaptor dari LGU (L-07, L-09)"),
     ("Building", "Server", "Server (catu 220 VAC dari UPS)",
-     "PC server tersedia (usulan: 4 core, 8 GB, SSD 256 GB, 2 port LAN)", "Aplikasi dipasang LGU (L-11)"),
+     "PC server tersedia (usulan: 4 core, 8 GB, SSD 256 GB, 2 port LAN)", "Aplikasi dipasang LGU (L-22)"),
     ("Building", "Ruang server", "Building",
      "Ruang/meja untuk server, router & Gateway; akses bagi tim LGU", "—"),
     ("Building", "Server → IT Network", "IT Network (intranet kilang)",
      "Port LAN ke intranet tersedia; persetujuan tim IT; dashboard dapat diakses dari kantor", "—"),
+    ("Building", "Kabel LAN Cat6 router → server", "LAN Cable Cat6 lokal, tanpa internet (butir 8)",
+     "Kabel Cat6 tergelar antar-ruang (≤ 90 m per segmen) & berlabel", "Spesifikasi dari LGU (L-10)"),
     ("Umum", "Izin kerja & HSE", "Seluruh pekerjaan instalasi",
-     "Izin kerja, TRA/JSA, dan klasifikasi area titik pemasangan disetujui", "—"),
-    ("Sistem", "Saksi uji end-to-end", "Commissioning",
-     "Perwakilan RU IV hadir saat uji alarm", "Uji oleh LGU (L-17)"),
+     "Izin masuk kilang, izin kerja, TRA/JSA, klasifikasi area titik pemasangan disetujui", "—"),
+    ("Sistem", "Saksi commissioning", "Commissioning",
+     "Perwakilan RU IV hadir saat uji alarm", "Uji oleh LGU (L-23)"),
     ("Sistem", "Berita acara", "Serah terima",
-     "Berita acara instalasi & commissioning ditandatangani", "Draf dari LGU (L-18)"),
+     "Berita acara instalasi & commissioning ditandatangani", "Draf dari LGU (L-24)"),
 ]
-AREA_FILL = {"Field": "EAF2FD", "Building": "FFF8E1", "Sistem": "F2F2F2", "Umum": "F2F2F2"}
+AREA_FILL = {"Field": "EAF2FD", "Building": "FFF8E1", "Sistem": "F2F2F2", "Umum": "F2F2F2", "Lokasi": "EDE7F6"}
 
 
 def checklist_sheet(wb, name, title, subtitle, prefix, rows, tab_color):
     ws = wb.create_sheet(name)
     ws.sheet_properties.tabColor = tab_color
     title_block(ws, title, subtitle, len(BD_HEAD))
-    data = [[f"{prefix}-{i + 1:02d}", a, k, s, cek, rel, "Belum", "", "", "", ""]
-            for i, (a, k, s, cek, rel) in enumerate(rows)]
-    end = write_table(ws, 4, BD_HEAD, data, [8, 10, 26, 32, 46, 24, 11, 14, 12, 22, 24], 7, BD_STATUS)
+    data = []
+    for i, row in enumerate(rows):
+        a, k, s, cek, rel = row[:5]
+        st, bukti, cat = (row[5:] + ("Belum", "", ""))[:3] if len(row) > 5 else ("Belum", "", "")
+        data.append([f"{prefix}-{i + 1:02d}", a, k, s, cek, rel, st, "LGU" if prefix == "L" and st == "Selesai"
+                     else "", DATE if st == "Selesai" else "", bukti, cat])
+    end = write_table(ws, 4, BD_HEAD, data, [8, 10, 28, 30, 44, 24, 11, 10, 16, 40, 30], 7, BD_STATUS)
     for r in range(5, end + 1):
         ws.cell(row=r, column=2).fill = PatternFill("solid", fgColor=AREA_FILL[ws.cell(row=r, column=2).value])
     return end
@@ -208,8 +243,7 @@ def build_block_diagram():
     wb = Workbook()
     sm = wb.active
     sm.title = "Ringkasan"
-    sub = (f"Disusun dari block diagram lingkup final. Status per {DATE}: semua item 'Belum' karena instalasi belum "
-           "dimulai. Pilih status dari dropdown kolom G. Kolom 'Terkait pihak lain' merujuk ID di checklist pihak lain.")
+    sub = (f"Disusun dari block diagram lingkup final. Status per {DATE}. Pilih status dari dropdown kolom G. Kolom 'Terkait pihak lain' merujuk ID di checklist pihak lain.")
     l_end = checklist_sheet(wb, "Checklist LGU", "Checklist LGU — Penyedia (Supplier) Sistem GLD, RU IV Cilacap",
                             "LGU: menyediakan GLD, CH, solar cell, Gateway, router WiFi & adaptor; konfigurasi "
                             "perangkat & aplikasi; supervisi/QA pemasangan; energize & commissioning. " + sub,
@@ -224,11 +258,13 @@ def build_block_diagram():
     sm["A1"].font = Font(bold=True, size=14, color=NAVY)
     r = summary(sm, 3, "Checklist LGU", "Checklist LGU", "G", 5, l_end, BD_STATUS)
     r = summary(sm, r, "Checklist RU IV Pertamina", "Checklist RU IV Pertamina", "G", 5, r_end, BD_STATUS)
-    notes = ["Warna lingkup (sesuai diagram): biru = disuplai LGU; kuning = disuplai/dipasang PTMN (RU IV).",
+    notes = ["Persiapan LGU selesai (L-01…L-19, bukti di kolom J). L-20…L-24 = pekerjaan LGU di lokasi yang baru "
+             "bisa dilakukan setelah pekerjaan RU IV selesai (status 'Menunggu').",
+             "Warna lingkup (sesuai diagram): biru = disuplai LGU; kuning = disuplai/dipasang PTMN (RU IV).",
              "Jalur: merah = daya (220 VAC / 24 VDC); putus-putus biru = LoRa; titik biru = WiFi 2,4 GHz; "
              "biru tegas = LAN Cat6 lokal tanpa internet.",
-             "Mounting CH tidak digambarkan di diagram — perlu dikonfirmasi (L-19 / R-09).",
-             "Penyedia kabel LAN Cat6 router → server tidak ditandai di diagram — perlu dikonfirmasi (L-10)."]
+             "Dari Spesifikasi Material rev 1.5: tiang CH 2\" Sch40 4,0 m = RU IV, bracket panel & klem CH = LGU; "
+             "kabel Cat6 router ↔ PC server = RU IV."]
     for n in notes:
         sm.cell(row=r, column=1, value=n).alignment = Alignment(wrap_text=True, vertical="top")
         sm.merge_cells(start_row=r, start_column=1, end_row=r, end_column=6)

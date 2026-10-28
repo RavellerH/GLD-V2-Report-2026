@@ -238,3 +238,8 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 - `Dashboard_Sertifikasi_GLD_ATEX_IECEx.{html,pdf}` track EMC: baris & banner pre-scan Telkom (dec:211).
 - `Dashboard_GLD_ProjectManagement.{html,pdf}`: 4 entri feed 18–21 Okt.
 - `Dashboard_Rapat_GLD_22Oktober2026.html` — dashboard interaktif rapat 22 Okt 09.00: KPI, grafik/tabel 216 titik EMC berfilter, spek PC server, diagram lingkup, demo MWIR, 5 butir keputusan yg bisa diisi saat rapat (dec:215).
+
+### Update 28 Okt 2026 (dec:216)
+- `Laporan_Teknis_Pengujian_EMC_GLD_CH.{docx,pdf}` — LGU/GLD/EMC/2026-001 rev 1.0, 17 hlm: isi draf tim (pre-scan EN 55032 Kelas A, Telkom Test House 15 Okt) + ringkasan, analisis E-1…E-7, checklist EMC, tindak lanjut, pengesahan. Generator `scripts/build_laporan_emc_docx.py`.
+- `Checklist_Instalasi_Block_Diagram_RU-IV.xlsx` — dari block diagram lingkup final; **dipisah 2 sheet: "Checklist LGU" (19 item L-01…L-19: suplai, konfigurasi, supervisi/QA, energize, commissioning) & "Checklist RU IV Pertamina" (18 item R-01…R-18: stanchion, mounting, JB, PSU, kabel, pemasangan, UPS, server, IT, izin/HSE, saksi/BA)**, kolom "Terkait pihak lain" saling merujuk ID; ringkasan otomatis per pihak + sheet diagram (28 Okt, revisi atas permintaan user).
+- `Checklist_Rencana_Sertifikasi_GLD_EMC_IP_RF_ATEX.xlsx` — Ringkasan, Checklist EMC, Rencana IP, Rencana RF, Monitor ATEX, Log ATEX. Generator `scripts/build_checklist_xlsx_okt2026.py`.

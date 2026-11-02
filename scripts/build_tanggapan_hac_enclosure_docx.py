@@ -27,7 +27,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Informasi_Enclosure_Proteksi_Ledakan_GLD_HAC_SRU.docx")
 
 DOC_NO = "LGU/GLD/HAC-ENCL/2026-001"
-REV = "1.0"
+REV = "1.1"
 DATE = "2 November 2026"
 HEADER = "Informasi Enclosure & Status Proteksi Ledakan GLD"
 
@@ -147,26 +147,26 @@ def build():
     # 3
     heading(doc, "3. Modifikasi pada housing dan dampaknya")
     para(doc, "GLD menggunakan susunan 8 sensor gas (MQ-series) dengan model AI di perangkat, bukan "
-         "satu sensor katalitik seperti produk aslinya. Untuk itu dilakukan modifikasi berikut:")
+         "satu sensor katalitik seperti pada konfigurasi standar detektor HIREP. Untuk itu dilakukan modifikasi berikut:")
     bullets(doc, [
         "**Kaca depan diganti mesh stainless steel** agar gas dapat mengalir ke ruang sensor.",
         "**Seluruh elektronik diganti** dengan papan GLD (ESP32-S3, 8 sensor MQ dengan heater, kipas, "
         "radio LoRa, terminal 24 VDC).",
-        "**Konsumsi daya naik** dari ≤ 3 W (produk asli) menjadi sekitar 8 W.",
+        "**Konsumsi daya naik** dari ≤ 3 W (konfigurasi standar HIREP) menjadi sekitar 8 W.",
     ])
     para(doc, "Pada metode Ex d, sertifikat berlaku hanya untuk konfigurasi yang diuji. Perbandingan "
          "berikut menunjukkan mengapa rating housing tidak dapat dipindahkan ke unit GLD:")
-    table(doc, ["Aspek", "HIREP HRP-T1000-A (asli)", "GLD (saat ini)"], [
+    table(doc, ["Aspek", "HIREP HRP-T1000-A (konfigurasi standar pabrikan)", "GLD (saat ini)"], [
         ["Jalur masuk gas", "Kepala sensor bawah dengan elemen flame arrestor, melindungi ruang sensor kecil",
          "Mesh stainless steel di bekas jendela depan, terbuka ke ruang utama casing (±0,4 L)"],
         ["Jendela depan", "Kaca, bagian dari sambungan flameproof", "Diganti mesh"],
         ["Isi / daya", "Elektronik pabrikan, ≤ 3 W", "Elektronik GLD, ±8 W, 8 heater sensor"],
-        ["Kelas suhu", "T6 (≤ 85 °C), untuk isi asli", "Target T4 (≤ 135 °C), perlu dibuktikan sendiri"],
+        ["Kelas suhu", "T6 (≤ 85 °C), untuk konfigurasi standar pabrikan", "Target T4 (≤ 135 °C), perlu dibuktikan sendiri"],
         ["Suhu lingkungan", "−20 °C s.d. +55 °C", "Rentang operasi GLD −20 °C s.d. +60 °C (sedang ditinjau ulang)"],
         ["Berat", "< 1.000 g", "± 2,4 kg"],
     ], [1.45, 2.7, 2.75])
     para(doc, "Kesimpulannya, mesh stainless steel pada GLD memiliki fungsi yang serupa dengan elemen "
-         "pelindung pada kepala sensor produk asli, tetapi **kesetaraannya sebagai flame arrestor "
+         "pelindung pada kepala sensor detektor HIREP standar, tetapi **kesetaraannya sebagai flame arrestor "
          "belum terbukti** karena jenis elemen, luas bukaan, dan volume ruang di belakangnya berbeda. "
          "Pembuktian ini menjadi bagian dari proses sertifikasi unit GLD.")
 
@@ -218,7 +218,7 @@ def build():
          "tambahan waktu tempuh sampel."],
         ["C. Perbaikan desain jalur gas",
          "Kaca depan dipasang kembali dan gas dimasukkan melalui kepala sensor ber-flame arrestor "
-         "bersertifikat pada entry M20, mengikuti pola produk asli; dikoordinasikan dengan pabrikan "
+         "bersertifikat pada entry M20, mengikuti pola kepala sensor detektor HIREP standar; dikoordinasikan dengan pabrikan "
          "housing dan proses sertifikasi.",
          "Solusi jangka panjang untuk instalasi langsung di area classified; memerlukan waktu desain "
          "dan pengujian, berjalan paralel dengan sertifikasi."],

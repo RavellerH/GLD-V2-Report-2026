@@ -163,6 +163,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **28 Okt — Laporan EMC rev 1.0 + checklist Excel instalasi & sertifikasi** (dec:216): `Deliverables/Laporan_Teknis_Pengujian_EMC_GLD_CH.{docx,pdf}` (draf tim + analisis temuan E-1…E-7 + checklist EMC), `Checklist_Instalasi_Block_Diagram_RU-IV.xlsx` (26 item dari block diagram final), `Checklist_Rencana_Sertifikasi_GLD_EMC_IP_RF_ATEX.xlsx` (Checklist EMC, Rencana IP, Rencana RF, Monitor ATEX + log). ⚠️ Dua temuan baru: **EIRP LoRa (GLD ≈25 dBm, CH mesh ≈30 dBm) perlu dicek ke batas SDPPI** (acuan umum 16 dBm), dan **inlet gas + fan terbuka berisiko utk IP66**.
 
+- 🔴 **2 Nov — HAC SRU Pertamina: keempat titik GLD (GLD-01…04) ada di area Class I Groups C/D Div. 2 → "Belum Memenuhi" (wajib ATEX)**; CH-01…05, JB-01 & Gateway "Memenuhi" (dec:218). Mengoreksi asumsi dec:106/109 bahwa instalasi permanen ada di titik non-ATEX. Reliability RU IV (Ibu Afi) minta justifikasi proteksi lain + **material/brand/model enclosure** — brand/model & no. sertifikat Ex enclosure **tidak ada di repo**; dan **kaca depan yg diganti wire mesh membatalkan klaim Ex d bawaan enclosure** — jangan jawab "enclosure sudah ATEX" tanpa caveat.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

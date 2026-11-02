@@ -27,7 +27,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Informasi_Enclosure_Proteksi_Ledakan_GLD_HAC_SRU.docx")
 
 DOC_NO = "LGU/GLD/HAC-ENCL/2026-001"
-REV = "1.1"
+REV = "1.2"
 DATE = "2 November 2026"
 HEADER = "Informasi Enclosure & Status Proteksi Ledakan GLD"
 
@@ -226,16 +226,6 @@ def build():
     para(doc, "LGU merekomendasikan **opsi A atau B untuk tahap pilot**, dengan opsi C dijalankan "
          "paralel sebagai jalur menuju instalasi permanen di area classified. LGU siap menyusun kajian "
          "teknis tertulis untuk opsi yang dipilih RU IV.")
-
-    # 7
-    heading(doc, "7. Tindak lanjut")
-    table(doc, ["No", "Tindak lanjut", "Pihak"], [
-        ["1", "Meminta salinan resmi sertifikat ATEX/IECEx housing HIREP HRP-T1000-A dan memverifikasi nomornya", "LGU"],
-        ["2", "Meminta data kepala sensor/flame arrestor dari pabrikan housing untuk opsi C", "LGU"],
-        ["3", "Menetapkan opsi yang dapat diterima untuk kajian (A, B, atau lainnya)", "RU IV (Reliability/HSE)"],
-        ["4", "Menyusun kajian teknis tertulis untuk opsi terpilih, termasuk usulan titik baru bila opsi A", "LGU"],
-        ["5", "Melanjutkan proses sertifikasi unit GLD dan melaporkan perkembangannya", "LGU"],
-    ], [0.5, 4.9, 1.5])
 
     doc.save(OUT)
     print(OUT)

@@ -27,7 +27,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Informasi_Enclosure_Proteksi_Ledakan_GLD_HAC_SRU.docx")
 
 DOC_NO = "LGU/GLD/HAC-ENCL/2026-001"
-REV = "1.2"
+REV = "1.3"
 DATE = "2 November 2026"
 HEADER = "Informasi Enclosure & Status Proteksi Ledakan GLD"
 
@@ -54,8 +54,8 @@ def build():
     tr.font.size = Pt(18); tr.font.bold = True; tr.font.color.rgb = NAVY
     para(doc, "Tanggapan atas hasil verifikasi lokasi perangkat terhadap Hazardous Area "
          "Classification (HAC) Sulfur Recovery Unit (SRU), RU IV Cilacap: identitas enclosure, "
-         "modifikasi yang dilakukan, data pendukung keselamatan yang sudah tersedia, status "
-         "sertifikasi, dan opsi tindak lanjut agar kajian dapat berjalan.",
+         "modifikasi yang dilakukan, data pendukung keselamatan yang sudah tersedia, dan status "
+         "sertifikasi unit GLD.",
          size=10.6, color=GRAY, after=10)
 
     rows = [
@@ -87,8 +87,7 @@ def build():
            "mencapai 8 sensor GLD, kaca depan housing diganti mesh stainless steel dan seluruh "
            "elektronik di dalamnya adalah rancangan LGU. Karena itu **rating housing tersebut tidak "
            "otomatis berlaku untuk unit GLD**. Sertifikasi ATEX/IECEx unit GLD secara utuh sedang "
-           "berproses. Sambil menunggu, LGU mengusulkan dua opsi agar kajian di SRU dapat berjalan "
-           "(Bagian 6) dan siap menyusun kajian teknis untuk opsi yang dipilih.", bg="EEF3FB")
+           "berproses melalui agen sertifikasi.", bg="EEF3FB")
 
     # header/footer
     hp = sec.header.paragraphs[0]
@@ -195,37 +194,13 @@ def build():
         "GLD2-0x1001.",
         "Skema yang diajukan: **II 2G Ex db IIC T4 Gb** (Zona 1, grup gas IIC, kelas suhu T4). Skema "
         "ini masih berupa permohonan; klasifikasi akhir ditentukan lembaga sertifikasi.",
-        "Dokumen teknis sedang direvisi mengikuti masukan iterasi berikutnya; perbaikan desain jalur "
-        "masuk gas (Bagian 6, opsi C) akan dibahas dalam proses yang sama.",
+        "Dokumen teknis sedang direvisi mengikuti masukan iterasi berikutnya, termasuk penyempurnaan "
+        "desain jalur masuk gas ke sensor.",
         "Perkiraan durasi sertifikasi 5–8 bulan sejak proses dimulai; jadwal pasti mengikuti lembaga.",
     ])
     para(doc, "Sebagai catatan, peralatan bersertifikat Zona 1 (EPL Gb) umumnya dapat dipakai di area "
          "yang lebih ringan seperti Zona 2 / Division 2. Penerimaan peralatan bertanda ATEX/IECEx di "
          "area berklasifikasi Class/Division tetap mengikuti kebijakan dan kajian RU IV.", size=9.8, color=GRAY)
-
-    # 6
-    heading(doc, "6. Opsi tindak lanjut sebelum sertifikat terbit")
-    table(doc, ["Opsi", "Uraian", "Konsekuensi"], [
-        ["A. Relokasi titik GLD",
-         "Memindahkan GLD-01…04 ke titik unclassified terdekat, misalnya sepanjang pagar SRU seperti "
-         "lokasi CH, mengarah ke sumber potensi bocor.",
-         "Paling cepat dan tidak memerlukan perubahan perangkat; jarak ke sumber bocor bertambah sehingga "
-         "waktu deteksi dapat lebih lama."],
-        ["B. Skema sampling",
-         "Unit GLD ditempatkan di area unclassified; udara dari titik pantau di area proses ditarik "
-         "melalui pipa sampling dengan flame arrestor bersertifikat di ujung pipa.",
-         "Perangkat tetap di luar area classified; perlu desain pipa, pompa, dan flame arrestor, serta "
-         "tambahan waktu tempuh sampel."],
-        ["C. Perbaikan desain jalur gas",
-         "Kaca depan dipasang kembali dan gas dimasukkan melalui kepala sensor ber-flame arrestor "
-         "bersertifikat pada entry M20, mengikuti pola kepala sensor detektor HIREP standar; dikoordinasikan dengan pabrikan "
-         "housing dan proses sertifikasi.",
-         "Solusi jangka panjang untuk instalasi langsung di area classified; memerlukan waktu desain "
-         "dan pengujian, berjalan paralel dengan sertifikasi."],
-    ], [1.45, 3.0, 2.45])
-    para(doc, "LGU merekomendasikan **opsi A atau B untuk tahap pilot**, dengan opsi C dijalankan "
-         "paralel sebagai jalur menuju instalasi permanen di area classified. LGU siap menyusun kajian "
-         "teknis tertulis untuk opsi yang dipilih RU IV.")
 
     doc.save(OUT)
     print(OUT)

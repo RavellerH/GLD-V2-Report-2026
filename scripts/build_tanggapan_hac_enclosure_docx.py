@@ -27,7 +27,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "Deliverables", "Informasi_Enclosure_Proteksi_Ledakan_GLD_HAC_SRU.docx")
 
 DOC_NO = "LGU/GLD/HAC-ENCL/2026-001"
-REV = "1.3"
+REV = "1.4"
 DATE = "2 November 2026"
 HEADER = "Informasi Enclosure & Status Proteksi Ledakan GLD"
 
@@ -196,7 +196,6 @@ def build():
         "ini masih berupa permohonan; klasifikasi akhir ditentukan lembaga sertifikasi.",
         "Dokumen teknis sedang direvisi mengikuti masukan iterasi berikutnya, termasuk penyempurnaan "
         "desain jalur masuk gas ke sensor.",
-        "Perkiraan durasi sertifikasi 5–8 bulan sejak proses dimulai; jadwal pasti mengikuti lembaga.",
     ])
     para(doc, "Sebagai catatan, peralatan bersertifikat Zona 1 (EPL Gb) umumnya dapat dipakai di area "
          "yang lebih ringan seperti Zona 2 / Division 2. Penerimaan peralatan bertanda ATEX/IECEx di "

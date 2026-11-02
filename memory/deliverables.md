@@ -250,3 +250,4 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 - **Rev 1.1 (2 Nov)**: kata "asli/produk asli" diganti "konfigurasi standar pabrikan/detektor HIREP standar" atas permintaan user (agar GLD tidak terkesan tidak asli).
 - **Rev 1.2 (2 Nov)**: Bagian 7 (tabel tindak lanjut) dihapus atas permintaan user.
 - **Rev 1.3 (2 Nov)**: Bagian 6 (opsi A relokasi/B sampling/C perbaikan jalur gas + rekomendasi) dihapus atas permintaan user; rujukan ke Bagian 6 di pengantar, ringkasan & bagian 5 ikut disesuaikan. Dokumen kini 5 bagian, 3 halaman. Opsi-opsi tsb tetap tercatat di dec:221 sbg bahan internal.
+- **Rev 1.4 (2 Nov)**: bullet perkiraan durasi sertifikasi 5–8 bulan di Bagian 5 dihapus atas permintaan user.

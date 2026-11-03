@@ -76,3 +76,5 @@
 - `Sumber Dokumen/data mentah test EMC di telkom Test House okt 20206/` — data mentah emisi EN 55032 Class A (ekspor .doc UTF-16). `GLD/`: Class A Below 1G, Above 1G, L1, L2. `Clusterhead besar/`: Below 1G, Above 1G, DC. Ringkasan hasil → `decisions.md` dec:211.
 - `Sumber Dokumen/3 macam gas dari MWIR thermal kamera HJKIR/` — 3 folder ekspor WeChat (Chat History.txt + 1 mp4 tiap folder), demo HJKIR 20 Okt: n-butana, propana, tabung & sertifikat DATEN → dec:213.
 - `Sumber Dokumen/sertifikasi oktober 2026/` — 2 docx dossier tim Rev25092026 (raw & formatted, 6 Okt) — salinan berkas terkirim GTS → dec:214.
+
+| `Sumber Dokumen/Alokasi Perangkat/Alokasi_Perangkat_per_RU_03Nov2026.jpg` | Pivot alokasi perangkat per RU (CH/GW/Node Sensor): RU2 3/1/10, RU3 3/1/4, RU4 2/1/3, RU5 1/1/2, RU6 2/2/4, RU7 11/1/5; total 22/7/28 (dec:223) |

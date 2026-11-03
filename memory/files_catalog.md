@@ -78,3 +78,4 @@
 - `Sumber Dokumen/sertifikasi oktober 2026/` — 2 docx dossier tim Rev25092026 (raw & formatted, 6 Okt) — salinan berkas terkirim GTS → dec:214.
 
 | `Sumber Dokumen/Alokasi Perangkat/Alokasi_Perangkat_per_RU_03Nov2026.jpg` | Pivot alokasi perangkat per RU (CH/GW/Node Sensor): RU2 3/1/10, RU3 3/1/4, RU4 2/1/3, RU5 1/1/2, RU6 2/2/4, RU7 11/1/5; total 22/7/28 (dec:223) |
+| `Sumber Dokumen/MOC Pertamina/MOC_15769_Multi_Modality_Gas_Leak_Detector_Area_SRU.pdf` | **MoC No. 15769/RU IV** (Pertamina, 33 hlm, Rev 0 Issued for Approval) — kajian mechanical integrity bidang instrument utk field test GLD di area SRU: dasar ND/SPK, FGDS eksisting (35 detektor Sieger-Honeywell), spek GLD/CH/GW/server, lokasi 4 GLD + 5 CH + JB-01 + GW, cable schedule (712 m 1-pair + 125 m 8-pair), material eBVL, status HAC Div. 2 (GLD belum memenuhi), analisa bahaya non-proses, kesimpulan (infrastruktur duluan, GLD setelah sertifikat) (dec:224) |

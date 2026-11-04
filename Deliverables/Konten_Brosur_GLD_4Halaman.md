@@ -1,243 +1,231 @@
-# Konten Brosur GLD — A4, 4 Halaman
+# Konten Brosur GLD — A4, 4 Halaman (Versi Visual)
 
 **Untuk:** brosur/katalog produk umum (pengunjung pameran, manajemen, mitra, direksi)
-**Format:** A4 portrait, 4 halaman, kertas katalog (art paper)
-**Status:** konten final untuk di-layout di tool desain lain
-**Disusun:** 4 November 2026
+**Format:** A4 portrait, 4 halaman, kertas katalog
+**Prinsip:** **±70% gambar/simulasi, ±30% teks.** Setiap halaman punya satu visual besar sebagai cerita utama. Teks dibatasi pada judul, satu kalimat penjelas, dan label pendek pada gambar.
+**Revisi:** v2, 4 November 2026 (menggantikan versi teks-padat)
 
 ---
 
 ## Panduan umum
 
-**Hierarki merek**
-1. **Pertamina Patra Niaga** paling menonjol (logo besar di sampul dan kepala halaman).
-2. **GLD — Multi-Modality Gas Leak Detector** sebagai nama produk (judul utama).
-3. **Korporasi Kinarya ITB** dan **LAPI Ganesha Utama** hanya logo kecil dengan teks "Dikembangkan bersama", di sampul bawah dan kaki halaman.
+**Hierarki merek:** Pertamina Patra Niaga paling besar, lalu nama produk GLD. Logo Korporasi Kinarya ITB dan LAPI Ganesha Utama kecil di kaki halaman dengan teks "Dikembangkan bersama".
 
-**Warna:** biru tua Pertamina (#12357A), biru (#2B5FCB), aksen merah (#E3242B) dan hijau (#8DC63F), latar putih.
+**Warna:** biru tua #12357A, biru #2B5FCB, aksen merah #E3242B dan hijau #8DC63F, latar putih.
 
-**Gaya:** teknologi industri, bersih, banyak ruang putih, foto produk asli.
+**Gaya visual (pakai untuk semua gambar agar seragam):**
+`clean 3D product visualization, Pertamina corporate colors (deep blue, red, lime green on white), soft studio lighting, industrial refinery context, high detail, no text in image`
 
-**File pendukung di repo**
-- Logo: `Sumber Dokumen/Logo/` (Pertamina Patra Niaga, Kinarya ITB, LGU)
-- Foto unit GLD: `scripts/assets/cert_doc_photos/3._Motherboard_ModulSensor_PenutupMesh_Casing_Antena_ModulAlarm.jpg`
-- Foto mesh sensor: `scripts/assets/cert_doc_photos/PenutupMesh_Casing.jpg`
-- Foto chamber uji gas: `scripts/assets/chamber_photos/chamber_gld_terpasang.jpeg`
-- Foto Cluster Head + panel surya: `scripts/assets/ch_mount_photos/ch_bracket_solar_detail.jpg`
-- Tangkapan layar dashboard: `Deliverables/Video_Produk_GLD_Remotion/public/images/dashboard.png`
+**Ciri unit GLD asli (sertakan di setiap prompt yang memuat GLD):**
+`blue die-cast aluminium explosion-proof style housing with four mounting lugs, round stainless steel mesh window on the front, red dome beacon on a short stainless cylinder at the side, short black antenna on top, silver cylindrical sensor head at the bottom, mounted with a flat square plate and two U-bolts on a 2-inch galvanized pole`
 
----
+Lampirkan foto asli sebagai referensi bila tool-nya mendukung:
+- Unit GLD: `scripts/assets/cert_doc_photos/3._Motherboard_ModulSensor_PenutupMesh_Casing_Antena_ModulAlarm.jpg`
+- Chamber: `scripts/assets/chamber_photos/chamber_gld_terpasang.jpeg`
+- Cluster Head: `scripts/assets/ch_mount_photos/ch_bracket_solar_detail.jpg`
+- Dashboard: `Deliverables/Video_Produk_GLD_Remotion/public/images/dashboard.png`
+- Logo: `Sumber Dokumen/Logo/`
 
-## HALAMAN 1 — Sampul
-
-**Logo atas:** Pertamina Patra Niaga (besar)
-
-**Label kecil:** Multi-Modality · AI on the Edge · LoRa Mesh
-
-**Judul:** GLD
-
-**Sub-judul:** Multi-Modality Gas Leak Detector
-
-**Tagline (pilih satu):**
-- "Mengenali jenis gas, bukan sekadar mendeteksinya."
-- "Delapan sensor. Satu kecerdasan. Deteksi kebocoran gas yang lebih cerdas."
-- "Deteksi kebocoran gas berbasis AI untuk kilang yang lebih aman."
-
-**Paragraf pembuka:**
-GLD adalah sistem deteksi kebocoran gas yang menggabungkan delapan sensor gas dalam satu unit. Kecerdasan buatan di dalam perangkat mengenali jenis gas dari pola respons kedelapan sensor itu. Hasilnya dikirim secara nirkabel melalui jaringan LoRa Mesh ke dashboard pemantauan, secara real-time.
-
-**4 angka kunci (kotak/ikon):**
-| Angka | Keterangan |
-|---|---|
-| **8** | sensor gas dalam satu unit |
-| **< 166 ms** | waktu inferensi AI langsung di perangkat |
-| **99,31%** | akurasi model pada data validasi laboratorium |
-| **LoRa Mesh** | komunikasi nirkabel 920–923 MHz, terenkripsi AES-128 |
-
-**Kotak pesan:**
-**Pelengkap sistem deteksi gas yang sudah ada.** GLD menambah informasi jenis gas sebagai lapisan pemantauan tambahan. Sistem berjalan mandiri dan tidak mengubah alarm, logic trip, maupun interlock sistem Fire & Gas dan DCS yang sudah terpasang.
-
-**Kaki halaman:** "Dikembangkan bersama" + logo Kinarya ITB + logo LGU (kecil)
-
-**Arahan visual:** foto unit GLD (housing biru, mesh stainless, beacon merah, antena) sebagai gambar utama, di atas latar biru tua bergradasi dengan siluet kilang samar dan garis jaringan bercahaya.
+> **Catatan:** AI hampir selalu salah menggambar logo dan tulisan. Buat gambar **tanpa teks**, lalu tambahkan logo dan label di tool layout.
 
 ---
 
-## HALAMAN 2 — Mengapa GLD & Cara Kerjanya
+## HALAMAN 1 — Sampul: "Mengenali Jenis Gas, Bukan Sekadar Mendeteksinya"
 
-### Judul: Mengapa GLD
+**Komposisi:** satu gambar penuh (full-bleed) unit GLD di kilang saat senja. Logo Pertamina Patra Niaga di kiri atas. Judul besar di sepertiga kiri.
 
-**Paragraf:**
-Kebocoran gas mudah terbakar dan beracun adalah salah satu risiko terbesar di fasilitas migas. Detektor konvensional umumnya memakai satu jenis sensor untuk satu jenis gas. Hasilnya berupa nilai konsentrasi, tetapi tidak menunjukkan gas apa yang sedang bocor. GLD membaca pola respons delapan sensor sekaligus, lalu model kecerdasan buatan menentukan jenis gasnya. Dengan begitu, petugas mendapat informasi yang lebih lengkap untuk mengambil tindakan.
+**Visual utama — prompt:**
+```
+Hero shot of an industrial gas leak detector mounted on a short galvanized pole in the
+foreground of an oil refinery at dusk, [ciri unit GLD], refinery towers and pipe racks
+softly out of focus behind it, faint glowing blue wireless signal waves radiating from
+the antenna toward a distant small solar-powered relay node, deep blue twilight sky with
+warm refinery lights, cinematic low angle, shallow depth of field, clean empty space on
+the left third for a headline, no text
+```
 
-**Tabel perbandingan:**
-| Aspek | Detektor konvensional | GLD Multi-Modality |
+**Teks:**
+- Label kecil: MULTI-MODALITY · AI ON THE EDGE · LORA MESH
+- Judul: **GLD**
+- Sub-judul: Multi-Modality Gas Leak Detector
+- Tagline: *Mengenali jenis gas, bukan sekadar mendeteksinya.*
+
+**Strip ikon di bawah gambar (4 ikon + angka, tanpa kalimat):**
+| Ikon | Angka | Label |
 |---|---|---|
-| Sensor | Satu jenis sensor per detektor | Delapan sensor dalam satu unit |
-| Keluaran | Nilai konsentrasi gas | Label jenis gas + tingkat keyakinan (confidence) |
-| Pengolahan data | Di panel kontrol | AI langsung di perangkat (edge computing) |
-| Pengiriman data | Kabel ke panel | Nirkabel LoRa Mesh, cukup kabel daya |
-| Peran | Lapisan proteksi utama | Lapisan pemantauan tambahan |
+| 8 lingkaran sensor | **8** | sensor dalam satu unit |
+| chip / otak | **< 166 ms** | AI di perangkat |
+| target / centang | **99,31%** | akurasi uji lab |
+| gelombang radio | **LoRa Mesh** | nirkabel terenkripsi |
 
-### Judul: Cara Kerja
-
-**5 langkah (ikon berurutan):**
-1. **Sampling udara** — kipas kecil menarik udara masuk melalui filter mesh stainless steel.
-2. **Pembacaan 8 sensor** — konverter analog-digital 24-bit membaca kedelapan sensor setiap 500 milidetik.
-3. **Pengolahan sinyal** — kalibrasi otomatis dan perataan data menghilangkan gangguan pembacaan.
-4. **Inferensi AI** — model di dalam perangkat mengenali jenis gas dan menghitung tingkat keyakinannya.
-5. **Pelaporan** — hasil dikirim terenkripsi ke server; kondisi normal dilaporkan berkala, alarm dikirim segera.
-
-### Judul kecil: Arsitektur Sistem
-
-**Diagram alir (kiri ke kanan):**
-**GLD** (node sensor di area proses) → *LoRa STAR 920 MHz* → **Cluster Head** (penghubung nirkabel bertenaga surya) → *LoRa MESH 921 MHz, multi-hop* → **Gateway** (di ruang kontrol) → *jaringan lokal* → **Server & Dashboard** (ruang kontrol dan intranet kantor)
-
-**Keterangan di bawah diagram:**
-Jaringan mesh memungkinkan data melompat dari satu Cluster Head ke Cluster Head lain hingga mencapai Gateway, sehingga jangkauan bisa diperluas ke seluruh area kilang. Bila satu Cluster Head terganggu, data otomatis mencari jalur lain.
-
-### Judul kecil: Delapan Sensor, Satu Sidik Jari Gas
-
-| Sensor | Sensitif terhadap |
-|---|---|
-| MQ-8 | Hidrogen (H₂) |
-| MQ-135 | Kualitas udara (NH₃, benzena, asap) |
-| MQ-3 | Alkohol / etanol |
-| MQ-5 | LPG, gas alam |
-| MQ-4 | Metana (CH₄) |
-| MQ-7 | Karbon monoksida (CO) |
-| MQ-6 | LPG, butana, propana |
-| MQ-2 | Gas mudah terbakar umum |
-
-*Catatan kecil:* Sensitivitas umum menurut pabrikan sensor. Jenis gas yang dikenali ditentukan oleh model AI yang dilatih untuk lokasi pemasangan.
-
-**Arahan visual:** infografis alur 5 langkah dengan ikon; diagram arsitektur sederhana dengan ikon perangkat; grid 8 sensor sebagai "sidik jari" berwarna.
+**Kaki:** "Dikembangkan bersama" + logo Kinarya ITB + logo LGU (kecil)
 
 ---
 
-## HALAMAN 3 — Komponen & Spesifikasi
+## HALAMAN 2 — Simulasi: "Dari Kebocoran ke Dashboard dalam Hitungan Detik"
 
-### Judul: Komponen Sistem
+**Komposisi:** **storyboard 4 panel** (2 × 2 atau satu baris memanjang) sebagai simulasi kejadian. Setiap panel hanya diberi nomor dan satu baris keterangan.
 
-**1. Gas Leak Detector (GLD) — node sensor**
-Perangkat lapangan yang memuat delapan sensor gas, prosesor AI, radio LoRa, dan keluaran alarm.
+**Panel 1 — Kebocoran terjadi**
+```
+Isometric 3D illustration of a refinery pipe flange with a small visible gas leak plume
+(soft semi-transparent orange-yellow vapour cloud) drifting toward an industrial gas leak
+detector on a pole a few meters away, [ciri unit GLD], clean stylized refinery
+environment, Pertamina corporate colors, no text
+```
+Keterangan: **1 · Gas bocor terbawa angin ke arah GLD**
 
-| Parameter | Spesifikasi |
-|---|---|
-| Sensor gas | 8 kanal seri MQ (Winsen) |
-| Sensor lingkungan | Suhu & kelembapan (Sensirion SHT40) |
-| Akuisisi data | ADC 24-bit, pemindaian 8 kanal setiap 500 ms |
-| Prosesor | ESP32-S3: kontrol, komunikasi & inferensi AI lokal |
-| Keluaran AI | Label jenis gas + confidence, waktu inferensi < 166 ms |
-| Kelas model saat ini | Udara bersih, LPG, hidrogen (H₂) |
-| Komunikasi | LoRa 920–923 MHz, enkripsi AES-128-GCM, anti-replay |
-| Antarmuka lokal | RS-485 Modbus RTU (baca saja) |
-| Catu daya | 24 VDC, konsumsi maks. ±8 W |
-| Keluaran alarm | Keluaran 24 V untuk buzzer/lampu eksternal |
-| Housing | Aluminium die-cast dengan filter mesh stainless steel |
-| Entry kabel | Cable gland M20 × 1,5 |
-| Pemasangan | Pelat 250 × 250 mm dengan 2 U-bolt pada tiang pipa 2 inci |
+**Panel 2 — GLD menghirup dan mengenali**
+```
+Cutaway 3D illustration of the same gas detector: vapour particles drawn in through the
+round stainless steel mesh by a small fan, eight small cylindrical gas sensors inside glow
+in different colours as they react, a small glowing AI chip next to them, clean technical
+visualization, transparent housing effect, no text
+```
+Keterangan: **2 · 8 sensor bereaksi, AI mengenali jenis gas dalam < 1 detik**
 
-**2. Cluster Head — penghubung nirkabel**
-| Parameter | Spesifikasi |
-|---|---|
-| Fungsi | Mengumpulkan data dari GLD dan meneruskannya lewat jaringan mesh |
-| Radio | 2 modul LoRa (jalur STAR & jalur MESH) |
-| Daya | 2 panel surya + baterai, tanpa kabel listrik |
-| Keandalan | Pemilihan jalur otomatis dan failover |
+**Panel 3 — Data melompat lewat jaringan mesh**
+```
+Isometric 3D map of a refinery site seen from above, several gas detectors at process
+areas, solar-powered relay nodes on poles along the perimeter fence, glowing blue data
+pulses hopping from detector to relay to relay toward a control building with a rooftop
+antenna, one alternative route highlighted, Pertamina corporate colors, no text
+```
+Keterangan: **3 · Data terenkripsi melompat antar Cluster Head menuju Gateway**
 
-**3. Gateway — pintu ke jaringan lokal**
-| Parameter | Spesifikasi |
-|---|---|
-| Fungsi | Akar jaringan mesh, meneruskan data ke server |
-| Antena | Omni 8 dBi di atap gedung |
-| Koneksi | Wi-Fi lokal ke router jaringan GLD |
-| Daya | 220 VAC melalui adaptor, didukung UPS |
+**Panel 4 — Alarm di ruang kontrol**
+```
+Modern refinery control room, an operator looking at a large wall screen showing a dark
+blue monitoring dashboard with a site map and one sensor marker flashing red, an alert
+card popping up, calm professional atmosphere, Pertamina corporate colors, no readable
+text on screen
+```
+Keterangan: **4 · Dashboard menampilkan jenis gas, lokasi, dan tingkat keyakinan**
 
-**4. Server & Dashboard**
-| Parameter | Spesifikasi |
-|---|---|
-| Perangkat | PC lokal (4 core, 8 GB RAM, SSD 256 GB, 2 port LAN) |
-| Fungsi | Validasi data, penyimpanan riwayat, alarm, status perangkat |
-| Akses | Dashboard web dari ruang kontrol dan intranet kantor |
-| Keamanan | Jaringan terpisah tanpa internet; tidak ada routing antar jaringan |
+> Tempel tangkapan layar dashboard asli di layar panel 4 agar sesuai kenyataan.
 
-### Kotak: Keamanan & Keandalan
-- Data dienkripsi dan diautentikasi AES-128-GCM, dengan proteksi anti-replay.
-- Jaringan GLD terpisah dan tidak terhubung ke internet.
-- Jalur alternatif otomatis bila salah satu Cluster Head tidak berfungsi.
-- Gateway, router, dan server didukung UPS agar data dan alarm tetap tercatat saat listrik padam.
-- Desain modular: daya, komunikasi, pengolahan data, dan sensor terpisah, sehingga perawatan bisa per bagian.
-
-**Arahan visual:** foto unit GLD besar + foto close-up mesh sensor; foto Cluster Head dengan panel surya; ikon untuk Gateway dan server.
+**Teks penutup halaman (satu kalimat, di bawah storyboard):**
+Berjalan mandiri sebagai lapisan pemantauan tambahan, tanpa mengubah sistem deteksi gas dan kontrol yang sudah ada.
 
 ---
 
-## HALAMAN 4 — Pengujian, Sertifikasi & Pengembangan
+## HALAMAN 3 — Produk: "Kenali Komponennya"
 
-### Judul: Teruji di Laboratorium, Siap Diuji di Lapangan
+**Komposisi:** setengah atas berisi **exploded view GLD** dengan 5 label penunjuk. Setengah bawah berisi **3 kartu foto** komponen jaringan.
 
-**Hasil pengujian laboratorium:**
-- Rantai lengkap GLD – Cluster Head – Gateway – Server berjalan end-to-end.
-- Akurasi model 99,31% pada data validasi laboratorium.
-- Jaringan mesh diuji dengan 8 Cluster Head bertingkat hingga 3 lompatan (hop).
-- Alarm terkirim otomatis ke server tanpa perlu diminta (push alarm).
-- Factory Acceptance Test laboratorium: 7 dari 7 butir uji lulus.
-- Komunikasi tetap stabil saat diuji dengan gangguan sinyal pada kanal yang sama (uji awal).
-- Pengukuran awal emisi elektromagnetik (pre-scan EMC EN 55032) telah dilakukan.
+**Visual utama — exploded view, prompt:**
+```
+Exploded view 3D technical illustration of an industrial gas detector, parts floating
+apart along a vertical axis on a clean white background: front cover with round stainless
+steel mesh, eight small cylindrical gas sensors on a round sensor board, a main circuit
+board with a processor chip and LoRa radio module, a small cooling fan, blue die-cast
+aluminium housing body, red dome beacon, black antenna, silver sensor head at the bottom,
+thin leader lines space for callouts, soft studio lighting, no text
+```
 
-### Judul kecil: Sertifikasi (dalam proses)
-| Bidang | Target |
-|---|---|
-| Area berbahaya | ATEX / IECEx — usulan II 2G Ex db IIC T4 Gb |
-| Perlindungan debu & air | IP66 / IP67 |
-| Kompatibilitas elektromagnetik | EMC EN 61000-6-2 / -4 |
-| Perangkat radio | Sesuai ketentuan SDPPI (pita 920–923 MHz) |
+**5 label penunjuk (pendek):**
+1. **Mesh stainless** — udara masuk, partikel tertahan
+2. **8 sensor gas** — satu "sidik jari" untuk tiap jenis gas
+3. **AI di perangkat** — klasifikasi langsung tanpa server
+4. **Radio LoRa** — kirim data nirkabel terenkripsi
+5. **Beacon alarm** — tanda visual di lapangan
 
-### Judul kecil: AI yang Belajar dari Lokasinya
-**Paragraf:**
-Setiap kilang memiliki jenis gas yang perlu diawasi. Karena itu, GLD dilengkapi metode pelatihan model di lokasi menggunakan chamber uji gas portabel.
+**3 kartu foto komponen jaringan (foto asli + 1 baris):**
+| Kartu | Gambar | Keterangan |
+|---|---|---|
+| Cluster Head | foto CH dengan 2 panel surya | Penghubung nirkabel bertenaga surya, tanpa kabel listrik |
+| Gateway | render antena omni di atap ruang kontrol | Pintu data ke jaringan lokal, didukung UPS |
+| Dashboard | tangkapan layar dashboard asli | Status perangkat, alarm, dan riwayat deteksi |
 
-**Alur 4 langkah:**
-1. Chamber uji gas dibawa ke lokasi kilang.
-2. Dataset gas setempat diambil dengan unit GLD di dalam chamber.
-3. Model AI dilatih dengan data tersebut.
-4. Model baru dipasang ke firmware GLD.
+Prompt pendukung untuk kartu Gateway (bila tidak ada foto):
+```
+Slim white omni-directional antenna on a short mast on the flat roof of a refinery control
+building, coaxial cable running down the wall, clear blue sky, clean industrial look, no text
+```
 
-**Paragraf penutup:**
-Gas target pengembangan berikutnya, seperti H₂S, hidrokarbon berat, metana, CO, dan benzena, ditambahkan melalui pengumpulan dataset dan pelatihan lanjutan sesuai kebutuhan tiap lokasi.
+**Strip spesifikasi kunci (ikon kecil, satu baris):**
+24 VDC · ±8 W · LoRa 920–923 MHz · AES-128 · RS-485 Modbus · IP66 (target) · pemasangan U-bolt tiang 2"
 
-### Judul kecil: Rencana Penerapan di 6 Refinery Unit
-| Unit | GLD | Cluster Head | Gateway |
+---
+
+## HALAMAN 4 — Teruji & Terus Belajar
+
+**Komposisi:** tiga blok visual: (A) foto chamber dengan infografis melingkar, (B) peta Indonesia dengan titik 6 RU, (C) baris lencana hasil uji dan sertifikasi.
+
+### Blok A — "AI yang belajar dari lokasinya"
+**Visual:** foto chamber uji gas asli di tengah, dikelilingi **siklus 4 langkah berbentuk lingkaran** (ikon + 2–3 kata):
+1. Chamber dibawa ke kilang
+2. Ambil data gas setempat
+3. Latih model AI
+4. Pasang ke GLD
+
+Prompt pendukung (bila ingin render, bukan foto):
+```
+Tall transparent clear acrylic gas test chamber on a white table, aluminium back plate
+inside with a blue industrial gas detector mounted at the center and a silver cylindrical
+sensor head below it, black square fan on the chamber floor, small gas tubing and valve on
+the side, a laptop beside it showing a live sensor graph, clean bright lab setting, no text
+```
+
+Satu kalimat: *Gas target pengembangan, seperti H₂S, metana, CO dan benzena, ditambahkan sesuai kebutuhan tiap lokasi.*
+
+### Blok B — "Menuju 6 Refinery Unit"
+**Visual:** peta Indonesia sederhana (gaya flat, biru muda) dengan 6 titik: RU II Dumai, RU III Plaju, RU IV Cilacap, RU V Balikpapan, RU VI Balongan, RU VII Kasim.
+
+Prompt pendukung:
+```
+Minimal flat vector map of Indonesia in light blue on white, six glowing location pins
+with small radiating signal rings, clean corporate infographic style, no text
+```
+
+Label pada titik (opsional): jumlah unit per RU. GLD · CH · GW: RU II 10·3·1, RU III 4·3·1, RU IV 3·2·1, RU V 2·1·1, RU VI 4·2·2, RU VII 5·11·1.
+*Gunakan hanya bila angka alokasi sudah final.*
+
+### Blok C — Lencana (badge)
+**Sudah teruji di laboratorium (ikon centang hijau):**
+- Sistem end-to-end GLD → Server
+- Akurasi model 99,31%
+- Mesh 8 Cluster Head, 3 lompatan
+- Push alarm otomatis
+- FAT laboratorium 7/7 lulus
+
+**Dalam proses sertifikasi (ikon jam/kuning):**
+- ATEX / IECEx
+- IP66 / IP67
+- EMC
+- Radio SDPPI
+
+**Kaki:** "Dikembangkan bersama" + logo Kinarya ITB + logo LGU (kecil)
+
+---
+
+## Daftar visual yang perlu dibuat
+
+| No | Halaman | Visual | Sumber |
 |---|---|---|---|
-| RU II | 10 | 3 | 1 |
-| RU III | 4 | 3 | 1 |
-| RU IV | 3 | 2 | 1 |
-| RU V | 2 | 1 | 1 |
-| RU VI | 4 | 2 | 2 |
-| RU VII | 5 | 11 | 1 |
-| **Total** | **28** | **22** | **7** |
-
-**Kaki halaman:** "Dikembangkan bersama" + logo Kinarya ITB + logo LGU (kecil)
-
-**Arahan visual:** foto chamber uji gas (kotak akrilik bening, unit GLD di pelat aluminium, kipas di lantai chamber); tangkapan layar dashboard; infografis 4 langkah pelatihan; tabel rollout dengan peta Indonesia dan titik 6 RU (opsional).
+| V1 | 1 | Hero GLD di kilang saat senja | Generate (prompt hal. 1) + foto GLD sbg referensi |
+| V2 | 2 | Panel 1: kebocoran gas | Generate |
+| V3 | 2 | Panel 2: cutaway GLD, sensor menyala | Generate |
+| V4 | 2 | Panel 3: peta isometrik jaringan mesh | Generate |
+| V5 | 2 | Panel 4: ruang kontrol + dashboard | Generate + tempel screenshot asli |
+| V6 | 3 | Exploded view GLD | Generate + foto GLD sbg referensi |
+| V7 | 3 | Foto Cluster Head | Foto asli |
+| V8 | 3 | Antena Gateway di atap | Foto asli atau generate |
+| V9 | 3 | Dashboard | Screenshot asli |
+| V10 | 4 | Chamber uji gas | Foto asli (atau generate) |
+| V11 | 4 | Peta Indonesia 6 RU | Generate / vektor |
+| — | semua | Ikon (sensor, chip, radio, centang, jam) | Pustaka ikon tool desain |
 
 ---
 
-## Hal yang sengaja TIDAK dicantumkan (dan alasannya)
+## Hal yang sengaja TIDAK dicantumkan
 
-| Jangan tulis | Alasan |
+| Jangan tampilkan | Alasan |
 |---|---|
-| "Bersertifikat ATEX" / "explosion-proof certified" | Sertifikasi masih dalam proses. Tulis "dalam proses sertifikasi". |
-| Nilai konsentrasi ppm/%LEL untuk H₂S, CO, benzena | GLD saat ini mengeluarkan label jenis gas + confidence, bukan nilai konsentrasi. Model saat ini mengenali udara bersih, LPG, dan H₂. |
-| "Mendeteksi H₂S/benzena" sebagai kemampuan saat ini | Masih tahap pengembangan dataset. Tulis sebagai "gas target pengembangan". |
-| "Menggantikan detektor/FGDS yang ada" | GLD adalah lapisan tambahan (advisory), bukan pengganti. |
-| Nomor kontrak, nilai anggaran, lokasi titik pemasangan spesifik | Bukan untuk materi umum. |
-| Tanggal selesai sertifikasi | Jadwal ditentukan lembaga sertifikasi. |
+| "Bersertifikat ATEX" / logo Ex sebagai klaim | Sertifikasi masih dalam proses |
+| Angka ppm/%LEL di layar dashboard simulasi | GLD mengeluarkan label jenis gas + confidence, bukan konsentrasi |
+| H₂S / benzena sebagai kemampuan saat ini | Masih gas target pengembangan; model saat ini: udara bersih, LPG, H₂ |
+| "Menggantikan detektor yang ada" | GLD adalah lapisan tambahan |
+| Nomor kontrak, anggaran, titik pemasangan spesifik | Bukan materi umum |
 
-## Glosarium singkat (opsional, untuk boks kecil)
-- **LoRa** — teknologi radio jarak jauh berdaya rendah untuk perangkat IoT.
-- **Mesh** — jaringan di mana data bisa melompat antar-perangkat hingga sampai tujuan.
-- **Edge AI** — kecerdasan buatan yang berjalan langsung di perangkat, bukan di server.
-- **ATEX / IECEx** — skema sertifikasi peralatan untuk area berpotensi ledakan.
-- **Confidence** — tingkat keyakinan model terhadap hasil klasifikasinya.
+> Di panel simulasi 1–4, kebocoran digambarkan sebagai "gas" secara umum. Hindari label "H₂S" pada awan gas.

@@ -255,3 +255,4 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 
 ## Brosur GLD 4 halaman A4 (4 Nov 2026, dec:226)
 `Deliverables/Konten_Brosur_GLD_4Halaman.md` (konten untuk di-layout di tool lain) + draf layout `Deliverables/Brosur_GLD_A4_4Halaman.{html,pdf}` (generator `scripts/build_brosur_gld_direksi.py`). Audiens umum, tanpa rujukan MoC/lokasi. Akurasi 99,31% (validasi lab), kelas model Clean Air/LPG/H2, sertifikasi 'dalam proses'.
+- **v2 (4 Nov)**: konten ditulis ulang jadi visual-first (±70% gambar) atas masukan user "lebih banyak gambar dan simulasi": storyboard simulasi 4 panel (kebocoran → sensor → mesh → ruang kontrol), exploded view, peta 6 RU, lencana; 11 prompt gambar siap pakai. Draf PDF lama (teks-padat) tidak lagi jadi acuan.

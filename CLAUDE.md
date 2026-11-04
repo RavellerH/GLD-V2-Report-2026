@@ -163,6 +163,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **28 Okt — Laporan EMC rev 1.0 + checklist Excel instalasi & sertifikasi** (dec:218): `Deliverables/Laporan_Teknis_Pengujian_EMC_GLD_CH.{docx,pdf}` (draf tim + analisis temuan E-1…E-7 + checklist EMC), `Checklist_Instalasi_Block_Diagram_RU-IV.xlsx` (26 item dari block diagram final), `Checklist_Rencana_Sertifikasi_GLD_EMC_IP_RF_ATEX.xlsx` (Checklist EMC, Rencana IP, Rencana RF, Monitor ATEX + log). ⚠️ Dua temuan baru: **EIRP LoRa (GLD ≈25 dBm, CH mesh ≈30 dBm) perlu dicek ke batas SDPPI** (acuan umum 16 dBm), dan **inlet gas + fan terbuka berisiko utk IP66**.
 
+- 🆕 **4 Nov — Video GLD & OGI pameran Cilacap: 6 shot 3D high-tech gaya *black glass + LiDAR* (beda dari RavTell) + penjelajahan dashboard RU asli 32 dtk** (permintaan Pak Pindoan) (dec:220). Kode 3D: `Deliverables/Video_Produk_GLD_Remotion/blender/hitech/`.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

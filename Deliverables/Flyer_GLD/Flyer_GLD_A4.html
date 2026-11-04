@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Flyer GLD V2</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.hero{position:relative;height:95mm;background:radial-gradient(ellipse 80% 90% at 75% 55%,#1f4fae 0%,#0e2350 58%,#081634 100%);color:#fff;overflow:hidden}
+.hero .gd{position:absolute;inset:0;background-image:linear-gradient(rgba(120,180,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(120,180,255,.07) 1px,transparent 1px);background-size:8mm 8mm}
+.hero img{position:absolute;right:-4mm;top:-6mm;width:108mm;height:108mm;object-fit:cover;object-position:50% 52%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%)}
+.hero .tx{position:absolute;left:14mm;top:8mm;width:100mm}
+.k{font-size:6.8pt;font-weight:800;letter-spacing:2.4pt;color:#7fc8ff}
+.ht{font-size:36pt;font-weight:800;line-height:.95;letter-spacing:-1pt;margin-top:3mm}
+.ht span{color:#7fc8ff}
+.hs{font-size:11.5pt;font-weight:600;line-height:1.3;margin-top:3.6mm;color:#e6f0ff}
+.vp{display:grid;grid-template-columns:1fr 1fr;gap:3.4mm 4mm;margin-top:5mm}
+.vp div{border-left:2px solid #13a9e0;padding:.3mm 0 .3mm 2.8mm}
+.vp b{display:block;font-size:8.6pt;font-weight:800}
+.vp span{font-size:6.6pt;color:#bcd2f2;line-height:1.38}
+.cap{position:absolute;right:14mm;bottom:3mm;font-size:5.4pt;letter-spacing:1pt;color:#9fbde6}
+.bot{position:absolute;left:0;right:0;bottom:0;height:17mm;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 14mm;color:#fff}
+</style>
+</head>
+<body>
+<div class="page grid-bg">
+  <div class="topbar">
+    <div class="logos"><img src="img/logo_pertamina.png" alt="Pertamina"><img src="img/logo_lgu.png" alt="LGU"><img class="itb" src="img/logo_itb.png" alt="ITB"></div>
+    <div class="doc">GAS LEAK DETECTION SYSTEM · GENERASI KEDUA</div>
+  </div>
+
+  <div class="hero">
+    <div class="gd"></div>
+    <img src="img/hero_f0020.png" alt="GLD V2">
+    <div class="tx">
+      <div class="k">SOLUSI DETEKSI KEBOCORAN GAS KILANG</div>
+      <div class="ht">GLD <span>V2</span></div>
+      <div class="hs">Deteksi multigas berbasis edge AI dengan jaringan nirkabel self-healing.</div>
+      <div class="vp">
+        <div><b>Multigas, satu perangkat</b><span>8 sensor gas membentuk sidik jari gas</span></div>
+        <div><b>AI di perangkat</b><span>klasifikasi gas langsung di node</span></div>
+        <div><b>Nirkabel & self-healing</b><span>private mesh LoRa 920 MHz</span></div>
+        <div><b>Alarm seketika</b><span>beacon lokal + push ke operator</span></div>
+      </div>
+    </div>
+    <div class="cap">ILUSTRASI 3D · GLD V2</div>
+  </div>
+
+  <div class="pad">
+    <div class="sec" style="margin-top:3.8mm"><span class="no">01</span><span class="t">TANTANGAN → SOLUSI</span></div>
+    <div class="ps" style="margin-top:2.6mm">
+      <div class="p"><div class="h">PENDEKATAN KONVENSIONAL</div><ul><li>Satu detektor untuk satu jenis gas</li><li>Kabel data ke ruang kontrol</li><li>Mahal dan sulit diperluas</li></ul></div>
+      <div class="arr">→</div>
+      <div class="s"><div class="h">SOLUSI GLD V2</div><ul><li><strong>8 sensor</strong> dalam satu perangkat</li><li><strong>Nirkabel</strong>, tanpa kabel data</li><li><strong>Mudah diperluas</strong> ke titik pantau baru</li></ul></div>
+    </div>
+
+    <div class="sec" style="margin-top:3.8mm"><span class="no">02</span><span class="t">PERANGKAT & SISTEM</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-top:2.6mm">
+      <div class="fig" style="height:39mm"><img class="lit" src="img/hi_f0349.png" style="object-position:55% 50%" alt="GLD terurai"><span class="corner c1"></span><span class="corner c4"></span><div class="tag">8 SENSOR · AI EDGE · DI DALAM GLD</div></div>
+      <div class="fig" style="height:39mm"><img class="lit" src="img/mesh.png" alt="Jaringan mesh"><span class="corner c1"></span><span class="corner c4"></span><div class="tag">KEBOCORAN → ALARM PUSH VIA MESH</div></div>
+    </div>
+    <div class="arch" style="margin-top:3mm;padding:2.6mm 3mm">
+      <svg viewBox="0 0 520 44" font-family="Inter,Segoe UI,Arial">
+        <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8z" fill="#2b5fcb"/></marker></defs>
+        <g font-size="9" font-weight="800" text-anchor="middle">
+          <rect x="2" y="8" width="62" height="24" rx="4" fill="#fff" stroke="#2b5fcb"/><text x="33" y="24" fill="#0e2350">GLD</text>
+          <rect x="102" y="8" width="88" height="24" rx="4" fill="#2b5fcb"/><text x="146" y="24" fill="#fff">Cluster Head</text>
+          <rect x="228" y="8" width="72" height="24" rx="4" fill="#0e2350"/><text x="264" y="24" fill="#fff">Gateway</text>
+          <rect x="338" y="8" width="80" height="24" rx="4" fill="#fff" stroke="#0e2350"/><text x="378" y="24" fill="#0e2350">Server lokal</text>
+          <rect x="446" y="8" width="72" height="24" rx="4" fill="#fff" stroke="#0e2350"/><text x="482" y="24" fill="#0e2350">Dashboard</text>
+        </g>
+        <g stroke="#2b5fcb" stroke-width="1.4"><path d="M64 20H100" marker-end="url(#a)" stroke-dasharray="3 2"/><path d="M190 20H226" marker-end="url(#a)"/><path d="M300 20H336" marker-end="url(#a)"/><path d="M418 20H444" marker-end="url(#a)"/></g>
+        <g font-size="6.4" fill="#5b6575" text-anchor="middle"><text x="83" y="42">LoRa</text><text x="208" y="42">mesh multi-hop</text><text x="318" y="42">LAN lokal</text><text x="431" y="42"></text></g>
+      </svg>
+    </div>
+
+    <div class="sec" style="margin-top:3.8mm"><span class="no">03</span><span class="t">NILAI BAGI OPERASI KILANG</span></div>
+    <div class="cards" style="grid-template-columns:repeat(4,1fr);margin-top:2.6mm">
+      <div class="c al"><div class="ic">RESPONS</div><h4>Alarm seketika</h4><p>Push seketika ke operator.</p></div>
+      <div class="c"><div class="ic">CAKUPAN</div><h4>Multigas di satu titik</h4><p>Satu perangkat, beberapa jenis gas.</p></div>
+      <div class="c"><div class="ic">INSTALASI</div><h4>Tanpa kabel data</h4><p>Cukup catu 24 VDC.</p></div>
+      <div class="c"><div class="ic">KEANDALAN</div><h4>Self-healing</h4><p>Rute pulih otomatis.</p></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:3.8mm">
+      <div>
+        <div class="sec" style="margin-top:0"><span class="no">04</span><span class="t">KEMAMPUAN GAS</span></div>
+        <div class="gas" style="margin-top:2.6mm"><span class="g v">LPG</span><span class="g v">H₂</span><span class="g d">CO₂</span><span class="g t">CH₄</span><span class="g t">CO</span><span class="g t">NH₃</span><span class="g t">Benzena</span></div>
+        <div class="gl"><i style="background:var(--ok);margin-left:0"></i>tervalidasi<i style="background:var(--blue)"></i>data tersedia<i style="background:#e2b464"></i>target</div>
+      </div>
+      <div>
+        <div class="sec" style="margin-top:0"><span class="no">05</span><span class="t">TERUJI</span></div>
+        <div class="kpi" style="margin-top:2.6mm;gap:2mm">
+          <div><div class="k">Lapangan</div><div class="v" style="font-size:9pt">RU VII Kasim</div><div class="s">2025 · gen. 1</div></div>
+          <div><div class="k">FAT</div><div class="v" style="font-size:9pt">7 / 7 lulus</div><div class="s">gen. 2 · lab</div></div>
+          <div><div class="k">Mesh</div><div class="v" style="font-size:9pt">8 Cluster Head</div><div class="s">failover teruji</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <div><div style="font-size:7.6pt;font-weight:800">PT Pertamina Patra Niaga (Fungsi Reliability) × LAPI Ganesha Utama × Institut Teknologi Bandung</div>
+    <div style="font-size:5.4pt;color:#9fbde6;margin-top:1mm">Pilot RU IV Cilacap · gambar perangkat & jaringan adalah ilustrasi 3D</div></div>
+  </div>
+</div>
+</body>
+</html>

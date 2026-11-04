@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, OffthreadVideo, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
@@ -110,6 +110,8 @@ const InfoPanel: React.FC = () => {
   );
 };
 
+const MESH3D_SEC = 7;
+
 export const Scene06Mesh: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -210,6 +212,20 @@ export const Scene06Mesh: React.FC = () => {
       >
         {t('Mekanisme failover telah diuji pada 8 Cluster Head di kampus ITB', 'Failover mechanism tested on 8 Cluster Heads at the ITB campus')}
       </div>
+      {/* Pembuka 3D: jaringan GLD -> Cluster Head -> Gateway di kilang (digital twin, ilustrasi) */}
+      {frame < Math.round(MESH3D_SEC * fps) + 2 && (
+        <AbsoluteFill style={{opacity: 1 - progress(frame, Math.round(MESH3D_SEC * fps) - 18, 18), backgroundColor: '#020409'}}>
+          <OffthreadVideo src={staticFile('blender/ht/gld_mesh.mp4')} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+          <AbsoluteFill style={{background: portrait ? 'linear-gradient(rgba(2,4,9,0.8), transparent 35%)' : 'linear-gradient(90deg, rgba(2,4,9,0.82), rgba(2,4,9,0) 50%)'}} />
+          <div style={{position: 'absolute', left: padX, top: portrait ? 200 : 70, maxWidth: portrait ? 952 : 820}}>
+            <div style={{fontSize: 22, fontWeight: 800, letterSpacing: 3, color: COLORS.blueLight, opacity: progress(frame, 6, 14)}}>PRIVATE MESH LoRa · 920 MHz</div>
+            <Caption text={t('GLD → Cluster Head → Gateway, tanpa kabel data', 'GLD → Cluster Head → Gateway, no data cables')} from={10} size={title(56)} color="#F2F5FA" />
+          </div>
+          <div style={{position: 'absolute', right: 28, top: 22, fontSize: 16, letterSpacing: 1.5, color: 'rgba(214,240,255,0.7)'}}>
+            {t('ILUSTRASI 3D · UKURAN PERANGKAT DIPERBESAR', '3D ILLUSTRATION · DEVICES ENLARGED')}
+          </div>
+        </AbsoluteFill>
+      )}
     </SceneFrame>
   );
 };

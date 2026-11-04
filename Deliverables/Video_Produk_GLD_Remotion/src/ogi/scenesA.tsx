@@ -9,7 +9,7 @@ import {useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress, useNarration} from '../motion';
 import {COLORS} from '../theme';
-import {InfoCard, SceneTitle} from './common';
+import {Bg3D, InfoCard, SceneTitle, glassPanel} from './common';
 
 // 01 — Pembuka: b-roll kilang malam + judul.
 export const OgiHook: React.FC = () => {
@@ -20,8 +20,12 @@ export const OgiHook: React.FC = () => {
   const t2 = at(['Kebocoran', 'Hydrocarbon']);
   return (
     <SceneFrame theme="night">
-      <AssetSlot asset={ASSETS.refinery} kind="video" />
-      <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(10,18,32,0.88) 0%, rgba(10,18,32,0.35) 60%, rgba(10,18,32,0.1))'}} />
+      <Bg3D
+        src="blender/ht/ogi_hook.mp4"
+        sec={10}
+        shade={portrait ? 'linear-gradient(rgba(2,4,9,0.2), rgba(2,4,9,0.55) 45%, rgba(2,4,9,0.2))' : 'linear-gradient(90deg, rgba(2,4,9,0.85) 0%, rgba(2,4,9,0.3) 55%, rgba(2,4,9,0))'}
+        label={t('ILUSTRASI 3D · DIGITAL TWIN', '3D ILLUSTRATION · DIGITAL TWIN')}
+      />
       <AbsoluteFill style={{padding: portrait ? `0 ${padX}px` : `0 ${padX}px`, justifyContent: 'center'}}>
         <div style={{fontSize: 24, fontWeight: 800, letterSpacing: 4, color: COLORS.blueLight, opacity: progress(frame, 6, 16)}}>GLD NEXT</div>
         <Caption text="Optical Gas Imaging" from={10} size={title(96)} color="#F2F5FA" style={{marginTop: 6}} />
@@ -73,7 +77,8 @@ export const OgiStakes: React.FC = () => {
   const g = progress(frame, gwpAt + 10, 40);
   const barW = portrait ? 640 : 1100;
   return (
-    <SceneFrame theme="light">
+    <SceneFrame theme="night">
+      <Bg3D src="blender/ht/ogi_hook.mp4" sec={6} shade="rgba(2,4,9,0.62)" />
       <SceneTitle kicker={t('MENGAPA PENTING', 'WHY IT MATTERS')} title={t('Satu kebocoran, tiga risiko', 'One leak, three risks')} />
       <div style={{position: 'absolute', left: padX, right: padX, top: portrait ? 420 : 240, display: 'grid', gridTemplateColumns: portrait ? '1fr' : '1fr 1fr 1fr', gap: 24}}>
         {RISKS.map((r) => {
@@ -135,7 +140,7 @@ export const OgiToday: React.FC = () => {
   const t = useT();
   const at = useNarration('ogi_today');
   const gapAt = at(['Namun', 'However']);
-  const map = portrait ? {x: padX, y: 820, w: width - padX * 2, h: 680} : {x: 900, y: 220, w: 900, h: 640};
+  const map = portrait ? {x: padX, y: 1180, w: width - padX * 2, h: 640} : {x: 1200, y: 560, w: 660, h: 470};
   const S = map.w / 900;
   const NODES = [
     [180, 160],
@@ -152,7 +157,13 @@ export const OgiToday: React.FC = () => {
     {k: t('Sensor titik', 'Point sensor'), v: t('Hanya gas yang mencapai sensor', 'Only gas that reaches the sensor'), at: gapAt + 30, warn: true},
   ];
   return (
-    <SceneFrame theme="light">
+    <SceneFrame theme="night">
+      <Bg3D
+        src="blender/ht/gld_mesh.mp4"
+        sec={14}
+        shade={portrait ? 'linear-gradient(rgba(2,4,9,0.75), rgba(2,4,9,0.2) 40%, rgba(2,4,9,0.2))' : 'linear-gradient(90deg, rgba(2,4,9,0.85) 0%, rgba(2,4,9,0.35) 45%, rgba(2,4,9,0.05))'}
+        label={t('ILUSTRASI 3D · NODE GLD DI KILANG', '3D ILLUSTRATION · GLD NODES IN A REFINERY')}
+      />
       <SceneTitle kicker={t('GLD HARI INI', 'GLD TODAY')} title={t('Deteksi titik berbasis edge AI', 'Point detection powered by edge AI')} />
       <div style={{position: 'absolute', left: padX, top: portrait ? 400 : 260, width: portrait ? width - padX * 2 : 700, display: 'flex', flexDirection: 'column', gap: 16}}>
         {CHECKS.map((c) => (
@@ -213,9 +224,9 @@ export const OgiPhysics: React.FC = () => {
   const tBond = at(['ikatan karbon', 'the carbon-hydrogen']);
   const tBand = at(['Mid-Wave', 'Mid-Wave']);
   const tFilter = at(['Dengan filter', 'With a narrow']);
-  const W = width - padX * 2;
-  const chartH = portrait ? 520 : 470;
-  const top = portrait ? 430 : 230;
+  const W = portrait ? width - padX * 2 - 40 : 860;
+  const chartH = portrait ? 360 : 290;
+  const top = portrait ? 1290 : 700;
   // sumbu x: 2..14 µm
   const xOf = (um: number) => ((um - 2) / 12) * W;
   const zoom = progress(frame, tBand - 10, 30);
@@ -236,8 +247,14 @@ export const OgiPhysics: React.FC = () => {
   ];
   return (
     <SceneFrame theme="night">
+      <Bg3D
+        src="blender/ht/ogi_physics.mp4"
+        sec={14}
+        shade="linear-gradient(rgba(2,4,9,0.65), rgba(2,4,9,0) 26%, rgba(2,4,9,0) 60%, rgba(2,4,9,0.55))"
+        label={t('ILUSTRASI 3D · MOLEKUL METANA (CH₄)', '3D ILLUSTRATION · METHANE MOLECULE (CH₄)')}
+      />
       <SceneTitle kicker={t('PRINSIP FISIKA', 'PHYSICAL PRINCIPLE')} title={t('Ikatan C–H menyerap inframerah di ≈3,3 µm', 'C–H bonds absorb infrared at ≈3.3 µm')} />
-      <div style={{position: 'absolute', left: padX, top, width: W, height: chartH}}>
+      <div style={{position: 'absolute', left: padX, top, width: W + 40, height: chartH + 64, padding: 20, opacity: progress(frame, tBand - 20, 18), ...glassPanel}}>
         <svg width={W} height={chartH}>
           {bands.map((b) => (
             <g key={b.a}>
@@ -293,8 +310,8 @@ export const OgiCooled: React.FC = () => {
   const tNoise = at(['Derau', 'The thermal noise']);
   const cool = progress(frame, tCool, 60);
   const temp = Math.round(interpolate(cool, [0, 1], [25, -196]));
-  const W = portrait ? width - padX * 2 : 820;
-  const H = 300;
+  const W = portrait ? width - padX * 2 - 40 : 640;
+  const H = portrait ? 260 : 210;
   const noiseAmp = interpolate(progress(frame, tNoise, 40), [0, 1], [70, 9]);
   const wave = (amp: number) => {
     const p: string[] = [];
@@ -302,54 +319,44 @@ export const OgiCooled: React.FC = () => {
       const x = (i / 200) * W;
       const sig = 55 * Math.exp(-(((i - 120) / 14) ** 2));
       const n = amp * (Math.sin(i * 1.7 + frame * 0.6) * 0.5 + Math.sin(i * 3.1 - frame * 0.9) * 0.3 + Math.sin(i * 5.3 + frame) * 0.2);
-      p.push(`${x},${H / 2 + 40 - sig - n * 0.6}`);
+      p.push(`${x},${H * 0.62 - sig * (H / 300) - n * 0.6 * (H / 300)}`);
     }
     return p.join(' ');
   };
   return (
     <SceneFrame theme="night">
+      <Bg3D
+        src="blender/ht/ogi_cooled.mp4"
+        sec={14}
+        shade="linear-gradient(rgba(2,4,9,0.6), rgba(2,4,9,0) 25%)"
+        label={t('ILUSTRASI 3D · STRUKTUR UMUM KAMERA MWIR BERPENDINGIN', '3D ILLUSTRATION · GENERIC COOLED MWIR CAMERA')}
+      />
       <SceneTitle kicker={t('DETEKTOR', 'DETECTOR')} title={t('Didinginkan hingga ≈ −196 °C (77 K)', 'Cooled to ≈ −196 °C (77 K)')} />
-      {/* diagram detektor: chip FPA dalam dewar + cooler Stirling */}
-      <div style={{position: 'absolute', left: padX, top: portrait ? 420 : 250, width: portrait ? W : 760}}>
-        <svg width={portrait ? W : 760} height={360} viewBox="0 0 760 360">
-          <rect x={40} y={60} width={300} height={220} rx={24} fill="#111C2E" stroke={COLORS.line} strokeWidth={3} />
-          <text x={190} y={46} textAnchor="middle" fontSize={22} fill={COLORS.muted} fontWeight={700}>
-            {t('Dewar vakum', 'Vacuum dewar')}
-          </text>
-          {Array.from({length: 8}).map((_, r) =>
-            Array.from({length: 10}).map((__, c) => (
-              <rect key={`${r}-${c}`} x={110 + c * 16} y={110 + r * 16} width={13} height={13} fill={COLORS.blueLight} fillOpacity={0.25 + 0.55 * cool * ((r + c) % 3 ? 1 : 0.7)} />
-            )),
-          )}
-          <text x={190} y={262} textAnchor="middle" fontSize={20} fill="#F2F5FA" fontWeight={700}>
-            MCT 640×512
-          </text>
-          <rect x={360} y={120} width={200} height={100} rx={14} fill="#1B2A44" stroke={COLORS.line} strokeWidth={3} />
-          <text x={460} y={176} textAnchor="middle" fontSize={22} fill="#F2F5FA" fontWeight={700}>
-            {t('Pendingin Stirling', 'Stirling cooler')}
-          </text>
-          <line x1={340} y1={170} x2={360} y2={170} stroke={COLORS.blueLight} strokeWidth={6} />
-          {/* termometer */}
-          <rect x={620} y={44} width={40} height={246} rx={20} fill="#111C2E" stroke={COLORS.line} strokeWidth={3} />
-          <rect x={628} y={48 + 234 * cool} width={24} height={234 * (1 - cool) + 6} rx={12} fill={cool > 0.9 ? COLORS.blueLight : COLORS.gas} />
-          <circle cx={640} cy={300} r={30} fill={cool > 0.9 ? COLORS.blueLight : COLORS.gas} />
-          <text x={640} y={30} textAnchor="middle" fontSize={28} fill="#F2F5FA" fontWeight={800}>
-            {temp}°C
-          </text>
+      {/* suhu detektor */}
+      <div style={{position: 'absolute', right: portrait ? undefined : 60, left: portrait ? padX : undefined, top: portrait ? 420 : 230, padding: '18px 26px', display: 'flex', alignItems: 'center', gap: 22, opacity: progress(frame, tCool - 10, 16), ...glassPanel}}>
+        <svg width={34} height={120} viewBox="0 0 34 120">
+          <rect x={7} y={2} width={20} height={96} rx={10} fill="#0A1120" stroke="#2B3D5C" strokeWidth={2} />
+          <rect x={11} y={6 + 88 * cool} width={12} height={88 * (1 - cool) + 6} rx={6} fill={cool > 0.9 ? COLORS.blueLight : COLORS.gas} />
+          <circle cx={17} cy={104} r={14} fill={cool > 0.9 ? COLORS.blueLight : COLORS.gas} />
         </svg>
+        <div>
+          <div style={{fontSize: 18, letterSpacing: 2, color: '#9FB3D1', fontWeight: 700}}>{t('SUHU DETEKTOR', 'DETECTOR TEMPERATURE')}</div>
+          <div style={{fontSize: 64, fontWeight: 800, color: cool > 0.9 ? COLORS.blueLight : '#F2F5FA', fontVariantNumeric: 'tabular-nums'}}>{temp}°C</div>
+          <div style={{fontSize: 18, color: '#9FB3D1'}}>{t('Dewar vakum · pendingin Stirling · FPA MCT 640×512', 'Vacuum dewar · Stirling cooler · MCT 640×512 FPA')}</div>
+        </div>
       </div>
       {/* derau vs sinyal */}
-      <div style={{position: 'absolute', left: portrait ? padX : 1000, top: portrait ? 860 : 280, width: W, opacity: progress(frame, tNoise - 6, 16)}}>
+      <div style={{position: 'absolute', right: portrait ? undefined : 60, left: portrait ? padX : undefined, top: portrait ? 1120 : 640, width: W + 40, padding: 20, opacity: progress(frame, tNoise - 6, 16), ...glassPanel}}>
         <div style={{fontSize: 24, fontWeight: 800, color: '#F2F5FA', marginBottom: 6}}>{t('Sinyal gas vs derau termal', 'Gas signal vs thermal noise')}</div>
         <svg width={W} height={H}>
-          <rect width={W} height={H} rx={14} fill="#111C2E" />
+          <rect width={W} height={H} rx={12} fill="rgba(10,17,32,0.8)" />
           <polyline points={wave(noiseAmp)} fill="none" stroke={COLORS.gas} strokeWidth={3} />
-          <text x={W * 0.6} y={40} fontSize={20} fill={COLORS.muted}>
+          <text x={W * 0.6} y={34} fontSize={20} fill={COLORS.muted}>
             {t('sinyal plume', 'plume signal')}
           </text>
         </svg>
-        <div style={{display: 'flex', gap: 16, marginTop: 14}}>
-          <InfoCard at={tNoise + 30} k="NETD" v={t('≤ 25 mK (spesifikasi opsi kamera)', '≤ 25 mK (camera option spec)')} color={COLORS.blueLight} style={{flex: 1, backgroundColor: '#111C2E', color: '#F2F5FA'}} />
+        <div style={{fontSize: 20, color: '#C9D2E0', marginTop: 10, opacity: progress(frame, tNoise + 30, 14)}}>
+          <b style={{color: COLORS.blueLight}}>NETD</b> {t('≤ 25 mK (spesifikasi opsi kamera)', '≤ 25 mK (camera option spec)')}
         </div>
       </div>
       <Sfx name="hum" at={tCool} volume={0.2} />

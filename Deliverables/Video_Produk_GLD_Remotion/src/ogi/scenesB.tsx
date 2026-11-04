@@ -9,10 +9,10 @@ import {useT} from '../i18n';
 import {useLayout} from '../layout';
 import {progress, useNarration} from '../motion';
 import {COLORS, FONT, PALETTES, themeVars} from '../theme';
-import {InfoCard, SceneTitle} from './common';
+import {Bg3D, InfoCard, SceneTitle} from './common';
 
 // 06 — Sistem di lapangan: render 3D (14 dtk) diperlambat mengisi slot + kartu spesifikasi + HUD preset.
-const OGI_3D_SEC = 14;
+const OGI_3D_SEC = 16;
 export const OgiField: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps, durationInFrames} = useVideoConfig();
@@ -21,11 +21,11 @@ export const OgiField: React.FC = () => {
   const rate = OGI_3D_SEC / ((durationInFrames + 18) / fps);
   const at3d = (s: number) => Math.round((s / rate) * fps); // detik render 3D -> frame adegan
   const PRESETS = [
-    {k: t('Preset 1 · Jalur pipa', 'Preset 1 · Pipe run'), a: at3d(0.6), b: at3d(4.0)},
-    {k: t('Preset 2 · Manifold', 'Preset 2 · Manifold'), a: at3d(5.2), b: at3d(7.5)},
-    {k: t('Preset 3 · Klaster valve', 'Preset 3 · Valve cluster'), a: at3d(8.8), b: durationInFrames + 20},
+    {k: t('Preset 1 · Jalur pipa', 'Preset 1 · Pipe run'), a: at3d(0.6), b: at3d(4.4)},
+    {k: t('Preset 2 · Manifold', 'Preset 2 · Manifold'), a: at3d(4.8), b: at3d(8.8)},
+    {k: t('Preset 3 · Klaster valve', 'Preset 3 · Valve cluster'), a: at3d(9.2), b: durationInFrames + 20},
   ];
-  const det = at3d(10.6);
+  const det = at3d(11.0);
   const SPECS = [
     {k: t('Pita spektral', 'Spectral band'), v: t('MWIR 3–5 µm · filter ≈3,3 µm', 'MWIR 3–5 µm · ≈3.3 µm filter')},
     {k: t('Detektor', 'Detector'), v: 'Cooled MCT 640×512'},
@@ -37,7 +37,7 @@ export const OgiField: React.FC = () => {
     <SceneFrame theme="night">
       <AbsoluteFill>
         <OffthreadVideo
-          src={staticFile(portrait ? 'blender/portrait/ogi_field.mp4' : 'blender/ogi_field.mp4')}
+          src={staticFile('blender/ht/ogi_field.mp4')}
           playbackRate={rate}
           muted
           style={{width: '100%', height: '100%', objectFit: 'cover'}}
@@ -211,7 +211,8 @@ export const OgiFusion: React.FC = () => {
     {g: true, c: true, r: t('Prioritas tertinggi', 'Highest priority'), col: COLORS.alarm},
   ];
   return (
-    <SceneFrame theme="light">
+    <SceneFrame theme="night">
+      <Bg3D src="blender/ht/ogi_field.mp4" sec={16} shade="rgba(2,4,9,0.68)" />
       <SceneTitle kicker={t('INTEGRASI', 'INTEGRATION')} title={t('GLD + OGI dalam satu dashboard', 'GLD + OGI in one dashboard')} />
       <div style={{position: 'absolute', left: padX, top: portrait ? 400 : 230, width: W, display: 'grid', gridTemplateColumns: portrait ? '1fr' : '1fr 1fr', gap: 22}}>
         <InfoCard at={tGld} big k={t('GLD · sensor titik', 'GLD · point sensor')} v={t('Gas apa & seberapa pekat', 'Which gas & how concentrated')} color={COLORS.gas} />
@@ -278,7 +279,8 @@ export const OgiLimits: React.FC = () => {
     {k: t('Garis pandang', 'Line of sight'), a: at(['garis pandang', 'line of sight'])},
   ];
   return (
-    <SceneFrame theme="light">
+    <SceneFrame theme="night">
+      <Bg3D src="blender/ht/ogi_physics.mp4" sec={14} shade="rgba(2,4,9,0.72)" />
       <SceneTitle kicker={t('BATASAN', 'LIMITATIONS')} title={t('Kamera melengkapi GLD, bukan menggantikannya', 'The camera complements GLD rather than replacing it')} />
       <div style={{position: 'absolute', left: padX, top: portrait ? 420 : 240, width: W, display: 'grid', gridTemplateColumns: portrait ? '1fr 1fr' : 'repeat(4, 1fr)', gap: 16}}>
         {FACTORS.map((f) => (

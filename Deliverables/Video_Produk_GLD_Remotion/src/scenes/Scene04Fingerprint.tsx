@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, OffthreadVideo, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Badge, Caption} from '../components/Caption';
 import {SceneFrame} from '../components/SceneFrame';
 import {Sfx} from '../components/Sfx';
@@ -314,6 +314,28 @@ const ModelPhase: React.FC<{phaseStart: number}> = ({phaseStart}) => {
   );
 };
 
+// Pembuka 3D: model GLD V2 terurai, 8 sensor MQ menyala, sidik jari hologram (render high-tech, 12 dtk).
+const CORE3D_SEC = 11;
+const Core3D: React.FC = () => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const {portrait, padX, title} = useLayout();
+  const t = useT();
+  const end = Math.round(CORE3D_SEC * fps);
+  if (frame > end + 2) return null;
+  return (
+    <AbsoluteFill style={{opacity: 1 - progress(frame, end - 18, 18), backgroundColor: '#020409'}}>
+      <OffthreadVideo src={staticFile('blender/ht/gld_core.mp4')} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+      <AbsoluteFill style={{background: portrait ? 'linear-gradient(rgba(2,4,9,0.8), transparent 30%)' : 'linear-gradient(90deg, rgba(2,4,9,0.75), rgba(2,4,9,0) 42%)'}} />
+      <div style={{position: 'absolute', left: padX, top: portrait ? 200 : 70, maxWidth: portrait ? 952 : 760}}>
+        <div style={{fontSize: 22, fontWeight: 800, letterSpacing: 3, color: COLORS.blueLight, opacity: progress(frame, 6, 14)}}>{t('8 SENSOR · 1 SIDIK JARI', '8 SENSORS · 1 FINGERPRINT')}</div>
+        <Caption text={t('Delapan sensor gas di dalam satu perangkat', 'Eight gas sensors inside one device')} from={10} size={title(56)} color="#F2F5FA" />
+      </div>
+      <div style={{position: 'absolute', right: 28, top: 22, fontSize: 16, letterSpacing: 1.5, color: 'rgba(214,240,255,0.7)'}}>{t('ILUSTRASI 3D · GLD V2', '3D ILLUSTRATION · GLD V2')}</div>
+    </AbsoluteFill>
+  );
+};
+
 export const Scene04Fingerprint: React.FC = () => {
   const frame = useCurrentFrame();
   const PHASE_B_AT = useNarration('fingerprint')(['Convolutional Neural Network', 'A dual-branch'], -12);
@@ -332,6 +354,7 @@ export const Scene04Fingerprint: React.FC = () => {
           <ModelPhase phaseStart={PHASE_B_AT} />
         </AbsoluteFill>
       </Sequence>
+      <Core3D />
     </SceneFrame>
   );
 };

@@ -53,6 +53,9 @@ export const Subtitles: React.FC<{id: string}> = ({id}) => {
     }
   }
 
+  // Narasi sudah selesai lama (mis. penjelajahan dashboard tanpa narasi): sembunyikan.
+  if (frame > span + fps * 1.5) return null;
+
   return (
     <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: subtitleBottom}}>
       <div

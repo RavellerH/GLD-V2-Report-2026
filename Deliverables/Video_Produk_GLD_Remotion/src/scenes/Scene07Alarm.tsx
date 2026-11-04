@@ -1,5 +1,6 @@
 import React from 'react';
-import {AbsoluteFill, Img, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Img, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {DashboardTour} from '../components/DashboardTour';
 import {ASSETS} from '../assets';
 import {AssetSlot} from '../components/AssetSlot';
 import {Caption} from '../components/Caption';
@@ -69,6 +70,8 @@ const Flow: React.FC<{alarmAt: number; w: number}> = ({alarmAt, w}) => {
 
 // Simulasi kebocoran (render Blender, ilustrasi) tampil penuh di awal adegan, lalu berganti ke dashboard.
 const LEAK_SEC = 6.5;
+// Setelah narasi alarm (19 dtk), penjelajahan dashboard asli (permintaan Pertamina HQ, 20 Okt 2026).
+const TOUR_AT_SEC = 19;
 
 export const Scene07Alarm: React.FC = () => {
   const frame = useCurrentFrame();
@@ -193,6 +196,10 @@ export const Scene07Alarm: React.FC = () => {
           </div>
         </AbsoluteFill>
       )}
+      <Sequence from={Math.round(TOUR_AT_SEC * fps)} layout="none">
+        <DashboardTour />
+        <Sfx name="whoosh" at={0} volume={0.3} />
+      </Sequence>
     </SceneFrame>
   );
 };

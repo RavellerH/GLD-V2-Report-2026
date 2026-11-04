@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>X-Banner GLD V2</title>
+<style>
+@font-face{font-family:Inter;font-weight:400;src:url(img/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(img/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(img/inter-latin-800-normal.woff2)}
+@page{size:600mm 1600mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:600mm;height:1600mm;font-family:Inter,"Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#081634}
+.b{width:600mm;height:1600mm;position:relative;overflow:hidden;color:#fff;background:radial-gradient(ellipse 90% 45% at 50% 48%,#2357bd 0%,#0e2350 60%,#081634 100%)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(120,180,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(120,180,255,.07) 1px,transparent 1px);background-size:20mm 20mm}
+.logos{position:absolute;left:0;right:0;top:0;height:130mm;background:#fff;display:flex;align-items:center;justify-content:center;gap:34mm}
+.logos img{height:52mm}.logos img.itb{height:72mm}
+.head{position:absolute;left:44mm;right:44mm;top:185mm}
+.k{font-size:42pt;font-weight:800;letter-spacing:9pt;color:#7fc8ff}
+.t{font-size:300pt;font-weight:800;line-height:.9;letter-spacing:-6pt;margin-top:12mm}
+.t span{color:#7fc8ff}
+.s{font-size:68pt;font-weight:600;line-height:1.2;margin-top:18mm;color:#e6f0ff}
+.hero{position:absolute;left:-40mm;right:-40mm;top:470mm;height:660mm;width:680mm;object-fit:cover;object-position:50% 56%;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 34%,#000 80%,transparent 100%)}
+.vp{position:absolute;left:44mm;right:44mm;top:1125mm;display:grid;grid-template-columns:1fr 1fr;gap:16mm 18mm}
+.vp div{border-left:5mm solid #13a9e0;padding:2mm 0 2mm 10mm}
+.vp div.al{border-left-color:#ff4d6d}
+.vp b{display:block;font-size:84pt;font-weight:800;line-height:1}
+.vp span{display:block;font-size:40pt;color:#bcd2f2;margin-top:4mm;line-height:1.25}
+.flow{position:absolute;left:44mm;right:44mm;top:1360mm;display:flex;align-items:center;justify-content:space-between}
+.flow b{font-size:34pt;font-weight:800;padding:7mm 9mm;border-radius:5mm;border:1.2mm solid #7fc8ff;color:#fff;white-space:nowrap}
+.flow b.f{background:#2b5fcb;border-color:#2b5fcb}
+.flow i{font-style:normal;font-size:44pt;color:#7fc8ff}
+.foot{position:absolute;left:0;right:0;bottom:0;height:150mm;background:#fff;color:#262321;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 40mm}
+.foot .a{font-size:34pt;font-weight:800;line-height:1.3;color:#0e2350}
+.foot .n{font-size:20pt;color:#8a95a6;margin-top:6mm}
+.corner{position:absolute;width:30mm;height:30mm;border-color:#5ab8ff;border-style:solid;opacity:.8}
+</style>
+</head>
+<body>
+<div class="b">
+  <div class="grid"></div>
+  <div class="logos"><img src="img/logo_pertamina.png" alt="Pertamina"><img src="img/logo_lgu.png" alt="LGU"><img class="itb" src="img/logo_itb.png" alt="ITB"></div>
+  <div class="head">
+    <div class="k">GAS LEAK DETECTION SYSTEM</div>
+    <div class="t">GLD <span>V2</span></div>
+    <div class="s">Deteksi kebocoran gas multigas, cerdas, dan nirkabel untuk kilang</div>
+  </div>
+  <img class="hero" src="img/hero_f0020.png" alt="GLD V2">
+  <span class="corner" style="left:44mm;top:600mm;border-width:1.2mm 0 0 1.2mm"></span>
+  <span class="corner" style="right:44mm;top:600mm;border-width:1.2mm 1.2mm 0 0"></span>
+  <div class="vp">
+    <div><b>8 Sensor</b><span>sidik jari multigas dalam satu perangkat</span></div>
+    <div><b>Edge AI</b><span>klasifikasi gas langsung di perangkat</span></div>
+    <div><b>LoRa Mesh</b><span>nirkabel & self-healing, tanpa kabel data</span></div>
+    <div class="al"><b>Push Alarm</b><span>peringatan seketika ke operator</span></div>
+  </div>
+  <div class="flow"><b>GLD</b><i>→</i><b class="f">Cluster Head</b><i>→</i><b class="f">Gateway</b><i>→</i><b>Dashboard</b></div>
+  <div class="foot">
+    <div class="a">PT Pertamina Patra Niaga (Fungsi Reliability) × LAPI Ganesha Utama × Institut Teknologi Bandung</div>
+    <div class="n">Ilustrasi 3D perangkat GLD V2</div>
+  </div>
+</div>
+</body>
+</html>

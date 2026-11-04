@@ -251,3 +251,7 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 - **Rev 1.2 (2 Nov)**: Bagian 7 (tabel tindak lanjut) dihapus atas permintaan user.
 - **Rev 1.3 (2 Nov)**: Bagian 6 (opsi A relokasi/B sampling/C perbaikan jalur gas + rekomendasi) dihapus atas permintaan user; rujukan ke Bagian 6 di pengantar, ringkasan & bagian 5 ikut disesuaikan. Dokumen kini 5 bagian, 3 halaman. Opsi-opsi tsb tetap tercatat di dec:221 sbg bahan internal.
 - **Rev 1.4 (2 Nov)**: bullet perkiraan durasi sertifikasi 5–8 bulan di Bagian 5 dihapus atas permintaan user.
+
+
+## Brosur GLD 4 halaman A4 (4 Nov 2026, dec:226)
+`Deliverables/Konten_Brosur_GLD_4Halaman.md` (konten untuk di-layout di tool lain) + draf layout `Deliverables/Brosur_GLD_A4_4Halaman.{html,pdf}` (generator `scripts/build_brosur_gld_direksi.py`). Audiens umum, tanpa rujukan MoC/lokasi. Akurasi 99,31% (validasi lab), kelas model Clean Air/LPG/H2, sertifikasi 'dalam proses'.

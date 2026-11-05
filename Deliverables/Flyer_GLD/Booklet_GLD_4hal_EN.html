@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Booklet GLD V2</title>
+<style>
+@font-face{font-family:Inter;font-weight:400;src:url(img/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(img/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(img/inter-latin-800-normal.woff2)}
+@page{size:A4;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:Inter,"Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+:root{--ink:#111318;--mute:#6b7280;--line:#e5e7eb;--acc:#2b5fcb;--acc-dk:#5b8cff;--dk:#07090d}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;background:#fff;color:var(--ink)}
+.page:last-child{page-break-after:auto}
+.dark{background:var(--dk);color:#fff}
+.in{position:absolute;left:18mm;right:18mm}
+.eyebrow{font-size:9pt;font-weight:600;letter-spacing:2.4pt;color:var(--acc)}
+.dark .eyebrow{color:var(--acc-dk)}
+h1{font-size:64pt;font-weight:800;line-height:1;letter-spacing:-2pt}
+h2{font-size:34pt;font-weight:800;line-height:1.05;letter-spacing:-1pt}
+.lead{font-size:13pt;line-height:1.5;color:#3f4652;max-width:150mm}
+.dark .lead{color:#b4bccb}
+.mute{color:var(--mute)}
+.dark .mute{color:#8a93a3}
+.small{font-size:8pt;line-height:1.5}
+.cols{display:grid;gap:8mm}
+.feat b{display:block;font-size:13pt;font-weight:800;margin-bottom:1.6mm}
+.feat p{font-size:10pt;line-height:1.5;color:#4b5260}
+.dark .feat p{color:#a9b2c2}
+.big{font-size:40pt;font-weight:800;letter-spacing:-1.2pt;line-height:1}
+.stat p{margin-top:2mm;font-size:10pt;line-height:1.5;color:#4b5260}
+.rule{height:1px;background:var(--line)}
+.dark .rule{background:#232733}
+img.full{display:block;width:100%;height:100%;object-fit:cover}
+table{width:100%;border-collapse:collapse;font-size:10pt}
+td{padding:2.6mm 0;border-top:1px solid var(--line);vertical-align:top;line-height:1.45}
+td:first-child{width:38mm;color:var(--mute)}
+.flow{display:flex;align-items:center;gap:3mm;font-size:11pt;font-weight:600}
+.flow i{font-style:normal;color:var(--acc-dk)}
+.logos{display:flex;align-items:center;gap:8mm}
+.logos img{height:9mm}.logos img.itb{height:12mm}
+.lb{position:absolute;color:#fff;font-size:8pt;line-height:1.3;width:30mm}
+.lb b{display:block;font-size:9pt;font-weight:800}
+.lb span{color:#b4c6e6}
+.lb::before{content:"";position:absolute;left:0;width:0;border-left:.3mm solid rgba(255,255,255,.7)}
+.lb.dn::before{bottom:100%;height:var(--h);margin-bottom:1.2mm}
+.lb.up::before{top:100%;height:var(--h);margin-top:1.2mm}
+.lb::after{content:"";position:absolute;left:-.8mm;width:1.9mm;height:1.9mm;border-radius:50%;background:#fff}
+.lb.dn::after{bottom:calc(100% + var(--h) + 1.2mm)}
+.lb.up::after{top:calc(100% + var(--h) + 1.2mm)}
+.lb{padding-left:1.6mm;white-space:nowrap;width:auto!important}
+.lb.r{padding-left:0;padding-right:1.6mm;text-align:right}
+.lb.r::before{left:auto;right:0}.lb.r::after{left:auto;right:-.8mm}
+.ph{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm 3mm}
+.ph div img{display:block;width:100%;height:33mm;object-fit:cover;border-radius:1.5mm}
+.ph div p{font-size:7.6pt;line-height:1.35;color:#6b7280;margin-top:1.3mm}
+</style>
+</head>
+<body>
+
+<!-- 1 · SAMPUL -->
+<div class="page dark">
+  <img src="img/hero_wide_banner.jpg" alt="GLD V2" style="position:absolute;left:0;top:66mm;width:210mm;height:206mm;object-fit:cover;object-position:50% 50%">
+  <div class="in" style="top:24mm">
+    <div class="eyebrow">GAS LEAK DETECTION SYSTEM</div>
+    <h1 style="margin-top:4mm">GLD V2</h1>
+    <div class="lead" style="margin-top:4mm;font-size:15pt">Intelligent, wireless multi-gas leak detection for refineries.</div>
+  </div>
+  <div class="in" style="bottom:16mm;display:flex;justify-content:space-between;align-items:flex-end">
+    <div class="small mute">PT Pertamina Patra Niaga (Fungsi Reliability)<br>LAPI Ganesha Utama · Institut Teknologi Bandung</div>
+    <div class="small mute">3D illustration</div>
+  </div>
+</div>
+
+<!-- 2 · PERANGKAT -->
+<div class="page">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">THE DEVICE</div>
+    <h2 style="margin-top:3mm">Multi-gas sensors.<br>One device.</h2>
+    <div class="lead" style="margin-top:5mm">Each GLD reads the response pattern of multiple gas sensors, and on-device AI identifies the gas. No server round-trip, no waiting.</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:104mm;height:112mm;background:var(--dk)">
+    <img class="full" src="img/exploded_crop.png" style="filter:brightness(.62) contrast(1.12) saturate(.85);-webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 4%,#000 16%)" alt="GLD V2 exploded view">
+    <div class="lb up" style="left:28.5%;top:30mm;--h:12mm"><b>AI model</b><span>Dual-branch CNN · 8-bit · on-device</span></div>
+    <div class="lb dn r" style="right:72.5%;bottom:6mm;--h:34mm"><b>Processor</b><span>on-device AI inference</span></div>
+    <div class="lb dn" style="left:41.5%;bottom:6mm;--h:38mm;width:40mm"><b>Multi-gas sensors</b><span>metal-oxide · multi-gas fingerprint</span></div>
+
+  </div>
+  <div class="in small mute" style="top:219mm">3D illustration of GLD V2, exploded view.</div>
+  <div class="in cols" style="top:234mm;grid-template-columns:repeat(3,1fr)">
+    <div class="feat"><b>Gas fingerprint</b><p>Metal-oxide sensors form a distinct pattern for each gas.</p></div>
+    <div class="feat"><b>Edge AI</b><p>A dual-branch 8-bit CNN runs directly on the microcontroller.</p></div>
+    <div class="feat"><b>Local alarm</b><p>The on-device beacon lights up the moment gas is detected.</p></div>
+  </div>
+</div>
+
+<!-- 3 · SISTEM -->
+<div class="page dark">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">THE SYSTEM</div>
+    <h2 style="margin-top:3mm">Leak detected.<br>Operators know instantly.</h2>
+    <div class="lead" style="margin-top:5mm">Data travels over a private LoRa mesh. No data cabling, no internet. If one path drops, the network reroutes itself.</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:100mm;height:104mm">
+    <img class="full" src="img/mesh.png" style="-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 18%,#000 82%,transparent 100%)" alt="Mesh network and alarm"><svg class="ov" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%" font-family="Inter,Segoe UI,Arial"><line x1="1190" y1="430" x2="1330" y2="640" stroke="#ff5a6e" stroke-width="2.4" opacity=".85"/><circle cx="1190" cy="430" r="9" fill="#ff5a6e"/><circle cx="1190" cy="430" r="20" fill="none" stroke="#ff5a6e" stroke-width="2" opacity=".55"/><circle cx="1356" cy="640" r="22" fill="#2b5fcb" stroke="#fff" stroke-width="2"/><text x="1356" y="649" font-size="26" font-weight="800" fill="#fff" text-anchor="middle">1</text><text x="1390" y="642" font-size="31" font-weight="800" fill="#fff" text-anchor="start">GLD detects gas</text><text x="1390" y="674" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="start">alarm sent over LoRa</text><line x1="1062" y1="770" x2="1230" y2="860" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="1062" cy="770" r="9" fill="#ffffff"/><circle cx="1062" cy="770" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><circle cx="1256" cy="860" r="22" fill="#2b5fcb" stroke="#fff" stroke-width="2"/><text x="1256" y="869" font-size="26" font-weight="800" fill="#fff" text-anchor="middle">2</text><text x="1290" y="862" font-size="31" font-weight="800" fill="#fff" text-anchor="start">Cluster Head</text><text x="1290" y="894" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="start">receives & relays</text><line x1="870" y1="400" x2="720" y2="560" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="870" cy="400" r="9" fill="#ffffff"/><circle cx="870" cy="400" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><circle cx="694" cy="560" r="22" fill="#2b5fcb" stroke="#fff" stroke-width="2"/><text x="694" y="569" font-size="26" font-weight="800" fill="#fff" text-anchor="middle">3</text><text x="660" y="562" font-size="31" font-weight="800" fill="#fff" text-anchor="end">Cluster Head</text><text x="660" y="594" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="end">next hop</text><line x1="140" y1="378" x2="140" y2="720" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="140" cy="378" r="9" fill="#ffffff"/><circle cx="140" cy="378" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><circle cx="166" cy="720" r="22" fill="#2b5fcb" stroke="#fff" stroke-width="2"/><text x="166" y="729" font-size="26" font-weight="800" fill="#fff" text-anchor="middle">4</text><text x="200" y="722" font-size="31" font-weight="800" fill="#fff" text-anchor="start">Cluster Head</text><text x="200" y="754" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="start">on to Gateway → server</text><line x1="232" y1="410" x2="420" y2="300" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="232" cy="410" r="9" fill="#ffffff"/><circle cx="232" cy="410" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><text x="434" y="302" font-size="31" font-weight="800" fill="#fff" text-anchor="start">GLD</text><text x="434" y="334" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="start">sensor at risk points</text><line x1="612" y1="352" x2="640" y2="260" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="612" cy="352" r="9" fill="#ffffff"/><circle cx="612" cy="352" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><text x="654" y="262" font-size="31" font-weight="800" fill="#fff" text-anchor="start">GLD</text></svg>
+  </div>
+  <div class="in flow" style="top:208mm"><span>GLD</span><i>→</i><span>Cluster Head</span><i>→</i><span>Gateway</span><i>→</i><span>Local server</span><i>→</i><span>Dashboard</span></div>
+  <div class="in" style="top:219mm"><div class="rule"></div></div>
+  <div class="in cols" style="top:226mm;grid-template-columns:1fr 1fr;gap:10mm">
+    <div class="feat">
+      <b>Self-healing network</b><p>If a Cluster Head goes offline, data is automatically rerouted through another path.</p>
+      <svg viewBox="0 0 300 142" style="display:block;width:100%;margin-top:3mm" font-family="Inter,Segoe UI,Arial" font-size="7" font-weight="700" text-anchor="middle"><line x1="22" y1="16" x2="84" y2="16" stroke="#6b7280" stroke-width="1"/><line x1="22" y1="40" x2="66" y2="52" stroke="#6b7280" stroke-width="1"/><line x1="22" y1="64" x2="66" y2="52" stroke="#6b7280" stroke-width="1"/><line x1="52" y1="92" x2="30" y2="124" stroke="#6b7280" stroke-width="1"/><line x1="122" y1="100" x2="104" y2="128" stroke="#6b7280" stroke-width="1"/><line x1="122" y1="100" x2="138" y2="128" stroke="#6b7280" stroke-width="1"/><line x1="190" y1="80" x2="190" y2="128" stroke="#6b7280" stroke-width="1"/><line x1="66" y1="52" x2="112" y2="54" stroke="#5b8cff" stroke-width="1.6"/><line x1="66" y1="52" x2="52" y2="92" stroke="#5b8cff" stroke-width="1.6"/><line x1="112" y1="54" x2="122" y2="100" stroke="#5b8cff" stroke-width="1.6"/><line x1="84" y1="16" x2="148" y2="32" stroke="#3a404c" stroke-width="1"/><line x1="112" y1="54" x2="148" y2="32" stroke="#3a404c" stroke-width="1"/><line x1="148" y1="32" x2="190" y2="32" stroke="#3a404c" stroke-width="1"/><line x1="190" y1="80" x2="190" y2="32" stroke="#ffffff" stroke-width="1.6"/><line x1="84" y1="16" x2="66" y2="52" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><line x1="84" y1="16" x2="112" y2="54" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><line x1="112" y1="54" x2="190" y2="80" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><line x1="122" y1="100" x2="190" y2="80" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><rect x="8.0" y="9.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="22" y="18.5" fill="#fff">GLD</text><rect x="8.0" y="33.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="22" y="42.5" fill="#fff">GLD</text><rect x="8.0" y="57.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="22" y="66.5" fill="#fff">GLD</text><rect x="16.0" y="117.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="30" y="126.5" fill="#fff">GLD</text><rect x="90.0" y="121.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="104" y="130.5" fill="#fff">GLD</text><rect x="124.0" y="121.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="138" y="130.5" fill="#fff">GLD</text><rect x="176.0" y="121.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="190" y="130.5" fill="#fff">GLD</text><rect x="70.0" y="9.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="84" y="18.5" fill="#fff">CH</text><rect x="52.0" y="45.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="66" y="54.5" fill="#fff">CH</text><rect x="98.0" y="47.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="112" y="56.5" fill="#fff">CH</text><rect x="38.0" y="85.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="52" y="94.5" fill="#fff">CH</text><rect x="108.0" y="93.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="122" y="102.5" fill="#fff">CH</text><rect x="176.0" y="73.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="190" y="82.5" fill="#fff">CH</text><rect x="134.0" y="25.0" width="28" height="14" rx="3" fill="#1c2029" stroke="#3a404c"/><text x="148" y="34.5" fill="#6b7280">CH</text><path d="M143 13L153 23M153 13L143 23" stroke="#ff5a6e" stroke-width="2.2"/><rect x="176.0" y="25.0" width="28" height="14" rx="3" fill="#fff"/><text x="190" y="34.5" fill="#07090d">GW</text><line x1="228" y1="44" x2="246" y2="44" stroke="#6b7280" stroke-width="1"/><text x="251" y="46.5" fill="#b4bccb" font-weight="600" text-anchor="start">GLD – CH</text><line x1="228" y1="60" x2="246" y2="60" stroke="#5b8cff" stroke-width="1.6"/><text x="251" y="62.5" fill="#b4bccb" font-weight="600" text-anchor="start">CH – CH</text><line x1="228" y1="76" x2="246" y2="76" stroke="#ffffff" stroke-width="1.6"/><text x="251" y="78.5" fill="#b4bccb" font-weight="600" text-anchor="start">CH – Gateway</text><line x1="228" y1="92" x2="246" y2="92" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><text x="251" y="94.5" fill="#b4bccb" font-weight="600" text-anchor="start">Failover path</text><text x="251" y="110.5" fill="#b4bccb" font-weight="600" text-anchor="start">CH offline</text><path d="M234 105L240 111M240 105L234 111" stroke="#ff5a6e" stroke-width="2"/></svg>
+    </div>
+    <div class="feat">
+      <b>Instant push alarms</b><p>Alarms bypass the polling cycle; operators see location and risk level at once.</p>
+      <div style="margin-top:3mm;border-radius:2mm;overflow:hidden;border:1px solid #232733"><img src="img/dash_alarm_crop.png" style="display:block;width:100%" alt="Alarm console"></div>
+    </div>
+  </div>
+  <div class="in small mute" style="bottom:9mm">3D illustrations · dashboard shown with demonstration data.</div>
+</div>
+
+<!-- 4 · TERUJI & SPESIFIKASI -->
+<div class="page">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">PROVEN</div>
+    <h2 style="margin-top:3mm">From lab to refinery.</h2>
+  </div>
+  <div class="in cols" style="top:52mm;grid-template-columns:repeat(3,1fr)">
+    <div class="stat"><div class="big">7/7</div><p>Factory Acceptance Test items passed · second-generation GLD, laboratory</p></div>
+    <div class="stat"><div class="big">8</div><p>Cluster Heads in a multi-hop mesh, failover tested · ITB campus</p></div>
+    <div class="stat"><div class="big">2025</div><p>Field trial at RU VII Kasim, Nov–Dec · first-generation GLD</p></div>
+  </div>
+  <div class="in ph" style="top:90mm">
+    <div><img src="img/k_01_persiapan.jpg" alt=""><p>Equipment check with HSE personnel</p></div>
+    <div><img src="img/k_02_pemasangan_disaksikan.jpg" alt=""><p>Pole installation, witnessed by refinery staff</p></div>
+    <div><img src="img/k_03_pemasangan_panel_surya.jpg" alt=""><p>Installation on a solar-powered pole</p></div>
+    <div><img src="img/k_07_gld_terpasang.jpg" alt=""><p>GLD installed in the tank area</p></div>
+    <div><img src="img/k_05_pemantauan_nodered.jpg" alt=""><p>Data monitoring from the control room</p></div>
+    <div><img src="img/k_06_koordinasi_tim.jpg" alt=""><p>Team coordination on site</p></div>
+  </div>
+  <div class="in small mute" style="top:177mm">Field trial at RU VII Kasim · November–December 2025 · first-generation GLD.</div>
+
+  <div class="in" style="top:188mm">
+    <div class="eyebrow" style="margin-bottom:3mm">SPECIFICATIONS</div>
+    <table>
+      <tr><td>Sensors</td><td>Multiple metal-oxide gas sensors</td></tr>
+      <tr><td>Intelligence</td><td>Dual-branch CNN, 8-bit, on-device</td></tr>
+      <tr><td>Communication</td><td>LoRa, private multi-hop mesh</td></tr>
+      <tr><td>Power supply</td><td>24 VDC</td></tr>
+      <tr><td>Validated gases</td><td>LPG, H₂</td></tr>
+      <tr><td>In development</td><td>CO₂ (data available) · CH₄, CO, NH₃, benzene (targets) · models trained on site</td></tr>
+    </table>
+  </div>
+  <div class="in" style="bottom:14mm;display:flex;justify-content:space-between;align-items:center">
+    <div class="logos"><img src="img/logo_pertamina.png" alt="Pertamina"><img src="img/logo_lgu.png" alt="LGU"><img class="itb" src="img/logo_itb.png" alt="ITB"></div>
+    <div class="small mute" style="text-align:right">Pilot: RU IV Cilacap</div>
+  </div>
+</div>
+
+</body>
+</html>

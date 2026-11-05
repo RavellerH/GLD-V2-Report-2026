@@ -79,8 +79,8 @@ const InfoPanel: React.FC = () => {
   return (
     <div style={{position: 'absolute', left: portrait ? 64 : 1330, top: portrait ? 1020 : 250, width: portrait ? 952 : 500}}>
       <div style={{fontSize: 24, fontWeight: 800, color: COLORS.blueLight, letterSpacing: 1, opacity: show(at(['dua lapis', 'two-layer'], -10))}}>{t('ARSITEKTUR RADIO DUA LAPIS', 'TWO-LAYER RADIO ARCHITECTURE')}</div>
-      {row(COLORS.gas, 'STAR · 920 MHz', t('node sensor → Cluster Head', 'sensor node → Cluster Head'), at(['Node sensor terhubung', 'Sensor nodes connect']), true)}
-      {row(COLORS.blueLight, 'MESH · 921 MHz', t('antar-Cluster Head → gateway', 'Cluster Head to Cluster Head → gateway'), at(['antar-Cluster Head', 'the Cluster Heads form']))}
+      {row(COLORS.gas, 'STAR', t('node sensor → Cluster Head', 'sensor node → Cluster Head'), at(['Node sensor terhubung', 'Sensor nodes connect']), true)}
+      {row(COLORS.blueLight, 'MESH', t('antar-Cluster Head → gateway', 'Cluster Head to Cluster Head → gateway'), at(['antar-Cluster Head', 'the Cluster Heads form']))}
 
       <div style={{fontSize: 24, fontWeight: 800, color: COLORS.ok, letterSpacing: 1, marginTop: portrait ? 28 : 48, opacity: show(FAIL_AT)}}>{t('PEMULIHAN RUTE OTOMATIS', 'AUTOMATIC ROUTE RECOVERY')}</div>
       {STEPS.map((s, i) => (
@@ -218,7 +218,7 @@ export const Scene06Mesh: React.FC = () => {
           <OffthreadVideo src={staticFile('blender/ht/gld_mesh.mp4')} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
           <AbsoluteFill style={{background: portrait ? 'linear-gradient(rgba(2,4,9,0.8), transparent 35%)' : 'linear-gradient(90deg, rgba(2,4,9,0.82), rgba(2,4,9,0) 50%)'}} />
           <div style={{position: 'absolute', left: padX, top: portrait ? 200 : 70, maxWidth: portrait ? 952 : 820}}>
-            <div style={{fontSize: 22, fontWeight: 800, letterSpacing: 3, color: COLORS.blueLight, opacity: progress(frame, 6, 14)}}>PRIVATE MESH LoRa · 920 MHz</div>
+            <div style={{fontSize: 22, fontWeight: 800, letterSpacing: 3, color: COLORS.blueLight, opacity: progress(frame, 6, 14)}}>PRIVATE MESH LoRa</div>
             <Caption text={t('GLD → Cluster Head → Gateway, tanpa kabel data', 'GLD → Cluster Head → Gateway, no data cables')} from={10} size={title(56)} color="#F2F5FA" />
           </div>
           <div style={{position: 'absolute', right: 28, top: 22, fontSize: 16, letterSpacing: 1.5, color: 'rgba(214,240,255,0.7)'}}>

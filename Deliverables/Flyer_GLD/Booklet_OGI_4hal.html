@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Booklet OGI</title>
+<link rel="stylesheet" href="booklet.css">
+</head>
+<body>
+
+<!-- 1 · SAMPUL -->
+<div class="page dark">
+  <img src="img/o_ogi_hook_0.95.png" alt="Citra thermal kebocoran gas" style="position:absolute;left:0;top:96mm;width:210mm;height:170mm;object-fit:cover;object-position:62% 50%;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 20%,#000 75%,transparent 100%)">
+  <div class="in" style="top:24mm">
+    <div class="eyebrow">GLD NEXT · KONSEP PENGEMBANGAN</div>
+    <h1 style="margin-top:4mm;font-size:52pt">Optical Gas<br>Imaging</h1>
+    <div class="lead" style="margin-top:4mm;font-size:15pt">Melihat kebocoran hidrokarbon yang tak kasatmata, dari titik ke area.</div>
+  </div>
+  <div class="in" style="bottom:16mm;display:flex;justify-content:space-between;align-items:flex-end">
+    <div class="small mute">PT Pertamina Patra Niaga (Fungsi Reliability)<br>LAPI Ganesha Utama · Institut Teknologi Bandung</div>
+    <div class="small mute">Ilustrasi 3D</div>
+  </div>
+</div>
+
+<!-- 2 · PRINSIP -->
+<div class="page">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">PRINSIP</div>
+    <h2 style="margin-top:3mm">Gas tak terlihat.<br>Kini tampak.</h2>
+    <div class="lead" style="margin-top:5mm">Ikatan karbon-hidrogen menyerap radiasi inframerah di sekitar 3,3 µm. Kamera dengan filter spektral sempit pada pita itu menampilkan gas sebagai kontras terhadap latar.</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:104mm;height:100mm;background:var(--dk)">
+    <img class="full" src="img/o_ogi_cooled_0.9.png" style="filter:brightness(.8) contrast(1.05)" alt="Struktur kamera MWIR berpendingin">
+    <div class="lb up" style="left:19%;top:8mm;--h:28mm"><b>Lensa MWIR</b><span>pita 3–5 µm</span></div>
+    <div class="lb dn r" style="right:66%;bottom:8mm;--h:34mm"><b>Filter spektral</b><span>±3,3 µm, pita serapan C–H</span></div>
+    <div class="lb up" style="left:50%;top:8mm;--h:30mm"><b>Detektor berpendingin</b><span>≈ −196 °C (77 K)</span></div>
+  </div>
+  <div class="in small mute" style="top:207mm">Ilustrasi 3D struktur umum kamera MWIR berpendingin.</div>
+  <div class="in cols" style="top:222mm;grid-template-columns:repeat(3,1fr)">
+    <div class="feat"><b>Pita MWIR</b><p>Mid-Wave Infrared 3–5 µm, tempat hidrokarbon menyerap radiasi.</p></div>
+    <div class="feat"><b>Filter sempit</b><p>Hanya meloloskan panjang gelombang serapan C–H.</p></div>
+    <div class="feat"><b>Detektor dingin</b><p>Pendinginan menekan derau detektor, meningkatkan sensitivitas terhadap sinyal inframerah gas yang lemah.</p></div>
+  </div>
+</div>
+
+<!-- 3 · SISTEM -->
+<div class="page dark">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">SISTEM</div>
+    <h2 style="margin-top:3mm">Dari titik<br>ke area.</h2>
+    <div class="lead" style="margin-top:5mm">Kamera pada tiang ±10 m dengan pan-tilt berpatroli di sektor kritis: jalur pipa, manifold, dan klaster valve. Target jangkauan ±100 m.</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:96mm;height:106mm">
+    <img class="full" src="img/o_ogi_field_0.6.png" style="-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 16%,#000 84%,transparent 100%)" alt="Kamera OGI di lapangan">
+  </div>
+  <div class="in flow" style="top:206mm"><span>Kamera MWIR</span><i>→</i><span>Edge server · AI segmentasi plume</span><i>→</i><span>Dashboard GLD + OGI</span></div>
+  <div class="in" style="top:217mm"><div class="rule"></div></div>
+  <div class="in cols" style="top:224mm;grid-template-columns:1fr 1fr;gap:10mm">
+    <div class="feat">
+      <b>GLD + OGI, satu sistem</b>
+      <table class="dt">
+        <tr><td>GLD</td><td>Gas apa &amp; seberapa pekat</td></tr>
+        <tr><td>OGI</td><td>Di mana &amp; ke arah mana menyebar</td></tr>
+        <tr class="hl"><td>Keduanya</td><td>Prioritas respons tertinggi</td></tr>
+      </table>
+    </div>
+    <div class="feat">
+      <b>Alarm yang terkonfirmasi</b><p>Alarm dipicu hanya bila plume terdeteksi konsisten pada beberapa frame berturut-turut, sehingga gangguan flare dan pantulan panas ditekan.</p>
+    </div>
+  </div>
+  <div class="in small mute" style="bottom:9mm">Ilustrasi 3D konsep sistem.</div>
+</div>
+
+<!-- 4 · SPESIFIKASI -->
+<div class="page">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">MELENGKAPI GLD</div>
+    <h2 style="margin-top:3mm">Melengkapi,<br>bukan menggantikan.</h2>
+  </div>
+  <div class="in cols" style="top:64mm;grid-template-columns:repeat(3,1fr)">
+    <div class="stat"><div class="big">3–5 µm</div><p>Pita Mid-Wave Infrared</p></div>
+    <div class="stat"><div class="big">−196 °C</div><p>Suhu kerja detektor</p></div>
+    <div class="stat"><div class="big">±100 m</div><p>Target jangkauan visualisasi</p></div>
+  </div>
+  <div class="in" style="top:102mm">
+    <div class="eyebrow" style="margin-bottom:3mm">SPESIFIKASI TARGET</div>
+    <table>
+      <tr><td>Detektor</td><td>MCT berpendingin, 640 × 512 piksel</td></tr>
+      <tr><td>Frame rate</td><td>100 Hz</td></tr>
+      <tr><td>Pemasangan</td><td>Tiang ±10 m, pan-tilt, patroli preset sektor</td></tr>
+      <tr><td>Kecerdasan</td><td>Segmentasi plume di edge server, konfirmasi multi-frame</td></tr>
+      <tr><td>Validasi</td><td>Uji pelepasan gas terkontrol</td></tr>
+      <tr><td>Batasan</td><td>Sistem OGI yang diusulkan dioptimalkan untuk deteksi hidrokarbon pada ±3,3 µm dan tidak dirancang untuk mendeteksi H₂, CO, atau H₂S; dapat ditangani oleh sistem GLD.</td></tr>
+    </table>
+  </div>
+  <div class="in" style="top:184mm">
+    <div class="eyebrow" style="margin-bottom:4mm">ARAH PENGEMBANGAN</div>
+    <div class="cols" style="grid-template-columns:repeat(3,1fr)">
+      <div class="feat"><b>Modular</b><p>Dirancang untuk direplikasi di seluruh kilang Pertamina.</p></div>
+      <div class="feat"><b>Emisi fugitif</b><p>Mendukung dokumentasi emisi fugitif.</p></div>
+      <div class="feat"><b>Predictive maintenance</b><p>Termografi radiometrik: hot spot heater, isolasi rusak, steam trap.</p></div>
+    </div>
+  </div>
+  <div class="in small mute" style="top:240mm;max-width:150mm">Konsep pengembangan tahap berikutnya, belum termasuk ruang lingkup unit GLD saat ini. Spesifikasi merupakan target rancangan; seluruh gambar adalah ilustrasi 3D.</div>
+  <div class="in" style="bottom:14mm;display:flex;justify-content:space-between;align-items:center">
+    <div class="logos"><img src="img/logo_pertamina.png" alt="Pertamina"><img src="img/logo_lgu.png" alt="LGU"><img class="itb" src="img/logo_itb.png" alt="ITB"></div>
+    <div class="small mute" style="text-align:right">Lab Internet of Things<br>Institut Teknologi Bandung</div>
+  </div>
+</div>
+
+</body>
+</html>

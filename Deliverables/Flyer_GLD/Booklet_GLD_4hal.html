@@ -3,210 +3,158 @@
 <head>
 <meta charset="utf-8">
 <title>Booklet GLD V2</title>
-<link rel="stylesheet" href="style.css">
 <style>
-.cover{background:radial-gradient(ellipse 90% 70% at 72% 55%,#1f4fae 0%,#0e2350 55%,#081634 100%);color:#fff}
-.cover .grid-dk{position:absolute;inset:0;background-image:linear-gradient(rgba(120,180,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(120,180,255,.07) 1px,transparent 1px);background-size:8mm 8mm}
-.cover .hero{position:absolute;right:-10mm;top:40mm;width:134mm;height:238mm;object-fit:cover;object-position:50% 45%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 24%,#000 100%),linear-gradient(180deg,transparent 0%,#000 14%,#000 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
-.cv-k{font-size:7pt;font-weight:800;letter-spacing:2.6pt;color:#7fc8ff}
-.cv-t{font-size:46pt;font-weight:800;line-height:.95;letter-spacing:-1.2pt;margin-top:4mm}
-.cv-t span{color:#7fc8ff}
-.cv-s{font-size:13.5pt;font-weight:600;line-height:1.3;margin-top:5mm;color:#e6f0ff;max-width:92mm}
-.vp{display:grid;gap:4.5mm;margin-top:12mm;max-width:78mm}
-.vp div{border-left:2px solid #13a9e0;padding:.4mm 0 .4mm 3.4mm}
-.vp b{display:block;font-size:10pt;font-weight:800}
-.vp span{font-size:7.4pt;color:#bcd2f2;line-height:1.4}
-.cv-foot{position:absolute;left:0;right:0;bottom:0;height:22mm;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 14mm}
-.cv-foot img{height:9mm}.cv-foot img.itb{height:12mm}
-.cv-foot .lg{display:flex;gap:6mm;align-items:center}
-.cv-foot .tx{font-size:6.4pt;color:#5b6575;line-height:1.5;text-align:right;font-weight:600}
-.ticks{position:absolute;left:14mm;top:16mm;right:14mm;display:flex;justify-content:space-between;font-size:6pt;letter-spacing:1.6pt;color:#7fa3d6;font-weight:800;border-bottom:1px solid rgba(127,163,214,.35);padding-bottom:2mm}
+@font-face{font-family:Inter;font-weight:400;src:url(img/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(img/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(img/inter-latin-800-normal.woff2)}
+@page{size:A4;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:Inter,"Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+:root{--ink:#111318;--mute:#6b7280;--line:#e5e7eb;--acc:#2b5fcb;--acc-dk:#5b8cff;--dk:#07090d}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;background:#fff;color:var(--ink)}
+.page:last-child{page-break-after:auto}
+.dark{background:var(--dk);color:#fff}
+.in{position:absolute;left:18mm;right:18mm}
+.eyebrow{font-size:9pt;font-weight:600;letter-spacing:2.4pt;color:var(--acc)}
+.dark .eyebrow{color:var(--acc-dk)}
+h1{font-size:64pt;font-weight:800;line-height:1;letter-spacing:-2pt}
+h2{font-size:34pt;font-weight:800;line-height:1.05;letter-spacing:-1pt}
+.lead{font-size:13pt;line-height:1.5;color:#3f4652;max-width:150mm}
+.dark .lead{color:#b4bccb}
+.mute{color:var(--mute)}
+.dark .mute{color:#8a93a3}
+.small{font-size:8pt;line-height:1.5}
+.cols{display:grid;gap:8mm}
+.feat b{display:block;font-size:13pt;font-weight:800;margin-bottom:1.6mm}
+.feat p{font-size:10pt;line-height:1.5;color:#4b5260}
+.dark .feat p{color:#a9b2c2}
+.big{font-size:40pt;font-weight:800;letter-spacing:-1.2pt;line-height:1}
+.stat p{margin-top:2mm;font-size:10pt;line-height:1.5;color:#4b5260}
+.rule{height:1px;background:var(--line)}
+.dark .rule{background:#232733}
+img.full{display:block;width:100%;height:100%;object-fit:cover}
+table{width:100%;border-collapse:collapse;font-size:10pt}
+td{padding:2.6mm 0;border-top:1px solid var(--line);vertical-align:top;line-height:1.45}
+td:first-child{width:38mm;color:var(--mute)}
+.flow{display:flex;align-items:center;gap:3mm;font-size:11pt;font-weight:600}
+.flow i{font-style:normal;color:var(--acc-dk)}
+.logos{display:flex;align-items:center;gap:8mm}
+.logos img{height:9mm}.logos img.itb{height:12mm}
+.lb{position:absolute;color:#fff;font-size:8pt;line-height:1.3;width:30mm}
+.lb b{display:block;font-size:9pt;font-weight:800}
+.lb span{color:#b4c6e6}
+.lb::before{content:"";position:absolute;left:0;width:0;border-left:.3mm solid rgba(255,255,255,.7)}
+.lb.dn::before{bottom:100%;height:var(--h);margin-bottom:1.2mm}
+.lb.up::before{top:100%;height:var(--h);margin-top:1.2mm}
+.lb::after{content:"";position:absolute;left:-.8mm;width:1.9mm;height:1.9mm;border-radius:50%;background:#fff}
+.lb.dn::after{bottom:calc(100% + var(--h) + 1.2mm)}
+.lb.up::after{top:calc(100% + var(--h) + 1.2mm)}
+.lb{padding-left:1.6mm;white-space:nowrap;width:auto!important}
+.lb.r{padding-left:0;padding-right:1.6mm;text-align:right}
+.lb.r::before{left:auto;right:0}.lb.r::after{left:auto;right:-.8mm}
+.ph{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm 3mm}
+.ph div img{display:block;width:100%;height:33mm;object-fit:cover;border-radius:1.5mm}
+.ph div p{font-size:7.6pt;line-height:1.35;color:#6b7280;margin-top:1.3mm}
 </style>
 </head>
 <body>
 
 <!-- 1 · SAMPUL -->
-<div class="page cover">
-  <div class="grid-dk"></div>
-  <img class="hero" src="img/hero_f0020.png" alt="GLD V2">
-  <div class="ticks"><span>GAS LEAK DETECTION SYSTEM</span><span>GENERASI KEDUA</span></div>
-  <div class="pad" style="position:relative;padding-top:34mm">
-    <div class="cv-k">SOLUSI DETEKSI KEBOCORAN GAS KILANG</div>
-    <div class="cv-t">GLD <span>V2</span></div>
-    <div class="cv-s">Deteksi multigas berbasis edge AI dengan jaringan nirkabel self-healing.</div>
-    <div class="vp">
-      <div><b>Multigas, satu perangkat</b><span>Delapan sensor gas membentuk sidik jari untuk mengenali jenis gas.</span></div>
-      <div><b>AI di dalam perangkat</b><span>Klasifikasi gas langsung di node, independen dari server.</span></div>
-      <div><b>Nirkabel & self-healing</b><span>Private mesh LoRa 920 MHz, tanpa kabel data ke ruang kontrol.</span></div>
-      <div><b>Alarm seketika</b><span>Alarm lokal menyala, notifikasi push langsung ke operator.</span></div>
-    </div>
+<div class="page dark">
+  <img src="img/hero_wide_banner.jpg" alt="GLD V2" style="position:absolute;left:0;top:66mm;width:210mm;height:206mm;object-fit:cover;object-position:50% 50%">
+  <div class="in" style="top:24mm">
+    <div class="eyebrow">GAS LEAK DETECTION SYSTEM</div>
+    <h1 style="margin-top:4mm">GLD V2</h1>
+    <div class="lead" style="margin-top:4mm;font-size:15pt">Deteksi kebocoran gas multigas, cerdas, dan nirkabel untuk kilang.</div>
   </div>
-  <div style="position:absolute;right:14mm;bottom:26mm;font-size:5.6pt;letter-spacing:1pt;color:#9fbde6">ILUSTRASI 3D · GLD V2</div>
-  <div class="cv-foot">
-    <div class="lg"><img src="img/logo_pertamina.png" alt="Pertamina"><img src="img/logo_lgu.png" alt="LGU"><img class="itb" src="img/logo_itb.png" alt="ITB"></div>
-    <div class="tx">PT Pertamina Patra Niaga (Fungsi Reliability)<br>LAPI Ganesha Utama · Institut Teknologi Bandung</div>
+  <div class="in" style="bottom:16mm;display:flex;justify-content:space-between;align-items:flex-end">
+    <div class="small mute">PT Pertamina Patra Niaga (Fungsi Reliability)<br>LAPI Ganesha Utama · Institut Teknologi Bandung</div>
+    <div class="small mute">Ilustrasi 3D</div>
   </div>
 </div>
 
-<!-- 2 · TANTANGAN, SOLUSI, PERANGKAT -->
-<div class="page grid-bg">
-  <div class="runhead"><span><b>GLD V2</b> · GAS LEAK DETECTION SYSTEM</span><span>SOLUSI</span></div>
-  <div class="pad">
-    <div class="sec"><span class="no">01</span><span class="t">TANTANGAN & SOLUSI</span></div>
-    <h2>Kebocoran gas tak kasatmata. <em>Kecepatan deteksi</em> menentukan tingkat risiko.</h2>
-    <div class="ps" style="margin-top:6mm">
-      <div class="p"><div class="h">PENDEKATAN KONVENSIONAL</div>
-        <ul><li>Satu detektor untuk satu jenis gas</li><li>Kabel data ditarik ke ruang kontrol</li><li>Mahal dan sulit diperluas</li></ul></div>
-      <div class="arr">→</div>
-      <div class="s"><div class="h">SOLUSI GLD V2</div>
-        <ul><li><strong>Delapan sensor</strong> dalam satu perangkat untuk deteksi multigas</li><li><strong>Nirkabel</strong>: private mesh LoRa, tanpa kabel data</li><li><strong>Mudah diperluas</strong>: titik pantau baru tanpa tarik kabel data</li></ul></div>
-    </div>
-
-    <div class="sec" style="margin-top:10mm"><span class="no">02</span><span class="t">DI DALAM PERANGKAT</span></div>
-    <div class="fig" style="aspect-ratio:16/9;margin-top:3mm">
-      <img class="lit" src="img/hi_f0349.png" alt="GLD V2 terurai">
-      <span class="corner c1"></span><span class="corner c2"></span><span class="corner c4"></span>
-      <div class="pin" style="left:32.3%;top:20%">1</div>
-      <div class="pin" style="left:48.6%;top:14%">2</div>
-      <div class="pin" style="left:56.5%;top:27%">3</div>
-      <div class="pin" style="left:41.5%;top:52%">4</div>
-      <div class="pin" style="left:52.6%;top:46%">5</div>
-      <div class="pin" style="left:59.5%;top:47%">6</div>
-      <div class="pin" style="left:71.7%;top:52%">7</div>
-      <div class="pin" style="left:78%;top:46%">8</div>
-      <div class="pin" style="left:88%;top:44%">9</div>
-      <div class="tag">ILUSTRASI 3D · GLD V2 TERURAI</div>
-    </div>
-    <div class="legend">
-      <div><b>1</b><span><strong>Sidik jari gas</strong> · pola respons 8 sensor</span></div>
-      <div><b>2</b><span><strong>Antena LoRa</strong> · 920 MHz</span></div>
-      <div><b>3</b><span><strong>Beacon</strong> · alarm lokal</span></div>
-      <div><b>4</b><span><strong>Enclosure</strong> · catu daya 24 VDC</span></div>
-      <div><b>5</b><span><strong>Motherboard</strong> · mikrokontroler & AI edge</span></div>
-      <div><b>6</b><span><strong>Sensor board</strong> · 8 sensor gas</span></div>
-      <div><b>7</b><span><strong>Kipas</strong> · sirkulasi udara ke sensor</span></div>
-      <div><b>8</b><span><strong>Mesh pelindung</strong> & gasket</span></div>
-      <div><b>9</b><span><strong>Tutup depan</strong></span></div>
-    </div>
-
-    <div class="sec" style="margin-top:10mm"><span class="no">03</span><span class="t">CARA KERJA</span></div>
-    <div class="steps" style="margin-top:3mm">
-      <div><div class="n">01 · SAMPEL</div><h4>Udara masuk</h4><p>Kipas menarik udara sekitar melalui mesh ke ruang sensor.</p></div>
-      <div><div class="n">02 · RESPONS</div><h4>8 sensor membaca</h4><p>Sensor metal-oxide menghasilkan pola respons khas tiap gas.</p></div>
-      <div><div class="n">03 · KLASIFIKASI</div><h4>AI mengenali gas</h4><p>CNN dua cabang, kuantisasi 8-bit, berjalan di perangkat.</p></div>
-      <div class="al"><div class="n">04 · ALARM</div><h4>Peringatan seketika</h4><p>Beacon menyala, alarm dikirim push lewat LoRa mesh.</p></div>
-    </div>
+<!-- 2 · PERANGKAT -->
+<div class="page">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">PERANGKAT</div>
+    <h2 style="margin-top:3mm">Sensor multigas.<br>Satu perangkat.</h2>
+    <div class="lead" style="margin-top:5mm">Satu GLD membaca pola respons sensor multigas, lalu AI di dalam perangkat mengenali jenis gasnya. Tanpa server, tanpa menunggu.</div>
   </div>
-  <div class="pfoot"><span>GLD V2 · GAS LEAK DETECTION SYSTEM</span><span>02</span></div>
+  <div style="position:absolute;left:0;right:0;top:104mm;height:112mm;background:var(--dk)">
+    <img class="full" src="img/exploded_crop.png" style="filter:brightness(.62) contrast(1.12) saturate(.85);-webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 4%,#000 16%)" alt="GLD V2 terurai">
+    <div class="lb up" style="left:28.5%;top:30mm;--h:12mm"><b>Model AI</b><span>CNN dua cabang · 8-bit · di perangkat</span></div>
+    <div class="lb dn r" style="right:72.5%;bottom:6mm;--h:34mm"><b>Prosesor</b><span>inferensi AI on-device</span></div>
+    <div class="lb dn" style="left:41.5%;bottom:6mm;--h:38mm;width:40mm"><b>Sensor multigas</b><span>metal-oxide · sidik jari multigas</span></div>
+
+  </div>
+  <div class="in small mute" style="top:219mm">Ilustrasi 3D GLD V2 terurai.</div>
+  <div class="in cols" style="top:234mm;grid-template-columns:repeat(3,1fr)">
+    <div class="feat"><b>Sidik jari gas</b><p>Sensor metal-oxide membentuk pola khas untuk tiap gas.</p></div>
+    <div class="feat"><b>AI di perangkat</b><p>CNN dua cabang, 8-bit, berjalan langsung di mikrokontroler.</p></div>
+    <div class="feat"><b>Alarm lokal</b><p>Beacon pada perangkat menyala begitu gas terdeteksi.</p></div>
+  </div>
 </div>
 
-<!-- 3 · ARSITEKTUR & DASHBOARD -->
-<div class="page grid-bg">
-  <div class="runhead"><span><b>GLD V2</b> · GAS LEAK DETECTION SYSTEM</span><span>SISTEM</span></div>
-  <div class="pad">
-    <div class="sec"><span class="no">04</span><span class="t">ARSITEKTUR SISTEM</span></div>
-    <h2>Dari sensor ke ruang kontrol, <em>tanpa kabel data</em></h2>
-    <div class="arch" style="margin-top:4mm">
-      <svg viewBox="0 0 520 120" font-family="Inter,Segoe UI,Arial">
-        <defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8z" fill="#2b5fcb"/></marker>
-        <marker id="ar2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8z" fill="#d81b43"/></marker></defs>
-        <rect x="2" y="4" width="160" height="112" rx="6" fill="#f2f6fc" stroke="#d6deea"/>
-        <text x="10" y="18" font-size="7" font-weight="800" fill="#13a9e0" letter-spacing="1.2">LAPIS 1 · NODE → CH</text>
-        <g font-size="8.5" font-weight="800" fill="#0e2350">
-          <rect x="12" y="28" width="44" height="20" rx="4" fill="#fff" stroke="#2b5fcb"/><text x="34" y="41" text-anchor="middle">GLD</text>
-          <rect x="12" y="56" width="44" height="20" rx="4" fill="#fff" stroke="#2b5fcb"/><text x="34" y="69" text-anchor="middle">GLD</text>
-          <rect x="12" y="84" width="44" height="20" rx="4" fill="#fff" stroke="#2b5fcb"/><text x="34" y="97" text-anchor="middle">GLD</text>
-          <rect x="96" y="40" width="58" height="22" rx="4" fill="#2b5fcb"/><text x="125" y="54" text-anchor="middle" fill="#fff">Cluster Head</text>
-          <rect x="96" y="74" width="58" height="22" rx="4" fill="#2b5fcb"/><text x="125" y="88" text-anchor="middle" fill="#fff">Cluster Head</text>
-        </g>
-        <g stroke="#2b5fcb" stroke-width="1.2" stroke-dasharray="3 2" fill="none"><path d="M56 38L96 50"/><path d="M56 66L96 54"/><path d="M56 94L96 86"/></g>
-        <path d="M125 62V74" stroke="#13a9e0" stroke-width="1.6"/>
-        <rect x="176" y="4" width="150" height="112" rx="6" fill="#f2f6fc" stroke="#d6deea"/>
-        <text x="184" y="18" font-size="7" font-weight="800" fill="#13a9e0" letter-spacing="1.2">LAPIS 2 · MESH MULTI-HOP</text>
-        <rect x="236" y="52" width="62" height="26" rx="4" fill="#0e2350"/><text x="267" y="69" text-anchor="middle" font-size="9" font-weight="800" fill="#fff">Gateway</text>
-        <path d="M154 51C190 36 210 48 236 60" stroke="#2b5fcb" stroke-width="1.4" fill="none" marker-end="url(#ar)"/>
-        <path d="M154 85C190 98 210 84 236 70" stroke="#2b5fcb" stroke-width="1.4" fill="none" marker-end="url(#ar)"/>
-        <text x="184" y="108" font-size="6.6" fill="#5b6575">LoRa 920 MHz · rute pulih otomatis</text>
-        <rect x="340" y="4" width="178" height="112" rx="6" fill="#f2f6fc" stroke="#d6deea"/>
-        <text x="348" y="18" font-size="7" font-weight="800" fill="#13a9e0" letter-spacing="1.2">JARINGAN LOKAL</text>
-        <rect x="352" y="52" width="66" height="26" rx="4" fill="#fff" stroke="#0e2350"/><text x="385" y="69" text-anchor="middle" font-size="8.5" font-weight="800" fill="#0e2350">Server lokal</text>
-        <rect x="438" y="52" width="72" height="26" rx="4" fill="#fff" stroke="#0e2350"/><text x="474" y="69" text-anchor="middle" font-size="8.5" font-weight="800" fill="#0e2350">Dashboard</text>
-        <path d="M298 65H350" stroke="#0e2350" stroke-width="1.4" marker-end="url(#ar)"/>
-        <path d="M418 65H436" stroke="#0e2350" stroke-width="1.4" marker-end="url(#ar)"/>
-        <text x="352" y="90" font-size="6.6" fill="#5b6575">Tanpa internet · data normal: pull berkala</text>
-        <text x="352" y="101" font-size="6.6" fill="#d81b43" font-weight="800">Alarm: push seketika ke operator</text>
-      </svg>
-    </div>
-    <div class="fig" style="height:72mm;margin-top:3.4mm"><img class="lit" src="img/mesh.png" alt="Ilustrasi jaringan dan alarm"><span class="corner c1"></span><span class="corner c2"></span><span class="corner c4"></span><div class="tag">ILUSTRASI 3D · KEBOCORAN TERDETEKSI → ALARM PUSH · UKURAN PERANGKAT DIPERBESAR</div></div>
-
-    <div class="sec"><span class="no">05</span><span class="t">NILAI BAGI OPERASI KILANG</span></div>
-    <div class="cards" style="grid-template-columns:repeat(4,1fr);margin-top:3mm">
-      <div class="c al"><div class="ic">RESPONS</div><h4>Alarm tanpa menunggu</h4><p>Push alarm tidak menunggu siklus pengambilan data.</p></div>
-      <div class="c"><div class="ic">CAKUPAN</div><h4>Multigas di satu titik</h4><p>Satu perangkat membaca pola beberapa jenis gas.</p></div>
-      <div class="c"><div class="ic">INSTALASI</div><h4>Tanpa kabel data</h4><p>Cukup catu 24 VDC; data lewat radio LoRa.</p></div>
-      <div class="c"><div class="ic">KEANDALAN</div><h4>Self-healing</h4><p>Rute dipulihkan otomatis bila satu Cluster Head terputus.</p></div>
-    </div>
-
-    <div class="sec"><span class="no">06</span><span class="t">DASHBOARD OPERATOR</span></div>
-    <div style="display:grid;grid-template-columns:116mm 1fr;gap:3mm;margin-top:3mm">
-      <div class="fig" style="height:64mm"><img class="lit" src="img/dash1.png" style="object-position:0 0" alt="Ringkasan sistem"><div class="tag">RINGKASAN SISTEM</div></div>
-      <div style="display:grid;gap:3mm">
-        <div class="fig" style="height:30.5mm"><img class="lit" src="img/dash2.png" style="object-position:0 0" alt="Konsol alarm"><div class="tag">KONSOL ALARM</div></div>
-        <div class="fig" style="height:30.5mm"><img class="lit" src="img/dash3.png" style="object-position:0 0" alt="Analitik"><div class="tag">ANALITIK</div></div>
-      </div>
-    </div>
-    <div class="note" style="margin-top:1.6mm">Status unit, konsol alarm dengan acknowledge operator, log kejadian, tren dan heatmap · rekaman aplikasi dengan data demonstrasi.</div>
+<!-- 3 · SISTEM -->
+<div class="page dark">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">SISTEM</div>
+    <h2 style="margin-top:3mm">Bocor terdeteksi.<br>Operator langsung tahu.</h2>
+    <div class="lead" style="margin-top:5mm">Data mengalir lewat jaringan mesh LoRa. Tanpa kabel data, tanpa internet. Bila satu jalur putus, rute pulih sendiri.</div>
   </div>
-  <div class="pfoot"><span>GLD V2 · GAS LEAK DETECTION SYSTEM</span><span>03</span></div>
+  <div style="position:absolute;left:0;right:0;top:100mm;height:104mm">
+    <img class="full" src="img/mesh.png" style="-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 18%,#000 82%,transparent 100%)" alt="Jaringan mesh dan alarm"><svg class="ov" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%" font-family="Inter,Segoe UI,Arial"><line x1="1190" y1="430" x2="1330" y2="640" stroke="#ff5a6e" stroke-width="2.4" opacity=".85"/><circle cx="1190" cy="430" r="9" fill="#ff5a6e"/><circle cx="1190" cy="430" r="20" fill="none" stroke="#ff5a6e" stroke-width="2" opacity=".55"/><circle cx="1356" cy="640" r="22" fill="#2b5fcb" stroke="#fff" stroke-width="2"/><text x="1356" y="649" font-size="26" font-weight="800" fill="#fff" text-anchor="middle">1</text><text x="1390" y="642" font-size="31" font-weight="800" fill="#fff" text-anchor="start">GLD mendeteksi gas</text><text x="1390" y="674" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="start">alarm dikirim via LoRa</text><line x1="1062" y1="770" x2="1230" y2="860" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="1062" cy="770" r="9" fill="#ffffff"/><circle cx="1062" cy="770" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><circle cx="1256" cy="860" r="22" fill="#2b5fcb" stroke="#fff" stroke-width="2"/><text x="1256" y="869" font-size="26" font-weight="800" fill="#fff" text-anchor="middle">2</text><text x="1290" y="862" font-size="31" font-weight="800" fill="#fff" text-anchor="start">Cluster Head</text><text x="1290" y="894" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="start">menerima & meneruskan</text><line x1="870" y1="400" x2="720" y2="560" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="870" cy="400" r="9" fill="#ffffff"/><circle cx="870" cy="400" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><circle cx="694" cy="560" r="22" fill="#2b5fcb" stroke="#fff" stroke-width="2"/><text x="694" y="569" font-size="26" font-weight="800" fill="#fff" text-anchor="middle">3</text><text x="660" y="562" font-size="31" font-weight="800" fill="#fff" text-anchor="end">Cluster Head</text><text x="660" y="594" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="end">hop berikutnya</text><line x1="140" y1="378" x2="140" y2="720" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="140" cy="378" r="9" fill="#ffffff"/><circle cx="140" cy="378" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><circle cx="166" cy="720" r="22" fill="#2b5fcb" stroke="#fff" stroke-width="2"/><text x="166" y="729" font-size="26" font-weight="800" fill="#fff" text-anchor="middle">4</text><text x="200" y="722" font-size="31" font-weight="800" fill="#fff" text-anchor="start">Cluster Head</text><text x="200" y="754" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="start">menuju Gateway → server</text><line x1="232" y1="410" x2="420" y2="300" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="232" cy="410" r="9" fill="#ffffff"/><circle cx="232" cy="410" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><text x="434" y="302" font-size="31" font-weight="800" fill="#fff" text-anchor="start">GLD</text><text x="434" y="334" font-size="23" font-weight="400" fill="#b4bccb" text-anchor="start">sensor di titik rawan</text><line x1="612" y1="352" x2="640" y2="260" stroke="#ffffff" stroke-width="2.4" opacity=".85"/><circle cx="612" cy="352" r="9" fill="#ffffff"/><circle cx="612" cy="352" r="20" fill="none" stroke="#ffffff" stroke-width="2" opacity=".55"/><text x="654" y="262" font-size="31" font-weight="800" fill="#fff" text-anchor="start">GLD</text></svg>
+  </div>
+  <div class="in flow" style="top:208mm"><span>GLD</span><i>→</i><span>Cluster Head</span><i>→</i><span>Gateway</span><i>→</i><span>Server lokal</span><i>→</i><span>Dashboard</span></div>
+  <div class="in" style="top:219mm"><div class="rule"></div></div>
+  <div class="in cols" style="top:226mm;grid-template-columns:1fr 1fr;gap:10mm">
+    <div class="feat">
+      <b>Self-healing network</b><p>Bila satu Cluster Head terputus, data dialihkan otomatis lewat jalur lain.</p>
+      <svg viewBox="0 0 300 142" style="display:block;width:100%;margin-top:3mm" font-family="Inter,Segoe UI,Arial" font-size="7" font-weight="700" text-anchor="middle"><line x1="22" y1="16" x2="84" y2="16" stroke="#6b7280" stroke-width="1"/><line x1="22" y1="40" x2="66" y2="52" stroke="#6b7280" stroke-width="1"/><line x1="22" y1="64" x2="66" y2="52" stroke="#6b7280" stroke-width="1"/><line x1="52" y1="92" x2="30" y2="124" stroke="#6b7280" stroke-width="1"/><line x1="122" y1="100" x2="104" y2="128" stroke="#6b7280" stroke-width="1"/><line x1="122" y1="100" x2="138" y2="128" stroke="#6b7280" stroke-width="1"/><line x1="190" y1="80" x2="190" y2="128" stroke="#6b7280" stroke-width="1"/><line x1="66" y1="52" x2="112" y2="54" stroke="#5b8cff" stroke-width="1.6"/><line x1="66" y1="52" x2="52" y2="92" stroke="#5b8cff" stroke-width="1.6"/><line x1="112" y1="54" x2="122" y2="100" stroke="#5b8cff" stroke-width="1.6"/><line x1="84" y1="16" x2="148" y2="32" stroke="#3a404c" stroke-width="1"/><line x1="112" y1="54" x2="148" y2="32" stroke="#3a404c" stroke-width="1"/><line x1="148" y1="32" x2="190" y2="32" stroke="#3a404c" stroke-width="1"/><line x1="190" y1="80" x2="190" y2="32" stroke="#ffffff" stroke-width="1.6"/><line x1="84" y1="16" x2="66" y2="52" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><line x1="84" y1="16" x2="112" y2="54" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><line x1="112" y1="54" x2="190" y2="80" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><line x1="122" y1="100" x2="190" y2="80" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><rect x="8.0" y="9.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="22" y="18.5" fill="#fff">GLD</text><rect x="8.0" y="33.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="22" y="42.5" fill="#fff">GLD</text><rect x="8.0" y="57.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="22" y="66.5" fill="#fff">GLD</text><rect x="16.0" y="117.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="30" y="126.5" fill="#fff">GLD</text><rect x="90.0" y="121.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="104" y="130.5" fill="#fff">GLD</text><rect x="124.0" y="121.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="138" y="130.5" fill="#fff">GLD</text><rect x="176.0" y="121.0" width="28" height="14" rx="3" fill="#07090d" stroke="#fff" stroke-width="1"/><text x="190" y="130.5" fill="#fff">GLD</text><rect x="70.0" y="9.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="84" y="18.5" fill="#fff">CH</text><rect x="52.0" y="45.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="66" y="54.5" fill="#fff">CH</text><rect x="98.0" y="47.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="112" y="56.5" fill="#fff">CH</text><rect x="38.0" y="85.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="52" y="94.5" fill="#fff">CH</text><rect x="108.0" y="93.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="122" y="102.5" fill="#fff">CH</text><rect x="176.0" y="73.0" width="28" height="14" rx="3" fill="#2b5fcb"/><text x="190" y="82.5" fill="#fff">CH</text><rect x="134.0" y="25.0" width="28" height="14" rx="3" fill="#1c2029" stroke="#3a404c"/><text x="148" y="34.5" fill="#6b7280">CH</text><path d="M143 13L153 23M153 13L143 23" stroke="#ff5a6e" stroke-width="2.2"/><rect x="176.0" y="25.0" width="28" height="14" rx="3" fill="#fff"/><text x="190" y="34.5" fill="#07090d">GW</text><line x1="228" y1="44" x2="246" y2="44" stroke="#6b7280" stroke-width="1"/><text x="251" y="46.5" fill="#b4bccb" font-weight="600" text-anchor="start">GLD – CH</text><line x1="228" y1="60" x2="246" y2="60" stroke="#5b8cff" stroke-width="1.6"/><text x="251" y="62.5" fill="#b4bccb" font-weight="600" text-anchor="start">CH – CH</text><line x1="228" y1="76" x2="246" y2="76" stroke="#ffffff" stroke-width="1.6"/><text x="251" y="78.5" fill="#b4bccb" font-weight="600" text-anchor="start">CH – Gateway</text><line x1="228" y1="92" x2="246" y2="92" stroke="#ffb547" stroke-width="1.4" stroke-dasharray="3.5 2.5"/><text x="251" y="94.5" fill="#b4bccb" font-weight="600" text-anchor="start">Jalur failover</text><text x="251" y="110.5" fill="#b4bccb" font-weight="600" text-anchor="start">CH terputus</text><path d="M234 105L240 111M240 105L234 111" stroke="#ff5a6e" stroke-width="2"/></svg>
+    </div>
+    <div class="feat">
+      <b>Alarm push, seketika</b><p>Tidak menunggu siklus pengambilan data; operator melihat lokasi dan tingkat risiko.</p>
+      <div style="margin-top:3mm;border-radius:2mm;overflow:hidden;border:1px solid #232733"><img src="img/dash_alarm_crop.png" style="display:block;width:100%" alt="Konsol alarm"></div>
+    </div>
+  </div>
+  <div class="in small mute" style="bottom:9mm">Ilustrasi 3D · dashboard memakai data demonstrasi.</div>
 </div>
 
-<!-- 4 · SPESIFIKASI, BUKTI, ROADMAP -->
-<div class="page grid-bg">
-  <div class="runhead"><span><b>GLD V2</b> · GAS LEAK DETECTION SYSTEM</span><span>SPESIFIKASI & BUKTI</span></div>
-  <div class="pad">
-    <div class="sec"><span class="no">07</span><span class="t">SPESIFIKASI RINGKAS</span></div>
-    <table class="spec" style="margin-top:3mm">
-      <tr><td>Sensor</td><td><strong>8 sensor gas metal-oxide</strong> dalam satu perangkat (prinsip electronic nose)</td></tr>
-      <tr><td>Kecerdasan</td><td><strong>CNN dua cabang</strong>, kuantisasi 8-bit, inferensi langsung di mikrokontroler</td></tr>
-      <tr><td>Komunikasi</td><td><strong>LoRa 920 MHz</strong> private mesh multi-hop: node → Cluster Head → Gateway</td></tr>
-      <tr><td>Pola data</td><td>Data normal: pull berkala dari Cluster Head · <strong>Alarm: push seketika</strong></td></tr>
-      <tr><td>Alarm lokal</td><td>Beacon pada perangkat</td></tr>
-      <tr><td>Catu daya</td><td><strong>24 VDC</strong></td></tr>
-      <tr><td>Integrasi</td><td>Server lokal & dashboard operator, independen dari internet dan jaringan TI kilang</td></tr>
-      <tr><td>Kemampuan gas</td><td>
-        <div class="gas"><span class="g v">LPG</span><span class="g v">H₂</span><span class="g d">CO₂</span><span class="g t">CH₄</span><span class="g t">CO</span><span class="g t">NH₃</span><span class="g t">Benzena</span></div>
-        <div class="gl"><i style="background:var(--ok);margin-left:0"></i>tervalidasi<i style="background:var(--blue)"></i>data tersedia<i style="background:#e2b464"></i>target pengembangan · model dilatih di lokasi</div></td></tr>
+<!-- 4 · TERUJI & SPESIFIKASI -->
+<div class="page">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">TERUJI</div>
+    <h2 style="margin-top:3mm">Dari lab ke kilang.</h2>
+  </div>
+  <div class="in cols" style="top:52mm;grid-template-columns:repeat(3,1fr)">
+    <div class="stat"><div class="big">7/7</div><p>Item Factory Acceptance Test lulus · GLD generasi kedua, laboratorium</p></div>
+    <div class="stat"><div class="big">8</div><p>Cluster Head mesh multi-hop dengan failover teruji · kampus ITB</p></div>
+    <div class="stat"><div class="big">2025</div><p>Uji lapangan RU VII Kasim, Nov–Des · GLD generasi pertama</p></div>
+  </div>
+  <div class="in ph" style="top:90mm">
+    <div><img src="img/k_01_persiapan.jpg" alt=""><p>Pemeriksaan perangkat bersama petugas K3</p></div>
+    <div><img src="img/k_02_pemasangan_disaksikan.jpg" alt=""><p>Pemasangan di tiang, disaksikan personel kilang</p></div>
+    <div><img src="img/k_03_pemasangan_panel_surya.jpg" alt=""><p>Pemasangan pada tiang ber-panel surya</p></div>
+    <div><img src="img/k_07_gld_terpasang.jpg" alt=""><p>GLD terpasang di area tangki</p></div>
+    <div><img src="img/k_05_pemantauan_nodered.jpg" alt=""><p>Pemantauan data dari ruang kontrol</p></div>
+    <div><img src="img/k_06_koordinasi_tim.jpg" alt=""><p>Koordinasi tim di area kilang</p></div>
+  </div>
+  <div class="in small mute" style="top:177mm">Uji lapangan RU VII Kasim · November–Desember 2025 · GLD generasi pertama.</div>
+
+  <div class="in" style="top:188mm">
+    <div class="eyebrow" style="margin-bottom:3mm">SPESIFIKASI</div>
+    <table>
+      <tr><td>Sensor</td><td>Multi sensor gas metal-oxide</td></tr>
+      <tr><td>Kecerdasan</td><td>CNN dua cabang, 8-bit, di perangkat</td></tr>
+      <tr><td>Komunikasi</td><td>LoRa, private mesh multi-hop</td></tr>
+      <tr><td>Catu daya</td><td>24 VDC</td></tr>
+      <tr><td>Gas tervalidasi</td><td>LPG, H₂</td></tr>
+      <tr><td>Pengembangan</td><td>CO₂ (data tersedia) · CH₄, CO, NH₃, Benzena (target) · model dilatih di lokasi</td></tr>
     </table>
-
-    <div class="sec"><span class="no">08</span><span class="t">TERUJI DI LAPANGAN & LABORATORIUM</span></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-top:3mm">
-      <div class="fig" style="height:60mm;border-color:var(--line)"><img src="img/kasim2.jpg" style="object-position:50% 35%" alt="Pemasangan di RU VII Kasim"></div>
-      <div class="fig" style="height:60mm;border-color:var(--line)"><img src="img/kasim.jpg" alt="GLD terpasang di RU VII Kasim"></div>
-    </div>
-    <div class="note" style="margin-top:1.4mm">Uji lapangan RU VII Kasim · November–Desember 2025 · GLD generasi pertama</div>
-    <div class="kpi" style="margin-top:4mm">
-      <div><div class="k">Uji lapangan</div><div class="v">RU VII Kasim</div><div class="s">Nov–Des 2025 · GLD generasi pertama</div></div>
-      <div><div class="k">Factory Acceptance Test</div><div class="v">7 / 7 lulus</div><div class="s">GLD generasi kedua · laboratorium</div></div>
-      <div><div class="k">Jaringan mesh</div><div class="v">8 Cluster Head</div><div class="s">multi-hop & failover teruji · kampus ITB</div></div>
-    </div>
-
-    <div class="sec"><span class="no">09</span><span class="t">PENGEMBANGAN BERIKUTNYA</span></div>
-    <div style="display:grid;grid-template-columns:78mm 1fr;gap:4mm;margin-top:3mm;align-items:center">
-      <div class="fig" style="height:50mm"><img src="img/ogi_thermal.png" alt="Konsep kamera thermal"><div class="tag">ILUSTRASI KONSEP</div></div>
-      <div>
-        <div style="font-size:10pt;font-weight:800;line-height:1.25">Integrasi kamera thermal: alarm titik & citra area terkorelasi</div>
-        <div class="steps" style="grid-template-columns:repeat(3,1fr);margin-top:3mm">
-          <div><div class="n">01</div><h4>Deteksi titik</h4><p>GLD multigas + edge AI</p></div>
-          <div><div class="n">02</div><h4>Pemantauan area</h4><p>Kamera thermal</p></div>
-          <div><div class="n">03</div><h4>Satu dashboard</h4><p>Alarm & citra terpadu</p></div>
-        </div>
-        <div class="note" style="margin-top:2mm">Tahap pengembangan berikutnya, belum termasuk ruang lingkup unit saat ini.</div>
-      </div>
-    </div>
   </div>
-  <div style="position:absolute;left:0;right:0;bottom:0;height:24mm;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 14mm;color:#fff">
-    <div><div style="font-size:8pt;font-weight:800">Pilot RU IV Cilacap</div><div style="font-size:6.4pt;color:#bcd2f2;margin-top:1mm;line-height:1.45">PT Pertamina Patra Niaga (Fungsi Reliability) × LAPI Ganesha Utama × Institut Teknologi Bandung</div><div style="font-size:5.4pt;color:#8fb0de;margin-top:1mm">Gambar perangkat, jaringan & kamera thermal adalah ilustrasi 3D · dashboard memakai data demonstrasi</div></div>
-    <div style="background:#fff;border-radius:1.6mm;padding:2mm 3mm;display:flex;gap:3.5mm;align-items:center"><img src="img/logo_pertamina.png" style="height:6.5mm" alt=""><img src="img/logo_lgu.png" style="height:6.5mm" alt=""><img src="img/logo_itb.png" style="height:8.5mm" alt=""></div>
+  <div class="in" style="bottom:14mm;display:flex;justify-content:space-between;align-items:center">
+    <div class="logos"><img src="img/logo_pertamina.png" alt="Pertamina"><img src="img/logo_lgu.png" alt="LGU"><img class="itb" src="img/logo_itb.png" alt="ITB"></div>
+    <div class="small mute" style="text-align:right">Pilot RU IV Cilacap</div>
   </div>
 </div>
 

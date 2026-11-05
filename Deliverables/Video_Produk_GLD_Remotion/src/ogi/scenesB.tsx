@@ -290,7 +290,7 @@ export const OgiLimits: React.FC = () => {
       <div style={{position: 'absolute', left: padX, top: portrait ? 760 : 440, width: W, display: 'grid', gridTemplateColumns: portrait ? '1fr' : '1fr 1fr', gap: 22}}>
         {[
           {h: t('Tampak pada pita ≈3,3 µm', 'Visible in the ≈3.3 µm band'), items: ['CH₄', 'C₃H₈', 'C₄H₁₀', 'VOC'], c: COLORS.ok, a: tGas - 20},
-          {h: t('Tidak tampak → tetap andalkan GLD', 'Not visible → GLD remains essential'), items: ['H₂', 'CO', 'H₂S'], c: COLORS.alarm, a: tGas},
+          {h: t('Di luar desain OGI → ditangani GLD', 'Not designed for OGI → addressed by GLD'), items: ['H₂', 'CO', 'H₂S'], c: COLORS.alarm, a: tGas},
         ].map((col) => {
           const p = spring({frame: frame - col.a, fps, config: {damping: 200}});
           return (

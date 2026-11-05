@@ -106,7 +106,7 @@ const FingerprintPhase: React.FC = () => {
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{padding: portrait ? `200px ${padX}px` : `70px ${padX}px`}}>
-        <Caption text={t('Delapan sensor bersama membentuk sidik jari gas', 'Eight sensors together form a gas fingerprint')} size={title(56)} />
+        <Caption text={t('Sensor multigas bersama membentuk sidik jari gas', 'Multi-gas sensors together form a gas fingerprint')} size={title(56)} />
         <Caption
           text={t('Prinsip electronic nose: sensor metal-oxide tidak selektif, namun pola responsnya khas', 'Electronic-nose principle: metal-oxide sensors are not selective, yet their response pattern is distinctive')}
           from={20}
@@ -145,7 +145,7 @@ type Rect = {x: number; y: number; w: number; h: number};
 type Box = {id: string; title: [string, string]; sub: [string, string]; at: number; accent?: string};
 
 const BOXES: Box[] = [
-  {id: 'in', title: ['Sinyal 8 sensor', '8-sensor signals'], sub: ['deret waktu, resolusi 24-bit', 'time series, 24-bit resolution'], at: 10},
+  {id: 'in', title: ['Sinyal sensor multigas', 'Multi-gas sensor signals'], sub: ['deret waktu, resolusi 24-bit', 'time series, 24-bit resolution'], at: 10},
   {id: 'ds', title: ['Profil sensitivitas', 'Sensitivity profile'], sub: ['karakteristik setiap sensor', 'characteristics of each sensor'], at: 25},
   {id: 'b1', title: ['Cabang 1 · Conv1D', 'Branch 1 · Conv1D'], sub: ['ekstraksi pola temporal', 'temporal pattern extraction'], at: 60, accent: COLORS.blue},
   {id: 'b2', title: ['Cabang 2 · Dense', 'Branch 2 · Dense'], sub: ['representasi sensitivitas', 'sensitivity representation'], at: 80, accent: COLORS.blue},
@@ -329,7 +329,7 @@ const Core3D: React.FC = () => {
       <AbsoluteFill style={{background: portrait ? 'linear-gradient(rgba(2,4,9,0.8), transparent 30%)' : 'linear-gradient(90deg, rgba(2,4,9,0.75), rgba(2,4,9,0) 42%)'}} />
       <div style={{position: 'absolute', left: padX, top: portrait ? 200 : 70, maxWidth: portrait ? 952 : 760}}>
         <div style={{fontSize: 22, fontWeight: 800, letterSpacing: 3, color: COLORS.blueLight, opacity: progress(frame, 6, 14)}}>{t('8 SENSOR · 1 SIDIK JARI', '8 SENSORS · 1 FINGERPRINT')}</div>
-        <Caption text={t('Delapan sensor gas di dalam satu perangkat', 'Eight gas sensors inside one device')} from={10} size={title(56)} color="#F2F5FA" />
+        <Caption text={t('Sensor multigas di dalam satu perangkat', 'Multi-gas sensors inside one device')} from={10} size={title(56)} color="#F2F5FA" />
       </div>
       <div style={{position: 'absolute', right: 28, top: 22, fontSize: 16, letterSpacing: 1.5, color: 'rgba(214,240,255,0.7)'}}>{t('ILUSTRASI 3D · GLD V2', '3D ILLUSTRATION · GLD V2')}</div>
     </AbsoluteFill>

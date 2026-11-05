@@ -23,7 +23,7 @@ def render():
         if getattr(c, "target", None) is not None:
             c.target.animation_data_clear()
             c.target.location = TGT
-    cam.data.lens = 52
+    cam.data.lens = float(__import__("os").environ.get("HERO_LENS", "52"))
     _render()
 
 

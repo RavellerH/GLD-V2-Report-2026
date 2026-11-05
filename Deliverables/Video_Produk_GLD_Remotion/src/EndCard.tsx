@@ -68,7 +68,7 @@ export const EndCard: React.FC = () => {
     {
       kind: 'ai',
       color: P.gas,
-      k: t('8 sensor gas + edge AI', '8 gas sensors + edge AI'),
+      k: t('Sensor multigas + edge AI', 'Multi-gas sensors + edge AI'),
       v: t('Klasifikasi gas langsung di perangkat', 'Gas classification directly on the device'),
     },
     {

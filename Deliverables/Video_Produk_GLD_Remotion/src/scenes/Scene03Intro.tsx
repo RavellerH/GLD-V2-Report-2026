@@ -13,10 +13,10 @@ import {COLORS} from '../theme';
 // Frame kemunculan label: sensor, akuisisi (motherboard), prosesor (motherboard), radio (antena).
 const LABEL_AT = [205, 222, 238, 254];
 const PARTS: [string, string][] = [
-  ['8 sensor gas metal-oxide semiconductor', '8 metal-oxide semiconductor gas sensors'],
+  ['Sensor multigas metal-oxide semiconductor', 'Multi-gas metal-oxide semiconductor sensors'],
   ['Data acquisition presisi 24-bit', 'Precision 24-bit data acquisition'],
-  ['Prosesor edge AI dual-core 240 MHz', 'Dual-core 240 MHz edge AI processor'],
-  ['Radio LoRa (Long Range) 920 MHz', 'LoRa (Long Range) radio, 920 MHz'],
+  ['Prosesor edge AI di perangkat', 'On-device edge AI processor'],
+  ['Radio LoRa (Long Range)', 'LoRa (Long Range) radio'],
 ];
 
 export const Scene03Intro: React.FC = () => {

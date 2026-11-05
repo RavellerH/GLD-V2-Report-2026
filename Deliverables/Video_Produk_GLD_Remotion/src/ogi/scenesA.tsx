@@ -347,7 +347,7 @@ export const OgiCooled: React.FC = () => {
       </div>
       {/* derau vs sinyal */}
       <div style={{position: 'absolute', right: portrait ? undefined : 60, left: portrait ? padX : undefined, top: portrait ? 1120 : 640, width: W + 40, padding: 20, opacity: progress(frame, tNoise - 6, 16), ...glassPanel}}>
-        <div style={{fontSize: 24, fontWeight: 800, color: '#F2F5FA', marginBottom: 6}}>{t('Sinyal gas vs derau termal', 'Gas signal vs thermal noise')}</div>
+        <div style={{fontSize: 24, fontWeight: 800, color: '#F2F5FA', marginBottom: 6}}>{t('Pendinginan menekan derau detektor', 'Cooling reduces detector noise')}</div>
         <svg width={W} height={H}>
           <rect width={W} height={H} rx={12} fill="rgba(10,17,32,0.8)" />
           <polyline points={wave(noiseAmp)} fill="none" stroke={COLORS.gas} strokeWidth={3} />

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Booklet OGI</title>
+<link rel="stylesheet" href="booklet.css">
+</head>
+<body>
+
+<!-- 1 · SAMPUL -->
+<div class="page dark">
+  <img src="img/o_ogi_hook_0.95.png" alt="Thermal image of a gas leak" style="position:absolute;left:0;top:96mm;width:210mm;height:170mm;object-fit:cover;object-position:62% 50%;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 20%,#000 75%,transparent 100%)">
+  <div class="in" style="top:24mm">
+    <div class="eyebrow">GLD NEXT · DEVELOPMENT CONCEPT</div>
+    <h1 style="margin-top:4mm;font-size:52pt">Optical Gas<br>Imaging</h1>
+    <div class="lead" style="margin-top:4mm;font-size:15pt">Seeing invisible hydrocarbon leaks, from point to area.</div>
+  </div>
+  <div class="in" style="bottom:16mm;display:flex;justify-content:space-between;align-items:flex-end">
+    <div class="small mute">PT Pertamina Patra Niaga (Reliability Function)<br>LAPI Ganesha Utama · Institut Teknologi Bandung</div>
+    <div class="small mute">3D illustration</div>
+  </div>
+</div>
+
+<!-- 2 · PRINSIP -->
+<div class="page">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">THE PRINCIPLE</div>
+    <h2 style="margin-top:3mm">Invisible gas.<br>Made visible.</h2>
+    <div class="lead" style="margin-top:5mm">Carbon-hydrogen bonds absorb infrared radiation near 3.3 µm. A camera with a narrow spectral filter on that band renders the gas as contrast against the background.</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:104mm;height:100mm;background:var(--dk)">
+    <img class="full" src="img/o_ogi_cooled_0.9.png" style="filter:brightness(.8) contrast(1.05)" alt="Cooled MWIR camera structure">
+    <div class="lb up" style="left:19%;top:8mm;--h:28mm"><b>MWIR optics</b><span>3–5 µm band</span></div>
+    <div class="lb dn r" style="right:66%;bottom:8mm;--h:34mm"><b>Spectral filter</b><span>~3.3 µm, C–H absorption band</span></div>
+    <div class="lb up" style="left:50%;top:8mm;--h:30mm"><b>Cooled detector</b><span>≈ −196 °C (77 K)</span></div>
+  </div>
+  <div class="in small mute" style="top:207mm">3D illustration of a generic cooled MWIR camera.</div>
+  <div class="in cols" style="top:222mm;grid-template-columns:repeat(3,1fr)">
+    <div class="feat"><b>MWIR band</b><p>Mid-Wave Infrared, 3–5 µm, where hydrocarbons absorb radiation.</p></div>
+    <div class="feat"><b>Narrow filter</b><p>Passes only the C–H absorption wavelength.</p></div>
+    <div class="feat"><b>Cryogenic detector</b><p>Cooling reduces detector noise, improving sensitivity to weak infrared gas signatures.</p></div>
+  </div>
+</div>
+
+<!-- 3 · SISTEM -->
+<div class="page dark">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">THE SYSTEM</div>
+    <h2 style="margin-top:3mm">From point<br>to area.</h2>
+    <div class="lead" style="margin-top:5mm">A pan-tilt camera on a ~10 m pole patrols critical sectors: pipe runs, manifolds and valve clusters. Target range ~100 m.</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:96mm;height:106mm">
+    <img class="full" src="img/o_ogi_field_0.6.png" style="-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 16%,#000 84%,transparent 100%)" alt="OGI camera in the field">
+  </div>
+  <div class="in flow" style="top:206mm"><span>MWIR camera</span><i>→</i><span>Edge server · AI plume segmentation</span><i>→</i><span>Dashboard GLD + OGI</span></div>
+  <div class="in" style="top:217mm"><div class="rule"></div></div>
+  <div class="in cols" style="top:224mm;grid-template-columns:1fr 1fr;gap:10mm">
+    <div class="feat">
+      <b>GLD + OGI, one system</b>
+      <table class="dt">
+        <tr><td>GLD</td><td>Which gas &amp; how concentrated</td></tr>
+        <tr><td>OGI</td><td>Where it is &amp; which way it spreads</td></tr>
+        <tr class="hl"><td>Both</td><td>Highest response priority</td></tr>
+      </table>
+    </div>
+    <div class="feat">
+      <b>Confirmed alarms</b><p>An alarm is raised only when the plume is detected consistently over consecutive frames, suppressing flares and heat reflections.</p>
+    </div>
+  </div>
+  <div class="in small mute" style="bottom:9mm">3D illustration of the system concept.</div>
+</div>
+
+<!-- 4 · SPESIFIKASI -->
+<div class="page">
+  <div class="in" style="top:22mm">
+    <div class="eyebrow">COMPLEMENTING GLD</div>
+    <h2 style="margin-top:3mm">Complementing,<br>not replacing.</h2>
+  </div>
+  <div class="in cols" style="top:64mm;grid-template-columns:repeat(3,1fr)">
+    <div class="stat"><div class="big">3–5 µm</div><p>Mid-Wave Infrared band</p></div>
+    <div class="stat"><div class="big">−196 °C</div><p>Detector operating temperature</p></div>
+    <div class="stat"><div class="big">±100 m</div><p>Target visualisation range</p></div>
+  </div>
+  <div class="in" style="top:102mm">
+    <div class="eyebrow" style="margin-bottom:3mm">TARGET SPECIFICATIONS</div>
+    <table>
+      <tr><td>Detector</td><td>Cooled MCT, 640 × 512 pixels</td></tr>
+      <tr><td>Frame rate</td><td>100 Hz</td></tr>
+      <tr><td>Mounting</td><td>~10 m pole, pan-tilt, preset sector patrol</td></tr>
+      <tr><td>Intelligence</td><td>Plume segmentation on edge server, multi-frame confirmation</td></tr>
+      <tr><td>Validation</td><td>Controlled gas release tests</td></tr>
+      <tr><td>Limitations</td><td>The proposed OGI system is optimized for hydrocarbon detection near 3.3 µm and is not designed to detect H₂, CO, or H₂S; can be addressed by the GLD system.</td></tr>
+    </table>
+  </div>
+  <div class="in" style="top:184mm">
+    <div class="eyebrow" style="margin-bottom:4mm">ROADMAP</div>
+    <div class="cols" style="grid-template-columns:repeat(3,1fr)">
+      <div class="feat"><b>Modular</b><p>Designed for replication across Pertamina refineries.</p></div>
+      <div class="feat"><b>Fugitive emissions</b><p>Supports fugitive emission documentation.</p></div>
+      <div class="feat"><b>Predictive maintenance</b><p>Radiometric thermography: heater hot spots, damaged insulation, steam traps.</p></div>
+    </div>
+  </div>
+  <div class="in small mute" style="top:240mm;max-width:150mm">Next-stage development concept, not part of the current GLD scope. Specifications are design targets; all images are 3D illustrations.</div>
+  <div class="in" style="bottom:14mm;display:flex;justify-content:space-between;align-items:center">
+    <div class="logos"><img src="img/logo_pertamina.png" alt="Pertamina"><img src="img/logo_lgu.png" alt="LGU"><img class="itb" src="img/logo_itb.png" alt="ITB"></div>
+    <div class="small mute" style="text-align:right">Internet of Things Laboratory<br>Institut Teknologi Bandung</div>
+  </div>
+</div>
+
+</body>
+</html>

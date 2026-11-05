@@ -251,3 +251,8 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 - **Rev 1.2 (2 Nov)**: Bagian 7 (tabel tindak lanjut) dihapus atas permintaan user.
 - **Rev 1.3 (2 Nov)**: Bagian 6 (opsi A relokasi/B sampling/C perbaikan jalur gas + rekomendasi) dihapus atas permintaan user; rujukan ke Bagian 6 di pengantar, ringkasan & bagian 5 ikut disesuaikan. Dokumen kini 5 bagian, 3 halaman. Opsi-opsi tsb tetap tercatat di dec:221 sbg bahan internal.
 - **Rev 1.4 (2 Nov)**: bullet perkiraan durasi sertifikasi 5–8 bulan di Bagian 5 dihapus atas permintaan user.
+
+## Paket 10 — Laporan Field Testing & Sertifikasi per 5 Nov 2026 (dec:225)
+- Folder: `Paket Pertamina/10_Laporan_FieldTesting_dan_Sertifikasi_5November2026/` (README di dalamnya).
+- Dokumen utama: `00_Laporan_Perkembangan_GLD_FieldTesting_Sertifikasi_5November2026.{docx,pdf}` — 7 hlm, `LGU/GLD/LAP-PERKEMBANGAN/2026-003` rev 1.0; generator `scripts/build_laporan_perkembangan_ft_sertifikasi_nov2026.py` (chart `scripts/assets/laporan_nov2026/kurva_s_5nov2026.png`), PDF via `scripts/docx_to_pdf_with_toc.py`.
+- Pendukung: `01_Field_Testing/01-01…01-09`, `02_Sertifikasi_ATEX_IECEx/02-01…02-05` (salinan revisi terbaru dari Deliverables, Paket LGU/02, Paket LGU/01, Sumber Dokumen).

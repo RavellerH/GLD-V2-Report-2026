@@ -167,6 +167,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 📄 **3 Nov — MoC Pertamina No. 15769/RU IV diterima** (`Sumber Dokumen/MOC Pertamina/`, dec:224): field test GLD di **SRU** (relokasi dari OM60), lingkup **4 GLD + 5 CH + JB-01 (PS27) + 1 GW + PC server**, sistem standalone/advisory, kabel 24 VDC armored via JB-01. **Kesimpulan MoC: infrastruktur pendukung boleh disiapkan lebih dulu, pemasangan GLD menunggu sertifikat Ex (min. setara Zone 2 IIB T3)**. ⚠️ Selisih dgn dokumen LGU: jumlah unit (4/5 vs alokasi 3 GLD/2 CH), tinggi GLD ±1,5 m (vs 1 m), MySQL (vs SQLite), akurasi 99,31% (vs 99,20%).
 
+- 🆕 **5 Nov — paket laporan Pertamina `Paket Pertamina/10_Laporan_FieldTesting_dan_Sertifikasi_5November2026/` dibuat** (dec:225): dokumen utama baru Laporan Perkembangan Field Testing & Sertifikasi (7 hlm) + 14 dokumen pendukung revisi terbaru. Kurva-S **63% vs rencana ≈73%** (usulan reassessment Claude: survey 100%, lab test 90% — belum dikonfirmasi user; Dashboard Proyek HTML masih 61%). Kelengkapan dokumen sertifikasi ≈52% (21 butir matriks panduan revisi).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

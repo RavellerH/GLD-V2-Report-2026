@@ -251,3 +251,6 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 - **Rev 1.2 (2 Nov)**: Bagian 7 (tabel tindak lanjut) dihapus atas permintaan user.
 - **Rev 1.3 (2 Nov)**: Bagian 6 (opsi A relokasi/B sampling/C perbaikan jalur gas + rekomendasi) dihapus atas permintaan user; rujukan ke Bagian 6 di pengantar, ringkasan & bagian 5 ikut disesuaikan. Dokumen kini 5 bagian, 3 halaman. Opsi-opsi tsb tetap tercatat di dec:221 sbg bahan internal.
 - **Rev 1.4 (2 Nov)**: bullet perkiraan durasi sertifikasi 5–8 bulan di Bagian 5 dihapus atas permintaan user.
+
+## Presentasi Koordinasi Implementasi GLD — RU VI Balongan (11 Nov 2026, dec:225)
+- `Deliverables/Presentasi_Koordinasi_Implementasi_GLD_RU-VI_Balongan_13November2026.pptx` + `.pdf` (17 slide, render LibreOffice) — bahan rapat Zoom Jumat 13 Nov 2026 09.00 dgn tim RU VI Balongan (PIC RU lain ikut). Generator: `scripts/build_presentasi_balongan_13nov.js` (pptxgenjs 3.12, palet biru/charcoal, catatan pembicara tiap slide). XML tiap part divalidasi well-formed.

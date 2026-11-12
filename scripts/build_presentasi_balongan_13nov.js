@@ -216,6 +216,7 @@ const SRC = "Sumber: dokumen teknis GLD V2 (TDS Rev 4.0 & dokumen teknis sertifi
       fontFace: FONT, fontSize: 12.5, color: CHAR_SOFT,
     });
   });
+  footnote(s, "Lampiran A–H: detail teknis instalasi — pelat & U-bolt, tiang & pondasi, tinggi sensor, catu daya & kabel, terminasi, antena & jaringan, contoh penempatan, perkiraan BoQ.", 6.8);
   s.addNotes("Durasi 2 jam: ±50 menit presentasi LGU (bagian 1–4), ±40 menit diskusi kebutuhan & konfirmasi, ±20 menit penjadwalan site survey.");
 })();
 
@@ -246,16 +247,16 @@ const SRC = "Sumber: dokumen teknis GLD V2 (TDS Rev 4.0 & dokumen teknis sertifi
     ["RU III Plaju", "4", "3", "1"],
     ["RU IV Cilacap", "3", "2", "1"],
     ["RU V Balikpapan", "2", "1", "1"],
-    ["RU VI Balongan", "4", "2", "2"],
+    ["RU VI Balongan", "4", "2*", "2*"],
     ["RU VII Kasim", "5", "11", "1"],
     ["Total", "28", "22", "7"],
   ], { x: 6.65, y: 2.1, w: 6.05, colW: [2.45, 1.1, 1.4, 1.1], size: 12, boldFirst: true, rowH: 0.42 });
   s.addShape(pres.ShapeType.rect, { x: 6.65, y: 2.1 + 0.42 * 5, w: 6.05, h: 0.42, fill: { color: BLUE, transparency: 85 }, line: { color: BLUE, width: 1.5 } });
-  s.addText("Jumlah dan lokasi final per RU ditetapkan setelah site survey; tiap RU juga mendapat 1 PC server lokal (disediakan RU).", {
+  s.addText("* Jumlah CH & Gateway RU VI masih angka awal — ditetapkan dari LoRa mapping saat site survey dan bisa bertambah. Jumlah & lokasi final per RU ditetapkan setelah survey; tiap RU juga mendapat 1 PC server lokal (disediakan RU).", {
     x: 6.65, y: 5.6, w: 6.05, h: 0.7, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11, italic: true, color: MUTED,
   });
   footnote(s, "Sumber alokasi: tabel alokasi perangkat per RU (3 Nov 2026) & dokumen Kebutuhan Peralatan GLD per RU.");
-  s.addNotes("RU VI Balongan direncanakan 4 GLD, 2 Cluster Head, 2 Gateway. Angka ini rencana awal — jumlah CH/GW bisa berubah setelah survey jangkauan radio. Pengalaman RU IV Cilacap menjadi acuan persiapan Balongan, terutama soal klasifikasi area dan MoC.");
+  s.addNotes("RU VI Balongan direncanakan 4 GLD; angka 2 Cluster Head dan 2 Gateway hanya rencana awal. Jumlah CH/GW ditetapkan dari LoRa mapping (uji jangkauan) saat site survey dan kemungkinan bertambah, tergantung jarak dan halangan antar-titik. Pengalaman RU IV Cilacap menjadi acuan persiapan Balongan, terutama soal klasifikasi area dan MoC.");
 })();
 
 // ================================================================ 4 · arsitektur
@@ -550,7 +551,7 @@ const SRC = "Sumber: dokumen teknis GLD V2 (TDS Rev 4.0 & dokumen teknis sertifi
   heading(s, "5 · Rencana", "Tahapan implementasi di RU VI Balongan");
   const steps = [
     ["Rapat koordinasi", "13 Nov 2026", "LGU & RU VI"],
-    ["Site survey awal", "Jadwal disepakati hari ini", "LGU & RU VI"],
+    ["Site survey & LoRa mapping", "Uji jangkauan → jumlah & posisi CH/GW", "LGU & RU VI"],
     ["Penetapan titik & desain", "Titik GLD/CH/GW, jarak kabel, BoQ", "LGU & RU VI"],
     ["MoC & perizinan", "MoC, TRA/JSA, izin kerja", "RU VI"],
     ["Persiapan infrastruktur", "Tiang, kabel, PSU, PC server, jaringan", "RU VI"],
@@ -583,7 +584,7 @@ const SRC = "Sumber: dokumen teknis GLD V2 (TDS Rev 4.0 & dokumen teknis sertifi
     ["Yang diperiksa tim LGU", BLUE, SURF, [
       "Kandidat titik GLD: sumber bocor (flange/valve), arah angin, tinggi pasang",
       "Klasifikasi area tiap titik (HAC)",
-      "Jangkauan LoRa: posisi CH & mast antena Gateway (line of sight)",
+      "LoRa mapping: uji jangkauan (RSSI/SNR) titik GLD → CH → mast Gateway, untuk menetapkan jumlah & posisi CH/GW",
       "Sumber 220 VAC / 24 VDC terdekat & rute kabel",
       "Ruang Gateway, ruang server, titik intranet",
       "Lokasi kerja chamber gas di kantor kilang",
@@ -621,7 +622,7 @@ const SRC = "Sumber: dokumen teknis GLD V2 (TDS Rev 4.0 & dokumen teknis sertifi
     "Tanggal site survey awal & persyaratan masuk site",
     "Area kandidat & gambar HAC / plot plan",
     "Gas target prioritas & ketersediaan sampel gas",
-    "Jumlah unit final (rencana: 4 GLD, 2 CH, 2 GW)",
+    "Jumlah unit final: 4 GLD; CH & GW setelah LoRa mapping",
     "Mekanisme MoC & izin kerja, serta estimasi waktunya",
     "Pelaksana instalasi fisik (tim internal / kontraktor RU)",
     "Sumber 24 VDC/220 VAC & standar kabel/grounding",
@@ -653,6 +654,306 @@ const SRC = "Sumber: dokumen teknis GLD V2 (TDS Rev 4.0 & dokumen teknis sertifi
     x: M, y: 5.0, w: 11, h: 0.3, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11, color: MUTED,
   });
   s.addNotes("Tutup dengan merangkum tanggal survey dan PIC yang disepakati.");
+})();
+
+// ================================================================ LAMPIRAN · detail teknis instalasi
+const SRC_SPEK = "Sumber: Spesifikasi Material & Kebutuhan Instalasi GLD rev 1.5 (disusun untuk RU IV Cilacap) — angka USULAN dapat disesuaikan dengan standar RU VI.";
+function lampHead(s, huruf, title) { heading(s, "Lampiran " + huruf, title); }
+function line(s, x, y, w, h, color, width, dash) {
+  s.addShape(pres.ShapeType.line, { x, y, w, h, line: { color: color || CHAR, width: width || 1, dashType: dash } });
+}
+function label(s, text, x, y, w, h, o = {}) {
+  s.addText(text, {
+    x, y, w, h: h || 0.3, isTextBox: true, margin: 0, fontFace: FONT, fontSize: o.size || 10,
+    bold: !!o.bold, color: o.color || CHAR_SOFT, align: o.align || "left", valign: o.valign || "middle",
+  });
+}
+
+// ---------------------------------------------------------------- pembatas
+(function lampiranCover() {
+  const s = slideDark();
+  s.addText("LAMPIRAN", { x: M, y: 0.92, w: 9, h: 0.3, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11.5, bold: true, charSpacing: 1.8, color: "9FB4E6" });
+  s.addText("Detail teknis instalasi", { x: M, y: 1.3, w: 11, h: 0.8, isTextBox: true, margin: 0, fontFace: SERIF, fontSize: 34, bold: true, color: WHITE });
+  s.addText("Acuan untuk pelaksana instalasi RU VI, diambil dari spesifikasi yang sudah disusun untuk RU IV Cilacap. Angka final RU VI ditetapkan setelah site survey.", {
+    x: M, y: 2.15, w: 10.5, h: 0.7, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 14, color: "CFD8EA",
+  });
+  const items = [
+    ["A", "Pelat mounting & U-bolt GLD"], ["B", "Tiang & pondasi (GLD, CH, mast Gateway)"],
+    ["C", "Tinggi sensor per jenis gas & mounting CH"], ["D", "Catu daya & kabel 24 VDC"],
+    ["E", "Terminasi kabel di unit GLD"], ["F", "Antena Gateway & jaringan lokal"],
+    ["G", "Contoh penempatan titik (RU IV, area SRU)"], ["H", "Perkiraan daftar material (BoQ) RU VI"],
+  ];
+  items.forEach((it, i) => {
+    const col = i % 2, row = Math.floor(i / 2);
+    const x = M + col * 6.15, y = 3.2 + row * 0.82;
+    badge(s, x, y, it[0], 0.46, BLUE);
+    s.addText(it[1], { x: x + 0.62, y: y - 0.04, w: 5.3, h: 0.54, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 15, bold: true, color: WHITE, valign: "middle" });
+  });
+  s.addNotes("Lampiran ini tidak dipresentasikan satu per satu; dibuka saat diskusi teknis bila RU VI menanyakan detail bracket, tiang, kabel, atau jaringan.");
+})();
+
+// ---------------------------------------------------------------- A · pelat & U-bolt
+(function lampA() {
+  const s = slideLight();
+  lampHead(s, "A", "Pelat mounting & U-bolt GLD");
+  const ih = 5.05, iw = ih * 740 / 1372;
+  card(s, M, 1.55, iw + 0.3, ih + 0.3, WHITE);
+  s.addImage({ path: ASSET("balongan_13nov/pelat_ubolt_dimensi.png"), x: M + 0.15, y: 1.7, w: iw, h: ih });
+  label(s, "Gambar kerja pelat 250 × 250 mm & posisi U-bolt (mm). Sumber: gambar CAD LGU 31/08/2026.", M, 6.95, iw + 0.3, 0.4, { size: 9.5, color: MUTED, valign: "top" });
+  const x0 = M + iw + 0.6, w0 = W - M - x0;
+  table(s, [
+    ["Item", "Spesifikasi", "Per titik"],
+    ["Pelat mounting", "Pelat baja 250 × 250 mm, dibuat pelaksana RU sesuai gambar LGU", "1"],
+    ["U-bolt", "2\"/DN50 untuk pipa OD 60,3 mm; ulir M10; lebar dalam 62–65 mm; tinggi dalam 95–100 mm; panjang ulir 40 mm", "2"],
+    ["Mur & ring", "M10: mur + ring datar + ring per; anti-karat (disarankan SS316 di dekat laut)", "4 set"],
+    ["Spacer", "45–60 mm bila pelat lebih tebal", "sesuai kebutuhan"],
+    ["Kabel ties", "Tahan UV, stainless atau nylon UV", "± 10"],
+    ["Larangan", "Tanpa PVC pada housing/bracket; tanpa bor/las pada struktur existing kilang", "—"],
+  ], { x: x0, y: 1.6, w: w0, colW: [1.6, w0 - 2.85, 1.25], size: 11, boldFirst: true, rowH: 0.48 });
+  card(s, x0, 5.45, w0, 1.15, WARN_BG);
+  s.addText("Perlu dicek sebelum fabrikasi: desain pelat saat ini paling sesuai untuk pipa horizontal (handrail). Bila GLD dipasang di tiang baru yang berdiri vertikal, orientasi pelat dicek bersama tim desain LGU & pelaksana RU sebelum pelat dibuat.", {
+    x: x0 + 0.2, y: 5.45, w: w0 - 0.4, h: 1.15, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11.5, bold: true, color: WARN, valign: "middle",
+  });
+  s.addNotes("U-bolt dirancang khusus untuk pipa OD 60,3 mm (2 inci). Pipa ukuran lain tidak bisa dipakai tanpa mengganti U-bolt. Pelat dibuat oleh pelaksana RU berdasarkan gambar ini.");
+})();
+
+// ---------------------------------------------------------------- B · tiang & pondasi
+(function lampB() {
+  const s = slideLight();
+  lampHead(s, "B", "Tiang & pondasi — pipa galvanis 2\" Sch40, ditanam & dicor");
+  // diagram
+  const G = 5.15, U = 0.55; // garis tanah, inci per meter
+  card(s, M, 1.55, 5.2, 5.2, WHITE);
+  s.addShape(pres.ShapeType.rect, { x: M + 0.15, y: G, w: 4.9, h: 1.45, fill: { color: "EFE9E1" }, line: { color: "EFE9E1" } });
+  line(s, M + 0.15, G, 4.9, 0, "8A7F72", 1.5);
+  const poles = [
+    { x: M + 0.95, up: 1.0, dn: 0.6, fw: 0.40, name: "Tiang GLD", sub: "1,6 m total" },
+    { x: M + 2.55, up: 3.0, dn: 1.0, fw: 0.50, name: "Tiang CH", sub: "4,0 m total" },
+    { x: M + 4.1, up: 4.8, dn: 1.2, fw: 0.50, name: "Mast antena GW", sub: "6,0 m total" },
+  ];
+  poles.forEach((p) => {
+    const top = G - p.up * U, bot = G + p.dn * U;
+    s.addShape(pres.ShapeType.rect, { x: p.x - p.fw * U / 2, y: G, w: p.fw * U, h: p.dn * U + 0.05, fill: { color: "B9B4AC" }, line: { color: "9A948B", width: 0.75 } });
+    s.addShape(pres.ShapeType.rect, { x: p.x - 0.035, y: top, w: 0.07, h: bot - top, fill: { color: "7D8794" }, line: { color: "5E6773", width: 0.5 } });
+    const isMast = p.name.startsWith("Mast");
+    label(s, p.up.toLocaleString("id-ID") + " m", isMast ? p.x - 0.72 : p.x + 0.12, top + (G - top) / 2 - 0.14, 0.6, 0.28, { size: 9.5, bold: true, color: CHAR, align: isMast ? "right" : "left" });
+    label(s, p.dn.toLocaleString("id-ID") + " m", p.x + 0.2, G + (bot - G) / 2 - 0.14, 0.6, 0.28, { size: 9, color: CHAR_SOFT });
+    label(s, p.name, p.x - 0.75, 6.3, 1.5, 0.22, { size: 10, bold: true, color: CHAR, align: "center" });
+    label(s, p.sub, p.x - 0.75, 6.5, 1.5, 0.2, { size: 9, color: MUTED, align: "center" });
+  });
+  // GLD unit (titik tengah sensor ± 0,5 m)
+  const gx = poles[0].x;
+  s.addShape(pres.ShapeType.roundRect, { x: gx - 0.24, y: G - 0.5 * U - 0.09, w: 0.2, h: 0.18, rectRadius: 0.03, fill: { color: BLUE }, line: { color: BLUE_DK } });
+  label(s, "GLD ± 0,5 m", gx - 0.95, G - 0.5 * U - 0.13, 0.7, 0.26, { size: 8.5, color: BLUE, bold: true, align: "right" });
+  // CH: unit + 2 panel surya
+  const cx = poles[1].x, ctop = G - 3.0 * U;
+  s.addShape(pres.ShapeType.rect, { x: cx - 0.45, y: ctop + 0.35, w: 0.38, h: 0.07, fill: { color: "2E3E66" }, line: { color: "2E3E66" }, rotate: -20 });
+  s.addShape(pres.ShapeType.rect, { x: cx + 0.07, y: ctop + 0.35, w: 0.38, h: 0.07, fill: { color: "2E3E66" }, line: { color: "2E3E66" }, rotate: 20 });
+  s.addShape(pres.ShapeType.roundRect, { x: cx - 0.09, y: ctop - 0.16, w: 0.18, h: 0.2, rectRadius: 0.03, fill: { color: BLUE }, line: { color: BLUE_DK } });
+  line(s, cx, ctop - 0.42, 0, 0.26, CHAR, 1.5);
+  // mast GW: antena + koaksial ke gedung
+  const mx = poles[2].x, mtop = G - 4.8 * U;
+  line(s, mx, mtop - 0.35, 0, 0.35, CHAR, 2);
+  s.addShape(pres.ShapeType.rect, { x: M + 4.5, y: G - 1.3, w: 0.55, h: 1.3, fill: { color: SURF_2 }, line: { color: LINE } });
+  label(s, "Ruang\nGateway", M + 4.5, G - 1.0, 0.55, 0.5, { size: 8, color: CHAR_SOFT, align: "center" });
+  line(s, mx + 0.04, G - 0.4, 0.36, 0, WARN, 1.5, "dash");
+  label(s, "koaksial\n≤ 15 m", M + 4.3, G - 1.85, 0.95, 0.45, { size: 8, color: WARN, align: "center" });
+  // tabel
+  const x0 = M + 5.45, w0 = W - M - x0;
+  table(s, [
+    ["", "Tiang GLD", "Tiang CH", "Mast antena GW"],
+    ["Panjang batang", "1,6 m", "4,0 m", "6,0 m"],
+    ["Di atas tanah", "1,0 m", "3,0 m", "± 4,8 m"],
+    ["Tertanam", "0,6 m", "1,0 m", "1,2 m"],
+    ["Pondasi cor", "40×40×60 cm", "50×50×100 cm", "50×50×120 cm"],
+    ["Ujung atas", "Pipe cap", "Dudukan CH/antena", "Pipe cap + klem antena"],
+    ["Yang dipasang", "Pelat U-bolt + GLD", "Bracket 2 panel surya + CH (dari LGU)", "Antena omni 8 dBi (dari LGU)"],
+  ], { x: x0, y: 1.6, w: w0, colW: [1.55, (w0 - 1.55) / 3, (w0 - 1.55) / 3, (w0 - 1.55) / 3], size: 10.5, boldFirst: true, rowH: 0.44 });
+  bullets(s, x0, 4.95, w0, 1.8, [
+    "Material: baja karbon galvanis celup panas (mis. ASTM A53 / API 5L Gr.B), OD 60,3 mm, tebal 3,91 mm.",
+    "Beton fc' ≥ 20 MPa; ujung bawah diberi angkur silang (2 × besi Ø12 mm) agar tiang tidak berputar; tegak ≤ 1°.",
+    "Semua tiang di-bonding ke grounding RU dan diberi label nomor titik sesuai dashboard.",
+    "Mast > 5 m atau angin kencang: tambah guy wire 3 arah atau klem ke dinding gedung.",
+  ], 11);
+  footnote(s, SRC_SPEK);
+  s.addNotes("Diagram tidak berskala presisi. Bila RU VI punya standar tiang/pondasi sendiri, standar RU yang dipakai; syarat mutlak hanya OD pipa 60,3 mm untuk tiang GLD karena U-bolt.");
+})();
+
+// ---------------------------------------------------------------- C · tinggi sensor & mounting CH
+(function lampC() {
+  const s = slideLight();
+  lampHead(s, "C", "Tinggi sensor menurut jenis gas & mounting Cluster Head");
+  table(s, [
+    ["Jenis gas", "Sifat", "Tinggi sensor ideal"],
+    ["LPG (propana/butana), CO₂", "Jauh lebih berat dari udara, mengendap", "0,3–0,5 m dari tanah"],
+    ["H₂S", "Sedikit lebih berat, toksik", "0,3–0,6 m (deteksi bocor); 1,2–1,8 m (zona napas)"],
+    ["CO", "Hampir sama dengan udara", "Zona napas 1,5–1,8 m"],
+    ["Metana", "Lebih ringan, naik", "± 0,5–1 m di atas sumber bocor"],
+    ["H₂", "Sangat ringan, naik cepat", "Di atas sumber bocor / titik gas terperangkap"],
+  ], { x: M, y: 1.6, w: 7.0, colW: [1.9, 2.4, 2.7], size: 11, boldFirst: true, rowH: 0.5 });
+  card(s, M, 4.85, 7.0, 1.75, SURF);
+  bullets(s, M + 0.25, 5.0, 6.55, 1.55, [
+    "Satu GLD membaca beberapa gas sekaligus, jadi tinggi pasang selalu kompromi — ditentukan dari gas prioritas & letak sumber bocor (flange/valve).",
+    "Jangan di bawah ± 0,3 m: mesh sensor bisa terkena cipratan air, lumpur, dan genangan.",
+    "Tinggi final per titik disepakati bersama HSE RU saat penentuan titik.",
+  ], 11.5);
+  const pw = 2.35, ph = pw * 1600 / 1200;
+  s.addImage({ path: ASSET("ch_mount_photos/ch_bracket_solar_detail.jpg"), x: 7.95, y: 1.6, w: pw, h: ph });
+  s.addImage({ path: ASSET("ch_mount_photos/ch_mast_antena_lapangan.jpg"), x: 7.95 + pw + 0.1, y: 1.6, w: pw, h: ph });
+  label(s, "Bracket 2 panel surya diklem ke tiang 2\" tanpa las/bor (kiri); unit CH & antena di ujung atas tiang (kanan). Foto uji LGU & ITB — di site, tiang ditanam & dicor.", 7.95, 1.7 + ph, 2 * pw + 0.1, 0.65, { size: 9.5, color: MUTED, valign: "top" });
+  footnote(s, "Acuan tinggi: praktik umum industri (IEC 60079-29-2, ISA RP12.13 Part II). " + SRC_SPEK);
+  s.addNotes("Tanyakan gas prioritas RU VI di area kandidat — ini menentukan tinggi tiang GLD. Cluster Head tidak memerlukan kabel daya; tinggi final CH ditentukan tim RF LGU saat survey (line of sight).");
+})();
+
+// ---------------------------------------------------------------- D · catu daya & kabel
+(function lampD() {
+  const s = slideLight();
+  lampHead(s, "D", "Catu daya & kabel 24 VDC — hanya GLD yang perlu kabel daya");
+  const opts = [
+    ["Opsi A — PSU per titik", "PSU 24 VDC ≥ 1 A (disarankan 2,5 A DIN-rail) per GLD, di box terdekat yang ada 220 VAC; MCB 2 A sisi AC.", "Kabel pendek (umumnya ≤ 50 m) → cukup 2 × 1,5 mm².", 1],
+    ["Opsi B — PSU pusat", "Satu PSU 24 VDC ≥ 6 A (4 × 1 A + cadangan) di panel/ruang kontrol; MCB/sekring DC 2 A per jalur.", "Tiap GLD ditarik kabel sendiri (home-run), tidak berantai; ukuran kabel mengikuti jarak.", 4],
+  ];
+  opts.forEach((o, i) => {
+    const x = M + i * 6.15, y = 1.55, w = 5.95;
+    card(s, x, y, w, 2.55, SURF);
+    cardTitle(s, x + 0.2, y + 0.12, w - 0.4, o[0], BLUE);
+    // alur mini
+    const fy = y + 0.6;
+    const boxes = i === 0 ? ["220 VAC", "PSU 24 V", "GLD"] : ["220 VAC", "PSU 24 V ≥6 A", "GLD × 4"];
+    boxes.forEach((b, k) => {
+      const bx = x + 0.2 + k * 1.95;
+      s.addShape(pres.ShapeType.roundRect, { x: bx, y: fy, w: 1.45, h: 0.42, rectRadius: 0.06, fill: { color: k === 2 ? BLUE : WHITE }, line: { color: k === 2 ? BLUE : LINE } });
+      label(s, b, bx, fy, 1.45, 0.42, { size: 10, bold: true, color: k === 2 ? WHITE : CHAR, align: "center" });
+      if (k < 2) {
+        line(s, bx + 1.47, fy + 0.21, 0.46, 0, CHAR, 1.25);
+        label(s, k === 0 ? "MCB" : "kabel 2 inti", bx + 1.3, fy + 0.43, 0.8, 0.2, { size: 8, color: MUTED, align: "center" });
+      }
+    });
+    label(s, o[1], x + 0.2, y + 1.3, w - 0.4, 0.6, { size: 10.5, valign: "top" });
+    label(s, o[2], x + 0.2, y + 1.9, w - 0.4, 0.55, { size: 10.5, bold: true, color: CHAR, valign: "top" });
+  });
+  table(s, [
+    ["Luas penampang", "Resistansi (Ω/km)", "Maks. @ 1 A (desain)", "Maks. @ 0,33 A (aktual)"],
+    ["2 × 1,5 mm²", "12,1", "50 m", "150 m"],
+    ["2 × 2,5 mm²", "7,41", "80 m", "245 m"],
+    ["2 × 4 mm²", "4,61", "130 m", "390 m"],
+    ["2 × 6 mm²", "3,08", "195 m", "590 m"],
+  ], { x: M, y: 4.3, w: 7.2, colW: [1.7, 1.7, 1.9, 1.9], size: 11, boldFirst: true, rowH: 0.4 });
+  card(s, 8.05, 4.3, 4.67, 2.0, PERTAMINA_BG);
+  s.addText([
+    { text: "Panjang kabel per titik", options: { bold: true, color: PERTAMINA, fontSize: 12.5, breakLine: true } },
+    { text: "= rute aktual × 1,10 + 3 m (sisi PSU) + 3 m (sisi GLD)", options: { bold: true, color: CHAR, fontSize: 12, breakLine: true } },
+    { text: "Ukur rute kabel, bukan garis lurus. Pilih ukuran dari kolom 1 A (desain). Jarak > 195 m → pakai Opsi A untuk titik itu.", options: { color: CHAR_SOFT, fontSize: 10.5 } },
+  ], { x: 8.25, y: 4.4, w: 4.3, h: 1.8, isTextBox: true, margin: 0, fontFace: FONT, valign: "top", paraSpaceAfter: 4 });
+  footnote(s, "Panjang maksimum satu arah PSU → GLD agar drop tegangan ≤ 5 % (1,2 V dari 24 V), kabel tembaga 2 inti pada 20 °C. GLD tidak menerima 220 VAC; konsumsi maks. ± 8 W (≈ 0,33 A). " + SRC_SPEK, 6.6);
+  s.addNotes("Pilihan Opsi A atau B diputuskan RU VI setelah survey, tergantung ketersediaan 220 VAC di dekat titik GLD. Di RU IV, MoC menyebut kabel 24 VDC armored lewat junction box — pola serupa bisa dipakai di RU VI.");
+})();
+
+// ---------------------------------------------------------------- E · terminasi di unit GLD
+(function lampE() {
+  const s = slideLight();
+  lampHead(s, "E", "Terminasi kabel di unit GLD");
+  const iw = 7.2, ih = iw * 1209 / 2008;
+  card(s, M, 1.55, iw + 0.2, ih + 0.2, WHITE);
+  s.addImage({ path: ASSET("measured_sketches/MS-06_terminal_wiring.png"), x: M + 0.1, y: 1.65, w: iw, h: ih });
+  label(s, "Blok terminal di papan cover GLD V2 (sketsa, tidak berskala). Pada konfigurasi 24 VDC, terminal BAT tidak dipakai.", M, 1.8 + ih, iw + 0.2, 0.45, { size: 9.5, color: MUTED, valign: "top" });
+  const x0 = M + iw + 0.45, w0 = W - M - x0;
+  table(s, [
+    ["Item", "Ketentuan"],
+    ["Konduktor", "2 inti tembaga, label L+ / L− (24 VDC)"],
+    ["Jenis kabel", "Kabel daya/instrumen luar ruang berarmor (mis. SWA), tahan UV & minyak; rute mengikuti standar RU"],
+    ["Masuk unit", "Cable gland M20 × 1,5; diameter kabel harus masuk rentang klem; kabel armor perlu gland tipe armored"],
+    ["Ujung kabel", "Ferrule/skun; terminasi ke 24V+ / 24V− dikerjakan teknisi LGU"],
+    ["Grounding", "Sekrup PE eksternal di samping cable gland, ke grounding RU"],
+    ["RS-485 (opsional)", "Terminal A/B untuk Modbus RTU read-only bila RU ingin membaca status GLD"],
+  ], { x: x0, y: 1.6, w: w0, colW: [1.35, w0 - 1.35], size: 10.5, boldFirst: true, rowH: 0.62 });
+  card(s, M, 6.15, 12.1, 0.55, OK_BG);
+  s.addText("Penarikan kabel & PSU oleh pelaksana RU; terminasi akhir, energize, dan commissioning oleh LGU.", {
+    x: M + 0.25, y: 6.15, w: 11.6, h: 0.55, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 12, bold: true, color: OK, valign: "middle",
+  });
+  footnote(s, SRC_SPEK, 6.85);
+  s.addNotes("Gland M20 x 1,5 bawaan unit; bila RU VI memakai kabel armor, gland harus tipe armored dan diameter kabel dicocokkan sebelum pembelian kabel.");
+})();
+
+// ---------------------------------------------------------------- F · antena GW & jaringan
+(function lampF() {
+  const s = slideLight();
+  lampHead(s, "F", "Antena Gateway & jaringan lokal");
+  table(s, [
+    ["Item", "Ketentuan"],
+    ["Antena", "Omni 8 dBi, 920–923 MHz (dari LGU); puncak ≥ 2 m di atas atap terdekat & lebih tinggi dari antena CH"],
+    ["Kabel antena", "Koaksial 50 Ω LMR-400 atau setara, tahan UV, target ≤ 15 m (rute × 1,10 + 1 m)"],
+    ["Konektor", "Tipe N di sisi antena & penangkal petir; adaptor ke konektor Gateway disiapkan LGU"],
+    ["Penangkal petir", "Coaxial arrester 50 Ω 900 MHz (gas discharge), di titik kabel masuk gedung, di-grounding"],
+    ["Masuk gedung", "Sleeve dinding disegel + drip loop; sambungan luar dibalut self-amalgamating tape"],
+    ["GW → router", "Wi-Fi 2,4 GHz, satu ruangan (± 1–5 m), WPA2, SSID khusus GLD"],
+    ["Router → PC", "Cat6 ≤ 90 m per segmen; IP tetap untuk PC server (MQTT broker)"],
+    ["PC → intranet", "LAN kedua, hanya akses dashboard/API; tanpa internet, router tanpa WAN/SIM"],
+  ], { x: M, y: 1.6, w: 7.6, colW: [1.6, 6.0], size: 10.5, boldFirst: true, rowH: 0.5 });
+  cardTitle(s, 8.55, 1.6, 4.2, "Redaman koaksial pada 921 MHz");
+  table(s, [
+    ["Panjang", "LMR-240", "LMR-400", "LMR-600"],
+    ["5 m", "1,2 dB", "0,6 dB", "0,4 dB"],
+    ["10 m", "2,5 dB", "1,3 dB", "0,8 dB"],
+    ["15 m", "3,7 dB", "1,9 dB", "1,2 dB"],
+    ["25 m", "6,2 dB", "3,2 dB", "2,1 dB"],
+  ], { x: 8.55, y: 2.0, w: 4.17, colW: [1.05, 1.04, 1.04, 1.04], size: 10.5, boldFirst: true, rowH: 0.4 });
+  card(s, 8.55, 4.2, 4.17, 1.95, WARN_BG);
+  s.addText("Setiap 3 dB redaman memangkas setengah daya sinyal dari dan ke seluruh CH. Rute > 20 m: pakai LMR-600 atau pindahkan Gateway ke ruangan yang lebih dekat dengan mast. Hindari RG-58 (± 0,5 dB/m).", {
+    x: 8.75, y: 4.2, w: 3.8, h: 1.95, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11, bold: true, color: WARN, valign: "middle",
+  });
+  footnote(s, "Nilai redaman: katalog umum, belum termasuk ± 0,5 dB rugi konektor. " + SRC_SPEK);
+  s.addNotes("RU VI direncanakan 2 Gateway; lokasi kedua ruang Gateway dan mast antena dipilih saat survey. Bila kedua Gateway berjauhan, kebutuhan router/PC server dibahas ulang.");
+})();
+
+// ---------------------------------------------------------------- G · contoh penempatan RU IV
+(function lampG() {
+  const s = slideLight();
+  lampHead(s, "G", "Contoh penempatan titik — RU IV Cilacap, area SRU");
+  const ih = 4.75, iw = ih * 1440 / 803;
+  s.addImage({ path: ASSET("ppn_design/layout_titik.jpg"), x: M, y: 1.6, w: iw, h: ih });
+  label(s, "Gambar kerja kandidat titik saat persiapan RU IV (citra satelit + foto lokasi).", M, 1.65 + ih, iw, 0.3, { size: 9.5, color: MUTED, valign: "top" });
+  const x0 = M + iw + 0.3, w0 = W - M - x0;
+  const legend = [
+    ["GLD", "Titik deteksi, dekat sumber bocor; kabel 24 VDC dari junction box (JB)", "E8A317"],
+    ["JB", "Junction box / sumber 24 VDC terdekat untuk GLD", "E8A317"],
+    ["CH", "Di tepi area, tiang tinggi, tanpa kabel daya", BLUE],
+    ["GW", "Di dalam gedung; antena di mast luar", BLUE],
+  ];
+  legend.forEach((l, i) => {
+    const y = 1.65 + i * 1.0;
+    chip(s, x0, y, l[0], WHITE, l[2] === BLUE ? BLUE : CHAR_SOFT, 0.75);
+    label(s, l[1], x0 + 0.9, y - 0.08, w0 - 0.9, 0.85, { size: 10.5, valign: "top" });
+  });
+  card(s, x0, 5.7, w0, 0.9, PERTAMINA_BG);
+  s.addText("Lingkup MoC RU IV: 4 GLD + 5 CH + JB-01 + 1 GW + PC server. Titik GLD di area terklasifikasi menunggu sertifikat Ex.", {
+    x: x0 + 0.15, y: 5.7, w: w0 - 0.3, h: 0.9, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 10, bold: true, color: PERTAMINA, valign: "middle",
+  });
+  s.addNotes("Contoh ini menunjukkan pola yang sama yang diharapkan di Balongan: GLD dekat sumber bocor dengan kabel ke JB, CH di tepi area, Gateway di gedung. Layout RU VI dibuat setelah survey.");
+})();
+
+// ---------------------------------------------------------------- H · BoQ RU VI
+(function lampH() {
+  const s = slideLight();
+  lampHead(s, "H", "Perkiraan BoQ RU VI — CH & GW per LoRa mapping");
+  table(s, [
+    ["No", "Item", "Spesifikasi", "Qty (perkiraan)", "Penyedia"],
+    ["1", "Pipa tiang GLD", "Galvanis 2\" Sch40, 1,6 m per titik", "4 (± 2 batang 6 m)", "RU VI"],
+    ["2", "Pipa tiang CH", "Galvanis 2\" Sch40, 4,0 m", "1 per CH (min. 2)", "RU VI"],
+    ["3", "Pipa mast antena GW", "Galvanis 2\" Sch40, 6,0 m (+ guy wire bila perlu)", "1 per GW (min. 2)", "RU VI"],
+    ["4", "Pipe cap 2\"", "Ujung atas tiang GLD & mast GW", "4 + 1 per GW", "RU VI"],
+    ["5", "Beton cor", "fc' ≥ 20 MPa; per titik: GLD 0,10 · CH 0,25 · GW 0,30 m³", "± 1,8 m³ (untuk 2 CH + 2 GW)", "RU VI"],
+    ["6", "U-bolt 2\" M10 + mur/ring", "Lampiran A", "8 U-bolt, 16 set mur", "RU VI"],
+    ["7", "Pelat mounting 250 × 250 mm", "Sesuai gambar LGU", "4", "RU VI"],
+    ["8", "PSU 24 VDC + box/MCB", "Opsi A: 4 × (≥ 1 A) · Opsi B: 1 × (≥ 6 A)", "4 atau 1 set", "RU VI"],
+    ["9", "Kabel daya 2 inti berarmor", "Ukuran & panjang per Lampiran D", "Σ setelah survey", "RU VI"],
+    ["10", "Koaksial LMR-400 + konektor N + arrester", "Lampiran F", "1 jalur per GW", "RU VI"],
+    ["11", "Grounding & label titik", "Standar RU VI", "1 per tiang/mast", "RU VI"],
+    ["12", "PC server + UPS, Cat6, stop kontak", "Slide kebutuhan server & jaringan", "1 set + 2 jalur Cat6", "RU VI"],
+    ["13", "GLD, CH, Gateway + antena, panel surya & bracket CH, router", "Perangkat sistem", "4 GLD; CH & GW per LoRa mapping", "LGU"],
+  ], { x: M, y: 1.55, w: 12.1, colW: [0.5, 3.2, 4.6, 2.3, 1.5], size: 10.5, rowH: 0.34 });
+  footnote(s, "Jumlah CH & Gateway ditetapkan dari LoRa mapping saat site survey (rencana awal 2 CH, 2 GW, bisa bertambah); item yang mengikutinya dihitung per unit. Panjang kabel dan kebutuhan router/PC ditetapkan setelah survey. " + SRC_SPEK, 6.7);
+  s.addNotes("BoQ ini mengikuti pola BoQ RU IV untuk 4 GLD; item CH dan Gateway ditulis per unit karena jumlahnya baru pasti setelah LoRa mapping. Sampaikan bahwa angka final keluar setelah survey; RU VI bisa mulai memperkirakan anggaran dari tabel ini.");
 })();
 
 pres.writeFile({ fileName: OUT }).then(() => console.log("written", OUT));

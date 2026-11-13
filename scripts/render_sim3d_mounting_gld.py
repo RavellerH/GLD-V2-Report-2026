@@ -60,27 +60,60 @@ def ubolt(cx, along, pipe_c, R=33, r=5, leg_top=12):
         parts += cyl(nut, [0, 0, 1], 9, 8, n=6)
     return parts
 
+def tube(path, r=8, col="#3F4246"):
+    P = []
+    for a, b in zip(path[:-1], path[1:]):
+        a, b = np.array(a, float), np.array(b, float)
+        L = np.linalg.norm(b - a)
+        P += cyl(a, b - a, r, L, caps=False, n=12)
+    return P
+
+def smooth(pts, k=10):
+    pts = [np.array(p, float) for p in pts]
+    pts = [pts[0]] + pts + [pts[-1]]
+    out = []
+    for i in range(1, len(pts) - 2):
+        p0, p1, p2, p3 = pts[i - 1], pts[i], pts[i + 1], pts[i + 2]
+        for t in np.linspace(0, 1, k, endpoint=False):
+            out.append(0.5 * (2 * p1 + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t ** 2 + (-p0 + 3 * p1 - 3 * p2 + p3) * t ** 3))
+    out.append(pts[-2])
+    return out
+
+def cable(kind):
+    if kind == "handrail":
+        path = smooth([(-108, 25, 70), (-140, 45, 70), (-150, 140, 45), (-150, 165, -20), (-150, 120, -76), (-175, 40, -76), (-240, 30, -76), (-330, 30, -76)])
+        ties = [cyl((x, 15, -55), (1, 0, 0), 44, 5, caps=False, n=24) for x in (-230, -300)]
+    else:
+        path = smooth([(-108, 25, 70), (-140, 45, 70), (-145, 145, 40), (-90, 172, -20), (-20, 150, -80), (0, 60, -80), (0, -100, -80), (0, -330, -80)])
+        ties = [cyl((0, y, -52), (0, 1, 0), 42, 5, caps=False, n=24) for y in (-200, -280)]
+    return tube(path), [q for t in ties for q in t]
+
 def gld():
     P, C = [], []
     def add(ps, col):
         P.extend(ps); C.extend([col] * len(ps))
     blue, steel, dark, beige = "#2F7BD8", "#C4C9CF", "#26282B", "#CDBFA6"
-    ears = [(0, 80), (-72, -60), (72, -60)]
+    ears = [(0, 95), (-76, -62), (76, -62)]
     for x, y in ears:
         add(cyl((x, y, 5), (0, 0, 1), 6, 30, n=12), steel)
-        add(cyl((x, y, 35), (0, 0, 1), 15, 8, n=20), blue)
-    add(box(-70, 70, -62, 62, 35, 43), blue)
-    add(box(-62, 62, -62, 62, 43, 95), blue)
-    add(cyl((0, 0, 95), (0, 0, 1), 68, 45, n=48), blue)
-    add(cyl((0, 0, 140), (0, 0, 1), 47, 0.6, n=48), beige)
-    add(cyl((62, 20, 70), (1, 0, 0), 12, 22, n=6), steel)
-    add(cyl((108, -15, 70), (0, 1, 0), 26, 90, n=32), steel)
-    add(cyl((108, 75, 70), (0, 1, 0), 24, 28, n=32), "#C0392B")
-    add(cyl((108, 103, 70), (0, 1, 0), 15, 8, n=24), "#C0392B")
-    add(cyl((-62, -20, 70), (-1, 0, 0), 13, 26, n=12), dark)
-    add(cyl((-94, -20, 70), (0, -1, 0), 8, 120, n=12), "#3F4246")
-    add(cyl((-40, 62, 70), (0, 1, 0), 5, 175, n=12), dark)
-    add(cyl((0, -62, 70), (0, -1, 0), 14, 10, n=6), steel)
+        add(cyl((x, y, 35), (0, 0, 1), 16, 8, n=20), blue)
+    add(box(-12, 12, 60, 95, 35, 43), blue)
+    for sx in (-1, 1):
+        add(box(min(0, sx * 76), max(0, sx * 76), -70, -50, 35, 43), blue)
+    add(cyl((0, 0, 35), (0, 0, 1), 72, 8, n=48), blue)
+    add(cyl((0, 0, 43), (0, 0, 1), 66, 52, n=48), blue)
+    add(cyl((0, 0, 95), (0, 0, 1), 74, 45, n=8), blue)
+    add(cyl((0, 0, 140), (0, 0, 1), 48, 0.6, n=48), beige)
+    add(box(-26, 26, -88, -55, 45, 88), blue)
+    add(cyl((0, -88, 66), (0, -1, 0), 12, 10, n=6), steel)
+    add(cyl((-60, 25, 70), (-1, 0, 0), 16, 24, n=24), blue)
+    add(cyl((-84, 25, 70), (-1, 0, 0), 13, 26, n=12), dark)
+    add(cyl((60, 25, 70), (1, 0, 0), 16, 24, n=24), blue)
+    add(cyl((84, 25, 70), (1, 0, 0), 12, 16, n=6), steel)
+    add(cyl((124, -40, 70), (0, 1, 0), 26, 100, n=32), steel)
+    add(cyl((124, 60, 70), (0, 1, 0), 24, 30, n=32), "#C0392B")
+    add(cyl((124, 90, 70), (0, 1, 0), 15, 8, n=24), "#C0392B")
+    add(cyl((-15, 60, 70), (0, 1, 0), 5, 180, n=12), dark)
     return P, C
 
 def scene(kind):
@@ -98,6 +131,7 @@ def scene(kind):
         for cx in (-95, 95):
             add(ubolt(cx, (0, 1, 0), pipe_c), "#C8641E")
     g, gc = gld(); P += g; C += gc
+    cb, ti = cable(kind); add(cb, "#3F4246"); add(ti, "#111111")
     T = lambda p: np.stack([p[:, 0], -p[:, 2], p[:, 1]], axis=1)
     P = [T(np.asarray(p, float)) for p in P]
     return P, C
@@ -162,9 +196,10 @@ def render(kind, fn, cam_dir, W=1800, H=1500, ss=2):
     im = im.crop((max(0, xs.min() - pad), max(0, ys.min() - pad), min(W, xs.max() + pad), min(H, ys.max() + pad)))
     im.save(fn)
 
-import sys
 render("handrail", OUT + "/sim3d_handrail.png", (0.75, -1.0, 0.45))
 render("pole", OUT + "/sim3d_tiang.png", (0.75, -1.0, 0.45))
 render("handrail", OUT + "/sim3d_handrail_belakang.png", (0.9, 1.0, 0.35))
 render("pole", OUT + "/sim3d_tiang_belakang.png", (0.9, 1.0, 0.35))
+render("handrail", OUT + "/sim3d_handrail_kiri.png", (-1.0, -0.35, 0.3))
+render("pole", OUT + "/sim3d_tiang_kiri.png", (-1.0, -0.35, 0.3))
 print("ok")

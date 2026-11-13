@@ -699,6 +699,26 @@ function imgCover(s, p, pw, ph, x, y, bw, bh) {
   s.addNotes("Foto asli bracket: pelat sudah difabrikasi, unit GLD dibaut ke pelat dengan spacer, U-bolt menembus pelat ke tiang. Pelat dan U-bolt dibuat pelaksana RU sesuai gambar LGU.");
 })();
 
+(function gldUnitViews() {
+  const s = slideLight();
+  heading(s, "3 · Kebutuhan GLD", "Bentuk casing GLD V2 — acuan simulasi pemasangan");
+  const ih = 5.1, iw = ih * 1600 / 1200;
+  s.addImage({ path: ASSET("balongan_13nov/unit_gld_4_tampak.jpg"), x: M, y: 1.5, w: iw, h: ih });
+  const x0 = M + iw + 0.35, w0 = W - M - x0;
+  table(s, [
+    ["Tampak", "Yang terlihat"],
+    ["Depan (kiri atas)", "Mesh sensor pada tutup depan; antena di atas; cable gland di sisi kiri atas; beacon di kanan"],
+    ["Belakang (kanan atas)", "Bidang pasang dengan 3 kuping: 1 atas, 2 bawah"],
+    ["Samping (bawah)", "Badan bulat, tutup bergerigi; cable gland & beacon pada dudukan sisi"],
+  ], { x: x0, y: 1.55, w: w0, colW: [1.45, w0 - 1.45], size: 10.5, boldFirst: true, rowH: 0.75 });
+  card(s, x0, 4.75, w0, 1.8, SURF);
+  s.addText("Bidang belakang dibaut ke pelat mounting lewat spacer, sehingga mesh sensor selalu menghadap ke depan dan antena ke atas.", {
+    x: x0 + 0.2, y: 4.75, w: w0 - 0.4, h: 1.8, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11.5, bold: true, color: BLUE, valign: "middle",
+  });
+  footnote(s, "Foto unit GLD V2 asli (Okt 2026).", 6.9);
+  s.addNotes("Foto ini menjadi acuan bentuk casing pada simulasi 3D: mesh di tutup depan, cable gland di sisi kiri atas, beacon di sisi kanan, 3 kuping di belakang.");
+})();
+
 (function gldMountSim() {
   const s = slideLight();
   heading(s, "3 · Kebutuhan GLD", "Simulasi 3D pemasangan — tiang vertikal & handrail horizontal");
@@ -708,10 +728,10 @@ function imgCover(s, p, pw, ph, x, y, bw, bh) {
   card(s, M, y0, cw, ch, WHITE);
   label(s, "A · Tiang vertikal (pipa 2\")", M + 0.2, y0 + 0.1, cw - 0.4, 0.3, { size: 12, bold: true, color: BLUE });
   const hA = 3.35;
-  s.addImage({ path: ASSET(IMG("sim3d_tiang")), x: M + 0.2, y: y0 + 0.5, w: hA * 584 / 1411, h: hA });
-  s.addImage({ path: ASSET(IMG("sim3d_tiang_belakang")), x: M + 0.35 + hA * 584 / 1411, y: y0 + 0.5, w: hA * 563 / 1411, h: hA });
+  s.addImage({ path: ASSET(IMG("sim3d_tiang")), x: M + 0.2, y: y0 + 0.5, w: hA * 628 / 1411, h: hA });
+  s.addImage({ path: ASSET(IMG("sim3d_tiang_belakang")), x: M + 0.35 + hA * 628 / 1411, y: y0 + 0.5, w: hA * 587 / 1411, h: hA });
   label(s, "depan", M + 0.2, y0 + 3.82, 1.3, 0.2, { size: 8.5, color: MUTED, align: "center" });
-  label(s, "belakang", M + 0.35 + hA * 584 / 1411, y0 + 3.82, 1.3, 0.2, { size: 8.5, color: MUTED, align: "center" });
+  label(s, "belakang", M + 0.35 + hA * 628 / 1411, y0 + 3.82, 1.3, 0.2, { size: 8.5, color: MUTED, align: "center" });
   bullets(s, M + 3.2, y0 + 0.55, cw - 3.35, 3.3, [
     "Pipa di tengah pelat, arah vertikal",
     "2 U-bolt horizontal: atas dan bawah",
@@ -722,9 +742,9 @@ function imgCover(s, p, pw, ph, x, y, bw, bh) {
   card(s, xb, y0, cw, ch, WHITE);
   label(s, "B · Handrail horizontal (pipa 2\")", xb + 0.2, y0 + 0.1, cw - 0.4, 0.3, { size: 12, bold: true, color: BLUE });
   const wB = 3.0;
-  s.addImage({ path: ASSET(IMG("sim3d_handrail")), x: xb + 0.15, y: y0 + 0.45, w: wB, h: wB * 1114 / 1681 });
+  s.addImage({ path: ASSET(IMG("sim3d_handrail")), x: xb + 0.15, y: y0 + 0.45, w: wB, h: wB * 1111 / 1681 });
   const wB2 = 1.75;
-  s.addImage({ path: ASSET(IMG("sim3d_handrail_belakang")), x: xb + 0.75, y: y0 + 0.5 + wB * 1114 / 1681, w: wB2, h: wB2 * 1262 / 1681 });
+  s.addImage({ path: ASSET(IMG("sim3d_handrail_belakang")), x: xb + 0.75, y: y0 + 0.5 + wB * 1111 / 1681, w: wB2, h: wB2 * 1230 / 1681 });
   label(s, "depan", xb + 2.4, y0 + 0.45, 0.8, 0.2, { size: 8.5, color: MUTED });
   label(s, "belakang", xb + 2.8, y0 + 3.3, 0.8, 0.2, { size: 8.5, color: MUTED });
   bullets(s, xb + 3.3, y0 + 0.55, cw - 3.45, 3.3, [
@@ -739,6 +759,40 @@ function imgCover(s, p, pw, ph, x, y, bw, bh) {
   ], { x: M + 0.25, y: 5.7, w: 11.6, h: 0.95, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11.5, color: OK, valign: "middle" });
   footnote(s, "Simulasi 3D LGU, dimensi pendekatan dari foto unit & bracket hasil fabrikasi serta gambar kerja pelat 250 × 250 mm (CAD 31/08/2026); U-bolt 2\" = OD 60,3 mm.", 6.9);
   s.addNotes("Pada kedua posisi pipa melewati titik tengah pelat, GLD tetap tegak dengan mesh sensor menghadap ke depan dan antena ke atas. Yang berubah hanya arah U-bolt: horizontal untuk tiang, vertikal untuk handrail. Simulasi konsep; perlu uji pasang nyata.");
+})();
+
+(function gldCableSim() {
+  const s = slideLight();
+  heading(s, "3 · Kebutuhan GLD", "Simulasi 3D tampak kiri — jalur kabel 24 VDC");
+  const cw = (W - 2 * M - 0.3) / 2, y0 = 1.5, ch = 4.2, hI = 3.7;
+  const IMG = (f) => ASSET("balongan_13nov/" + f + ".png");
+  const cols = [
+    ["A · Tiang vertikal", "sim3d_tiang_kiri", 578, [
+      "Kabel keluar dari cable gland sisi kiri atas GLD",
+      "Naik melewati tepi atas pelat ke sisi belakang",
+      "Diikat cable tie sepanjang tiang menuju JB / PSU",
+    ]],
+    ["B · Handrail horizontal", "sim3d_handrail_kiri", 1348, [
+      "Kabel keluar dari cable gland sisi kiri atas GLD",
+      "Naik melewati tepi atas pelat ke sisi belakang",
+      "Diikat cable tie sepanjang handrail menuju rute kabel",
+    ]],
+  ];
+  cols.forEach((c, i) => {
+    const x = M + i * (cw + 0.3), iw = hI * c[2] / 1411;
+    card(s, x, y0, cw, ch, WHITE);
+    label(s, c[0], x + 0.2, y0 + 0.1, cw - 0.4, 0.3, { size: 12, bold: true, color: BLUE });
+    s.addImage({ path: IMG(c[1]), x: x + 0.2, y: y0 + 0.45, w: iw, h: hI });
+    const tx = x + 0.4 + iw, tw = x + cw - tx - 0.15;
+    bullets(s, tx, y0 + 0.55, tw, 3.4, c[3], 11);
+  });
+  card(s, M, 5.85, 12.1, 0.8, SURF);
+  s.addText([
+    { text: "Ketentuan umum: ", options: { bold: true } },
+    { text: "kabel armored 2 inti dengan gland tipe armored; beri lengkung bawah (drip loop) sebelum cable gland agar air tidak mengalir ke gland; cable tie stainless/tahan UV; kabel tidak menghalangi mesh sensor dan tidak terjepit U-bolt." },
+  ], { x: M + 0.25, y: 5.85, w: 11.6, h: 0.8, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11.5, color: CHAR, valign: "middle" });
+  footnote(s, "Jalur kabel usulan LGU; rute akhir mengikuti standar instalasi kabel RU VI. Simulasi konsep, dimensi pendekatan.", 6.9);
+  s.addNotes("Cable gland GLD ada di sisi kiri atas casing. Kabel naik melewati tepi atas pelat ke belakang, lalu diikat sepanjang tiang atau handrail menuju JB/PSU. Beri drip loop sebelum gland. Rute akhir disesuaikan standar RU.");
 })();
 
 (function gldTiang() {

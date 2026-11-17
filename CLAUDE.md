@@ -16,7 +16,7 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 ## 2. Status singkat (per 4 Sep 2026)
 
-- **Progres pilot Cilacap ≈ 49%** (di-reassess 17 Sep dari 44%/4 Sep, sebelumnya 39%/24 Jul) vs baseline resmi **52%** pada tanggal sama → kini **-3 poin** (murni sisi engineering lab, **bukan** kesiapan lapangan) — melanjutkan tren menyusut dari +20 poin (24 Jul) → +1 poin (4 Sep) → -3 poin (17 Sep), krn sisa pekerjaan kini bergantung gate eksternal (scoping ATEX, TRA/JSA), bukan krn progres melambat. Detail metodologi → `memory/blockers_metrics.md`, `memory/decisions.md` dec:121.
+- **Progres pilot Cilacap = 66% per 17 Nov 2026 vs rencana 78% (−12 poin, seluruhnya aktivitas lapangan yg menunggu sertifikat Ex — dec:228).** Catatan lama berikut historis: **Progres pilot Cilacap ≈ 49%** (di-reassess 17 Sep dari 44%/4 Sep, sebelumnya 39%/24 Jul) vs baseline resmi **52%** pada tanggal sama → kini **-3 poin** (murni sisi engineering lab, **bukan** kesiapan lapangan) — melanjutkan tren menyusut dari +20 poin (24 Jul) → +1 poin (4 Sep) → -3 poin (17 Sep), krn sisa pekerjaan kini bergantung gate eksternal (scoping ATEX, TRA/JSA), bukan krn progres melambat. Detail metodologi → `memory/blockers_metrics.md`, `memory/decisions.md` dec:121.
 - ✅ Rantai **GLD-CH-GW-Server end-to-end**; **inferensi AI kini on-device** (CNN Dual-Branch, ESP32-S3, dikonfirmasi user 19 Agu — belum diverifikasi dokumen tertulis).
 - ✅ TCN LPG 8-sensor ≥92%; **dataset konsisten & siap pakai**; failover CH; **mesh 8-CH multi-hop se-kampus** (menyiasati jangkauan LoRa); CH power teratasi dgn 2 panel.
 - ✅ **Progress chamber gas**: solenoid valve, BME280 ganda (I2C 0x76/0x77), TGS2610 via ADS1115, LM2596 step-down, BTS7960 driver pompa. Next: PCB layout, pompa senyap, mounting dinding.
@@ -168,6 +168,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 - 📄 **3 Nov — MoC Pertamina No. 15769/RU IV diterima** (`Sumber Dokumen/MOC Pertamina/`, dec:224): field test GLD di **SRU** (relokasi dari OM60), lingkup **4 GLD + 5 CH + JB-01 (PS27) + 1 GW + PC server**, sistem standalone/advisory, kabel 24 VDC armored via JB-01. **Kesimpulan MoC: infrastruktur pendukung boleh disiapkan lebih dulu, pemasangan GLD menunggu sertifikat Ex (min. setara Zone 2 IIB T3)**. ⚠️ Selisih dgn dokumen LGU: jumlah unit (4/5 vs alokasi 3 GLD/2 CH), tinggi GLD ±1,5 m (vs 1 m), MySQL (vs SQLite), akurasi 99,31% (vs 99,20%).
 
 - 🆕 **11 Nov — rollout berikutnya RU VI Balongan; deck rapat koordinasi 13 Nov dibuat** (dec:225): `Deliverables/Presentasi_Koordinasi_Implementasi_GLD_RU-VI_Balongan_13November2026.{pptx,pdf}` (17 slide) — fitur & spek GLD V2, kebutuhan instalasi di site, server/jaringan, klasifikasi area & status sertifikasi, tahapan, persiapan site survey, 10 butir konfirmasi (juga utk RU II/III/V/VII). Rencana RU VI: 4 GLD / 2 CH / 2 GW.
+
+- 🆕 **17 Nov — Kurva-S & Dashboard Proyek di-reassess 61%→66% (rencana 78%, −12 poin)** (dec:228): bukti Okt–Nov (FAT 7/7 + 3 laporan uji lab, MoC 15769, MQTT ingest + MySQL di app, paket serah-terima server, persiapan RU VI Balongan). Selisih seluruhnya dari instalasi/field trial yg menunggu sertifikat Ex. Proyeksi bersyarat 92% per Feb 2027. Nilai per aktivitas = usulan Claude, belum dikonfirmasi user satu per satu. `Dashboard_GLD_ProjectManagement.{html,pdf}` diperbarui (area selisih kini merah saat tertinggal).
 
 ## 4. Deliverable utama (`Deliverables/`)
 

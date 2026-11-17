@@ -389,10 +389,10 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
     </div>
 
     <div class="side-status">
-      <div class="ss-row"><span class="ss-lab">Progres pilot</span><span class="ss-val">61%</span></div>
-      <div class="ss-track"><div class="ss-fill" style="width:61%"></div><div class="ss-mark" style="left:62%"></div></div>
-      <div class="ss-note">vs rencana 62% (30 Sep) · 12 aktivitas Gantt</div>
-      <a class="ss-flag" href="#zona-2">✓ Survey Cilacap selesai (9-10 Agu) · ⚠ instalasi belum dimulai</a>
+      <div class="ss-row"><span class="ss-lab">Progres pilot</span><span class="ss-val">66%</span></div>
+      <div class="ss-track"><div class="ss-fill" style="width:66%"></div><div class="ss-mark" style="left:78%"></div></div>
+      <div class="ss-note">vs rencana 78% (17 Nov) · 12 aktivitas Gantt</div>
+      <a class="ss-flag" href="#zona-2">✓ MoC RU IV terbit (3 Nov) · ⚠ pemasangan GLD menunggu sertifikat Ex</a>
     </div>
 
     <nav class="zonenav" id="zonenav" aria-label="Navigasi zona">
@@ -426,9 +426,9 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
         <div><span class="k">Proyek</span><span class="v">GLD Point Sensor Network</span></div>
         <div><span class="k">Klien / Partner</span><span class="v">Pertamina Patra Niaga</span></div>
         <div><span class="k">Scope aktif</span><span class="v">Pilot RU IV Cilacap</span></div>
-        <div><span class="k">Status per</span><span class="v">17 Sep (update &amp; progres di-reassess)</span></div>
-        <div><span class="k">Survey Cilacap</span><span class="v">9-10 Agu 2026 (selesai) · instalasi fisik belum dimulai</span></div>
-        <div><span class="k">Target implementasi</span><span class="v">Desember 2026</span></div>
+        <div><span class="k">Status per</span><span class="v">17 Nov 2026 (progres di-reassess)</span></div>
+        <div><span class="k">Survey Cilacap</span><span class="v">Survey 9-10 Agu selesai · MoC 15769 (3 Nov) · instalasi belum dimulai</span></div>
+        <div><span class="k">Target implementasi</span><span class="v">Desember 2026 · bergantung sertifikat Ex</span></div>
       </div>
     </header>
 
@@ -439,8 +439,8 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
 
       <section class="exec" aria-label="Ringkasan eksekutif">
         <div class="el">Ringkasan Eksekutif</div>
-        <h3>Keunggulan jadwal menyusut — kesiapan lapangan kini bergantung pada gate eksternal, bukan lagi throughput rekayasa.</h3>
-        <p>Progres pilot Cilacap <b>61%</b> per 30 September (di-reassess dari 49%/17 Sep), terhadap rencana <b>62%</b> di tanggal yang sama — <b>selisih -1 poin</b>. Kenaikan berasal dari aktivitas yang kini tuntas: detailed design (spesifikasi enclosure final, konsep Ex d), prototype build (sampel S/N GLD2-0x1001 diajukan ke sertifikasi), dan persiapan HSE/izin dari sisi LGU (dokumen persiapan instalasi dikirim ke Pertamina, rapat koordinasi 29 Sep); juga survey & rencana data (90%) dan lab test (72%, uji suhu 30 Sep). Item di pihak Pertamina (izin, TRA/JSA, penugasan vendor, klasifikasi area) dicatat terpisah dan tidak dihitung dalam progres LGU. Empat aktivitas terakhir (instalasi, field trial, evaluasi, roadmap) baru terjadwal November–Februari, sehingga batas atas Kurva-S saat ini ≈67%. Pekerjaan sertifikasi ATEX/IECEx dilaporkan terpisah di Dashboard Sertifikasi.</p>
+        <h3>Pekerjaan rekayasa &amp; uji lab hampir tuntas — sisa progres kini terkunci di instalasi lapangan yang menunggu sertifikat Ex.</h3>
+        <p>Progres pilot Cilacap <b>66%</b> per 17 November 2026 (di-reassess dari 61%/30 Sep), terhadap rencana <b>78%</b> di tanggal yang sama — <b>selisih -12 poin</b>. Kenaikan 5 poin berasal dari bukti Oktober–November: <b>FAT 7/7 lulus lab</b> + 3 laporan uji lab formal (lab test 95%, AI 90%), <b>MoC Pertamina 15769/RU IV</b> yang memuat tata letak, jalur kabel, dan lingkup SRU (site survey 100%), aplikasi dashboard dengan MQTT ingest di <i>main</i> + dukungan MySQL/MariaDB dan paket serah-terima server PertaminaGLD (integration test 95%), serta persiapan rollout <b>RU VI Balongan</b> (roadmap 15%). Selisih terhadap rencana berasal dari aktivitas lapangan (instalasi, field trial, evaluasi): sesuai kesimpulan MoC, <b>pemasangan GLD menunggu sertifikat Ex terbit</b> (HAC SRU: titik GLD di Class I Div. 2), sedangkan infrastruktur pendukung boleh disiapkan lebih dulu. Seluruh aktivitas yang bisa dikerjakan tanpa instalasi sudah ≥90%, sehingga batas atas Kurva-S sebelum instalasi ≈67%. Item di pihak Pertamina (izin, TRA/JSA, pelaksana instalasi, material eBVL) tidak dihitung dalam progres LGU. Sertifikasi ATEX/IECEx dilaporkan terpisah di Dashboard Sertifikasi.</p>
         <div class="statuschips">
           <span class="sc g">✓ Rantai GLD→server end-to-end + AI on-device — didemokan sebelum Cilacap</span>
           <span class="sc g">✓ Mesh 8-CH multi-hop terbukti + push alarm otomatis (lab)</span>
@@ -448,8 +448,10 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
           <span class="sc g">✓ 24V siap sertifikasi · PSU final ≥1A</span>
           <span class="sc g">✓ Survey lokasi Cilacap selesai (9-10 Agu)</span>
           <span class="sc g">✓ Adapter MQTT→backend sudah dibangun · jaringan field LGU independen</span>
-          <span class="sc w">⚠ Instalasi fisik Cilacap belum dimulai</span>
-          <span class="sc w">⚠ Sertifikasi ATEX (5-8 bln) · scoping ATEX blm ditentukan</span>
+          <span class="sc g">✓ FAT 7/7 lulus lab + 3 laporan uji lab (Okt)</span>
+          <span class="sc g">✓ MoC 15769/RU IV terbit — lingkup SRU 4 GLD/5 CH/1 GW</span>
+          <span class="sc w">⚠ Pemasangan GLD menunggu sertifikat Ex (MoC) · instalasi belum dimulai</span>
+          <span class="sc w">⚠ Sertifikasi ATEX berjalan di GTS (Ex db IIC T4 Gb diajukan)</span>
           <span class="sc w">⚠ Gate TRA/JSA · gas capability 4/6 (H2S/Benzena/CO blm tercakup)</span>
         </div>
       </section>
@@ -457,13 +459,13 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
       <section class="kpis" aria-label="Ringkasan indikator">
         <div class="kpi info">
           <div class="lab">Progres Pilot Cilacap</div>
-          <div class="val">61%</div>
-          <div class="sub">Rencana <b>62%</b> (30 Sep) · <span class="delta neg">-1 poin</span></div>
+          <div class="val">66%</div>
+          <div class="sub">Rencana <b>78%</b> (17 Nov) · <span class="delta neg">-12 poin</span> · selisih dari aktivitas lapangan</div>
         </div>
         <div class="kpi info">
           <div class="lab">RU Aktif / Program</div>
           <div class="val">1 / 6</div>
-          <div class="sub">Cilacap · <b>3</b> sensor · <b>2</b> CH · <b>1</b> GW</div>
+          <div class="sub">Cilacap (SRU) · MoC: <b>4</b> GLD · <b>5</b> CH · <b>1</b> GW · berikutnya RU VI Balongan</div>
         </div>
         <div class="kpi">
           <div class="lab">Blocker Kritis Aktif</div>
@@ -490,7 +492,7 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
       <div class="po">
         <div class="pocol done">
           <h3><span>✓ Progres — Tercapai</span><span class="cnt" id="donecnt"></span></h3>
-          <p class="hint2">Capaian yang telah diverifikasi hingga 24 Jul 2026.</p>
+          <p class="hint2">Capaian yang telah diverifikasi hingga 17 Nov 2026.</p>
           <div id="donelist"></div>
         </div>
         <div class="pocol out">
@@ -500,7 +502,7 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
         </div>
       </div>
 
-      <p class="baseline-note">📐 <b>Baseline resmi:</b> Kurva-S &amp; timeline dikalibrasi ke <b>Project Timeline 9 bulan</b> pada Deck Kick-Off (12 Jun 2026 → Feb 2027, 12 aktivitas). Scope aktif saat ini <b>fokus 1 RU — pilot RU IV Cilacap</b> (5 RU lainnya = roadmap). Progres di-reassess 30 Sep 2026: <b>61% vs rencana 62%</b> (<b>-1 poin</b>; sebelumnya 49% vs 52% per 17 Sep — lihat catatan Kurva-S di zona 02) — ini <b>murni sisi engineering lab</b> — <b>bukan</b> kesiapan lapangan/sertifikasi/commissioning. Inferensi AI kini <b>on-device</b> (CNN Dual-Branch, ESP32-S3 int8), <b>didemokan langsung sebelum kunjungan Cilacap</b> — dokumen firmware tertulis terpisah masih menyusul. <b>Survey lokasi RU IV Cilacap (9-10 Agu) sudah selesai — instalasi fisik belum dimulai</b> (dilakukan vendor Pertamina), menunggu gate TRA/JSA disahkan dan sertifikasi ATEX (estimasi realistis 5-8 bulan sejak Kick-Off). <b>Fokus deployment kini 24VDC saja</b> — GLD versi baterai portable dideprioritaskan, sehingga blocker autonomi baterai/TPL5010/DC converter tidak lagi relevan utk scope saat ini. Jangkauan LoRa per-hop terbatas namun sudah <b>disiasati mesh multi-hop 8-CH</b> (kapasitas Gateway/CH thd jumlah sensor bisa di-mitigasi dgn adjust interval kirim), dan <b>push alarm sudah berhasil diuji</b> otomatis di mesh kampus (belum validasi lapangan RU). Arsitektur deployment: app + database penuh berjalan <b>lokal</b> (site RU IV &amp; kantor Jakarta, plus PC dedicated LGU dekat Gateway) — akses dari kantor kilang hanya lewat API/dashboard endpoint, bukan akses jaringan penuh; cloud hanya sebagai <b>gateway/relay ringan</b>. ⚠️ <b>Gate terbuka lain:</b> scoping ATEX (gas group/kelas temperatur/zona) belum ditentukan sama sekali, requirement gas Benzena/CO/H2S belum direkonsiliasi dgn gate 6-kelas (sampel gas dari Pertamina belum diterima). <b>Sertifikasi ketinggian pemasangan bukan tanggung jawab LGU</b> — ditangani vendor Pertamina. Lihat Datasheet Sistem (rev 0.9) untuk daftar gate lengkap.</p>
+      <p class="baseline-note">📐 <b>Baseline resmi:</b> Kurva-S &amp; timeline dikalibrasi ke <b>Project Timeline 9 bulan</b> pada Deck Kick-Off (12 Jun 2026 → Feb 2027, 12 aktivitas). Scope aktif saat ini <b>fokus 1 RU — pilot RU IV Cilacap</b> (5 RU lainnya = roadmap). Progres di-reassess 17 Nov 2026: <b>66% vs rencana 78%</b> (<b>-12 poin</b>, seluruhnya dari aktivitas lapangan yang menunggu sertifikat Ex; sebelumnya 61% vs 62% per 30 Sep — lihat catatan Kurva-S di zona 02) — ini <b>murni sisi engineering lab</b> — <b>bukan</b> kesiapan lapangan/sertifikasi/commissioning. Inferensi AI kini <b>on-device</b> (CNN Dual-Branch, ESP32-S3 int8), <b>didemokan langsung sebelum kunjungan Cilacap</b> — dokumen firmware tertulis terpisah masih menyusul. <b>Survey lokasi RU IV Cilacap (9-10 Agu) sudah selesai — instalasi fisik belum dimulai</b> (dilakukan vendor Pertamina), menunggu gate TRA/JSA disahkan dan sertifikasi ATEX (estimasi realistis 5-8 bulan sejak Kick-Off). <b>Fokus deployment kini 24VDC saja</b> — GLD versi baterai portable dideprioritaskan, sehingga blocker autonomi baterai/TPL5010/DC converter tidak lagi relevan utk scope saat ini. Jangkauan LoRa per-hop terbatas namun sudah <b>disiasati mesh multi-hop 8-CH</b> (kapasitas Gateway/CH thd jumlah sensor bisa di-mitigasi dgn adjust interval kirim), dan <b>push alarm sudah berhasil diuji</b> otomatis di mesh kampus (belum validasi lapangan RU). Arsitektur deployment: app + database penuh berjalan <b>lokal</b> (site RU IV &amp; kantor Jakarta, plus PC dedicated LGU dekat Gateway) — akses dari kantor kilang hanya lewat API/dashboard endpoint, bukan akses jaringan penuh; cloud hanya sebagai <b>gateway/relay ringan</b>. ⚠️ <b>Gate terbuka lain:</b> scoping ATEX (gas group/kelas temperatur/zona) belum ditentukan sama sekali, requirement gas Benzena/CO/H2S belum direkonsiliasi dgn gate 6-kelas (sampel gas dari Pertamina belum diterima). <b>Sertifikasi ketinggian pemasangan bukan tanggung jawab LGU</b> — ditangani vendor Pertamina. Lihat Datasheet Sistem (rev 0.9) untuk daftar gate lengkap.</p>
     </section>
 
     <!-- ================= ZONA 02 — JADWAL & CAKUPAN ================= -->
@@ -511,13 +513,14 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
       <div class="subhead"><span class="eyebrow">Kurva-S · Progres Kumulatif</span></div>
       <div class="card">
         <div class="card-head"><h2>Kurva-S: Rencana vs Aktual vs Proyeksi</h2></div>
-        <p class="hint">Baseline = Project Timeline 9 bulan (Deck Kick-Off), mewakili perjalanan pilot RU IV Cilacap. Aktual di-<b>reassess 30 September 2026</b> (dari 49%/17 Sep menjadi <b>61%</b>): detailed design, prototype build, dan persiapan HSE/izin sisi LGU tuntas; survey & rencana data 90%; lab test 72% (uji suhu 30 Sep). Rencana per 30 Sep = <b>62%</b> — selisih <b>-1 poin</b>.  Titik pudar "39% (24 Jul)" = data lama sebelum reassessment. Garis merah = target implementasi Desember (field installation).</p>
+        <p class="hint">Baseline = Project Timeline 9 bulan (Deck Kick-Off), mewakili perjalanan pilot RU IV Cilacap. Aktual di-<b>reassess 17 November 2026</b> (dari 61%/30 Sep menjadi <b>66%</b>): site survey 100% (MoC 15769 memuat tata letak &amp; jalur kabel SRU), lab test 95% (FAT 7/7 + laporan uji lab), AI model 90%, integration test 95% (MQTT ingest + MySQL, paket serah-terima server), roadmap 15% (persiapan RU VI Balongan). Rencana per 17 Nov = <b>78%</b> — selisih <b>-12 poin</b>, dari instalasi/field trial yang menunggu sertifikat Ex. Garis proyeksi <b>bersyarat</b>: asumsi sertifikat Ex terbit dalam estimasi 5–8 bulan sejak Kick-Off (paling lambat ±Feb 2027) lalu instalasi berjalan Januari; jika sertifikat mundur, proyeksi ikut mundur.  Titik pudar "61% (30 Sep)" = reassessment sebelumnya. Garis merah = target implementasi Desember (field installation).</p>
         <div class="chart-scroll"><svg id="scurve" viewBox="0 0 960 420" role="img" aria-label="Kurva-S progres proyek"></svg></div>
         <div class="legend">
           <span style="color:var(--accent)"><i class="lg-swatch" style="background:var(--accent)"></i>Aktual</span>
           <span style="color:var(--ink-soft)"><i class="lg-dash"></i>Rencana / Baseline resmi</span>
           <span style="color:var(--info)"><i class="lg-dash"></i>Proyeksi</span>
           <span style="color:var(--good)"><i class="lg-swatch" style="background:var(--good);opacity:.35"></i>Kelebihan (ahead)</span>
+          <span style="color:var(--crit)"><i class="lg-swatch" style="background:var(--crit);opacity:.3"></i>Tertinggal (behind)</span>
         </div>
       </div>
 
@@ -677,16 +680,16 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
     </section>
 
     <footer>
-      Sumber: Deck Kick-Off GLD (12 Jun 2026, timeline 9 bulan &amp; resource plan) · Dokumen Kebutuhan Peralatan GLD per RU v1.0 · Laporan Progres 18 Jun–20 Jul · Notulensi Kick-Off · MoM RU IV Cilacap · Board12 TCN per-Sensor (LPG) · Deteksi Gas CNN Presentasi · Notulen Meeting GLD 24 Juli 2026 · Notulen weekly meeting 30 Jul · Notulensi Rapat GLD 6 Agustus 2026 (Labtek XV ITB) · Notulen kunjungan RU IV Cilacap 9-10 Agustus · Datasheet Sistem GLD rev 0.8 (4 Sep) · repo gasleakdetectionV2-April, PertaminaGLD, gas-leak-ml-chamber-system · dataset GLD-F001.<br>
-      Baseline Kurva-S dikalibrasi ke Project Timeline 9 bulan (Deck Kick-Off); persentase progres bersifat estimasi turunan dari status aktivitas &amp; dapat dikalibrasi lebih lanjut dengan laporan milestone resmi. Progres awalnya terukur 39% per 24 Juli 2026, di-reassess menjadi 44% per 4 September 2026 (vs rencana 43%, +1 poin), lalu 49% per 17 September 2026 (vs rencana 52%), dan <b>di-reassess lagi menjadi 61% per 30 September 2026</b> (vs rencana 62% — <b>-1 poin</b>, metodologi rata-rata 12 aktivitas Gantt tak berubah); jadwal &amp; arsitektur diperbarui per 30 Juli 2026; mounting/topologi &amp; requirement tambahan per 8 Agustus 2026; status AI on-device, gate ATEX/MQTT-adapter/jaringan, dan hasil survey lokasi Cilacap diperbarui per 4 September 2026; uji ketahanan RF, penutupan 6 gate integrasi, dan kesiapan instalasi Cilacap diperbarui per 17 September 2026 (sinkron dgn Laporan Perkembangan &amp; Pembagian Persiapan Instalasi tanggal sama).
+      Sumber: Deck Kick-Off GLD (12 Jun 2026, timeline 9 bulan &amp; resource plan) · Dokumen Kebutuhan Peralatan GLD per RU v1.0 · Laporan Progres 18 Jun–20 Jul · Notulensi Kick-Off · MoM RU IV Cilacap · Board12 TCN per-Sensor (LPG) · Deteksi Gas CNN Presentasi · Notulen Meeting GLD 24 Juli 2026 · Notulen weekly meeting 30 Jul · Notulensi Rapat GLD 6 Agustus 2026 (Labtek XV ITB) · Notulen kunjungan RU IV Cilacap 9-10 Agustus · Datasheet Sistem GLD rev 0.8 (4 Sep) · Laporan FAT rev 1.4 &amp; 3 Laporan Uji Lab (Okt) · MoC Pertamina 15769/RU IV (3 Nov) · HAC SRU (2 Nov) · tabel alokasi perangkat per RU (3 Nov) · deck koordinasi RU VI Balongan (13 Nov) · repo gasleakdetectionV2-April, PertaminaGLD, gas-leak-ml-chamber-system · dataset GLD-F001.<br>
+      Baseline Kurva-S dikalibrasi ke Project Timeline 9 bulan (Deck Kick-Off); persentase progres bersifat estimasi turunan dari status aktivitas &amp; dapat dikalibrasi lebih lanjut dengan laporan milestone resmi. Progres awalnya terukur 39% per 24 Juli 2026, di-reassess menjadi 44% per 4 September 2026 (vs rencana 43%, +1 poin), lalu 49% per 17 September 2026 (vs rencana 52%), 61% per 30 September 2026 (vs rencana 62%), dan <b>di-reassess lagi menjadi 66% per 17 November 2026</b> (vs rencana 78% — <b>-12 poin</b>, metodologi rata-rata 12 aktivitas Gantt tak berubah; selisih dari aktivitas lapangan yang menunggu sertifikat Ex sesuai MoC 15769/RU IV); jadwal &amp; arsitektur diperbarui per 30 Juli 2026; mounting/topologi &amp; requirement tambahan per 8 Agustus 2026; status AI on-device, gate ATEX/MQTT-adapter/jaringan, dan hasil survey lokasi Cilacap diperbarui per 4 September 2026; uji ketahanan RF, penutupan 6 gate integrasi, dan kesiapan instalasi Cilacap diperbarui per 17 September 2026 (sinkron dgn Laporan Perkembangan &amp; Pembagian Persiapan Instalasi tanggal sama).
     </footer>
   </main>
 </div>
 
 <script>
 const START=new Date(2026,5,1), END=new Date(2027,1,28);
-const TODAY=new Date(2026,8,30);
-const LAST_ACT=new Date(2026,8,30);
+const TODAY=new Date(2026,10,17);
+const LAST_ACT=new Date(2026,10,17);
 const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt',2026,9],['Nov',2026,10],['Des',2026,11],['Jan',2027,0],['Feb',2027,1]];
 
 /* ---------- S-CURVE ---------- */
@@ -707,11 +710,11 @@ const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt'
   const act=[
     [new Date(2026,5,1),0],[new Date(2026,5,12),6],[new Date(2026,5,30),16],
     [new Date(2026,6,7),23],[new Date(2026,6,15),30],[new Date(2026,6,24),39],
-    [new Date(2026,8,4),44],[new Date(2026,8,17),49],[new Date(2026,8,30),61]
+    [new Date(2026,8,4),44],[new Date(2026,8,17),49],[new Date(2026,8,30),61],[new Date(2026,10,17),66]
   ].map(a=>({d:a[0],v:a[1]}));
   const fc=[
-    [new Date(2026,8,30),61],[new Date(2026,9,31),68],
-    [new Date(2026,10,30),80],[new Date(2026,11,31),90],[new Date(2027,0,31),97],[new Date(2027,1,28),100]
+    [new Date(2026,10,17),66],[new Date(2026,11,31),68],
+    [new Date(2027,0,31),80],[new Date(2027,1,28),92]
   ].map(a=>({d:a[0],v:a[1]}));
   for(let v=0;v<=100;v+=20){
     svg.appendChild(el('line',{x1:m.l,y1:y(v),x2:W-m.r,y2:y(v),stroke:'var(--line)','stroke-width':1}));
@@ -732,7 +735,13 @@ const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt'
   }
   const planToday=plan.filter(p=>p.d<=LAST_ACT).concat([{d:LAST_ACT,v:planAt(LAST_ACT)}]);
   const aheadPts=act.map(p=>x(p.d)+','+y(p.v)).concat(planToday.slice().reverse().map(p=>x(p.d)+','+y(p.v)));
-  svg.appendChild(el('polygon',{points:aheadPts.join(' '),fill:'var(--good)',opacity:.15}));
+  // Selisih aktual vs rencana: hijau di atas rencana, merah di bawah rencana (clip per sisi kurva rencana)
+  const defs=el('defs',{});svg.appendChild(defs);
+  const pl=plan.map(p=>x(p.d)+','+y(p.v));
+  const cpA=el('clipPath',{id:'sc-above'});cpA.appendChild(el('polygon',{points:[x(START)+','+m.t].concat(pl,[x(END)+','+m.t]).join(' ')}));defs.appendChild(cpA);
+  const cpB=el('clipPath',{id:'sc-below'});cpB.appendChild(el('polygon',{points:[x(START)+','+(m.t+ph)].concat(pl,[x(END)+','+(m.t+ph)]).join(' ')}));defs.appendChild(cpB);
+  svg.appendChild(el('polygon',{points:aheadPts.join(' '),fill:'var(--good)',opacity:.18,'clip-path':'url(#sc-above)'}));
+  svg.appendChild(el('polygon',{points:aheadPts.join(' '),fill:'var(--crit)',opacity:.14,'clip-path':'url(#sc-below)'}));
   const aArea=act.map(p=>x(p.d)+','+y(p.v));
   aArea.push(x(act[act.length-1].d)+','+y(0)); aArea.unshift(x(act[0].d)+','+y(0));
   svg.appendChild(el('polygon',{points:aArea.join(' '),fill:'var(--accent)',opacity:.08}));
@@ -742,44 +751,46 @@ const MONTHS=[['Jun',2026,5],['Jul',2026,6],['Agu',2026,7],['Sep',2026,8],['Okt'
   ap.classList.add('draw');svg.appendChild(ap);
   requestAnimationFrame(()=>{const L=ap.getTotalLength();ap.style.setProperty('--len',L);});
   svg.appendChild(el('line',{x1:x(TODAY),y1:m.t-2,x2:x(TODAY),y2:m.t+ph,stroke:'var(--ink)','stroke-width':1.5,'stroke-dasharray':'3 3',opacity:.5}));
-  const tl=el('text',{x:x(TODAY)+5,y:m.t+11,fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini (30 Sep)';svg.appendChild(tl);
+  const tl=el('text',{x:x(TODAY)-5,y:m.t+11,'text-anchor':'end',fill:'var(--ink)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});tl.textContent='Hari ini (17 Nov)';svg.appendChild(tl);
   const planTodayVal=planAt(TODAY);
   svg.appendChild(el('circle',{cx:x(TODAY),cy:y(planTodayVal),r:3.5,fill:'var(--ink-soft)'}));
   const ptl=el('text',{x:x(TODAY)-8,y:y(planTodayVal)+4,'text-anchor':'end',fill:'var(--ink-soft)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});ptl.textContent='rencana '+Math.round(planTodayVal)+'%';svg.appendChild(ptl);
   const last=act[act.length-1];
   svg.appendChild(el('circle',{cx:x(last.d),cy:y(last.v),r:5,fill:'var(--accent)',stroke:'var(--surface)','stroke-width':2}));
-  const lt=el('text',{x:x(last.d)+8,y:y(last.v)+16,'text-anchor':'start',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='61%';svg.appendChild(lt);
+  const lt=el('text',{x:x(last.d)+8,y:y(last.v)+16,'text-anchor':'start',fill:'var(--accent)','font-size':13,'font-family':'var(--mono)','font-weight':700});lt.textContent='66%';svg.appendChild(lt);
   const prevPt=act[act.length-2];
   svg.appendChild(el('circle',{cx:x(prevPt.d),cy:y(prevPt.v),r:3.5,fill:'var(--accent)',opacity:.5}));
-  const prevLt=el('text',{x:x(prevPt.d),y:y(prevPt.v)-10,'text-anchor':'middle',fill:'var(--ink-soft)','font-size':10.5,'font-family':'var(--mono)'});prevLt.textContent='39% (24 Jul)';svg.appendChild(prevLt);
+  const prevLt=el('text',{x:x(prevPt.d),y:y(prevPt.v)-10,'text-anchor':'middle',fill:'var(--ink-soft)','font-size':10.5,'font-family':'var(--mono)'});prevLt.textContent='61% (30 Sep)';svg.appendChild(prevLt);
   const dec=new Date(2026,11,1);
   svg.appendChild(el('line',{x1:x(dec),y1:m.t,x2:x(dec),y2:m.t+ph,stroke:'var(--crit)','stroke-width':1.5,opacity:.5}));
-  const dt=el('text',{x:x(dec)-5,y:m.t+11,'text-anchor':'end',fill:'var(--crit)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});dt.textContent='Target Des';svg.appendChild(dt);
+  const dt=el('text',{x:x(dec)+5,y:m.t+11,'text-anchor':'start',fill:'var(--crit)','font-size':10.5,'font-family':'var(--mono)','font-weight':600});dt.textContent='Target Des';svg.appendChild(dt);
 })();
 
 /* ---------- GANTT (12 activities) ---------- */
 const ACT=[
   {id:1,name:'Kick-off & requirement confirmation',s:[2026,5,8],e:[2026,5,15],act:100,plan:100,st:'good'},
-  {id:2,name:'Site survey & data collection plan',s:[2026,5,15],e:[2026,6,7],act:90,plan:100,st:'warn'},
-  {id:3,name:'Detailed design',s:[2026,6,1],e:[2026,6,21],act:100,plan:90,st:'good'},
-  {id:4,name:'Prototype build',s:[2026,6,15],e:[2026,7,21],act:100,plan:5,st:'accent'},
-  {id:5,name:'Lab test',s:[2026,7,15],e:[2026,8,21],act:72,plan:0,st:'accent'},
-  {id:6,name:'AI model training / validation',s:[2026,7,15],e:[2026,8,21],act:85,plan:0,st:'accent'},
-  {id:7,name:'Integration test (fungsional)',s:[2026,6,1],e:[2026,9,7],act:80,plan:0,st:'accent'},
-  {id:8,name:'HSE review & permit preparation',s:[2026,10,1],e:[2026,10,14],act:100,plan:0,st:'good'},
-  {id:9,name:'Field installation',s:[2026,10,15],e:[2026,11,7],act:0,plan:0,st:'neutral'},
+  {id:2,name:'Site survey & data collection plan',s:[2026,5,15],e:[2026,6,7],act:100,plan:100,st:'good'},
+  {id:3,name:'Detailed design',s:[2026,6,1],e:[2026,6,21],act:100,plan:100,st:'good'},
+  {id:4,name:'Prototype build',s:[2026,6,15],e:[2026,7,21],act:100,plan:100,st:'good'},
+  {id:5,name:'Lab test',s:[2026,7,15],e:[2026,8,21],act:95,plan:100,st:'warn'},
+  {id:6,name:'AI model training / validation',s:[2026,7,15],e:[2026,8,21],act:90,plan:100,st:'warn'},
+  {id:7,name:'Integration test (fungsional)',s:[2026,6,1],e:[2026,9,7],act:95,plan:100,st:'warn'},
+  {id:8,name:'HSE review & permit preparation',s:[2026,10,1],e:[2026,10,14],act:100,plan:100,st:'good'},
+  {id:9,name:'Field installation',s:[2026,10,15],e:[2026,11,7],act:0,plan:9,st:'warn'},
   {id:10,name:'Field trial',s:[2026,11,8],e:[2027,0,7],act:0,plan:0,st:'neutral'},
   {id:11,name:'Evaluation & final report',s:[2027,0,1],e:[2027,0,21],act:0,plan:0,st:'neutral'},
-  {id:12,name:'Industrialization roadmap',s:[2027,1,8],e:[2027,1,21],act:5,plan:0,st:'neutral'}
+  {id:12,name:'Industrialization roadmap',s:[2027,1,8],e:[2027,1,21],act:15,plan:0,st:'accent'}
 ];
 const GMILES=[
   {d:[2026,5,12],lab:'Kick-off',done:true},
   {d:[2026,6,16],lab:'Uji fungsional + AI ✓',done:true},
   {d:[2026,7,1],lab:'TRA/JSA gate',done:false},
+  {d:[2026,9,4],lab:'FAT 7/7 lab ✓',done:true},
+  {d:[2026,10,3],lab:'MoC RU IV ✓',done:true},
   {d:[2026,7,10],lab:'Survey lokasi Cilacap ✓ (instalasi belum)',done:true},
   {d:[2026,8,20],lab:'Integration',done:false},
-  {d:[2026,10,10],lab:'HSE permit',done:false},
-  {d:[2026,11,1],lab:'Field install (target)',done:false},
+  {d:[2026,10,10],lab:'HSE permit (Pertamina)',done:false},
+  {d:[2026,11,1],lab:'Field install (menunggu sertifikat Ex)',done:false},
   {d:[2027,0,15],lab:'Field trial',done:false},
   {d:[2027,1,15],lab:'Final report',done:false}
 ];
@@ -841,9 +852,9 @@ const WSW=[
   {n:'AI & Sensor MQ (TCN LPG + CNN Dual-Branch · dataset konsisten)',w:22,act:68,plan:70,st:'accent'},
   {n:'Catu Daya & Manajemen Energi',w:15,act:52,plan:72,st:'crit'},
   {n:'Gas Chamber, Hardware & QC',w:12,act:35,plan:62,st:'crit'},
-  {n:'Perangkat Lunak, Server & Dashboard (adapter MQTT selesai 4 Sep)',w:13,act:70,plan:60,st:'good'},
-  {n:'Integrasi Sistem (fungsional; AI on-device sejak 19 Agu)',w:10,act:78,plan:45,st:'accent'},
-  {n:'Persiapan & Survei RU / HSE (survey lokasi Cilacap selesai, instalasi belum)',w:8,act:52,plan:60,st:'warn'},
+  {n:'Perangkat Lunak, Server & Dashboard (MQTT ingest di main + MySQL/MariaDB, 15 Nov)',w:13,act:85,plan:80,st:'good'},
+  {n:'Integrasi Sistem (FAT 7/7 lulus lab, Okt)',w:10,act:90,plan:85,st:'good'},
+  {n:'Persiapan & Survei RU / HSE (MoC 15769 terbit; pemasangan GLD menunggu sertifikat Ex)',w:8,act:80,plan:90,st:'warn'},
   {n:'Inisiasi & Desain Sistem',w:10,act:95,plan:100,st:'good'}
 ];
 (function(){
@@ -883,6 +894,12 @@ const RES=[
 
 /* ---------- ACTIVITY FEED ---------- */
 const FEED=[
+  {d:'13 Nov',t:'Rapat koordinasi implementasi RU VI Balongan',b:'Rapat online LGU–Pertamina (tim Balongan + PIC RU lain). Rencana RU VI <b>4 GLD / 2 CH / 2 GW</b>; dibahas arsitektur, kebutuhan instalasi &amp; server, klasifikasi area (pelajaran HAC/MoC RU IV), dan 10 butir konfirmasi untuk semua RU. Deck direvisi hasil rapat (simulasi 3D mounting, lampiran detail instalasi).',tag:'Roadmap',m:true},
+  {d:'9–15 Nov',t:'Server &amp; aplikasi siap dipasang',b:'PertaminaGLD: paket serah-terima PC server (Operator Hub, Node-RED, MQTT, MariaDB, firmware final) terverifikasi di clone GitHub. Dashboard: <b>MQTT ingest masuk <i>main</i></b>, register RU4 mengikuti MoC, dan dukungan <b>MySQL/MariaDB</b> diuji end-to-end (migrasi, seed, alarm, topologi). Belum diuji di PC server RU IV.',tag:'Repo'},
+  {d:'3 Nov',t:'MoC Pertamina 15769/RU IV diterima',b:'Kajian field test di <b>area SRU</b> (relokasi dari OM60): <b>4 GLD</b>, <b>5 CH</b>, JB-01 di PS27, 1 Gateway di Control Room, PC server (MySQL + Node-RED + MQTT), kabel 24 VDC armored. Sistem standalone/advisory. <b>Infrastruktur boleh disiapkan lebih dulu; pemasangan GLD menunggu sertifikat Ex.</b>',tag:'Milestone',m:true},
+  {d:'2 Nov',t:'HAC SRU — titik GLD di area klasifikasi',b:'Keempat titik GLD berada di Class I Groups C/D Div. 2 → wajib Ex (min. setara Zone 2 IIB T3). CH, JB-01, dan Gateway memenuhi. Dokumen tanggapan enclosure &amp; status proteksi ledakan dikirim ke RU IV.',tag:'Gate'},
+  {d:'12 Okt',t:'Sampel GLD dibawa ke GTS Shanghai',b:'Surat pengantar sampel (S/N GLD2-0x1001) &amp; surat keterangan Bea Cukai disiapkan; berkas sertifikasi sudah diajukan ±29 Sep.',tag:'Sertifikasi'},
+  {d:'4 Okt',t:'FAT 7/7 lulus lab + 3 laporan uji lab formal',b:'Laporan Factory Acceptance Test 7 item (FAT-01..07) dari bukti lab, plus Laporan Uji Lab 01 Model AI, 02 LoRa, 03 Mesh &amp; Integrasi. Dilampirkan ke laporan Termin 1 Field Testing.',tag:'Milestone',m:true},
   {d:'21 Okt',t:'Pertamina teruskan kebutuhan field testing multi-modality ke setiap RU',b:'Pertamina Patra Niaga (grup WA RU + LGU ITB) menyampaikan ulang spesifikasi minimum PC server usulan LGU: <b>PC fisik, 2 port LAN (NIC kedua boleh USB-LAN), di ruang server lokal, 4 core / 8 GB RAM / SSD 256 GB</b>. Skema lingkup tetap sesuai block diagram final 8 Okt (Gateway → router Wi-Fi LGU → LAN Cat6 → server → IT network). Unit PC aktual tiap RU belum dikonfirmasi.',tag:'Pertamina',m:true},
   {d:'20 Okt',t:'Demo kamera MWIR HJKIR — n-butana &amp; propana',b:'Tiga video dari HJKIR (Tiongkok): gas <b>n-butana</b> dan <b>propana</b> dilepas dari selang dan tampak sebagai gumpalan di layar thermal (640×512, 25 Hz). Video ketiga memperlihatkan tabung &amp; sertifikat bahan acuan DATEN (batch 202610171528). Ini demo vendor di kantornya, <b>bukan uji LGU/ITB</b>; konsentrasi, laju bocor, dan jarak tidak disebutkan.',tag:'OGI'},
   {d:'Okt',t:'Pre-scan EMC di Telkom Test House (data mentah)',b:'Emisi EN 55032 Class A untuk <b>GLD</b> (radiasi 30 MHz–6 GHz, konduksi AC) dan <b>Cluster Head besar</b> (radiasi 30 MHz–6 GHz, konduksi DC). Semua titik di bawah batas kecuali frekuensi kerja LoRa 920–921 MHz (sinyal pancar sendiri). Margin tipis GLD 0,5 dB di ±118 MHz. Belum ada laporan resmi lab.',tag:'Sertifikasi',m:true},
@@ -1038,11 +1055,11 @@ const ISS=[
 
 /* ---------- RECOMMENDATIONS ---------- */
 const RECS=[
-  'Manfaatkan posisi <b>di depan jadwal engineering</b> untuk menuntaskan 3 blocker teknis (catu daya, DC converter, LoRa) sebelum masuk fase field. Keunggulan jadwal akan tergerus bila blocker terbawa ke instalasi.',
-  'Tuntaskan <b>gate TRA/JSA</b> untuk membuka eksekusi site survey RU IV Cilacap — rencana &amp; workflow survei sudah siap, sehingga TRA/JSA kini menjadi jalur kritis tunggal yang bergantung pihak RU sebelum penentuan titik GLD/CH &amp; DED.',
-  'Segera <b>kuantifikasi ulang jangkauan LoRa</b> (±100 m vs target 1–2 km) menjadi estimasi jumlah CH per RU. RU VII sudah butuh 11 CH; validasi antena/tinggi mounting sebelum survei agar biaya deployment realistis.',
-  'Formalkan <b>SOP pengujian &amp; QC per unit</b> serta <b>konsolidasi 3 repositori</b> (frontend, server, ML) menjadi satu repo utama untuk tata kelola menuju rollout 6 RU.',
-  'Konfirmasikan kesiapan sumber daya berstatus <b>Need Confirmation</b> (dataset gas tambahan, RU Site, Procurement) dan siapkan <b>Test Equipment</b> yang masih To Be Prepared — Gas Test Setup &amp; Server/Dashboard sudah lebih siap, sisa gas supply utk kelas tambahan.'
+  'Siapkan <b>infrastruktur pendukung RU IV lebih dulu</b> (tiang, jalur kabel 24 VDC, JB-01, PC server, jaringan) sesuai MoC 15769 — MoC mengizinkan ini sebelum sertifikat Ex terbit, sehingga begitu sertifikat terbit pemasangan GLD tinggal hitungan hari.',
+  'Kejar <b>sertifikat Ex</b> (GTS) sebagai jalur kritis tunggal: perbaiki kontradiksi dossier yang sudah dicatat (Tamb, marking debu, cable entry) pada putaran iterasi berikutnya; tanpa sertifikat, instalasi, field trial, dan evaluasi tidak bisa berjalan.',
+  'Konfirmasi ke Pertamina <b>jumlah perangkat RU IV yang berlaku</b> (MoC 4 GLD/5 CH vs tabel alokasi 3 GLD/2 CH vs BoQ 3 GLD/6 CH) sebelum register aplikasi dan BoQ difinalkan.',
+  'Gunakan pelajaran RU IV untuk <b>RU VI Balongan &amp; RU lain</b>: cek HAC sejak site survey, minta MoC lebih awal, dan pilih titik non-klasifikasi bila memungkinkan agar tidak tertahan sertifikat.',
+  'Susun <b>rencana field trial &amp; evaluasi</b> (SAT, durasi trial, KPI ≤30 dtk alarm) sekarang, agar sisa 3 aktivitas langsung jalan setelah instalasi.'
 ];
 (function(){
   const c=document.getElementById('recs');
@@ -1073,13 +1090,19 @@ const DONE=[
   ['<b>Model CNN Dual-Branch</b> menggantikan CNN 1D — akurasi naik ke 99,20% on-chip, kini cakup 4 kelas (+H2)'],
   ['<b>Adapter MQTT→backend</b> sudah dibangun — jalur data lapangan→dashboard tersambung penuh di level aplikasi'],
   ['<b>Jaringan field GW↔server independen</b> — router LGU sendiri, tak perlu registrasi MAC/satukan jaringan ke IT kilang'],
-  ['<b>Data collision multi-sensor</b> pada mesh produksi — sudah diuji']
+  ['<b>Data collision multi-sensor</b> pada mesh produksi — sudah diuji'],
+  ['<b>FAT 7/7 lulus lab</b> (4 Okt) + 3 laporan uji lab formal (Model AI, LoRa, Mesh &amp; Integrasi)'],
+  ['<b>Sampel GLD2-0x1001 &amp; berkas sertifikasi</b> diajukan ke GTS (agen sertifikasi); pre-scan EMC Telkom Test House (Okt)'],
+  ['<b>MoC Pertamina 15769/RU IV</b> terbit (3 Nov) — lingkup SRU 4 GLD/5 CH/1 GW, jalur kabel, JB-01, server; infrastruktur boleh disiapkan lebih dulu'],
+  ['<b>Aplikasi dashboard</b>: MQTT ingest di <i>main</i> + dukungan MySQL/MariaDB sesuai MoC, diuji end-to-end (15 Nov); paket serah-terima server PertaminaGLD terverifikasi (9–10 Nov)'],
+  ['<b>Koordinasi rollout RU VI Balongan</b> (13 Nov) — rencana 4 GLD/2 CH/2 GW, 10 butir konfirmasi untuk semua RU']
 ];
 const OUT=[
-  ['Pengesahan <b>TRA/JSA</b> — gate eksekusi instalasi fisik (survey sudah selesai)','gate','Gate'],
-  ['Eksekusi <b>instalasi fisik</b> RU IV Cilacap (pasca-survey 9-10 Agu, jadwal belum ditentukan; dilakukan vendor Pertamina)','gate','Gate'],
-  ['<b>Sertifikasi ATEX</b> belum terbit — estimasi realistis 5-8 bulan sejak Kick-Off','gate','Gate'],
-  ['<b>Scoping ATEX</b> (gas group/kelas temperatur/zona) belum ditentukan sama sekali — gate paling fundamental','gate','Gate'],
+  ['<b>Pemasangan GLD menunggu sertifikat Ex</b> — kesimpulan MoC 15769; HAC SRU menempatkan titik GLD di Class I Div. 2 (min. setara Zone 2 IIB T3)','gate','Gate'],
+  ['Pengesahan <b>TRA/JSA</b> &amp; izin kerja RU IV (pihak Pertamina)','gate','Gate'],
+  ['Eksekusi <b>instalasi fisik</b> RU IV Cilacap — jadwal belum ditentukan; dilaksanakan pihak RU IV, LGU supervisi/QA','gate','Gate'],
+  ['<b>Jumlah perangkat RU IV</b> belum seragam antar dokumen (MoC 4/5/1 vs alokasi 3/2/1 vs BoQ 3/6/1)','risk','Risiko'],
+  ['<b>Sertifikasi ATEX</b> belum terbit — berkas &amp; sampel di GTS, estimasi 5-8 bulan sejak Kick-Off; kontradiksi dossier (Tamb, marking debu, cable entry) perlu dibetulkan di iterasi berikutnya','gate','Gate'],
   ['<b>Requirement gas H2S/Benzena/CO</b> — CNN Dual-Branch (9 Agu) sudah cakup H2, tapi H2S/Benzena/CO masih belum direkonsiliasi dgn gate 6-kelas; sampel gas dari Pertamina belum diterima','gate','Gate'],
   ['<b>Kapasitas Gateway/CH</b> thd jumlah sensor — belum ada angka resmi; mitigasi: adjust interval kirim per sensor (trade-off bandwidth LoRa), action item verifikasi formal','gate','Gate'],
   ['Jangkauan LoRa ~100 m/hop — <b>disiasati mesh</b> (konsekuensi: lebih banyak CH)','risk','Risiko'],

@@ -2,7 +2,12 @@
 
 > Ini **satu sumber kebenaran** untuk angka kunci. File lain merujuk ke sini.
 
-## Status progres (di-reassess 17 Sep 2026 — sebelumnya per 4 Sep 2026, per 24 Jul 2026)
+## Status progres TERKINI (di-reassess 17 Nov 2026 — dec:228)
+- **Progres pilot Cilacap: 66%** vs rencana **78%** (per 17 Nov) → **−12 poin**, seluruhnya dari aktivitas lapangan (instalasi/field trial/evaluasi) yg menunggu sertifikat Ex (kesimpulan MoC 15769). Tren: +20 (24 Jul) → +1 (4 Sep) → −3 (17 Sep) → −1 (30 Sep, 61%/62%) → **−12 (17 Nov)**.
+- Per aktivitas: kick-off 100 · site survey 100 · design 100 · prototype 100 · lab test 95 · AI 90 · integration 95 · HSE/permit prep (sisi LGU) 100 · field installation 0 · field trial 0 · evaluation 0 · roadmap 15 → 795/12. Batas atas sebelum instalasi ≈67%.
+- Proyeksi bersyarat (asumsi sertifikat Ex terbit, instalasi Jan 2027): 68% (31 Des) → 80% (31 Jan) → 92% (28 Feb).
+
+## Status progres historis (17 Sep 2026 — sebelumnya per 4 Sep 2026, per 24 Jul 2026)
 - **Progres pilot Cilacap: 49%** vs baseline resmi **52%** (per 17 Sep) → **-3 poin** (murni sisi engineering lab, BUKAN kesiapan lapangan; jangan over-claim). Melanjutkan tren menyusut: **+20 poin (24 Jul) → +1 poin (4 Sep) → -3 poin (17 Sep)** — bukan krn progres melambat, tapi krn sisa pekerjaan makin bergantung gate eksternal (scoping ATEX, TRA/JSA, sampel gas) yg tak bisa dipercepat murni lewat rekayasa & rencana terus naik.
 - **Metodologi reassessment** (rata-rata 12 aktivitas Gantt baseline Kick-Off, tidak berubah): perubahan 17 Sep — "Site survey" 65%→75% (checklist &amp; bracket diserahkan vendor, lokasi Jalur C dikonfirmasi perimeter SRU), "Detailed design" 90%→92% (casing v3 cadangan sertifikasi), "Prototype build" 62%→68% (laporan chamber gas versi terbaru 14 Sep), "Lab test" 55%→65% (uji ketahanan RF thd interferensi 17 Sep), "Integration test" 75%→80% (6 gate ditutup), "HSE review & permit prep" 5%→22% (checklist instalasi, daftar persiapan vendor, draf permintaan material — TRA/JSA tetap belum disahkan), "AI model training/validation" 75%→**85%** (dinaikkan eksplisit atas permintaan user, alasan: model sudah mendekati final utk gas yg sudah dicakup). Aktivitas lapangan murni (field install/trial/evaluation) **tidak berubah** — masih 0%, krn belum ada eksekusi fisik RU.
 - Action items: **41** (7 berjalan, 31 terbuka, 1 selesai, 2 lainnya — dihitung otomatis dari array di Dashboard). Isu & risiko: **17** (4 prioritas tinggi).

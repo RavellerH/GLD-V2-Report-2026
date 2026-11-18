@@ -6,6 +6,8 @@
 - **Progres pilot Cilacap: 66%** vs rencana **78%** (per 17 Nov) → **−12 poin**, seluruhnya dari aktivitas lapangan (instalasi/field trial/evaluasi) yg menunggu sertifikat Ex (kesimpulan MoC 15769). Tren: +20 (24 Jul) → +1 (4 Sep) → −3 (17 Sep) → −1 (30 Sep, 61%/62%) → **−12 (17 Nov)**.
 - Per aktivitas: kick-off 100 · site survey 100 · design 100 · prototype 100 · lab test 95 · AI 90 · integration 95 · HSE/permit prep (sisi LGU) 100 · field installation 0 · field trial 0 · evaluation 0 · roadmap 15 → 795/12. Batas atas sebelum instalasi ≈67%.
 - Proyeksi bersyarat (asumsi sertifikat Ex terbit, instalasi Jan 2027): 68% (31 Des) → 80% (31 Jan) → 92% (28 Feb).
+- **Kurva-S Persiapan Instalasi RU IV (rev 1.1, 17 Nov — dec:229): 48%** (19/40) — LGU & ITB 100% (15/15), Pertamina RU IV 21% (3/14), Vendor 9% (1/11). Sebelumnya 38% (18 Sep & 28 Okt).
+- Kesiapan dokumen sertifikasi ≈43% = angka 30 Sep, **belum dihitung ulang**.
 
 ## Status progres historis (17 Sep 2026 — sebelumnya per 4 Sep 2026, per 24 Jul 2026)
 - **Progres pilot Cilacap: 49%** vs baseline resmi **52%** (per 17 Sep) → **-3 poin** (murni sisi engineering lab, BUKAN kesiapan lapangan; jangan over-claim). Melanjutkan tren menyusut: **+20 poin (24 Jul) → +1 poin (4 Sep) → -3 poin (17 Sep)** — bukan krn progres melambat, tapi krn sisa pekerjaan makin bergantung gate eksternal (scoping ATEX, TRA/JSA, sampel gas) yg tak bisa dipercepat murni lewat rekayasa & rencana terus naik.

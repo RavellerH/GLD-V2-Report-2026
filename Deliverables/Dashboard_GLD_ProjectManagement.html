@@ -981,8 +981,8 @@ const AI=[
   ['Uji metode aliran gas: disedot vs didorong','Tim Chamber','s','selesai','Selesai'],
   ['Konsolidasi 3 repositori menjadi satu repo utama','Farhan Budiman','s','terencana','Terencana'],
   ['Menambahkan collaborator GitHub dari Pertamina','Farhan Budiman','r','menunggu','Menunggu'],
-  ['Penyiapan dokumen JSA/TRA','Pak Tresnandi / LGU','t','terbuka','Terbuka'],
-  ['Penjadwalan site visit Pertamina ke lab LGU','LGU','t','terbuka','Terbuka'],
+  ['Penyiapan dokumen JSA/TRA — draft JSA LGU selesai; pengesahan TRA/JSA di RU IV','Pak Tresnandi / LGU · RU IV','t','berjalan','Menunggu RU IV'],
+  ['Penjadwalan site visit Pertamina ke lab LGU','LGU','t','selesai','Selesai (6 Agu, Labtek XV)'],
   ['Pencatatan jenis gas Cilacap & cek tabung gas','Tim Pengujian','s','selesai','Selesai'],
   ['Penyusunan SOP keselamatan (larangan cabut saat on)','Tim Lab','s','selesai','Selesai'],
   ['Evaluasi keputusan solder vs soket sensor','Tim Elektronik','s','selesai','Selesai'],
@@ -1001,8 +1001,8 @@ const AI=[
   ['Cost-benefit analysis solar panel vs catu daya kabel (termasuk CAPEX kabel) untuk GLD','Beny (ITB Fisika)','s','terbuka','Terbuka'],
   ['Kaji sistem pembuangan gas pasca-sampling (cegah paparan)','Tim Instrumentasi ITB','s','terbuka','Terbuka'],
   ['Studi banding topologi jaringan dengan sistem Emerson/WirelessHART','Tim Komunikasi ITB','s','terbuka','Terbuka'],
-  ['Susun rencana sertifikasi perangkat untuk implementasi di kilang','Tim ITB bersama Pertamina','t','terbuka','Terbuka'],
-  ['Susun skenario instalasi lengkap dengan dimensi pemasangan','Tim Mekanik & Vendor Mekanik','t','terbuka','Terbuka']
+  ['Susun rencana sertifikasi perangkat untuk implementasi di kilang','Tim ITB bersama Pertamina','t','selesai','Selesai (rencana EMC/IP/RF/ATEX, 28 Okt)'],
+  ['Susun skenario instalasi lengkap dengan dimensi pemasangan','Tim Mekanik & Vendor Mekanik','t','selesai','Selesai (Spesifikasi Material rev 1.5, MoC 15769)']
 ];
 const PRIO={t:['t','Tinggi'],s:['s','Sedang'],r:['r','Rendah']};
 (function(){
@@ -1027,14 +1027,17 @@ const PRIO={t:['t','Tinggi'],s:['s','Sedang'],r:['r','Rendah']};
 
 /* ---------- ISSUES ---------- */
 const ISS=[
-  ['Eksekusi site survey Cilacap menunggu gate TRA/JSA','Rencana & workflow survei siap; TRA/JSA menahan survei fisik','s','Sedang'],
+  ['Pemasangan GLD di SRU menunggu sertifikat Ex','HAC SRU: titik GLD di Class I Div. 2; MoC 15769 mengizinkan infrastruktur disiapkan lebih dulu','t','Tinggi'],
+  ['Sertifikat Ex casing HIREP tidak berlaku untuk GLD termodifikasi','Kaca diganti mesh & elektronik diganti; rating housing −20…+55 °C dan T6 hanya ≤3 W','t','Tinggi'],
+  ['Jumlah perangkat RU IV berbeda antar dokumen','MoC 4 GLD/5 CH vs tabel alokasi 3 GLD/2 CH vs BoQ 3 GLD/6 CH','s','Sedang'],
+  ['Bukti witness Termin 1 Sertifikasi belum terdokumentasi','Sampel dibawa ke GTS 12 Okt; berita acara witness Pertamina belum ada di repo','s','Sedang'],
   ['Jangkauan LoRa ~100 m/hop — disiasati mesh multi-hop','Konsekuensi: butuh lebih banyak CH (mis. RU VII 11 CH)','s','Sedang'],
   ['Konsolidasi 3 repositori menjadi satu repo utama belum tuntas','Berdampak pada maintenance & tata kelola kode (keputusan solder vs soket sudah selesai)','s','Sedang'],
   ['Anomali pencatatan data tegangan baterai (tertulis 309 V)','Integritas dokumentasi pengukuran','r','Rendah'],
   ['Potensi kondensasi/genangan air dalam casing GLD','Mekanisme pencegahan (lubang sirkulasi/kipas/pemanas) belum dipilih','s','Sedang'],
   ['Cost-benefit analysis solar panel vs catu daya kabel (+ CAPEX kabel) belum dihitung','Sebelumnya solar dinilai menyulitkan instalasi & sempat tidak diizinkan Pertamina','s','Sedang'],
   ['Pertanyaan buangan gas hasil sedotan pompa chamber belum dijawab','Potensi risiko paparan user jika dibuang ke udara bebas','s','Sedang'],
-  ['Opsi gateway indoor + kabel (antena saja di luar) belum dikonfirmasi','Dari catatan informal — tidak disebut di notulensi resmi 6 Agu','r','Rendah']
+  ['EIRP LoRa & margin EMC tipis','GLD ≈25 dBm, CH mesh ≈30 dBm perlu dicek ke batas SDPPI; margin emisi GLD <1 dB di 117–127 MHz','s','Sedang']
 ];
 (function(){
   const byStatus={};AI.forEach(a=>{byStatus[a[3]]=(byStatus[a[3]]||0)+1;});

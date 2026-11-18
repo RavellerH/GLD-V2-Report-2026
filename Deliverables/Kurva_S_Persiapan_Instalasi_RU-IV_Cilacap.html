@@ -108,7 +108,7 @@ footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
     <h1>Kurva-S — Persiapan Instalasi<br>RU IV Cilacap</h1>
     <p class="sub">Status kesiapan sebelum mobilisasi &amp; pemasangan fisik GLD di RU IV Cilacap, per kategori kerja dan per pihak (LGU &amp; ITB, Pertamina RU IV, Vendor Instalasi). Ini bukan Kurva-S proyek keseluruhan 9 bulan &mdash; cakupannya khusus tahap persiapan instalasi Cilacap.</p>
     <div class="meta">
-      <span class="pill acc">REV 1.0 &middot; 18 SEPTEMBER 2026</span>
+      <span class="pill acc">REV 1.1 &middot; 17 NOVEMBER 2026</span>
       <span class="pill">STATUS: PRA-MOBILISASI</span>
     </div>
   </section>
@@ -121,28 +121,33 @@ footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
     </div>
     <div class="kpi warn">
       <div class="lab">Pertamina RU IV</div>
-      <div class="val">0%</div>
-      <div class="sub">14 item &mdash; dokumen &amp; infrastruktur dalam proses</div>
+      <div class="val">21%</div>
+      <div class="sub">3 dari 14 item &mdash; HAC SRU &amp; MoC 15769 terbit</div>
     </div>
     <div class="kpi warn">
       <div class="lab">Vendor Instalasi</div>
-      <div class="val">0%</div>
-      <div class="sub">11 item &mdash; menunggu penugasan resmi</div>
+      <div class="val">9%</div>
+      <div class="sub">1 dari 11 item &mdash; pelaksana belum ditugaskan</div>
     </div>
     <div class="kpi">
       <div class="lab">Keseluruhan</div>
-      <div class="val">38%</div>
-      <div class="sub">15 dari 40 item lintas 3 pihak</div>
+      <div class="val">48%</div>
+      <div class="sub">19 dari 40 item lintas 3 pihak (18 Sep: 38%)</div>
     </div>
   </div>
 
   <div class="note warn">
-    <b>Catatan penting soal angka 100% LGU &amp; ITB:</b> angka ini mencakup desain, unit, dokumen kerja, dan kesiapan teknis &mdash; <b>bukan perizinan</b>. Seluruh proses perizinan (pengesahan TRA/JSA, izin kerja, izin masuk personel, dan surat masuk barang ke area RU IV) sepenuhnya berada di wewenang dan tanggung jawab Pertamina RU IV, tercakup dalam angka 0/14 di kolom Pertamina RU IV &mdash; bukan bagian dari 15 item LGU.
+    <b>Catatan penting soal angka 100% LGU &amp; ITB:</b> angka ini mencakup desain, unit, dokumen kerja, dan kesiapan teknis &mdash; <b>bukan perizinan</b>. Seluruh proses perizinan (pengesahan TRA/JSA, izin kerja, izin masuk personel, dan surat masuk barang ke area RU IV) sepenuhnya berada di wewenang dan tanggung jawab Pertamina RU IV, tercakup dalam kolom Pertamina RU IV (kini 3/14) &mdash; bukan bagian dari 15 item LGU.
+  </div>
+
+  <div class="note">
+    <b>Perkembangan sejak Rev 1.0 (18 Sep):</b> Pertamina RU IV menerbitkan <b>HAC area SRU</b> (2 Nov 2026) dan <b>MoC No. 15769/RU IV Rev 0</b> (3 Nov 2026, <i>Issued for Approval</i>). Kedua dokumen menutup empat item: klasifikasi area tertulis (#3), titik pasang &amp; rute kabel (#4), metode mounting (#19 &mdash; tiang baru 2&Prime; HDG), dan orientasi pemasangan (#6). Keseluruhan naik <b>38% &rarr; 48%</b>.<br><br>
+    <b>Catatan:</b> HAC menempatkan keempat titik GLD di <b>Class I Groups C/D Div. 2</b>. Kesimpulan MoC: infrastruktur pendukung (tiang, jalur kabel, JB-01, server, jaringan) boleh disiapkan lebih dulu, sedangkan <b>pemasangan GLD menunggu sertifikat Ex terbit</b>. Lingkup MoC: 4 GLD, 5 CH, JB-01, 1 Gateway, PC server &mdash; berbeda dengan tabel alokasi perangkat (3 GLD / 2 CH), perlu disepakati.
   </div>
 
   <div class="card">
     <h2>Tren persiapan (keseluruhan)</h2>
-    <p class="hint">Dihitung dari checklist kerja bersama 3 pihak. Baru ada 2 titik data yang bisa dipertanggungjawabkan: saat checklist pertama disusun (10 Sep) dan hari ini (18 Sep) &mdash; belum ada pengukuran harian di antaranya, jadi garis di bawah ini menghubungkan dua titik nyata, bukan tren presisi harian.</p>
+    <p class="hint">Dihitung dari checklist kerja bersama 3 pihak. Titik data hanya pada tanggal yang punya checklist: disusun (10 Sep), Rev 1.0 (18 Sep), checklist block diagram (28 Okt &mdash; sisi RU IV masih seluruhnya belum), dan hari ini (17 Nov, setelah HAC SRU &amp; MoC 15769). Garis menghubungkan titik nyata, bukan tren presisi harian. Sumbu waktu proporsional.</p>
     <div class="chart-scroll">
       <svg viewBox="0 0 700 300" role="img" aria-label="Kurva-S persiapan instalasi RU IV Cilacap">
         <!-- gridlines -->
@@ -162,24 +167,32 @@ footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
           <text x="60" y="64" text-anchor="end">100%</text>
         </g>
         <!-- ambang meeting RU IV (>95%) -->
-        <line x1="70" y1="30.8" x2="670" y2="30.8" stroke="var(--crit)" stroke-width="1.3" stroke-dasharray="5 4" opacity=".7"/>
-        <text x="668" y="25" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="var(--crit)">95% &mdash; ambang meeting RU IV</text>
+        <line x1="70" y1="69.6" x2="670" y2="69.6" stroke="var(--crit)" stroke-width="1.3" stroke-dasharray="5 4" opacity=".7"/>
+        <text x="668" y="83" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="var(--crit)">95% &mdash; ambang meeting RU IV</text>
 
-        <!-- actual solid: 10 Sep (0%) -> 18 Sep (38%) -->
-        <path d="M120 252 L 590 161.6" fill="none" stroke="var(--accent)" stroke-width="2.6"/>
-        <!-- projection dashed: 18 Sep -> arah target, tanggal belum ditentukan -->
-        <path d="M590 161.6 L 660 118" fill="none" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="5 5"/>
+        <!-- month ticks (10 Sep = x80 ... 31 Des = x640) -->
+        <g font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)" text-anchor="middle">
+          <line x1="185" y1="252" x2="185" y2="257" stroke="var(--line)"/><text x="185" y="268">1 Okt</text>
+          <line x1="340" y1="252" x2="340" y2="257" stroke="var(--line)"/><text x="340" y="268">1 Nov</text>
+          <line x1="490" y1="252" x2="490" y2="257" stroke="var(--line)"/><text x="490" y="268">1 Des</text>
+          <line x1="640" y1="252" x2="640" y2="257" stroke="var(--line)"/><text x="640" y="268">31 Des</text>
+        </g>
+        <!-- actual: 10 Sep 0% -> 18 Sep 38% -> 28 Okt 38% -> 17 Nov 48% -->
+        <path d="M80 252 L120 179 L320 179 L420 159.8" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linejoin="round"/>
+        <!-- projection: tanggal belum ditentukan -->
+        <path d="M420 159.8 L 520 108" fill="none" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="5 5"/>
 
-        <circle cx="120" cy="252" r="4.5" fill="var(--ink-soft)"/>
-        <text x="120" y="272" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="var(--ink-2)">10 Sep</text>
-        <text x="120" y="286" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)">checklist disusun</text>
-
-        <circle cx="590" cy="161.6" r="5.5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>
-        <text x="590" y="146" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="700" fill="var(--accent-2)">38%</text>
-        <text x="590" y="272" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="var(--ink-2)">18 Sep (hari ini)</text>
-
-        <text x="640" y="106" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)">rencana &mdash;</text>
-        <text x="640" y="118" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)">jadwal menyusul</text>
+        <circle cx="80" cy="252" r="4.5" fill="var(--ink-soft)"/>
+        <text x="80" y="284" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)">10 Sep</text>
+        <circle cx="120" cy="179" r="4.5" fill="var(--accent)"/>
+        <text x="120" y="168" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="var(--ink-2)">38% &middot; 18 Sep</text>
+        <circle cx="320" cy="179" r="4.5" fill="var(--accent)"/>
+        <text x="320" y="196" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="var(--ink-2)">38% &middot; 28 Okt</text>
+        <circle cx="420" cy="159.8" r="5.5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>
+        <text x="420" y="146" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="700" fill="var(--accent-2)">48%</text>
+        <text x="420" y="182" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="var(--ink-2)">17 Nov (hari ini)</text>
+        <text x="560" y="104" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)">jadwal infrastruktur</text>
+        <text x="560" y="116" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="var(--ink-soft)">menyusul</text>
       </svg>
     </div>
     <div class="legend">
@@ -194,13 +207,13 @@ footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
     <p class="hint">Jumlah item persiapan yang sudah selesai/siap dibanding total item pada kategori tsb, per pihak. Rincian penuh per item ada di dokumen "Pembagian Persiapan Instalasi RU IV Cilacap" (17 Sep).</p>
     <table>
       <tr><th>Kategori</th><th>LGU &amp; ITB</th><th>Pertamina RU IV</th><th>Vendor Instalasi</th></tr>
-      <tr><td><b>1. Lokasi &amp; klasifikasi area</b></td><td class="frac g">2/2</td><td class="frac p">0/2</td><td class="frac p">0/2</td></tr>
+      <tr><td><b>1. Lokasi &amp; klasifikasi area</b></td><td class="frac g">2/2</td><td class="frac g">2/2</td><td class="frac p">1/2</td></tr>
       <tr><td><b>2. Dokumen, izin &amp; K3</b></td><td class="frac g">2/2</td><td class="frac p">0/4</td><td class="frac p">0/3</td></tr>
-      <tr><td><b>3. Perangkat, mekanik &amp; bracket</b></td><td class="frac g">3/3</td><td class="frac p">0/2</td><td class="frac p">0/3</td></tr>
+      <tr><td><b>3. Perangkat, mekanik &amp; bracket</b></td><td class="frac g">3/3</td><td class="frac p">1/2</td><td class="frac p">0/3</td></tr>
       <tr><td><b>4. Catu daya &amp; kabel</b></td><td class="frac g">2/2</td><td class="frac p">0/2</td><td class="frac p">0/2</td></tr>
       <tr><td><b>5. Jaringan &amp; server</b></td><td class="frac g">3/3</td><td class="frac p">0/2</td><td>&mdash;</td></tr>
       <tr><td><b>6. Koordinasi &amp; commissioning hari-H</b></td><td class="frac g">3/3</td><td class="frac p">0/2</td><td class="frac p">0/1</td></tr>
-      <tr><td><b>Total</b></td><td class="frac g">15/15</td><td class="frac p">0/14</td><td class="frac p">0/11</td></tr>
+      <tr><td><b>Total</b></td><td class="frac g">15/15</td><td class="frac p">3/14</td><td class="frac p">1/11</td></tr>
     </table>
   </div>
 
@@ -212,17 +225,17 @@ footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
       <tr class="cathead"><td colspan="5">1. Lokasi &amp; Klasifikasi Area</td></tr>
       <tr><td>1</td><td>Basis desain mounting (pelat mounting U-bolt 2&Prime;/DN50), non-invasive &mdash; tanpa bor/las</td><td>LGU</td><td>SELESAI</td><td><span class="pill2 ok">selesai</span></td></tr>
       <tr><td>2</td><td>Gambar CAD (STEP/OBJ) diserahkan ke vendor sbg acuan fabrikasi</td><td>LGU</td><td>SELESAI</td><td><span class="pill2 ok">selesai</span></td></tr>
-      <tr><td>3</td><td>Dokumen klasifikasi area tertulis resmi (perimeter SRU)</td><td>RU IV</td><td>DALAM PROSES</td><td><span class="pill2 pend">belum</span></td></tr>
-      <tr><td>4</td><td>Penetapan titik pasang detail per unit, rute kabel &amp; tinggi kerja</td><td>RU IV</td><td>SURVEY ADA, DETAIL BELUM DIKUNCI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>3</td><td>Dokumen klasifikasi area tertulis resmi (perimeter SRU)</td><td>RU IV</td><td>HAC SRU TERBIT 2 NOV &mdash; TITIK GLD DI CLASS I DIV. 2</td><td><span class="pill2 ok">selesai</span></td></tr>
+      <tr><td>4</td><td>Penetapan titik pasang detail per unit, rute kabel &amp; tinggi kerja</td><td>RU IV</td><td>DITETAPKAN MoC 15769 REV 0 (GLD-01&hellip;04, CH-01&hellip;05, JB-01)</td><td><span class="pill2 ok">selesai</span>**</td></tr>
       <tr><td>5</td><td>Verifikasi lapangan &amp; shop drawing titik pasang</td><td>Vendor</td><td>MENUNGGU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
-      <tr><td>6</td><td>Konfirmasi orientasi bracket (tiang vertikal vs handrail horizontal)</td><td>Vendor</td><td>BELUM DIKONFIRMASI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>6</td><td>Konfirmasi orientasi bracket (tiang vertikal vs handrail horizontal)</td><td>Vendor</td><td>TERJAWAB MoC: TIANG VERTIKAL 2&Prime; HDG</td><td><span class="pill2 ok">selesai</span></td></tr>
 
       <tr class="cathead"><td colspan="5">2. Dokumen, Izin &amp; Keselamatan Kerja</td></tr>
       <tr><td>7</td><td>Draft JSA/HSE sbg acuan awal (belum menggantikan TRA/JSA resmi)</td><td>LGU</td><td>TERSEDIA (DRAFT)</td><td><span class="pill2 ok">selesai*</span></td></tr>
       <tr><td>8</td><td>Checklist kesiapan instalasi lengkap sbg referensi kerja bersama</td><td>LGU</td><td>TERSEDIA</td><td><span class="pill2 ok">selesai</span></td></tr>
       <tr><td>9</td><td>Pengesahan TRA/JSA spesifik titik pasang</td><td>RU IV</td><td>BELUM DISAHKAN</td><td><span class="pill2 pend">belum</span></td></tr>
       <tr><td>10</td><td>Izin kerja, izin masuk personel &amp; surat masuk barang</td><td>RU IV</td><td>WAJIB SEBELUM MOBILISASI</td><td><span class="pill2 pend">belum</span></td></tr>
-      <tr><td>11</td><td>Penugasan resmi vendor pelaksana &amp; konfirmasi kompetensi kerja tinggi</td><td>RU IV</td><td>PERLU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>11</td><td>Penugasan resmi vendor pelaksana &amp; konfirmasi kompetensi kerja tinggi</td><td>RU IV</td><td>MATERIAL VIA eBVL (MoC); PELAKSANA BELUM DITUGASKAN</td><td><span class="pill2 pend">belum</span></td></tr>
       <tr><td>12</td><td>Daftar kontak PIC (operasi/HSE/control room/IT) &amp; jalur stop-work</td><td>RU IV</td><td>PERLU DIISI</td><td><span class="pill2 pend">belum</span></td></tr>
       <tr><td>13</td><td>Personel bersertifikasi kerja di ketinggian &amp; metode kerja aman</td><td>Vendor</td><td>MENUNGGU PENUGASAN RESMI</td><td><span class="pill2 pend">belum</span></td></tr>
       <tr><td>14</td><td>Toolbox meeting, APD, LOTO, gas test, koordinasi control room</td><td>Vendor</td><td>PERLU RENCANA KERJA</td><td><span class="pill2 pend">belum</span></td></tr>
@@ -232,17 +245,17 @@ footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
       <tr><td>16</td><td>Unit GLD (3 RU IV + 1 cadangan), firmware &amp; AI on-device</td><td>LGU</td><td>SIAP, VERIFIKASI PRA-MOBILISASI</td><td><span class="pill2 ok">selesai*</span></td></tr>
       <tr><td>17</td><td>Spesifikasi bracket/U-bolt/fastener sudah diberikan ke vendor</td><td>LGU</td><td>SELESAI</td><td><span class="pill2 ok">selesai</span></td></tr>
       <tr><td>18</td><td>Supervisi teknis/QA selama pemasangan fisik</td><td>LGU</td><td>SIAP DILAKSANAKAN</td><td><span class="pill2 ok">selesai</span></td></tr>
-      <tr><td>19</td><td>Menyetujui metode mounting non-invasive pada struktur existing</td><td>RU IV</td><td>MENUNGGU KONFIRMASI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>19</td><td>Menyetujui metode mounting non-invasive pada struktur existing</td><td>RU IV</td><td>DIPUTUSKAN MoC: TIANG BARU 2&Prime; HDG (GLD), STANCHION (CH)</td><td><span class="pill2 ok">selesai</span>**</td></tr>
       <tr><td>20</td><td>Menyediakan akses ke struktur existing titik pasang</td><td>RU IV</td><td>TERGANTUNG SURVEY DETAIL</td><td><span class="pill2 pend">belum</span></td></tr>
       <tr><td>21</td><td>Fabrikasi &amp; pemasangan fisik bracket</td><td>Vendor</td><td>MENUNGGU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
       <tr><td>22</td><td>Menyediakan alat kerja, kunci, dan fastener sesuai spesifikasi</td><td>Vendor</td><td>DETAIL FASTENER TERBUKA</td><td><span class="pill2 pend">belum</span></td></tr>
-      <tr><td>23</td><td>Melaksanakan pemasangan fisik GLD &amp; Cluster Head</td><td>Vendor</td><td>BELUM DAPAT DIMULAI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>23</td><td>Melaksanakan pemasangan fisik GLD &amp; Cluster Head</td><td>Vendor</td><td>GLD MENUNGGU SERTIFIKAT Ex (MoC); CH BOLEH DISIAPKAN</td><td><span class="pill2 pend">belum</span></td></tr>
 
       <tr class="cathead"><td colspan="5">4. Catu Daya &amp; Kabel</td></tr>
       <tr><td>24</td><td>Spesifikasi catu daya 24VDC &ge;1A per unit GLD sudah ditetapkan</td><td>LGU</td><td>SELESAI</td><td><span class="pill2 ok">selesai</span></td></tr>
       <tr><td>25</td><td>Terminasi elektrikal spesifik-GLD, energize, dan commissioning</td><td>LGU</td><td>SIAP DILAKSANAKAN</td><td><span class="pill2 ok">selesai</span></td></tr>
-      <tr><td>26</td><td>Menyediakan titik catu daya 24VDC di lokasi pasang</td><td>RU IV</td><td>PERLU KONFIRMASI TITIK</td><td><span class="pill2 pend">belum</span></td></tr>
-      <tr><td>27</td><td>Menyediakan jalur kabel dari sumber daya ke titik pasang</td><td>RU IV</td><td>MENUNGGU KONFIRMASI</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>26</td><td>Menyediakan titik catu daya 24VDC di lokasi pasang</td><td>RU IV</td><td>DESAIN DI MoC (PSU DI CONTROL ROOM &rarr; JB-01); BELUM TERPASANG</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>27</td><td>Menyediakan jalur kabel dari sumber daya ke titik pasang</td><td>RU IV</td><td>DESAIN DI MoC (ARMORED 14 AWG, &plusmn;712 m); BELUM TERPASANG</td><td><span class="pill2 pend">belum</span></td></tr>
       <tr><td>28</td><td>Instalasi fisik jalur kabel, terminasi mekanik &amp; identifikasi kabel</td><td>Vendor</td><td>MENUNGGU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
       <tr><td>29</td><td>Menerapkan LOTO selama pekerjaan instalasi kabel &amp; catu daya</td><td>Vendor</td><td>MENUNGGU RENCANA KERJA</td><td><span class="pill2 pend">belum</span></td></tr>
 
@@ -250,7 +263,7 @@ footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
       <tr><td>30</td><td>Setup PC server, MQTT broker, adapter MQTT&rarr;backend, dan dashboard</td><td>LGU</td><td>SIAP DIKONFIGURASI</td><td><span class="pill2 ok">selesai</span></td></tr>
       <tr><td>31</td><td>Router LGU sendiri di lokasi &mdash; jaringan field berjalan independen</td><td>LGU</td><td>SUDAH DIRANCANG</td><td><span class="pill2 ok">selesai</span></td></tr>
       <tr><td>32</td><td>Uji lokal &amp; acceptance test sebelum serah terima</td><td>LGU</td><td>CHECKLIST HARI-H DISIAPKAN</td><td><span class="pill2 ok">selesai</span></td></tr>
-      <tr><td>33</td><td>Menyediakan PC dedicated fisik dekat Gateway</td><td>RU IV</td><td>MENUNGGU PENGADAAN</td><td><span class="pill2 pend">belum</span></td></tr>
+      <tr><td>33</td><td>Menyediakan PC dedicated fisik dekat Gateway</td><td>RU IV</td><td>TERCANTUM DI MoC; PENGADAAN BELUM DIKONFIRMASI</td><td><span class="pill2 pend">belum</span></td></tr>
       <tr><td>34</td><td>Review keamanan IT bila dashboard dibuka ke intranet kantor (NIC kedua)</td><td>RU IV</td><td>REVIEW FORMAL TERBUKA</td><td><span class="pill2 pend">belum</span></td></tr>
 
       <tr class="cathead"><td colspan="5">6. Koordinasi &amp; Commissioning Hari-H</td></tr>
@@ -262,14 +275,15 @@ footer{margin-top:22px;color:var(--ink-soft);font-size:11px;line-height:1.7}
       <tr><td>40</td><td>Hadir sbg pelaksana fisik hari-H, dikoordinasikan LGU/HSE</td><td>Vendor</td><td>MENUNGGU PENUGASAN</td><td><span class="pill2 pend">belum</span></td></tr>
     </table>
     <p class="hint" style="margin:14px 0 0">* Item #7 (JSA) dan #16 (unit GLD) dihitung selesai dari sisi LGU, tapi masing-masing masih menyisakan syarat di pihak lain: #7 masih berstatus draft, menunggu pengesahan resmi RU IV (item #9); #16 masih perlu verifikasi pra-mobilisasi (cek serial number/firmware/kondisi fisik) sebelum keberangkatan.</p>
+    <p class="hint" style="margin:8px 0 0">** Item #4 dan #19 ditutup oleh MoC No. 15769/RU IV Rev 0 yang berstatus <i>Issued for Approval</i>; bila MoC direvisi, status keduanya ikut ditinjau. Item #19 tidak lagi memakai metode non-invasive pada struktur existing: MoC menetapkan tiang baru 2&Prime; HDG untuk GLD (&plusmn;1,5 m) dan stanchion untuk CH, sehingga basis desain U-bolt (#1) tetap berlaku untuk klem ke tiang baru.</p>
   </div>
 
   <div class="note">
-    <b>Langkah berikutnya:</b> pengesahan TRA/JSA spesifik titik pasang, penugasan resmi vendor instalatur oleh Pertamina RU IV, dan penyediaan infrastruktur di lokasi (titik catu daya, PC server, akses struktur) &mdash; ketiganya berada di sisi Pertamina RU IV &amp; vendor. Dari sisi LGU, seluruh item persiapan yang menjadi tanggung jawab kami sudah selesai. Kami usulkan meeting online bersama vendor instalatur dan RU IV untuk menyepakati jadwal dan menutup item-item ini bersama.
+    <b>Langkah berikutnya:</b> sesuai kesimpulan MoC 15769, infrastruktur pendukung dapat disiapkan lebih dulu &mdash; tiang, jalur kabel 24 VDC, JB-01, PC server, dan jaringan &mdash; sedangkan pemasangan GLD menunggu sertifikat Ex terbit. Item terbuka di sisi Pertamina RU IV &amp; pelaksana: pengesahan TRA/JSA, izin kerja, penugasan pelaksana instalasi, pengadaan material (eBVL) dan PC server, serta PIC hari-H. Perlu disepakati: jumlah perangkat RU IV (MoC 4 GLD/5 CH vs tabel alokasi 3 GLD/2 CH). Dari sisi LGU, seluruh item persiapan yang menjadi tanggung jawab kami sudah selesai. Kami usulkan meeting bersama RU IV dan pelaksana instalasi untuk menyepakati jadwal pekerjaan infrastruktur.
   </div>
 
   <footer>
-    Dokumen ini merangkum "Pembagian Persiapan Instalasi RU IV Cilacap" (17 Sep 2026) dan "Checklist Kesiapan Instalasi RU IV Cilacap" (10 Sep 2026). Bukan izin kerja, sertifikat, atau pengganti persetujuan HSE/operasi Pertamina. Instalasi permanen di area berbahaya tetap menunggu gate keselamatan &amp; sertifikasi terkait.
+    Dokumen ini merangkum "Pembagian Persiapan Instalasi RU IV Cilacap" (17 Sep 2026), "Checklist Kesiapan Instalasi RU IV Cilacap" (10 Sep 2026), HAC area SRU (2 Nov 2026), dan MoC No. 15769/RU IV Rev 0 (3 Nov 2026). Bukan izin kerja, sertifikat, atau pengganti persetujuan HSE/operasi Pertamina. Instalasi permanen di area berbahaya tetap menunggu gate keselamatan &amp; sertifikasi terkait.
   </footer>
 </div>
 <script>

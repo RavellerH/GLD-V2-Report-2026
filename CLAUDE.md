@@ -171,9 +171,12 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **17 Nov — Kurva-S & Dashboard Proyek di-reassess 61%→66% (rencana 78%, −12 poin)** (dec:228): bukti Okt–Nov (FAT 7/7 + 3 laporan uji lab, MoC 15769, MQTT ingest + MySQL di app, paket serah-terima server, persiapan RU VI Balongan). Selisih seluruhnya dari instalasi/field trial yg menunggu sertifikat Ex. Proyeksi bersyarat 92% per Feb 2027. Nilai per aktivitas = usulan Claude, belum dikonfirmasi user satu per satu. `Dashboard_GLD_ProjectManagement.{html,pdf}` diperbarui (area selisih kini merah saat tertinggal).
 
+- 🆕 **18 Nov — dokumen PM disinkronkan ke 17 Nov** (dec:229): Kurva-S Persiapan Instalasi rev 1.1 **38%→48%** (RU IV 3/14 via HAC SRU & MoC 15769, vendor 1/11); `Laporan_Status_Proyek_GLD_LGU_17November2026.{docx,pdf}` (10 hlm, generator `scripts/build_laporan_status_lgu_17nov_docx.py`); `Dashboard_GLD_ProjectManagement_Laporan.html` kini dibangun otomatis dari dashboard interaktif (`scripts/build_dashboard_laporan_html.py`) — jalankan ulang tiap dashboard diubah. Isu/action item dashboard diperbarui (11 isu).
+
 ## 4. Deliverable utama (`Deliverables/`)
 
-- `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).
+- `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal). Versi cetak `Dashboard_GLD_ProjectManagement_Laporan.html` dibangun dari data dashboard ini via `scripts/build_dashboard_laporan_html.py`.
+- `Deliverables/Laporan_Status_Proyek_GLD_LGU_17November2026.{docx,pdf}` — laporan status internal utk manajemen LGU per 17 Nov (menggantikan versi 30 Sep; dec:229).
 - `Deliverables/Laporan_Progres_ByDate_GLD.{html,md}` — laporan progres kronologis (periode 20 Apr–31 Agu 2026, final).
 - `Deliverables/Laporan_Progres_GLD_Final_31Agustus2026.pdf` — versi PDF laporan di atas (12 halaman, untuk didistribusikan).
 - `Deliverables/JSA_HSE_RU-IV_Cilacap_GLD.{html,md}` — draft JSA/HSE Cilacap (belum disahkan).

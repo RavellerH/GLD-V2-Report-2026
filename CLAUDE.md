@@ -171,6 +171,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **17 Nov — Kurva-S & Dashboard Proyek di-reassess 61%→66% (rencana 78%, −12 poin)** (dec:228): bukti Okt–Nov (FAT 7/7 + 3 laporan uji lab, MoC 15769, MQTT ingest + MySQL di app, paket serah-terima server, persiapan RU VI Balongan). Selisih seluruhnya dari instalasi/field trial yg menunggu sertifikat Ex. Proyeksi bersyarat 92% per Feb 2027. Nilai per aktivitas = usulan Claude, belum dikonfirmasi user satu per satu. `Dashboard_GLD_ProjectManagement.{html,pdf}` diperbarui (area selisih kini merah saat tertinggal).
 
+- 🔴 **23 Nov — foto GLD antena-samping masih ada di Instruction Manual & `Paket Sertifikasi ATEX & Manual/` (salinan 22 Sep) → diperbaiki** (dec:229): manual rev 1.0 pakai foto unit produksi (antena di atas), CAD v2/v3 dihapus; paket disinkronkan ulang. Setiap hide/ganti gambar wajib dicek ke SEMUA dokumen + salinan paket.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

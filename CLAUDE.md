@@ -173,6 +173,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🔴 **23 Nov — foto GLD antena-samping masih ada di Instruction Manual & `Paket Sertifikasi ATEX & Manual/` (salinan 22 Sep) → diperbaiki** (dec:229): manual rev 1.0 pakai foto unit produksi (antena di atas), CAD v2/v3 dihapus; paket disinkronkan ulang. Setiap hide/ganti gambar wajib dicek ke SEMUA dokumen + salinan paket.
 
+- 🆕 **23 Nov — casing HIREP HRP-T1000-A masuk dokumen sertifikasi** (dec:230): cert doc rev 3.1 / narrative rev 2.3; suhu operasi +60 °C kini *Under review* (housing +55 °C), T6 HIREP tak berlaku utk GLD 8 W, sertifikat housing masih harus diminta ke supplier.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
 - `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).

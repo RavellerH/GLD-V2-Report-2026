@@ -209,8 +209,8 @@ _H4 = lambda t: doc.add_heading(t, level=4)  # noqa: E731
 # COVER / LETTERHEAD
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-TDF/2026-001"
-REVISION = "3.0"
-DOC_DATE = "9 October 2026"
+REVISION = "3.1"
+DOC_DATE = "23 November 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -391,8 +391,10 @@ for rev, rev_date, rev_desc in [
      "Audit against the reviewer's revision guide (text corrections, no new test data): application form recorded as received and completed; ISO 9001 in progress (audit Oct 2026); certification contact named; product description completed with the gas path and alarm chain; specification list 2.2 extended to the full guide list; operating-modes table added to 2.3; MQ sensor described behind its own protective mesh; RF power 0\u201322 dBm with IS-08 RF-threshold check; AC/DC adapter marked outside the equipment boundary; IP66 marked as target pending test; supplier-listing and internal remarks removed; 2.5 completed with Group II/2G/EPL Gb, humidity, gas-only scope and installation conditions; status boxes of 2.6.c\u20132.6.i aligned with their content; two safety warnings added to 2.6.g.a; grounding requirements of g.7 rewritten in English; draft-review remarks removed from g.6\u2013g.14; f.11 references aligned with f.3; nameplate gains the ATEX specific marking and full manufacturer address; battery item in 3.2 made conditional; compliance-matrix statuses corrected."),
     ("2.9", "8 October 2026",
      "Antenna row of 2.3.b: confirmed that the certified configuration (sample GLD2-0x1001) has no internal 2.4 GHz antenna; superseded remark removed."),
-    (REVISION, DOC_DATE,
+("3.0", "9 October 2026",
      "Figures showing the superseded antenna position (antenna on the side of the base) withheld from this issue: two earlier prototype photographs in 2.4, the ATEX CASING v2 drawing set (M-A1, M-A2, bracket sheet), the GLD ATEX CASE v3 sheets (M-B1\u2013M-B7 and dimensioned sheet) and assembly steps M-E7 and M-E9. Register entries kept and marked 'Withheld in this issue'; references in 2.4.1, EX-01/02/13, MAT-10 and d.4 repointed. Revised drawings to follow."),
+    (REVISION, DOC_DATE,
+     "Base housing source identified and recorded: HIREP HRP-T1000-A (Zhengzhou HIREP Electronic Technology Co., Ltd.), a commercial Ex d gas-detector housing adapted for GLD (Section 2.3.c, EX-01, 2.6.i.1). Supplier ratings that differ from GLD recorded as open points: ambient \u221220 \u00b0C to +55 \u00b0C versus the proposed +60 \u00b0C (operating-temperature status changed to Under review; 2.6.f.2) and T6 valid for \u22643.0 W contents only versus \u22488 W for GLD (2.6.f.1). Housing certificate to be requested from the supplier; the original product certificate is not transferable to GLD."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -902,7 +904,7 @@ make_table(
     [
         ["Enclosure material", "Aluminum alloy (ADC12 die-cast) + stainless steel",
          ("__status__", ("Final", "ok")),
-         "The enclosure is a die-cast metal housing manufactured and supplied by the applicant, with a "
+         "The enclosure is a die-cast metal housing supplied by the applicant (commercially sourced base housing, see next row), with a "
          "threaded cover, threaded side entries and a front stainless-steel mesh, as shown in the product "
          "photography (Section 2.4). A related case CAD drawing (“GLD ATEX CASE v3,” "
          "dated 8 September 2026) specifying a cylindrical sensor-case body (Ø102 mm outer housing ring, "
@@ -918,6 +920,17 @@ make_table(
          "uses this alloy consistently — this is an extrapolation from the supplier's sub-component drawing, "
          "not a direct material callout on the main enclosure drawing, and should be verified against the "
          "casing partner's own datasheet for the enclosure body before formal ExCB submission."],
+        ["Base housing (source)", "HIREP HRP-T1000-A, Zhengzhou HIREP Electronic Technology Co., Ltd. (CN)",
+         ("__status__", ("Pending certificate", "wip")),
+         "Commercial explosion-proof gas-detector housing (die-cast aluminium, blue) with its stainless visual/audible "
+         "alarm beacon, adapted by the manufacturer for GLD. Supplier data (product listing, not a certificate): flameproof "
+         "Ex d IIC T6 Gb, IP66, 195 \u00d7 185 \u00d7 95 mm, M20\u00d71.5 or G1/2 entries, ambient \u221220 \u00b0C to +55 \u00b0C, "
+         "24 VDC, power consumption \u22643.0 W. The certificate number and notified body are not stated and are to be "
+         "requested from the supplier. Any certificate of the original detector applies only to that complete product "
+         "(glass front window, its own sensor head and electronics); GLD replaces the window with a stainless-steel wire "
+         "mesh and replaces all electronics, so the certificate cannot be transferred to GLD and the modified enclosure "
+         "must be assessed in its own right. Two supplier ratings differ from the GLD values in this table: ambient "
+         "+55 \u00b0C (GLD: +60 \u00b0C) and T6 for \u22643.0 W contents (GLD: \u22488 W, temperature class per Section 2.6.f)."],
         ["Dimensions (L \u00d7 W \u00d7 H)", "200 \u00d7 90 \u00d7 290 mm", ("__status__", ("Final", "ok")),
          "Consistent between the technical specification documentation and the EMC parameter table."],
         ["Total weight", "2.378 kg", ("__status__", ("Final", "ok")),
@@ -936,8 +949,10 @@ make_table(
          "suited to this conductor count/diameter, not an independent gland datasheet or fit test on GLD's "
          "own enclosure. Overall cable outer diameter and insulation rating remain to be documented."],
         ["Antenna mounting", "External, SMA male connector", ("__status__", ("Final", "ok")), ""],
-        ["Operating temperature", "\u221220\u00b0C to +60\u00b0C (ambient)", ("__status__", ("Final", "ok")),
-         "Rated ambient range of the equipment and the reference ambient for the temperature-class evaluation (Sections 2.5, 2.6.f)."],
+        ["Operating temperature", "\u221220\u00b0C to +60\u00b0C (ambient)", ("__status__", ("Under review", "wip")),
+         "Rated ambient range of the equipment and the reference ambient for the temperature-class evaluation (Sections 2.5, 2.6.f). "
+         "Under review: the supplier of the base housing states \u221220\u00b0C to +55\u00b0C; +60\u00b0C must be substantiated "
+         "for GLD or the rated maximum reduced to +55\u00b0C (Section 2.6.f.1, f.2)."],
         ["Operating humidity", "5\u201395% RH, non-condensing", ("__status__", ("Final", "ok")),
          "Rated operating humidity range."],
         ["Front gas inlet", "Stainless-steel wire-mesh plate with locking bracket", ("__status__", ("Partial", "wip")),
@@ -1037,10 +1052,10 @@ make_table(
          "extrapolated to the +60\u00b0C maximum ambient, is \u2248114\u00b0C (MQ sensor body, fan-stalled "
          "condition), below the T4 limit less the 5 K margin (130\u00b0C). Not yet final \u2014 several "
          "measurement points and conditions remain open (see 2.6.f), and confirmation requires ExCB type testing."],
-        ["Ambient temperature range", "\u221220\u00b0C to +60\u00b0C", ("__status__", ("Final", "ok")),
-         "Project-confirmed value, consistent with the Mechanical Parameters table (Section 2.3.c). Used as the "
+        ["Ambient temperature range", "\u221220\u00b0C to +60\u00b0C", ("__status__", ("Under review", "wip")),
+         "Project value, consistent with the Mechanical Parameters table (Section 2.3.c). Used as the "
          "reference for extrapolating the preliminary surface-temperature measurements in Section 2.6.f to "
-         "worst-case ambient."],
+         "worst-case ambient. Under review: the base-housing supplier states +55\u00b0C maximum (Section 2.6.f.2)."],
         ["Area classification (zone)", "Zone 1", ("__status__", ("Team recommendation \u2014 pending ExCB confirmation", "wip")),
          "Assessed as sufficient for the general refinery deployment envelope, including areas near storage. "
          "Zone 0 would only apply if the detector were installed directly inside a tank vapor space."],

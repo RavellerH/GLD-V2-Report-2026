@@ -243,7 +243,7 @@ def bom(d, h=None):
        "the revision guide. The electronic BOM above remains the full component list; this table is the Ex-critical "
        "subset and is controlled by part number or drawing number.", size=9.5)
     ex = [
-        ("EX-01", "Main enclosure body", "PT Galaksi Megatama Indonesia", "Common base (M-D7); controlled enclosure drawing TBC",
+        ("EX-01", "Main enclosure body", "PT Galaksi Megatama Indonesia (housing sourced from Zhengzhou HIREP Electronic Technology Co., Ltd.)", "HIREP HRP-T1000-A housing / common base (M-D7); controlled enclosure drawing TBC",
          "ADC12 die-cast aluminium alloy; threaded-neck wall 10.50 mm at the root / 5.80 mm at the top, bore ≈Ø84.7 mm (caliper, Figures 4-128–4-131); body wall thickness elsewhere and surface treatment TBC", "Flameproof enclosure (Ex d, proposed)",
          "Drawing M-D7; Figures 4-128–4-137", "Open"),
         ("EX-02", "Enclosure cover (threaded)", "PT Galaksi Megatama Indonesia", "TBC",
@@ -590,10 +590,18 @@ def temperature(d, h=None):
     _sub("f.1 Proposed temperature class")
     _p("T4 (≤135 °C; effective limit 130 °C with the 5 K margin). Final assignment only after the hot-spot "
        "measurements, extrapolation to maximum ambient and fault conditions are complete.", size=9.5)
+    _p("The T6 marking stated for the original HIREP HRP-T1000-A detector applies to that product\u2019s own "
+       "contents (power consumption \u22643.0 W, single catalytic sensor). GLD dissipates about 8 W with eight heated "
+       "MQ sensors, so the donor product\u2019s temperature class does not carry over; the temperature class of GLD "
+       "is established by its own measurements (Section 2.6.f).", size=9.5)
     _sub("f.2 Maximum ambient temperature")
     _p("+60 °C, the rated maximum of the operating range −20 °C to +60 °C. Note: an assessment at +85 °C would "
        "raise the fan-stalled sensor-body value to about 139 °C, above the T4 limit; +85 °C is therefore not the "
        "rated ambient.", size=9.5)
+    _note("Open point \u2014 housing rating. The commercial housing used for the enclosure (HIREP HRP-T1000-A) is "
+          "stated by its manufacturer for an ambient of \u221220 \u00b0C to +55 \u00b0C, i.e. 5 K below the +60 \u00b0C maximum "
+          "proposed here. Either +60 \u00b0C is substantiated for the modified enclosure by the thermal and flameproof "
+          "assessment of GLD itself, or the rated maximum ambient is reduced to +55 \u00b0C. Decision pending.")
     _sub("f.3 Candidate hottest points")
     _table(["Ref.", "Component / location", "Reason", "Measurement status"], [
         ("T-01", "MQ sensor heater / sensor head", "Heater active during operation", "Measured (TC-1)"),
@@ -733,8 +741,11 @@ def ex_certs(d, h=None):
     _p("Ex-certified components needed for the proposed Ex d construction (gas group IIC). Each certificate must "
        "cover gas group IIC, the ambient range −20 °C to +60 °C and the thread form used.", size=9.5)
     _table(["Component", "Required certification", "Supplier / certificate no.", "Status"], [
-        ("Flameproof enclosure (if a certified empty enclosure is used)", "Ex db IIC component certificate (ATEX/IECEx)",
-         "TBC", "Pending certificate"),
+        ("Flameproof enclosure \u2014 HIREP HRP-T1000-A housing", "Ex db IIC certificate of the housing (ATEX EU-type "
+         "examination / IECEx CoC); copy to be requested from the supplier. Note: the original product certificate covers "
+         "the complete HIREP detector (glass window, its own sensor head and electronics) and does not transfer to GLD, "
+         "whose window is replaced by a wire mesh and whose electronics are replaced",
+         "Zhengzhou HIREP Electronic Technology Co., Ltd. / certificate no. not yet received", "Pending certificate"),
         ("Cable gland, 24 VDC entry", "Ex d barrier gland for IIC, M20×1.5, IP66", "TBC", "Pending certificate"),
         ("Blanking plug / adaptor", "Ex d IIC, M20×1.5", "TBC", "Pending certificate"),
         ("Front mesh / flame arrestor (if claimed)", "Certificate or test evidence of flame-arresting function", "TBC",

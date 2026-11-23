@@ -201,8 +201,8 @@ def figure(path, max_w=6.2, max_h=None, cap=None):
 # COVER
 # ============================================================
 DOC_NO = "GMI/GLD/IECEX-CIR/2026-001"
-REVISION = "2.2"
-DOC_DATE = "9 October 2026"
+REVISION = "2.3"
+DOC_DATE = "23 November 2026"
 
 letterhead = doc.add_table(rows=1, cols=1)
 lc = letterhead.rows[0].cells[0]
@@ -341,8 +341,10 @@ for rev, rev_date, rev_desc in [
      "Navigation: five-level Table of Contents, List of Drawings/Figures with page numbers, PDF bookmarks to individual drawings and photographs; photo groups added. No technical content changed."),
     ("2.1", "7 October 2026",
      "Audit against the reviewer's revision guide: application form received and completed; ISO 9001 in progress; internal file names and working-draft references removed; product description and 2.5 completed (gas path, EPL Gb, Tamb, humidity, gas-only scope, installation conditions); shared sections updated as in the technical documentation file rev. 2.8."),
-    (REVISION, DOC_DATE,
+("2.2", "9 October 2026",
      "Figures showing the superseded antenna position (antenna on the side of the base) withheld: earlier prototype photographs, ATEX CASING v2 and GLD ATEX CASE v3 drawings, assembly steps M-E7/M-E9; references repointed. Revised drawings to follow."),
+    (REVISION, DOC_DATE,
+     "Base housing source recorded: HIREP HRP-T1000-A (Zhengzhou HIREP Electronic Technology Co., Ltd.); supplier ratings that differ from GLD noted as open points (ambient +55 \u00b0C vs +60 \u00b0C; T6 for \u22643.0 W contents only); housing certificate to be requested, not transferable to GLD (Sections 2.3, 2.6.b, 2.6.f, 2.6.i)."),
 ]:
     rrow = rt.add_row().cells
     for i, v in enumerate([rev, rev_date, rev_desc]):
@@ -597,11 +599,12 @@ make_table(
         ["Dimensions (L×W×H)", "200 × 90 × 290 mm", "Final"],
         ["Total weight", "2.378 kg", "Final (project-confirmed, not yet calibration-verified)"],
         ["Enclosure material", "Aluminum alloy (ADC12 die-cast) + stainless steel", "Final (see caveat below)"],
+        ["Base housing (source)", "HIREP HRP-T1000-A, Zhengzhou HIREP Electronic Technology Co., Ltd. (CN)", "Pending certificate (see note below)"],
         ["Mounting method", "U-bolt mounting plate (2″/DN50), no drilling/welding", "Final"],
         ["Ingress protection (IP rating)", "IP66", "Final"],
         ["Cable entry (gland)", "M20×1.5 cable gland (IP66-rated), power cable L+/L−, ≈ 0.75 mm/conductor", "Final (see note below)"],
         ["Antenna mounting", "External, SMA male connector", "Final"],
-        ["Operating temperature range", "−20°C to +60°C (ambient)", "Final (project-confirmed)"],
+        ["Operating temperature range", "−20°C to +60°C (ambient)", "Under review (housing rated +55°C, see note below)"],
         ["Operating humidity range", "5–95% RH, non-condensing", "Final (project-confirmed)"],
     ],
     col_widths=[2.1, 2.9, 1.5],
@@ -624,6 +627,19 @@ note_box(
     "from an independent gland datasheet or fit test on GLD's own enclosure. This should be confirmed by "
     "test/fit-check before formal ExCB submission. The operating temperature and humidity ranges above are "
     "current project-specification values (24 Sep 2026), not yet documented against a calibrated test record.",
+    shade=WARN_SHADE,
+)
+note_box(
+    "Base housing. The enclosure uses a commercially sourced explosion-proof gas-detector housing, HIREP model "
+    "HRP-T1000-A (Zhengzhou HIREP Electronic Technology Co., Ltd.), with its stainless visual/audible alarm beacon. "
+    "Supplier data (product listing, not a certificate): Ex d IIC T6 Gb, IP66, ambient −20 °C to +55 °C, 24 VDC, "
+    "power consumption ≤3.0 W. The certificate number and notified body are not stated and are to be requested "
+    "from the supplier. Any certificate of the original detector covers only that complete product (glass window, "
+    "its own sensor head and electronics); GLD replaces the window with a stainless-steel wire mesh and replaces all "
+    "electronics, so the certificate does not transfer and the modified enclosure is assessed in its own right. "
+    "Open points: (1) housing ambient +55 °C versus the proposed +60 °C — either substantiated for GLD or the rated "
+    "maximum reduced to +55 °C; (2) the T6 rating applies to ≤3.0 W contents only — GLD (≈8 W) is classed by its own "
+    "temperature measurements (Section 2.6.f).",
     shade=WARN_SHADE,
 )
 

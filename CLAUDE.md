@@ -175,9 +175,14 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **23 Nov — casing HIREP HRP-T1000-A masuk dokumen sertifikasi** (dec:230): cert doc rev 3.1 / narrative rev 2.3; suhu operasi +60 °C kini *Under review* (housing +55 °C), T6 HIREP tak berlaku utk GLD 8 W, sertifikat housing masih harus diminta ke supplier.
 
+- 🆕 **18 Nov — dokumen PM disinkronkan ke 17 Nov** (dec:231): Kurva-S Persiapan Instalasi rev 1.1 **38%→48%** (RU IV 3/14 via HAC SRU & MoC 15769, vendor 1/11); `Laporan_Status_Proyek_GLD_LGU_17November2026.{docx,pdf}` (10 hlm, generator `scripts/build_laporan_status_lgu_17nov_docx.py`); `Dashboard_GLD_ProjectManagement_Laporan.html` kini dibangun otomatis dari dashboard interaktif (`scripts/build_dashboard_laporan_html.py`) — jalankan ulang tiap dashboard diubah. Isu/action item dashboard diperbarui (11 isu).
+
+- 🆕 **25 Nov — paket rapat TÜV SÜD (Teams 26 Nov 14.30 WIB) dibuat** (dec:232): `Paket Meeting TUV SUD 26November2026/` — 01 assembly drawing (ekstrak cert doc rev 3.1), 02 user manual rev 1.0, 03 lembar EN target marking II 2G Ex db IIC T4 Gb −20…+60 °C + status IP66 & ISO 9001. Catatan internal rapat (00_*) disimpan lokal saja, di-.gitignore (repo public). RAB/penawaran Balongan juga tidak di-commit.
+
 ## 4. Deliverable utama (`Deliverables/`)
 
-- `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal).
+- `Deliverables/Dashboard_GLD_ProjectManagement.html` — dashboard manajemen proyek (biru #2B5FCB + charcoal). Versi cetak `Dashboard_GLD_ProjectManagement_Laporan.html` dibangun dari data dashboard ini via `scripts/build_dashboard_laporan_html.py`.
+- `Deliverables/Laporan_Status_Proyek_GLD_LGU_17November2026.{docx,pdf}` — laporan status internal utk manajemen LGU per 17 Nov (menggantikan versi 30 Sep; dec:229).
 - `Deliverables/Laporan_Progres_ByDate_GLD.{html,md}` — laporan progres kronologis (periode 20 Apr–31 Agu 2026, final).
 - `Deliverables/Laporan_Progres_GLD_Final_31Agustus2026.pdf` — versi PDF laporan di atas (12 halaman, untuk didistribusikan).
 - `Deliverables/JSA_HSE_RU-IV_Cilacap_GLD.{html,md}` — draft JSA/HSE Cilacap (belum disahkan).

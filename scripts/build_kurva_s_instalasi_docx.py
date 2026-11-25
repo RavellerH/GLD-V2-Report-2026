@@ -34,16 +34,22 @@ def build_chart():
 
     d0 = dt.date(2026, 8, 10)  # kunjungan/survey terakhir RU IV Cilacap (9-10 Agustus 2026)
     d1 = dt.date(2026, 9, 18)
+    d2 = dt.date(2026, 10, 28)  # checklist block diagram: sisi RU IV masih seluruhnya "Belum"
+    d3 = dt.date(2026, 11, 17)  # MoC 15769 (3 Nov) + HAC SRU (2 Nov)
 
     fig, ax = plt.subplots(figsize=(9.6, 4.7), dpi=200)
 
-    # actual line (solid black) - LGU & ITB readiness only (what was asked)
-    ax.plot([d0, d1], [0, 100], color="#000000", linewidth=2.6, marker="o",
-             markersize=7, markerfacecolor="#000000", zorder=5)
+    # LGU & ITB readiness (solid black) - pertanyaan awal Pertamina
+    ax.plot([d0, d1, d3], [0, 100, 100], color="#000000", linewidth=2.6, marker="o",
+             markersize=7, markerfacecolor="#000000", zorder=5, label="LGU & ITB")
+    # Keseluruhan 3 pihak (dashed grey) - hanya titik yang punya data checklist
+    ax.plot([d1, d2, d3], [38, 38, 48], color="#595959", linewidth=2.2, linestyle=(0, (5, 3)),
+            marker="s", markersize=6, markerfacecolor="#595959", zorder=4, label="Keseluruhan 3 pihak")
+    ax.legend(loc="upper right", bbox_to_anchor=(1.0, 0.80), fontsize=8.8, frameon=False)
 
     # 95% threshold reference line (disebutkan Pertamina utk syarat agenda meeting RU IV)
     ax.axhline(95, color="#000000", linewidth=1.1, linestyle=(0, (6, 4)), alpha=0.65, zorder=2)
-    ax.text(d0 + dt.timedelta(days=1), 91, "95% — ambang meeting lanjutan RU IV (disebut Pertamina)",
+    ax.text(d0 + dt.timedelta(days=1), 91, "95% — ambang meeting RU IV",
             ha="left", va="top", fontsize=9.2, color="#000000", fontweight="bold")
 
     # data point labels
@@ -51,14 +57,20 @@ def build_chart():
                 textcoords="offset points", ha="center", va="top", fontsize=9.3, color="#262626")
     ax.annotate("100%", xy=(d1, 100), xytext=(-16, 4), textcoords="offset points",
                 ha="right", va="center", fontsize=14, fontweight="bold", color="#000000")
-    ax.annotate("18 Sep 2026\n(hari ini)", xy=(d1, 100), xytext=(-6, -26), textcoords="offset points",
-                ha="right", va="top", fontsize=9.3, color="#262626")
+    ax.annotate("18 Sep 2026", xy=(d1, 100), xytext=(6, -12), textcoords="offset points",
+                ha="left", va="top", fontsize=9.3, color="#262626")
+    ax.annotate("38%", xy=(d1, 38), xytext=(-8, 6), textcoords="offset points",
+                ha="right", va="bottom", fontsize=10, color="#404040")
+    ax.annotate("38% (28 Okt)", xy=(d2, 38), xytext=(0, -16), textcoords="offset points",
+                ha="center", va="top", fontsize=9, color="#404040")
+    ax.annotate("48%\n17 Nov 2026\n(hari ini)", xy=(d3, 48), xytext=(-8, -12), textcoords="offset points",
+                ha="right", va="top", fontsize=9.5, fontweight="bold", color="#262626")
 
-    ax.set_xlim(d0 - dt.timedelta(days=2), d1 + dt.timedelta(days=2))
+    ax.set_xlim(d0 - dt.timedelta(days=2), d3 + dt.timedelta(days=4))
     ax.set_ylim(-10, 112)
     ax.set_yticks([0, 25, 50, 75, 100])
     ax.set_yticklabels(["0%", "25%", "50%", "75%", "100%"])
-    ax.xaxis.set_major_locator(mdates.DayLocator(interval=7))
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=14))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
     ax.grid(axis="y", color="#D9D9D9", linewidth=0.8, zorder=0)
     for spine in ("top", "right"):
@@ -284,8 +296,8 @@ def add_table(doc, headers, rows, widths, font_size=8.7, mark_col=None, section_
 def add_document_control(doc):
     rows = [
         ("Nomor dokumen", "LGU/GLD/KURVA-INSTALASI/2026-001"),
-        ("Revisi", "1.0"),
-        ("Tanggal", "18 September 2026"),
+        ("Revisi", "1.1"),
+        ("Tanggal", "17 November 2026 (Rev 1.0: 18 September 2026)"),
         ("Status", "Untuk koordinasi PT Pertamina Patra Niaga — RU IV Cilacap"),
         ("Disiapkan oleh", "LAPI Ganesha Utama bersama Lab IoT/Instrumentation and Computation ITB"),
         ("Ditujukan kepada", "PT Pertamina Patra Niaga — RU IV Cilacap"),
@@ -384,9 +396,9 @@ def build_document():
     tbl.autofit = False
     for i, (lab, val, sub) in enumerate([
         ("LGU & ITB", "100%", "15 dari 15 item"),
-        ("PERTAMINA RU IV", "0%", "0 dari 14 item"),
-        ("VENDOR INSTALASI", "0%", "0 dari 11 item"),
-        ("KESELURUHAN", "38%", "15 dari 40 item"),
+        ("PERTAMINA RU IV", "21%", "3 dari 14 item"),
+        ("VENDOR INSTALASI", "9%", "1 dari 11 item"),
+        ("KESELURUHAN", "48%", "19 dari 40 item"),
     ]):
         cell = tbl.rows[0].cells[i]
         cell.width = Inches(1.75)
@@ -422,7 +434,7 @@ def build_document():
     r4 = p.add_run(
         "Seluruh proses perizinan (pengesahan TRA/JSA, izin kerja, izin masuk personel, dan surat masuk "
         "barang ke area RU IV) sepenuhnya berada pada wewenang dan tanggung jawab Pertamina RU IV, "
-        "tercakup dalam angka 0/14 pada kolom Pertamina RU IV — bukan bagian dari 15 item LGU."
+        "tercakup dalam kolom Pertamina RU IV (kini 3/14) — bukan bagian dari 15 item LGU."
     )
     set_run_font(r4, size=9, color=DARK)
     tbl_pr = box._tbl.tblPr
@@ -437,15 +449,42 @@ def build_document():
     tbl_pr.append(borders)
     doc.add_paragraph().paragraph_format.space_after = Pt(2)
 
+    box2 = doc.add_table(rows=1, cols=1)
+    box2.alignment = WD_TABLE_ALIGNMENT.CENTER
+    c2 = box2.rows[0].cells[0]
+    set_cell_shading(c2, "F2F2F2")
+    set_cell_margins(c2, top=110, bottom=110, start=130, end=130)
+    pp = c2.paragraphs[0]
+    rr = pp.add_run("PERKEMBANGAN SEJAK REV 1.0 (18 SEP) — ")
+    set_run_font(rr, size=9, bold=True, color=BLACK)
+    rr = pp.add_run(
+        "Pertamina RU IV menerbitkan HAC area SRU (2 November 2026) dan MoC No. 15769/RU IV Rev 0 "
+        "(3 November 2026, Issued for Approval). Kedua dokumen ini menutup empat item: klasifikasi area "
+        "tertulis (Item 3), titik pasang & rute kabel (Item 4), metode mounting (Item 19, tiang baru 2″ HDG), "
+        "dan orientasi pemasangan (Item 6). Keseluruhan naik 38% → 48%. "
+    )
+    set_run_font(rr, size=9, color=DARK)
+    rr = pp.add_run("Catatan: ")
+    set_run_font(rr, size=9, bold=True, color=BLACK)
+    rr = pp.add_run(
+        "HAC menempatkan keempat titik GLD di Class I Groups C/D Div. 2. Kesimpulan MoC: infrastruktur "
+        "pendukung (tiang, jalur kabel, JB-01, server, jaringan) boleh disiapkan lebih dulu, sedangkan "
+        "pemasangan GLD menunggu sertifikat Ex terbit. Lingkup MoC: 4 GLD, 5 CH, JB-01, 1 Gateway, PC server."
+    )
+    set_run_font(rr, size=9, color=DARK)
+    set_table_borders(box2, color=LINE, size="8")
+    doc.add_paragraph().paragraph_format.space_after = Pt(2)
+
     # 2 Tren
     add_heading(doc, "2  Tren Persiapan", 1)
     add_paragraph(
         doc,
         "Metodologi. Kurva ini melacak progres LGU & ITB secara khusus — sesuai pertanyaan yang diajukan "
         "Pertamina ('dari sisi LGU persiapannya sudah berapa persen?'), bukan angka gabungan tiga pihak. "
-        "Titik awal diambil dari kunjungan/survey lapangan terakhir ke RU IV Cilacap (9–10 Agustus 2026) "
-        "— belum ada kunjungan lain setelahnya — dibandingkan dengan snapshot kesiapan hari ini "
-        "(18 September 2026).",
+        "Titik awal diambil dari kunjungan/survey lapangan terakhir ke RU IV Cilacap (9–10 Agustus 2026). "
+        "Rev 1.1 menambahkan garis keseluruhan tiga pihak, hanya pada tanggal yang punya data checklist: "
+        "18 September (Rev 1.0), 28 Oktober (checklist block diagram: sisi RU IV masih seluruhnya belum), "
+        "dan 17 November 2026 (setelah HAC SRU dan MoC 15769).",
         bold_lead="Metodologi. ",
     )
 
@@ -455,24 +494,26 @@ def build_document():
     cap = doc.add_paragraph()
     cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
     cap.paragraph_format.space_after = Pt(12)
-    r = cap.add_run("Grafik 1. Kurva-S kesiapan LGU & ITB, persiapan instalasi RU IV Cilacap")
+    r = cap.add_run("Grafik 1. Kurva-S kesiapan LGU & ITB dan keseluruhan tiga pihak, persiapan instalasi RU IV Cilacap")
     set_run_font(r, size=8.3, italic=True, color=MID)
 
     add_table(
         doc,
-        ["Tanggal", "Peristiwa", "Progres LGU & ITB"],
+        ["Tanggal", "Peristiwa", "LGU & ITB", "Keseluruhan"],
         [
-            ("9–10 Agustus 2026", "Survey lokasi RU IV Cilacap (kunjungan lapangan terakhir)", "0%"),
-            ("18 September 2026 (hari ini)", "Seluruh 15 item tanggung jawab LGU & ITB selesai/siap", "100%"),
+            ("9–10 Agustus 2026", "Survey lokasi RU IV Cilacap (kunjungan lapangan terakhir)", "0%", "—"),
+            ("18 September 2026", "Seluruh 15 item tanggung jawab LGU & ITB selesai/siap (Rev 1.0)", "100%", "38%"),
+            ("28 Oktober 2026", "Checklist block diagram: persiapan LGU selesai; 19 item RU IV belum", "100%", "38%"),
+            ("17 November 2026 (hari ini)", "HAC SRU (2 Nov) & MoC 15769 (3 Nov) menutup Item 3, 4, 6, 19", "100%", "48%"),
         ],
-        [1.7, 3.85, 1.25],
+        [1.55, 3.45, 0.85, 0.95],
         font_size=9,
     )
     add_paragraph(
         doc,
         "* Ambang yang disebutkan Pertamina pada percakapan 18 September 2026 (>95% agar meeting lanjutan "
         "bersama RU IV dapat diagendakan) sudah terlampaui dari sisi kesiapan LGU & ITB. Ini tidak mencakup "
-        "kesiapan Pertamina RU IV dan Vendor Instalasi, yang saat dokumen ini disusun masih 0% (lihat Bagian 1 "
+        "kesiapan Pertamina RU IV (21%) dan Vendor Instalasi (9%) per 17 November 2026 (lihat Bagian 1 "
         "dan 3) — perizinan dan penugasan resmi tetap berada di luar kendali LGU.",
         size=8.6, color=MID, space_after=10,
     )
@@ -490,13 +531,13 @@ def build_document():
         doc,
         ["Kategori", "LGU & ITB", "Pertamina RU IV", "Vendor Instalasi"],
         [
-            ("1. Lokasi & klasifikasi area", "2 / 2", "0 / 2", "0 / 2"),
+            ("1. Lokasi & klasifikasi area", "2 / 2", "2 / 2", "1 / 2"),
             ("2. Dokumen, izin & K3", "2 / 2", "0 / 4", "0 / 3"),
-            ("3. Perangkat, mekanik & bracket", "3 / 3", "0 / 2", "0 / 3"),
+            ("3. Perangkat, mekanik & bracket", "3 / 3", "1 / 2", "0 / 3"),
             ("4. Catu daya & kabel", "2 / 2", "0 / 2", "0 / 2"),
             ("5. Jaringan & server", "3 / 3", "0 / 2", "—"),
             ("6. Koordinasi & commissioning hari-H", "3 / 3", "0 / 2", "0 / 1"),
-            ("Total", "15 / 15", "0 / 14", "0 / 11"),
+            ("Total", "15 / 15", "3 / 14", "1 / 11"),
         ],
         [2.9, 1.1, 1.35, 1.35],
         font_size=9,
@@ -517,16 +558,16 @@ def build_document():
         ("1. LOKASI & KLASIFIKASI AREA",),
         ("1", "Basis desain mounting (pelat mounting U-bolt 2″/DN50), non-invasive — tanpa bor/las", "LGU", "SELESAI", "SELESAI"),
         ("2", "Gambar CAD (STEP/OBJ) diserahkan ke vendor sebagai acuan fabrikasi", "LGU", "SELESAI", "SELESAI"),
-        ("3", "Dokumen klasifikasi area tertulis resmi (perimeter SRU)", "RU IV", "Dalam proses", "BELUM"),
-        ("4", "Penetapan titik pasang detail per unit, rute kabel & tinggi kerja", "RU IV", "Survey ada, detail belum dikunci", "BELUM"),
+        ("3", "Dokumen klasifikasi area tertulis resmi (perimeter SRU)", "RU IV", "HAC SRU terbit 2 Nov — titik GLD di Class I Div. 2", "SELESAI"),
+        ("4", "Penetapan titik pasang detail per unit, rute kabel & tinggi kerja", "RU IV", "Ditetapkan MoC 15769 Rev 0 (GLD-01…04, CH-01…05, JB-01)", "SELESAI**"),
         ("5", "Verifikasi lapangan & shop drawing titik pasang", "Vendor", "Menunggu penugasan", "BELUM"),
-        ("6", "Konfirmasi orientasi bracket (tiang vertikal vs handrail horizontal)", "Vendor", "Belum dikonfirmasi", "BELUM"),
+        ("6", "Konfirmasi orientasi bracket (tiang vertikal vs handrail horizontal)", "Vendor", "Terjawab MoC: tiang vertikal 2″ HDG", "SELESAI"),
         ("2. DOKUMEN, IZIN & KESELAMATAN KERJA",),
         ("7", "Draft JSA/HSE sebagai acuan awal (belum menggantikan TRA/JSA resmi)", "LGU", "Tersedia (draft)", "SELESAI*"),
         ("8", "Checklist kesiapan instalasi lengkap sebagai referensi kerja bersama", "LGU", "Tersedia", "SELESAI"),
         ("9", "Pengesahan TRA/JSA spesifik titik pasang", "RU IV", "Belum disahkan", "BELUM"),
         ("10", "Izin kerja, izin masuk personel & surat masuk barang", "RU IV", "Wajib sebelum mobilisasi", "BELUM"),
-        ("11", "Penugasan resmi vendor pelaksana & konfirmasi kompetensi kerja tinggi", "RU IV", "Perlu penugasan", "BELUM"),
+        ("11", "Penugasan resmi vendor pelaksana & konfirmasi kompetensi kerja tinggi", "RU IV", "Material via eBVL (MoC); pelaksana belum ditugaskan", "BELUM"),
         ("12", "Daftar kontak PIC (operasi/HSE/control room/IT) & jalur stop-work", "RU IV", "Perlu diisi", "BELUM"),
         ("13", "Personel bersertifikasi kerja di ketinggian & metode kerja aman", "Vendor", "Menunggu penugasan resmi", "BELUM"),
         ("14", "Toolbox meeting, APD, LOTO, gas test, koordinasi control room", "Vendor", "Perlu rencana kerja", "BELUM"),
@@ -535,23 +576,23 @@ def build_document():
         ("16", "Unit GLD (3 RU IV + 1 cadangan), firmware & AI on-device", "LGU", "Siap, verifikasi pra-mobilisasi", "SELESAI*"),
         ("17", "Spesifikasi bracket/U-bolt/fastener sudah diberikan ke vendor", "LGU", "Selesai", "SELESAI"),
         ("18", "Supervisi teknis/QA selama pemasangan fisik", "LGU", "Siap dilaksanakan", "SELESAI"),
-        ("19", "Menyetujui metode mounting non-invasive pada struktur existing", "RU IV", "Menunggu konfirmasi", "BELUM"),
+        ("19", "Menyetujui metode mounting non-invasive pada struktur existing", "RU IV", "Diputuskan MoC: tiang baru 2″ HDG (GLD), stanchion (CH)", "SELESAI**"),
         ("20", "Menyediakan akses ke struktur existing titik pasang", "RU IV", "Tergantung survey detail", "BELUM"),
         ("21", "Fabrikasi & pemasangan fisik bracket", "Vendor", "Menunggu penugasan", "BELUM"),
         ("22", "Menyediakan alat kerja, kunci, dan fastener sesuai spesifikasi", "Vendor", "Detail fastener terbuka", "BELUM"),
-        ("23", "Melaksanakan pemasangan fisik GLD & Cluster Head", "Vendor", "Belum dapat dimulai", "BELUM"),
+        ("23", "Melaksanakan pemasangan fisik GLD & Cluster Head", "Vendor", "GLD menunggu sertifikat Ex (MoC); CH boleh disiapkan", "BELUM"),
         ("4. CATU DAYA & KABEL",),
         ("24", "Spesifikasi catu daya 24VDC ≥ 1A per unit GLD sudah ditetapkan", "LGU", "Selesai", "SELESAI"),
         ("25", "Terminasi elektrikal spesifik-GLD, energize, dan commissioning", "LGU", "Siap dilaksanakan", "SELESAI"),
-        ("26", "Menyediakan titik catu daya 24VDC di lokasi pasang", "RU IV", "Perlu konfirmasi titik", "BELUM"),
-        ("27", "Menyediakan jalur kabel dari sumber daya ke titik pasang", "RU IV", "Menunggu konfirmasi", "BELUM"),
+        ("26", "Menyediakan titik catu daya 24VDC di lokasi pasang", "RU IV", "Desain di MoC (PSU di Control Room → JB-01); belum terpasang", "BELUM"),
+        ("27", "Menyediakan jalur kabel dari sumber daya ke titik pasang", "RU IV", "Desain di MoC (armored 14 AWG, ±712 m); belum terpasang", "BELUM"),
         ("28", "Instalasi fisik jalur kabel, terminasi mekanik & identifikasi kabel", "Vendor", "Menunggu penugasan", "BELUM"),
         ("29", "Menerapkan LOTO selama pekerjaan instalasi kabel & catu daya", "Vendor", "Menunggu rencana kerja", "BELUM"),
         ("5. JARINGAN & SERVER",),
         ("30", "Setup PC server, MQTT broker, adapter MQTT→backend, dan dashboard", "LGU", "Siap dikonfigurasi", "SELESAI"),
         ("31", "Router LGU sendiri di lokasi — jaringan field berjalan independen", "LGU", "Sudah dirancang", "SELESAI"),
         ("32", "Uji lokal & acceptance test sebelum serah terima", "LGU", "Checklist hari-H disiapkan", "SELESAI"),
-        ("33", "Menyediakan PC dedicated fisik dekat Gateway", "RU IV", "Menunggu pengadaan", "BELUM"),
+        ("33", "Menyediakan PC dedicated fisik dekat Gateway", "RU IV", "Tercantum di MoC; pengadaan belum dikonfirmasi", "BELUM"),
         ("34", "Review keamanan IT bila dashboard dibuka ke intranet kantor (NIC kedua)", "RU IV", "Review formal terbuka", "BELUM"),
         ("6. KOORDINASI & COMMISSIONING HARI-H",),
         ("35", "Memimpin energize & uji fungsional bersama HSE/control room", "LGU", "Siap dilaksanakan", "SELESAI"),
@@ -579,6 +620,14 @@ def build_document():
         "fisik) sebelum keberangkatan.",
         size=8.4, color=MID,
     )
+    add_paragraph(
+        doc,
+        "** Item 4 dan 19 ditutup oleh MoC No. 15769/RU IV Rev 0 yang berstatus Issued for Approval; bila MoC "
+        "direvisi, status keduanya ikut ditinjau. Item 19 tidak lagi memakai metode non-invasive pada struktur "
+        "existing: MoC menetapkan tiang baru 2″ HDG untuk GLD (±1,5 m) dan stanchion untuk CH, sehingga basis "
+        "desain U-bolt pada Item 1 tetap berlaku untuk klem ke tiang baru tersebut.",
+        size=8.4, color=MID,
+    )
 
     doc.add_page_break()
 
@@ -586,11 +635,13 @@ def build_document():
     add_heading(doc, "5  Langkah Berikutnya", 1)
     add_paragraph(
         doc,
-        "Pengesahan TRA/JSA spesifik titik pasang, penugasan resmi vendor instalatur oleh Pertamina RU IV, "
-        "dan penyediaan infrastruktur di lokasi (titik catu daya, PC server, akses struktur) — ketiganya "
-        "berada di sisi Pertamina RU IV dan vendor. Dari sisi LGU, seluruh item persiapan yang menjadi "
-        "tanggung jawab kami sudah selesai. Kami mengusulkan meeting online bersama vendor instalatur dan "
-        "RU IV untuk menyepakati jadwal dan menutup item-item ini bersama."
+        "Sesuai kesimpulan MoC 15769, infrastruktur pendukung dapat disiapkan lebih dulu: tiang, jalur kabel "
+        "24 VDC, JB-01, PC server, dan jaringan. Pemasangan GLD menunggu sertifikat Ex terbit. Item yang masih "
+        "terbuka di sisi Pertamina RU IV dan pelaksana: pengesahan TRA/JSA, izin kerja, penugasan pelaksana "
+        "instalasi, pengadaan material (eBVL) dan PC server, serta PIC hari-H. Satu hal perlu disepakati: "
+        "jumlah perangkat RU IV (MoC 4 GLD/5 CH; tabel alokasi perangkat 3 GLD/2 CH). Dari sisi LGU, seluruh "
+        "item persiapan yang menjadi tanggung jawab kami sudah selesai. Kami mengusulkan meeting bersama "
+        "RU IV dan pelaksana instalasi untuk menyepakati jadwal pekerjaan infrastruktur."
     )
 
     add_heading(doc, "6  Referensi Dokumen", 1)
@@ -599,6 +650,9 @@ def build_document():
         "Checklist Kesiapan Instalasi RU IV Cilacap, 10 September 2026 (Rev 1.0).",
         "Daftar Persiapan Vendor Instalasi RU IV Cilacap, 17 September 2026.",
         "Draf Permintaan Penyediaan Material Instalasi RU IV Cilacap, 17 September 2026.",
+        "Hazardous Area Classification (HAC) area SRU, PT Pertamina RU IV, 2 November 2026.",
+        "MoC No. 15769/RU IV — Field Test Multi-Modality Gas Leak Detector System area SRU, Rev 0 (Issued for Approval), 3 November 2026.",
+        "Checklist Instalasi Block Diagram RU IV (xlsx), 28 Oktober 2026.",
     ]
     for i, ref in enumerate(refs, 1):
         add_paragraph(doc, f"{i}. {ref}", size=8.8)

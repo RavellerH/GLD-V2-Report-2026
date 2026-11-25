@@ -407,35 +407,23 @@ function imgCover(s, p, pw, ph, x, y, bw, bh) {
 // ================================================================ 6 · spesifikasi
 (function spesifikasi() {
   const s = slideLight();
-  heading(s, "1 · Komponen", "Spesifikasi teknis GLD V2");
-  const L = [
-    ["Parameter", "Nilai"],
-    ["Sensor gas", "8 kanal MOS: MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135"],
-    ["Pemrosesan", "ESP32-S3-WROOM-1U (AI on-device)"],
-    ["Kelas gas (AI)", "Clean Air, LPG, H₂"],
-    ["Radio", "LoRa E22-900MM22S, 920–923 MHz, 17 dBm operasional"],
-    ["Antena", "Eksternal 3 dBi omni, SMA"],
-    ["Antarmuka kabel", "RS-485 / Modbus RTU (read-only)"],
-    ["Alarm lokal", "Modul visual + audible (beacon)"],
-  ];
-  const R = [
-    ["Parameter", "Nilai"],
-    ["Catu daya", "24 VDC; konsumsi maks. ±8 W"],
-    ["Housing", "Aluminium die-cast ADC12 + stainless steel"],
-    ["Dimensi / berat", "200 × 90 × 290 mm / 2,378 kg"],
-    ["Cable entry", "M20 × 1,5 (cable gland Ex d)"],
-    ["Mounting", "Pelat U-bolt 250×250 mm ke pipa 2\" (OD 60,3 mm)"],
-    ["Lingkungan", "−20 s/d +60 °C (rentang desain, dalam verifikasi); 5–95 %RH"],
-    ["Proteksi", "IP66 (target, belum diuji)"],
-  ];
-  table(s, L, { x: M, y: 1.65, w: 5.95, colW: [1.7, 4.25], size: 11, boldFirst: true, rowH: 0.5 });
-  table(s, R, { x: 6.75, y: 1.65, w: 5.95, colW: [1.6, 4.35], size: 11, boldFirst: true, rowH: 0.5 });
+  heading(s, "1 · Komponen", "Spesifikasi untuk instalasi");
+  table(s, [
+    ["Parameter", "GLD", "Cluster Head", "Gateway"],
+    ["Catu daya", "24 VDC, maks. ± 8 W; kabel 2 inti dari PSU", "Panel surya + baterai; tanpa kabel daya", "Dari UPS di ruangan (adaptor)"],
+    ["Pemasangan", "Pelat U-bolt 250 × 250 mm ke pipa 2\" (OD 60,3 mm)", "Tiang 3–5 m; U-bolt sesuai OD tiang", "Tiang atap ± 2–2,5 m, menyatu dengan antena"],
+    ["Dimensi / berat", "200 × 90 × 290 mm / ± 2,4 kg", "—", "—"],
+    ["Kabel masuk", "Cable gland M20 × 1,5", "—", "Kabel daya"],
+    ["Komunikasi", "LoRa 920–923 MHz ke CH", "LoRa mesh antar-CH", "LoRa → Wi-Fi 2,4 GHz ke router"],
+    ["Lingkungan", "−20 s/d +60 °C; IP66 (target)", "Outdoor", "Outdoor"],
+    ["Area pasang", "Sesuai HAC; area terklasifikasi menunggu sertifikat Ex", "Area aman / unclassified", "Area aman / unclassified"],
+  ], { x: M, y: 1.65, w: 12.1, colW: [1.9, 4.0, 3.1, 3.1], size: 11.5, boldFirst: true, rowH: 0.5 });
   card(s, M, 5.85, 12.1, 0.75, WARN_BG);
-  s.addText("Usulan klasifikasi sertifikasi: II 2G Ex db IIC T4 Gb (Zona 1). Berkas sedang berproses di lembaga sertifikasi — sertifikat belum terbit; status lengkap di slide sertifikasi.", {
+  s.addText("Usulan klasifikasi sertifikasi GLD: II 2G Ex db IIC T4 Gb (Zona 1). Sertifikat belum terbit — status di slide sertifikasi.", {
     x: M + 0.25, y: 5.85, w: 11.6, h: 0.75, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11.5, bold: true, color: WARN, valign: "middle",
   });
   footnote(s, SRC);
-  s.addNotes("Angka mengikuti dokumen teknis terbaru. Item bertanda target/verifikasi (IP66, rentang suhu) disampaikan apa adanya.");
+  s.addNotes("Hanya spesifikasi yang relevan untuk instalasi. Detail sensor, radio, dan pemrosesan tersedia di datasheet bila diminta.");
 })();
 
 // ================================================================ 8 · hasil pengujian
@@ -689,7 +677,7 @@ function imgCover(s, p, pw, ph, x, y, bw, bh) {
   bullets(s, x0, 2.0, w0, 2.9, [
     "Pelat 250 × 250 mm dikunci ke tiang dengan 2 U-bolt 2\" (M10).",
     "Unit GLD dibaut ke pelat lewat 3 kuping mounting.",
-    "Mesh sensor menghadap ke bawah/samping, antena tegak ke atas.",
+    "Mesh sensor menghadap ke depan, antena tegak ke atas.",
     "Kabel 24 VDC masuk lewat cable gland M20 × 1,5.",
   ], 11);
   card(s, x0, 5.0, w0, 1.75, WARN_BG);
@@ -915,7 +903,7 @@ function imgCover(s, p, pw, ph, x, y, bw, bh) {
   label(s, "unit Gateway", mx + 0.36, mtop + 0.05, 1.0, 0.24, { size: 8.5, color: CHAR });
   seg(s, mx - 0.45, mtop - 0.5, mx - 0.45, R - 0.1, { color: MUTED, width: 0.75 });
   label(s, "± 2–2,5 m\ndi atas atap", mx - 1.6, mtop + 0.2, 1.1, 0.5, { size: 9.5, bold: true, color: CHAR, align: "right" });
-  label(s, "base plate / ballast", mx - 1.75, R - 0.38, 1.4, 0.22, { size: 8, color: CHAR_SOFT, align: "right" });
+  label(s, "base plate /\nballast", mx + 0.35, R - 0.78, 0.75, 0.36, { size: 8, color: CHAR_SOFT });
   box(s, bx + 0.25, R + 0.95, 1.25, 0.45, "Router Wi-Fi", { fill: SURF_2 });
   seg(s, mx - 0.3, mtop + 0.3, bx + 1.5, R + 1.0, { color: MUTED, width: 1.5, dash: "sysDot" });
   label(s, "Wi-Fi 2,4 GHz", bx + 1.4, R + 0.55, 1.1, 0.22, { size: 8, color: MUTED });
@@ -1125,7 +1113,7 @@ function imgCover(s, p, pw, ph, x, y, bw, bh) {
     s.addText(st[2], { x: x + 0.1, y: 4.65, w: w - 0.2, h: 0.45, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11, bold: true, color: BLUE, valign: "top" });
   });
   card(s, M, 5.5, 12.1, 0.95, PERTAMINA_BG);
-  s.addText("Langkah 4–6 dapat berjalan paralel. Bila titik GLD berada di area terklasifikasi, langkah 7 untuk GLD menunggu sertifikat Ex terbit; infrastruktur (langkah 5) tetap dapat disiapkan lebih dulu, seperti di RU IV.", {
+  s.addText("Langkah 4–6 dapat berjalan paralel. Bila titik GLD berada di area terklasifikasi, langkah 7 untuk GLD menunggu sertifikat Ex terbit; infrastruktur (langkah 5) dapat disiapkan lebih dulu sesuai keputusan RU VI.", {
     x: M + 0.25, y: 5.5, w: 11.6, h: 0.95, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 12, color: PERTAMINA, bold: true, valign: "middle",
   });
   s.addNotes("Tidak menjanjikan tanggal instalasi: tanggal bergantung hasil survey, MoC dan klasifikasi area. Target hari ini adalah tanggal site survey.");
@@ -1134,40 +1122,123 @@ function imgCover(s, p, pw, ph, x, y, bw, bh) {
 // ================================================================ 15 · site survey
 (function survey() {
   const s = slideLight();
-  heading(s, "Rencana", "Persiapan site survey awal");
+  heading(s, "Rencana", "Checklist persiapan site survey");
   const cols = [
-    ["Yang diperiksa tim LGU", BLUE, SURF, [
-      "Kandidat titik GLD: sumber bocor (flange/valve), arah angin, tinggi pasang",
-      "Klasifikasi area tiap titik (HAC)",
-      "LoRa mapping: uji jangkauan (RSSI/SNR) titik GLD → CH → mast Gateway, untuk menetapkan jumlah & posisi CH/GW",
-      "Sumber 220 VAC / 24 VDC terdekat & rute kabel",
-      "Atap untuk tiang Gateway (unit + antena), jalur kabel daya dari UPS, ruang router & server, titik intranet",
+    ["Pemeriksaan oleh LGU", BLUE, SURF, [
+      "Kandidat titik GLD: sumber bocor, arah angin, tinggi pasang",
+      "Klasifikasi area tiap titik berdasarkan HAC",
+      "LoRa mapping GLD → CH → Gateway",
+      "Sumber 220 VAC / 24 VDC terdekat dan rute kabel",
+      "Atap untuk tiang Gateway dan jalur kabel daya dari UPS",
+      "Ruang router & server serta titik intranet",
       "Lokasi kerja chamber gas di kantor kilang",
     ]],
-    ["Yang mohon disiapkan RU VI", PERTAMINA, PERTAMINA_BG, [
-      "PIC lapangan (operasi, HSE, elektrikal/instrumen, IT)",
-      "Izin masuk, safety induction, APD & escort",
-      "Gambar HAC, plot plan, daftar kandidat area",
-      "Izin dokumentasi foto/video untuk keperluan desain",
-      "Informasi standar kabel, grounding & tiang RU VI",
-      "Gas target yang diharapkan RU",
+    ["Persiapan oleh RU VI", PERTAMINA, PERTAMINA_BG, [
+      "PIC lapangan: operasi, HSE, elektrikal/instrumen, IT",
+      "Izin masuk, safety induction, APD, dan pendampingan",
+      "Gambar HAC, plot plan, dan daftar area kandidat",
+      "Izin dokumentasi foto/video",
+      "Standar kabel, grounding, dan tiang RU VI",
+      "Gas target prioritas",
     ]],
   ];
   cols.forEach((c, i) => {
     const x = M + i * 6.15;
     card(s, x, 1.65, 5.95, 4.3, c[2]);
     s.addShape(pres.ShapeType.rect, { x, y: 1.65, w: 5.95, h: 0.5, fill: { color: c[1] }, line: { color: c[1] } });
-    s.addText(c[0], { x: x + 0.25, y: 1.65, w: 5.5, h: 0.5, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 15, bold: true, color: WHITE, valign: "middle" });
-    bullets(s, x + 0.3, 2.35, 5.4, 3.5, c[3], 15, CHAR);
+    s.addText(c[0], { x: x + 0.25, y: 1.65, w: 4.0, h: 0.5, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 15, bold: true, color: WHITE, valign: "middle" });
+    s.addText("Status", { x: x + 4.75, y: 1.65, w: 1.0, h: 0.5, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11, bold: true, color: WHITE, align: "center", valign: "middle" });
+    c[3].forEach((t, k) => {
+      const ry = 2.27 + k * 0.52;
+      if (k > 0) s.addShape(pres.ShapeType.line, { x: x + 0.2, y: ry - 0.04, w: 5.55, h: 0, line: { color: LINE, width: 0.75 } });
+      s.addShape(pres.ShapeType.rect, { x: x + 0.25, y: ry + 0.11, w: 0.22, h: 0.22, fill: { color: WHITE }, line: { color: c[1], width: 1.25 } });
+      s.addText(t, { x: x + 0.62, y: ry, w: 4.05, h: 0.44, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 12, color: CHAR, valign: "middle" });
+      s.addShape(pres.ShapeType.roundRect, { x: x + 4.8, y: ry + 0.09, w: 0.9, h: 0.26, rectRadius: 0.05, fill: { color: WHITE }, line: { color: LINE, width: 0.75 } });
+    });
   });
   card(s, M, 6.1, 12.1, 0.65, OK_BG);
-  s.addText("Hasil survey: titik GLD/CH/GW terpilih, jarak & rute kabel, kebutuhan material (BoQ) RU VI, dan dokumen persiapan instalasi.", {
+  s.addText("Hasil survey: titik GLD/CH/Gateway terpilih, rute dan panjang kabel, BoQ RU VI, dan dokumen persiapan instalasi.", {
     x: M + 0.25, y: 6.1, w: 11.6, h: 0.65, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 12, bold: true, color: OK, valign: "middle",
   });
-  s.addNotes("Usulkan durasi survey ±1–2 hari di site. Mohon dokumen HAC & plot plan dikirim sebelum survey jika memungkinkan, agar kandidat titik bisa disaring lebih dulu.");
+  s.addNotes("Usulan durasi survey ± 1–2 hari di site. Gambar HAC dan plot plan sebaiknya dikirim sebelum survey agar kandidat titik dapat disaring lebih dulu.");
 })();
 
 // ================================================================ 16 · hal yang perlu dikonfirmasi
+(function loraMapping() {
+  const s = slideLight();
+  heading(s, "Rencana", "LoRa mapping saat site survey — simulasi");
+  const GOOD = "1F9D55", MARG = "E08A00", BAD = "C0392B";
+  const pw = 5.95, ph = 3.45, py = 1.5;
+  function panel(px, title, fixed) {
+    card(s, px, py, pw, ph, WHITE);
+    label(s, title, px + 0.2, py + 0.08, pw - 0.4, 0.3, { size: 12, bold: true, color: BLUE });
+    const X = (u) => px + 0.2 + u, Y = (v) => py + 0.45 + v;
+    s.addShape(pres.ShapeType.rect, { x: X(0), y: Y(0), w: pw - 0.4, h: ph - 0.6, fill: { color: "F4F1EA" }, line: { color: "E2DCCF", width: 0.75 } });
+    // obstacles
+    s.addShape(pres.ShapeType.rect, { x: X(0.15), y: Y(0.12), w: 1.0, h: 0.8, fill: { color: "D5D9E0" }, line: { color: "9AA3AE", width: 0.75 } });
+    label(s, "Gedung", X(0.15), Y(0.66), 1.0, 0.22, { size: 8, color: CHAR_SOFT, align: "center" });
+    [[2.6, 1.25, 0.55, "Tangki"], [1.9, 2.3, 0.35, "Tangki"]].forEach((t) => {
+      s.addShape(pres.ShapeType.ellipse, { x: X(t[0] - t[2]), y: Y(t[1] - t[2]), w: 2 * t[2], h: 2 * t[2], fill: { color: "C9CED6" }, line: { color: "8B939E", width: 0.75 } });
+      label(s, t[3], X(t[0] - t[2]), Y(t[1] - 0.11), 2 * t[2], 0.22, { size: 8, color: CHAR_SOFT, align: "center" });
+    });
+    s.addShape(pres.ShapeType.rect, { x: X(2.9), y: Y(2.62), w: 1.6, h: 0.12, fill: { color: "B0B7C0" }, line: { color: "8B939E", width: 0.5 } });
+    label(s, "pipe rack", X(2.9), Y(2.42), 1.0, 0.2, { size: 7.5, color: MUTED });
+    const node = (u, v, t, col, sz) => {
+      const d = sz || 0.34;
+      s.addShape(pres.ShapeType.ellipse, { x: X(u) - d / 2, y: Y(v) - d / 2, w: d, h: d, fill: { color: col }, line: { color: WHITE, width: 1 } });
+      s.addText(t, { x: X(u) - 0.3, y: Y(v) - 0.12, w: 0.6, h: 0.24, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 7, bold: true, color: WHITE, align: "center", valign: "middle" });
+    };
+    const link = (a, b, col, txt, dash) => {
+      seg(s, X(a[0]), Y(a[1]), X(b[0]), Y(b[1]), { color: col, width: 2.25, dash: dash || (col === BAD ? "dash" : undefined) });
+      if (txt) label(s, txt, X((a[0] + b[0]) / 2) - 0.55, Y((a[1] + b[1]) / 2) - 0.2, 1.1, 0.2, { size: 7.5, bold: true, color: col, align: "center" });
+    };
+    const GW = [0.62, 0.42], CH1 = [1.6, 0.35], G1 = [1.15, 1.45], G2 = [4.9, 0.5], G3 = [5.0, 2.45], G4 = [3.5, 2.1], CH2 = [4.4, 1.1];
+    link(GW, CH1, GOOD, "−78 dBm");
+    link(G1, CH1, GOOD, "");
+    link(G2, CH1, MARG, "−112 dBm");
+    if (!fixed) {
+      link(G3, CH1, BAD, "");
+      label(s, "terhalang tangki", X(3.75), Y(1.55), 1.3, 0.22, { size: 8, bold: true, color: BAD });
+      link(G4, CH1, BAD, "");
+    } else {
+      link(CH2, CH1, GOOD, "mesh");
+      link(G3, CH2, GOOD, "");
+      link(G4, CH2, GOOD, "");
+      link(G2, CH2, GOOD, "");
+      node(CH2[0], CH2[1], "CH-2", BLUE, 0.42);
+    }
+    node(GW[0], GW[1], "GW", PERTAMINA, 0.42);
+    node(CH1[0], CH1[1], "CH-1", BLUE, 0.42);
+    [[G1, "G1"], [G2, "G2"], [G3, "G3"], [G4, "G4"]].forEach((g) => node(g[0][0], g[0][1], g[1], "2F7BD8", 0.32));
+  }
+  panel(M, "1 · Ukur kualitas link di tiap titik", false);
+  panel(M + pw + 0.2, "2 · Perbaiki: tambah CH relay di posisi terbaik", true);
+  // legend
+  const leg = [[GOOD, undefined, "Link layak"], [MARG, undefined, "Marginal"], [BAD, "dash", "Terputus / terhalang"]];
+  leg.forEach((l, k) => {
+    const x = M + k * 2.3;
+    seg(s, x, py + ph + 0.17, x + 0.45, py + ph + 0.17, { color: l[0], width: 2.25, dash: l[1] });
+    label(s, l[2], x + 0.52, py + ph + 0.06, 1.7, 0.22, { size: 9 });
+  });
+  label(s, "Node uji portable dibawa ke tiap titik GLD; RSSI, SNR, dan paket diterima dicatat.", M + 6.9, py + ph + 0.06, 5.2, 0.22, { size: 9, color: MUTED, align: "right" });
+  // why
+  cardTitle(s, M, 5.35, 6, "Mengapa perlu LoRa mapping", BLUE);
+  const why = [
+    "Tangki, pipa, dan bangunan logam menghalangi serta memantulkan sinyal radio",
+    "Layout dan jarak tiap kilang berbeda — hasil RU lain tidak bisa dipakai langsung",
+    "Menentukan jumlah & posisi CH/Gateway serta tinggi tiang sebelum material dipesan",
+    "Memastikan alarm dari setiap GLD sampai ke server",
+  ];
+  const ww = (12.1 - 3 * 0.15) / 4;
+  why.forEach((t, k) => {
+    const x = M + k * (ww + 0.15);
+    card(s, x, 5.72, ww, 0.95, SURF);
+    s.addText(t, { x: x + 0.15, y: 5.72, w: ww - 0.3, h: 0.95, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 10.5, color: CHAR, valign: "middle" });
+  });
+  footnote(s, "Ilustrasi, tidak berskala; nilai RSSI contoh. Metode dan kriteria final disepakati sebelum survey.", 6.95);
+  s.addNotes("Panel kiri: dari satu CH, titik G1 terhubung baik, G2 marginal, G3 dan G4 terhalang tangki. Panel kanan: CH-2 ditambahkan di posisi yang punya garis pandang ke G2-G4 dan ke CH-1, sehingga semua titik terhubung lewat mesh. Inilah alasan jumlah CH/Gateway baru final setelah mapping.");
+})();
+
 (function konfirmasi() {
   const s = slideDark();
   s.addText("HAL YANG PERLU DIKONFIRMASI", { x: M, y: 0.46, w: 11, h: 0.26, isTextBox: true, margin: 0, fontFace: FONT, fontSize: 11, bold: true, charSpacing: 1.6, color: "9FB4E6" });
@@ -1233,7 +1304,7 @@ function label(s, text, x, y, w, h, o = {}) {
   });
   const items = [
     ["A", "Tiang & pondasi (GLD, CH, tiang atap Gateway)"], ["B", "Tinggi sensor GLD per jenis gas"],
-    ["C", "Terminasi kabel di unit GLD"], ["D", "Antena Gateway & jaringan lokal"],
+    ["C", "Terminasi kabel di unit GLD"], ["D", "Gateway di atap & jaringan lokal"],
     ["E", "Perkiraan daftar material (BoQ) RU VI"],
   ];
   items.forEach((it, i) => {
@@ -1279,6 +1350,7 @@ function label(s, text, x, y, w, h, o = {}) {
   s.addShape(pres.ShapeType.rect, { x: mx - 0.2, y: R - 0.06, w: 0.4, h: 0.06, fill: { color: CHAR }, line: { color: CHAR } });
   s.addShape(pres.ShapeType.rect, { x: mx - 0.035, y: mtop, w: 0.07, h: R - 0.06 - mtop, fill: { color: "7D8794" }, line: { color: "5E6773", width: 0.5 } });
   line(s, mx, mtop - 0.32, 0, 0.32, CHAR, 2);
+  box(s, mx - 0.17, mtop - 0.02, 0.34, 0.26, "GW", { fill: PERTAMINA, line: PERTAMINA, color: WHITE, size: 7 });
   label(s, "± 2–2,5 m", bx - 0.05, mtop + 0.35, 1.2, 0.28, { size: 9.5, bold: true, color: CHAR, align: "right" });
   label(s, "Tiang atap GW", bx, G + 0.42, bw, 0.2, { size: 9.5, bold: true, color: CHAR, align: "right" });
   label(s, "base plate, tanpa cor", bx, G + 0.62, bw, 0.2, { size: 8.5, color: MUTED, align: "right" });

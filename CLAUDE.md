@@ -177,6 +177,8 @@ Repo dokumentasi & pelaporan proyek **Gas Leak Detection (GLD) Tahap 2** — sis
 
 - 🆕 **18 Nov — dokumen PM disinkronkan ke 17 Nov** (dec:231): Kurva-S Persiapan Instalasi rev 1.1 **38%→48%** (RU IV 3/14 via HAC SRU & MoC 15769, vendor 1/11); `Laporan_Status_Proyek_GLD_LGU_17November2026.{docx,pdf}` (10 hlm, generator `scripts/build_laporan_status_lgu_17nov_docx.py`); `Dashboard_GLD_ProjectManagement_Laporan.html` kini dibangun otomatis dari dashboard interaktif (`scripts/build_dashboard_laporan_html.py`) — jalankan ulang tiap dashboard diubah. Isu/action item dashboard diperbarui (11 isu).
 
+- 🆕 **17 Nov — site survey RU VI Balongan (notulensi diterima 26 Nov, dec:233)**: 2 lokasi WHB, satu ~200 °C → GLD di area bawah/risiko rendah utk uji reliabilitas (ATEX belum); 3 CH + 1 GW; tanpa baterai, cut-off suhu, fan hanya saat sampling. Lingkup suplai PTMN: stanchion 2" HDG, JB SS316, PSU di JB, kabel 2C 16AWG. Tindak lanjut LGU: laporan survei + rekomendasi titik, dok. sertifikasi casing/flame arrester, kalibrasi Des.
+
 - 🆕 **25 Nov — paket rapat TÜV SÜD (Teams 26 Nov 14.30 WIB) dibuat** (dec:232): `Paket Meeting TUV SUD 26November2026/` — 01 assembly drawing (ekstrak cert doc rev 3.1), 02 user manual rev 1.0, 03 lembar EN target marking II 2G Ex db IIC T4 Gb −20…+60 °C + status IP66 & ISO 9001. Catatan internal rapat (00_*) disimpan lokal saja, di-.gitignore (repo public). RAB/penawaran Balongan juga tidak di-commit.
 
 ## 4. Deliverable utama (`Deliverables/`)

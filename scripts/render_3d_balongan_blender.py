@@ -13,7 +13,7 @@ import sys
 
 import bpy
 from bpy_extras.object_utils import world_to_camera_view
-from mathutils import Vector
+from mathutils import Matrix, Vector
 
 PASS = sys.argv[sys.argv.index("--") + 1] if "--" in sys.argv else "wide"
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -240,10 +240,6 @@ def structure(p, hx=14.0, hy=12.0, h=5.0):
         r = 0.32 if i % 2 else 0.22
         y = -hy + 0.9 + (i % 2) * 0.6
         tube([p + Vector((x, y, z0)), p + Vector((x, y, TOPZ + 0.8)), p + Vector((x, y + 1.5, TOPZ + 1.8))], r, ins)
-    g1, g2 = P["GLD-01"], P["GLD-02"]                              # pipa gas kuning lewat di atas kedua GLD (foto survei)
-    dv = (g2 - g1).normalized(); pv = Vector((-dv.y, dv.x, 0))
-    for off, zz, rr, mm in ((0.0, h - 0.9, 0.25, yel), (1.2, h - 1.4, 0.2, yel), (2.6, h - 1.2, 0.3, ins)):
-        tube([g1 - dv * 6 + pv * off + Vector((0, 0, zz)), g2 + dv * 6 + pv * off + Vector((0, 0, zz))], rr, mm)
     # steam drum horizontal di puncak + saddle
     bpy.ops.mesh.primitive_cylinder_add(vertices=32, radius=1.2, depth=2 * hx + 1.5,
                                         location=(p.x, p.y + 1.0, TOPZ + 2.0), rotation=(0, math.pi / 2, 0))
@@ -263,7 +259,7 @@ def structure(p, hx=14.0, hy=12.0, h=5.0):
     NP["W:duct"] = p + Vector((hx + 2.0, 1.5, TOPZ + 7.0))
     NP["W:stack"] = sx + Vector((2.0, 0, 20.0))
     NP["W:stk_base"] = sx + Vector((-4.0, 0, 0)); NP["W:stk_top"] = sx + Vector((-4.0, 0, 40.0))
-    NP["W:yellow"] = (g1 + g2) / 2 + Vector((0, 0, h - 0.9))
+    NP["W:yellow"] = p + Vector((0, 0, h - 0.9))
     NP["W:col"] = p + Vector((-hx, -hy - 0.5, 2.5))
     NP["W:base"] = p + Vector((-hx - 1.0, -hy - 0.5, 0)); NP["W:deck"] = p + Vector((-hx - 1.0, -hy - 0.5, h + 1.05))
     NP["W:top"] = p + Vector((-hx - 1.0, -hy - 0.5, TOPZ))
@@ -271,7 +267,20 @@ def structure(p, hx=14.0, hy=12.0, h=5.0):
 
 
 gld("GLD-01"); gld("GLD-02")
-structure((P["GLD-01"] + P["GLD-02"] + P["CH-01"]) / 3 + Vector((0.3, 0.2, 0)))
+_pc = (P["GLD-01"] + P["GLD-02"] + P["CH-01"]) / 3 + Vector((0.3, 0.2, 0))
+_before = set(sc.objects)
+structure(_pc)
+WHB_ROT = math.radians(31.0)                         # sejajar blok WHB di citra peta (tepi ± 31°)
+_piv = bpy.data.objects.new("WHB_pivot", None); sc.collection.objects.link(_piv); _piv.location = _pc
+bpy.context.view_layer.update()
+for _o in set(sc.objects) - _before:
+    if _o.parent is None and _o is not _piv:
+        _mw = _o.matrix_world.copy(); _o.parent = _piv; _o.matrix_parent_inverse = _piv.matrix_world.inverted(); _o.matrix_world = _mw
+_piv.rotation_euler.z = WHB_ROT
+bpy.context.view_layer.update()
+_R = Matrix.Rotation(WHB_ROT, 3, "Z")
+for _k in [k for k in NP if k.startswith("W:") or k == "STRUCT"]:
+    NP[_k] = _pc + _R @ (NP[_k] - _pc)
 ch("CH-01", CH1_H)
 ch("CH-02", CH2_H, solar=True)
 
@@ -349,13 +358,6 @@ for (cx, cy) in ((992, 245), (922, 318)):
     q = w(cx, cy); cyl(q, 2.1, 40.0, VESS, 40)
     bpy.ops.mesh.primitive_uv_sphere_add(radius=2.1, location=(q.x, q.y, 40.0)); o = bpy.context.object; o.scale.z = 0.35; add(o, VESS)
 NP["COL1"] = w(992, 245, 40.0)
-# pipe rack dgn pipa kuning dari area vessel ke WHB (± 5 m)
-ra, rb = w(960, 300), w(1095, 245)
-for t in [i / 6 for i in range(7)]:
-    q = ra.lerp(rb, t)
-    cube(q, 0.3, 0.3, 5.2, M["steel"])
-for k, (off, mm) in enumerate(((0.0, "y"), (0.6, "y"), (1.2, "s"), (1.8, "y"))):
-    tube([ra + Vector((0, off, 5.4)), rb + Vector((0, off, 5.4))], 0.18, bpy.data.materials["gas_yellow"] if mm == "y" else M["steel"])
 column(520, 345, 11, 6.0, VESS)                                                          # tangki/vessel
 NP["WHB"] = w(1300, 150, 10)
 NP["ROOF:base"] = gw.copy(); NP["ROOF:top"] = gw + Vector((0, 0, ROOF))

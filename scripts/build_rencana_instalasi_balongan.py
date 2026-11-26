@@ -83,7 +83,7 @@ def build_diagram():
     wire((65.4, 30.5), (69.6, 37), blu, ls="--", lw=1.4)
     ax.text(66.2, 43.8, "LoRa", fontsize=7, color=blu)
     wire((81, 34.6), (81, 15.4), blu, ls="--", lw=1.4)
-    ax.text(82, 25, "LoRa ±20 m", fontsize=7, color=blu, rotation=90, va="center")
+    ax.text(82, 25, "LoRa ±32 m", fontsize=7, color=blu, rotation=90, va="center")
     wire((85.4, 12), (93.6, 38), blu, ls="--", lw=1.4)
     ax.text(86.5, 31, "LoRa ±91 m", fontsize=7, color=blu, rotation=72, va="center")
     wire((101, 28.4), (101, 35.6), red)
@@ -103,7 +103,7 @@ def build_diagram():
 PX_PER_M = 6.8  # skala bar "10 m" = 68 px pada citra peta
 # posisi (piksel citra peta) & tinggi (m) -- estimasi, verifikasi di lapangan
 PTS = {
-    "GLD-01": ((1262, 212), 1.0), "GLD-02": ((1303, 268), 1.0), "CH-01": ((1335, 214), 3.0),
+    "GLD-01": ((1125, 195), 1.0), "GLD-02": ((1210, 295), 1.0), "CH-01": ((1167, 245), 3.0),
     "CH-02": ((1332, 330), 6.0), "JB": ((1290, 240), 0.8), "GW-01": ((878, 716), 9.5),
 }
 ROOF = 4.0  # asumsi tinggi atap carport kantor
@@ -200,7 +200,7 @@ def build_3d(path, box, title, show, up=1, zs=2.0, shear=0.45, squash=0.55, labe
                     arrowprops=dict(arrowstyle="-", color=red), bbox=dict(boxstyle="round,pad=0.25", fc=red, ec="none", alpha=0.92))
         lab("GW-01", "GW-01  tepi atap carport kantor (±4 m) · siku besi")
     # LoRa
-    for a_, b_, txt in (("GLD-01", "CH-01", None), ("GLD-02", "CH-01", None), ("CH-01", "CH-02", "±20 m"),
+    for a_, b_, txt in (("GLD-01", "CH-01", None), ("GLD-02", "CH-01", None), ("CH-01", "CH-02", "±32 m"),
                         ("CH-02", "GW-01", "±91 m")):
         if a_ in show and b_ in show:
             A, B = proj(a_), proj(b_)
@@ -235,7 +235,7 @@ def plan_map(out):
     src = cv2.inpaint(src, mask, 9, cv2.INPAINT_TELEA)
     im = Image.fromarray(cv2.cvtColor(src, cv2.COLOR_BGR2RGB)).crop(box)
     w, h = im.size
-    pt = {"GLD-01": (1262, 212), "GLD-02": (1303, 268), "CH-01": (1335, 214), "CH-02": (1332, 330), "GW-01": (936, 680)}
+    pt = {"GLD-01": (1125, 195), "GLD-02": (1210, 295), "CH-01": (1167, 245), "CH-02": (1332, 330), "GW-01": (936, 680)}
     pt = {k: (x - box[0], y - box[1]) for k, (x, y) in pt.items()}
     fig, ax = plt.subplots(figsize=(11, 11 * h / w))
     ax.imshow(im); ax.axis("off"); ax.set_xlim(0, w); ax.set_ylim(h, 0)
@@ -265,7 +265,7 @@ def plan_map(out):
     lab("GLD-02", "GLD-02 · 24 VDC", -200, 45, org)
     lab("CH-01", "CH-01 · 5 VDC" + chr(10) + "bawah struktur, ± 1,5 m", 240, 28, pur)
     lab("CH-02", "CH-02 · panel surya" + chr(10) + "tiang 6 m, luar struktur", 230, 45, pur)
-    lab("GW-01", "GW-01 Gateway" + chr(10) + "tepi atap kantor (siku besi)", -40, 85, "#00838F")
+    lab("GW-01", "GW-01 Gateway" + chr(10) + "tepi atap carport kantor", -40, 85, "#00838F")
 
     def dist(a, b, text, off):
         (x1, y1), (x2, y2) = pt[a], pt[b]
@@ -273,7 +273,7 @@ def plan_map(out):
                 ha="center", va="center", zorder=11,
                 bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=blu, lw=1.2))
 
-    dist("CH-01", "CH-02", "± 20 m", (42, 18))
+    dist("CH-01", "CH-02", "± 32 m", (10, 26))
     dist("CH-02", "GW-01", "LoRa ± 91 m", (30, 22))
     x0, y0 = min(xs) - 22, min(ys) - 22
     ax.text(x0, y0 - 10, "Area WHB (lantai dasar, bawah struktur)", fontsize=8, fontweight="bold", color="#262321",
@@ -285,7 +285,7 @@ def plan_map(out):
                        Line2D([], [], color=cya, marker="D", ls="", ms=8, mec="white", label="Gateway"),
                        Line2D([], [], color=blu, lw=2.2, ls="--", label="Link LoRa (jalur data)")],
               loc="lower right", fontsize=8.2, framealpha=0.93)
-    ax.text(8, 8, "Total CH-01 → GW-01 ± 111 m", fontsize=8.6, fontweight="bold", color="#262321", ha="left", va="top",
+    ax.text(8, 8, "Total CH-01 → GW-01 ± 123 m", fontsize=8.6, fontweight="bold", color="#262321", ha="left", va="top",
             zorder=11, bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#262321", lw=0.8))
     ax.text(8, h - 8, "Citra © 2026 Google, Airbus, Maxar Technologies", fontsize=6.5, color="white", ha="left", va="bottom")
     fig.savefig(out, dpi=200, bbox_inches="tight", pad_inches=0.02)
@@ -453,19 +453,19 @@ def build():
     build_diagram()
     O, C, B_, P_, G_ = "#00977A", "#D50000", "#454A52", "#7B2FE0", "#F07800"
     plan_map(PLAN)
-    label_render("overview", "wide", D3A, (0, 330, 2200, 1400), "A. Gambaran lokasi — klaster WHB ke Gateway di atap kantor", [
+    label_render("overview", "wide", D3A, (0, 330, 2200, 1400), "A. Gambaran lokasi — klaster WHB ke Gateway di atap carport kantor", [
         ("lab", "GW-01", "GW-01 Gateway · tepi atap carport kantor", 120, -230, O),
-        ("lab", "BLDG", "Gedung kantor: adaptor 5 VDC, router & PC server di dalam", 330, 170, B_),
+        ("lab", "BLDG", "Gedung kantor: adaptor 5 VDC, router & PC server di dalam", 200, 330, B_),
         ("tag", "LORA:CH-02>GW-01", "LoRa CH-02 → GW-01 ± 91 m", "#0077E6", (60, 40)),
-        ("lab", "STRUCT", "Klaster WHB: GLD-01, GLD-02, CH-01, CH-02", -300, 230, G_),
+        ("lab", "STRUCT", "Klaster WHB: GLD-01, GLD-02, CH-01, CH-02", 330, -60, G_),
         ("dim", "ROOF:base", "ROOF:top", "± 4 m", -60),
         ("lab", "COL1", "Bangunan, kolom & unit proses dari citra peta (bentuk/tinggi ilustratif)", 120, -120, "#6E737A"),
     ])
     label_render("struct", "wide", D3S, (0, 0, 2200, 1400), "B. Lokasi GLD dan Cluster Head di struktur WHB", [
         ("lab", "GLD-01", "GLD-01 · lantai dasar", -330, 140, G_),
         ("lab", "GLD-02", "GLD-02 · lantai dasar", 330, 120, G_),
-        ("lab", "CH-01", "CH-01 · bawah struktur", 380, 40, P_),
-        ("lab", "CH-02:pv", "CH-02 · panel surya, luar struktur", -360, 140, P_),
+        ("lab", "CH-01", "CH-01 · bawah struktur", 60, -330, P_),
+        ("lab", "CH-02:pv", "CH-02 · panel surya, luar struktur", 200, -300, P_),
         ("dim", "W:base", "W:deck", "± 6 m", -50),
     ], legend=False)
     label_render("whb", "wide", D3B, (0, 120, 2200, 1250), "C. Klaster WHB — posisi GLD, Cluster Head, dan relay LoRa", [
@@ -474,7 +474,7 @@ def build():
         ("lab", "CH-01", "CH-01 · 5 VDC, di bawah struktur", 300, 90, P_),
         ("lab", "CH-02:pv", "CH-02 · panel surya", -420, -60, P_),
         ("lab", "STRUCT", "Struktur WHB (kolom beton, girder, deck)", -60, -170, B_),
-        ("tag", "LORA:CH-01>CH-02", "LoRa ± 20 m", "#0077E6"),
+        ("tag", "LORA:CH-01>CH-02", "LoRa ± 32 m", "#0077E6"),
         ("dim", "CH-02:base", "CH-02:top", "6 m", -60),
         ("dim", "CH-01:base", "CH-01:top", "± 1,5 m", 70),
     ], legend_loc="lower right")
@@ -540,20 +540,21 @@ def build():
     h(d, "2. Tata letak titik")
     figure(d, PLAN,
            "Gambar 1. Rencana titik GLD, Cluster Head, dan Gateway di atas citra Google Maps; garis biru putus-putus = "
-           "link LoRa (jalur data). Jarak CH-01–CH-02 dan CH-02–GW diukur dengan Google Maps; perlu diverifikasi di lapangan.",
+           "link LoRa (jalur data). Jarak CH-02–GW diukur dengan Google Maps, jarak lain dari skala peta; perlu diverifikasi di lapangan.",
            Inches(6.85))
     para(d, "Lokasi GLD-01, GLD-02, dan CH-01 berada di lantai dasar di bawah struktur WHB: area beratap dengan kolom "
             "beton persegi, girder baja, serta pipa gas dan pipa berinsulasi di atasnya (survei 17–18 November 2026).",
          size=9.5)
-    figure(d, os.path.join(RB, "foto_survei_lokasi_gld_18nov.jpg"),
-           "Foto 1. Lokasi GLD di bawah struktur WHB (foto survei 18 November 2026).", Inches(5.2))
+    figure(d, os.path.join(RB, "foto_survei_lokasi_gld_18nov_anotasi.jpg"),
+           "Foto 1. Lokasi GLD di lantai dasar struktur WHB, di bawah pipa gas kuning; GLD-01 dan GLD-02 di sisi kiri dan kanan "
+           "(foto survei 18 November 2026).", Inches(3.3))
     figure(d, os.path.join(RB, "foto_posisi_gld_whb.jpg"),
            "Foto 2. Rencana posisi GLD di lantai dasar sisi depan struktur WHB, di antara kolom beton dan pedestal, "
            "di bawah header pipa berinsulasi (foto survei 18 November 2026; wajah disamarkan).", Inches(3.3))
     table(d, ["ID", "Fungsi", "Posisi", "Catu daya", "Mounting", "Jarak (estimasi)"], [
-        ("GLD-01", "Sensor gas", "Area WHB, di bawah struktur, dekat CH-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 13 m ke CH-01"),
-        ("GLD-02", "Sensor gas", "Area WHB, di bawah struktur, selatan GLD-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 11 m ke CH-01"),
-        ("CH-01", "Relay LoRa dari 2 GLD", "Di antara GLD, di bawah struktur, posisi rendah ± 1,5 m (tanpa cahaya matahari)", "5 VDC via JB", "Klem ke struktur existing; stanchion bila tidak memungkinkan", "± 20 m ke CH-02"),
+        ("GLD-01", "Sensor gas", "Lantai dasar WHB, di bawah pipa gas kuning (sisi kiri)", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 11 m ke CH-01"),
+        ("GLD-02", "Sensor gas", "Lantai dasar WHB, di bawah pipa gas kuning (sisi kanan), ± 22 m dari GLD-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 11 m ke CH-01"),
+        ("CH-01", "Relay LoRa dari 2 GLD", "Di antara GLD, di bawah struktur, posisi rendah ± 1,5 m (tanpa cahaya matahari)", "5 VDC via JB", "Klem ke struktur existing; stanchion bila tidak memungkinkan", "± 32 m ke CH-02"),
         ("CH-02", "Relay LoRa ke Gateway", "Di luar struktur, terpapar matahari", "Panel surya + baterai CH", "Stanchion 2\" HDG s/d 6 m + bracket panel surya", "± 91 m (garis lurus) ke GW-01"),
         ("GW-01", "Gateway LoRa", "Tepi atap gedung kantor", "5 VDC, adaptor di dalam kantor", "Dudukan siku besi L 50×50×5 HDG ± 0,5 m", "—"),
         ("Server", "PC server lokal + router", "Dalam gedung kantor", "Stopkontak/UPS kantor", "—", "—"),
@@ -647,7 +648,7 @@ def build():
               "Jalur data Gateway ke PC server (Wi-Fi ke router di kantor, atau LAN) dan lokasi PC server.",
               "Akses ke atap kantor dan izin memasang dudukan siku besi; titik masuk kabel Gateway ke dalam gedung.",
               "Persetujuan HSE atas titik GLD (area risiko rendah) selama sertifikat Ex belum terbit.",
-              "Verifikasi jarak di lapangan (ukur Google Maps: CH-01–CH-02 ± 20 m, CH-02–GW ± 91 m, total CH-01–GW ± 111 m; GLD–CH-01 ± 11–13 m dari peta)."]:
+              "Verifikasi jarak di lapangan (ukur Google Maps: CH-02–GW ± 91 m; dari peta: CH-01–CH-02 ± 32 m, GLD–CH-01 ± 11 m, GLD-01–GLD-02 ± 22 m; total CH-01–GW ± 123 m dari peta)."]:
         bullet(d, t)
 
     h(d, "Lampiran — Daftar material (kuantitas)")

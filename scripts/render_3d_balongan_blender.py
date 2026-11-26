@@ -18,8 +18,9 @@ from mathutils import Vector
 PASS = sys.argv[sys.argv.index("--") + 1] if "--" in sys.argv else "wide"
 HERE = os.path.dirname(os.path.abspath(__file__))
 RB = os.path.join(HERE, "assets", "rab_balongan")
-MAP = os.path.join(RB, "peta_lokasi_balongan_26nov_crop.png")
-BOX = (760, 120, 1480, 800)  # crop piksel citra peta
+MAP = os.path.join(RB, "peta_lokasi_balongan_26nov_crop2.png")
+BOX = (560, 40, 1480, 800)   # crop piksel citra peta (diperluas: deret vessel & 2 kolom tinggi)
+BOX0 = (760, 120)            # acuan piksel poligon lama
 PPM = 5.8                    # px per meter — dikalibrasi ulang dari ukur Google Maps: CH-01→CH-02 ±20 m, CH-02→GW ±91 m (total 111,3 m)
 S = 5.0 if PASS == "wide" else 1.0   # pembesaran ukuran perangkat (tinggi tiang selalu nyata)
 ROOF = 4.0                   # asumsi tinggi atap kantor
@@ -30,8 +31,8 @@ def w(px, py, z=0.0):
     return Vector(((px - BOX[0]) / PPM, (BOX[3] - py) / PPM, z))
 
 
-P = {"GLD-01": w(1262, 212), "GLD-02": w(1303, 268), "CH-01": w(1335, 214), "CH-02": w(1332, 330),
-     "JB": w(1290, 240), "GW-01": w(936, 680)}
+P = {"GLD-01": w(1125, 195), "GLD-02": w(1210, 295), "CH-01": w(1167, 245), "CH-02": w(1332, 330),   # GLD: titik hijau peta user 27 Nov
+     "JB": w(1160, 258), "GW-01": w(936, 680)}
 NP = {}  # titik bernama untuk label/dimensi
 
 # ------------------------------------------------------------------ scene
@@ -200,7 +201,7 @@ def ch(k, h, solar=False):
         NP[k + ":pv"] = p + Vector((0.2 * sc_, -0.15 * sc_, 1.5 + 0.1 * sc_))
 
 
-def structure(p, hx=9.1, hy=8.0, h=5.0):
+def structure(p, hx=14.0, hy=12.0, h=5.0):
     """Lantai dasar di bawah struktur WHB (foto survei 18 Nov): kolom beton persegi bersabuk hitam,
     girder baja & deck di atas. GLD-01, GLD-02, CH-01 berada di bawahnya; jarak kolom/tinggi = estimasi."""
     conc = mat("col_conc", (0.78, 0.8, 0.82)); band = mat("col_band", (0.08, 0.08, 0.08))
@@ -239,10 +240,10 @@ def structure(p, hx=9.1, hy=8.0, h=5.0):
         r = 0.32 if i % 2 else 0.22
         y = -hy + 0.9 + (i % 2) * 0.6
         tube([p + Vector((x, y, z0)), p + Vector((x, y, TOPZ + 0.8)), p + Vector((x, y + 1.5, TOPZ + 1.8))], r, ins)
-    for zz, yy in ((h - 0.9, -hy + 2.0), (h - 1.5, -hy + 3.2)):    # pipa gas kuning di bawah girder
-        tube([p + Vector((-hx - 3, yy, zz)), p + Vector((hx + 3, yy, zz))], 0.2, yel)
-    ins_pipe = p + Vector((-hx - 3, -hy + 4.5, h - 1.2))
-    tube([ins_pipe, p + Vector((hx + 3, -hy + 4.5, h - 1.2))], 0.3, ins)
+    g1, g2 = P["GLD-01"], P["GLD-02"]                              # pipa gas kuning lewat di atas kedua GLD (foto survei)
+    dv = (g2 - g1).normalized(); pv = Vector((-dv.y, dv.x, 0))
+    for off, zz, rr, mm in ((0.0, h - 0.9, 0.25, yel), (1.2, h - 1.4, 0.2, yel), (2.6, h - 1.2, 0.3, ins)):
+        tube([g1 - dv * 6 + pv * off + Vector((0, 0, zz)), g2 + dv * 6 + pv * off + Vector((0, 0, zz))], rr, mm)
     # steam drum horizontal di puncak + saddle
     bpy.ops.mesh.primitive_cylinder_add(vertices=32, radius=1.2, depth=2 * hx + 1.5,
                                         location=(p.x, p.y + 1.0, TOPZ + 2.0), rotation=(0, math.pi / 2, 0))
@@ -262,7 +263,7 @@ def structure(p, hx=9.1, hy=8.0, h=5.0):
     NP["W:duct"] = p + Vector((hx + 2.0, 1.5, TOPZ + 7.0))
     NP["W:stack"] = sx + Vector((2.0, 0, 20.0))
     NP["W:stk_base"] = sx + Vector((-4.0, 0, 0)); NP["W:stk_top"] = sx + Vector((-4.0, 0, 40.0))
-    NP["W:yellow"] = p + Vector((hx * 0.25, -hy + 2.0, h - 0.9))
+    NP["W:yellow"] = (g1 + g2) / 2 + Vector((0, 0, h - 0.9))
     NP["W:col"] = p + Vector((-hx, -hy - 0.5, 2.5))
     NP["W:base"] = p + Vector((-hx - 1.0, -hy - 0.5, 0)); NP["W:deck"] = p + Vector((-hx - 1.0, -hy - 0.5, h + 1.05))
     NP["W:top"] = p + Vector((-hx - 1.0, -hy - 0.5, TOPZ))
@@ -284,7 +285,7 @@ def prism(poly_px, h, wall, name=None):
     import bmesh
     me = bpy.data.meshes.new("b"); ob = bpy.data.objects.new("b", me); sc.collection.objects.link(ob)
     bm = bmesh.new()
-    vs = [bm.verts.new(w(px + BOX[0], py + BOX[1])) for px, py in poly_px]
+    vs = [bm.verts.new(w(px + BOX0[0], py + BOX0[1])) for px, py in poly_px]
     f = bm.faces.new(vs)
     bmesh.ops.recalc_face_normals(bm, faces=[f])
     if f.normal.z < 0:
@@ -300,15 +301,15 @@ def prism(poly_px, h, wall, name=None):
     bm.to_mesh(me); bm.free()
     me.materials.append(wall); me.materials.append(gm)
     if name:
-        c = Vector((sum(p[0] for p in poly_px) / len(poly_px) + BOX[0], sum(p[1] for p in poly_px) / len(poly_px) + BOX[1]))
+        c = Vector((sum(p[0] for p in poly_px) / len(poly_px) + BOX0[0], sum(p[1] for p in poly_px) / len(poly_px) + BOX0[1]))
         NP[name] = w(c.x, c.y, h * 0.6)
     return ob
 
 
 def column(cx, cy, r_px, h, m, name=None):
-    o = cyl(w(cx + BOX[0], cy + BOX[1]), r_px / PPM, h, m, 32)
+    o = cyl(w(cx + BOX0[0], cy + BOX0[1]), r_px / PPM, h, m, 32)
     if name:
-        NP[name] = w(cx + BOX[0], cy + BOX[1], h)
+        NP[name] = w(cx + BOX0[0], cy + BOX0[1], h)
     return o
 
 
@@ -324,22 +325,42 @@ cp = prism([A_, B_, B2, A2], 0.12, ROOFM); cp.location.z = ROOF - 0.12          
 POST = mat("post", (0.88, 0.89, 0.9)); YEL = mat("post_y", (1.0, 0.82, 0.0)); BLK = mat("post_k", (0.05, 0.05, 0.05))
 for i in range(12):
     t = (i + 0.5) / 12
-    q = w(A_[0] + (B_[0] - A_[0]) * t + BOX[0] + nin[0] * 0.03, A_[1] + (B_[1] - A_[1]) * t + BOX[1] + nin[1] * 0.03)
+    q = w(A_[0] + (B_[0] - A_[0]) * t + BOX0[0] + nin[0] * 0.03, A_[1] + (B_[1] - A_[1]) * t + BOX0[1] + nin[1] * 0.03)
     cyl(q, 0.08, ROOF - 0.12, POST, 12)
     for k in range(4):
         cyl(q + Vector((0, 0, k * 0.25)), 0.085, 0.25, YEL if k % 2 else BLK, 12)
     if i == 9:
         NP["CARPORT"] = q - Vector((280, 165, 0)).normalized() * 3.0 + Vector((0, 0, ROOF)); NP["POSTBAND"] = q + Vector((0, 0, 0.5))
 prism([(382, 455), (520, 365), (562, 440), (425, 537)], 9.0, WALL, "BLDG2")            # gedung tengah
-prism([(100, 0), (205, 0), (250, 140), (160, 170)], 10.0, PROC, "PROC1")               # unit proses barat laut
-prism([(398, 175), (455, 150), (472, 215), (420, 240)], 10.0, PROC)                     # unit proses (rangka)
-prism([(330, 140), (380, 120), (400, 200), (355, 215)], 8.0, PROC)
-column(242, 252, 9, 20.0, VESS, "COL1"); column(160, 312, 9, 20.0, VESS)             # kolom tinggi (bayangan panjang)
+# deret vessel vertikal + walkway di atas (foto 18 Nov) — posisi dari citra, dimensi estimasi
+va, vb = w(880, 85), w(928, 245)
+for i in range(8):
+    q = va.lerp(vb, (i + 0.5) / 8)
+    cyl(q, 1.6, 13.0, VESS, 32)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=1.6, location=(q.x, q.y, 13.0)); o = bpy.context.object; o.scale.z = 0.4; add(o, VESS)
+vd = (vb - va); vn = vd.normalized()
+wk = cube((va + vb) / 2 + Vector((0, 0, 13.6)), 3.6, vd.length + 3, 0.15, M["steel"])
+wk.rotation_euler.z = math.atan2(vn.y, vn.x) - math.pi / 2
+for t in (0.0, 0.5, 1.0):
+    q = va.lerp(vb, t) + Vector((2.2, 0, 0)); cube(q, 0.4, 0.4, 13.6, M["steel"])
+NP["VESSELS"] = va.lerp(vb, 0.5) + Vector((0, 0, 14.0))
+# dua kolom tinggi (bayangan panjang di citra)
+for (cx, cy) in ((992, 245), (922, 318)):
+    q = w(cx, cy); cyl(q, 2.1, 40.0, VESS, 40)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=2.1, location=(q.x, q.y, 40.0)); o = bpy.context.object; o.scale.z = 0.35; add(o, VESS)
+NP["COL1"] = w(992, 245, 40.0)
+# pipe rack dgn pipa kuning dari area vessel ke WHB (± 5 m)
+ra, rb = w(960, 300), w(1095, 245)
+for t in [i / 6 for i in range(7)]:
+    q = ra.lerp(rb, t)
+    cube(q, 0.3, 0.3, 5.2, M["steel"])
+for k, (off, mm) in enumerate(((0.0, "y"), (0.6, "y"), (1.2, "s"), (1.8, "y"))):
+    tube([ra + Vector((0, off, 5.4)), rb + Vector((0, off, 5.4))], 0.18, bpy.data.materials["gas_yellow"] if mm == "y" else M["steel"])
 column(520, 345, 11, 6.0, VESS)                                                          # tangki/vessel
 NP["WHB"] = w(1300, 150, 10)
 NP["ROOF:base"] = gw.copy(); NP["ROOF:top"] = gw + Vector((0, 0, ROOF))
 # GW di tepi atap carport: titik peta diproyeksikan ke garis tepi A–B, 0,2 m ke dalam
-ea, eb = w(A_[0] + BOX[0], A_[1] + BOX[1]), w(B_[0] + BOX[0], B_[1] + BOX[1])
+ea, eb = w(A_[0] + BOX0[0], A_[1] + BOX0[1]), w(B_[0] + BOX0[0], B_[1] + BOX0[1])
 ed = (eb - ea).normalized()
 gw = ea + ed * (gw - ea).dot(ed) - Vector((280, 165, 0)).normalized() * 0.2
 P["GW-01"] = gw
@@ -388,13 +409,42 @@ def render(name, loc, target, lens):
     return res
 
 
+if PASS == "glb":                                  # ekspor model interaktif (skala nyata) untuk viewer HTML
+    bpy.ops.object.select_all(action="SELECT")
+    bpy.ops.object.duplicates_make_real()
+    for o in list(sc.objects):
+        if o.type == "CURVE":
+            bpy.ops.object.select_all(action="DESELECT"); o.select_set(True)
+            bpy.context.view_layer.objects.active = o; bpy.ops.object.convert(target="MESH")
+    nf = sorted(((len(o.data.polygons), o.name) for o in sc.objects if o.type == "MESH"), reverse=True)
+    print("TOPFACES", nf[:8], sum(n for n, _ in nf))
+    for o in sc.objects:                                # ringankan mesh berat (model video) untuk web
+        if o.type == "MESH" and len(o.data.polygons) > 400:
+            md = o.modifiers.new("dec", "DECIMATE"); md.ratio = max(0.05, 400 / len(o.data.polygons))
+    for m in bpy.data.materials:
+        if not m.use_nodes:
+            m.use_nodes = True
+        b = m.node_tree.nodes.get("Principled BSDF")
+        if b and not b.inputs["Base Color"].is_linked:
+            b.inputs["Base Color"].default_value = (*m.diffuse_color[:3], 1)
+            if m.diffuse_color[3] < 1:
+                b.inputs["Alpha"].default_value = m.diffuse_color[3]; m.blend_method = "BLEND"
+    out_glb = os.path.join(RB, "model_3d_balongan.glb")
+    bpy.ops.export_scene.gltf(filepath=out_glb, export_format="GLB", use_visible=True, export_apply=True,
+                              export_yup=True, export_image_format="JPEG")
+    pts = {k: [v.x, v.z, -v.y] for k, v in NP.items()}
+    pts.update({"TOP:" + k: [v.x, v.z, -v.y] for k, v in TOP.items()})
+    with open(os.path.join(RB, "model_3d_balongan_pts.json"), "w") as f:
+        json.dump(pts, f, indent=1)
+    print("GLB_OK", os.path.getsize(out_glb))
+    sys.exit(0)
 out = {}
 if PASS == "wide":
-    out["overview"] = render("overview", (122, -16, 49), (55, 56, 3.5), 24)
-    c0 = P["GLD-02"]
-    out["whb"] = render("whb", (c0.x + 22, c0.y - 28, 9), (c0.x + 2, c0.y + 1, 2.5), 30)
+    out["overview"] = render("overview", (166, -24, 60), (85, 64, 3.5), 24)
+    c0 = (P["GLD-01"] + P["GLD-02"]) / 2
+    out["whb"] = render("whb", (c0.x + 4, c0.y - 46, 13), (c0.x + 12, c0.y - 5, 2.5), 30)
     wc = NP["W:c"]
-    out["struct"] = render("struct", (wc.x + 30, wc.y - 50, 13), (wc.x + 2, wc.y, 14), 26)
+    out["struct"] = render("struct", (wc.x - 38, wc.y - 52, 24), (wc.x + 2, wc.y, 9), 26)
 else:
     g2 = P["GLD-02"]
     out["gld"] = render("gld", (g2.x + 1.6, g2.y - 2.4, 1.6), (g2.x, g2.y, 0.75), 30)

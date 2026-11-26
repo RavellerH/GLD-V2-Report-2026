@@ -81,9 +81,9 @@ def build_diagram():
     wire((65.4, 30.5), (69.6, 37), blu, ls="--", lw=1.4)
     ax.text(66.2, 43.8, "LoRa", fontsize=7, color=blu)
     wire((81, 34.6), (81, 15.4), blu, ls="--", lw=1.4)
-    ax.text(82, 25, "LoRa ±18 m", fontsize=7, color=blu, rotation=90, va="center")
+    ax.text(82, 25, "LoRa ±20 m", fontsize=7, color=blu, rotation=90, va="center")
     wire((85.4, 12), (93.6, 38), blu, ls="--", lw=1.4)
-    ax.text(86.5, 31, "LoRa ±80 m", fontsize=7, color=blu, rotation=72, va="center")
+    ax.text(86.5, 31, "LoRa ±91 m", fontsize=7, color=blu, rotation=72, va="center")
     wire((101, 28.4), (101, 35.6), red)
     ax.text(102, 31, "NYY 5 VDC", fontsize=7, color=red)
     wire((113, 35.6), (113, 13.4), grn, ls=":", lw=1.4)
@@ -198,8 +198,8 @@ def build_3d(path, box, title, show, up=1, zs=2.0, shear=0.45, squash=0.55, labe
                     arrowprops=dict(arrowstyle="-", color=red), bbox=dict(boxstyle="round,pad=0.25", fc=red, ec="none", alpha=0.92))
         lab("GW-01", "GW-01  tepi atap kantor (±8 m) · siku besi")
     # LoRa
-    for a_, b_, txt in (("GLD-01", "CH-01", None), ("GLD-02", "CH-01", None), ("CH-01", "CH-02", "±18 m"),
-                        ("CH-02", "GW-01", "±80 m")):
+    for a_, b_, txt in (("GLD-01", "CH-01", None), ("GLD-02", "CH-01", None), ("CH-01", "CH-02", "±20 m"),
+                        ("CH-02", "GW-01", "±91 m")):
         if a_ in show and b_ in show:
             A, B = proj(a_), proj(b_)
             seg(A, B, blu, ls=(0, (5, 3)), lw=2.2, z=9)
@@ -383,7 +383,7 @@ def build():
     label_render("overview", "wide", D3A, (0, 330, 2200, 1400), "A. Gambaran lokasi — klaster WHB ke Gateway di atap kantor", [
         ("lab", "GW-01", "GW-01 Gateway · tepi atap kantor", 120, -230, O),
         ("lab", "BLDG", "Gedung kantor: adaptor 5 VDC, router & PC server di dalam", 330, 170, B_),
-        ("tag", "LORA:CH-02>GW-01", "LoRa CH-02 → GW-01 ± 80 m", "#0077E6", (60, 40)),
+        ("tag", "LORA:CH-02>GW-01", "LoRa CH-02 → GW-01 ± 91 m", "#0077E6", (60, 40)),
         ("lab", "STRUCT", "Klaster WHB: GLD-01, GLD-02, CH-01, CH-02", -300, 230, G_),
         ("dim", "ROOF:base", "ROOF:top", "± 8 m", -60),
         ("lab", "COL1", "Bangunan, kolom & unit proses dari citra peta (bentuk/tinggi ilustratif)", 120, -120, "#6E737A"),
@@ -394,7 +394,7 @@ def build():
         ("lab", "CH-01", "CH-01 · 5 VDC, di bawah struktur", 300, 90, P_),
         ("lab", "CH-02:pv", "CH-02 · panel surya", -420, -60, P_),
         ("lab", "STRUCT", "Struktur WHB (kolom beton, girder, deck)", -60, -170, B_),
-        ("tag", "LORA:CH-01>CH-02", "LoRa ± 18 m", "#0077E6"),
+        ("tag", "LORA:CH-01>CH-02", "LoRa ± 20 m", "#0077E6"),
         ("dim", "CH-02:base", "CH-02:top", "6 m", -60),
         ("dim", "CH-01:base", "CH-01:top", "± 1,5 m", 70),
     ], legend_loc="lower right")
@@ -463,10 +463,10 @@ def build():
     figure(d, os.path.join(RB, "foto_survei_lokasi_gld_18nov.jpg"),
            "Foto 1. Lokasi GLD di bawah struktur WHB (foto survei 18 November 2026).", Inches(5.2))
     table(d, ["ID", "Fungsi", "Posisi", "Catu daya", "Mounting", "Jarak (estimasi)"], [
-        ("GLD-01", "Sensor gas", "Area WHB, di bawah struktur, dekat CH-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 11 m ke CH-01"),
-        ("GLD-02", "Sensor gas", "Area WHB, di bawah struktur, selatan GLD-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 9 m ke CH-01"),
-        ("CH-01", "Relay LoRa dari 2 GLD", "Di antara GLD, di bawah struktur, posisi rendah ± 1,5 m (tanpa cahaya matahari)", "5 VDC via JB", "Klem ke struktur existing; stanchion bila tidak memungkinkan", "± 18 m ke CH-02"),
-        ("CH-02", "Relay LoRa ke Gateway", "Di luar struktur, terpapar matahari", "Panel surya + baterai CH", "Stanchion 2\" HDG s/d 6 m + bracket panel surya", "± 80 m (garis lurus) ke GW-01"),
+        ("GLD-01", "Sensor gas", "Area WHB, di bawah struktur, dekat CH-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 13 m ke CH-01"),
+        ("GLD-02", "Sensor gas", "Area WHB, di bawah struktur, selatan GLD-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 11 m ke CH-01"),
+        ("CH-01", "Relay LoRa dari 2 GLD", "Di antara GLD, di bawah struktur, posisi rendah ± 1,5 m (tanpa cahaya matahari)", "5 VDC via JB", "Klem ke struktur existing; stanchion bila tidak memungkinkan", "± 20 m ke CH-02"),
+        ("CH-02", "Relay LoRa ke Gateway", "Di luar struktur, terpapar matahari", "Panel surya + baterai CH", "Stanchion 2\" HDG s/d 6 m + bracket panel surya", "± 91 m (garis lurus) ke GW-01"),
         ("GW-01", "Gateway LoRa", "Tepi atap gedung kantor", "5 VDC, adaptor di dalam kantor", "Dudukan siku besi L 50×50×5 HDG", "—"),
         ("Server", "PC server lokal + router", "Dalam gedung kantor", "Stopkontak/UPS kantor", "—", "—"),
     ], [0.6, 1.05, 1.35, 1.05, 1.6, 1.2], size=8.3)
@@ -554,7 +554,7 @@ def build():
               "Jalur data Gateway ke PC server (Wi-Fi ke router di kantor, atau LAN) dan lokasi PC server.",
               "Akses ke atap kantor dan izin memasang dudukan siku besi; titik masuk kabel Gateway ke dalam gedung.",
               "Persetujuan HSE atas titik GLD (area risiko rendah) selama sertifikat Ex belum terbit.",
-              "Verifikasi jarak di lapangan (estimasi dari peta: GLD–CH-01 ± 10 m, CH-01–CH-02 ± 18 m, CH-02–GW ± 80 m)."]:
+              "Verifikasi jarak di lapangan (ukur Google Maps: CH-01–CH-02 ± 20 m, CH-02–GW ± 91 m, total CH-01–GW ± 111 m; GLD–CH-01 ± 11–13 m dari peta)."]:
         bullet(d, t)
 
     h(d, "Lampiran — Daftar material (kuantitas)")

@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RB = os.path.join(HERE, "assets", "rab_balongan")
 MAP = os.path.join(RB, "peta_lokasi_balongan_26nov_crop.png")
 BOX = (760, 120, 1480, 800)  # crop piksel citra peta
-PPM = 6.8                    # px per meter (skala bar 10 m = 68 px)
+PPM = 5.8                    # px per meter — dikalibrasi ulang dari ukur Google Maps: CH-01→CH-02 ±20 m, CH-02→GW ±91 m (total 111,3 m)
 S = 5.0 if PASS == "wide" else 1.0   # pembesaran ukuran perangkat (tinggi tiang selalu nyata)
 ROOF = 8.0                   # asumsi tinggi atap kantor
 CH1_H, CH2_H, GLD_H, JB_H = 1.5, 6.0, 1.0, 1.0
@@ -200,7 +200,7 @@ def ch(k, h, solar=False):
         NP[k + ":pv"] = p + Vector((0.2 * sc_, -0.15 * sc_, 1.5 + 0.1 * sc_))
 
 
-def structure(p, hx=7.8, hy=6.8, h=5.0):
+def structure(p, hx=9.1, hy=8.0, h=5.0):
     """Lantai dasar di bawah struktur WHB (foto survei 18 Nov): kolom beton persegi bersabuk hitam,
     girder baja & deck di atas. GLD-01, GLD-02, CH-01 berada di bawahnya; jarak kolom/tinggi = estimasi."""
     conc = mat("col_conc", (0.78, 0.8, 0.82)); band = mat("col_band", (0.08, 0.08, 0.08))
@@ -308,7 +308,7 @@ def render(name, loc, target, lens):
 
 out = {}
 if PASS == "wide":
-    out["overview"] = render("overview", (104, -14, 42), (47, 48, 3), 24)
+    out["overview"] = render("overview", (122, -16, 49), (55, 56, 3.5), 24)
     c0 = P["GLD-02"]
     out["whb"] = render("whb", (c0.x + 22, c0.y - 28, 15), (c0.x + 2, c0.y + 1, 2.0), 30)
 else:

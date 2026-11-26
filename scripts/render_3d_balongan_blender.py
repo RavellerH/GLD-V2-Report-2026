@@ -271,10 +271,10 @@ column(242, 252, 9, 20.0, VESS, "COL1"); column(160, 312, 9, 20.0, VESS)        
 column(520, 345, 11, 6.0, VESS)                                                          # tangki/vessel
 NP["WHB"] = w(1300, 150, 10)
 NP["ROOF:base"] = gw.copy(); NP["ROOF:top"] = gw + Vector((0, 0, ROOF))
-cube(gw + Vector((0, 0, ROOF)), 0.05, 0.05, 1.5, M["steel"])                      # siku L50×50×5, 1,5 m
-NP["SIKU"] = gw + Vector((0.03, 0, ROOF + 0.75))
-NP["SIKU:base"] = gw + Vector((0, 0, ROOF)); NP["SIKU:top"] = gw + Vector((0, 0, ROOF + 1.5))
-gwb = gw + Vector((0, -0.025 - 0.05 * S, ROOF + 1.5 - 0.35 * S))
+cube(gw + Vector((0, 0, ROOF)), 0.05, 0.05, 0.5, M["steel"])                      # siku L50×50×5, 0,5 m (antena GW menambah tinggi)
+NP["SIKU"] = gw + Vector((0.03, 0, ROOF + 0.25))
+NP["SIKU:base"] = gw + Vector((0, 0, ROOF)); NP["SIKU:top"] = gw + Vector((0, 0, ROOF + 0.5))
+gwb = gw + Vector((0, -0.025 - 0.05 * S, ROOF + 0.5 - 0.35 * S))
 cube(gwb, 0.22 * S, 0.1 * S, 0.3 * S, M["gw"])
 cyl(gwb + Vector((0, 0, 0.3 * S)), 0.005 * S, 0.35 * S, M["ant"], 8)
 TOP["GW-01"] = gwb + Vector((0, 0, 0.65 * S))
@@ -314,8 +314,8 @@ if PASS == "wide":
 else:
     g2 = P["GLD-02"]
     out["gld"] = render("gld", (g2.x + 1.6, g2.y - 2.4, 1.6), (g2.x, g2.y, 0.75), 30)
-    cam = gw + nrm * 10 + tang * 6
-    out["gw"] = render("gw", (cam.x, cam.y, ROOF + 3.5), (gw.x, gw.y, ROOF - 1.0), 30)
+    cam = gw + nrm * 2.6 + tang * 1.6
+    out["gw"] = render("gw", (cam.x, cam.y, ROOF + 1.5), (gw.x, gw.y, ROOF + 0.1), 30)
 with open(os.path.join(RB, f"render3d_pts_{PASS}.json"), "w") as f:
     json.dump(out, f, indent=1)
 print("RENDER_OK", PASS)

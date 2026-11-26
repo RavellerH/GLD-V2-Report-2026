@@ -25,6 +25,7 @@ DIAG = os.path.join(RB, "diagram_daya_data_balongan.png")
 MAP = os.path.join(RB, "peta_lokasi_balongan_26nov.png")
 D3A = os.path.join(RB, "diagram_3d_balongan_overview.png")
 D3B = os.path.join(RB, "diagram_3d_balongan_whb.png")
+PLAN = os.path.join(RB, "peta_rencana_titik_balongan.png")
 D3C = os.path.join(RB, "diagram_3d_balongan_gld.png")
 D3D = os.path.join(RB, "diagram_3d_balongan_gw.png")
 
@@ -220,6 +221,76 @@ def build_3d(path, box, title, show, up=1, zs=2.0, shear=0.45, squash=0.55, labe
     plt.close(fig)
 
 
+def plan_map(out):
+    """Gambar 1: peta rencana titik di atas citra bersih (tanpa coretan & UI Google Maps)."""
+    from PIL import Image
+    from matplotlib.lines import Line2D
+    import matplotlib.patheffects as pe
+    import cv2
+    import numpy as np
+    box = (250, 15, 1760, 805)
+    src = cv2.imread(os.path.join(RB, "peta_lokasi_balongan_26nov_bersih.png"))
+    mask = np.zeros(src.shape[:2], np.uint8); mask[56:100, 850:1016] = 255          # tombol "Search this area"
+    src = cv2.inpaint(src, mask, 9, cv2.INPAINT_TELEA)
+    im = Image.fromarray(cv2.cvtColor(src, cv2.COLOR_BGR2RGB)).crop(box)
+    w, h = im.size
+    pt = {"GLD-01": (1262, 212), "GLD-02": (1303, 268), "CH-01": (1335, 214), "CH-02": (1332, 330), "GW-01": (936, 680)}
+    pt = {k: (x - box[0], y - box[1]) for k, (x, y) in pt.items()}
+    fig, ax = plt.subplots(figsize=(11, 11 * h / w))
+    ax.imshow(im); ax.axis("off"); ax.set_xlim(0, w); ax.set_ylim(h, 0)
+    halo = [pe.Stroke(linewidth=5.5, foreground="white"), pe.Normal()]
+    blu, org, pur, cya = "#1565E0", "#F28C0F", "#8C5CF0", "#00B8D4"
+
+    def link(a, b, lw=2.6):
+        ax.plot(*zip(pt[a], pt[b]), color=blu, lw=lw, ls=(0, (5, 3)), zorder=5, path_effects=halo)
+
+    link("GLD-01", "CH-01", 1.8); link("GLD-02", "CH-01", 1.8)
+    link("CH-01", "CH-02"); link("CH-02", "GW-01")
+    # area WHB
+    xs = [pt[k][0] for k in ("GLD-01", "GLD-02", "CH-01")]; ys = [pt[k][1] for k in ("GLD-01", "GLD-02", "CH-01")]
+    ax.add_patch(FancyBboxPatch((min(xs) - 22, min(ys) - 22), max(xs) - min(xs) + 44, max(ys) - min(ys) + 44,
+                                boxstyle="round,pad=0,rounding_size=10", fc="none", ec="white", lw=1.6, ls="--", zorder=4))
+    for k, col, mk in (("GLD-01", org, "o"), ("GLD-02", org, "o"), ("CH-01", pur, "s"), ("CH-02", pur, "s"), ("GW-01", cya, "D")):
+        ax.plot(*pt[k], marker=mk, ms=12, mfc=col, mec="white", mew=2, zorder=8)
+
+    def lab(k, text, dx, dy, col):
+        x, y = pt[k]
+        ax.annotate(text, (x, y), xytext=(x + dx, y + dy), fontsize=8.6, fontweight="bold", color="white",
+                    ha="center", va="center", zorder=10,
+                    arrowprops=dict(arrowstyle="-", color="white", lw=1.4, shrinkA=0, shrinkB=7),
+                    bbox=dict(boxstyle="round,pad=0.35", fc=col, ec="white", lw=1, alpha=0.95))
+
+    lab("GLD-01", "GLD-01 · 24 VDC", -190, -40, org)
+    lab("GLD-02", "GLD-02 · 24 VDC", -200, 45, org)
+    lab("CH-01", "CH-01 · 5 VDC" + chr(10) + "bawah struktur, ± 1,5 m", 240, 28, pur)
+    lab("CH-02", "CH-02 · panel surya" + chr(10) + "tiang 6 m, luar struktur", 230, 45, pur)
+    lab("GW-01", "GW-01 Gateway" + chr(10) + "tepi atap kantor (siku besi)", -40, 85, "#00838F")
+
+    def dist(a, b, text, off):
+        (x1, y1), (x2, y2) = pt[a], pt[b]
+        ax.text((x1 + x2) / 2 + off[0], (y1 + y2) / 2 + off[1], text, fontsize=8.6, fontweight="bold", color=blu,
+                ha="center", va="center", zorder=11,
+                bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=blu, lw=1.2))
+
+    dist("CH-01", "CH-02", "± 20 m", (42, 18))
+    dist("CH-02", "GW-01", "LoRa ± 91 m", (30, 22))
+    x0, y0 = min(xs) - 22, min(ys) - 22
+    ax.text(x0, y0 - 10, "Area WHB (lantai dasar, bawah struktur)", fontsize=8, fontweight="bold", color="#262321",
+            ha="left", va="bottom", zorder=11, bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.9))
+    ax.text(pt["GW-01"][0] - 150, pt["GW-01"][1] - 40, "Gedung kantor", fontsize=8.6, fontweight="bold", color="#262321",
+            ha="center", zorder=11, bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.9))
+    ax.legend(handles=[Line2D([], [], color=org, marker="o", ls="", ms=9, mec="white", label="GLD (sensor gas)"),
+                       Line2D([], [], color=pur, marker="s", ls="", ms=9, mec="white", label="Cluster Head"),
+                       Line2D([], [], color=cya, marker="D", ls="", ms=8, mec="white", label="Gateway"),
+                       Line2D([], [], color=blu, lw=2.2, ls="--", label="Link LoRa (jalur data)")],
+              loc="lower right", fontsize=8.2, framealpha=0.93)
+    ax.text(8, 8, "Total CH-01 → GW-01 ± 111 m", fontsize=8.6, fontweight="bold", color="#262321", ha="left", va="top",
+            zorder=11, bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#262321", lw=0.8))
+    ax.text(8, h - 8, "Citra © 2026 Google, Airbus, Maxar Technologies", fontsize=6.5, color="white", ha="left", va="bottom")
+    fig.savefig(out, dpi=200, bbox_inches="tight", pad_inches=0.02)
+    plt.close(fig)
+
+
 def label_render(view, pas, out, crop, title, items, legend_loc="lower left", legend=True):
     """Beri label, tag & garis dimensi pada render Blender (scripts/render_3d_balongan_blender.py)."""
     import json
@@ -380,6 +451,7 @@ def page_field(p):
 def build():
     build_diagram()
     O, C, B_, P_, G_ = "#00977A", "#D50000", "#454A52", "#7B2FE0", "#F07800"
+    plan_map(PLAN)
     label_render("overview", "wide", D3A, (0, 330, 2200, 1400), "A. Gambaran lokasi — klaster WHB ke Gateway di atap kantor", [
         ("lab", "GW-01", "GW-01 Gateway · tepi atap kantor", 120, -230, O),
         ("lab", "BLDG", "Gedung kantor: adaptor 5 VDC, router & PC server di dalam", 330, 170, B_),
@@ -406,8 +478,8 @@ def build():
     ], legend=False)
     label_render("gw", "detail", D3D, (300, 0, 2200, 1350), "D. Detail Gateway di tepi atap kantor (skala nyata)", [
         ("lab", "GW-01", "GW-01 Gateway · 5 VDC ± 0,73 W", 430, -60, O),
-        ("lab", "SIKU", "Siku L 50 × 50 × 5 HDG ± 1,5 m, baut/klem SS304", -380, -150, B_),
-        ("dim", "SIKU:base", "SIKU:top", "1,5 m", -90),
+        ("lab", "SIKU", "Siku L 50 × 50 × 5 HDG ± 0,5 m, baut/klem SS304", -380, -150, B_),
+        ("dim", "SIKU:base", "SIKU:top", "0,5 m", -90),
     ], legend=False)
     d = docx.Document()
     st = d.styles["Normal"]; st.font.name = "Calibri"; st.font.size = Pt(10)
@@ -454,9 +526,10 @@ def build():
             "dengan temperature cut-off pada firmware dan fan aktif hanya saat sampling.")
 
     h(d, "2. Tata letak titik")
-    figure(d, os.path.join(RB, "peta_lokasi_balongan_26nov.png"),
-           "Gambar 1. Rencana titik GLD, Cluster Head, dan Gateway (citra Google Maps; garis merah = jalur data). "
-           "Jarak dalam dokumen ini diukur kasar dari skala peta dan perlu diverifikasi di lapangan.", Inches(6.85))
+    figure(d, PLAN,
+           "Gambar 1. Rencana titik GLD, Cluster Head, dan Gateway di atas citra Google Maps; garis biru putus-putus = "
+           "link LoRa (jalur data). Jarak CH-01–CH-02 dan CH-02–GW diukur dengan Google Maps; perlu diverifikasi di lapangan.",
+           Inches(6.85))
     para(d, "Lokasi GLD-01, GLD-02, dan CH-01 berada di lantai dasar di bawah struktur WHB: area beratap dengan kolom "
             "beton persegi, girder baja, serta pipa gas dan pipa berinsulasi di atasnya (survei 17–18 November 2026).",
          size=9.5)
@@ -467,7 +540,7 @@ def build():
         ("GLD-02", "Sensor gas", "Area WHB, di bawah struktur, selatan GLD-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 11 m ke CH-01"),
         ("CH-01", "Relay LoRa dari 2 GLD", "Di antara GLD, di bawah struktur, posisi rendah ± 1,5 m (tanpa cahaya matahari)", "5 VDC via JB", "Klem ke struktur existing; stanchion bila tidak memungkinkan", "± 20 m ke CH-02"),
         ("CH-02", "Relay LoRa ke Gateway", "Di luar struktur, terpapar matahari", "Panel surya + baterai CH", "Stanchion 2\" HDG s/d 6 m + bracket panel surya", "± 91 m (garis lurus) ke GW-01"),
-        ("GW-01", "Gateway LoRa", "Tepi atap gedung kantor", "5 VDC, adaptor di dalam kantor", "Dudukan siku besi L 50×50×5 HDG", "—"),
+        ("GW-01", "Gateway LoRa", "Tepi atap gedung kantor", "5 VDC, adaptor di dalam kantor", "Dudukan siku besi L 50×50×5 HDG ± 0,5 m", "—"),
         ("Server", "PC server lokal + router", "Dalam gedung kantor", "Stopkontak/UPS kantor", "—", "—"),
     ], [0.6, 1.05, 1.35, 1.05, 1.6, 1.2], size=8.3)
 
@@ -507,7 +580,7 @@ def build():
               "250 × 250 × 5 mm SS304 dengan 2 U-bolt 2\" M10.")
     bullet(d, "CH-01: diklem ke struktur existing dengan bracket U-bolt tanpa las/bor; stanchion dipakai bila tidak ada struktur yang sesuai.")
     bullet(d, "CH-02: stanchion 2\" HDG s/d 6 m, bracket CH dan rangka panel surya dengan sudut kemiringan yang dapat diatur.")
-    bullet(d, "GW-01: siku baja L 50 × 50 × 5 mm HDG ± 1,5 m di tepi atap kantor, diikat ke struktur atap dengan baut/klem SS304 "
+    bullet(d, "GW-01: siku baja L 50 × 50 × 5 mm HDG ± 0,5 m (cukup, karena antena Gateway menambah tinggi) di tepi atap kantor, diikat ke struktur atap dengan baut/klem SS304 "
               "(tanpa las di lokasi), lengkap pelat dudukan dan klem enclosure Gateway/antena.")
     figure(d, os.path.join(RB, "pole_bracket_redraw.png"),
            "Gambar 7. Acuan pole & bracket GLD, Cluster Head, dan panel surya (desain LGU, dimensi mm).", Inches(6.85))

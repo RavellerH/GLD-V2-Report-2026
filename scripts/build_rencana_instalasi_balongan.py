@@ -461,19 +461,12 @@ def build():
         ("dim", "ROOF:base", "ROOF:top", "± 4 m", -60),
         ("lab", "COL1", "Bangunan, kolom & unit proses dari citra peta (bentuk/tinggi ilustratif)", 120, -120, "#6E737A"),
     ])
-    label_render("struct", "wide", D3S, (0, 0, 2200, 1400), "B. Struktur WHB — bangunan di atas lokasi GLD (dimensi estimasi dari foto)", [
-        ("lab", "W:drum", "Steam drum horizontal di puncak", 480, -60, B_),
-        ("lab", "W:duct", "Ducting gas buang ke cerobong", -420, -120, B_),
-        ("lab", "W:stack", "Cerobong (stack) beralas kerucut, ± 40 m", 330, 230, B_),
-        ("lab", "W:pipes", "Pipa vertikal berinsulasi", -420, -60, B_),
-        ("lab", "W:casing", "Casing boiler / WHB, rangka baja 4 lantai", 300, -60, B_),
-        ("lab", "W:yellow", "Pipa gas (kuning) di bawah girder", 560, 330, "#8D6E00"),
+    label_render("struct", "wide", D3S, (0, 0, 2200, 1400), "B. Lokasi GLD dan Cluster Head di struktur WHB", [
         ("lab", "GLD-01", "GLD-01 · lantai dasar", -330, 140, G_),
         ("lab", "GLD-02", "GLD-02 · lantai dasar", 330, 120, G_),
         ("lab", "CH-01", "CH-01 · bawah struktur", 380, 40, P_),
         ("lab", "CH-02:pv", "CH-02 · panel surya, luar struktur", -360, 140, P_),
         ("dim", "W:base", "W:deck", "± 6 m", -50),
-        ("dim", "W:base", "W:top", "± 22 m", -150),
     ], legend=False)
     label_render("whb", "wide", D3B, (0, 120, 2200, 1250), "C. Klaster WHB — posisi GLD, Cluster Head, dan relay LoRa", [
         ("lab", "GLD-01", "GLD-01 · 24 VDC, di bawah struktur", -380, -150, G_),
@@ -571,13 +564,15 @@ def build():
             "(lihat diagram satu garis di atas). Tampilan A–B: ukuran perangkat dibesarkan 5× agar terlihat (tinggi tiang nyata); "
             "tampilan C–D: skala nyata. Posisi, bentuk bangunan, dan tinggi atap carport kantor (± 4 m) adalah estimasi dari citra.", size=9.5)
     figure(d, D3A, "Gambar 3. Gambaran lokasi: klaster WHB dan Gateway di tepi atap kantor.", Inches(6.85))
-    figure(d, D3S, "Gambar 4. Struktur WHB (bentuk dari foto 17 Nov 2026): lantai dasar berkolom beton tempat GLD-01/02 dan CH-01, "
-                   "rangka baja bertingkat dengan pipa vertikal berinsulasi, steam drum di puncak, ducting ke cerobong. "
-                   "Tinggi dan dimensi adalah estimasi visual.", Inches(6.85))
+    figure(d, D3S, "Gambar 4. Posisi GLD-01/02 dan CH-01 di lantai dasar bawah struktur WHB, CH-02 di luar struktur. "
+                   "Bentuk bangunan dari foto survei; tinggi dan dimensi adalah estimasi visual.", Inches(6.85))
     figure(d, D3B, "Gambar 5. Klaster WHB: GLD-01/02 (stanchion 1 m) dan CH-01 (± 1,5 m) di lantai dasar bawah struktur WHB (kolom beton, girder, deck digambar transparan); "
                    "CH-02 bertenaga surya (6 m) merelay data ke Gateway.", Inches(6.85))
     figure(d, D3C, "Gambar 6. Detail GLD di stanchion 1 m dengan pelat U-bolt.", Inches(6.85))
     figure(d, D3D, "Gambar 7. Detail Gateway: siku L ± 0,5 m di tepi atap carport depan gedung kantor (± 4 m), GW di atas siku dan antena di atas GW.", Inches(6.85))
+    figure(d, os.path.join(RB, "foto_posisi_gateway_carport.jpg"),
+           "Foto 2. Posisi rencana GW-01 di tepi atap carport depan gedung kantor (foto survei 18 Nov 2026): siku L ± 0,5 m, "
+           "Gateway di atas siku, antena di atas Gateway. Wajah dan pelat nomor disamarkan.", Inches(6.3))
     para(d, "Catu daya. PSU 24 VDC memakai unit RU VI (TDK-Lambda DLP240-24-1) di panel RU VI (safe area), ditambah PSU 5 VDC "
             "(Mean Well HDR-15-5) dan fuse per cabang di panel yang sama. Dua jalur kabel armoured (24 VDC dan 5 VDC) ditarik ke "
             "satu terminal box Ex d di lapangan, lalu dicabangkan ke GLD-01, GLD-02 (24 VDC) dan CH-01 (5 VDC). Tidak ada PSU di "

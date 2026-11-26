@@ -547,6 +547,9 @@ def build():
          size=9.5)
     figure(d, os.path.join(RB, "foto_survei_lokasi_gld_18nov.jpg"),
            "Foto 1. Lokasi GLD di bawah struktur WHB (foto survei 18 November 2026).", Inches(5.2))
+    figure(d, os.path.join(RB, "foto_posisi_gld_whb.jpg"),
+           "Foto 2. Rencana posisi GLD di lantai dasar sisi depan struktur WHB, di antara kolom beton dan pedestal, "
+           "di bawah header pipa berinsulasi (foto survei 18 November 2026; wajah disamarkan).", Inches(3.3))
     table(d, ["ID", "Fungsi", "Posisi", "Catu daya", "Mounting", "Jarak (estimasi)"], [
         ("GLD-01", "Sensor gas", "Area WHB, di bawah struktur, dekat CH-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 13 m ke CH-01"),
         ("GLD-02", "Sensor gas", "Area WHB, di bawah struktur, selatan GLD-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 11 m ke CH-01"),
@@ -571,7 +574,7 @@ def build():
     figure(d, D3C, "Gambar 6. Detail GLD di stanchion 1 m dengan pelat U-bolt.", Inches(6.85))
     figure(d, D3D, "Gambar 7. Detail Gateway: siku L ± 0,5 m di tepi atap carport depan gedung kantor (± 4 m), GW di atas siku dan antena di atas GW.", Inches(6.85))
     figure(d, os.path.join(RB, "foto_posisi_gateway_carport.jpg"),
-           "Foto 2. Posisi rencana GW-01 di tepi atap carport depan gedung kantor (foto survei 18 Nov 2026): siku L ± 0,5 m, "
+           "Foto 3. Posisi rencana GW-01 di tepi atap carport depan gedung kantor (foto survei 18 Nov 2026): siku L ± 0,5 m, "
            "Gateway di atas siku, antena di atas Gateway. Wajah dan pelat nomor disamarkan.", Inches(6.3))
     para(d, "Catu daya. PSU 24 VDC memakai unit RU VI (TDK-Lambda DLP240-24-1) di panel RU VI (safe area), ditambah PSU 5 VDC "
             "(Mean Well HDR-15-5) dan fuse per cabang di panel yang sama. Dua jalur kabel armoured (24 VDC dan 5 VDC) ditarik ke "

@@ -29,6 +29,13 @@ F_R = r"C:\Windows\Fonts\calibri.ttf"
 F_B = r"C:\Windows\Fonts\calibrib.ttf"
 
 
+TR = {}  # terjemahan string helper/diagram (diisi oleh generator versi bahasa lain)
+
+
+def tr(x):
+    return TR.get(x, x)
+
+
 # ------------------------------------------------------------------ helpers
 def shade(cell, color):
     tcPr = cell._tc.get_or_add_tcPr()
@@ -73,16 +80,16 @@ def new_doc(docno, short):
         d.styles[name].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
     hp = s.header.paragraphs[0]; hp.style = d.styles["Normal"]; hp.alignment = WD_ALIGN_PARAGRAPH.LEFT
     r = hp.add_run("GAS LEAK DETECTOR GLD V2"); r.font.size = Pt(8); r.bold = True; r.font.color.rgb = NAVY
-    r = hp.add_run("   |   Diskusi Sertifikasi ATEX/IECEx \u2014 T\u00dcV S\u00dcD"); r.font.size = Pt(8); r.font.color.rgb = GREY
+    r = hp.add_run(tr("   |   Diskusi Sertifikasi ATEX/IECEx \u2014 T\u00dcV S\u00dcD")); r.font.size = Pt(8); r.font.color.rgb = GREY
     hp.add_run("\t")
     r = hp.add_run(short); r.font.size = Pt(8); r.font.color.rgb = GREY
     hp.paragraph_format.tab_stops.add_tab_stop(Cm(TW), alignment=2)
     border(hp._p.get_or_add_pPr(), "bottom", "1F3A5F", 6, 4)
     fp = s.footer.paragraphs[0]; fp.style = d.styles["Normal"]; fp.alignment = WD_ALIGN_PARAGRAPH.LEFT
     border(fp._p.get_or_add_pPr(), "top", "C9D3E0", 4, 4)
-    r = fp.add_run(f"{docno}   \u00b7   Rev. {REV}   \u00b7   {TANGGAL}   \u00b7   RAHASIA"); r.font.size = Pt(8); r.font.color.rgb = GREY
+    r = fp.add_run(f"{docno}   \u00b7   Rev. {REV}   \u00b7   {TANGGAL}   \u00b7   " + tr("RAHASIA")); r.font.size = Pt(8); r.font.color.rgb = GREY
     fp.add_run("\t")
-    r = fp.add_run("Halaman "); r.font.size = Pt(8); r.font.color.rgb = GREY
+    r = fp.add_run(tr("Halaman ")); r.font.size = Pt(8); r.font.color.rgb = GREY
     r = fp.add_run(); r.font.size = Pt(8); r.bold = True; field(r, "PAGE")
     r = fp.add_run(" / "); r.font.size = Pt(8); r.font.color.rgb = GREY
     r = fp.add_run(); r.font.size = Pt(8); field(r, "NUMPAGES")
@@ -125,7 +132,7 @@ def tbl_margins(t, tb=50, lr=100):
 
 def title_block(d, title, subtitle, docno, purpose):
     short = d._short
-    label = "DOKUMEN PEMBUKA" if not short[:2].isdigit() else f"LAMPIRAN {short[:2]}"
+    label = tr("DOKUMEN PEMBUKA") if not short[:2].isdigit() else tr("LAMPIRAN") + f" {short[:2]}"
     p = d.add_paragraph(); r = p.add_run(label); r.bold = True; r.font.size = Pt(9); r.font.color.rgb = RGBColor(0x2B, 0x5F, 0xCB)
     rPr = r._r.get_or_add_rPr(); sp = OxmlElement("w:spacing"); sp.set(qn("w:val"), "30"); rPr.append(sp)
     p.paragraph_format.space_after = Pt(2); p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -135,11 +142,11 @@ def title_block(d, title, subtitle, docno, purpose):
     p.paragraph_format.space_after = Pt(10); p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
     border(p._p.get_or_add_pPr(), "bottom", "1F3A5F", 12, 6)
     t = table(d, [
-        ["Produk", "Gas Leak Detector (GLD) V2 \u2014 detektor gas titik tetap"],
-        ["Nomor dokumen", docno],
-        ["Revisi / tanggal", f"{REV} / {TANGGAL}"],
-        ["Tujuan", purpose],
-        ["Sumber data", "Dossier IECEx/ATEX Certification Information Requirements GLD V2 (Rev. 2.1\u20132.3) dan data proyek terkini"],
+        [tr("Produk"), tr("Gas Leak Detector (GLD) V2 \u2014 detektor gas tipe titik (fixed point)")],
+        [tr("Nomor dokumen"), docno],
+        [tr("Revisi / tanggal"), f"{REV} / {TANGGAL}"],
+        [tr("Tujuan"), purpose],
+        [tr("Sumber data"), tr("Dossier IECEx/ATEX Certification Information Requirements GLD V2 (Rev. 2.1\u20132.3) dan data proyek terkini")],
     ], [3.6, TW - 3.6], header=False, label_col=True, size=9, zebra=False)
     tbl_borders(t, {"bottom": ("single", 4, "C9D3E0")})
 
@@ -267,33 +274,33 @@ def flow_diagram(path):
         dr.line([i, 40, i + 16, 40], fill=blue, width=4); dr.line([i, 560, i + 16, 560], fill=blue, width=4)
     for j in range(40, 560, 30):
         dr.line([70, j, 70, j + 16], fill=blue, width=4); dr.line([1530, j, 1530, j + 16], fill=blue, width=4)
-    dr.text((90, 62), "Batas peralatan yang diajukan sertifikasi — Node Sensor GLD V2 (enclosure Ex db)", font=fb, fill=blue)
+    dr.text((90, 62), tr("Batas peralatan yang diajukan sertifikasi — Node Sensor GLD V2 (enclosure Ex db)"), font=fb, fill=blue)
     y = 150
-    box(110, y, 250, 120, "Udara sekitar", "masuk lewat mesh SS")
+    box(110, y, 250, 120, tr("Udara sekitar"), tr("masuk lewat mesh SS"))
     arrow(360, y + 60, 410, y + 60)
-    box(410, y, 230, 120, "Kipas DC", "aliran ke sensor")
+    box(410, y, 230, 120, tr("Kipas DC"), tr("aliran ke sensor"))
     arrow(640, y + 60, 690, y + 60)
-    box(690, y, 250, 120, "8 sensor MQ", "metal-oxide")
+    box(690, y, 250, 120, tr("8 sensor MQ"), tr("metal-oxide"))
     arrow(940, y + 60, 990, y + 60)
-    box(990, y, 230, 120, "ADC 24-bit", "ADS1256, 500 ms")
+    box(990, y, 230, 120, tr("ADC 24-bit"), tr("ADS1256, 500 ms"))
     arrow(1220, y + 60, 1270, y + 60)
-    box(1270, y, 230, 120, "ESP32-S3", "klasifikasi AI lokal")
+    box(1270, y, 230, 120, tr("ESP32-S3"), tr("klasifikasi AI lokal"))
     y2 = 360
-    box(1050, y2, 220, 130, "Alarm lokal", "LED + buzzer", fill=(255, 238, 230), col=(156, 59, 0))
-    box(1290, y2, 210, 130, "Radio LoRa", "920–923 MHz")
+    box(1050, y2, 220, 130, tr("Alarm lokal"), tr("LED + buzzer"), fill=(255, 238, 230), col=(156, 59, 0))
+    box(1290, y2, 210, 130, tr("Radio LoRa"), tr("920–923 MHz"))
     arrow(1385, 270, 1160, y2)
     arrow(1385, 270, 1395, y2)
-    box(110, y2, 300, 130, "Terminal 24 VDC", "maks. ± 8 W, M20×1,5")
-    box(460, y2, 270, 130, "Grounding PE", "stud eksternal")
-    box(780, y2, 220, 130, "RS-485", "Modbus RTU (opsional)")
+    box(110, y2, 300, 130, tr("Terminal 24 VDC"), tr("maks. ±8 W, M20×1,5"))
+    box(460, y2, 270, 130, tr("Grounding PE"), tr("stud eksternal"))
+    box(780, y2, 220, 130, tr("RS-485"), tr("Modbus RTU (opsional)"))
     # luar batas
-    box(1610, 360, 330, 130, "Cluster Head → Gateway", "area aman / unclassified", fill=(245, 245, 245), col=grey)
+    box(1610, 360, 330, 130, tr("Cluster Head → Gateway"), tr("area aman / unclassified"), fill=(245, 245, 245), col=grey)
     arrow(1500, 425, 1610, 425, col=grey)
-    box(1610, 560, 330, 120, "Server & dashboard", "intranet lokasi", fill=(245, 245, 245), col=grey)
+    box(1610, 560, 330, 120, tr("Server & dashboard"), tr("intranet lokasi"), fill=(245, 245, 245), col=grey)
     arrow(1775, 490, 1775, 560, col=grey)
-    box(110, 620, 420, 110, "Adaptor 220 VAC → 24 VDC", "di luar batas peralatan", fill=(245, 245, 245), col=grey)
+    box(110, 620, 420, 110, tr("Adaptor 220 VAC → 24 VDC"), tr("di luar batas peralatan"), fill=(245, 245, 245), col=grey)
     arrow(260, 620, 260, 490, col=grey)
-    dr.text((1610, 300), "Di luar lingkup sertifikasi", font=fr, fill=grey)
+    dr.text((1610, 300), tr("Di luar lingkup sertifikasi"), font=fr, fill=grey)
     im.save(path)
 
 
@@ -302,22 +309,22 @@ def build_00():
     no = "GLD/ATEX-IN/2026-001-ID"
     d = new_doc(no, "Pengantar Produk")
     title_block(d, "Pengantar Produk GLD V2", "Gambaran produk dan peta dokumen yang diminta TÜV SÜD", no,
-                "Bahan pembuka rapat Microsoft Teams dengan TÜV SÜD, Kamis 26 November 2026, 14.30 WIB (13.30 waktu China)")
+                "Bahan pengantar rapat teknis dengan TÜV SÜD melalui Microsoft Teams, Kamis, 26 November 2026, pukul 14.30 WIB (13.30 waktu Tiongkok)")
 
-    d.add_heading("1. Alur pembahasan", level=1)
-    para(d, "Dokumen ini membuka diskusi: pertama menjelaskan produk yang akan disertifikasi, lalu memetakan setiap "
-            "permintaan TÜV SÜD ke lampiran yang menjawabnya.")
+    d.add_heading("1. Agenda pembahasan", level=1)
+    para(d, "Dokumen ini mengawali diskusi dengan menguraikan produk yang akan disertifikasi, kemudian memetakan setiap "
+            "permintaan TÜV SÜD ke lampiran yang menanggapinya.")
     table(d, [
         ["Bagian", "Isi", "Dokumen"],
         ["A. Produk", "Fungsi, cara kerja, konstruksi, spesifikasi, batas peralatan", "00 (dokumen ini) §2–5"],
         ["B. Lingkup sertifikasi", "Usulan klasifikasi Ex dan standar yang relevan", "00 §6"],
-        ["C. Permintaan TÜV SÜD", "Assembly drawing, user manual, target Ex marking, IP66, ISO 9001", "Lampiran 01–05"],
-        ["D. Diskusi", "Pertanyaan untuk menyepakati jalur sertifikasi", "00 §8"],
+        ["C. Permintaan TÜV SÜD", "Gambar perakitan, panduan pengguna, target penandaan Ex, IP66, ISO 9001", "Lampiran 01–05"],
+        ["D. Diskusi", "Pokok bahasan untuk menyepakati jalur sertifikasi", "00 §8"],
     ], [3.6, 8.9, 4.0])
 
     page_break(d)
-    d.add_heading("2. Apa itu GLD V2", level=1)
-    para(d, "Gas Leak Detector (GLD) V2 adalah detektor kebocoran gas titik tetap berbasis IoT untuk area proses kilang "
+    d.add_heading("2. Gambaran produk", level=1)
+    para(d, "Gas Leak Detector (GLD) V2 adalah detektor kebocoran gas tipe titik berbasis IoT untuk area proses kilang "
             "minyak dan gas — unit proses, tank farm, pipe rack dan area bongkar muat. Satu unit memantau udara di "
             "sekitarnya secara terus-menerus, mengklasifikasikan kondisi gas langsung di dalam perangkat, membunyikan "
             "alarm lokal, dan mengirim status serta alarm secara nirkabel ke sistem pemantauan.")
@@ -340,7 +347,7 @@ def build_00():
         ["Enclosure", "Aluminium die-cast (ADC12) dengan tutup berulir dan O-ring; basis dari housing detektor gas komersial HIREP HRP-T1000-A yang dimodifikasi"],
         ["Inlet gas", "Pelat wire-mesh stainless steel di tutup depan (menggantikan kaca housing asli)"],
         ["Elektronik", "Main board V4 (ESP32-S3, ADC, LoRa E22-900MM22S, RS-485), papan terminal, 8 modul sensor MQ, kipas DC 5 V"],
-        ["Alarm", "Beacon LED + buzzer 24 V di sisi kanan"],
+        ["Alarm", "Beacon alarm 24 V (LED dan buzzer) di sisi kanan"],
         ["Antena", "Antena LoRa di permukaan atas base, konektor SMA"],
         ["Cable entry", "M20 × 1,5 untuk kabel 24 VDC (dua inti L+/L−); gland Ex d akan ditetapkan"],
         ["Pemasangan", "Pelat U-bolt 250 × 250 mm ke pipa 2 in/DN50 (OD 60,3 mm), baut M10"],
@@ -350,13 +357,13 @@ def build_00():
     d.add_heading("5. Spesifikasi utama", level=1)
     table(d, [
         ["Parameter", "Nilai", "Status"],
-        ["Catu daya", "24 VDC; maks. ± 8 W (≈ 0,33 A)", "Terukur"],
-        ["Dimensi / massa", "200 × 90 × 290 mm / 2,378 kg", "Data proyek"],
+        ["Catu daya", "24 VDC; maks. ±8 W (≈ 0,33 A)", "Terukur"],
+        ["Dimensi / massa", "200 × 90 × 290 mm / 2,378 kg", "Data desain"],
         ["Sensor", "8 × MQ metal-oxide + SHT40 (suhu/kelembapan)", "Final"],
         ["Klasifikasi gas on-device", "Clean Air, LPG, H₂", "Final (versi model saat ini)"],
         ["Komunikasi", "LoRa 920–923 MHz; RS-485 Modbus RTU read-only 9600 8N1", "Final"],
-        ["Suhu operasi", "−20 °C s/d +60 °C", "Batas atas dalam peninjauan (housing dasar +55 °C)"],
-        ["Kelembapan", "5–95 % RH, non-kondensasi", "Data proyek"],
+        ["Suhu operasi", "−20 °C hingga +60 °C", "Batas atas dalam peninjauan (housing dasar +55 °C)"],
+        ["Kelembapan", "5–95 % RH, non-kondensasi", "Data desain"],
         ["Ingress protection", "IP66", "Target, belum diuji"],
     ], [4.0, 7.0, 5.5])
 
@@ -366,9 +373,9 @@ def build_00():
     table(d, [
         ["Elemen", "Usulan", "Alasan"],
         ["Objek", "Node Sensor GLD V2 saja", "Cluster Head dan Gateway dipasang di area aman"],
-        ["Area", "Zone 1 (Category 2G, EPL Gb)", "Penempatan di area proses kilang terklasifikasi"],
-        ["Proteksi", "Ex db — flameproof enclosure", "Enclosure die-cast; heater sensor (± 0,75 W/sensor) tidak cocok dengan batas energi Ex i"],
-        ["Kelompok gas", "IIC", "Hidrogen termasuk gas yang dideteksi"],
+        ["Area", "Zone 1 (Category 2G, EPL Gb)", "Dipasang di area proses kilang yang terklasifikasi"],
+        ["Proteksi", "Ex db — flameproof enclosure", "Enclosure die-cast; heater sensor (±0,75 W/sensor) tidak memungkinkan pemenuhan batas energi keselamatan intrinsik (Ex i)"],
+        ["Kelompok gas", "IIC", "Hidrogen termasuk gas sasaran deteksi"],
         ["Kelas suhu", "T4 (≤ 135 °C)", "Pengukuran internal awal: titik terpanas ≈ 114 °C diekstrapolasi ke Ta +60 °C"],
         ["Debu", "Tidak diajukan", "Atmosfer gas saja"],
         ["Standar acuan", "IEC/EN 60079-0, 60079-1; IEC 60529 (IP)", "Edisi dan tambahan sesuai arahan TÜV SÜD"],
@@ -380,20 +387,20 @@ def build_00():
         ["Permintaan", "Lampiran", "Isi", "Status"],
         ["Assembly drawing", "01 Gambar Perakitan", "Konfigurasi acuan, register gambar, foto rakitan & pengukuran, gambar komponen, urutan perakitan, terminal, grounding, sensor", "Tersedia sebagian — gambar berdimensi terkendali unit produksi akan diterbitkan"],
         ["User manual", "02 Panduan Pengguna", "Spesifikasi, keselamatan, instalasi, commissioning, operasi, alarm, inspeksi, pemeliharaan, penghentian", "Draf"],
-        ["Target Ex marking", "03 Target Penandaan Ex", "Usulan marking, arti tiap elemen, nameplate, evaluasi awal T4", "Usulan tersedia"],
-        ["IP66?", "04 Status IP66", "Target, antarmuka sealing, rencana verifikasi IEC 60529", "Target, belum diuji"],
-        ["ISO 9001 certificate", "05 Status ISO 9001", "Status sertifikasi produsen, dokumen mutu, jalur QAR/QAN", "Dalam proses"],
+        ["Target penandaan Ex", "03 Target Penandaan Ex", "Usulan marking, arti tiap elemen, nameplate, evaluasi awal T4", "Usulan tersedia"],
+        ["IP66", "04 Status IP66", "Target, antarmuka sealing, rencana verifikasi IEC 60529", "Target, belum diuji"],
+        ["Sertifikat ISO 9001", "05 Status ISO 9001", "Status sertifikasi produsen, dokumen mutu, jalur QAR/QAN", "Dalam proses"],
     ], [3.0, 3.1, 6.4, 4.0], size=9)
 
     d.add_heading("8. Pokok diskusi dengan TÜV SÜD", level=1)
     bullets(d, [
-        "Skema: IECEx dan ATEX sekaligus, notified body, serta lokasi pengujian.",
+        "Skema sertifikasi: IECEx dan ATEX secara bersamaan, notified body, serta lokasi pengujian.",
         "Pemanfaatan sertifikat housing dasar setelah modifikasi (kaca depan diganti mesh, isi elektronik diganti).",
         "Metode pembuktian mesh stainless steel sebagai elemen flame path (uji transmisi api) atau kebutuhan flame arrestor bersertifikat.",
         "Penetapan Ta maksimum +60 °C dan metode uji kelas suhu T4.",
         "Uji IP66 untuk perangkat dengan inlet gas terbuka.",
         "Jumlah sampel, urutan pengujian, jadwal, estimasi biaya, serta jalur QAR/QAN dan peran ISO 9001.",
-        "Format dan bahasa dokumen teknis yang diterima.",
+        "Format dan bahasa dokumen teknis yang dapat diterima.",
     ], style="List Number")
     f = OUT / "00_Pengantar_Produk_GLD_V2_ID.docx"; d.save(f); return f
 
@@ -403,7 +410,7 @@ def build_01():
     no = "GLD/ATEX-AD/2026-001-ID"
     d = new_doc(no, "01 Gambar Perakitan")
     title_block(d, "Paket Gambar Perakitan", "Assembly drawing · foto rakitan · gambar komponen dan referensi", no,
-                "Menjawab permintaan TÜV SÜD: Assembly drawing")
+                "Tanggapan atas permintaan TÜV SÜD: Assembly drawing")
     note(d, "Draf teknis — bukan gambar produksi terkendali. Lembar sumber ditampilkan dengan label aslinya (bahasa Inggris).")
     d.add_heading("1. Konfigurasi acuan", level=1)
     para(d, "Konfigurasi fisik acuan adalah unit produksi per foto 7 Oktober 2026: suplai 24 VDC kontinu, mesh stainless "
@@ -413,7 +420,7 @@ def build_01():
         ["Parameter", "Data / catatan"],
         ["Dimensi", "200 × 90 × 290 mm; dicocokkan ulang dengan konfigurasi terbaru"],
         ["Massa", "2,378 kg; belum ditimbang dengan timbangan terkalibrasi"],
-        ["Material", "ADC12 (enclosure) + stainless steel (mesh); bukti material dari pemasok menyusul"],
+        ["Material", "ADC12 (enclosure) + stainless steel (mesh); bukti material dari pemasok akan dilampirkan"],
         ["Pemasangan", "Pelat 250 × 250 mm; U-bolt 2 in/DN50, M10"],
         ["Cable entry", "M20 × 1,5; gland prototipe polimer akan diganti gland Ex d"],
     ], [3.4, TW - 3.4])
@@ -444,7 +451,7 @@ def build_01():
 
 # ================================================================== 02 PANDUAN PENGGUNA
 MANUAL = [
-    ("g.1 Peringatan keselamatan", "Hanya personel terlatih dan berwenang boleh memasang, mengoperasikan, menginspeksi atau memelihara GLD. Isolasi dan verifikasi suplai 24 VDC serta terapkan lockout/tagout sebelum membuka enclosure atau mengubah wiring; pastikan area aman. Gunakan hanya konfigurasi suplai 24 VDC. Uji alarm dengan prosedur lokasi dan pelindung pendengaran bila perlu. Nulling hanya pada udara bersih terkonfirmasi dan harus berhasil 8/8. Dilarang mengebor, mengelas, memperbesar lubang, mem-bypass proteksi atau mengubah enclosure tanpa persetujuan. Keluarkan unit dari layanan bila rusak, kemasukan air, ada fault sensor yang belum selesai, alarm gagal atau kontinuitas PE hilang."),
+    ("g.1 Peringatan keselamatan", "Hanya personel terlatih dan berwenang boleh memasang, mengoperasikan, menginspeksi atau memelihara GLD. Isolasi dan verifikasi suplai 24 VDC serta terapkan lockout/tagout sebelum membuka enclosure atau mengubah wiring; pastikan area aman. Gunakan hanya konfigurasi suplai 24 VDC. Uji alarm dengan prosedur lokasi dan pelindung pendengaran bila perlu. Nulling hanya pada udara bersih yang telah dipastikan dan harus berhasil 8/8. Dilarang mengebor, mengelas, memperbesar lubang, memintas (bypass) proteksi atau mengubah enclosure tanpa persetujuan. Hentikan pengoperasian unit apabila rusak, kemasukan air, ada fault sensor yang belum selesai, alarm gagal atau kontinuitas PE hilang."),
     ("g.2 Lingkungan pemasangan", "Target penggunaan adalah instalasi tetap di unit proses, tank farm, pipe rack dan area bongkar muat kilang: Group II, Category 2G/EPL Gb, Zone 1, IIC, T4, gas saja — tunduk pada persetujuan lembaga sertifikasi. Hanya lokasi yang memenuhi marking dan kondisi sertifikat final yang boleh digunakan. Debu mudah terbakar dikecualikan. Lindungi alat dari benturan, perubahan tanpa izin, kontaminasi dan kondisi di luar batas. Jaga akses inlet, sambungan, antena dan kabel."),
     ("g.3 Pemasangan mekanis", "Gunakan pelat U-bolt yang disetujui, sesuai gambar dan BOM terkendali; jangan mengubah struktur penyangga tanpa persetujuan pemilik lokasi. Pastikan dudukan tidak longgar, berputar atau bergeser akibat getaran dan beban yang dapat diperkirakan. Ikuti orientasi dan torsi final. Hindari benturan, deformasi, dan inlet yang terhalang dinding, pipa atau pelat."),
     ("g.4 Inlet gas dan area sensing", "Mesh depan, jalur udara, kipas DC dan delapan sensor MQ harus tetap dapat menerima udara sekitar. Dilarang menutup, mengecat, menempelkan pita, memasang filter/membran tambahan atau mengubah jalur gas tanpa persetujuan. Jangan merusak mesh pelindung bawaan sensor. Fungsi perlindungan mesh dibuktikan melalui pengujian tipe."),
@@ -458,10 +465,10 @@ MANUAL = [
     ("g.12 Penanganan alarm dan fault", "Alarm memiliki dua jalur paralel: LED/buzzer lokal dan notifikasi LoRa. Putusnya LoRa bukan bukti tidak ada gas. Perlakukan setiap alarm sebagai kejadian keselamatan proses nyata hingga prosedur lokasi membuktikan sebaliknya. Jangan menonaktifkan, mereset atau mengubah parameter untuk menyembunyikan alarm/fault."),
     ("g.13 Pembersihan", "Isolasi sesuai prosedur. Gunakan kain lembut bebas serat yang sedikit dibasahi air bersih atau pembersih ringan yang disetujui. Jangan gunakan abrasif, pelarut agresif, udara tekan atau semprotan bertekanan tinggi; jangan biarkan cairan masuk. Periksa mesh, seal, gasket dan penetrasi; jangan menusuk mesh."),
     ("g.14 Inspeksi dan pemeliharaan berkala", "Personel berwenang mengikuti jadwal di bawah; interval dapat dipersingkat sesuai kondisi lokasi. Isolasi 24 VDC, LOTO dan konfirmasi area aman sebelum pembukaan. Catat nomor seri, tanggal, kondisi, temuan, tindakan, komponen pengganti, hasil nulling/uji/PE, versi perangkat lunak dan personel."),
-    ("g.15 Nulling dan kalibrasi sensor", "Lakukan setelah start-up dan stabilisasi, tanpa fault, di udara bersih terkonfirmasi. Hasil harus 8/8; bila gagal, cari penyebab, koreksi dan ulangi. Nulling bukan cara menutupi drift, kontaminasi atau fault. Kalibrasi gas memerlukan prosedur, gas referensi dan peralatan yang disetujui."),
+    ("g.15 Nulling dan kalibrasi sensor", "Lakukan setelah start-up dan stabilisasi, tanpa fault, di udara bersih yang telah dipastikan. Hasil harus 8/8; bila gagal, cari penyebab, koreksi dan ulangi. Nulling bukan cara menutupi drift, kontaminasi atau fault. Kalibrasi gas memerlukan prosedur, gas referensi dan peralatan yang disetujui."),
     ("g.16 Inspeksi bagian kritis Ex", "Periksa enclosure, cover, mesh, sambungan/ulir, gasket, gland, adaptor/plug, bonding, antena, beacon, kipas dan modul MQ. Verifikasi part number, material, pemasangan, retensi, engagement dan sealing; tidak boleh ada korosi, aus, retak, deformasi, kontaminasi atau modifikasi yang tidak disetujui."),
     ("g.17 Kontrol firmware dan konfigurasi", "Hanya versi firmware dan model AI yang disetujui untuk revisi hardware terkait yang boleh digunakan. Identifikasi versi/build/hash dan catat per unit. Perubahan akuisisi, klasifikasi, alarm, kipas, daya, komunikasi dan diagnostik harus dievaluasi, disetujui dan dapat di-rollback."),
-    ("g.18 Pembatasan perbaikan", "Hanya personel berwenang, prosedur dan komponen pengganti yang disetujui. Dilarang mengebor, mengelas, memodifikasi ulir, memperbesar lubang, mem-bypass proteksi atau mengikir/menggerinda/melapisi flame path. Inspeksi dan uji fungsi sebelum unit kembali ke layanan."),
+    ("g.18 Pembatasan perbaikan", "Perbaikan hanya boleh dilakukan oleh personel berwenang dengan prosedur dan komponen pengganti yang disetujui. Dilarang mengebor, mengelas, memodifikasi ulir, memperbesar lubang, memintas (bypass) proteksi atau mengikir/menggerinda/melapisi flame path. Inspeksi dan uji fungsi sebelum unit dioperasikan kembali."),
     ("g.19 Penyimpanan dan transportasi", "Gunakan kemasan pelindung terhadap benturan, getaran, kelembapan, korosi dan debu. Lindungi mesh, antena, ulir, permukaan sealing, cable entry dan stud PE. Lepas pelindung sementara inlet sebelum operasi dan inspeksi unit sebelum energisasi."),
     ("g.20 Penghentian penggunaan", "Isolasi dan verifikasi suplai tidak bertegangan, terapkan LOTO dan konfirmasi area aman. Lepas koneksi daya, PE, antena, komunikasi dan mounting; amankan kabel tersisa. Tandai unit decommissioned dan tangani pembuangan elektronik/logam/PCB sesuai aturan lokasi."),
 ]
@@ -471,21 +478,21 @@ def build_02():
     no = "GLD/ATEX-UM/2026-001-ID"
     d = new_doc(no, "02 Panduan Pengguna")
     title_block(d, "Panduan Pengguna GLD V2", "Instalasi, pengoperasian, inspeksi dan pemeliharaan", no,
-                "Menjawab permintaan TÜV SÜD: User manual")
+                "Tanggapan atas permintaan TÜV SÜD: User manual")
     note(d, "Draf untuk penelaahan. Belum boleh dipakai untuk instalasi di atmosfer eksplosif sebelum sertifikat terbit.")
     d.add_heading("1. Deskripsi produk", level=1)
-    para(d, "GLD V2 adalah detektor gas titik tetap. Udara sekitar masuk melalui mesh stainless steel; kipas DC membantu "
+    para(d, "GLD V2 adalah detektor gas tipe titik untuk instalasi tetap. Udara sekitar masuk melalui mesh stainless steel; kipas DC membantu "
             "aliran ke delapan sensor MQ. ESP32-S3 melakukan klasifikasi AI lokal (Clean Air, LPG, H₂); alarm visual/audibel "
             "dan notifikasi LoRa aktif saat kriteria alarm terpenuhi. Ambang confidence ≥ 30 % bukan konsentrasi gas atau %LEL. "
             "GLD tidak dimaksudkan sebagai satu-satunya sistem proteksi.")
     table(d, [
         ["Parameter", "Spesifikasi"],
-        ["Suplai", "24 VDC kontinu; maks. ± 8 W (≈ 0,33 A); PSU ≥ 1 A per unit"],
+        ["Suplai", "24 VDC kontinu; maks. ±8 W (≈ 0,33 A); PSU ≥ 1 A per unit"],
         ["Sensor", "MQ-2, MQ-3B, MQ-4, MQ-5, MQ-6, MQ-7B, MQ-8, MQ-135"],
         ["Akuisisi", "ADS1256, 24-bit; interval pemindaian 500 ms"],
         ["Komunikasi", "LoRa E22-900MM22S, 920–923 MHz; laporan rutin 10 detik, alarm segera"],
         ["RS-485", "Modbus RTU read-only, 9600 bit/s, 8N1, Unit ID 1; 8 register"],
-        ["Lingkungan", "−20 s/d +60 °C (batas atas dalam peninjauan); 5–95 % RH non-kondensasi; IP66 target"],
+        ["Lingkungan", "−20 hingga +60 °C (batas atas dalam peninjauan); 5–95 % RH non-kondensasi; IP66 target"],
         ["Target Ex", "II 2G Ex db IIC T4 Gb; gas saja; belum tersertifikasi"],
     ], [3.4, TW - 3.4])
     d.add_heading("2. Petunjuk keselamatan, instalasi dan operasi", level=1)
@@ -496,10 +503,10 @@ def build_02():
                 ["Kondisi", "Tindakan"],
                 ["Alarm gas", "Ikuti prosedur respons gas darurat lokasi"],
                 ["Fault sensor / nulling tidak 8/8", "Investigasi, perbaiki, ulangi nulling di udara bersih"],
-                ["LoRa terputus", "Beri tahu operator; terapkan impairment"],
-                ["Alarm lokal gagal", "Keluarkan dari layanan, perbaiki dan verifikasi"],
+                ["Komunikasi LoRa terputus", "Beri tahu operator; terapkan prosedur impairment lokasi"],
+                ["Alarm lokal gagal", "Hentikan pengoperasian, perbaiki, lalu verifikasi"],
                 ["Fault grounding", "Isolasi hingga kontinuitas pulih"],
-                ["Air masuk / enclosure rusak", "Keluarkan dari layanan, inspeksi sebelum commissioning ulang"],
+                ["Air masuk / enclosure rusak", "Hentikan pengoperasian; inspeksi sebelum commissioning ulang"],
             ], [6.0, TW - 6.0])
         if h.startswith("g.14"):
             table(d, [
@@ -524,7 +531,7 @@ def build_03():
     no = "GLD/ATEX-EX/2026-001-ID"
     d = new_doc(no, "03 Target Penandaan Ex")
     title_block(d, "Target Penandaan Ex", "Usulan klasifikasi ATEX/IECEx, nameplate dan evaluasi awal kelas suhu", no,
-                "Menjawab permintaan TÜV SÜD: Target Ex marking")
+                "Tanggapan atas permintaan TÜV SÜD: Target Ex marking")
     d.add_heading("1. Usulan penandaan", level=1)
     for line in ("ATEX:   ⟨Ex⟩ II 2G  Ex db IIC T4 Gb", "IECEx:   Ex db IIC T4 Gb", "−20 °C ≤ Ta ≤ +60 °C   ·   IP66 (target)"):
         p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -539,7 +546,7 @@ def build_03():
         ["IIC", "Kelompok gas IIC (mencakup H₂)", "Usulan"],
         ["T4", "Suhu permukaan maksimum 135 °C", "Usulan; evaluasi awal di §3"],
         ["Gb", "Equipment Protection Level Gb", "Usulan"],
-        ["Ta", "−20 s/d +60 °C", "Batas atas dalam peninjauan: rating housing dasar +55 °C"],
+        ["Ta", "−20 hingga +60 °C", "Batas atas dalam peninjauan: rating housing dasar +55 °C"],
         ["Debu", "Tidak diajukan", "Gas saja"],
     ], [2.4, 7.4, 6.7])
     note(d, "Usulan — belum tersertifikasi. Penandaan ini tidak boleh diterapkan sebagai klaim sertifikasi.")
@@ -550,14 +557,15 @@ def build_03():
         ["Produk", "Gas Leak Detector — GLD V2"],
         ["Nomor seri / tahun", "Per unit; contoh sampel GLD2-0x1001"],
         ["Penandaan", "Simbol Ex segi enam, II 2G; Ex db IIC T4 Gb — usulan"],
-        ["Rating", "24 VDC, 8 W maks.; Ta −20 s/d +60 °C; IP66 target"],
+        ["Rating", "24 VDC, 8 W maks.; Ta −20 hingga +60 °C; IP66 target"],
         ["Cable entry", "M20 × 1,5"],
         ["Sertifikat", "Nomor ATEX/IECEx dan CE/notified body diisi setelah terbit"],
         ["Peringatan", "WARNING – DO NOT OPEN WHEN AN EXPLOSIVE ATMOSPHERE MAY BE PRESENT, ditambah peringatan sesuai sertifikat"],
         ["Lokasi & bahan", "Permukaan datar atas base di samping antena; pelat 80 × 55 mm stainless steel 0,5 mm, etsa/engraving; 4 rivet atau perekat"],
     ], [3.6, TW - 3.6])
     x = [f for f in FIG if f["file"].startswith("x")][0]
-    figure(d, A / x["file"], "MS-05 — rancangan nameplate (bukan penandaan tersertifikasi).", max_h=10)
+    figure(d, A / x["file"], "MS-05 — rancangan nameplate (bukan penandaan tersertifikasi).", max_h=7)
+    figure(d, A / "nameplate_mockup_figure.jpg", "Ilustrasi posisi nameplate pada unit: permukaan datar atas base di samping antena (usulan, bukan penandaan tersertifikasi). Kanan: detail.", crop=False, max_h=7.8)
     d.add_heading("3. Evaluasi awal kelas suhu T4", level=1)
     para(d, "Batas T4 adalah 135 °C; evaluasi memakai batas efektif 130 °C (margin 5 K). Pengukuran internal dengan "
             "termokopel delapan titik, 180 menit per kondisi, diekstrapolasi ke Ta +60 °C: T(Ta,max) = Ta,max + (T terukur − Ta uji).")
@@ -584,7 +592,7 @@ def build_03():
         "Gambar flame path terkendali, data material enclosure, dan pengujian tipe Ex db IIC.",
         "Pembuktian mesh depan sebagai elemen flame path (sertifikat atau uji).",
         "Gland Ex d IIC, plug/adaptor, beacon dan feed-through antena yang sesuai atau dicakup penilaian perangkat.",
-        "Sertifikat housing dasar HIREP HRP-T1000-A (klaim pemasok Ex d IIC T6 Gb, −20…+55 °C, IP66). Rating T6 pemasok berlaku untuk isi ≤ 3 W dan tidak diklaim untuk GLD (± 8 W).",
+        "Sertifikat housing dasar HIREP HRP-T1000-A (klaim pemasok Ex d IIC T6 Gb, −20…+55 °C, IP66). Rating T6 pemasok berlaku untuk isi ≤ 3 W dan tidak diklaim untuk GLD (±8 W).",
         "Bukti IP66 dan hasil pengujian temperatur final.",
     ])
     f = OUT / "03_Target_Penandaan_Ex_GLD_V2_ID.docx"; d.save(f); return f
@@ -595,8 +603,8 @@ def build_04():
     no = "GLD/ATEX-IP/2026-001-ID"
     d = new_doc(no, "04 Status IP66")
     title_block(d, "Status IP66 dan Rencana Verifikasi", "Ingress protection — target desain dan bukti pengujian", no,
-                "Menjawab permintaan TÜV SÜD: IP66?")
-    note(d, "Jawaban singkat: IP66 adalah target desain dan belum diuji pada GLD V2.")
+                "Tanggapan atas permintaan TÜV SÜD: IP66")
+    note(d, "Ringkasan: IP66 adalah target desain dan belum diuji pada GLD V2.")
     d.add_heading("1. Target dan batas klaim", level=1)
     para(d, "IP66 berarti kedap debu (IP6X) dan tahan semburan air kuat (IPX6) menurut IEC 60529. Penilaian mencakup unit "
             "GLD lengkap, bukan hanya gland atau housing. Inlet gas sengaja terbuka ke udara sekitar, sehingga kesesuaian "
@@ -627,14 +635,14 @@ def build_05():
     no = "GLD/ATEX-QMS/2026-001-ID"
     d = new_doc(no, "05 Status ISO 9001")
     title_block(d, "Status Sertifikasi ISO 9001", "Sistem manajemen mutu produsen dan persiapan QAR/QAN", no,
-                "Menjawab permintaan TÜV SÜD: ISO 9001 certificate")
-    note(d, "Jawaban singkat: sertifikasi ISO 9001 produsen dalam proses; salinan sertifikat diserahkan setelah terbit.")
+                "Tanggapan atas permintaan TÜV SÜD: sertifikat ISO 9001")
+    note(d, "Ringkasan: sertifikasi ISO 9001 produsen dalam proses; salinan sertifikat diserahkan setelah terbit.")
     d.add_heading("1. Produsen", level=1)
     table(d, [
         ["Data", "Keterangan"],
         ["Produsen", "Produsen pemohon — identitas dicantumkan pada formulir aplikasi"],
         ["Lokasi produksi", "Lokasi produksi serial ditetapkan setelah tahap prototipe"],
-        ["Perakitan PCB", "Pabrikasi dan perakitan PCB melalui penyedia PCB assembly"],
+        ["Perakitan PCB", "Fabrikasi dan perakitan PCB dilakukan oleh penyedia jasa PCB assembly"],
     ], [3.6, TW - 3.6])
     d.add_heading("2. Status ISO 9001", level=1)
     para(d, "Proses sertifikasi ISO 9001 produsen berjalan; audit sertifikasi dijadwalkan Oktober 2026. Nomor sertifikat, "

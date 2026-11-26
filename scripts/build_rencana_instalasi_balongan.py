@@ -106,7 +106,7 @@ PTS = {
     "GLD-01": ((1262, 212), 1.0), "GLD-02": ((1303, 268), 1.0), "CH-01": ((1335, 214), 3.0),
     "CH-02": ((1332, 330), 6.0), "JB": ((1290, 240), 0.8), "GW-01": ((878, 716), 9.5),
 }
-ROOF = 8.0  # asumsi tinggi atap kantor
+ROOF = 4.0  # asumsi tinggi atap carport kantor
 
 
 def build_3d(path, box, title, show, up=1, zs=2.0, shear=0.45, squash=0.55, labels=None):
@@ -198,7 +198,7 @@ def build_3d(path, box, title, show, up=1, zs=2.0, shear=0.45, squash=0.55, labe
         ax.annotate("5 VDC dari adaptor\ndi dalam kantor", (roof[0] + off, (g[1] + roof[1]) / 2),
                     xytext=(roof[0] + off + 25 * up, (g[1] + roof[1]) / 2 + 10 * up), fontsize=7.5, color="white", zorder=20,
                     arrowprops=dict(arrowstyle="-", color=red), bbox=dict(boxstyle="round,pad=0.25", fc=red, ec="none", alpha=0.92))
-        lab("GW-01", "GW-01  tepi atap kantor (±8 m) · siku besi")
+        lab("GW-01", "GW-01  tepi atap carport kantor (±4 m) · siku besi")
     # LoRa
     for a_, b_, txt in (("GLD-01", "CH-01", None), ("GLD-02", "CH-01", None), ("CH-01", "CH-02", "±20 m"),
                         ("CH-02", "GW-01", "±91 m")):
@@ -454,11 +454,11 @@ def build():
     O, C, B_, P_, G_ = "#00977A", "#D50000", "#454A52", "#7B2FE0", "#F07800"
     plan_map(PLAN)
     label_render("overview", "wide", D3A, (0, 330, 2200, 1400), "A. Gambaran lokasi — klaster WHB ke Gateway di atap kantor", [
-        ("lab", "GW-01", "GW-01 Gateway · tepi atap kantor", 120, -230, O),
+        ("lab", "GW-01", "GW-01 Gateway · tepi atap carport kantor", 120, -230, O),
         ("lab", "BLDG", "Gedung kantor: adaptor 5 VDC, router & PC server di dalam", 330, 170, B_),
         ("tag", "LORA:CH-02>GW-01", "LoRa CH-02 → GW-01 ± 91 m", "#0077E6", (60, 40)),
         ("lab", "STRUCT", "Klaster WHB: GLD-01, GLD-02, CH-01, CH-02", -300, 230, G_),
-        ("dim", "ROOF:base", "ROOF:top", "± 8 m", -60),
+        ("dim", "ROOF:base", "ROOF:top", "± 4 m", -60),
         ("lab", "COL1", "Bangunan, kolom & unit proses dari citra peta (bentuk/tinggi ilustratif)", 120, -120, "#6E737A"),
     ])
     label_render("struct", "wide", D3S, (0, 0, 2200, 1400), "B. Struktur WHB — bangunan di atas lokasi GLD (dimensi estimasi dari foto)", [
@@ -491,10 +491,14 @@ def build():
         ("lab", "GLD-02:base", "Pelat dasar 240 × 240 × 10 mm + anchor, dicor", 420, 120, B_),
         ("dim", "GLD-02:base", "GLD-02:top", "1,0 m", -110),
     ], legend=False)
-    label_render("gw", "detail", D3D, (300, 0, 2200, 1350), "E. Detail Gateway di tepi atap kantor (skala nyata)", [
-        ("lab", "GW-01", "GW-01 Gateway · 5 VDC ± 0,73 W", 430, -60, O),
-        ("lab", "SIKU", "Siku L 50 × 50 × 5 HDG ± 0,5 m, baut/klem SS304", -380, -150, B_),
+    label_render("gw", "detail", D3D, (300, 0, 2200, 1350), "E. Detail Gateway di tepi atap carport kantor (skala nyata)", [
+        ("lab", "GW-01", "GW-01 Gateway · 5 VDC ± 0,73 W", 430, 0, O),
+        ("lab", "ANT", "Antena Gateway", 380, -120, "#1F7FD0"),
+        ("lab", "SIKU", "Siku L 50 × 50 × 5 HDG ± 0,5 m, kaki dibaut ke atap", -420, -120, B_),
+        ("lab", "CARPORT2", "Atap carport (seng) di depan gedung kantor", -100, 170, B_),
+        ("lab", "POSTBAND", "Tiang carport bergaris kuning-hitam", 420, 40, B_),
         ("dim", "SIKU:base", "SIKU:top", "0,5 m", -90),
+        ("dim", "ROOF:base", "ROOF:top", "± 4 m", 120),
     ], legend=False)
     d = docx.Document()
     st = d.styles["Normal"]; st.font.name = "Calibri"; st.font.size = Pt(10)
@@ -565,7 +569,7 @@ def build():
     para(d, "Model 3D berikut dibangun dari citra peta untuk memperlihatkan posisi dan ketinggian GLD, Cluster Head, "
             "dan Gateway serta arah link LoRa. Lokasi junction box dan rute kabel belum ditentukan sehingga tidak digambarkan "
             "(lihat diagram satu garis di atas). Tampilan A–B: ukuran perangkat dibesarkan 5× agar terlihat (tinggi tiang nyata); "
-            "tampilan C–D: skala nyata. Posisi, bentuk bangunan, dan tinggi atap kantor (± 8 m) adalah estimasi dari citra.", size=9.5)
+            "tampilan C–D: skala nyata. Posisi, bentuk bangunan, dan tinggi atap carport kantor (± 4 m) adalah estimasi dari citra.", size=9.5)
     figure(d, D3A, "Gambar 3. Gambaran lokasi: klaster WHB dan Gateway di tepi atap kantor.", Inches(6.85))
     figure(d, D3S, "Gambar 4. Struktur WHB (bentuk dari foto 17 Nov 2026): lantai dasar berkolom beton tempat GLD-01/02 dan CH-01, "
                    "rangka baja bertingkat dengan pipa vertikal berinsulasi, steam drum di puncak, ducting ke cerobong. "
@@ -573,7 +577,7 @@ def build():
     figure(d, D3B, "Gambar 5. Klaster WHB: GLD-01/02 (stanchion 1 m) dan CH-01 (± 1,5 m) di lantai dasar bawah struktur WHB (kolom beton, girder, deck digambar transparan); "
                    "CH-02 bertenaga surya (6 m) merelay data ke Gateway.", Inches(6.85))
     figure(d, D3C, "Gambar 6. Detail GLD di stanchion 1 m dengan pelat U-bolt.", Inches(6.85))
-    figure(d, D3D, "Gambar 7. Detail Gateway: dudukan siku besi di tepi atap kantor.", Inches(6.85))
+    figure(d, D3D, "Gambar 7. Detail Gateway: siku L ± 0,5 m di tepi atap carport depan gedung kantor (± 4 m), GW di atas siku dan antena di atas GW.", Inches(6.85))
     para(d, "Catu daya. PSU 24 VDC memakai unit RU VI (TDK-Lambda DLP240-24-1) di panel RU VI (safe area), ditambah PSU 5 VDC "
             "(Mean Well HDR-15-5) dan fuse per cabang di panel yang sama. Dua jalur kabel armoured (24 VDC dan 5 VDC) ditarik ke "
             "satu terminal box Ex d di lapangan, lalu dicabangkan ke GLD-01, GLD-02 (24 VDC) dan CH-01 (5 VDC). Tidak ada PSU di "

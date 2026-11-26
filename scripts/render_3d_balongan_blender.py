@@ -22,7 +22,7 @@ MAP = os.path.join(RB, "peta_lokasi_balongan_26nov_crop.png")
 BOX = (760, 120, 1480, 800)  # crop piksel citra peta
 PPM = 5.8                    # px per meter — dikalibrasi ulang dari ukur Google Maps: CH-01→CH-02 ±20 m, CH-02→GW ±91 m (total 111,3 m)
 S = 5.0 if PASS == "wide" else 1.0   # pembesaran ukuran perangkat (tinggi tiang selalu nyata)
-ROOF = 8.0                   # asumsi tinggi atap kantor
+ROOF = 4.0                   # asumsi tinggi atap kantor
 CH1_H, CH2_H, GLD_H, JB_H = 1.5, 6.0, 1.0, 1.0
 
 
@@ -313,7 +313,23 @@ def column(cx, cy, r_px, h, m, name=None):
 
 
 WALL = mat("wall", (0.9, 0.88, 0.82)); PROC = mat("proc", (0.62, 0.64, 0.68)); VESS = mat("vess", (0.85, 0.86, 0.88))
-prism([(50, 360), (215, 640), (87, 719), (-78, 439)], ROOF, WALL, "BLDG")              # gedung kantor (lokasi GW)
+# gedung kantor 1 lantai + carport beratap seng di sisi NE (foto survei: GW di tepi atap carport)
+CP = 6.0 * PPM                                                                           # lebar carport ± 6 m (px)
+nin = (-0.861 * CP, 0.508 * CP)                                                          # arah ke dalam gedung (px)
+A_, B_ = (50, 360), (215, 640)
+A2, B2 = (A_[0] + nin[0], A_[1] + nin[1]), (B_[0] + nin[0], B_[1] + nin[1])
+prism([A2, B2, (87, 719), (-78, 439)], 3.5, WALL, "BLDG")                              # gedung kantor
+ROOFM = mat("seng", (0.72, 0.74, 0.76))
+cp = prism([A_, B_, B2, A2], 0.12, ROOFM); cp.location.z = ROOF - 0.12                # atap carport (seng)
+POST = mat("post", (0.88, 0.89, 0.9)); YEL = mat("post_y", (1.0, 0.82, 0.0)); BLK = mat("post_k", (0.05, 0.05, 0.05))
+for i in range(12):
+    t = (i + 0.5) / 12
+    q = w(A_[0] + (B_[0] - A_[0]) * t + BOX[0] + nin[0] * 0.03, A_[1] + (B_[1] - A_[1]) * t + BOX[1] + nin[1] * 0.03)
+    cyl(q, 0.08, ROOF - 0.12, POST, 12)
+    for k in range(4):
+        cyl(q + Vector((0, 0, k * 0.25)), 0.085, 0.25, YEL if k % 2 else BLK, 12)
+    if i == 9:
+        NP["CARPORT"] = q - Vector((280, 165, 0)).normalized() * 3.0 + Vector((0, 0, ROOF)); NP["POSTBAND"] = q + Vector((0, 0, 0.5))
 prism([(382, 455), (520, 365), (562, 440), (425, 537)], 9.0, WALL, "BLDG2")            # gedung tengah
 prism([(100, 0), (205, 0), (250, 140), (160, 170)], 10.0, PROC, "PROC1")               # unit proses barat laut
 prism([(398, 175), (455, 150), (472, 215), (420, 240)], 10.0, PROC)                     # unit proses (rangka)
@@ -322,14 +338,29 @@ column(242, 252, 9, 20.0, VESS, "COL1"); column(160, 312, 9, 20.0, VESS)        
 column(520, 345, 11, 6.0, VESS)                                                          # tangki/vessel
 NP["WHB"] = w(1300, 150, 10)
 NP["ROOF:base"] = gw.copy(); NP["ROOF:top"] = gw + Vector((0, 0, ROOF))
-cube(gw + Vector((0, 0, ROOF)), 0.05, 0.05, 0.5, M["steel"])                      # siku L50×50×5, 0,5 m (antena GW menambah tinggi)
+# GW di tepi atap carport: titik peta diproyeksikan ke garis tepi A–B, 0,2 m ke dalam
+ea, eb = w(A_[0] + BOX[0], A_[1] + BOX[1]), w(B_[0] + BOX[0], B_[1] + BOX[1])
+ed = (eb - ea).normalized()
+gw = ea + ed * (gw - ea).dot(ed) - Vector((280, 165, 0)).normalized() * 0.2
+P["GW-01"] = gw
+NP["ROOF:base"] = gw.copy(); NP["ROOF:top"] = gw + Vector((0, 0, ROOF))
+# siku L: kaki 0,3 m dibaut di atap carport + batang tegak ± 0,5 m di tepi atap; GW di atasnya, antena di atas GW
+nrm_ = Vector((280, 165, 0)).normalized()
+foot = gw - nrm_ * 0.15
+cube(foot + Vector((0, 0, ROOF)), 0.3 * abs(nrm_.x) + 0.05, 0.3 * abs(nrm_.y) + 0.05, 0.05, M["steel"])
+cube(gw + Vector((0, 0, ROOF)), 0.05, 0.05, 0.5, M["steel"])
 NP["SIKU"] = gw + Vector((0.03, 0, ROOF + 0.25))
 NP["SIKU:base"] = gw + Vector((0, 0, ROOF)); NP["SIKU:top"] = gw + Vector((0, 0, ROOF + 0.5))
-gwb = gw + Vector((0, -0.025 - 0.05 * S, ROOF + 0.5 - 0.35 * S))
-cube(gwb, 0.22 * S, 0.1 * S, 0.3 * S, M["gw"])
-cyl(gwb + Vector((0, 0, 0.3 * S)), 0.005 * S, 0.35 * S, M["ant"], 8)
-TOP["GW-01"] = gwb + Vector((0, 0, 0.65 * S))
-NP["GW-01"] = gwb + Vector((0, 0, 0.15 * S))
+gwb = gw + Vector((0, 0, ROOF + 0.5))
+cube(gwb, 0.15 * S, 0.1 * S, 0.22 * S, M["gw"])
+ANT = mat("ant_lb", (0.45, 0.78, 1.0))
+cyl(gwb + Vector((0, 0, 0.22 * S)), 0.008 * S, 0.9 * S, ANT, 8)
+NP["ANT"] = gwb + Vector((0, 0, 0.22 * S + 0.6 * S))
+TOP["GW-01"] = gwb + Vector((0, 0, 1.12 * S))
+_t = Vector((-165, 280, 0)).normalized()
+NP["CARPORT"] = gw - nrm_ * 3.0 - _t * 4.0 + Vector((0, 0, ROOF))
+NP["CARPORT2"] = gw - nrm_ * 3.0 + _t * 4.0 + Vector((0, 0, ROOF))
+NP["GW-01"] = gwb + Vector((0, 0, 0.11 * S))
 tang = Vector((-nrm.y, nrm.x, 0))
 
 # link LoRa (biru putus-putus)
@@ -367,8 +398,8 @@ if PASS == "wide":
 else:
     g2 = P["GLD-02"]
     out["gld"] = render("gld", (g2.x + 1.6, g2.y - 2.4, 1.6), (g2.x, g2.y, 0.75), 30)
-    cam = gw + nrm * 2.6 + tang * 1.6
-    out["gw"] = render("gw", (cam.x, cam.y, ROOF + 1.5), (gw.x, gw.y, ROOF + 0.1), 30)
+    cam = gw + nrm * 7.0 + tang * 3.5
+    out["gw"] = render("gw", (cam.x, cam.y, 6.8), (gw.x - nrm.x * 1.0, gw.y - nrm.y * 1.0, ROOF - 0.8), 28)
 with open(os.path.join(RB, f"render3d_pts_{PASS}.json"), "w") as f:
     json.dump(out, f, indent=1)
 print("RENDER_OK", PASS)

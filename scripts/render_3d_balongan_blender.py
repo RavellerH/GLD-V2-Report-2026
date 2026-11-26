@@ -216,6 +216,57 @@ def structure(p, hx=9.1, hy=8.0, h=5.0):
         cube(p + Vector((dx, 0, h)), 0.5, 2 * hy + 1.0, 0.8, gird)
     cube(p + Vector((0, 0, h + 0.8)), 2 * hx + 1.0, 2 * hy + 1.0, 0.25, deck)
     NP["STRUCT"] = p + Vector((hx * 0.6, -hy, h + 0.9))
+    # ---- bangunan WHB di atas lantai dasar (foto 17 Nov; tinggi/dimensi = estimasi visual)
+    frame = mat("whb_frame", (0.36, 0.38, 0.42)); ins = mat("whb_ins", (0.86, 0.87, 0.89))
+    casing = mat("whb_casing", (0.6, 0.62, 0.66)); grat = mat("whb_grat", (0.42, 0.45, 0.5), 0.55)
+    yel = mat("gas_yellow", (1.0, 0.8, 0.0)); stk = mat("stack", (0.74, 0.76, 0.79))
+    z0, TOPZ = h + 1.05, 22.0
+    for dx in (-hx, -hx / 2, 0, hx / 2, hx):                      # kolom rangka baja
+        for dy in (-hy, hy):
+            cube(p + Vector((dx, dy, z0)), 0.35, 0.35, TOPZ - z0, frame)
+    for lv in (10.0, 14.0, 18.0, TOPZ):                            # balok & grating tiap lantai
+        for dy in (-hy, hy):
+            cube(p + Vector((0, dy, lv - 0.3)), 2 * hx + 0.4, 0.3, 0.3, frame)
+        for dx in (-hx, hx):
+            cube(p + Vector((dx, 0, lv - 0.3)), 0.3, 2 * hy + 0.4, 0.3, frame)
+        cube(p + Vector((0, -hy + 1.2, lv)), 2 * hx + 0.4, 2.4, 0.08, grat)   # platform sisi depan
+        for dx in (-hx, -hx / 2, 0, hx / 2, hx):                  # railing
+            cube(p + Vector((dx, -hy - 0.0, lv)), 0.06, 0.06, 1.1, frame)
+        cube(p + Vector((0, -hy, lv + 1.05)), 2 * hx + 0.4, 0.06, 0.06, frame)
+    cube(p + Vector((0, 1.0, z0)), 2 * hx * 0.75, 2 * hy * 0.6, TOPZ - 3.0 - z0, casing)   # casing boiler/HRSG
+    for i in range(7):                                             # pipa vertikal berinsulasi (riser/downcomer)
+        x = -hx + 1.5 + i * (2 * hx - 3.0) / 6
+        r = 0.32 if i % 2 else 0.22
+        y = -hy + 0.9 + (i % 2) * 0.6
+        tube([p + Vector((x, y, z0)), p + Vector((x, y, TOPZ + 0.8)), p + Vector((x, y + 1.5, TOPZ + 1.8))], r, ins)
+    for zz, yy in ((h - 0.9, -hy + 2.0), (h - 1.5, -hy + 3.2)):    # pipa gas kuning di bawah girder
+        tube([p + Vector((-hx - 3, yy, zz)), p + Vector((hx + 3, yy, zz))], 0.2, yel)
+    ins_pipe = p + Vector((-hx - 3, -hy + 4.5, h - 1.2))
+    tube([ins_pipe, p + Vector((hx + 3, -hy + 4.5, h - 1.2))], 0.3, ins)
+    # steam drum horizontal di puncak + saddle
+    bpy.ops.mesh.primitive_cylinder_add(vertices=32, radius=1.2, depth=2 * hx + 1.5,
+                                        location=(p.x, p.y + 1.0, TOPZ + 2.0), rotation=(0, math.pi / 2, 0))
+    add(bpy.context.object, ins)
+    for dx in (-hx * 0.6, hx * 0.6):
+        cube(p + Vector((dx, 1.0, TOPZ)), 0.5, 1.6, 1.0, frame)
+    # ducting gas buang ke cerobong (timur) + cerobong beralas kerucut
+    sx = p + Vector((hx + 7.0, 2.0, 0))
+    bpy.ops.mesh.primitive_cone_add(vertices=40, radius1=4.0, radius2=2.0, depth=10.0, location=(sx.x, sx.y, 5.0))
+    add(bpy.context.object, stk)
+    cyl(sx + Vector((0, 0, 10.0)), 2.0, 30.0, stk, 40)
+    tube([p + Vector((hx * 0.3, 1.0, TOPZ - 3.0)), p + Vector((hx * 0.3, 1.0, TOPZ + 5.0)),
+          p + Vector((hx + 3.0, 1.5, TOPZ + 7.5)), sx + Vector((-1.0, 0, TOPZ + 7.5))], 1.6, stk)
+    NP["W:drum"] = p + Vector((hx + 0.75, 1.0, TOPZ + 2.0))
+    NP["W:pipes"] = p + Vector((-hx + 1.5 + 2 * (2 * hx - 3.0) / 6, -hy + 0.9, 15.0))
+    NP["W:casing"] = p + Vector((hx * 0.4, 1.0 - hy * 0.6, 13.0))
+    NP["W:duct"] = p + Vector((hx + 2.0, 1.5, TOPZ + 7.0))
+    NP["W:stack"] = sx + Vector((2.0, 0, 20.0))
+    NP["W:stk_base"] = sx + Vector((-4.0, 0, 0)); NP["W:stk_top"] = sx + Vector((-4.0, 0, 40.0))
+    NP["W:yellow"] = p + Vector((hx * 0.25, -hy + 2.0, h - 0.9))
+    NP["W:col"] = p + Vector((-hx, -hy - 0.5, 2.5))
+    NP["W:base"] = p + Vector((-hx - 1.0, -hy - 0.5, 0)); NP["W:deck"] = p + Vector((-hx - 1.0, -hy - 0.5, h + 1.05))
+    NP["W:top"] = p + Vector((-hx - 1.0, -hy - 0.5, TOPZ))
+    NP["W:c"] = p.copy()
 
 
 gld("GLD-01"); gld("GLD-02")
@@ -310,7 +361,9 @@ out = {}
 if PASS == "wide":
     out["overview"] = render("overview", (122, -16, 49), (55, 56, 3.5), 24)
     c0 = P["GLD-02"]
-    out["whb"] = render("whb", (c0.x + 22, c0.y - 28, 15), (c0.x + 2, c0.y + 1, 2.0), 30)
+    out["whb"] = render("whb", (c0.x + 22, c0.y - 28, 9), (c0.x + 2, c0.y + 1, 2.5), 30)
+    wc = NP["W:c"]
+    out["struct"] = render("struct", (wc.x + 30, wc.y - 50, 13), (wc.x + 2, wc.y, 14), 26)
 else:
     g2 = P["GLD-02"]
     out["gld"] = render("gld", (g2.x + 1.6, g2.y - 2.4, 1.6), (g2.x, g2.y, 0.75), 30)

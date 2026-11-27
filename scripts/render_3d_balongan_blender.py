@@ -31,8 +31,8 @@ def w(px, py, z=0.0):
     return Vector(((px - BOX[0]) / PPM, (BOX[3] - py) / PPM, z))
 
 
-P = {"GLD-01": w(1125, 195), "GLD-02": w(1210, 295), "CH-01": w(1167, 245), "CH-02": w(1332, 330),   # GLD: titik hijau peta user 27 Nov
-     "JB": w(1160, 258), "GW-01": w(936, 680)}
+P = {"GLD-01": w(1285, 187), "GLD-02": w(1362, 289), "CH-01": w(1370, 220), "CH-02": w(1315, 429),   # GLD: titik hijau peta user 27 Nov
+     "JB": w(1324, 238), "GW-01": w(936, 680)}
 NP = {}  # titik bernama untuk label/dimensi
 
 # ------------------------------------------------------------------ scene
@@ -182,23 +182,18 @@ def gld(k):
     NP[k + ":gland"] = c + Vector((0, 0, -0.072 * S))
 
 
-def ch(k, h, solar=False):
+def ch(k, h, solar=False, box_h=None, pv_h=1.5):
     p = P[k]
-    if solar and S == 1.0:                        # model video utuh (tiang ±6 m + panel surya)
-        inst(C_CH, p + Vector((0, 0, 0.5)))
-        TOP[k] = p + Vector((0.014, 0, 7.27))
-        NP[k] = p + Vector((0, 0, 6.09))
-        NP[k + ":pv"] = p + Vector((0.2, -0.15, 1.6))
-        NP[k + ":base"] = p.copy(); NP[k + ":top"] = p + Vector((0, 0, 6.0))
-        return
     stanchion(p, h, k)
     sc_ = min(S, 2.5)
+    if box_h is not None:                         # CH-02 (27 Nov): CH ± 4,2 m di tiang 6 m, 1 panel ± 2,5 m di bawah CH
+        h = box_h
     inst(C_CHBOX, p + Vector((0, 0, h)), sc_)
     TOP[k] = p + Vector((0.014 * sc_, 0, h + 1.267 * sc_))
     NP[k] = p + Vector((0, 0, h + 0.09 * sc_))
     if solar:
-        inst(C_SOLAR, p + Vector((0, 0, 1.5)), sc_)
-        NP[k + ":pv"] = p + Vector((0.2 * sc_, -0.15 * sc_, 1.5 + 0.1 * sc_))
+        inst(C_SOLAR, p + Vector((0, 0, pv_h)), sc_)
+        NP[k + ":pv"] = p + Vector((0.2 * sc_, -0.15 * sc_, pv_h + 0.1 * sc_))
 
 
 def structure(p, hx=14.0, hy=12.0, h=5.0):
@@ -282,7 +277,7 @@ _R = Matrix.Rotation(WHB_ROT, 3, "Z")
 for _k in [k for k in NP if k.startswith("W:") or k == "STRUCT"]:
     NP[_k] = _pc + _R @ (NP[_k] - _pc)
 ch("CH-01", CH1_H)
-ch("CH-02", CH2_H, solar=True)
+ch("CH-02", CH2_H, solar=True, box_h=4.2, pv_h=2.5)
 
 # gedung kantor + gateway di tepi atap
 gw = P["GW-01"]
@@ -444,7 +439,7 @@ out = {}
 if PASS == "wide":
     out["overview"] = render("overview", (166, -24, 60), (85, 64, 3.5), 24)
     c0 = (P["GLD-01"] + P["GLD-02"]) / 2
-    out["whb"] = render("whb", (c0.x + 4, c0.y - 46, 13), (c0.x + 12, c0.y - 5, 2.5), 30)
+    out["whb"] = render("whb", (c0.x + 26, c0.y - 34, 9), (c0.x - 2, c0.y - 9, 2.2), 24)
     wc = NP["W:c"]
     out["struct"] = render("struct", (wc.x - 38, wc.y - 52, 24), (wc.x + 2, wc.y, 9), 26)
 else:

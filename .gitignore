@@ -31,7 +31,10 @@ env
 Paket Meeting TUV SUD 26November2026/00_Catatan_Internal_*
 
 # Komersial & data pribadi (repo publik) — simpan lokal saja
-Deliverables/RAB_Material_Instalasi_GLD_RU-VI_Balongan.xlsx
-Deliverables/Penawaran_Harga_Material_Instalasi_GLD_RU-VI_Balongan.*
+Deliverables/Instalasi_GLD_RU-VI_Balongan/RAB_Material_Instalasi_GLD_RU-VI_Balongan.xlsx
+Deliverables/Instalasi_GLD_RU-VI_Balongan/Penawaran_Harga_Material_Instalasi_GLD_RU-VI_Balongan.*
 scripts/build_rab_material_ex_balongan.py
 Sumber Dokumen/Notulensi_Rapat_RU_VI_Balongan_17November2026.pdf
+scripts/build_referensi_produk_boq_balongan.py
+scripts/assets/boq_balongan_ref/
+Deliverables/Instalasi_GLD_RU-VI_Balongan/Referensi_Produk_BoQ_Instalasi_GLD_RU-VI_Balongan.*

@@ -6,7 +6,7 @@ import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RB = os.path.join(HERE, "assets", "rab_balongan")
-OUT = os.path.join(os.path.dirname(HERE), "Deliverables", "Model_3D_Instalasi_GLD_RU-VI_Balongan.html")
+OUT = os.path.join(os.path.dirname(HERE), "Deliverables", "Instalasi_GLD_RU-VI_Balongan", "Model_3D_Instalasi_GLD_RU-VI_Balongan.html")
 
 glb = base64.b64encode(open(os.path.join(RB, "model_3d_balongan.glb"), "rb").read()).decode()
 pts = json.load(open(os.path.join(RB, "model_3d_balongan_pts.json")))
@@ -76,7 +76,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,system-
   <h2>Perangkat &amp; jalur data</h2>
   <ul id="devlist"></ul>
   <div class="tools"><label><input type="checkbox" id="tl" checked> Label</label><label><input type="checkbox" id="te" checked> Label bangunan</label><label><input type="checkbox" id="tr"> Putar otomatis</label></div>
-  <p>Jarak: CH-01→CH-02 dan CH-02→GW dari peta/ukur Google Maps; GLD–CH-01 dari peta. Semua perlu diverifikasi di lapangan.</p>
+  <p>Jarak dari peta (posisi ditandai 27 Nov 2026). JB di tengah antara GLD-01 & GLD-02. Semua perlu diverifikasi di lapangan.</p>
 </aside>
 <div class="hint">Seret untuk memutar · scroll/cubit untuk zoom · klik kanan / dua jari untuk geser</div>
 
@@ -89,14 +89,14 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,system-
 const P = JSON.parse(document.getElementById('pts').textContent);
 const V = (k) => new THREE.Vector3(...P[k]);
 const DEV = [
-  {k:'GLD-01', t:'TOP:GLD-01', txt:'GLD-01 · 24 VDC', c:'--gld', d:'± 11 m ke CH-01'},
-  {k:'GLD-02', t:'TOP:GLD-02', txt:'GLD-02 · 24 VDC', c:'--gld', d:'± 11 m ke CH-01'},
-  {k:'CH-01', t:'TOP:CH-01', txt:'CH-01 · 5 VDC, bawah struktur', c:'--ch', d:'± 32 m ke CH-02'},
-  {k:'CH-02', t:'TOP:CH-02', txt:'CH-02 · panel surya', c:'--ch', d:'± 91 m ke GW-01'},
-  {k:'GW-01', t:'TOP:GW-01', txt:'GW-01 · tepi atap carport', c:'--gw', d:'5 VDC dari kantor'},
+  {k:'GLD-01', t:'TOP:GLD-01', txt:'GLD-01 · 24 VDC, mesh depan', c:'--gld', d:'± 16 m ke CH-01'},
+  {k:'GLD-02', t:'TOP:GLD-02', txt:'GLD-02 · 24 VDC, mesh depan', c:'--gld', d:'± 12 m ke CH-01'},
+  {k:'CH-01', t:'TOP:CH-01', txt:'CH-01 · 5 VDC, stanchion 1,5 m', c:'--ch', d:'± 37 m ke CH-02'},
+  {k:'CH-02', t:'TOP:CH-02', txt:'CH-02 · panel surya, stanchion 6 m', c:'--ch', d:'± 78 m ke GW-01'},
+  {k:'GW-01', t:'TOP:GW-01', txt:'GW-01 · siku 0,5 m, atap carport', c:'--gw', d:'5 VDC dari kantor'},
 ];
 const ENV = [['W:c','Struktur WHB',[0,24,0]],['VESSELS','Deret vessel'],['COL1','Kolom tinggi'],['BLDG','Gedung kantor'],['BLDG2','Gedung']];
-const DIST = [['LORA:GLD-01>CH-01','± 11 m'],['LORA:GLD-02>CH-01','± 11 m'],['LORA:CH-01>CH-02','LoRa ± 32 m'],['LORA:CH-02>GW-01','LoRa ± 91 m']];
+const DIST = [['LORA:GLD-01>CH-01','± 16 m'],['LORA:GLD-02>CH-01','± 12 m'],['LORA:CH-01>CH-02','LoRa ± 37 m'],['LORA:CH-02>GW-01','LoRa ± 78 m']];
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 
 const canvas = document.getElementById('c');

@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 ASSET = os.path.join(HERE, "assets", "lgu_cover")
 RB = os.path.join(HERE, "assets", "rab_balongan")
-OUT = os.path.join(ROOT, "Deliverables", "Rencana_Instalasi_GLD_RU-VI_Balongan.docx")
+OUT = os.path.join(ROOT, "Deliverables", "Instalasi_GLD_RU-VI_Balongan", "Rencana_Instalasi_GLD_RU-VI_Balongan.docx")
 DIAG = os.path.join(RB, "diagram_daya_data_balongan.png")
 MAP = os.path.join(RB, "peta_lokasi_balongan_26nov.png")
 D3A = os.path.join(RB, "diagram_3d_balongan_overview.png")
@@ -31,8 +31,8 @@ D3C = os.path.join(RB, "diagram_3d_balongan_gld.png")
 D3D = os.path.join(RB, "diagram_3d_balongan_gw.png")
 
 DOC_NO = "LGU/GLD/RI-BLG/2026-001"
-REV = "0.1 (Draf)"
-TANGGAL = "26 November 2026"
+REV = "0.3 (Draf)"
+TANGGAL = "27 November 2026"
 BLUE, INK, GRAY = "2B5FCB", "262321", "6B6B6B"
 
 
@@ -60,14 +60,14 @@ def build_diagram():
     zone(25, 3, 63, 54, "Area proses WHB (risiko rendah, survei 17 Nov)", "#FFF8EC")
     zone(91, 3, 28, 54, "Gedung kantor", "#EEF6EE")
 
-    box(3, 43, 18, 7, "PSU 24 VDC", "DLP240-24-1 (RU VI)")
-    box(3, 32, 18, 7, "PSU 5 VDC + fuse", "HDR-15-5 · fuse/cabang")
-    box(28, 34, 14, 9, "JB Ex d", "HLBH31 · 5 entry M20")
+    box(3, 43, 18, 7, "PSU 24 VDC", "Mean Well HDR-60-24")
+    box(3, 32, 18, 7, "PSU 5 VDC + fuse", "HDR-15-5 · fuse F1/F2")
+    box(28, 34, 14, 9, "JB Ex d 4-way", "Helon HLBH31")
     box(50, 43, 15, 7, "GLD-01", "24 VDC · stanchion 1 m")
     box(50, 27, 15, 7, "GLD-02", "24 VDC · stanchion 1 m")
-    box(70, 35, 15, 7, "CH-01", "5 VDC · bawah struktur")
-    box(70, 8, 15, 7, "CH-02", "panel surya · stanchion")
-    box(94, 36, 23, 8, "Gateway GW-01", "tepi atap · siku besi")
+    box(70, 35, 15, 7, "CH-01", "5 VDC · stanchion 1,5 m")
+    box(70, 8, 15, 7, "CH-02", "panel surya · stanchion 6 m")
+    box(94, 36, 23, 8, "Gateway GW-01", "atap carport · siku 0,5 m")
     box(94, 21, 14, 7, "Adaptor 5 VDC", "stopkontak/UPS")
     box(94, 6, 23, 7, "PC server + router", "dalam kantor")
 
@@ -78,14 +78,14 @@ def build_diagram():
     wire((42.4, 37.5), (49.6, 30.5), red)
     ax.plot([35, 35, 73], [33.6, 22, 22], color=red, lw=1.8)
     wire((73, 22), (73, 34.6), red)
-    ax.text(54, 22.6, "armoured 2C 1,5 mm² (5 VDC ke CH-01)", fontsize=7, color=red, ha="center")
+    ax.text(54, 22.6, "NYFGbY 4×1,5 mm² (5 VDC ke CH-01)", fontsize=7, color=red, ha="center")
     wire((65.4, 46.5), (69.6, 40.5), blu, ls="--", lw=1.4)
     wire((65.4, 30.5), (69.6, 37), blu, ls="--", lw=1.4)
     ax.text(66.2, 43.8, "LoRa", fontsize=7, color=blu)
     wire((81, 34.6), (81, 15.4), blu, ls="--", lw=1.4)
-    ax.text(82, 25, "LoRa ±32 m", fontsize=7, color=blu, rotation=90, va="center")
+    ax.text(82, 25, "LoRa ±37 m", fontsize=7, color=blu, rotation=90, va="center")
     wire((85.4, 12), (93.6, 38), blu, ls="--", lw=1.4)
-    ax.text(86.5, 31, "LoRa ±91 m", fontsize=7, color=blu, rotation=72, va="center")
+    ax.text(86.5, 31, "LoRa ±78 m", fontsize=7, color=blu, rotation=72, va="center")
     wire((101, 28.4), (101, 35.6), red)
     ax.text(102, 31, "NYY 5 VDC", fontsize=7, color=red)
     wire((113, 35.6), (113, 13.4), grn, ls=":", lw=1.4)
@@ -103,8 +103,8 @@ def build_diagram():
 PX_PER_M = 6.8  # skala bar "10 m" = 68 px pada citra peta
 # posisi (piksel citra peta) & tinggi (m) -- estimasi, verifikasi di lapangan
 PTS = {
-    "GLD-01": ((1125, 195), 1.0), "GLD-02": ((1210, 295), 1.0), "CH-01": ((1167, 245), 3.0),
-    "CH-02": ((1332, 330), 6.0), "JB": ((1290, 240), 0.8), "GW-01": ((878, 716), 9.5),
+    "GLD-01": ((1285, 187), 1.0), "GLD-02": ((1362, 289), 1.0), "CH-01": ((1370, 220), 3.0),
+    "CH-02": ((1315, 429), 6.0), "JB": ((1324, 238), 0.8), "GW-01": ((878, 716), 9.5),
 }
 ROOF = 4.0  # asumsi tinggi atap carport kantor
 
@@ -186,7 +186,7 @@ def build_3d(path, box, title, show, up=1, zs=2.0, shear=0.45, squash=0.55, labe
         lab("CH-02", "CH-02  panel surya · tiang 6 m")
     if "JB" in show:
         pole("JB", col="#9E9E9E", lw=3); dev("JB", "#BDBDBD", "D", 11)
-        lab("JB", "JB Ex d (HLBH31)", fc="#555555")
+        lab("JB", "JB Ex d 4-way", fc="#555555")
     if "GW-01" in show:
         g = ground("GW-01"); roof = proj("GW-01", ROOF); t = proj("GW-01")
         ax.plot([g[0], roof[0]], [g[1], roof[1]], color="white", lw=1.2, ls=":", zorder=6)
@@ -200,8 +200,8 @@ def build_3d(path, box, title, show, up=1, zs=2.0, shear=0.45, squash=0.55, labe
                     arrowprops=dict(arrowstyle="-", color=red), bbox=dict(boxstyle="round,pad=0.25", fc=red, ec="none", alpha=0.92))
         lab("GW-01", "GW-01  tepi atap carport kantor (±4 m) · siku besi")
     # LoRa
-    for a_, b_, txt in (("GLD-01", "CH-01", None), ("GLD-02", "CH-01", None), ("CH-01", "CH-02", "±32 m"),
-                        ("CH-02", "GW-01", "±91 m")):
+    for a_, b_, txt in (("GLD-01", "CH-01", None), ("GLD-02", "CH-01", None), ("CH-01", "CH-02", "±37 m"),
+                        ("CH-02", "GW-01", "±78 m")):
         if a_ in show and b_ in show:
             A, B = proj(a_), proj(b_)
             seg(A, B, blu, ls=(0, (5, 3)), lw=2.2, z=9)
@@ -235,7 +235,7 @@ def plan_map(out):
     src = cv2.inpaint(src, mask, 9, cv2.INPAINT_TELEA)
     im = Image.fromarray(cv2.cvtColor(src, cv2.COLOR_BGR2RGB)).crop(box)
     w, h = im.size
-    pt = {"GLD-01": (1125, 195), "GLD-02": (1210, 295), "CH-01": (1167, 245), "CH-02": (1332, 330), "GW-01": (936, 680)}
+    pt = {"GLD-01": (1285, 187), "GLD-02": (1362, 289), "CH-01": (1370, 220), "CH-02": (1315, 429), "GW-01": (936, 680)}
     pt = {k: (x - box[0], y - box[1]) for k, (x, y) in pt.items()}
     fig, ax = plt.subplots(figsize=(11, 11 * h / w))
     ax.imshow(im); ax.axis("off"); ax.set_xlim(0, w); ax.set_ylim(h, 0)
@@ -273,8 +273,8 @@ def plan_map(out):
                 ha="center", va="center", zorder=11,
                 bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=blu, lw=1.2))
 
-    dist("CH-01", "CH-02", "± 32 m", (10, 26))
-    dist("CH-02", "GW-01", "LoRa ± 91 m", (30, 22))
+    dist("CH-01", "CH-02", "± 37 m", (10, 26))
+    dist("CH-02", "GW-01", "LoRa ± 78 m", (30, 22))
     x0, y0 = min(xs) - 22, min(ys) - 22
     ax.text(x0, y0 - 10, "Area WHB (lantai dasar, bawah struktur)", fontsize=8, fontweight="bold", color="#262321",
             ha="left", va="bottom", zorder=11, bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.9))
@@ -285,7 +285,7 @@ def plan_map(out):
                        Line2D([], [], color=cya, marker="D", ls="", ms=8, mec="white", label="Gateway"),
                        Line2D([], [], color=blu, lw=2.2, ls="--", label="Link LoRa (jalur data)")],
               loc="lower right", fontsize=8.2, framealpha=0.93)
-    ax.text(8, 8, "Total CH-01 → GW-01 ± 123 m", fontsize=8.6, fontweight="bold", color="#262321", ha="left", va="top",
+    ax.text(8, 8, "Total CH-01 → GW-01 ± 116 m", fontsize=8.6, fontweight="bold", color="#262321", ha="left", va="top",
             zorder=11, bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#262321", lw=0.8))
     ax.text(8, h - 8, "Citra © 2026 Google, Airbus, Maxar Technologies", fontsize=6.5, color="white", ha="left", va="bottom")
     fig.savefig(out, dpi=200, bbox_inches="tight", pad_inches=0.02)
@@ -456,7 +456,7 @@ def build():
     label_render("overview", "wide", D3A, (0, 330, 2200, 1400), "A. Gambaran lokasi — klaster WHB ke Gateway di atap carport kantor", [
         ("lab", "GW-01", "GW-01 Gateway · tepi atap carport kantor", 120, -230, O),
         ("lab", "BLDG", "Gedung kantor: adaptor 5 VDC, router & PC server di dalam", 200, 330, B_),
-        ("tag", "LORA:CH-02>GW-01", "LoRa CH-02 → GW-01 ± 91 m", "#0077E6", (60, 40)),
+        ("tag", "LORA:CH-02>GW-01", "LoRa CH-02 → GW-01 ± 78 m", "#0077E6", (60, 40)),
         ("lab", "STRUCT", "Klaster WHB: GLD-01, GLD-02, CH-01, CH-02", 330, -60, G_),
         ("dim", "ROOF:base", "ROOF:top", "± 4 m", -60),
         ("lab", "COL1", "Bangunan, kolom & unit proses dari citra peta (bentuk/tinggi ilustratif)", 120, -120, "#6E737A"),
@@ -469,17 +469,15 @@ def build():
         ("dim", "W:base", "W:deck", "± 6 m", -50),
     ], legend=False)
     label_render("whb", "wide", D3B, (0, 120, 2200, 1250), "C. Klaster WHB — posisi GLD, Cluster Head, dan relay LoRa", [
-        ("lab", "GLD-01", "GLD-01 · 24 VDC, di bawah struktur", -380, -150, G_),
+        ("lab", "GLD-01", "GLD-01 · 24 VDC, di bawah struktur", -420, 90, G_),
         ("lab", "GLD-02", "GLD-02 · 24 VDC, di bawah struktur", 120, 300, G_),
         ("lab", "CH-01", "CH-01 · 5 VDC, di bawah struktur", 300, 90, P_),
-        ("lab", "CH-02:pv", "CH-02 · panel surya", -420, -60, P_),
         ("lab", "STRUCT", "Struktur WHB (kolom beton, girder, deck)", -60, -170, B_),
-        ("tag", "LORA:CH-01>CH-02", "LoRa ± 32 m", "#0077E6"),
-        ("dim", "CH-02:base", "CH-02:top", "6 m", -60),
+        ("tag", "LORA:CH-01>CH-02", "LoRa ± 37 m ke CH-02", "#0077E6"),
         ("dim", "CH-01:base", "CH-01:top", "± 1,5 m", 70),
     ], legend_loc="lower right")
     label_render("gld", "detail", D3C, (0, 120, 2200, 1400), "D. Detail mounting GLD (skala nyata)", [
-        ("lab", "GLD-02", "GLD-02 · enclosure 200 × 90 × 290 mm, antena di atas", 420, -200, G_),
+        ("lab", "GLD-02", "GLD-02 · casing mesh sensor di depan, antena di atas", 420, -200, G_),
         ("lab", "GLD-02:gland", "Cable gland Ex d M20 × 1,5", 420, 40, "#8D6E00"),
         ("lab", "GLD-02:base", "Pelat dasar 240 × 240 × 10 mm + anchor, dicor", 420, 120, B_),
         ("dim", "GLD-02:base", "GLD-02:top", "1,0 m", -110),
@@ -552,11 +550,11 @@ def build():
            "Foto 2. Rencana posisi GLD di lantai dasar sisi depan struktur WHB, di antara kolom beton dan pedestal, "
            "di bawah header pipa berinsulasi (foto survei 18 November 2026; wajah disamarkan).", Inches(3.3))
     table(d, ["ID", "Fungsi", "Posisi", "Catu daya", "Mounting", "Jarak (estimasi)"], [
-        ("GLD-01", "Sensor gas", "Lantai dasar WHB, di bawah pipa gas kuning (sisi kiri)", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 11 m ke CH-01"),
-        ("GLD-02", "Sensor gas", "Lantai dasar WHB, di bawah pipa gas kuning (sisi kanan), ± 22 m dari GLD-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 11 m ke CH-01"),
-        ("CH-01", "Relay LoRa dari 2 GLD", "Di antara GLD, di bawah struktur, posisi rendah ± 1,5 m (tanpa cahaya matahari)", "5 VDC via JB", "Klem ke struktur existing; stanchion bila tidak memungkinkan", "± 32 m ke CH-02"),
-        ("CH-02", "Relay LoRa ke Gateway", "Di luar struktur, terpapar matahari", "Panel surya + baterai CH", "Stanchion 2\" HDG s/d 6 m + bracket panel surya", "± 91 m (garis lurus) ke GW-01"),
-        ("GW-01", "Gateway LoRa", "Tepi atap gedung kantor", "5 VDC, adaptor di dalam kantor", "Dudukan siku besi L 50×50×5 HDG ± 0,5 m", "—"),
+        ("GLD-01", "Sensor gas", "Lantai dasar WHB, di bawah pipa gas kuning (sisi kiri)", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 16 m ke CH-01"),
+        ("GLD-02", "Sensor gas", "Lantai dasar WHB, di bawah pipa gas kuning (sisi kanan), ± 22 m dari GLD-01", "24 VDC via JB", "Stanchion 2\" HDG 1 m + pelat U-bolt", "± 12 m ke CH-01"),
+        ("CH-01", "Relay LoRa dari 2 GLD", "Di antara GLD, di bawah struktur, posisi rendah ± 1,5 m (tanpa cahaya matahari)", "5 VDC via JB", "Stanchion 2\" HDG 1,5 m sendiri + bracket CH", "± 37 m ke CH-02"),
+        ("CH-02", "Relay LoRa ke Gateway", "Di luar struktur, terpapar matahari", "Panel surya + baterai CH", "Stanchion 2\" HDG 6 m + bracket panel surya", "± 78 m (garis lurus) ke GW-01"),
+        ("GW-01", "Gateway LoRa", "Tepi atap carport depan gedung kantor (± 4 m)", "5 VDC, adaptor di dalam kantor", "Dudukan siku besi L 50×50×5 HDG ± 0,5 m", "—"),
         ("Server", "PC server lokal + router", "Dalam gedung kantor", "Stopkontak/UPS kantor", "—", "—"),
     ], [0.6, 1.05, 1.35, 1.05, 1.6, 1.2], size=8.3)
 
@@ -564,53 +562,54 @@ def build():
     figure(d, DIAG, "Gambar 2. Diagram satu garis catu daya dan jalur data.", Inches(6.85))
     h(d, "Model 3D instalasi", 2)
     para(d, "Model 3D berikut dibangun dari citra peta untuk memperlihatkan posisi dan ketinggian GLD, Cluster Head, "
-            "dan Gateway serta arah link LoRa. Lokasi junction box dan rute kabel belum ditentukan sehingga tidak digambarkan "
-            "(lihat diagram satu garis di atas). Tampilan A–B: ukuran perangkat dibesarkan 5× agar terlihat (tinggi tiang nyata); "
+            "dan Gateway serta arah link LoRa. Junction box direncanakan di tengah antara GLD-01 dan GLD-02 (bawah struktur); rute kabel belum ditentukan sehingga tidak digambarkan "
+            "(lihat diagram satu garis di atas dan Skenario Instalasi LGU/GLD/SI-BLG/2026-001). Tampilan A–B: ukuran perangkat dibesarkan 5× agar terlihat (tinggi tiang nyata); "
             "tampilan C–D: skala nyata. Posisi, bentuk bangunan, dan tinggi atap carport kantor (± 4 m) adalah estimasi dari citra.", size=9.5)
     figure(d, D3A, "Gambar 3. Gambaran lokasi: klaster WHB dan Gateway di tepi atap kantor.", Inches(6.85))
     figure(d, D3S, "Gambar 4. Posisi GLD-01/02 dan CH-01 di lantai dasar bawah struktur WHB, CH-02 di luar struktur. "
                    "Bentuk bangunan dari foto survei; tinggi dan dimensi adalah estimasi visual.", Inches(6.85))
     figure(d, D3B, "Gambar 5. Klaster WHB: GLD-01/02 (stanchion 1 m) dan CH-01 (± 1,5 m) di lantai dasar bawah struktur WHB (kolom beton, girder, deck digambar transparan); "
-                   "CH-02 bertenaga surya (6 m) merelay data ke Gateway.", Inches(6.85))
+                   "link LoRa ke CH-02 (tiang 6 m, lihat Gambar 4) yang merelay data ke Gateway.", Inches(6.85))
     figure(d, D3C, "Gambar 6. Detail GLD di stanchion 1 m dengan pelat U-bolt.", Inches(6.85))
     figure(d, D3D, "Gambar 7. Detail Gateway: siku L ± 0,5 m di tepi atap carport depan gedung kantor (± 4 m), GW di atas siku dan antena di atas GW.", Inches(6.85))
     figure(d, os.path.join(RB, "foto_posisi_gateway_carport.jpg"),
            "Foto 3. Posisi rencana GW-01 di tepi atap carport depan gedung kantor (foto survei 18 Nov 2026): siku L ± 0,5 m, "
            "Gateway di atas siku, antena di atas Gateway. Wajah dan pelat nomor disamarkan.", Inches(6.3))
-    para(d, "Catu daya. PSU 24 VDC memakai unit RU VI (TDK-Lambda DLP240-24-1) di panel RU VI (safe area), ditambah PSU 5 VDC "
-            "(Mean Well HDR-15-5) dan fuse per cabang di panel yang sama. Dua jalur kabel armoured (24 VDC dan 5 VDC) ditarik ke "
+    para(d, "Catu daya. PSU 24 VDC (Mean Well HDR-60-24, disediakan LGU — unit DLP240-24-1 RU VI sudah discontinued) di panel RU VI (safe area), ditambah PSU 5 VDC "
+            "(Mean Well HDR-15-5) dan fuse per keluaran PSU (24 VDC & 5 VDC) di panel yang sama; percabangan ke tiap unit di JB. Dua jalur kabel armoured (24 VDC dan 5 VDC) ditarik ke "
             "satu terminal box Ex d di lapangan, lalu dicabangkan ke GLD-01, GLD-02 (24 VDC) dan CH-01 (5 VDC). Tidak ada PSU di "
             "lapangan. CH-02 mandiri dengan panel surya. Gateway dicatu 5 VDC dari adaptor di dalam kantor; tidak ada 220 VAC di luar gedung.")
     para(d, "Jalur data. GLD-01 dan GLD-02 mengirim data via LoRa ke CH-01, diteruskan ke CH-02, lalu ke Gateway di tepi atap "
             "kantor. Gateway meneruskan ke PC server lokal di dalam kantor (rencana: Wi-Fi 2,4 GHz ke router LGU, seperti skema RU IV; "
             "perlu dikonfirmasi). Sistem berdiri sendiri (standalone/advisory), tidak terhubung ke DCS.")
     table(d, ["Ruas", "Kabel", "Panjang (asumsi)", "Keterangan"], [
-        ("Panel RU VI → JB (24 VDC)", "Armoured 2C 1,5 mm² Cu/XLPE/SWA", "± 30 m", "Jarak panel belum diukur"),
-        ("Panel RU VI → JB (5 VDC)", "Armoured 2C 1,5 mm²", "± 30 m", "Naik ke 2,5 mm² bila jatuh tegangan > 5 %"),
-        ("JB → GLD-01 / GLD-02", "Armoured 2C 1,5 mm²", "2 × ± 15 m", "Gland Ex d M20 di kedua ujung"),
-        ("JB → CH-01", "Armoured 2C 1,5 mm²", "± 10 m", "5 VDC"),
-        ("Adaptor kantor → GW-01", "NYY 2C 1,5 mm² tahan UV + conduit", "± 20 m", "5 VDC, beban ± 0,73 W"),
+        ("Panel RU VI → JB (24 & 5 VDC)", "NYFGbY 4×1,5 mm² (4 inti: ±24 V, ±5 V)", "± 30 m", "1 kabel; jarak panel belum diukur"),
+        ("JB → GLD-01 / GLD-02", "NYFGbY 4×1,5 mm²", "± 16 m / ± 16 m", "JB di tengah antara GLD-01 & GLD-02; gland Ex d M20 di kedua ujung"),
+        ("JB → CH-01", "NYFGbY 4×1,5 mm²", "± 14 m", "5 VDC; cek jatuh tegangan"),
+        ("Adaptor kantor → GW-01", "NYY 2C 1,5 mm² tahan UV + conduit", "± 22 m", "5 VDC, beban ± 0,73 W"),
     ], [1.75, 2.0, 1.1, 2.0], size=8.5)
-    para(d, "Total kabel armoured ± 110 m (termasuk cadangan 10 %) → 3 roll 50 m; kabel NYY 1 roll 50 m.", size=9.5)
+    para(d, "Total kabel NYFGbY 4×1,5 mm² ± 76 m (estimasi termasuk allowance ± 10 %, lihat Cable Schedule LGU/GLD/CS-BLG/2026-001). Karena panjang masih asumsi, BoQ dilebihkan menjadi 3 roll 50 m (150 m, ± 2×); kabel NYY 1 roll 50 m.", size=9.5)
 
     h(d, "4. Junction box dan metode mounting")
-    bullet(d, "Junction box: terminal box HEXLON/Helon HLBH31-D/M20×1.5F atau setara (Ex db IIC T6 Gb, IP66), dipesan dengan 5 entry "
-              "M20 × 1,5 bawaan pabrik (2 input + 3 output). Enclosure Ex d tidak boleh dilubangi di lapangan karena membatalkan "
-              "sertifikat; entry tak terpakai ditutup stopping plug Ex d.")
+    bullet(d, "Junction box: terminal box Helon HLBH31-D/M20×1.5F atau setara kualitas (Ex db IIC T6 Gb, 4 entry M20 × 1,5 bawaan pabrik, IP66) — "
+              "satu-satunya item indent (2–4 minggu) demi sertifikat terverifikasi; 1 input kabel 4 inti (24 V & 5 V) + 3 output (GLD-01, GLD-02, CH-01). Enclosure Ex d tidak boleh dilubangi di lapangan karena membatalkan "
+              "sertifikat; keempat entry terpakai sehingga tidak perlu stopping plug.")
     bullet(d, "GLD: stanchion pipa 2\" Sch 40 HDG, tinggi 1 m di atas pelat dasar 240 × 240 × 10 mm (anchor bolt), pelat dudukan "
-              "250 × 250 × 5 mm SS304 dengan 2 U-bolt 2\" M10.")
-    bullet(d, "CH-01: diklem ke struktur existing dengan bracket U-bolt tanpa las/bor; stanchion dipakai bila tidak ada struktur yang sesuai.")
-    bullet(d, "CH-02: stanchion 2\" HDG s/d 6 m, bracket CH dan rangka panel surya dengan sudut kemiringan yang dapat diatur.")
+              "250 × 250 × 5 mm SS304 dengan 2 U-bolt 2\" M10. Casing GLD tipe mesh sensor di depan (tutup depan bermesh), mesh menghadap "
+              "area pantau dan tidak tertutup; tipe mesh di bawah belum disetujui.")
+    bullet(d, "CH-01: stanchion sendiri pipa 2\" Sch 40 HDG 1,5 m dengan pelat dasar & anchor (tidak diklem ke struktur existing), bracket CH + U-bolt 2\" M10.")
+    bullet(d, "CH-02: stanchion 2\" HDG 6 m (pelat dasar & anchor); unit CH ± 4,2 m dengan antena di atasnya; 1 panel surya ± 2,5 m di bawah unit CH "
+              "(agar tidak menghalangi antena LoRa), menghadap utara dengan sudut kemiringan yang dapat diatur.")
     bullet(d, "GW-01: siku baja L 50 × 50 × 5 mm HDG ± 0,5 m (cukup, karena antena Gateway menambah tinggi) di tepi atap kantor, diikat ke struktur atap dengan baut/klem SS304 "
               "(tanpa las di lokasi), lengkap pelat dudukan dan klem enclosure Gateway/antena.")
     figure(d, os.path.join(RB, "pole_bracket_redraw.png"),
-           "Gambar 8. Acuan pole & bracket GLD, Cluster Head, dan panel surya (desain LGU, dimensi mm).", Inches(6.85))
+           "Gambar 8. Acuan pole & bracket GLD, Cluster Head, dan panel surya (desain umum LGU, dimensi mm). Untuk RU VI Balongan: CH-01 di stanchion sendiri 1,5 m; CH-02 di tiang 6 m dengan unit CH ± 4,2 m dan 1 panel surya ± 2,5 m di bawah CH agar tidak menghalangi antena LoRa (lihat Skenario Instalasi, Gambar S-4 dan S-5).", Inches(6.85))
 
     h(d, "5. Pembagian tanggung jawab")
     table(d, ["Pihak", "Tanggung jawab"], [
         ("LGU & ITB", "Suplai GLD, CH, panel surya CH, Gateway (dengan adaptor), router; basis desain bracket; supervisi teknis & QA; "
                       "terminasi di unit GLD/CH, energize, konfigurasi, commissioning, dan berita acara"),
-        ("RU VI Balongan", "Izin kerja/HSE, persetujuan titik & klasifikasi area, PSU 24 VDC di panel, ruang panel & stopkontak/UPS "
+        ("RU VI Balongan", "Izin kerja/HSE, persetujuan titik & klasifikasi area, sumber 220 VAC & ruang di panel & stopkontak/UPS "
                            "kantor, akses atap kantor, PC server/jaringan sesuai kesepakatan"),
         ("Pelaksana instalasi", "Penyediaan & pemasangan stanchion, bracket, dudukan Gateway, JB, cable gland, penarikan kabel, "
                                 "grounding (pelaksana RU VI, atau jasa instalasi LGU bila diambil sesuai penawaran)"),
@@ -619,7 +618,7 @@ def build():
     h(d, "6. Tahapan kerja")
     table(d, ["No", "Tahap", "Kegiatan", "PIC", "Durasi"], [
         ("1", "Konfirmasi desain", "Validasi titik & rute kabel, jarak panel–JB, cara pasang CH-01, jalur data GW–server", "LGU + RU VI", "1 minggu"),
-        ("2", "Pengadaan & fabrikasi", "PO material, fabrikasi stanchion/bracket/siku, indent JB HLBH31", "Pelaksana / LGU", "2–4 minggu"),
+        ("2", "Pengadaan & fabrikasi", "PO terminal box Helon HLBH31 lebih dulu (indent 2–4 minggu); material lain ready stock; fabrikasi stanchion/bracket/siku di bengkel lokal", "Pelaksana / LGU", "± 2–4 minggu (JB)"),
         ("3", "Izin kerja & HSE", "Permit, JSA, toolbox meeting, isolasi panel (LOTO)", "RU VI + pelaksana", "Paralel tahap 2"),
         ("4", "Pekerjaan mekanis", "Pengecoran/anchor stanchion, pasang bracket, JB, dudukan GW", "Pelaksana", "2 hari"),
         ("5", "Pengkabelan", "Penarikan kabel, gland, terminasi di JB & panel, grounding, kabel GW", "Pelaksana", "2 hari"),
@@ -643,31 +642,34 @@ def build():
 
     h(d, "8. Hal yang perlu dikonfirmasi")
     for t in ["Lokasi panel RU VI dan jarak panel ke junction box (menentukan panjang kabel dan penampang jalur 5 VDC).",
-              "Kesediaan PSU 24 VDC DLP240-24-1 milik RU VI dan ruang di panel untuk PSU 5 VDC & fuse.",
-              "CH-01 dapat diklem ke struktur existing atau perlu stanchion.",
+              "Sumber 220 VAC dan ruang rel DIN di panel RU VI untuk PSU 24 VDC, PSU 5 VDC & fuse (disediakan LGU).",
+              "Izin pengeboran lantai beton untuk anchor stanchion GLD-01, GLD-02 dan CH-01 di bawah struktur WHB.",
               "Jalur data Gateway ke PC server (Wi-Fi ke router di kantor, atau LAN) dan lokasi PC server.",
               "Akses ke atap kantor dan izin memasang dudukan siku besi; titik masuk kabel Gateway ke dalam gedung.",
               "Persetujuan HSE atas titik GLD (area risiko rendah) selama sertifikat Ex belum terbit.",
-              "Verifikasi jarak di lapangan (ukur Google Maps: CH-02–GW ± 91 m; dari peta: CH-01–CH-02 ± 32 m, GLD–CH-01 ± 11 m, GLD-01–GLD-02 ± 22 m; total CH-01–GW ± 123 m dari peta)."]:
+              "Verifikasi jarak di lapangan (dari peta, posisi ditandai user 27 Nov: CH-01–CH-02 ± 37 m, CH-02–GW ± 78 m, GLD-01/02–CH-01 ± 16/12 m, GLD-01–GLD-02 ± 22 m; total CH-01–GW ± 116 m)."]:
         bullet(d, t)
 
     h(d, "Lampiran — Daftar material (kuantitas)")
     table(d, ["Kode", "Material", "Qty", "Satuan"], [
-        ("A.1", "Terminal box Ex d HLBH31-D/M20×1.5F atau setara, 5 entry", "1", "unit"),
-        ("B.1", "Cable gland armoured M20 × 1,5 Ex d", "9", "pcs"),
-        ("B.2", "Stopping plug M20 × 1,5 Ex d", "1", "pcs"),
-        ("C.1", "Kabel armoured 2C 1,5 mm² Cu/XLPE/SWA", "3", "roll 50 m"),
+        ("A.1", "Terminal box Ex d 4 entry M20 (Helon HLBH31 atau setara kualitas)", "1", "unit"),
+        ("B.1", "Cable gland armoured M20 × 1,5 Ex d", "8", "pcs"),
+        ("B.3", "Cable gland armoured M20 non-Ex (sisi panel)", "1", "pcs"),
+        ("C.1", "Kabel armoured NYFGbY 4×1,5 mm² (ready stock)", "3", "roll 50 m"),
         ("C.2", "Kabel NYY 2C 1,5 mm² tahan UV (Gateway)", "1", "roll 50 m"),
         ("C.3", "Conduit & klem jalur kabel Gateway", "1", "lot"),
+        ("D.1", "PSU 24 VDC Mean Well HDR-60-24 (di panel RU VI)", "1", "unit"),
         ("D.2", "PSU 5 VDC Mean Well HDR-15-5 (di panel RU VI)", "1", "unit"),
         ("D.3", "Fuse terminal & terminal block di panel RU VI", "1", "set"),
         ("E.1", "Stanchion GLD 2\" HDG 1 m", "2", "set"),
-        ("E.2", "Stanchion CH 2\" HDG s/d 6 m", "2", "set"),
+        ("E.2", "Stanchion CH-02 2\" HDG 6 m", "1", "set"),
         ("E.3", "Bracket GLD (pelat U-bolt)", "2", "set"),
         ("E.4", "Bracket Cluster Head", "2", "set"),
         ("E.5", "Bracket panel surya CH-02", "1", "set"),
-        ("E.6", "Dudukan Gateway siku besi", "1", "set"),
+        ("E.6", "Dudukan Gateway siku L ± 0,5 m + kaki", "1", "set"),
+        ("E.7", "Stanchion CH-01 2\" HDG 1,5 m", "1", "set"),
         ("F.1", "Aksesoris terminasi (skun, heat-shrink, label, earth tag)", "3", "set"),
+        ("F.3", "Material grounding (GLD-01, GLD-02, JB, CH-01, CH-02)", "5", "set"),
     ], [0.6, 4.35, 0.7, 1.2], size=8.6)
     para(d, "Perangkat GLD, CH, panel surya CH, Gateway beserta adaptor, dan router disediakan LGU (tidak termasuk daftar di atas).", size=9, italic=True)
 

@@ -253,10 +253,19 @@ Desain mengikuti sistem visual charcoal `#2F4050` + teal `#1ABB9C` (token CSS di
 - **Rev 1.4 (2 Nov)**: bullet perkiraan durasi sertifikasi 5–8 bulan di Bagian 5 dihapus atas permintaan user.
 
 ## Presentasi Koordinasi Implementasi GLD — RU VI Balongan (11 Nov 2026, dec:225)
-- `Deliverables/Presentasi_Koordinasi_Implementasi_GLD_RU-VI_Balongan_13November2026.pptx` + `.pdf` (17 slide, render LibreOffice) — bahan rapat Zoom Jumat 13 Nov 2026 09.00 dgn tim RU VI Balongan (PIC RU lain ikut). Generator: `scripts/build_presentasi_balongan_13nov.js` (pptxgenjs 3.12, palet biru/charcoal, catatan pembicara tiap slide). XML tiap part divalidasi well-formed.
+- `Deliverables/Instalasi_GLD_RU-VI_Balongan/Presentasi_Koordinasi_Implementasi_GLD_RU-VI_Balongan_13November2026.pptx` + `.pdf` (17 slide, render LibreOffice) — bahan rapat Zoom Jumat 13 Nov 2026 09.00 dgn tim RU VI Balongan (PIC RU lain ikut). Generator: `scripts/build_presentasi_balongan_13nov.js` (pptxgenjs 3.12, palet biru/charcoal, catatan pembicara tiap slide). XML tiap part divalidasi well-formed.
 
 ## Update 17–18 Nov 2026 (dec:228–229)
 - `Dashboard_GLD_ProjectManagement.{html,pdf}` — Kurva-S 66% vs rencana 78% (17 Nov); register isu 11 item, action item #20/#21/#40/#41 diperbarui.
 - `Dashboard_GLD_ProjectManagement_Laporan.html` — versi cetak, kini **dibangun otomatis** dari dashboard interaktif (`scripts/build_dashboard_laporan_html.py` + `scripts/extract_dashboard_data.js`). Jalankan ulang setiap dashboard interaktif diubah.
 - `Kurva_S_Persiapan_Instalasi_RU-IV_Cilacap.{html,docx,pdf}` rev 1.1 — keseluruhan 48% (LGU 100%, RU IV 21%, vendor 9%); grafik HTML sumbu waktu proporsional, bug garis 95% diperbaiki; PDF 8 hlm.
 - `Laporan_Status_Proyek_GLD_LGU_17November2026.{docx,pdf}` — 10 hlm, no. LGU/GLD/LAP-STATUS/2026-002; generator `scripts/build_laporan_status_lgu_17nov_docx.py`; PDF via `scripts/docx_to_pdf_with_toc.py`.
+
+## Paket instalasi RU VI Balongan — `Deliverables/Instalasi_GLD_RU-VI_Balongan/` (27 Nov 2026)
+Semua dokumen instalasi Balongan dikumpulkan di satu folder (generator menulis langsung ke sini):
+- `Rencana_Instalasi_GLD_RU-VI_Balongan.{docx,pdf}` — rev 0.2 (27 Nov), 11 hlm; generator `scripts/build_rencana_instalasi_balongan.py`.
+- `Skenario_Instalasi_GLD_RU-VI_Balongan.{docx,pdf}` — rev 0.3, 10 hlm; prosedur per perangkat + gambar teknis S-1…S-7 (`scripts/build_skenario_instalasi_balongan.py`, `scripts/build_gambar_skenario_balongan.py`).
+- `Model_3D_Instalasi_GLD_RU-VI_Balongan.html` — viewer 3D interaktif (artifact https://claude.ai/artifact/4MNnHQJbb5LPwdrk3Khaiz).
+- `Presentasi_Koordinasi_Implementasi_GLD_RU-VI_Balongan_13November2026.{pptx,pdf}` — deck historis pra-survei (tidak diperbarui).
+- LOKAL saja (gitignored, repo public): `RAB_Material_...xlsx`, `Penawaran_Harga_Material_...{docx,pdf}`, `Referensi_Produk_BoQ_...{html,pdf}` (link Tokopedia/distributor lokal).
+- `Cable_Schedule_GLD_RU-VI_Balongan.pdf` (A3, 2 lembar, LGU/GLD/CS-BLG/2026-001 rev 0.2): Lembar 1 = layout kabel isometrik + Tabel cable schedule **format MoC 15769** (From/To/Cable/Route Length/Allowance/Est.) + 6 ketentuan (mengikuti MoC hlm 15–16); Lembar 2 = schedule rinci (inti, gland asal/tujuan). Generator `scripts/build_cable_schedule_balongan.py` + `scripts/build_cable_layout_iso_balongan.py` (rute orthogonal mengikuti grid WHB 31°, allowance 10 % min 2 m). Total armoured ≈ 115 m → 3 roll. Juga jadi Gambar S-8/S-9 di Skenario.
